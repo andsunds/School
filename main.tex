@@ -1,0 +1,189 @@
+\documentclass[11pt,a4paper]{article}
+\pdfoutput=1
+%vons grund
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, swedish]{babel} %OBS! Se till att vi får rätt språk.
+\usepackage{amsmath}
+\usepackage{lmodern}
+\usepackage{units}
+\usepackage{icomma}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{bbm}
+\newcommand{\N}{\ensuremath{\mathbbm{N}}}
+\newcommand{\Z}{\ensuremath{\mathbbm{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbbm{Q}}}
+\newcommand{\R}{\ensuremath{\mathbbm{R}}}
+\newcommand{\C}{\ensuremath{\mathbbm{C}}}
+\newcommand{\rd}{\ensuremath{\mathrm{d}}}
+\newcommand{\id}{\ensuremath{\,\rd}}
+\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%Egna tillägg%%%%%%%%%%%%%%%%%%%%%%%
+%%För att få referenser 'på svenska'
+\usepackage[fixlanguage]{babelbib}
+%\selectbiblanguage{swedish}
+%\renewcommand\btxauthorcolon{:}
+%%För att figurtext i underfigurer
+\usepackage{subfigure} 
+%%För att kunna inkludera andra PDF-dokument
+\usepackage{pdfpages}
+%%För att kunna ha roterade bilder
+\usepackage{rotating}
+%%För att kunna byta uppräkningsvisare t.ex. [label=\alph*)]
+\usepackage{enumitem}
+%%För att kunna lägga till 'bilagor' utan sidnumrering.
+\usepackage{tocstyle}
+\usetocstyle{standard}%För att få en vanlig TOC
+                %no page numbers for part
+\settocstylefeature[-1]{pagenumberbox}{\csname @gobble\endcsname}
+\usepackage[nottoc]{tocbibind} %Puts an 'Reference' entry in the ToC.
+%%För att kunna använda bra och ket
+\usepackage{physics} %\bra{}\ket{} eller \expval{H}{\psi}
+%%För att kunna rita snygga matriser
+\usepackage{mathtools} %\begin{pmatrix*}[r] ... \end
+%%För att kunna kommentera ut större stycken
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+\usepackage{comment} %\begin{comment}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}, \todolist
+
+
+
+%%För att inkludera MATLABkod. 
+%%OBS: mcode är ett separat paket och man måste ha mcode.sty i samma
+%%katalog som dokumentet.
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+%\usepackage{listings} 
+%\lstloadlanguages{matlab} 
+%\lstset{language=matlab} 
+%\lstset{literate= {å}{{\r{a}}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {Å}{{\r{A}}}1
+%  {Ä}{{\"A}}1 {Ö}{{\"O}}1}%För att få svenska bokstäver från MATLAB.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%Formatering%%%%%%%%%%%%%%%%%%%%%%%%
+%%Partiell derivata
+\newcommand{\pd}{\ensuremath{\partial}}
+%%Följer ISO-8601 oberoende av språk.
+\usepackage{datetime2} 
+%\newdateformat{specialdate}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
+%%Göra grader Celcius
+\newcommand{\degC}{\ifmmode \,^\circ\mathrm{C} \else $\,^\circ\mathrm{C}$ \fi}
+%%Figurreferenser
+\newcommand{\figref}{\figurename~\ref} 
+%%Tabellreferenser
+\newcommand{\tabref}{\tablename~\ref} %Stor bokstav i början
+
+%%Det ska vara ett rakt µ i prefixet
+\usepackage{upgreek}
+\newcommand{\micro}{\upmu}
+%%Ohm enhetskommando
+\newcommand{\ohm}{\ifmmode \Upomega \else $\Upomega$ \fi}
+
+%%'e' och 'i' ska vara upprätt
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+
+%%För att själv bestämma marginalerna. 
+%\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+%]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+%\renewcommand{\thesection}{...}
+
+
+
+\begin{document}
+\begin{titlepage}
+\title{}
+\author{}
+\date{\today}
+
+\maketitle
+
+\pagenumbering{roman} %%Romersk sidnumrering
+%\thispagestyle{empty} \pagestyle{empty} %%Ingen sidnumrering 
+
+%%Ser till att vi får rätt rubrik på svenska
+\iflanguage{swedish}{\renewcommand{\abstractname}{Sammandrag}}{}
+\begin{abstract}
+
+
+\end{abstract}
+\newpage
+\tableofcontents
+\end{titlepage}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+%\input{...}
+
+
+\newpage
+%Ser till att det blir rätt namn i rubriken
+\iflanguage{swedish}{\renewcommand{\refname}{Källförteckning}}{}
+\bibliographystyle{babunsrt}
+\bibliography{referenser}%kräver en fil som heter 'referenser.bib'          
+
+\clearpage
+\appendix%Resets the section counter and changes it to Alph                 
+\setcounter{page}{1} %Resets the pgenumbering                               
+\renewcommand*{\thepage}{A\arabic{page}}%Changes the pagenubering to 'A...'
+%Ser till at det blir rätt namn
+\iflanguage{swedish}{\renewcommand{\appendixname}{Bilagor}}{}
+\phantomsection{}%This one is needed to make 'Appendix' show up in the TOC
+\addcontentsline{toc}{part}{\appendixname} %Makes 'Appendix' show up in the TOC
+%Byter tillbaks till det gamla namnet
+\iflanguage{swedish}{\renewcommand{\appendixname}{Bilaga}}{}
+
+
+
+
+\end{document}
+
+
+
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer (två enkelfjongar): ''.
+
+%%För att referera till till tidigare fotnot:
+%\footnotemark[\value{footnote}]
+
+%% Inkludera PDF-dokument
+%\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+
+%% Figurer inkluderade som pdf-filer
+%\begin{figure}\centering
+%\centerline{ %centrerar även större bilder
+%\includegraphics[width=1\textwidth]{filnamn.pdf}
+%}
+%\caption{\label{fig:} }
+%\end{figure}
+
+%% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
+%\begin{figure}\centering
+%\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
+%\caption{\label{fig:} }
+%\end{figure}
+
+%% Figurer roterade 90 grader
+%\begin{sidewaysfigure}\centering
+%\centerline{ %centrerar även större bilder
+%\includegraphics[width=1\textwidth]{filnamn.pdf}
+%}
+%\caption{\label{fig:} }
+%\end{sidewaysfigure}
+
+
+%%Om man vill lägga till något i TOC
+%\stepcounter{section} %Till exempel en 'section'
+%\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
