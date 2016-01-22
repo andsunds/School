@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper]{report}
+\documentclass[11pt,a4paper, notitlepage]{report}
 \pdfoutput=1
 %vons grund
 \usepackage[T1]{fontenc}
@@ -10,6 +10,7 @@
 \usepackage{icomma}
 \usepackage{color}
 \usepackage{graphicx}
+\graphicspath{ {bilder/} } %Gör så att man kan lägga alla bilder i en egen katalog
 \usepackage{bbm}
 \newcommand{\N}{\ensuremath{\mathbbm{N}}}
 \newcommand{\Z}{\ensuremath{\mathbbm{Z}}}
@@ -70,6 +71,7 @@
 \usepackage{datetime2} 
 %\newdateformat{specialdate}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
 %%Göra grader Celcius
+\usepackage[iso, swedish]{isodate}
 \newcommand{\degC}{\ifmmode \,^\circ\mathrm{C} \else $\,^\circ\mathrm{C}$ \fi}
 %%Figurreferenser
 \newcommand{\figref}{\figurename~\ref} 
@@ -87,35 +89,109 @@
 \newcommand{\ii}{\mathrm{i}}
 
 %%För att själv bestämma marginalerna. 
-%\usepackage[
+\usepackage[
 %            top    = 3cm,
 %            bottom = 3cm,
 %            left   = 3cm, right  = 3cm
-%]{geometry}
+]{geometry}
 
-%%För att ändra hur rubrikerna ska formateras
-%\renewcommand{\thesection}{...}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\andsunds}{andsunds@student.chalmers.se}
+\newcommand{\emeeke}{emeeke@student.chalmers.se}
+\newcommand{\robka}{robka@student.chalmers.se}
+\newcommand{\soliver}{soliver@student.chalmers.se}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 
 
 \begin{document}
+\pagenumbering{roman} %%Romersk sidnumrering i början
 \begin{titlepage}
-\title{Rapportnamn}
-\author{
-Andreas Sundström\footnote{\href{mailto:andsunds@student.chalmers.se}{\texttt{andsunds}}} \and 
-Emelie Ekenstedt\footnote{\href{mailto:andsunds@student.chalmers.se}{\texttt{emeeke}}} \and
-Robin Karlsson\footnote{\href{mailto:robka@student.chalmers.se}{\texttt{robka}}} \and
-Oliver Sundell\footnote{\href{mailto:soliver@student.chalmers.se}{\texttt{soliver}}} 
-}
-%\supervisor{Handledare: Måns Henningson}
-\date{\today}
+\newgeometry{top=3cm, bottom=2cm}
 
-\maketitle
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
 
-\pagenumbering{roman} %%Romersk sidnumrering
-%\thispagestyle{empty} \pagestyle{empty} %%Ingen sidnumrering 
+\center % Center everything on the page
+ 
+%------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%------------------------------------------------------------------------------------
 
-%%Ser till att vi får rätt rubrik på svenska
+\textsc{\LARGE Chalmers tekniska högskola}\\[1.5cm] % Name of your university/college
+\textsc{\Large Kandidatarbetesrapport}\\[0.5cm] % Major heading such as course name
+\textsc{\large Institutionen för fysik }\\[0.5cm] % Minor heading such as course title
+
+%------------------------------------------------------------------------------------
+%	TITLE SECTION
+%------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Titel}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Författare:}\\
+Andreas Sundström\footnotemark{} \\
+Emelie Ekenstedt\footnotemark{} \\
+Robin Karlsson\footnotemark{} \\
+Oliver Sundell\footnotemark{}
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Handledare:} \\
+Måns Henningson
+\end{flushright}
+\end{minipage}\\[3cm]
+
+\addtocounter{footnote}{-4} %3=n
+\stepcounter{footnote}
+  \footnotetext{\href{mailto:\andsunds}{\texttt{\andsunds}}}
+\stepcounter{footnote}
+  \footnotetext{\href{mailto:\emeeke}{\texttt{\emeeke}}}
+\stepcounter{footnote}
+  \footnotetext{\href{mailto:\robka}{\texttt{\robka}}}
+\stepcounter{footnote}
+  \footnotetext{\href{mailto:\soliver}{\texttt{\soliver}}}
+
+
+
+%------------------------------------------------------------------------------------
+%	DATE SECTION
+%------------------------------------------------------------------------------------
+
+{\large \today}\\[1cm] % Date, change the \today to a set date if you want to be precise
+
+%------------------------------------------------------------------------------------
+%	LOGO SECTION
+%------------------------------------------------------------------------------------
+
+\includegraphics[height=5cm]{logo.pdf} % Include a department/university logo - this will require the graphicx package
+ 
+%------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+\restoregeometry
+
+
+
+
+\setcounter{page}{2}%detta är ANDRA (2) sidan
+
 \renewcommand{\abstractname}{Sammandrag}
 \begin{abstract}
 
@@ -128,16 +204,22 @@ Oliver Sundell\footnote{\href{mailto:soliver@student.chalmers.se}{\texttt{solive
 
 \end{abstract}
 
-\newpage
+\clearpage
 \tableofcontents
-\end{titlepage}
+\clearpage
 
 \pagenumbering{arabic}
 \setcounter{page}{1}
-
+%\part{Inledning}
+%\chapter{Test}
 %\input{...}
 
 
+
+
+
+
+%%%%%%%%%%%%%%%%% slutet av rapporten %%%%%%%%%%%%%%%%%
 \newpage
 %Ser till att det blir rätt namn i rubriken
 \iflanguage{swedish}{\renewcommand{\refname}{Källförteckning}}{}
