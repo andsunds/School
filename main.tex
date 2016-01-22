@@ -68,10 +68,8 @@
 %%Partiell derivata
 \newcommand{\pd}{\ensuremath{\partial}}
 %%Följer ISO-8601 oberoende av språk.
-\usepackage{datetime2} 
-%\newdateformat{specialdate}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
-%%Göra grader Celcius
 \usepackage[iso, swedish]{isodate}
+%%Göra grader Celcius
 \newcommand{\degC}{\ifmmode \,^\circ\mathrm{C} \else $\,^\circ\mathrm{C}$ \fi}
 %%Figurreferenser
 \newcommand{\figref}{\figurename~\ref} 
@@ -96,126 +94,22 @@
 ]{geometry}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\newcommand{\andsunds}{andsunds@student.chalmers.se}
-\newcommand{\emeeke}{emeeke@student.chalmers.se}
-\newcommand{\robka}{robka@student.chalmers.se}
-\newcommand{\soliver}{soliver@student.chalmers.se}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
 
 
 \begin{document}
-\pagenumbering{roman} %%Romersk sidnumrering i början
-\begin{titlepage}
-\newgeometry{top=3cm, bottom=2cm}
 
-\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+%Alla inledande sidor finns i 'titlepages.tex'.
+\input{titlepages.tex}
 
-\center % Center everything on the page
- 
-%------------------------------------------------------------------------------------
-%	HEADING SECTIONS
-%------------------------------------------------------------------------------------
-
-\textsc{\LARGE Chalmers tekniska högskola}\\[1.5cm] % Name of your university/college
-\textsc{\Large Kandidatarbetesrapport}\\[0.5cm] % Major heading such as course name
-\textsc{\large Institutionen för fysik }\\[0.5cm] % Minor heading such as course title
-
-%------------------------------------------------------------------------------------
-%	TITLE SECTION
-%------------------------------------------------------------------------------------
-
-\HRule \\[0.4cm]
-{ \huge \bfseries Titel}\\[0.4cm] % Title of your document
-\HRule \\[1.5cm]
- 
-%------------------------------------------------------------------------------------
-%	AUTHOR SECTION
-%------------------------------------------------------------------------------------
-
-\begin{minipage}{0.4\textwidth}
-\begin{flushleft} \large
-\emph{Författare:}\\
-Andreas Sundström\footnotemark{} \\
-Emelie Ekenstedt\footnotemark{} \\
-Robin Karlsson\footnotemark{} \\
-Oliver Sundell\footnotemark{}
-\end{flushleft}
-\end{minipage}
-~
-\begin{minipage}{0.4\textwidth}
-\begin{flushright} \large
-\emph{Handledare:} \\
-Måns Henningson
-\end{flushright}
-\end{minipage}\\[3cm]
-
-\addtocounter{footnote}{-4} %3=n
-\stepcounter{footnote}
-  \footnotetext{\href{mailto:\andsunds}{\texttt{\andsunds}}}
-\stepcounter{footnote}
-  \footnotetext{\href{mailto:\emeeke}{\texttt{\emeeke}}}
-\stepcounter{footnote}
-  \footnotetext{\href{mailto:\robka}{\texttt{\robka}}}
-\stepcounter{footnote}
-  \footnotetext{\href{mailto:\soliver}{\texttt{\soliver}}}
-
-
-
-%------------------------------------------------------------------------------------
-%	DATE SECTION
-%------------------------------------------------------------------------------------
-
-{\large \today}\\[1cm] % Date, change the \today to a set date if you want to be precise
-
-%------------------------------------------------------------------------------------
-%	LOGO SECTION
-%------------------------------------------------------------------------------------
-
-\includegraphics[height=5cm]{logo.pdf} % Include a department/university logo - this will require the graphicx package
- 
-%------------------------------------------------------------------------------------
-
-\vfill % Fill the rest of the page with whitespace
-
-\end{titlepage}
-\restoregeometry
-
-
-
-
-\setcounter{page}{2}%detta är ANDRA (2) sidan
-
-\renewcommand{\abstractname}{Sammandrag}
-\begin{abstract}
-
-
-\end{abstract}
-
-\renewcommand{\abstractname}{Abstract}
-\begin{abstract}
-
-
-\end{abstract}
-
-\clearpage
-\renewcommand{\contentsname}{Innehållsförteckning}
-\tableofcontents
-
-\clearpage
-\pagenumbering{arabic}
-\setcounter{page}{1}
-
+%Här ett exempel till på hur man använder input
 \input{exempel.tex}
 
+
+%%%%%%%%%%%%%%%%%%%%%% Här börjar huvudtexten %%%%%%%%%%%%%%%%%%%%%%
 \part{Inledning}
 \chapter{Test}
+%\input{...}
 
 
 
@@ -223,7 +117,13 @@ Måns Henningson
 
 
 
-%%%%%%%%%%%%%%%%% slutet av rapporten %%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bilagor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 %Ser till att det blir rätt namn i rubriken
 \iflanguage{swedish}{\renewcommand{\refname}{Källförteckning}}{}
@@ -253,36 +153,33 @@ Måns Henningson
 %% På svenska ska citattecknet vara samma i både början och slut.
 %% Använd två apostrofer (två enkelfjongar): ''.
 
-%%För att referera till till tidigare fotnot:
-%\footnotemark[\value{footnote}]
-
 %% Inkludera PDF-dokument
-%\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
 
 %% Figurer inkluderade som pdf-filer
-%\begin{figure}\centering
-%\centerline{ %centrerar även större bilder
-%\includegraphics[width=1\textwidth]{filnamn.pdf}
-%}
-%\caption{\label{fig:} }
-%\end{figure}
+\begin{figure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{\label{fig:} }
+\end{figure}
 
 %% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
-%\begin{figure}\centering
-%\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
-%\caption{\label{fig:} }
-%\end{figure}
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
+\caption{\label{fig:} }
+\end{figure}
 
 %% Figurer roterade 90 grader
-%\begin{sidewaysfigure}\centering
-%\centerline{ %centrerar även större bilder
-%\includegraphics[width=1\textwidth]{filnamn.pdf}
-%}
-%\caption{\label{fig:} }
-%\end{sidewaysfigure}
+\begin{sidewaysfigure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{\label{fig:} }
+\end{sidewaysfigure}
 
 
 %%Om man vill lägga till något i TOC
-%\stepcounter{section} %Till exempel en 'section'
-%\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+\stepcounter{section} %Till exempel en 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
 
