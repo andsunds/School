@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[11pt,a4paper]{report}
 \pdfoutput=1
 %vons grund
 \usepackage[T1]{fontenc}
@@ -100,8 +100,14 @@
 
 \begin{document}
 \begin{titlepage}
-\title{}
-\author{}
+\title{Rapportnamn}
+\author{
+Andreas Sundström\footnote{\href{mailto:andsunds@student.chalmers.se}{\texttt{andsunds}}} \and 
+Emelie Ekenstedt\footnote{\href{mailto:andsunds@student.chalmers.se}{\texttt{emeeke}}} \and
+Robin Karlsson\footnote{\href{mailto:robka@student.chalmers.se}{\texttt{robka}}} \and
+Oliver Sundell\footnote{\href{mailto:soliver@student.chalmers.se}{\texttt{soliver}}} 
+}
+%\supervisor{Handledare: Måns Henningson}
 \date{\today}
 
 \maketitle
@@ -110,11 +116,18 @@
 %\thispagestyle{empty} \pagestyle{empty} %%Ingen sidnumrering 
 
 %%Ser till att vi får rätt rubrik på svenska
-\iflanguage{swedish}{\renewcommand{\abstractname}{Sammandrag}}{}
+\renewcommand{\abstractname}{Sammandrag}
 \begin{abstract}
 
 
 \end{abstract}
+
+\renewcommand{\abstractname}{Abstract}
+\begin{abstract}
+
+
+\end{abstract}
+
 \newpage
 \tableofcontents
 \end{titlepage}
