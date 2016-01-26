@@ -1,5 +1,5 @@
 # Matlabkod till kandidatarbete
-Här har jag lagt all min Matlabkod för kandidatarbetet.
+Här har jag lagt all min Matlabkod för för simulering av strängar i celler.
 
 ODE/ här finns simuleringar som utnyttjar ode45, INGEN brownsk rörelse.
 
