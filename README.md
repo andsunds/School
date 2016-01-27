@@ -1,9 +1,10 @@
 # Matlabkod till kandidatarbete
 Här har jag lagt all min Matlabkod för för simulering av strängar i celler.
 
-ODE/ här finns simuleringar som utnyttjar ode45, INGEN brownsk rörelse.
+balls_on_spring/ 
+   ODE/ här finns simuleringar som utnyttjar ode45, INGEN brownsk rörelse.
 
-SDE/ här finns simuleringar där Euler-frammåt används som ode-lösare.
+   SDE/ här finns simuleringar där Euler-frammåt används som ode-lösare.
 
 universal_tools/ här finns lite smått och gott som går att använda i alla dessa tillämpningar. t.ex. 'play_movie' för att spela upp simuleringar som en film.
 
