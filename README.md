@@ -6,6 +6,8 @@ balls_on_spring/
 
    SDE/ här finns simuleringar där Euler-frammåt används som ode-lösare.
 
+diffusion/ Här finns lite kod som simulerar olika typer av diffusion.
+
 universal_tools/ här finns lite smått och gott som går att använda i alla dessa tillämpningar. t.ex. 'play_movie' för att spela upp simuleringar som en film.
 
 Övriga kataloger har lite annat oviktigt. 
