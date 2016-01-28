@@ -23,6 +23,7 @@ D=sqrt(sum(d.^2,2));%steglängd
 %hist(D)
 
 %% Filmuppspelning
+clf
 T=X(:,1);
 n=length(T);
 
@@ -32,6 +33,7 @@ dim=2;
 framesize=max(max(Q))*1.1;
 playbackspeed=.05;
 
+addpath('../balls_on_spring/universal_tools/')
 play_movie_v3(T,Q,m,dim,framesize, playbackspeed,0 )
 
 
