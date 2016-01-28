@@ -13,17 +13,16 @@ X=C{i};
 mean(X(:,2:3))
 std(X(:,2:3))
 
+plot(X(:,1),X(:,2:3));%plottar 
 
 
-plot(X(:,1),X(:,2:3))
 
-
-d=diff(X(:,2:3),1,1);
+d=diff(X(:,2:3),1,1);%faktiska steg
 hist(d)
-D=sum(d.^2,2);
+D=sqrt(sum(d.^2,2));%steglängd
 %hist(D)
 
-%%
+%% Filmuppspelning
 T=X(:,1);
 n=length(T);
 
