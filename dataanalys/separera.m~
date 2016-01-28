@@ -6,12 +6,12 @@ function [C,index] = separera(X) % Separera partiklar och spara i en cell
 % index = find(E);
 
 
-index=[find(X(:,1)==0); size(X,1)+1];%varje index som en ny partikel börjar vid
+index=[find(X(:,1)==0); size(X,1)+1];
 
 n = size(index,1)-1; % n �r antalet olika partiklar
 
 C = cell(n,1);
-for i=1:n
+for i=1:n-1
     C{i} = X(index(i):index(i+1)-1, :);
 end
 
