@@ -48,7 +48,7 @@ ylabel('Stegl\"a{}ngd', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15)%,'XScale','log','YScale','log');
 axis([0,20,0,0.05])
 
-fit(storl,rorlighet,'power1')
+fit(storl,rorlighet,'power1') 
 end
 
 %% varians som fkn av tid
