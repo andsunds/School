@@ -12,4 +12,4 @@ universal_tools/ här finns lite smått och gott som går att använda i alla de
 
 Övriga kataloger har lite annat oviktigt. 
 
-README.md senast uppdaterad 2016-01-17
+README.md senast uppdaterad 2016-01-28
