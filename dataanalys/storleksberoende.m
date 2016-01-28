@@ -7,7 +7,7 @@ filnamn{2}='logphasecells.csv';
 
 offs=[0.007, 0.009]*0;%det finns lite offest i steglängden
 
-for fil=1:1 %för att plotta datan för båda celltyperna
+for fil=1:2 %för att plotta datan för båda celltyperna
 
 data =load(filnamn{fil});
 
@@ -47,8 +47,9 @@ xlabel('Storlek', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 ylabel('Stegl\"a{}ngd', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15)%,'XScale','log','YScale','log');
 axis([0,20,0,0.05])
-end
 
+fit(storl,rorlighet,'power1')
+end
 
 %% varians som fkn av tid
 clc;clf;clear all
