@@ -1,26 +1,52 @@
 %%
 clc;clf;clear all
 
-data =load('energydepletedcells.csv');
-size(data);
+data_energydepleted =load('energydepletedcells.csv');
+%size(data_energydepleted)
+data_logphase=load('logphasecells.csv');
+
 
 %%
-C = separera(data);
+C = separera(data_logphase);
 
-i=6;
-X=C{i};
+i=14; 
+X=C{i}; %Examine the trajectory of the i:th particle
 
-mean(X(:,2:3))
-std(X(:,2:3))
+mean(X(:,2:3)) %Mean value of x and y coordinates
+std(X(:,2:3)) %Standard deviation
 
-plot(X(:,1),X(:,2:3));%plottar 
+figure(1)
+plot(X(:,1),X(:,2:3)); %Displacement in x and y direction versus time
 
+figure(2)
+d=diff(X(:,2:3),1,1); %Actual steps in x and y direction
+hist(d) %Plot in a histogram
 
+figure(3)
+D=sqrt(sum(d.^2,2)); %Length of steps
+hist(D)
 
-d=diff(X(:,2:3),1,1);%faktiska steg
-hist(d)
-D=sqrt(sum(d.^2,2));%steglängd
-%hist(D)
+%%
+%plot total displacement from original position for some particles
+clf
+
+figure(4)
+hold on
+for i=1:6; 
+    X=C{i};
+    Intensity=X(1,4);
+    disp(i)
+    disp(Intensity)
+    x_o=X(:,2)-X(1,2); %Displacement in x direction relative to original position
+    y_o=X(:,3)-X(1,3); %Displacement in y direction relative to original position
+    r=[sqrt(x_o.^2+y_o.^2)]; %Total displacement from original position
+    plot(X(:,1),r)
+end
+%t=1:1:10;
+%plot(t,0.2*sqrt(t))
+hold off
+legend('1','2','3','4','5','6','Location','Best')
+
 
 %% Filmuppspelning
 clf
