@@ -46,9 +46,9 @@ title(filnamn{fil})
 xlabel('Storlek', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 ylabel('Stegl\"a{}ngd', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15)%,'XScale','log','YScale','log');
-axis([0,20,0,0.05])
+axis([0,20,0,8e-9])
 
-fit(storl,rorlighet,'power1') 
+fit(storl,rorlighet,'power1') %Powerfit rörlighet
 end
 
 %% varians som fkn av tid
