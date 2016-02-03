@@ -48,7 +48,7 @@ ylabel('Stegl\"a{}ngd', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15)%,'XScale','log','YScale','log');
 axis([0,20,0,8e-9])
 
-fit(storl,rorlighet,'power1') %Powerfit r�rlighet
+fit(storl,rorlighet,'power1') %Powerfit r�rlighet
 end
 
 %% varians som fkn av tid
@@ -101,7 +101,20 @@ end
 %plot(linspace(0.01,10,1000),M)
 %set(gca,'XScale','log','YScale','log');
 
+%%
+%Hur många partiklar av olika storlek
+clf
 
+C = separera(data);
+n=length(C);%antal partiklar
 
+intensitet=zeros(1,n);
+for i=1:n
+    intensitet(i)=C{i}(1,4);
+end
+bins=40;
+hist(intensitet,bins)
 
+%En faktor 3 skiljer i radielängd mellan de största och minsta partiklarna,
+%dvs ~10 i areaskillnad
 
