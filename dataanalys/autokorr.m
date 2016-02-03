@@ -46,3 +46,34 @@ subplot(1,2,2)
 plot(V,cross,'v')
 title('Crosskorrelation')
 
+
+%% Korrelation i normal och tangential koordinater
+
+%Antal "lags", dvs hur långt i tiden vill man undersöka korrelation
+lagsauto =900;
+lagscross = 900;
+corrT = zeros(lagsauto+1,1);
+corrN = zeros(lagsauto+1,1);
+for i=1:length(data)
+    if data{i}(:,4)<20 % Gräns för storlek på partiklar
+    
+    TN=koordinatbyte( bsxfun(@minus, data{i}(:,2:3), mean(data{i}(:,2:3), 1)) );
+    T=TN(:,1);
+    N=TN(:,2);
+    corrT = corrT+autocorr(T,lagsauto); % Summera autokorrelation för alla partiklar
+    corrN = corrN+autocorr(N,lagsauto); % Summera autokorrelation för alla partiklar
+    
+    end
+end
+corrT=corrT/length(data);
+corrN=corrN/length(data)
+
+U = linspace(0,lagsauto,lagsauto+1); % Vektor med diskreta punkter, lags
+
+figure(2)
+subplot(1,2,1)
+plot(U(2:end),corrT(2:end),'*')
+title('Korrelation T')
+subplot(1,2,2)
+plot(U,corrN,'v')
+title('Korrelation N')
