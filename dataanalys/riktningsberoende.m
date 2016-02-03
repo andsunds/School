@@ -1,11 +1,11 @@
 %% riktningsberoende
+
+%% för ögoninspektion
 clc;clf;clear all
 
 filnamn=cell(1,2);
 filnamn{1}='energydepletedcells.csv';
 filnamn{2}='logphasecells.csv';
-
-
 
 fil=1;
 data =load(filnamn{fil});
@@ -13,7 +13,7 @@ data =load(filnamn{fil});
 C = separera(data);
 n=length(C);%antal partiklar
 
-%för ögoninspektion
+
 for i=1:n
 
     X=C{i}(:,2)-mean(C{i}(:,2));
@@ -41,6 +41,40 @@ for i=1:n
     pause(2)
 end
 
+
+%% Jämförelse mot storleken
+clc;clf;clear all
+
+filnamn=cell(1,2);
+filnamn{1}='energydepletedcells.csv';
+filnamn{2}='logphasecells.csv';
+
+
+
+for fil=1:2
+    data =load(filnamn{fil});
+    C = separera(data);
+    n=length(C);%antal partiklar
+    
+    I=zeros(n,1);
+    R_sq=zeros(n,1);
+    
+    for i=1:n
+        I(i)=mean(C{i}(:,4));
+        X=C{i}(:,2)-mean(C{i}(:,2));
+        Y=C{i}(:,3)-mean(C{i}(:,3));
+        [koef, R_sq(i)]=minsta_kvadrat( X, Y );
+    end
+    
+    figure(fil)
+    plot(I,R_sq,'.')
+    title(filnamn{fil})
+    xlabel('$I$', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+    ylabel('$R^2$', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+    set(gca,'FontSize',15)%,'XScale','log','YScale','log');
+    figure(fil+2)
+    hist(R_sq)
+end
 
 
 
