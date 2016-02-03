@@ -9,7 +9,7 @@ data_logphase=load('logphasecells.csv');
 %%
 C = separera(data_logphase);
 
-i=14; 
+i=1; 
 X=C{i}; %Examine the trajectory of the i:th particle
 
 mean(X(:,2:3)) %Mean value of x and y coordinates
@@ -18,6 +18,7 @@ std(X(:,2:3)) %Standard deviation
 figure(1)
 plot(X(:,1),X(:,2:3)); %Displacement in x and y direction versus time
 
+%%
 figure(2)
 d=diff(X(:,2:3),1,1); %Actual steps in x and y direction
 hist(d) %Plot in a histogram
