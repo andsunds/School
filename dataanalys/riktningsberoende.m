@@ -15,7 +15,7 @@ n=length(C);%antal partiklar
 
 %för ögoninspektion
 for i=1:n
-<<<<<<< HEAD
+
     X=C{i}(:,2)-mean(C{i}(:,2));
     Y=C{i}(:,3)-mean(C{i}(:,3));
     M=max(max(abs([X,Y])));
@@ -38,7 +38,6 @@ for i=1:n
     axis equal
     legend(p,sprintf('y=%0.2fx, R^2=%0.2f',lutn,R_sq))
        
->>>>>>> d6d991bd8e8dce332f275788715fc84c4d58ae96
     pause(2)
 end
 
