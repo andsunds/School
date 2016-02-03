@@ -1,6 +1,7 @@
 function [C,index] = separera(X) % Separera data fran olika partiklar och spara i en cell
 
-X(:,2:3) = X(:,2:3)*108*10^(-9); %Korrigera enhet längder
+X(:,2:3) = X(:,2:3)*108*1e-9; %Korrigera enhet lï¿½ngder
+X(:,1) = X(:,1)*1e-3; %Korrigera tidsenhet 
 
 index=[find(X(:,1)==0); size(X,1)+1];%Tar ut varje index som en ny partikel startar vid, letar efter t==0, tar med slutindex+1 pga for-loopen nedan
 
