@@ -115,6 +115,8 @@ end
 bins=40;
 hist(intensitet,bins)
 
-%En faktor 3 skiljer i radielängd mellan de största och minsta partiklarna,
-%dvs ~10 i areaskillnad
+intensitetskvot=max(intensitet)/min(intensitet);
+areakvot=(intensitetskvot)^(2/3) %
+
+%En faktor ~20 skiljer i areastorleken mellan de största och minsta partiklarna
 
