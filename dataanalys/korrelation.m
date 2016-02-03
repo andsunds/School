@@ -33,7 +33,7 @@ for i=1:n
     
     pause(0.01)
     subplot(2,2,2*fil-1)
-    plot(XY(1:end-1,:),D, '.r');hold on;axis equal
+    plot(XY(1:end-1,:),D, '.r');hold on;axis equal; tittle
     
     subplot(2,2,2*fil)
     plot(D1,D2, '.b');hold on;axis equal
