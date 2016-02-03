@@ -107,10 +107,14 @@ clf
 
 C = separera(data);
 n=length(C);%antal partiklar
+index_smallparticle=[];
 
 intensitet=zeros(1,n);
 for i=1:n
     intensitet(i)=C{i}(1,4);
+    if (intensitet(i)<1.28)
+        index_smallparticle=[index_smallparticle i];
+    end
 end
 bins=40;
 hist(intensitet,bins)
