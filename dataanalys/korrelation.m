@@ -23,9 +23,9 @@ rorlighet=zeros(n,1);%hur stort område vandrar partikeln runt i
 hold on
 
 for i=1:n
-    if size(C{i},1)~=1000
-        continue
-    end
+    %if size(C{i},1)~=1000
+    %    continue
+    %end
     XY=C{i}(2:end-1,2:3);
     D1=diff(XY(1:end-1));
     D2=diff(XY(2:end));
