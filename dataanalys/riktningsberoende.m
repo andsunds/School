@@ -78,7 +78,8 @@ for i=1:n
     M=max(max(abs([T,N])));
     %t=[-M, M]*1.1;
     %lutn=-koef(1)/koef(2);
-    %n=lutn*t;
+    %n=lutn*t;[n(2); -n(1)];
+
     %p=plot(t,n);hold off
     axis equal
     axis([-M, M, -M, M]*1.1)
