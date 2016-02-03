@@ -14,8 +14,8 @@ C = separera(data);
 n=length(C);%antal partiklar
 
 for i=1:n
-    v=atan(diff(C{i}(:,3))./(diff(C{i}(:,2))));
-    hist(v)
+    v=atan(diff(C{i}(:,3))./(diff(C{i}(:,2)))); %Vinkel partikeln rör sig åt
+    hist(v) %Hur ofta partikeln rör sig i en viss vinkel
     pause(2)
 end
 
