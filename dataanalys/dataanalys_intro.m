@@ -27,6 +27,9 @@ figure(3)
 D=sqrt(sum(d.^2,2)); %Length of steps
 hist(D)
 
+figure(4)
+hist(data_logphase(:,4))
+
 %%
 %plot total displacement from original position for some particles
 clf
