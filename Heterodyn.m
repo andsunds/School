@@ -25,7 +25,7 @@ for k=1:size(time,2);
     Z(k) = 2*I./(time_k(end)-time_k(1));
 end
 %I = sum(P(1:end-1,:).*diff(time,1,1));
-disp(abs(Z))
+%disp(abs(Z))
 log_r = log(abs(Z));
 phi = phase(Z);
 
