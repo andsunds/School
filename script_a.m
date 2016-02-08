@@ -14,14 +14,19 @@ beta1  = zeros(l,1); beta2  = zeros(l,1);
 gamma1 = zeros(l,1); gamma2 = zeros(l,1);
 
 for i=1:l
-    time = load(files_t(i).name);
+    %j=floor((1+i)/2);%övertoner
+    j=i;
+    name_t=files_t(j).name;
+    name_v=files_v(j).name;
+    time = load(name_t);
     time = (time-min(min(time)))/1000;
-    volt = load(files_v(i).name);
+    volt = load(name_v);
     cels = V2C(volt,Pb_order);
     
-    
-    T(i)=str2double(files_t(i).name(regexp(files_t(i).name, '\d')));
-    
+    T(i)=str2double(name_t(regexp(name_t, '\d')));
+    if i==j*2
+        T(i)=3*T(i);%tredje övertonen
+    end
     
     
     Nper=5;
