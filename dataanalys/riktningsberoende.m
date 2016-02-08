@@ -13,6 +13,8 @@ data =load(filnamn{fil});
 C = separera(data);
 n=length(C);%antal partiklar
 
+lutn_x=zeros(n,1); R_sq_v=zeros(n,1);
+lutn_v=zeros(n,1); R_sq  =zeros(n,1);
 
 for i=1:n
 
@@ -22,91 +24,44 @@ for i=1:n
     dY=diff(Y);
         
     %Hittar min. kv. anpassning
-    [koef, R_sq] =minsta_kvadrat( X, Y );
-    [koef_d, R_sq_d] =minsta_kvadrat( dX, dY );
+    [koef, R_sq(i)] =minsta_kvadrat( X, Y );
+    [koef_v, R_sq_v(i)] =minsta_kvadrat( dX, dY );
     
-    figure(1)
-    subplot(1,2,1)
-    title('Rumskoordinat')
-    plot(X,Y, '.');hold on
-    M=max(max(abs([X,Y])));
-    x=[-M, M]*1.1;
-    lutn=-koef(1)/koef(2);
-    y=lutn*x;
-    p=plot(x,y);hold off
-    axis equal
-    axis([-M, M, -M, M]*1.1)
-    legend(p,sprintf('y=%0.2fx, R^2=%0.2f',lutn,R_sq))
+    lutn_x(i)=-koef(1)/koef(2);
+    lutn_v(i)=-koef_v(1)/koef_v(2);
     
-    subplot(1,2,2)
-    title('Hastighet')
-    plot(dX,dY, '.');hold on
-    M=max(max(abs([dX,dY])));
-    x=[-M, M]*1.1;
-    lutn=-koef_d(1)/koef_d(2);
-    y=lutn*x;
-    h=plot(x,y);hold off
-    axis equal
-    axis([-M, M, -M, M]*1.1)
-    legend(h,sprintf('y=%0.2fx, R^2=%0.2f',lutn,R_sq_d))
+%     subplot(1,2,1)
+%     title('Rumskoordinat')
+%     M=max(max(abs([X,Y])));
+%     x=[-M, M]*1.1;
+%     y=lutn_x(i)*x;
+%     plot(X,Y, '.');hold on
+%     p=plot(x,y);hold off; legend(p,sprintf('y=%0.2fx, R^2=%0.2f',lutn_x(i),R_sq(i)))
+%     axis equal; axis([-M, M, -M, M]*1.1)
     
     
-    
-    pause(.1)
+%     subplot(1,2,2)
+%     title('Hastighet')
+%     Mv=max(max(abs([dX,dY])));
+%     vx=[-Mv, Mv]*1.1;
+%     xy=lutn_v(i)*vx;
+%     plot(dX,dY, '.');hold on
+%     h=plot(vx,xy);hold off; legend(h,sprintf('y=%0.2fx, R^2=%0.2f',lutn_v(i),R_sq_v(i)))
+%     axis equal; axis([-Mv, Mv, -Mv, Mv]*1.1)
+
+    %pause(1)
 end
+disp('Färdig')
 
 
-
-%% för ögoninspektion med koordinatbyte
-clc;clf;clear all
-grid on
-
-filnamn=cell(1,2);
-filnamn{1}='energydepletedcells.csv';
-filnamn{2}='logphasecells.csv';
-
-fil=1;
-data =load(filnamn{fil});
-
-C = separera(data);
-n=length(C);%antal partiklar
-
-
-for i=1:n
-
-    TN=koordinatbyte( bsxfun(@minus, C{i}(:,2:3), mean(C{i}(:,2:3), 1)) );
-    
-    T=TN(:,1);
-    N=TN(:,2);
-    l=floor(length(T)/2);
-    
-    figure(3)
-    T_trans=fft(diff(T));
-    loglog(abs(T_trans(2:l)));grid on
-    figure(4)
-    N_trans=fft(diff(N));
-    loglog(abs(N_trans(2:l)));grid on
-    
-    
-    
-    figure(2)
-    plot(T,N, '.');grid on,%hold on
-    M=max(max(abs([T,N])));
-    %t=[-M, M]*1.1;
-    %lutn=-koef(1)/koef(2);
-    %n=lutn*t;[n(2); -n(1)];
-
-    %p=plot(t,n);hold off
-    axis equal
-    axis([-M, M, -M, M]*1.1)
-    
-    %legend(p,sprintf('y=%0.2fx, R^2=%0.2f',lutn,R_sq))
-       
-    pause(.1)
-end
-
-
-
+%% Korrelationmellan hastighet och position?
+clc;clf
+%subplot(1,2,1)
+hist(lutn_x),%hist(lutn_v)
+%plot(lutn_x,lutn_v, '.')
+%subplot(1, 2, 2)
+%hist(R_sq), hold on
+%hist(R_sq_v)
 
 
 
