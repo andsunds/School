@@ -18,13 +18,16 @@ for i=1:n
 
     X=C{i}(:,2)-mean(C{i}(:,2));
     Y=C{i}(:,3)-mean(C{i}(:,3));
-    %X=diff(X);
-    %Y=diff(Y);
+    dX=diff(X);
+    dY=diff(Y);
         
     %Hittar min. kv. anpassning
     [koef, R_sq] =minsta_kvadrat( X, Y );
+    [koef_d, R_sq_d] =minsta_kvadrat( dX, dY );
     
-    figure(2)
+    figure(1)
+    subplot(1,2,1)
+    title('Rumskoordinat')
     plot(X,Y, '.');hold on
     M=max(max(abs([X,Y])));
     x=[-M, M]*1.1;
@@ -33,9 +36,22 @@ for i=1:n
     p=plot(x,y);hold off
     axis equal
     axis([-M, M, -M, M]*1.1)
-    
     legend(p,sprintf('y=%0.2fx, R^2=%0.2f',lutn,R_sq))
-       
+    
+    subplot(1,2,2)
+    title('Hastighet')
+    plot(dX,dY, '.');hold on
+    M=max(max(abs([dX,dY])));
+    x=[-M, M]*1.1;
+    lutn=-koef_d(1)/koef_d(2);
+    y=lutn*x;
+    h=plot(x,y);hold off
+    axis equal
+    axis([-M, M, -M, M]*1.1)
+    legend(h,sprintf('y=%0.2fx, R^2=%0.2f',lutn,R_sq_d))
+    
+    
+    
     pause(.1)
 end
 
@@ -120,8 +136,8 @@ for fil=1:2
     
     for i=1:n
         I(i)=mean(C{i}(:,4));
-        X=C{i}(:,2)-mean(C{i}(:,2));
-        Y=C{i}(:,3)-mean(C{i}(:,3));
+        X=diff(C{i}(:,2)-mean(C{i}(:,2)));
+        Y=diff(C{i}(:,3)-mean(C{i}(:,3)));
         [koef, R_sq(i)]=minsta_kvadrat( X, Y );
     end
     
