@@ -1,11 +1,11 @@
-%% Korrelation i rörelsen
+%% Korrelation i r??relsen
 clc;clf;clear all
 
 filnamn=cell(1,2);
 filnamn{1}='energydepletedcells.csv';
 filnamn{2}='logphasecells.csv';
 
-for fil=1:2 %för att plotta datan för båda celltyperna
+for fil=1:2 %to plot data for both cell types
 
 data =load(filnamn{fil});
 C = separera(data);
@@ -34,7 +34,7 @@ filnamn=cell(1,2);
 filnamn{1}='energydepletedcells.csv';
 filnamn{2}='logphasecells.csv';
 
-for fil=1:2 %för att plotta datan för båda celltyperna
+for fil=1:2 %to plot data for both cell types
 
 data =load(filnamn{fil});
 C = separera(data);
@@ -53,13 +53,6 @@ for i=1:n
 end
 
 end
-
-
-
-
-
-
-
 
 
 

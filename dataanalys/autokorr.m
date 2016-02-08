@@ -8,7 +8,7 @@ filnamn{2}='logphasecells.csv';
 fil=1;
 data = separera(load(filnamn{fil}));
 
-%Antal "lags", dvs hur l�ngt i tiden vill man unders�ka korrelation
+%Antal "lags", dvs hur l???ngt i tiden vill man unders???ka korrelation
 lagsauto =900;
 lagscross = 900;
 corr = zeros(lagsauto+1,1);
@@ -17,20 +17,20 @@ cross = zeros(2*lagscross+1,1);
 %% En partikel
 clf
 
-i =100;%V�lj partikel
+i =100;%Choose particle
 XY = data{i}(:,2:3);
 avst1=sqrt(sum(XY.^2,2)); 
 
 figure(1)
-autocorr(avst1) %Korrelation av storlek p� steg
+autocorr(avst1) %Correlation of step length
 
 %% Alla partiklar 
 
 for i=1:length(data)
-    if data{i}(:,4)<20 % Gr�ns f�r storlek p� partiklar
+    if data{i}(:,4)<20 % Upper limit for particle size
     XY = data{i}(:,2:3);
     avst=sqrt(sum(XY.^2,2)); 
-    corr = corr+autocorr(avst,lagsauto); % Summera autokorrelation f�r alla partiklar
+    corr = corr+autocorr(avst,lagsauto); % Sum of autocorrelation for all particles
     cross = cross+crosscorr(diff(data{i}(:,2)),diff(data{i}(:,3)),lagscross);
     end
 end
@@ -60,7 +60,7 @@ for j=1:2
     
 fil=j;
 
-%Antal "lags", dvs hur l�ngt i tiden vill man unders�ka korrelation
+%Antal "lags", dvs hur l???ngt i tiden vill man unders???ka korrelation
 lagsauto =900;
 lagscross = 900;
 corrT = zeros(lagsauto+1,1);
@@ -68,13 +68,13 @@ corrN = zeros(lagsauto+1,1);
 
 data = separera(load(filnamn{fil}));
 for i=1:length(data)
-    if data{i}(1,4)<22 % Gr�ns f�r storlek p� partiklar
+    if data{i}(1,4)<22 % Gr???ns f???r storlek p??? partiklar
     
     TN=koordinatbyte( bsxfun(@minus, data{i}(:,2:3), mean(data{i}(:,2:3), 1)) );
     T=TN(:,1);
     N=TN(:,2);
-    corrT = corrT+autocorr(T,lagsauto); % Summera autokorrelation f�r alla partiklar
-    corrN = corrN+autocorr(N,lagsauto); % Summera autokorrelation f�r alla partiklar
+    corrT = corrT+autocorr(T,lagsauto); % Summera autokorrelation f???r alla partiklar
+    corrN = corrN+autocorr(N,lagsauto); % Summera autokorrelation f???r alla partiklar
     
     end
 end
@@ -98,6 +98,6 @@ title('Korrelation N')
 end
 
 subplot(1,2,1)
-legend('Dvala','Aktiva','Location','Best') %Placerar en legend på lämplig plats
+legend('Dvala','Aktiva','Location','Best') %Placerar en legend p?? l??mplig plats
 subplot(1,2,2)
 legend('Dvala','Aktiva','Location','Best')
