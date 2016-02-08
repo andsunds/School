@@ -24,7 +24,7 @@ for i=1:l
     
     
     
-    Nper=4;
+    Nper=5;
     
     [log_r1, phi1] = Heterodyn(time,cels,T(i)*60, Nper, Pb_order);
     [log_r2, phi2] = Heterodyn(time,volt,T(i)*60, Nper, Pb_order);
@@ -87,17 +87,22 @@ title('gamma')
 legend('temperatur', 'spänning', 'location', 'NorthWest')
 
 
+pause()
 
-
-%%
 clc;clf
 
 plot(tau.^2,beta1./gamma1,'bo'),hold on
+xlabel('omega [s^{-1}]')
+ylabel('beta./gamma')
+grid on
 
-w=linspace(0.02, 0.2);
-t=.5;
-y=(sqrt(sqrt((w*t).^2+1)-t*w)./sqrt(sqrt((w*t).^2+1)+t*w)).^-1;
-plot(w, y)
+
+%w=tau.^2;
+%y= @(t, w)(sqrt(sqrt((w*t).^2+1)-t*w)./sqrt(sqrt((w*t).^2+1)+t*w));
+
+%t0=fminbnd(@(t)sum((y(t, w)-(beta1./gamma1).').^2), 0,1000)
+%W=linspace(0.02, 0.2);
+%plot(W, y(t0, W))
 
 
 
