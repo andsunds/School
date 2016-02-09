@@ -74,9 +74,10 @@ end
 
 
 
-%% varians som fkn av tid
+%% varians som fkn av tid (Radius of duration)
 clc;
 figure(2);clf;pause(.1)
+
 
 for fil=1:2;
 data =load(filnamn{fil});
@@ -109,9 +110,10 @@ koef(1)=exp(koef(1));%konverterar till potenssamband
 % figure(2)
 
 %initialisering
-STD_t=zeros(1000,1);
-STD_n=zeros(1000,1);
-%loop över alla partiklar med tidsdata upp till 10ms
+STD=zeros(1000,1);
+%STD_n=zeros(1000,1);
+%loop över alla partiklar med tidsdata upp till 10s
+tic
 for i=find(cellfun('length',C)==1000).'; 
     TN=koordinatbyte(C{i}(:,2:3));%laddar in data för partikeln
     
@@ -119,25 +121,110 @@ for i=find(cellfun('length',C)==1000).';
     for j=1:1000 %loop över att tidpunkter
         tmp(j, :)=std(TN(1:j,:), 0, 1);
     end
+    
     %bygger "medelvärde"
-    %STD_t=STD_t+tmp(:,1)/(koef_t(1)*I(i).^koef_t(2));%normerat medelvärde
-    %STD_n=STD_n+tmp(:,2)/(koef_n(1)*I(i).^koef_n(2));%normerat medelvärde
-    %bygger "medelvärde"
-    STD_t=STD_t+tmp(:,1)/(koef(1)*I(i).^koef(2));%normerat medelvärde
-    STD_n=STD_n+tmp(:,2)/(koef(1)*I(i).^koef(2));%normerat medelvärde
+    STD=STD+tmp/(koef(1)*I(i).^koef(2));%normerat medelvärde
+    %STD_n=STD_n+tmp(:,2)/(koef(1)*I(i).^koef(2));%normerat medelvärde
 end
+toc
+
+
+%anpassar exponentialsamband, funkar inte
+t=C{i}(2:end,1);
+c=[ones(size(t)), log(t)]\log(STD(2:end,:));
+
+x=logspace( -4, log10(t(end)) ).';
+y=exp(c(1,:)).*(x.^(c(2,:)));
+
 
 %plottar data
 subplot(1,2,fil)
-plot(C{i}(:,1), STD_t), hold on
-plot(C{i}(:,1), STD_n)
-legend('Rörlighet T', 'Rörlighet N', 'location', 'SouthEast')
+plot(C{i}(:,1), STD.^2), hold on
+plot(x,y)
+
+str1=sprintf('%.1f dt^{%1.2f}', c(:,1));
+str2=sprintf('%.1f dt^{%1.2f}', c(:,2));
+
+legend('T', 'N', str1, str2, 'location', 'NorthWest')
 title(filnamn{fil}(1:end-4))
 xlabel('Tid/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 ylabel('R\"o{}rlighet', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
-set(gca,'FontSize',15,'XScale','log','YScale','log');
+set(gca,'FontSize',15)%,'XScale','log','YScale','log');
 pause(.1)
 end
+
+%% S(dt)=(1/T) sum((f(t)-f(t+dt)).^2) over all t
+clc;
+figure(3);clf;pause(.1)
+
+Dt=(1:300).';
+
+for fil=1:2;
+data =load(filnamn{fil});
+C = separera(data);
+
+%kortare namn
+I=intensitet{fil};
+lambda_t=rorlighet_t{fil};
+lambda_n=rorlighet_n{fil};
+
+%Detta är just nu samma normering som för rörligheten...
+%Sammanvägd koef för T och N ger rörligheter som går att jämföra
+lambda=sqrt(rorlighet_n{fil}.^2+rorlighet_t{fil}.^2);
+%beräkna koefficienter för lutning i loglog
+koef=[ones(size(I)), log(I)]\log(lambda);
+koef(1)=exp(koef(1));%konverterar till potenssamband
+
+
+S=zeros(length(Dt),2);
+tic
+for i=find(cellfun('length',C)==1000).'; 
+    TN=koordinatbyte(C{i}(:,2:3));%laddar in data för partikeln
+    
+    tmp=zeros(length(Dt),2);
+    for dt=Dt.'
+        tmp(dt, :)=mean(diff(TN(1:dt:end,:), 1,1).^2, 1);
+    end
+%     f_t=@(dt) mean(diff(TN(1:dt:end,1), 1,1).^2, 1);
+%     f_n=@(dt) mean(diff(TN(1:dt:end,2), 1,1).^2, 1);
+%     tmp_t=arrayfun(f_t, Dt.');
+%     tmp_n=arrayfun(f_n, Dt.');
+%     tmp=[tmp_t, tmp_n];
+
+    % Detta är samma normering som för rörligheten, 
+    % kanske skulle man hitta på något annat.
+    S=S+tmp/(koef(1)*I(i).^koef(2));
+end
+toc
+
+%anpassar exponentialsamband
+c=[ones(size(Dt)), log(Dt)]\log(S);
+
+x=logspace(-1, log10(Dt(end))+0.05 ).';
+y=exp(c(1,:)).*(x.^(c(2,:)));
+
+%plottar data
+subplot(1,2,fil)
+plot(Dt,S), hold on
+plot(x,y)
+
+str1=sprintf('%.1f dt^{%1.2f}', c(:,1));
+str2=sprintf('%.1f dt^{%1.2f}', c(:,2));
+
+legend('T', 'N', str1, str2, 'location', 'NorthWest')
+title(filnamn{fil}(1:end-4))
+xlabel('Tid/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+ylabel('R\"o{}rlighet', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+set(gca,'FontSize',15)%,'XScale','log','YScale','log');
+pause(.1)
+end
+
+
+
+
+
+
+
 
 
 %% Hur många partiklar av olika storlek
