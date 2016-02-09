@@ -131,7 +131,7 @@ toc
 
 %anpassar exponentialsamband, funkar inte
 t=C{i}(2:end,1);
-c=[ones(size(t)), log(t)]\log(STD(2:end,:));
+c=[ones(size(t)), log(t)]\log(STD(2:end,:).^2);
 
 x=logspace( -4, log10(t(end)) ).';
 y=exp(c(1,:)).*(x.^(c(2,:)));
@@ -142,8 +142,9 @@ subplot(1,2,fil)
 plot(C{i}(:,1), STD.^2), hold on
 plot(x,y)
 
-str1=sprintf('%.1f dt^{%1.2f}', c(:,1));
-str2=sprintf('%.1f dt^{%1.2f}', c(:,2));
+str1=sprintf('%.1d t^{%1.2f}', exp(c(1,1)), c(2,1));
+str2=sprintf('%.1d t^{%1.2f}', exp(c(1,2)), c(2,2));
+
 
 legend('T', 'N', str1, str2, 'location', 'NorthWest')
 title(filnamn{fil}(1:end-4))
@@ -208,8 +209,8 @@ subplot(1,2,fil)
 plot(Dt,S), hold on
 plot(x,y)
 
-str1=sprintf('%.1f dt^{%1.2f}', c(:,1));
-str2=sprintf('%.1f dt^{%1.2f}', c(:,2));
+str1=sprintf('%.1d dt^{%1.2f}', exp(c(1,1)), c(2,1));
+str2=sprintf('%.1d dt^{%1.2f}', exp(c(1,2)), c(2,2));
 
 legend('T', 'N', str1, str2, 'location', 'NorthWest')
 title(filnamn{fil}(1:end-4))
