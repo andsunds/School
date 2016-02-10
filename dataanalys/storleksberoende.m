@@ -110,7 +110,7 @@ koef(1)=exp(koef(1));%konverterar till potenssamband
 % figure(2)
 
 %initialisering
-STD=zeros(1000,1);
+STD=zeros(1000,2);
 %STD_n=zeros(1000,1);
 %loop över alla partiklar med tidsdata upp till 10s
 tic
@@ -134,7 +134,7 @@ t=C{i}(2:end,1);
 c=[ones(size(t)), log(t)]\log(STD(2:end,:).^2);
 
 x=logspace( -4, log10(t(end)) ).';
-y=exp(c(1,:)).*(x.^(c(2,:)));
+y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
 
 
 %plottar data
@@ -158,7 +158,7 @@ end
 clc;
 figure(3);clf;pause(.1)
 
-Dt=(1:300).';
+Dt=(1:600).';
 
 for fil=1:2;
 data =load(filnamn{fil});
@@ -184,12 +184,18 @@ for i=find(cellfun('length',C)==1000).';
     
     tmp=zeros(length(Dt),2);
     for dt=Dt.'
-        tmp(dt, :)=mean(diff(TN(1:dt:end,:), 1,1).^2, 1);
+        l=0;
+        for j=1:dt
+            s=diff(TN(j:dt:end,:), 1,1).^2;
+            l=l+size(s,1);
+            tmp(dt, :)=tmp(dt, :)+sum(s,1);
+        end
+        tmp(dt, :)=tmp(dt, :)/l;
     end
 %     f_t=@(dt) mean(diff(TN(1:dt:end,1), 1,1).^2, 1);
 %     f_n=@(dt) mean(diff(TN(1:dt:end,2), 1,1).^2, 1);
-%     tmp_t=arrayfun(f_t, Dt.');
-%     tmp_n=arrayfun(f_n, Dt.');
+%     tmp_t=arrayfun(f_t, Dt);
+%     tmp_n=arrayfun(f_n, Dt);
 %     tmp=[tmp_t, tmp_n];
 
     % Detta är samma normering som för rörligheten, 
@@ -198,24 +204,27 @@ for i=find(cellfun('length',C)==1000).';
 end
 toc
 
+%S=mean(S,2);
+
 %anpassar exponentialsamband
 c=[ones(size(Dt)), log(Dt)]\log(S);
 
-x=logspace(-1, log10(Dt(end))+0.05 ).';
-y=exp(c(1,:)).*(x.^(c(2,:)));
+x=logspace(-4, log10(Dt(end)) ).';
+y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
 
 %plottar data
 subplot(1,2,fil)
-plot(Dt,S), hold on
-plot(x,y)
+plot(Dt*1e-2,S), hold on
+plot(x*1e-2,y)
 
 str1=sprintf('%.1d dt^{%1.2f}', exp(c(1,1)), c(2,1));
 str2=sprintf('%.1d dt^{%1.2f}', exp(c(1,2)), c(2,2));
 
-legend('T', 'N', str1, str2, 'location', 'NorthWest')
+legend('T', 'N', str1,str2, 'location', 'NorthWest')
+%legend('T', str1, 'location', 'NorthWest')
 title(filnamn{fil}(1:end-4))
-xlabel('Tid/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
-ylabel('R\"o{}rlighet', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+xlabel('Tidssteg dt/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+ylabel('S(dt)', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15)%,'XScale','log','YScale','log');
 pause(.1)
 end
