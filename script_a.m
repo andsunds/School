@@ -25,17 +25,27 @@ for i=1:l
     
     T(i)=str2double(name_t(regexp(name_t, '\d')));
     if i==j*2
-        T(i)=3*T(i);%tredje övertonen
+        T(i)=T(i)/3;%tredje övertonen
     end
     
     
-    Nper=5;
+    Nper=3;
     
     [log_r1, phi1] = Heterodyn(time,cels,T(i)*60, Nper, Pb_order);
     [log_r2, phi2] = Heterodyn(time,volt,T(i)*60, Nper, Pb_order);
-
     
     N=3;
+    
+    
+    %(phi1(:)-phi1(1))
+    k=-(phi1(1:N)-phi1(1))\(log_r1(1:N)-log_r1(1))
+    k=mean((log_r1(2:4)-log_r1(1))./(phi1(2:4)-phi1(1)))
+    tau=((1-k.^2)./(2*k))*T(i)/2/pi
+    
+    
+    
+    
+    
     
     X1 = [ones(N,1),Pb_x(1:N)]\[log_r1(1:N),phi1(1:N)];
     log_V0 = X1(1,1);
@@ -67,36 +77,48 @@ for i=1:l
     hold off
     pause()
 end
-
-
-
+%%
 clf
+
+a=3.4e-1;
+tau=.01;
+x=linspace(0,4);
+
+y1=sqrt(x/(2*a)).*sqrt(sqrt((tau*x).^2+1)+tau*x);
+y2=sqrt(x/(2*a)).*sqrt(sqrt((tau*x).^2+1)-tau*x);
+
+
 subplot(1,2,1)
-tau = T.^(-1/2);
-plot(tau,beta1,'bo'),hold on
-plot(tau,beta2,'rx')
+w = 2*pi*T.^(-1);
+plot(w,beta1,'bo'),hold on
+plot(w,beta2,'rx')
+plot(x,y1)
 grid on
 %plot(tau,gamma,'rv')
 hold off
 %axis([0,max(tau)*1.1,0,max(beta1)*1.1])
 title('beta')
-legend('temperatur', 'spänning', 'location', 'NorthWest')
+legend('temperatur', 'spänning', 'location', 'Best')
+
+
+
 
 
 subplot(1,2,2)
-plot(tau,gamma1,'bv'), hold on
-plot(tau,gamma2,'r^')
+plot(w,gamma1,'bv'), hold on
+plot(w,gamma2,'r^')
+plot(x,y2)
 grid on
 %axis([0,max(tau)*1.1,0,max(gamma1)*1.1])
 title('gamma')
-legend('temperatur', 'spänning', 'location', 'NorthWest')
+legend('temperatur', 'spänning', 'location', 'best')
 
-
+%%
 pause()
 
 clc;clf
 
-plot(tau.^2,beta1./gamma1,'bo'),hold on
+plot(w,beta1./gamma1,'bo'),hold on
 xlabel('omega [s^{-1}]')
 ylabel('beta./gamma')
 grid on
