@@ -158,7 +158,12 @@ end
 clc;
 figure(3);clf;pause(.1)
 
-Dt=(1:600).';
+N=1000;
+Dt=(1:N).';
+INDECIES=create_indecis(N);
+LENGHTS=N+1-Dt;
+
+
 
 for fil=1:2;
 data =load(filnamn{fil});
@@ -177,27 +182,32 @@ koef=[ones(size(I)), log(I)]\log(lambda);
 koef(1)=exp(koef(1));%konverterar till potenssamband
 
 
-S=zeros(length(Dt),2);
+S=zeros(N,2);
 tic
-for i=find(cellfun('length',C)==1000).'; 
+for i=find(cellfun('length',C)==N).'; 
     TN=koordinatbyte(C{i}(:,2:3));%laddar in data för partikeln
     
     tmp=zeros(length(Dt),2);
-    for dt=Dt.'
-        l=0;
-        for j=1:dt
-            s=diff(TN(j:dt:end,:), 1,1).^2;
-            l=l+size(s,1);
-            tmp(dt, :)=tmp(dt, :)+sum(s,1);
-        end
-        tmp(dt, :)=tmp(dt, :)/l;
-    end
-%     f_t=@(dt) mean(diff(TN(1:dt:end,1), 1,1).^2, 1);
-%     f_n=@(dt) mean(diff(TN(1:dt:end,2), 1,1).^2, 1);
-%     tmp_t=arrayfun(f_t, Dt);
-%     tmp_n=arrayfun(f_n, Dt);
-%     tmp=[tmp_t, tmp_n];
+    %VARNING! mycket långsam for-loop
+%     for dt=Dt.'
+%         l=0;
+%         for j=1:dt
+%             s=diff(TN(j:dt:end,:), 1,1).^2;
+%             l=l+size(s,1);
+%             tmp(dt, :)=tmp(dt, :)+sum(s,1);
+%         end
+%         tmp(dt, :)=tmp(dt, :)/l;
+%     end
 
+    %Hög minnesåtgång
+    A=repmat(TN(:,1), 1,N);
+    A=triu(A.'-A);
+    tmp(:,1)=sum(A(INDECIES).^2, 2)./LENGHTS;
+    
+    A=repmat(TN(:,2), 1,N);
+    A=triu(A.'-A);
+    tmp(:,2)=sum(A(INDECIES).^2, 2)./LENGHTS;
+    
     % Detta är samma normering som för rörligheten, 
     % kanske skulle man hitta på något annat.
     S=S+tmp/(koef(1)*I(i).^koef(2));
@@ -207,7 +217,7 @@ toc
 %S=mean(S,2);
 
 %anpassar exponentialsamband
-c=[ones(size(Dt)), log(Dt)]\log(S);
+c=[ones(N-1,1), log(Dt(2:end)-1)]\log(S(2:end,:));
 
 x=logspace(-4, log10(Dt(end)) ).';
 y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
