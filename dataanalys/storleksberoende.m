@@ -159,9 +159,9 @@ clc;
 figure(3);clf;pause(.1)
 
 N=1000;
-Dt=(1:N).';
+DT=(1:N).';
 INDECIES=create_indecis(N);
-LENGHTS=N+1-Dt;
+LENGHTS=N+1-DT;
 
 
 
@@ -187,7 +187,7 @@ tic
 for i=find(cellfun('length',C)==N).'; 
     TN=koordinatbyte(C{i}(:,2:3));%laddar in data för partikeln
     
-    tmp=zeros(length(Dt),2);
+    tmp=zeros(length(DT),2);
     %VARNING! mycket långsam for-loop
 %     for dt=Dt.'
 %         l=0;
@@ -217,20 +217,26 @@ toc
 %S=mean(S,2);
 
 %anpassar exponentialsamband
-c=[ones(N-1,1), log(Dt(2:end)-1)]\log(S(2:end,:));
+Dt=DT*1e-2;
+c=[ones(N-1,1), log(Dt(2:end)-1e-2)]\log(S(2:end,:));
 
 x=logspace(-4, log10(Dt(end)) ).';
 y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
+uncertainty=1./sqrt(N+1-DT);
 
 %plottar data
 subplot(1,2,fil)
-plot(Dt*1e-2,S), hold on
-plot(x*1e-2,y)
+plot(Dt,S), hold on
+plot(x,y)
+
+plot(Dt, S.*(1+repmat(uncertainty,1,2)), '--k')
+plot(Dt, S.*(1-repmat(uncertainty,1,2)), '--k')
+axis([0,10, 0,2.5e-5]);
 
 str1=sprintf('%.1d dt^{%1.2f}', exp(c(1,1)), c(2,1));
 str2=sprintf('%.1d dt^{%1.2f}', exp(c(1,2)), c(2,2));
 
-legend('T', 'N', str1,str2, 'location', 'NorthWest')
+legend('T', 'N', str1,str2, 'Osäkerhetsgränser', 'location', 'NorthWest')
 %legend('T', str1, 'location', 'NorthWest')
 title(filnamn{fil}(1:end-4))
 xlabel('Tidssteg dt/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
