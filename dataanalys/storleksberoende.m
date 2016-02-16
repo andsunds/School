@@ -71,7 +71,7 @@ axis([0,20,0,8e-9])
 % fprintf('\n\n')
 
 end
-
+koef = [1, -1/3];
 
 
 %% varians som fkn av tid (Radius of duration)
@@ -102,7 +102,9 @@ koef=[ones(size(I)), log(I)]\log(lambda);
 koef(1)=exp(koef(1));%konverterar till potenssamband
 
 
-% figure(1) %Ritar in anpassning
+
+
+% figure(1) %Ritakoef = [1, -1/3];r in anpassning
 % subplot(2,2,2*fil-1)
 % x=logspace(-4, 1, 1000)*2;
 % plot(x,koef_t(1)*x.^koef_t(2),'-k')
@@ -110,7 +112,7 @@ koef(1)=exp(koef(1));%konverterar till potenssamband
 % figure(2)
 
 %initialisering
-STD=zeros(1000,2);
+VAR=zeros(1000,2);
 %STD_n=zeros(1000,1);
 %loop över alla partiklar med tidsdata upp till 10s
 tic
@@ -118,12 +120,12 @@ for i=find(cellfun('length',C)==1000).';
     TN=koordinatbyte(C{i}(:,2:3));%laddar in data för partikeln
     
     tmp=zeros(1000,2);%initialisering
-    for j=1:1000 %loop över att tidpunkter
-        tmp(j, :)=std(TN(1:j,:), 0, 1);
+    for j=1:1000 %loop över at(koef(1)*I(i).^koef(2))t tidpunkter
+        tmp(j, :)=var(TN(1:j,:), 0, 1);
     end
     
     %bygger "medelvärde"
-    STD=STD+tmp/(koef(1)*I(i).^koef(2));%normerat medelvärde
+    VAR=VAR+tmp/(koef(1)*I(i).^koef(2));%normerat medelvärde
     %STD_n=STD_n+tmp(:,2)/(koef(1)*I(i).^koef(2));%normerat medelvärde
 end
 toc
@@ -131,15 +133,15 @@ toc
 
 %anpassar exponentialsamband, funkar inte
 t=C{i}(2:end,1);
-c=[ones(size(t)), log(t)]\log(STD(2:end,:).^2);
+c=[ones(size(t)), log(t)]\log(VAR(2:end,:));
 
-x=logspace( -4, log10(t(end)) ).';
+x=logspace( -4, log10(t(end)) (koef(1)*I(i).^koef(2))).';
 y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
 
 
 %plottar data
 subplot(1,2,fil)
-plot(C{i}(:,1), STD.^2), hold on
+plot(C{i}(:,1), VAR), hold on
 plot(x,y)
 
 str1=sprintf('%.1d t^{%1.2f}', exp(c(1,1)), c(2,1));
@@ -149,14 +151,16 @@ str2=sprintf('%.1d t^{%1.2f}', exp(c(1,2)), c(2,2));
 legend('T', 'N', str1, str2, 'location', 'NorthWest')
 title(filnamn{fil}(1:end-4))
 xlabel('Tid/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
-ylabel('R\"o{}rlighet', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+ylabel('Varians', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15)%,'XScale','log','YScale','log');
 pause(.1)
 end
 
 %% S(dt)=(1/T) sum((f(t)-f(t+dt)).^2) over all t
 clc;
-figure(3);clf;pause(.1)
+figure(3);clf;
+figure(4);clf;
+pause(.1)
 
 N=1000;
 DT=(1:N).';
@@ -181,6 +185,7 @@ lambda=sqrt(rorlighet_n{fil}.^2+rorlighet_t{fil}.^2);
 koef=[ones(size(I)), log(I)]\log(lambda);
 koef(1)=exp(koef(1));%konverterar till potenssamband
 
+%koef = [1, -1/3];
 
 S=zeros(N,2);
 tic
@@ -214,17 +219,17 @@ for i=find(cellfun('length',C)==N).';
 end
 toc
 
-%S=mean(S,2);
 
 %anpassar exponentialsamband
 Dt=DT*1e-2;
 c=[ones(N-1,1), log(Dt(2:end)-1e-2)]\log(S(2:end,:));
 
-x=logspace(-4, log10(Dt(end)) ).';
+x=logspace(-2, log10(Dt(end)) ).';
 y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
 uncertainty=1./sqrt(N+1-DT);
 
 %plottar data
+figure(3);
 subplot(1,2,fil)
 plot(Dt,S), hold on
 plot(x,y)
@@ -243,5 +248,36 @@ xlabel('Tidssteg dt/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 ylabel('S(dt)', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15)%,'XScale','log','YScale','log');
 pause(.1)
+
+figure(4);
+FS=fft(S,[],1);
+w_max=pi./1e-2;
+w=linspace(0,w_max,N/2).';
+c=[ones(N/2-1,1) log(w(2:end))]\log(abs(FS(2:N/2,:)));
+
+
+x=logspace(-2,log10(w(end))).';
+y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
+
+subplot(1,2,fil)
+plot(w,abs(FS(1:500,:))), hold on
+plot(x,y)
+
+
+xlabel('frekvens /[rad/s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+ylabel('|FFT[S]|', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+
+str1=sprintf('%.1d dt^{%1.2f}', exp(c(1,1)), c(2,1));
+str2=sprintf('%.1d dt^{%1.2f}', exp(c(1,2)), c(2,2));
+
+legend('T', 'N', str1,str2, 'location', 'NorthWest')
+set(gca,'FontSize',15,'XScale','log','YScale','log');
+pause(.1)
+
 end
+
+
+
+
+
 
