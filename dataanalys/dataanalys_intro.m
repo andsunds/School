@@ -22,7 +22,7 @@ plot(X(:,1),X(:,2:3)); %Displacement in x and y direction versus time
 
 C = separera(data_logphase);
 
-i=2; 
+i=5; 
 X=C{i}; %Examine the trajectory of the i:th particle
 
 figure(2)
@@ -35,7 +35,7 @@ D=sqrt(sum(d.^2,2)); %Length of steps
 hist(D)
 title('Steglängdsfördelning')
 
-%Hur medelsteget ändras med tiden
+%Hur medelsteget ändras med tiden för 1 partikel
 i_max=length(D);
 L_mean_t=zeros(1,i_max);
 for i=1:i_max
