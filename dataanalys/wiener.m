@@ -4,7 +4,8 @@ filnamn=cell(1,2);
 filnamn{1}='energydepletedcells.csv';
 filnamn{2}='logphasecells.csv';
 
-nbrlags = 999; % Välj 999 för steg och 1000 för position
+figure(1)
+nbrlags = 999; % Välj 999 för steglängd och 1000 för position
 for fil = 1:2
     AN = zeros(nbrlags,1);
     AT = zeros(nbrlags,1);
@@ -15,27 +16,31 @@ for fil = 1:2
     
     
     for i=1:n
-        if length(C{i})==1000 && C{i}(1,4) < 5
+        if length(C{i})==1000 && C{i}(1,4) < 5 % Om man vill begränsa storlek
             np = np+1;
             TN=koordinatbyte(C{i}(:,2:3));
-            T = TN(:,1);
+            T = TN(:,1); % Ta fram tangential och normalkoord
             N = TN(:,2);
-            dT = diff(T);
-            dN = diff(N);
+            dT = diff(T); % Steg tangentiell
+            dN = diff(N); % Steg normal
 
 
-            Tw = fft(dT);
+            Tw = fft(dT); 
             Nw = fft(dN);
 
-            autokorrT = ifft(abs(Tw).^2);
+            %Ta fram autokorrelation enligt Wiener-Khinchin
+            %Normera med "perfekt korrelation"
+            autokorrT = ifft(abs(Tw).^2); 
             autokorrN = ifft(abs(Nw).^2);
             autokorrT = autokorrT/autokorrT(1,1);
             autokorrN = autokorrN/autokorrN(1,1);
-
+            
+            % Summera ihop för alla partiklar
             AN = AN+autokorrT;
             AT = AT+autokorrN;
         end
     end
+    %Normera med antalet partiklar s.a autkorro in [-1,1]
     AN = AN/np;
     AT = AT/np;
     
@@ -46,6 +51,8 @@ for fil = 1:2
         titel = 'Logphasecells';
     end
     
+    
+    figure(1)
     subplot(2,2,2*fil-1)
     plot(AT(1:end/2))
     legend('Tangentiell','Interpreter', 'Latex')
@@ -54,5 +61,35 @@ for fil = 1:2
     plot(AN(1:end/2))
     legend('Normal','Interpreter','Latex')
     title(titel,'Interpreter', 'Latex') 
+    figure(2)
+    
+    % Fouriertransformen av autokorrelationen
+    ANtrans = fft(AN);
+    ATtrans = fft(AT);
+    
+    Fs = 100;            % Sampling frequency
+    T = 1/Fs;             % Sampling period
+    L = 1000;             % Length of signal
+    t = (0:L-1)*T;        % Time vector
+    
+    P2N = abs(ANtrans/L);
+    P1N = P2N(1:L/2+1);
+    P1N(2:end-1) = 2*P1N(2:end-1);
+    
+    P2T = abs(ATtrans/L);
+    P1T = P2T(1:L/2+1);
+    P1T(2:end-1) = 2*P1T(2:end-1);
+    
+    f = Fs*(0:(L/2))/L;
+    
+    subplot(2,2,2*fil-1)
+    plot(f,P1T)
+    legend('Tangentiell','Interpreter', 'Latex')
+    title(titel,'Interpreter', 'Latex')
+    subplot(2,2,2*fil)
+    plot(f,P1N)
+    legend('Normal','Interpreter','Latex')
+    title(titel,'Interpreter', 'Latex') 
+    
 end
 set(0,'defaultAxesFontSize', 16)
