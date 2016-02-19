@@ -256,7 +256,7 @@ w=linspace(0,w_max,N/2).';
 c=[ones(N/2-1,1) log(w(2:end))]\log(abs(FS(2:N/2,:)));
 
 
-x=logspace(-2,log10(w(end))).';
+x=logspace(0,log10(w(end))).';
 y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
 
 subplot(1,2,fil)
