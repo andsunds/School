@@ -33,6 +33,6 @@ end
 
 %% 
 clear all
- A = importdata('confined_270304-6-28-min.mat');
+A = importdata('confined_270304-6-28-min.mat');
 
 
