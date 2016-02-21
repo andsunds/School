@@ -6,7 +6,7 @@ filnamn{2}='confined_280204-2-32min.mat';
 filnamn{3}='nonconfined_180304-1-5min.mat';
 filnamn{4}='nonconfined_250104-1-167min.mat';
 
-A = importdata(filnamn{4});
+A = importdata(filnamn{2});
 nbrB = size(A,3);%Antal bilder
 
 XY=cell(nbrB,1); % Cell med positioner
@@ -36,6 +36,7 @@ for k=1:nbrB
 end
 
 %% Beräkning av spåret av G samt dess egenvärden
+%1:a delen behöver köras först
 
 clf
 nbrB = size(A,3);%Antal bilder
@@ -53,6 +54,7 @@ figure(1)
 h = plot(Trace) 
 title('Tr(G)','Interpreter','Latex')
 xlabel('Tid','Interpreter','Latex')
+set(gca,'Fontsize',30)
 
 % Plotta egenvärde som funktion av bilder(tid)
 figure(2)
@@ -64,5 +66,38 @@ legend('Egenvärde 1','Egenvärde 2')
 title('Egenvärden till G','Interpreter','Latex')
 xlabel('Tid','Interpreter','latex')
 set(gca,'Fontsize',30)
+
+
+%% Asphericity
+%1:a & 2:a delen behöver köras först
+
+d = 2; % Dimension
+lambdaMedel = bsxfun(@times,Trace,1/d); % Medel egenvärde
+
+I = eye(2);
+Ad = zeros(nbrB,1); % Asphericity; =0 för sfäriskt symm, =1 för rak linje
+Ghat = cell(nbrB,1); 
+for i=1:nbrB
+    Ghat{i} = G{i}-lambdaMedel(i,1)*I;
+    Ad(i,1) = d/(d-1)*trace(Ghat{i}^2)/(Trace(i)^2);
+end
+
+figure(3)
+plot(Ad)
+title('Asphericity A$_d = \frac{d}{d-1}\frac{Tr\hat{G}^2}{(TrG)^2}$','Interpreter','Latex')
+xlabel('Tid','Interpreter','latex')
+set(gca,'Fontsize',30)
+
+
+figure(4)
+% "film" på strängen för att kunna jämföra A_d och rörelsen
+bilder_s=3; %bilder/sekund
+disp('speltid=')
+disp(size(A,3)/bilder_s)
+for i = 1:size(A,3)
+  image(A(:,:,i))
+  pause(bilder_s^-1)
+  i % Fullösning för att se vart i tiden filmen är
+end
 
 
