@@ -6,7 +6,7 @@ filnamn{2}='confined_280204-2-32min.mat';
 filnamn{3}='nonconfined_180304-1-5min.mat';
 filnamn{4}='nonconfined_250104-1-167min.mat';
 
-A = importdata(filnamn{1});
+A = importdata(filnamn{4});
 nbrB = size(A,3);%Antal bilder
 
 XY=cell(nbrB,1); % Cell med positioner
@@ -17,17 +17,17 @@ for i=1:nbrB
     XY{i}=[kol,rad];
 end
 
-CM = zeros(2,1,nbrB);
+CM = zeros(2,nbrB);
 
 for i=1:nbrB
-    CM(1,1,i) = mean(kol); %Masscentrum x-led 
-    CM(2,1,i) = mean(rad); %Masscentrum y-led
+    CM(1,i) = mean(XY{i}(:,1)); %Masscentrum x-led 
+    CM(2,i) = mean(XY{i}(:,2)); %Masscentrum y-led
 end
 
 for k=1:nbrB
     N = size(XY{k},1); % Antal punkter
-    XY{k}(:,1) = bsxfun(@minus,XY{k}(:,1),CM(1,1,k)); % Position-CM
-    XY{k}(:,2) = bsxfun(@minus,XY{k}(:,2),CM(2,1,k)); % Position-CM
+    XY{k}(:,1) = bsxfun(@minus,XY{k}(:,1),CM(1,k)); % Position relativt CM
+    XY{k}(:,2) = bsxfun(@minus,XY{k}(:,2),CM(2,k)); % Position relativt CM
     for i=1:2
         for j=1:2
             G{k}(i,j) = 1/N*dot(XY{k}(:,i),XY{k}(:,j)); %Beräkna gyration tensor
@@ -35,7 +35,7 @@ for k=1:nbrB
     end
 end
 
-%% 
+%% Beräkning av spåret av G samt dess egenvärden
 
 clf
 nbrB = size(A,3);%Antal bilder
@@ -48,17 +48,21 @@ Trace(i,1) = trace(G{i});
 [Egenvarde{i},Egenvektorer{i}] = eig(G{i});
 end
 
-% Plotta trace som funktion av bilder
+% Plotta trace som funktion av bilder(tid)
 figure(1)
-plot(Trace) 
+h = plot(Trace) 
+title('Tr(G)','Interpreter','Latex')
+xlabel('Tid','Interpreter','Latex')
 
-% Plotta egenvärde som funktion av bilder
+% Plotta egenvärde som funktion av bilder(tid)
 figure(2)
 for i=1:nbrB
     plot(i,Egenvarde{i}(1),'*k');hold on;
     plot(i,Egenvarde{i}(2),'vr')
 end
 legend('Egenvärde 1','Egenvärde 2')
-
+title('Egenvärden till G','Interpreter','Latex')
+xlabel('Tid','Interpreter','latex')
+set(gca,'Fontsize',30)
 
 
