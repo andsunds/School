@@ -6,7 +6,7 @@ filnamn{2}='confined_280204-2-32min.mat';
 filnamn{3}='nonconfined_180304-1-5min.mat';
 filnamn{4}='nonconfined_250104-1-167min.mat';
 
-A = importdata(filnamn{2});
+A = importdata(filnamn{3});
 nbrB = size(A,3);%Antal bilder
 
 XY=cell(nbrB,1); % Cell med positioner
@@ -46,12 +46,12 @@ Egenvektorer = cell(nbrB,1); % Egenvektor av G
 
 for i=1:nbrB;
 Trace(i,1) = trace(G{i});
-[Egenvarde{i},Egenvektorer{i}] = eig(G{i});
+[Egenvektorer{i},Egenvarde{i}] = eig(G{i});
 end
 
 % Plotta trace som funktion av bilder(tid)
 figure(1)
-h = plot(Trace) 
+plot(Trace) 
 title('Tr(G)','Interpreter','Latex')
 xlabel('Tid','Interpreter','Latex')
 set(gca,'Fontsize',30)
@@ -59,10 +59,11 @@ set(gca,'Fontsize',30)
 % Plotta egenvärde som funktion av bilder(tid)
 figure(2)
 for i=1:nbrB
-    plot(i,Egenvarde{i}(1),'*k');hold on;
-    plot(i,Egenvarde{i}(2),'vr')
+    plot(i,Egenvarde{i}(1,1),'*k');hold on;
+    plot(i,Egenvarde{i}(2,2),'vr')
 end
-legend('Egenvärde 1','Egenvärde 2')
+leg = legend('$\lambda_x$','$\lambda_y$');
+set(leg,'Interpreter','Latex')
 title('Egenvärden till G','Interpreter','Latex')
 xlabel('Tid','Interpreter','latex')
 set(gca,'Fontsize',30)
@@ -89,15 +90,33 @@ xlabel('Tid','Interpreter','latex')
 set(gca,'Fontsize',30)
 
 
-figure(4)
+
 % "film" på strängen för att kunna jämföra A_d och rörelsen
 bilder_s=3; %bilder/sekund
 disp('speltid=')
 disp(size(A,3)/bilder_s)
+figure(4)
 for i = 1:size(A,3)
   image(A(:,:,i))
   pause(bilder_s^-1)
   i % Fullösning för att se vart i tiden filmen är
 end
+
+%% Fouriertransform av egenvärden
+L = zeros(2,nbrB);
+
+for i=1:nbrB 
+    L(1,i) = Egenvarde{i}(1,1); % Lambda_x
+    L(2,i) = Egenvarde{i}(2,2); % Lambda_y
+end
+
+LX = fft(L(1,:));
+LY = fft(L(2,:));
+
+
+figure(5)
+plot(abs(LX).^2)
+figure(6)
+plot(abs(LY).^2)
 
 
