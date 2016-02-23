@@ -28,7 +28,6 @@ for i=1:l
         T(i)=T(i)/3;%tredje Ã¶vertonen
     end
     
-    
     Nper=3;
     
     [log_r1, phi1] = Heterodyn(time,cels,T(i)*60, Nper, Pb_order);
@@ -36,15 +35,10 @@ for i=1:l
     
     N=3;
     
-    
     %(phi1(:)-phi1(1))
     k=-(phi1(1:N)-phi1(1))\(log_r1(1:N)-log_r1(1))
     k=mean((log_r1(2:4)-log_r1(1))./(phi1(2:4)-phi1(1)))
     tau=((1-k.^2)./(2*k))*T(i)/2/pi
-    
-    
-    
-    
     
     
     X1 = [ones(N,1),Pb_x(1:N)]\[log_r1(1:N),phi1(1:N)];
@@ -132,21 +126,44 @@ grid on
 %plot(W, y(t0, W))
 
 
+%% Test av högpassfilter
+clc; clf;clear all
+p='Data/';addpath(p);
 
+files_t=dir([p,'Pb','*_t.lvm']);
+files_v=dir([p,'Pb','*_v.lvm']);
 
+l=length(files_t);
 
+T=zeros(1,l);
+Pb_order = [2 3 4 6 5]-1;
+Pb_x = [0,1,2,3,4].';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+for i=1:l
+    %j=floor((1+i)/2);%Ã¶vertoner
+    j=i;
+    name_t=files_t(j).name;
+    name_v=files_v(j).name;
+    time = load(name_t);
+    time = (time-min(min(time)))/1000; %Konvertera till sekunder
+    volt = load(name_v);
+    cels = V2C(volt,Pb_order);
+    T(j) = 60*sscanf(name_t,'Pb_%dmin'); % Periodtid i minuter
+    
+    cels_highpass = highpass(time,cels,0.1/T(j));
+    
+    subplot(2,1,1)
+    plot(repmat(time(:,1)/60,1,5),cels)
+    title(sprintf('Periodtid: %dmin',T(i)/60))
+    xlabel('Tid [min]')
+    ylabel('Temperatur [C]')
+    
+    subplot(2,1,2)
+    plot(repmat(time(:,1)/60,1,5),cels_highpass)
+    title('Högpassfiltrerad signal')
+    xlabel('Tid [min]')
+    ylabel('Temperatur [C]')
+    
+    pause()
+end
 
