@@ -107,9 +107,20 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%% Här börjar huvudtexten %%%%%%%%%%%%%%%%%%%%%%
-\part{Inledning}
-\chapter{Test}
-%\input{...}
+%\part{Inledning}
+
+\chapter{Inledning}
+\input{Inledning.tex}
+
+
+
+%\part{Huvuddel}
+
+\chapter{Partikelrörelse i celler}
+\input{Partikel.tex}
+
+\chapter{Strängars rörelse i vätskor}
+\input{Strang.tex}
 
 
 
@@ -118,18 +129,14 @@
 
 
 
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bilagor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% Källförteckning %%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 %Ser till att det blir rätt namn i rubriken
-\iflanguage{swedish}{\renewcommand{\refname}{Källförteckning}}{}
+\iflanguage{swedish}{\renewcommand{\bibname}{Källförteckning}}{}
 \bibliographystyle{babunsrt}
-\bibliography{referenser}%kräver en fil som heter 'referenser.bib'          
+\bibliography{referenser_kandidat}%kräver en fil som heter 'referenser.bib'          
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bilagor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \appendix%Resets the section counter and changes it to Alph                 
 \setcounter{page}{1} %Resets the pgenumbering                               

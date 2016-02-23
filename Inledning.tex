@@ -1,0 +1,76 @@
+\begin{itemize}
+    \item Lite om transport i celler
+    \item Resultat från dataanalysen
+    \item Slutsatser vi kan dra från analysen
+\end{itemize}
+
+
+\section{Bakgrund}
+
+Att partiklar kan ta sig fram genom cytoplasman spelar onekligen en viktig roll för många funktioner i cellen, exempelvis vid signaltransport när signalämnen tillåts sprida sig genom cellen. I vissa fall har hastigheten för spridning inte en betydande roll, men vid exempelvis celldelning är det viktigt att de delade cellerna får med sig en fullständig uppsättning organeller och en likvärdig blandning av cytoplasmans beståndsdelar. För detta krävs att beståndsdelarna kan förflytta sig runt och blandas.
+
+I nuläget råder viss oenighet gällande hur cytoplasman, cellens fyllnadsmaterial, egentligen beter sig. Man har länge trott att cytoplasman kan ha två distinkta faser, en kolloid vätskefas med partiklar väl blandade i cytoplasman och en fas med komponenter i cellen som interagerar för att bilda ett sammanhängande nätverk som gör cytoplasman mer fast eller glasliknande.
+
+Till en första approximation skulle rörelserna i cytoplasman kunna beskrivas med klassisk Brownsk rörelse där partiklarna krockar med mindre partiklar från omgivningen och där rörelsen kan beskrivas med en gaussisk propagator. Denna teori bygger dock på att man har termisk jämvikt och att partiklar rör sig i en helt viskös vätska, två kriterier som inte uppfylls i cytoplasman bland annat på grund av mitokondriernas energiutvinning. Andra modeller måste sålunda tillämpas för att nå en bättre beskrivning.
+
+Tidigare studier på eukaryota celler har visat att partiklars rörlighet i cytoplasman beror på hur aktiv cellen är.\cite{Gou_etal2014} Rörligheten i de undersökta cellerna ökade trefaldigt om cellen drabbades av cancer jämfört med en normalt fungerande cell och den sammanlagda påverkan av motorproteinerna utpekas som en möjlig kandidat till fenomenet. Studier på bakterier har samtidigt visat att partiklarnas rörlighet minskade drastiskt om den metabola aktiviteten minskade. \cite{Parry_etal2014} Då bakterier saknar aktiv transport i sina celler försöker man här istället nå en förklaring via att cytoplasman blir mer vätskelik ju högre aktiviteten är och börjar likna mer ett elastiskt fast material då aktiviteten minskar men också att partiklarnas storlek spelar roll.
+
+Datan som kommer analyseras under detta kandidatarbete utgörs av registrerade positioner för vissa utmarkerade proteinkluster i jästceller samt förhoppnigsvis av rörelsen för filament i cytoplasman. 
+
+Jäst hör till riket svampar och utgörs av encelliga organismer. De är därmed varken djur, växter eller bakterier men delar vissa likheter med alla tre. Med sitt arvsanlag samlat i en cellkärna precis som djur- och växtceller skiljer sig jästceller från bakterier. De har även en vakuol och cellvägg som växtceller men saknar växtcellens kloroplaster. Att jästcellen är en encellig organism gör att den reproducerar sig snabbt vilket gör den smidig att arbeta med och vill man dra paralleller till djurceller uppvisar jästceller mer likheter med dessa än de likväl encelliga bakterierna. Djurcellernas komplicerade nät av proteintrådar som möjliggör en aktiv transport inom cellen finns inte hos jästceller som istället får förlita sig på passiv transport, förutom vid just celldelning. Med jästceller kan man därför undersöka om anomalier från klassisk Brownsk rörelse uppkommer även utan de stokastiska krafter som har sitt ursprung i motorproteinernas rörelse. Jästceller kan även gå i dvala där de intracellulära aktiviteterna minskar, vilket möjliggör undersökningar om huruvida cytoplasmans beståndsdelars rörlighet i cellen beror på cellens metabola tillstånd. \cite{Yeast}
+
+Fördjupade studier av partikelrörelse i cellen skulle t ex kunna leda till mer effektiva läkemedel. Vet man hur transporten inom cellen sker underlättar det arbetet med att ta fram specialdesignad medicin.
+
+
+\section{Syfte}
+
+Syftet med detta kandidatarbete är att studera rörelser i celler och utifrån denna studie förhoppningsvis kunna ge en klarare bild av cytoplasmans betende. Detta ska framför allt ske genom att försöka ta fram en teoretisk förklaringsmodell för hur partiklar och filament (proteintrådar) rör sig genom cytoplasman. Denna modell är lämpligen en mikroskopisk beskrivning som ger upphov till en stokastisk modell. Ur en stokastisk modell kan sedan en makroskopisk, statistisk beskrivning uppnås och det är med denna statistiska beskrivning som modellen kan jämföras med data. 
+
+Datan kommer från Max Planck Institutet i Dresden och utgörs av positionen för fluorescerande partiklar i jästceller. Partiklarna varierar i storlek vilket speglas av att de har olika stark ljusintensitet i mikroskopet. 
+Vidare kommer förhoppningsvis även data från strängars rörelse i cytoplasman studeras. Tanken är att generalisera modellen för enskilda partiklars rörelse till att även kunna tillämpas för strängars rörelse.
+
+%Syftet specificerar vad projektet är tänkt att resultera i och vilken typ av resultat som kommer att uppnås. Ett projekt kan ha flera syften som är relaterade till de ämnen/problem som presenteras i bakgrunden. I de flesta fall är det dock lämpligt att ha endast ett generellt syfte, som sedan bryts ner i mer detaljerade delar längre fram i rapporten/processen.
+
+\section{Problem}
+
+Målet med arbetet är att hitta en förklaringsmodell för hur partikar och förhoppningsvis filament rör sig med aktiv eller passiv transport i cellen och utifrån denna modell dra slutsatser om cytoplasmans natur. Dock är det inte säkert att datan från dessa filament kommer att finnas tillgänglig. Om så är fallet kommer arbetet begränsas till mindre, lokala partiklar för vilka data redan finns. Denna data består av tid-positionsdata för partiklar av storleksordning omkring 10--100\,nm uppmätta under jämna tidsintervall. %Med grund i tidigare studier gjorda på detta ämne ämnar vi leta efter liknande observationer och kanske hittar vi något nytt som vi kan tillföra till området.
+
+\subsection{Dataanalys}
+
+Ett första steg är att jämföra observationer på partiklar med motsvarande förutsägelser från teorin om Brownsk rörelse. Då det är känt att diffusionen i cytoplasman påverkas av motorprotein och man då funnit avvikelser\cite{Gou_etal2014} från klassisk Brownsk rörelse bör dessa redan funna avvikelser jämföras med den tillgängliga datan. I denna analys bör även skillnader mellan cellens olika stadier av metabol aktivitet kunna upptäckas. Vidare kan det vara intressant att undersöka hur partiklarna och filamenten borde bete sig om de endast utförde Brownsk rörelse i cytoplasman. Man kan då undersöka hur modellen påverkas om cytoplasman betraktas som en fluid vars beståndsdelar skiljer sig i storlek eller istället om den betraktas som ett elastiskt fast ämne. 
+Härefter fås nu en grund varifrån man kan försöka hitta förklaringar till avvikelserna.
+
+Men för att över huvud taget kunna analysera datan behöver man kunna veta osäkerheten i mätningarna. Detta är dock inte helt problemfritt då till exempel Brownsk rörelse i sig själv är en sorts brus. Brus brukar i vanliga fall hanteras genom att undersöka en sorts medelvärde. I det här fallet kommer datan från flera olika partiklar vilket gör att en direkt jämförelse av en undersökt parameter inte kan göras; man måste istället först finna ett samband mellan storleken på partiklarna och den parameter som man vill undersöka. 
+
+I datan finns utöver position även en partikels intensitet i mikroskopet. Intensiteten beror med största sannolikhet på partikelns storlek; dock är det exakta sambandet inte helt klart vilket ger ännu en svårighet i hur datan ska analyseras. Troligen går det dock att från intensiteterna kunna jämföra olika partiklar och på så sätt ändå kunna utnyttja den i jämförelser mellan olika partiklar. 
+
+\subsection{Teoretisk modell}
+
+Från den observerade datan ska sedan en modell försöka konstrueras. Denna modell bör rimligtvis ta sin grund i frågorna:
+\begin{itemize}
+    \item Vad skulle en eventuell avvikelse från Brownsk rörelse kunna bero på?
+    \item Är det den totala effekten av många motorprotein som arbetar oberoende av varandra som stör den annars kanske ideala slumpvandringen? 
+    \item Beter sig cytoplasman olika vid olika tillfällen exempelvis beroende på vilken partikel den interagerar med? Ska cytoplasman betraktas som en fluid eller ett elastiskt fast ämne?
+    \item Vad är det för egenskaper hos aktiva celler och celler i dvala som svarar mot de observerade skillnaderna mellan dem?
+\end{itemize}
+
+%Ska en del av detta stycke läggas som bakgrund?
+Inspiration till hur modellen kan byggas upp kan hämtas från redan publicerade artiklar på området. En möjlig förklaringsmodell för anomal transport i celler utgörs av CTRW (continuous-time random walks). Här beskrivs rörelsemönstret med att partiklarna under majoriteten av tiden sitter bundna till olika strukturer för att sedan plötsligt ta sig vidare till en ny position efter en viss väntetid, där positionsändringen och väntetiden beskrivs av en stokastisk variabel. Anomal transport uppkommer här genom att medelväntetiden mellan två hopp blir oändlig och därmed att centrala-gränsvärdessatsen ej uppfylls. Summan av de stokastiska variablerna går således ej mot att bli normalfördelad, något som är grundläggande i teorin kring Brownsk rörelse.
+En annan modell som kan undersökas är Fractional Brownian motion som bygger på superpositioner av Brownska processer med brus som uppvisar en beständig korrelation. Detta får transporten av partiklar att sakta ner med tiden jämfört med vanlig Brownsk rörelse. \cite{Hofling_Franosch}
+
+För att testa dessa modellers riktighet för den mätdata som finns tillgänglig kan modellernas förutsägelser vad gäller bland annat autokorrelationsfunktioner samt mean square displacement testas. Finnes avvikelse kan modellen antingen avfärdas eller moduleras.
+  
+  
+%Det här avsnittet är ofta den viktigaste delen av planeringsrapporten (och av den slutgiltiga rapporten). Den syftar till att identifiera frågan/frågorna som ska tas upp i projektet. Det är viktigt att gruppen gör en problem(uppgifts)analys även om det i projektförslaget redan finns ett problem (en uppgift) specificerat. Anledningen till detta är att det riktiga primära problemet ofta skiljer sig från det i början av uppdragsgivaren/förslagsställaren/kunden föreslagna. Problemanalysen syftar också till att bryta ner problemet/uppgiften i mindre och mer detaljerade delproblem/deluppgifter, vilket också leder till formulering av delsyften. Genom att göra detta får studenterna mycket bättre förståelse för de olika aspekterna av problemet/uppgiften. Utan den här information är det omöjligt att identifiera vilken information som behövs, vilka informationskällor som behövs,  och lämpliga tillvägagångssätt.
+
+%En bra problemanalys som identifierar delproblem/deluppgifter och delsyften vilar i många fall på användning av teorier och modeller från litteraturen. En litteraturgenomgång bör därför genomföras tidigt i processen. 
+
+\section{Avgränsningar}
+
+Detta arbete kommer framförallt att fokusera på att analysera redan framtagen data för partiklars rörelse i cytoplasman och utifrån dessa observationer bygga en teoretisk modell med grund i redan föreslagna modeller. 
+
+Att avbilda filament innebär stora svårigheter vilket har försvårat analysen av dess egenskaper och i dagsläget finns ingen fullkomlig modell som beskriver filamentens rörelse. Den teoretiska modellen som tas fram under kandidatarbetet kommer rimligtvis tas fram under vissa antaganden som begränsar dess användningsområde. Exempelvis kan variationer som uppstår vid betraktande av rörelser under olika tidsskalor komma att leda till svårigheter, bland annat i att finna en teoretisk modell som korrekt beskriver rörelsen oberoende av tidsskala. Således anses det mer rimligt att modellera rörelsen under antagandet att modellen i första hand beskriver rörelser för en viss tidsskala, förslagsvis observationer som varar i intervallet $\unit[10]{ms}$ till $\unit[10]{s}$ vilket speglar den data som hittills analyserats av gruppen.
+
+Den datan som finns tillgänglig för analys består av datan från genmodifierade jästceller och den teoretiska modellen jämförs huvudsakligen med rörelse från dessa celler. Möjligheten att jämföra modellen med dels samma celler men med andra förutsättningar och dels med andra sorts celler kommer troligtvis vara något begränsad. 
+
+Jästcellerna som har observerats saknar aktiv transport i stadier mellan celldelning, under vilka datan inhämtats. Därmed kan vi inte bekräfta en eventuell modell för celler med aktiv transport så som djur- och växtceller. En avgränsning i arbetet kan därför vara att inte fokusera på rörelse som beror på den sammanlagda effekten av motorproteiners bidrag till den aktiva transporten.
