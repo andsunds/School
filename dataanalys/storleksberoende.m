@@ -135,7 +135,7 @@ toc
 t=C{i}(2:end,1);
 c=[ones(size(t)), log(t)]\log(VAR(2:end,:));
 
-x=logspace( -4, log10(t(end)) (koef(1)*I(i).^koef(2))).';
+x=logspace( -4, log10(t(end))).';
 y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
 
 
@@ -219,29 +219,34 @@ for i=find(cellfun('length',C)==N).';
 end
 toc
 
+show=101; %hur många tidssteg ska undersökas
 
 %anpassar exponentialsamband
-Dt=DT*1e-2;
-c=[ones(N-1,1), log(Dt(2:end)-1e-2)]\log(S(2:end,:));
+Dt=(DT(1:show)-1)*1e-2;%verklig tid
+start=10;
+c=[ones(show+1-start,1), log(Dt(start:end))]\log(S(start:show,:));
 
 x=logspace(-2, log10(Dt(end)) ).';
 y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
-uncertainty=1./sqrt(N+1-DT);
+
 
 %plottar data
 figure(3);
 subplot(1,2,fil)
-plot(Dt,S), hold on
+plot(Dt,S(1:show,:)), hold on
 plot(x,y)
 
-plot(Dt, S.*(1+repmat(uncertainty,1,2)), '--k')
-plot(Dt, S.*(1-repmat(uncertainty,1,2)), '--k')
-axis([0,10, 0,2.5e-5]);
+%uncertainty=1./sqrt(N+1-DT(1:show));
+%plot(Dt, S(1:show,:).*(1+repmat(uncertainty,1,2)), '--k')
+%q=plot(Dt, S(1:show,:).*(1-repmat(uncertainty,1,2)), '--k')
+%legend(q, 'Osäkerhetsgränser')
+
+axis([0, Dt(end), 0, 0.4e-5]);
 
 str1=sprintf('%.1d dt^{%1.2f}', exp(c(1,1)), c(2,1));
 str2=sprintf('%.1d dt^{%1.2f}', exp(c(1,2)), c(2,2));
 
-legend('T', 'N', str1,str2, 'Osäkerhetsgränser', 'location', 'NorthWest')
+legend('T', 'N', str1,str2, 'location', 'NorthWest')
 %legend('T', str1, 'location', 'NorthWest')
 title(filnamn{fil}(1:end-4))
 xlabel('Tidssteg dt/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
@@ -249,30 +254,30 @@ ylabel('S(dt)', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15)%,'XScale','log','YScale','log');
 pause(.1)
 
-figure(4);
-FS=fft(S,[],1);
-w_max=pi./1e-2;
-w=linspace(0,w_max,N/2).';
-c=[ones(N/2-1,1) log(w(2:end))]\log(abs(FS(2:N/2,:)));
-
-
-x=logspace(0,log10(w(end))).';
-y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
-
-subplot(1,2,fil)
-plot(w,abs(FS(1:500,:))), hold on
-plot(x,y)
-
-
-xlabel('frekvens /[rad/s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
-ylabel('|FFT[S]|', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
-
-str1=sprintf('%.1d dt^{%1.2f}', exp(c(1,1)), c(2,1));
-str2=sprintf('%.1d dt^{%1.2f}', exp(c(1,2)), c(2,2));
-
-legend('T', 'N', str1,str2, 'location', 'NorthWest')
-set(gca,'FontSize',15,'XScale','log','YScale','log');
-pause(.1)
+% figure(4);
+% FS=fft(S,[],1);
+% w_max=pi./1e-2;
+% w=linspace(0,w_max,N/2).';
+% c=[ones(N/2-1,1) log(w(2:end))]\log(abs(FS(2:N/2,:)));
+% 
+% 
+% x=logspace(0,log10(w(end))).';
+% y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
+% 
+% subplot(1,2,fil)
+% plot(w,abs(FS(1:500,:))), hold on
+% plot(x,y)
+% 
+% 
+% xlabel('frekvens /[rad/s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+% ylabel('|FFT[S]|', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+% 
+% str1=sprintf('%.1d dt^{%1.2f}', exp(c(1,1)), c(2,1));
+% str2=sprintf('%.1d dt^{%1.2f}', exp(c(1,2)), c(2,2));
+% 
+% legend('T', 'N', str1,str2, 'location', 'NorthWest')
+% set(gca,'FontSize',15,'XScale','log','YScale','log');
+% pause(.1)
 
 end
 

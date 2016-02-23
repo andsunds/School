@@ -10,18 +10,18 @@ data =load(filnamn{fil});
 
 C = separera(data);
 n=length(C);%antal partiklar
-index_particle_0_128=[]; %Index för partiklar upp till intensiteten 1.28
-index_particle_129_237=[];
-index_largeparticle=[]; %Index för partiklar med intensitet mellan 8.9-21.8
+%index_particle_0_128=[]; %Index för partiklar upp till intensiteten 1.28
+%index_particle_129_237=[];
+%index_largeparticle=[]; %Index för partiklar med intensitet mellan 8.9-21.8
 
 intensitet=zeros(1,n);
 for i=1:n
     intensitet(i)=C{i}(1,4);
-    if (intensitet(i)<1.28)
-        index_particle_0_128=[index_particle_0_128 i];
-    elseif (8.9<intensitet(i))
-        index_largeparticle=[index_largeparticle i];
-    end
+    %if (intensitet(i)<1.28)
+    %    index_particle_0_128=[index_particle_0_128 i];
+    %elseif (8.9<intensitet(i))
+    %    index_largeparticle=[index_largeparticle i];
+    %end
 end
 %Hela denna for-loop kan ersättas med:
 %index_smallparticle=find(intensitet(i)<1.28));
@@ -51,26 +51,38 @@ end
 
 
 %% MSD for the small particles
+%Run previous cell first
 clf;
+figure(1)
 
-
-fil=2;
 data = separera(load(filnamn{fil}));
+j_max=5; %Number of bins
+MSD_tot=0;
 
-for j=1:5 %length(index_particles_sizesorted)
-    MSD=zeros(1,916)'; %916=l?gsta index
+for j=1:j_max %length(index_particles_sizesorted)
+    MSD=zeros(1,916)'; %916=lowest index
     for i=index_particles_sizesorted{j};
         XY = data{i}(:,2:3);
-        MSD_i=sum(XY.^2,2);
+        Intensitet_i=data{i}(1,4)
+        MSD_i=sum(XY.^2,2)*(Intensitet_i)^(1/3); %To remove intensity dependency
         MSD=MSD+MSD_i(1:916);
     end
-    MSD=MSD/length(index_particles_sizesorted{j})
+    MSD=MSD/bin_counts(j);%;
+    MSD_tot=MSD_tot+MSD*bin_counts(j); %Weight by number of particles
     hold on
     plot(data{1}(1:916,1),MSD)
 end
 
 center_etikett=num2str(bin_center,3)
-title('MSD, olika intensitet')
+title('MSD, olika intensitetsboxar')
 legend(center_etikett(1:5), center_etikett(6+6:(12+4)), center_etikett((16+6):(22+4)), center_etikett((26+6):(32+4)),center_etikett((36+6):(42+4)),'Location','Best')
+xlabel('tid')
+ylabel('MSD')
+
+MSD_tot=MSD_tot/sum(bin_counts(1:j_max)); %Divide by total number of particles
+
+figure(2)
+plot(data{1}(1:916,1),MSD_tot)
+title('MSD, viktad summa')
 xlabel('tid')
 ylabel('MSD')
