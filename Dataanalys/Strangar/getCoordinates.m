@@ -6,7 +6,12 @@ filnamn{2}='confined_280204-2-32min.mat';
 filnamn{3}='nonconfined_180304-1-5min.mat';
 filnamn{4}='nonconfined_250104-1-167min.mat';
 
-A = importdata(filnamn{4});
+a = importdata(filnamn{4});
+
+A=zeros((size(a)+[4, 4, 0]));
+%disp('hej')
+A(3:end-2, 3:end-2,:)=a;
+
 dim=2;
 N_pics=size(A,3);
 
@@ -19,14 +24,56 @@ end
 %Här hämtas koordinaterna
 
 coordinates=NaN(N_pics, max(N_points), dim);
+index_endpoint=zeros(N_pics,1);
 
 for i = 1:N_pics
-    [row, kol]=find(A(:,:,i));
+    [rad, kol]=find(A(:,:,i));
+    index_endpoint(i)=find_endpoint(A(:,:,i) , rad, kol );
     %l=length(kol);
     coordinates(i,1:N_points(i), 1)=kol;
-    coordinates(i,1:N_points(i), 2)=row;
+    coordinates(i,1:N_points(i), 2)=rad;
+    
+    
 end
-%%
+
+
+
+
+%% Sortera punkter
+clf;clc
+i=50;
+S=coordinates;
+
+%143
+for i=1:N_pics %Över alla bilder
+    %Lista med lediga index
+    INDEX=1:N_points(i); 
+    INDEX(index_endpoint(i))=[];
+    %Initierar Smed första 
+    S(i,1,:)=coordinates(i,index_endpoint(i),:);
+    
+    for j=2:N_points(i) %Över alla punkter
+        [S(i,j,:), I] =find_nearest_point(S(i,j-1,:), coordinates(i,INDEX,:));
+        %disp('hej')
+        %I
+        INDEX(I)=[];
+        
+    end
+end
+
+
+coordinates=S;%sorterat!
+
+%% film
+clf
+for i = 1:N_pics
+    plot(S(i,:,1),S(i,:,2), '-'), hold on
+    plot(S(i,1,1),S(i,1,2), 'r*', 'markersize', 16), hold off
+    pause(.1)
+
+end
+
+%% Beräkna längd
 clf
 L_string   = sum( sqrt( nansum( diff(coordinates,1, 2).^2 , 3 ) ), 2);
 
@@ -45,60 +92,22 @@ plot(L_endtoend)
 subplot(1,2,2)
 plot(L_endtoend./L_string)
 
+
+%%
+clc;clf
+R_sq=mean((L_endtoend.^2));
+L=mean(L_string);
+
+f=@(x) R_sq -2*(L.*x + x.^2.*(-1 + exp(-L./x)));
+
+x=linspace(0,1e3);
+plot(x,f(x))
+
+fzero(f, 100)
+
 %% Ska BARA köras en gång!!!!
-%%%save('nonconfined_167min.mat', 'coordinates', 'N_points', 'L_string', 'L_endtoend', '-mat')
-%%%disp('save successfull')
-
-%% 
-clf
-for i = 1:N_pics
-    plot(coordinates(i,:,1),coordinates(i,:,2), 'o-')
-    axis equal
-    pause(.1)
-end
-
-%% FOR loopar
-clf;clc
-i=50;
-S=coordinates;%(i,:,:);
-
-
-
-
-for i=1:N_pics %Över alla bilder
-    subplot(1,2,1)
-    plot(S(i,:,1),S(i,:,2), 'o-')
-    
-    
-    INDEX=2:N_points(i);
-    
-    for j=2:N_points(i) %Över alla punkter
-        [S(i,j,:), I] =find_nearest_point(S(i,j-1,:), coordinates(i,INDEX,:));
-        %disp('hej')
-        %I
-        INDEX(I)=[];
-        
-    end
-    
-    
-    
-
-
-
-
-subplot(1,2,2)
-plot(S(i,:,1),S(i,:,2), 'o-')
-
-pause(.4)
-end
-
-
-
-
-
-
-
-
+save('nonconfined_167min.mat', 'coordinates', 'N_points', 'L_string', 'L_endtoend', '-mat')
+disp('save successfull')
 
 
 
