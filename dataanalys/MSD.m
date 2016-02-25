@@ -7,7 +7,7 @@ filnamn{1}='energydepletedcells.csv';
 filnamn{2}='logphasecells.csv';
 filstr={'energydepleted' 'logphase'};%For usage in titles
 
-for k=1:2%
+for k=1:2 %För båda filerna
 fil=k;
 subplot(1,2,k)
 data =load(filnamn{fil});
