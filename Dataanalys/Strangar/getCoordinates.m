@@ -52,9 +52,82 @@ plot(L_endtoend./L_string)
 %% 
 clf
 for i = 1:N_pics
-plot(coordinates(i,:,1),coordinates(i,:,2), 'o-')
-axis equal
-pause(.1)
+    plot(coordinates(i,:,1),coordinates(i,:,2), 'o-')
+    axis equal
+    pause(.1)
 end
 
-%%
+%% FOR loopar
+clf;clc
+i=50;
+S=coordinates;%(i,:,:);
+
+
+
+
+for i=1:N_pics %Över alla bilder
+    subplot(1,2,1)
+    plot(S(i,:,1),S(i,:,2), 'o-')
+    
+    
+    INDEX=2:N_points(i);
+    
+    for j=2:N_points(i) %Över alla punkter
+        [S(i,j,:), I] =find_nearest_point(S(i,j-1,:), coordinates(i,INDEX,:));
+        %disp('hej')
+        %I
+        INDEX(I)=[];
+        
+    end
+    
+    
+    
+
+
+
+
+subplot(1,2,2)
+plot(S(i,:,1),S(i,:,2), 'o-')
+
+pause(.4)
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
