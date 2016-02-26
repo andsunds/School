@@ -7,7 +7,7 @@ files_v=dir([p,'Pb','*_v.lvm']);
 
 l=length(files_t);
 
-T=zeros(1,l);
+T=zeros(l,1);
 Pb_order = [2 3 4 6 5]-1;
 Pb_x = [0,1,2,3,4].';
 beta1  = zeros(l,1); beta2  = zeros(l,1);
@@ -22,23 +22,30 @@ for i=1:l
     time = (time-min(min(time)))/1000;
     volt = load(name_v);
     cels = V2C(volt,Pb_order);
-    
     T(i)=str2double(name_t(regexp(name_t, '\d')));
+    
+    %cels = highpass(time,cels,0.1/T(j));
+    
+    Nper=5;
+    
     if i==j*2
         T(i)=T(i)/3;%tredje Ã¶vertonen
+        Nper=Nper*3;
+        
     end
     
-    Nper=3;
+    
     
     [log_r1, phi1] = Heterodyn(time,cels,T(i)*60, Nper, Pb_order);
     [log_r2, phi2] = Heterodyn(time,volt,T(i)*60, Nper, Pb_order);
     
     N=3;
     
+    %%%%%%Roetzels metod%%%%%%
     %(phi1(:)-phi1(1))
-    k=-(phi1(1:N)-phi1(1))\(log_r1(1:N)-log_r1(1))
-    k=mean((log_r1(2:4)-log_r1(1))./(phi1(2:4)-phi1(1)))
-    tau=((1-k.^2)./(2*k))*T(i)/2/pi
+    %k=-(phi1(1:N)-phi1(1))\(log_r1(1:N)-log_r1(1))
+    %k=mean((log_r1(2:4)-log_r1(1))./(phi1(2:4)-phi1(1)))
+    %tau=((1-k.^2)./(2*k))*T(i)/2/pi
     
     
     X1 = [ones(N,1),Pb_x(1:N)]\[log_r1(1:N),phi1(1:N)];
@@ -69,28 +76,36 @@ for i=1:l
     hold on
     plot(Pb_x, phi0 - Pb_x*beta1(i),'-')
     hold off
-    pause()
+    pause(.2)
 end
 %%
 clf
+w = 2*pi*T.^(-1);
 
 a=3.4e-1;
 tau=.01;
 x=linspace(0,4);
 
+BETA=@(tau, a) sqrt(w/(2*a)).*sqrt(sqrt((tau*w).^2+1)+tau*w);
+
+GAMMA=@(tau,a) sqrt(w/(2*a)).*sqrt(sqrt((tau*w).^2+1)-tau*w);
+
+X=fminsearch(@(X) sum( (BETA(X(1), X(2)) - beta1).^2 ), [1, 1])
+Y=fminsearch(@(X) sum( (GAMMA(X(1), X(2)) - gamma1).^2 ), [1, 1])
+
+tau=X(1);a=X(2);
 y1=sqrt(x/(2*a)).*sqrt(sqrt((tau*x).^2+1)+tau*x);
+tau=Y(1);a=Y(2);
 y2=sqrt(x/(2*a)).*sqrt(sqrt((tau*x).^2+1)-tau*x);
 
 
 subplot(1,2,1)
-w = 2*pi*T.^(-1);
 plot(w,beta1,'bo'),hold on
 plot(w,beta2,'rx')
 plot(x,y1)
 grid on
-%plot(tau,gamma,'rv')
 hold off
-%axis([0,max(tau)*1.1,0,max(beta1)*1.1])
+
 title('beta')
 legend('temperatur', 'spÃ¤nning', 'location', 'Best')
 
@@ -103,6 +118,7 @@ plot(w,gamma1,'bv'), hold on
 plot(w,gamma2,'r^')
 plot(x,y2)
 grid on
+hold off
 %axis([0,max(tau)*1.1,0,max(gamma1)*1.1])
 title('gamma')
 legend('temperatur', 'spÃ¤nning', 'location', 'best')
@@ -126,7 +142,7 @@ grid on
 %plot(W, y(t0, W))
 
 
-%% Test av högpassfilter
+%% Test av hï¿½gpassfilter
 clc; clf;clear all
 p='Data/';addpath(p);
 
@@ -160,7 +176,7 @@ for i=1:l
     
     subplot(2,1,2)
     plot(repmat(time(:,1)/60,1,5),cels_highpass)
-    title('Högpassfiltrerad signal')
+    title('Hï¿½gpassfiltrerad signal')
     xlabel('Tid [min]')
     ylabel('Temperatur [C]')
     
