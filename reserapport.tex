@@ -1,0 +1,201 @@
+\documentclass[11pt,a4paper, english, swedish]{article}
+\pdfoutput=1
+%vons grund
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel} %OBS! Se till att vi får rätt språk.
+\usepackage{amsmath}
+\usepackage{lmodern}
+\usepackage{units}
+\usepackage{icomma}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{bbm}
+\newcommand{\N}{\ensuremath{\mathbbm{N}}}
+\newcommand{\Z}{\ensuremath{\mathbbm{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbbm{Q}}}
+\newcommand{\R}{\ensuremath{\mathbbm{R}}}
+\newcommand{\C}{\ensuremath{\mathbbm{C}}}
+\newcommand{\rd}{\ensuremath{\mathrm{d}}}
+\newcommand{\id}{\ensuremath{\,\rd}}
+\usepackage{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%Egna tillägg%%%%%%%%%%%%%%%%%%%%%%%
+%%För att få referenser 'på svenska'
+\usepackage[fixlanguage]{babelbib}
+%\selectbiblanguage{swedish}
+%\renewcommand\btxauthorcolon{:}
+%%För att figurtext i underfigurer
+\usepackage{subfigure} 
+%%För att kunna inkludera andra PDF-dokument
+\usepackage{pdfpages}
+%%För att kunna ha roterade bilder
+\usepackage{rotating}
+%%För att kunna byta uppräkningsvisare t.ex. [label=\alph*)]
+\usepackage{enumitem}
+%%För att kunna lägga till 'bilagor' utan sidnumrering.
+\usepackage{tocstyle}
+\usetocstyle{standard}%För att få en vanlig TOC
+                %no page numbers for part
+\settocstylefeature[-1]{pagenumberbox}{\csname @gobble\endcsname}
+\usepackage[nottoc]{tocbibind} %Puts an 'Reference' entry in the ToC.
+%%För att kunna använda bra och ket
+\usepackage{physics} %\bra{}\ket{} eller \expval{H}{\psi}
+%%För att kunna rita snygga matriser
+\usepackage{mathtools} %\begin{pmatrix*}[r] ... \end
+%%För att kunna kommentera ut större stycken
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+\usepackage{comment} %\begin{comment}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}, \todolist
+
+
+
+%%För att inkludera MATLABkod. 
+%%OBS: mcode är ett separat paket och man måste ha mcode.sty i samma
+%%katalog som dokumentet.
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+%\usepackage{listings} 
+%\lstloadlanguages{matlab} 
+%\lstset{language=matlab} 
+%\lstset{literate= {å}{{\r{a}}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {Å}{{\r{A}}}1
+%  {Ä}{{\"A}}1 {Ö}{{\"O}}1}%För att få svenska bokstäver från MATLAB.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%Formatering%%%%%%%%%%%%%%%%%%%%%%%%
+%%Partiell derivata
+\newcommand{\pd}{\ensuremath{\partial}}
+%%Följer ISO-8601 oberoende av språk.
+\usepackage[iso]{isodate}
+%%Göra grader Celcius
+\newcommand{\degC}{\ifmmode \,^\circ\mathrm{C} \else $\,^\circ\mathrm{C}$ \fi}
+%%Figurreferenser
+\newcommand{\figref}{\figurename~\ref} 
+%%Tabellreferenser
+\newcommand{\tabref}{\tablename~\ref} %Stor bokstav i början
+
+%%Det ska vara ett rakt µ i prefixet
+\usepackage{upgreek}
+\newcommand{\micro}{\upmu}
+%%Ohm enhetskommando
+\newcommand{\ohm}{\ifmmode \Upomega \else $\Upomega$ \fi}
+
+%%'e' och 'i' ska vara upprätt
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+
+%%För att själv bestämma marginalerna. 
+%\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+%]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+%\renewcommand{\thesection}{...}
+
+
+
+\begin{document}
+
+\title{Reserapport -- University of Waterloo (UW)}
+\author{Andréas Sundström -- F}
+\date{2016--2017}
+
+\maketitle
+
+\addtocounter{section}{-1}
+\section{Inför utbytet}
+Ett ganska standard 
+
+\subsection{Språktest}
+Om man läser äldre reserapporter från UW så verkar vissa ha klarat sig
+utan ett språkprov. Så var det inte den här gången. I efterhand borde
+jag ha varit mer aktiv med att undersöka detta, men som det föll sig
+nu var det så att när vi hade fått kontrakt med vår koordinator på
+Chalmers fick vi reda på att vi skulle kontakta UW\footnotemark{}.
+Då fick vi veta om att det visst skulle krävas ett språkprov. 
+\footnotetext{I skrivande stund var det Ibi Brown som man får tag i
+  via
+  \href{mailto:studyabroad@uwaterloo.ca}{\nolinkurl{studyabroad@uwaterloo.ca}}. }
+
+Man kan här notera att detta fick vi reda på den 5:e februari och att
+ansökan skulle in den 1:a mars. Nu gick visserligen
+\href{http://www.folkuniversitetet.se/Las-mer-om-sprak/Sprakexamina/IELTS/IELTS-Goteborg/}{IELTS}
+i Göteborg den 20:e februari, vilket ledde till en hektisk
+tvåveckorsperiod med att försöka gräva upp sina gamla
+engelka. \emph{Så om man är intresserad av att söka sig till ett
+  utbyte bör man kolla upp med just det universitetet vad som kommer
+  att krävas, så att man hinner förbereda sig lite inför eventuella
+  prov.}
+
+Själva provet i sig kan i stora drag sammanfattas med ''tänk
+nationella i Engelska~B, men med den strängaste läraren du någonsin
+träffat''. Allt är väldigt stikt. De kolla ditt pass hela tiden
+under provet, man får inte använda sin egna penna, man får inte ens ha
+med sig sitt armbandsur. 
+
+En sak till också om provet: det kostar 2\,250~SEK. Inte det roligaste
+att skrapa ihop för att skriva ett prov. Man får var beredd på att saker
+kommer att kosta; det är sådant som resebidraget ska täcka, men de
+pengarna kommer inte förrän i November.\todo{Uppdatera när pengarna
+  faktiskt kom.}
+
+\subsection{Ansökan}
+Själva ansökan skulle in redan den 1:e mars, men den var mest bara att
+fylla i personuppgifter och vilket porgram man sökte till. Efter den
+ansökan så kommer man få ett konto\footnotemark{} där man ska ladda
+upp saker som kursval, studeresultat och sitt resultat i
+engelskprovet. 
+
+\footnotetext{Motsvarande typ Studentportalen, fast ganska mycket tråkigare.}
+
+Om man söker som non-degree student så behövdes inga referenser, trots
+att det såg ut som det på ansöknigssidan. Man ska, om man gjort
+allting rätt, inte helle behöva beta ansökningsavgiften på 100~CAD.
+
+
+
+
+
+\end{document}
+
+
+
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer (två enkelfjongar): ''.
+
+
+%% Inkludera PDF-dokument
+\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+
+%% Figurer inkluderade som pdf-filer
+\begin{figure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{\label{fig:} }
+\end{figure}
+
+%% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
+\caption{\label{fig:} }
+\end{figure}
+
+%% Figurer roterade 90 grader
+\begin{sidewaysfigure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{\label{fig:} }
+\end{sidewaysfigure}
+
+
+%%Om man vill lägga till något i TOC
+\stepcounter{section} %Till exempel en 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
