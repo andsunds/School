@@ -1,25 +1,28 @@
 %% 2D-polynom
 clc;clf;clear all
 
+%Ladda in data
 filnamn=cell(1,4);
-filnamn{1}='confined_28min.mat'; % Några konstiga hopp i denna.
+filnamn{1}='confined_28min.mat'; 
 filnamn{2}='confined_32min.mat';
 filnamn{3}='nonconfined_5min.mat';
 filnamn{4}='nonconfined_167min.mat';
 
-load(['data/' filnamn{4}]);
+load(['data/' filnamn{3}]);
 
 
 
-N=size(coordinates, 1);
+N=size(coordinates, 1);%antalet bilder
 
+%gradtal för polynomanpassning
 grad=20;
-px=zeros(N,grad+1);
-py=zeros(N,grad+1);
+px=zeros(N,grad+1);%init
+py=zeros(N,grad+1);%init
 
 ws=warning('off', 'all');%Stänger av polyfits varingar
 tic
 for i=1:N
+%Kurvlängds vekot med varje punkts pos. längs kurvan.
 s=L_string(i,1:N_points(i))/L_string(i,N_points(i));
 %%%%%%%%                   ^alla blir lika långa
 
@@ -45,31 +48,46 @@ warning(ws)
 % Medelvärde av polynom är samma som medevärde av koef.
 PX=mean(px,1);
 PY=mean(py,1);
-
+%Tarfram x- och y-värden som fkn av kurvlängd
 S=linspace(0, 1 ,1000);
 X=polyval(PX,S);
 Y=polyval(PY,S);
-
+%plotta
 plot(X-mean(X),Y-mean(Y), 'K', 'linewidth',10)
+axis equal
 
 %% Film med sträng och medelpositionen
 % Alla bilder är centrerade kring medelvärdet
+clc;clf
 
-for i=1:N
+plot(X-mean(X),Y-mean(Y), 'k', 'linewidth',4)%plottar medelvärdet
+hold on
+%Första steget i for-loopen är lite speciellt
+i=1;
+XP=polyval(px(i,:),S);
+YP=polyval(py(i,:),S);
+x=coordinates(i,1:N_points(i), 1);
+y=coordinates(i,1:N_points(i), 2);
+
+h=plot(x-mean(XP),y-mean(YP));
+p=plot(XP-mean(XP),YP-mean(YP));
+pause(.1)
+%sen fortsätter filmen
+for i=2:N
+    %Uppdatera x- och y-koordinaterna:
     x=coordinates(i,1:N_points(i), 1);
     y=coordinates(i,1:N_points(i), 2);
-
+    %uppdatera polynomanpassningen:
     XP=polyval(px(i,:),S);
     YP=polyval(py(i,:),S);
-
-    plot(x-mean(XP),y-mean(YP)), hold on
-    plot(XP-mean(XP),YP-mean(YP))
-    plot(X-mean(X),Y-mean(Y), 'k', 'linewidth',4)
-    hold off
-    axis equal
-    axis([-300,300, -200, 200])
+    %Snabbare med set(...) när man vill uppdatera bilder.
+    set(p, 'XData',XP-mean(x) ,'YData',YP-mean(y));
+    set(h, 'XData',x-mean(x),'YData',y-mean(y));
+    %formatering av bilden:
+    axis equal, axis([-300,300, -200, 200])
     pause(.1)
 end
+hold off
 
 
 %% Tangentvektorskorr (Finns förbättringspotential)
@@ -94,6 +112,7 @@ T=T./repmat(sqrt(sum(T.^2,1)),2,1);%normering
 %Beräkna korr
 for s=1:n
 for dl=1:(n-s)
+    %Sumerar delar till medelvärden av korrelationsfunktionen
     K(dl)=K(dl)+(T(:,s).'*T(:,s+dl-1))/(n-dl)/N;
 end
 end
