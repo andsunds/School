@@ -1,6 +1,6 @@
-%% filamentrörelser
+%% filamentrï¿½relser
 clear all
-D = dir('*.tif'); %hämtar alla filer i directory med formatet .tif
+D = dir('*.tif'); %hï¿½mtar alla filer i directory med formatet .tif
 imcell = cell(1,numel(D));
 
 %%
@@ -11,7 +11,7 @@ for i = 1:numel(D)
 end
 
 %% trans. hast.
-t=5*60/numel(D);    %tid om hela förloppet är 5minuter
+t=5*60/numel(D);    %tid om hela fï¿½rloppet ï¿½r 5minuter
 L=108*10^-9;        %om 1pixel motsvarar 108nm
 for i=1:numel(D)
 [rad,kol]=find(255==imcell{i});
@@ -25,13 +25,13 @@ end
 %% 
 clear all
 filnamn=cell(1,4);
-filnamn{1}='confined_270304-6-28-min.mat'; % Några konstiga hopp i denna.
-filnamn{2}='confined_280204-2-32min.mat';
-filnamn{3}='nonconfined_180304-1-5min.mat';
-filnamn{4}='nonconfined_250104-1-167min.mat';
+filnamn{1}='data/confined_270304-6-28-min.mat'; % Nï¿½gra konstiga hopp i denna.
+filnamn{2}='data/confined_280204-2-32min.mat';
+filnamn{3}='data/nonconfined_180304-1-5min.mat';
+filnamn{4}='data/nonconfined_250104-1-167min.mat';
 
-A = importdata(filnamn{1});
-% "film" på strängen
+A = importdata(filnamn{4});
+% "film" pï¿½ strï¿½ngen
 bilder_s=20; %bilder/sekund
 disp('speltid=')
 disp(size(A,3)/bilder_s)
@@ -39,3 +39,36 @@ for i = 1:size(A,3)
   image(A(:,:,i))
   pause(bilder_s^-1)
 end
+%%
+clc, clear all
+A=importdata('datanonconfined_250104-1-167min.mat');
+for t=1:size(A,3)
+[rad,kol]=find(255==A(:,:,t));
+AA=A(:,:,t);
+for i=1:length(rad)
+    for j=1:5
+        for k=1:5
+    B(k,j)=A(rad(i)+k-3,kol(i)+j-3,t);
+    [radB,kolB]=find(255==B);
+    C(i)=length(radB);
+        end
+    end
+end
+D=find(3==C);
+reserv=find(4==C);
+if length(D)==1
+    D=reserv;
+end
+if norm(D)==0
+    D=reserv;
+end
+
+startXY(t,:)=[kol(D(1)),rad(D(1))];
+%tail=[rad(D(2)),kol(D(2))];
+
+%plot(kol,rad,start(2),start(1),'o')
+%pause(.3)
+end
+
+
+
