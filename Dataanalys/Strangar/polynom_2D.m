@@ -7,7 +7,7 @@ filnamn{2}='confined_32min.mat';
 filnamn{3}='nonconfined_5min.mat';
 filnamn{4}='nonconfined_167min.mat';
 
-load(['data/' filnamn{4}]);
+load(['data/' filnamn{1}]);
 
 
 
@@ -74,14 +74,39 @@ pause(.1)
 end
 
 
-%% Tangentvektor
+%% Tangentvektor (Finns förbättringspotential)
 %<t(s) * t(s+l)> ~ exp(-l/L_P)
+clc;clf
+
+n=100;
+K=zeros(1,n);
+
+l=linspace(0,1,n);
+tic
+for i=1:N;
+
+dx=polyder(px(i,:));
+dy=polyder(py(i,:));
 
 
+T=[polyval(dx, l); polyval(dy, l) ];
+
+T=T./repmat(sqrt(sum(T.^2,1)),2,1);
 
 
+for s=1:n
+for dl=1:(n-s)
+    K(dl)=K(dl)+(T(:,s).'*T(:,s+dl-1))/(n-dl);
+end
+end
 
+end
+toc
+plot(linspace(0,1,n), K/N)
 
+axis([0,1, 0,1])
+
+set(gca, 'fontsize',15, 'yscale', 'log')
 
 
 
