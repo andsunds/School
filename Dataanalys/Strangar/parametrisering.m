@@ -45,8 +45,9 @@ Ys = cell(nbrB,1); % y(s) fr�n spline
 for i = 1:nbrB
     % ppval tar en spline X{i} och en parametervektor s{i} och ber�knar
     % motsvarande x(s)
-    Xt{i} = ppval(X{i},s{i}); % x(s) fr�n spline
-    Yt{i} = ppval(Y{i},s{i}); % y(s) fr�n spline
+    SS=linspace(0,1,10000);
+    Xt{i} = ppval(X{i},SS); % x(s) fr�n spline
+    Yt{i} = ppval(Y{i},SS); % y(s) fr�n spline
     plot(Xt{i},Yt{i})
     pause(0.5)
 end
