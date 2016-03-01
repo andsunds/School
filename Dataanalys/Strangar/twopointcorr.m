@@ -2,10 +2,10 @@
 
 clear all; clf;clc;
 filnamn=cell(1,4);
-filnamn{1}='confined_270304-6-28-min.mat';
-filnamn{2}='confined_280204-2-32min.mat';
-filnamn{3}='nonconfined_180304-1-5min.mat';
-filnamn{4}='nonconfined_250104-1-167min.mat';
+filnamn{1}='data/confined_270304-6-28-min.mat';
+filnamn{2}='data/confined_280204-2-32min.mat';
+filnamn{3}='data/nonconfined_180304-1-5min.mat';
+filnamn{4}='data/nonconfined_250104-1-167min.mat';
 
 A = importdata(filnamn{3});
 nbrB = size(A,3);%Antal bilder
@@ -13,7 +13,7 @@ nbrB = size(A,3);%Antal bilder
 XY=cell(nbrB,1); % Cell med positioner
 
 for i=1:nbrB
-    [rad,kol] = find(255==A(:,:,i)); % Hitta index för position
+    [rad,kol] = find(255==A(:,:,i)); % Hitta index fï¿½r position
     XY{i}=[kol,rad];
 end
 
@@ -30,8 +30,8 @@ end
 
 
 
-s = 50; % Storlek på undersökt intervall (z1-z2)
-t = 100; % Storlek på undersökt intervall (t1-t2)
+s = 50; % Storlek pï¿½ undersï¿½kt intervall (z1-z2)
+t = 100; % Storlek pï¿½ undersï¿½kt intervall (t1-t2)
 
 G = zeros(t+1,2*s+1);
 %P = zeros(t+1,2*s+1);

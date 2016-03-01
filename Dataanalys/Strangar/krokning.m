@@ -1,5 +1,5 @@
 clc, clear all
-A=importdata('confined_270304-6-28-min.mat');
+A=importdata('data/confined_270304-6-28-min.mat');
 
 %% Gradient 
 C=cell(size(A,3),1);

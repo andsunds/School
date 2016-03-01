@@ -1,51 +1,52 @@
-%% Parametrisering av strängar som funktion av båglängd s
+%% Parametrisering av strï¿½ngar som funktion av bï¿½glï¿½ngd s
 
 clear all; clf;clc;
 filnamn=cell(1,4);
-filnamn{1}='confined_270304-6-28-min.mat';
-filnamn{2}='confined_280204-2-32min.mat';
-filnamn{3}='nonconfined_180304-1-5min.mat';
-filnamn{4}='nonconfined_250104-1-167min.mat';
+filnamn{1}='data/confined_270304-6-28-min.mat';
+filnamn{2}='data/confined_280204-2-32min.mat';
+filnamn{3}='data/nonconfined_180304-1-5min.mat';
+filnamn{4}='data/nonconfined_250104-1-167min.mat';
 
 A = importdata(filnamn{3});
 nbrB = size(A,3);%Antal bilder
 
 XY=cell(nbrB,1); % Cell med positioner
-s = cell(nbrB,1); % Båglängd, används till parametrisering s.a 
+s = cell(nbrB,1); % Bï¿½glï¿½ngd, anvï¿½nds till parametrisering s.a 
                   % x=x(s) och y=y(s)
 S = cell(nbrB,1); % Normerad variant av s. 
 X = cell(nbrB,1); % Spline x(s)
 Y = cell(nbrB,1); % Spline y(s)
-L = zeros(nbrB,1); % Total längd L
+L = zeros(nbrB,1); % Total lï¿½ngd L
 for i=1:nbrB
-    [rad,kol] = find(255==A(:,:,i)); % Hitta index för position
+    [rad,kol] = find(255==A(:,:,i)); % Hitta index fï¿½r position
     XY{i}=[kol,rad];
     
-    % Skapa s-parameter som kumulativ summa av vägskillnader
+    % Skapa s-parameter som kumulativ summa av vï¿½gskillnader
     s{i} = cumsum(sqrt([0,diff(kol')].^2 + [0,diff(rad')].^2)); 
     
     L(i) = s{i}(end); 
     
-    % Normerad variant för att möjliggöra jämförelse % mellan tider av 
-    % olika antal punkter och olika totala längder L.
+    % Normerad variant fï¿½r att mï¿½jliggï¿½ra jï¿½mfï¿½relse % mellan tider av 
+    % olika antal punkter och olika totala lï¿½ngder L.
     S{i} = s{i}/max(s{i}); 
                            
                            
-    % Ta fram spline x(s) och y(s). Byt ut s{i}->S{i} för normerad variant, dvs
-    % att man kan jämföra strängar av olika L. 
+    % Ta fram spline x(s) och y(s). Byt ut s{i}->S{i} fï¿½r normerad variant, dvs
+    % att man kan jï¿½mfï¿½ra strï¿½ngar av olika L. 
     X{i} = spline(S{i},kol); 
     Y{i} = spline(S{i},rad);
 end 
 
+clear A;
 
 %% 
-Xs = cell(nbrB,1); % x(s) från spline
-Ys = cell(nbrB,1); % y(s) från spline
+Xs = cell(nbrB,1); % x(s) frï¿½n spline
+Ys = cell(nbrB,1); % y(s) frï¿½n spline
 for i = 1:nbrB
-    % ppval tar en spline X{i} och en parametervektor s{i} och beräknar
+    % ppval tar en spline X{i} och en parametervektor s{i} och berï¿½knar
     % motsvarande x(s)
-    Xt{i} = ppval(X{i},s{i}); % x(s) från spline
-    Yt{i} = ppval(Y{i},s{i}); % y(s) från spline
+    Xt{i} = ppval(X{i},s{i}); % x(s) frï¿½n spline
+    Yt{i} = ppval(Y{i},s{i}); % y(s) frï¿½n spline
     plot(Xt{i},Yt{i})
     pause(0.5)
 end
@@ -53,15 +54,15 @@ end
 
 
 %% Surf
-%Välj S{i} vid spline anpassning
+%Vï¿½lj S{i} vid spline anpassning
 clf;
 Ss = linspace(0,1,nbrB); % s-parameter 
-T = linspace(0,nbrB-1,nbrB); % Tidsvektor   Ss och T behöver va lika stora.
-XYT = zeros(nbrB,nbrB,2); % XY-värden som "funktion" av tiden T
+T = linspace(0,nbrB-1,nbrB); % Tidsvektor   Ss och T behï¿½ver va lika stora.
+XYT = zeros(nbrB,nbrB,2); % XY-vï¿½rden som "funktion" av tiden T
 
 for i=1:nbrB
-    XYT(i,:,1) = ppval(X{i},Ss); % Beräkna x(Ss)
-    XYT(i,:,2) = ppval(Y{i},Ss); % Beräkna y(Ss)
+    XYT(i,:,1) = ppval(X{i},Ss); % Berï¿½kna x(Ss)
+    XYT(i,:,2) = ppval(Y{i},Ss); % Berï¿½kna y(Ss)
     XYT(i,:,3) = T; % Tidsvektor 
 end
 

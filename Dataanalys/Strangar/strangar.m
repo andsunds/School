@@ -25,10 +25,10 @@ end
 %% 
 clear all
 filnamn=cell(1,4);
-filnamn{1}='confined_270304-6-28-min.mat'; % N�gra konstiga hopp i denna.
-filnamn{2}='confined_280204-2-32min.mat';
-filnamn{3}='nonconfined_180304-1-5min.mat';
-filnamn{4}='nonconfined_250104-1-167min.mat';
+filnamn{1}='data/confined_270304-6-28-min.mat'; % N�gra konstiga hopp i denna.
+filnamn{2}='data/confined_280204-2-32min.mat';
+filnamn{3}='data/nonconfined_180304-1-5min.mat';
+filnamn{4}='data/nonconfined_250104-1-167min.mat';
 
 A = importdata(filnamn{4});
 % "film" p� str�ngen
@@ -41,7 +41,7 @@ for i = 1:size(A,3)
 end
 %%
 clc, clear all
-A=importdata('nonconfined_250104-1-167min.mat');
+A=importdata('datanonconfined_250104-1-167min.mat');
 for t=1:size(A,3)
 [rad,kol]=find(255==A(:,:,t));
 AA=A(:,:,t);
