@@ -79,7 +79,7 @@ clc;clf
 n=100;%antalet punkter att kolla korr. i
 
 K=zeros(1,n-1);%init.
-l=linspace(0,1,n);Vilka punkter vi ska kolla efter tangentvektor
+l=linspace(0,1,n);%Vilka punkter vi ska kolla efter tangentvektor
 
 tic
 for i=1:N;
