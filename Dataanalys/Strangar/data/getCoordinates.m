@@ -6,7 +6,9 @@ filnamn{2}='confined_280204-2-32min.mat';
 filnamn{3}='nonconfined_180304-1-5min.mat';
 filnamn{4}='nonconfined_250104-1-167min.mat';
 
-a = importdata(filnamn{4});
+fil=4;
+
+a = importdata(filnamn{fil});
 
 A=zeros((size(a)+[4, 4, 0]));
 %disp('hej')
@@ -74,8 +76,8 @@ for i = 1:N_pics
 end
 
 %% Beräkna längd
-clf
-L_string   = sum( sqrt( nansum( diff(coordinates,1, 2).^2 , 3 ) ), 2);
+clf;clc
+L_string   = cumsum( sqrt( nansum( diff(coordinates, 1, 2).^2 , 3 ) ), 2);
 
 L_endtoend = zeros(N_pics,1);
 for i = 1:N_pics
@@ -85,12 +87,14 @@ for i = 1:N_pics
           3) );                         % ^avst. mellan första och sista punkten
         % ^summera längs tredje dimensionen (summera x och y)
 end
+size(L_string)
+size(L_endtoend)
 
 subplot(1,2,1)
-plot(L_string), hold on
+plot(L_string(:,end)), hold on
 plot(L_endtoend)
 subplot(1,2,2)
-plot(L_endtoend./L_string)
+plot(L_endtoend./L_string(:,end))
 
 
 %%
@@ -106,7 +110,14 @@ plot(x,f(x))
 fzero(f, 100)
 
 %% Ska BARA köras en gång!!!!
-save('nonconfined_167min.mat', 'coordinates', 'N_points', 'L_string', 'L_endtoend', '-mat')
+filnamn=cell(1,4);
+filnamn{1}='confined_28min.mat'; % Några konstiga hopp i denna.
+filnamn{2}='confined_32min.mat';
+filnamn{3}='nonconfined_5min.mat';
+filnamn{4}='nonconfined_167min.mat';
+
+
+save(filnamn{fil}, 'coordinates', 'N_points', 'L_string', 'L_endtoend', '-mat')
 disp('save successfull')
 
 
