@@ -8,7 +8,8 @@ filnamn{2}='confined_32min.mat';
 filnamn{3}='nonconfined_5min.mat';
 filnamn{4}='nonconfined_167min.mat';
 
-load(['data/' filnamn{4}]);
+fil=1;
+load([filnamn{fil}]);
 
 
 
@@ -46,15 +47,29 @@ toc
 warning(ws)
 
 % Medelvärde av polynom är samma som medevärde av koef.
-PX=mean(px,1);
-PY=mean(py,1);
+PX_mean=mean(px,1);
+PY_mean=mean(py,1);
 %Tarfram x- och y-värden som fkn av kurvlängd
 S=linspace(0, 1 ,1000);
-X=polyval(PX,S);
-Y=polyval(PY,S);
+X=polyval(PX_mean,S);
+Y=polyval(PY_mean,S);
 %plotta
 plot(X-mean(X),Y-mean(Y), 'K', 'linewidth',10)
 axis equal
+
+%%
+
+filnamn=cell(1,4);
+filnamn{1}='confined_28min_polynom.mat'; 
+filnamn{2}='confined_32min_polynom.mat';
+filnamn{3}='nonconfined_5min_polynom.mat';
+filnamn{4}='nonconfined_167min_polynom.mat';
+
+
+save(filnamn{fil}, 'px', 'py', 'PX_mean', 'PY_mean', '-mat')
+disp('save successfull')
+
+
 
 %% Film med sträng och medelpositionen
 % Alla bilder är centrerade kring medelvärdet
@@ -89,70 +104,6 @@ for i=2:N
 end
 hold off
 
-%% avstånd från jmvkt.
-n=50;
-K=zeros(1,n-1);
-Q=500;
-avs(:,1)=XP(:,Q)-X(Q);
-avs(:,2)=YP(:,Q)-Y(Q);
-avs=avs';
-
-for i=1:N;
-%Tangenten ges av derivatan:
-dX=polyder(X);%derivera x
-dY=polyder(Y);%derivera y
-
-jmN=[dX(Q),dY(Q)]/sqrt([dX(Q),dY(Q)].^2);
-
-%Tangentvektor i de specifika pkt.
-%T=[polyval(dx, l); polyval(dy, l) ];
-avs=avs./repmat(sqrt(sum(avs.^2,1)),2,1);%normering
-
-%Beräkna korr
-for s=1:n
-for dl=1:(n-s)
-    %Sumerar delar till medelvärden av korrelationsfunktionen
-    K(dl)=K(dl)+(avs(:,s).'*avs(:,s+dl-1))/(n-dl)/N;
-end
-end
-
-end
-
-%% Tangentvektorskorr (Finns förbättringspotential)
-%<t(s) * t(s+l)> ~ exp(-l/L_P)
-clc;clf
-
-n=100;%antalet punkter att kolla korr. i
-
-K=zeros(1,n-1);%init.
-l=linspace(0,1,n);%Vilka punkter vi ska kolla efter tangentvektor
-
-tic
-for i=1:N;
-%Tangenten ges av derivatan:
-dx=polyder(px(i,:));%derivera x
-dy=polyder(py(i,:));%derivera y
-
-%Tangentvektor i de specifika pkt.
-T=[polyval(dx, l); polyval(dy, l) ];
-T=T./repmat(sqrt(sum(T.^2,1)),2,1);%normering
-
-%Beräkna korr
-for s=1:n
-for dl=1:(n-s)
-    %Sumerar delar till medelvärden av korrelationsfunktionen
-    K(dl)=K(dl)+(T(:,s).'*T(:,s+dl-1))/(n-dl)/N;
-end
-end
-
-end
-toc
-%plottar
-plot(linspace(0,1,n-1), K)
-
-%axis([0,1, 0,1])
-
-%set(gca, 'fontsize',15, 'yscale', 'log')
 
 
 
