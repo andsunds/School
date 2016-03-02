@@ -3,13 +3,20 @@ function [ tangent, normal ] = tangent_normal( polynom_x , polynom_y, punkter )
 %undersökas. 
 %
 %Ger ut normerad tangent- och normalvektor i dessa punkter. 
-%Formatet på utskrifterna är en 3D-matris med varje tidssteg i den tredje
-%dimensionen. 
+%
+%Man kan köra tangent_normal, med många eller få polynom. Det som som
+%händer är att man får ut en 3D-matris om man använder en matris med
+%polynom. 
+%
+%Formatet på utskrifterna är en 3D-matris (om många polynom körs samtidigt)
+%med varje tidssteg i den tredje dimensionen. 
 %
 %x-komp finns i 1: raden i 1:a dimensionen, y i 2:a raden i
 %1:a dimensionen. 
 %
 %Varje punkts resp. värden finns längs med 2:a dimensinen.
+%
+
 
 
 N=size(polynom_x, 1);
