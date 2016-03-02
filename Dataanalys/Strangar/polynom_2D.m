@@ -8,7 +8,7 @@ filnamn{2}='confined_32min.mat';
 filnamn{3}='nonconfined_5min.mat';
 filnamn{4}='nonconfined_167min.mat';
 
-load(['data/' filnamn{3}]);
+load(['data/' filnamn{4}]);
 
 
 
@@ -78,17 +78,45 @@ for i=2:N
     x=coordinates(i,1:N_points(i), 1);
     y=coordinates(i,1:N_points(i), 2);
     %uppdatera polynomanpassningen:
-    XP=polyval(px(i,:),S);
-    YP=polyval(py(i,:),S);
+    XP(i,:)=polyval(px(i,:),S);
+    YP(i,:)=polyval(py(i,:),S);
     %Snabbare med set(...) när man vill uppdatera bilder.
-    set(p, 'XData',XP-mean(x) ,'YData',YP-mean(y));
+    set(p, 'XData',XP(i,:)-mean(x) ,'YData',YP(i,:)-mean(y));
     set(h, 'XData',x-mean(x),'YData',y-mean(y));
     %formatering av bilden:
     axis equal, axis([-300,300, -200, 200])
-    pause(.1)
+    %pause(.1)
 end
 hold off
 
+%% avstånd från jmvkt.
+n=50;
+K=zeros(1,n-1);
+Q=500;
+avs(:,1)=XP(:,Q)-X(Q);
+avs(:,2)=YP(:,Q)-Y(Q);
+avs=avs';
+
+for i=1:N;
+%Tangenten ges av derivatan:
+dX=polyder(X);%derivera x
+dY=polyder(Y);%derivera y
+
+jmN=[dX(Q),dY(Q)]/sqrt([dX(Q),dY(Q)].^2);
+
+%Tangentvektor i de specifika pkt.
+%T=[polyval(dx, l); polyval(dy, l) ];
+avs=avs./repmat(sqrt(sum(avs.^2,1)),2,1);%normering
+
+%Beräkna korr
+for s=1:n
+for dl=1:(n-s)
+    %Sumerar delar till medelvärden av korrelationsfunktionen
+    K(dl)=K(dl)+(avs(:,s).'*avs(:,s+dl-1))/(n-dl)/N;
+end
+end
+
+end
 
 %% Tangentvektorskorr (Finns förbättringspotential)
 %<t(s) * t(s+l)> ~ exp(-l/L_P)
