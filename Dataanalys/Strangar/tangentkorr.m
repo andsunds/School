@@ -8,7 +8,7 @@ filnamn{2}='confined_32min_polynom.mat';
 filnamn{3}='nonconfined_5min_polynom.mat';
 filnamn{4}='nonconfined_167min_polynom.mat';
 
-fil=4;
+fil=3;
 load(['data/', filnamn{fil}])
 
 N=size(px, 1);
@@ -49,7 +49,7 @@ filnamn{2}='confined_32min_polynom.mat';
 filnamn{3}='nonconfined_5min_polynom.mat';
 filnamn{4}='nonconfined_167min_polynom.mat';
 
-fil=4;
+fil=3;
 load(['data/', filnamn{fil}])
 
 N=size(px, 1);
@@ -62,14 +62,17 @@ l=linspace(0,1,n);%Vilka punkter vi ska kolla efter tangentvektor
 tangent=tangent_normal(px, py, l);
 
 addpath('../Partiklar/');%Lägger till så att create_indecis kan användas
-INDEX=create_indecis(n);
+INDEX=create_indecis(n);%Tar fram index som sorterar längs med diagonalerna
 tic
 for i=1:N;
-T=tangent(:,:,i);%tar fram tangentvektorerna vid just tid i.
-tmp=triu(T.'*T);
+%                        /-- tar fram tangentvektorerna vid just tid i och
+%   /-- bara övre        |    matrismultiplicerar dem för att få en matris
+%   V    diagonalerna    V      med alla produkter
+tmp=triu(tangent(:,:,i).'*tangent(:,:,i));
 
-K=K+sum( tmp(INDEX), 2)./(n+1-1:n)/N;
-
+%  v-- lägger bidrag från varje bild  %v-- medelvärde över alla bilder
+K=K+sum( tmp(INDEX), 2)./fliplr(1:n).'/N;
+%                       ^normerar m.a.p. antalet datapunkter
 end
 toc
 
