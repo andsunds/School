@@ -21,7 +21,7 @@ n=100;%antalet punkter att kolla korr. i
 
 Kn=zeros(n,1);%init
 
-addpath('../Partiklar/');%Lägger till så att create_indecis kan användas
+addpath('../');%Lägger till så att create_indecis kan användas
 INDEX=create_indecis(n);%Tar fram index som sorterar längs med diagonalerna
 
 

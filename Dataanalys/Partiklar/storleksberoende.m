@@ -164,6 +164,7 @@ pause(.1)
 
 N=1000;
 DT=(1:N).';
+addpath('../');%Lägger till så att create_indecis kan användas
 INDECIES=create_indecis(N);
 LENGHTS=N+1-DT;
 

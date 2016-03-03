@@ -20,7 +20,7 @@ l=linspace(0,1,n);%Vilka punkter vi ska kolla efter tangentvektor
 %Beräkna tangentvektorer i alla punkter och tider. 
 tangent=tangent_normal(px, py, l);
 
-addpath('../Partiklar/');%Lägger till så att create_indecis kan användas
+addpath('../');%Lägger till så att create_indecis kan användas
 INDEX=create_indecis(n);%Tar fram index som sorterar längs med diagonalerna
 
 tic
