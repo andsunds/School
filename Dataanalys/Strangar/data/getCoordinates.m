@@ -41,7 +41,7 @@ end
 
 
 
-%% Sortera punkter
+%% Sort points along the string
 clf;clc
 i=50;
 S=coordinates;
@@ -56,7 +56,6 @@ for i=1:N_pics %Över alla bilder
     
     for j=2:N_points(i) %Över alla punkter
         [S(i,j,:), I] =find_nearest_point(S(i,j-1,:), coordinates(i,INDEX,:));
-        %disp('hej')
         %I
         INDEX(I)=[];
         
@@ -77,7 +76,8 @@ coordinates=S;%sorterat!
 
 %% Beräkna längd
 clf;clc
-L   =  cumsum( sqrt( nansum( diff(coordinates, 1, 2).^2 , 3 ) ), 2);
+
+L=cumsum( sqrt( nansum( diff(coordinates, 1, 2).^2 , 3 ) ), 2);
 
 L_string=[zeros(size(L,1),1), L];
 
@@ -95,8 +95,16 @@ size(L_endtoend)
 subplot(1,2,1)
 plot(L_string(:,end)), hold on
 plot(L_endtoend)
+axis([0 N_pics min(L_endtoend)-50 max(max(L_string))+50])
+title('Length and end-to-end length')
+xlabel('pictureframe')
+legend('Length','End-to-end','Location','Best')
+
 subplot(1,2,2)
 plot(L_endtoend./L_string(:,end))
+axis([0 N_pics min(L_endtoend./L_string(:,end))-0.05 1])
+title('end-to-end/length')
+xlabel('pictureframe')
 
 
 % %%
@@ -121,35 +129,3 @@ filnamn{4}='nonconfined_167min.mat';
 
 save(filnamn{fil}, 'coordinates', 'N_points', 'L_string', 'L_endtoend', '-mat')
 disp('save successfull')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
