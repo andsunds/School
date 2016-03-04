@@ -7,7 +7,7 @@ filnamn{1}='energydepletedcells.csv';
 filnamn{2}='logphasecells.csv';
 filstr={'energydepleted' 'logphase'};%For usage in titles
 
-for k=1:2%
+for k=1:2 %För båda filerna
 fil=k;
 subplot(1,2,k)
 data =load(filnamn{fil});
@@ -63,7 +63,7 @@ figure(2)
 subplot(1,2,k)
 
 
-j_max=5; %Number of bins used in calculation
+j_max=7; %Number of bins used in calculation
 n_max=916; %Number of data points
 MSD_tot=0;
 
@@ -71,7 +71,7 @@ for j=1:j_max %length(index_particles_sizesorted)
     MSD=zeros(1,n_max)'; %916=lowest index
     for i=index_particles_sizesorted{j};
         XY = C{i}(:,2:3);
-        Intensitet_i=C{i}(1,4)
+        Intensitet_i=C{i}(1,4);
         MSD_i=sum(XY.^2,2)*(Intensitet_i)^(1/3); %To remove intensity dependency
         MSD=MSD+MSD_i(1:n_max);
     end
@@ -83,7 +83,7 @@ end
 hold off
 center_etikett=num2str(bin_center,3);
 title(strcat('MSD, boxar, ',filstr{k}))
-legend(center_etikett(1:5), center_etikett(6+6:(12+4)), center_etikett((16+6):(22+4)), center_etikett((26+6):(32+4)),center_etikett((36+6):(42+4)),'Location','Best')
+legend(center_etikett(1:5), center_etikett(6+6:(12+4)), center_etikett((16+6):(22+4)), center_etikett((26+6):(32+4)),center_etikett((36+6):(42+4)), center_etikett(46+6:(52+4)), center_etikett(56+6:(62+4)),'Location','Best')
 xlabel('tid')
 ylabel('MSD')
 
@@ -121,6 +121,6 @@ title(strcat('MSD, viktad summa,',filstr{k}))
 xlabel('tid')
 ylabel('MSD')
 
-str1=sprintf('%.1d dt^{%1.2f}', exp(c(1,1)), c(2,1))
+str1=sprintf('%.1d dt^{%1.2f}', exp(c(1,1)), c(2,1));
 legend(str1, 'location', 'North')
 end
