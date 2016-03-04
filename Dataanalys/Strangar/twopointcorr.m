@@ -30,20 +30,19 @@ end
 
 
 
-s = 50; % Storlek p� unders�kt intervall (z1-z2)
-t = 100; % Storlek p� unders�kt intervall (t1-t2)
+s = 100; % Storlek p� unders�kt intervall (z1-z2)
+t = 40; % Storlek p� unders�kt intervall (t1-t2)
 
-G = zeros(t+1,2*s+1);
+G = zeros(2*s+1,t+1);
 %P = zeros(t+1,2*s+1);
-
-for z = -s:s
+for z = 101:101+2*s
     for tau = 0:t
         
         for k = -s:s
             for j = 0:t
-            G(k+s+1,j+1) = XY{tau+1}(z+s+1,2)*XY{tau+j+1}(z+2*s+k+1,2)/((2*s+1)*(t+1));
+            G(k+s+1,j+1) = G(k+s+1,j+1)+XY{tau+1}(z+1,2)*XY{tau+j+1}(z+k+1,2)/((2*s+1)*(t+1));
             end
-        end        
+        end
     end
 end
         
