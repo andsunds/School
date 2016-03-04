@@ -97,7 +97,7 @@ MSD_tot=MSD_tot/sum(bin_counts(1:j_max)); %Divide by total number of particles
 %ylabel('MSD')
 
 
-%Finds exponential fit y=a*exp(b*x)
+%Finds exponential fit y=a*x^b
 
 show=901; %Number of timesteps
 DT=(1:n_max)';
