@@ -65,7 +65,7 @@ Pos(fil,2)=sum(TSprod)/sum(abs(TSprod));
 end
 %% plottar
 clf
-i=4;
+i=1;
 figure(1),  hold on
 subplot(2,3,1),plot(prod{i,1}), title('skalarprod m.a.p normalvektor')
 subplot(2,3,2),plot(prod{i,2}), title('skalarprod m.a.p Tangentvektor')
@@ -79,7 +79,7 @@ subplot(2,3,6),plot(AccPos{fil,1}+AccPos{fil,2}), title('summa av skalarprod nor
 % plot(abs(S(1:end/2)))
 %% avvikelse från jämvikt definerad med skärning med tangentlinje
 clc,clear all
-for fil=1:1
+for fil=4:4
 
 if fil==1
 load('data/confined_28min_polynom.mat', '-mat');
@@ -98,43 +98,61 @@ Y=polyval(PY_mean,S);
 X=X-mean(X);
 Y=Y-mean(Y);
 N=size(px,1);
+x=linspace(min(X),max(X),res);
 for i=1:N
     XP(i,:)=polyval(px(i,:),S);
     YP(i,:)=polyval(py(i,:),S);
     XP(i,:)=XP(i,:)-mean(XP(i,:));
     YP(i,:)=YP(i,:)-mean(YP(i,:));
 end
-punkt=.99; %punkt vi kollar på i intervallet [0,1]
+punkt=.5; %punkt vi kollar på i intervallet [0,1]
 Q=length(S)*punkt;
 
 %Tangenten till jmvkt läge
 dX=polyder(PX_mean);%derivera jämviktspolynomet i x
 dY=polyder(PY_mean);%derivera jämviktspolynomet i y
 
-dXP=polyder(XP(1,:));%derivera polynomet i x
-dYP=polyder(YP(1,:));%derivera polynomet i y
-
 jmN=[-polyval(dY, punkt), polyval(dX, punkt) ]; %normalvektor till jmvkt
 jmT=[ polyval(dX, punkt), polyval(dY, punkt) ]; %tangentvektor till jmvkt
 jmN=jmN/norm(jmN);  %normerad normalvektor
 jmT=jmT/norm(jmT);  %normerad tangentvektor
+
+b=Y(Q)-jmN(2)/jmN(1)*X(Q);
+Nx=jmN(2)/jmN(1).*x+b; %normal till jmvkt-poly i som funktion i x-led
+
+for i=1:N
+dXP=polyder(px(i,:));%derivera polynomet i x
+dYP=polyder(py(i,:));%derivera polynomet i y
 
 Nor=[-polyval(dYP, punkt), polyval(dXP, punkt) ]; %normalvektor
 Tan=[ polyval(dXP, punkt), polyval(dYP, punkt) ]; %tangentvektor
 Nor=Nor/norm(Nor);  %normerad normalvektor
 Tan=Tan/norm(Tan);  %normerad tangentvektor
 
-clf
 
-x=linspace(min(X),max(X),res);
-b=Y(Q)-jmN(2)/jmN(1)*X(Q);
-Nx=jmN(2)/jmN(1).*x+b;
-
-m=YP(1,Q)-Tan(2)/Tan(1)*XP(1,Q);
+m=YP(i,Q)-Tan(2)/Tan(1)*XP(i,Q);
 Tx=Tan(2)/Tan(1).*x+m;
-%C=find(abs(Nx-YP(1,:)-XP(1,:))<=0.2)
-plot(x,Nx,x,Y,XP(1,:),YP(1,:),X(Q),Y(Q),'o',XP(1,Q),YP(1,Q),'*',x,Tx)
+
+C=find(min(abs(Nx-Tx))==abs(Nx-Tx));
+val=C/res*(max(X)-min(X))+min(X);
+D=find(min(abs(XP(i,:)-val))==abs(XP(i,:)-val)); 
+
+plot(x,Nx,X,Y,XP(i,:),YP(i,:),X(Q),Y(Q),'o',XP(i,Q),YP(i,Q),'*',x,Tx,XP(i,D),YP(i,D),'o')
 axis equal
+%plot(x,abs(Tx-Nx))
+avs(i,1)=XP(i,D)-X(Q);
+avs(i,2)=YP(i,D)-Y(Q);
+end
+
+ Nprod=jmN*avs';
+ int=zeros(1,N);
+ for k=1:N
+     int(k)=sum(Nprod(1:k))+Nprod(k);
+ end
+ figure(2)
+ subplot(1,2,1),plot(1:N,Nprod,1:N,0*[1:N],'-'),title('Avvikelse från jämviktsläge')
+ subplot(1,2,2),plot(int),title('summa av avvikelser')
+
 
 end
 
