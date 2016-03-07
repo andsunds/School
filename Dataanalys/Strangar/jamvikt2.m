@@ -24,12 +24,12 @@ P=linspace(0,1,n);%loopa över hela strängen
 [~, N0]=tangent_normal(PX_mean, PY_mean, P);
 
 Q0=[polyval(PX_mean, P); polyval(PY_mean, P)];%Den undersökt punkten på medelkurvan
-Q0=Q0-mean([polyval(PX_mean, S); polyval(PY_mean, S)], 2);%tyngdpunkt i origo
+Q0=bsxfun(@minus, Q0, mean([polyval(PX_mean, S); polyval(PY_mean, S)], 2));%tyngdpunkt i origo
 
 
 for i=1:N %loopa över alla bilder
     Q1=[polyval(px(i,:), P); polyval(py(i,:), P)]; 
-    Q1=Q1-mean([polyval(px(i,:), S); polyval(py(i,:), S)], 2);%tyngdpunkt i origo
+    Q1=bsxfun(@minus, Q1, mean([polyval(px(i,:), S); polyval(py(i,:), S)], 2));%tyngdpunkt i origo
     
     %           v-- specialare som kollar tangenterna
     Kn(i)=Kn(i)+sum(diag(N0.'*(Q1-Q0))); %kolla normalen
