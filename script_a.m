@@ -36,7 +36,7 @@ for i=1:l
     xlabel('Tid [min]')
     ylabel('Temperatur [C]')
     
-    for j=1:2:m
+    for j=1:m
         Nper = 5;
          % Se till så att ett helt antal perioder av den exciterande
          % vågformen kommer med
@@ -73,13 +73,13 @@ for i=1:l
         subplot(2,2,3)
         plot(Pb_x,log_rC,'o')
         hold on
-        plot(Pb_x, log_V0 - Pb_x*gammaC(i),'-')
+        plot(Pb_x, log_V0 - Pb_x*gammaC(i,j),'-')
         title(sprintf('Överton #%d',j))
         hold off
         subplot(2,2,4)
         plot(Pb_x,phiC,'v')
         hold on
-        plot(Pb_x, phi0 - Pb_x*betaC(i),'-')
+        plot(Pb_x, phi0 - Pb_x*betaC(i,j),'-')
         hold off
         
         pause()
