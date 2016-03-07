@@ -86,6 +86,20 @@ for i=1:l
        
     end
 end
+
+%% Plotta dispersionsrelationen
+% Lägg all data i endimensionella vektorer
+w = 2*pi./reshape(T,m*l,1); % Vinkelfrekvens
+betaC = reshape(betaC,m*l,1);
+gammaC = reshape(gammaC,m*l,1);
+clf
+
+plot(w,gammaC,'o',w,betaC,'d')
+legend('\beta','\gamma')
+xlabel('\omega/[rad/min]')
+ylabel('cm^{-1}')
+grid on
+
 %%
 clf
 w = 2*pi*T.^(-1);

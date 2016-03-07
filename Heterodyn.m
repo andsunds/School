@@ -28,5 +28,10 @@ end
 %disp(abs(Z))
 log_r = log(abs(Z));
 phi = phase(Z);
+for i=2:length(phi)
+    if(phi(i) > phi(i-1))
+        phi(i) = phi(i) - 2*pi*ceil((phi(i)-phi(i-1))/(2*pi));
+    end
+end
 
 end
