@@ -63,7 +63,34 @@ AccPos{fil,2}=AccTSprod;
 Pos(fil,1)=sum(NSprod)/sum(abs(NSprod)); %>0 betyder att strängen är mer på positiv sida av jmkvt
 Pos(fil,2)=sum(TSprod)/sum(abs(TSprod));
 end
+
+%% 2-korr (kör övre koden först)
+clearvars -except Pos AccPos prod fil
+fil=1;
+avs=prod{fil,1}+prod{fil,2};
+N=length(avs);
+M=floor(N/2);
+
+s = 80;
+t = 20;
+normering=(s+1)*(t+1);
+G = zeros(2*s+1,t+1);
+
+for z = M-floor(s/2):M+ceil(s/2)
+    for tau = 0:t
+        for k = -s:s
+            for j = 0:t
+            G(z+floor(s/2)+1,tau+1) = G(z+floor(s/2)+1,tau+1)+...
+                +XY{j+1}(z,2)*XY{tau+j+1}(z,2)/normering;
+            end
+        end
+    end
+end
+       
+
+
 %% plottar
+
 clf
 i=1;
 figure(1),  hold on
@@ -77,7 +104,7 @@ subplot(2,3,6),plot(AccPos{fil,1}+AccPos{fil,2}), title('summa av skalarprod nor
 % figure(2), clf
 % S=fft(prodT{i});
 % plot(abs(S(1:end/2)))
-%% avvikelse från jämvikt definerad med skärning med tangentlinje
+%% avvikelse definerad som skärning mellan jämviktssträngens tangentlinje och sträng
 clc,clear all
 for fil=4:4
 
@@ -133,33 +160,48 @@ Tan=Tan/norm(Tan);  %normerad tangentvektor
 m=YP(i,Q)-Tan(2)/Tan(1)*XP(i,Q);
 Tx=Tan(2)/Tan(1).*x+m;
 
-C=find(min(abs(Nx-Tx))==abs(Nx-Tx));
-val=C/res*(max(X)-min(X))+min(X);
-D=find(min(abs(XP(i,:)-val))==abs(XP(i,:)-val)); 
+C=find(min(abs(Nx-Tx))==abs(Nx-Tx));                    %skärning mellan tangent och normal
+val=C/res*(max(X)-min(X))+min(X);                       %hittar x-värdet på polynomet i skärningspunkten
+D(i)=find(min(abs(XP(i,:)-val))==abs(XP(i,:)-val));     %skärningspunkten på polynomet
 
-plot(x,Nx,X,Y,XP(i,:),YP(i,:),X(Q),Y(Q),'o',XP(i,Q),YP(i,Q),'*',x,Tx,XP(i,D),YP(i,D),'o')
-axis equal
+
+%liten loop som kastar orimliga punkten på polynomet. Gäller för strängar
+%som har 2 värden för ett x-värde. Dvs kröker runt sig själv i x-led.
+if i>1 && D(i)-D(i-1)>res/10
+    for e=1:1000
+    E=find(abs(XP(i,:)-val)<1/(e^2));
+    if length(E)<10
+        F=find(min(abs(E-Q))==abs(E-Q));
+        D(i)=E(F);
+        break
+    end
+    end
+end
+
+%plot(x,Nx,X,Y,XP(i,:),YP(i,:),X(Q),Y(Q),'o',XP(i,Q),YP(i,Q),'*',x,Tx,XP(i,D(i)),YP(i,D(i)),'o')
+%axis equal
 %plot(x,abs(Tx-Nx))
-avs(i,1)=XP(i,D)-X(Q);
-avs(i,2)=YP(i,D)-Y(Q);
+avs(i,1)=XP(i,D(i))-X(Q);       %avstånd från jämviktsläge i x-led
+avs(i,2)=YP(i,D(i))-Y(Q);       %avstånd från jämviktsläge i y-led
 end
 
- Nprod=jmN*avs';
- int=zeros(1,N);
- for k=1:N
-     int(k)=sum(Nprod(1:k))+Nprod(k);
- end
- figure(2)
- subplot(1,2,1),plot(1:N,Nprod,1:N,0*[1:N],'-'),title('Avvikelse från jämviktsläge')
- subplot(1,2,2),plot(int),title('summa av avvikelser')
+L=(sum(sqrt(sum(diff([polyval(PX_mean, S); polyval(PY_mean, S)] ,2).^2 ,1)))); %längd på sträng
+Nprod=jmN*avs'/L;                %skalärprod mellan avstånd och normalvektor, normerad med stärngens längd.
+int=zeros(1,N);
+ 
+ 
+for k=1:N
+    int(k)=sum(Nprod(1:k))+Nprod(k);   %summerar avvikelser fram till punkten k, motsvarar integral.
+end
+ 
+ 
+int=int/N;
+figure(2)
+subplot(1,2,1),plot(1:N,Nprod,1:N,0*[1:N],'-'),title('Avvikelse från jämviktsläge')
+subplot(1,2,2),plot(int),title('summa av avvikelser (normerad med N)')
 
 
 end
-
-
-
-
-
 
 
 
