@@ -8,7 +8,7 @@ filnamn{2}='confined_32min_polynom.mat';
 filnamn{3}='nonconfined_5min_polynom.mat';
 filnamn{4}='nonconfined_167min_polynom.mat';
 
-fil=3;
+fil=4;
 load(['data/', filnamn{fil}])
 
 N=size(px, 1);
@@ -99,38 +99,40 @@ filnamn{2}='confined_32min_polynom.mat';
 filnamn{3}='nonconfined_5min_polynom.mat';
 filnamn{4}='nonconfined_167min_polynom.mat';
 
-fil=4;
+fil=2;
 load(['data/', filnamn{fil}])
 
 N=size(px, 1); % Total tid
 
-n=100;%antalet punkter att kolla korr. i
+n=300;%antalet punkter att kolla korr. i
 K=zeros(N,n);%init.
-l=linspace(0,1,n);%Vilka punkter vi ska kolla efter tangentvektor
+l=linspace(0.1,.9,n);%Vilka punkter vi ska kolla efter tangentvektor
 
 %BerÃ¤kna tangentvektorer i alla punkter och tider. 
 tangent=tangent_normal(px, py, l);
 
 for i=1:N
-    T1 = tangent(:,:,i); % Tangentvektorer tid i
+    T1 = tangent(:,:,i); % Tangentvektorer tid: i
     for dt=0:(N-i)
-        T2 = tangent(:,:,i+dt); % Tangentvektorer tid i+dt
-        K(dt+1,:) = K(dt+1)+sum(T1.*T2)./(N-dt);
+        T2 = tangent(:,:,i+dt); % Tangentvektorer tid: i+dt
+        K(dt+1,:) = K(dt+1)+sum(T1.*T2, 1)./(N-dt);
+        %                   ^-- summan i skalÃ¤rprodukten
     end
 end
 
-Ks = sum(K,2)'/n; % Summera över alla punkter på strängen
-dt = linspace(0,N-1,N);
-figure(1)
-plot(dt,Ks)
+Ks = sum(K,2)'/n; % Summera ï¿½ver alla punkter pï¿½ strï¿½ngen
+dt = 0:(N-1);
+
+%figure(1)
+plot(dt,(Ks))
 xlabel('$d\tau$ [tid]','Interpreter','Latex');
 ylabel('$<$t($\tau$)$\cdot$t($\tau+d\tau$)$>$','Interpreter','Latex')
 set(gca,'Fontsize',24);%'xscale','log','yscale','log');
 
-
+%%
 figure(2)
-surf(K(:,:)) % Summerar ej över punkterna på strängen
-xlabel('Båglängd s [längd]');
+surf(K(:,:)) % Summerar ej ï¿½ver punkterna pï¿½ strï¿½ngen
+xlabel('Bï¿½glï¿½ngd s [lï¿½ngd]');
 ylabel('dt [tid]');
 zlabel('<t(s)*t(s+dt)>')
 % figure(1)
