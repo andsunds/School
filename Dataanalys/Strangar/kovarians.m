@@ -106,7 +106,11 @@ tmp=triu(B(i,:).'*B(j,:));
 %                ^-- korrelationsfunktion på diagonalerna
 %                         %v-- medelvärde över diagonalerna
 K_kors=sum( tmp(INDEX), 2)./fliplr(1:N).';
-
+fprintf('sum(K_kors)/sqrt(sum(K_kors.^2)) = %.3f\n\n',...
+         sum(K_kors)/sqrt(sum(K_kors.^2)))%borde inte denhär vara nära 0?
+fprintf('sum(K_kors.^2)/max(sum([K_auto1, K_auto2].^2, 1)) = %.3f\n\n',...
+         sum(K_kors.^2)/max(sum([K_auto1, K_auto2].^2, 1)))
+     
 tmp=triu(B(i,:).'*B(i,:));
 K_auto1=sum( tmp(INDEX), 2)./fliplr(1:N).';
 
