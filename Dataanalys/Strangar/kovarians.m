@@ -1,14 +1,14 @@
 %% Kovariansundersökning
-clc;clf;clear all
+clc;clear all
 
 filnamn=cell(1,4);
-filnamn{1}='confined_28min_polynom.mat'; 
-filnamn{2}='confined_32min_polynom.mat';
-filnamn{3}='nonconfined_5min_polynom.mat';
-filnamn{4}='nonconfined_167min_polynom.mat';
+filnamn{1}='confined_28min_polynom'; 
+filnamn{2}='confined_32min_polynom';
+filnamn{3}='nonconfined_5min_polynom';
+filnamn{4}='nonconfined_167min_polynom';
 
 fil=4;
-load(['data/', filnamn{fil}])
+load(['data/', filnamn{fil}, '.mat'])
 
 N=size(px, 1);
 S=linspace(0,1,1000);
@@ -52,12 +52,13 @@ B=V.'*A;
 % Där Bi(t) är den i:te moden i bild/tid t.
 
 
-figure(1)
-plot(A.') %Massa bröte bara
-figure(2)
-plot(B.') %mindre bröte, men ändå otydligt
+%figure(1), clf
+%plot(A.') %Massa bröte bara
+%figure(2), clf
+%plot(B.') %mindre bröte, men ändå otydligt
 
 %% Autokorrelation
+clc
 K=zeros(N,n);%init.
 %Lägger till så att create_indecis kan användas
 addpath('../');
@@ -76,19 +77,27 @@ end
 toc
 
 
-figure(3)
+figure(3), clf
 plot(0:(N-1), K) %Häftig korrelatinosfunktioner
 
+typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
+title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
+
+xlabel('$\Delta t$','Interpreter','Latex');
+ylabel('$<B_i(t)B_i(t+\Delta t)>_{t}$','Interpreter','Latex')
+set(gca,'Fontsize',16)%, 'yscale','log');
+
+
 %% Korskorrelation
-clc;clf
+clc;
 K=zeros(N,1);%init.
 %Lägger till så att create_indecis kan användas
 addpath('../');
 %Tar fram index som sorterar längs med diagonalerna
 INDEX=create_indecis(N);
 
-i=90;
-j=90;
+i=60;
+j=50;
 
 tic
 %   /-- bara övre        
@@ -106,10 +115,21 @@ K_auto2=sum( tmp(INDEX), 2)./fliplr(1:N).';
 toc
 
 
-%figure(3)
+figure(4), clf
 plot(0:(N-1), K_kors) 
 hold on
 plot(0:(N-1), K_auto1) 
 plot(0:(N-1), K_auto2) 
 
+typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
+title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
+
+leg=legend(sprintf('$i=%d$, $j=%d$', i, j), ...
+           sprintf('$i=%d$, $j=%d$', i, i), ...
+           sprintf('$i=%d$, $j=%d$', j, j));
+set(leg, 'interpreter', 'Latex')
+
+xlabel('$\Delta t$','Interpreter','Latex');
+ylabel('$<B_i(t)B_j(t+\Delta t)>_{t}$','Interpreter','Latex')
+set(gca,'Fontsize',16)%, 'yscale','log');
 

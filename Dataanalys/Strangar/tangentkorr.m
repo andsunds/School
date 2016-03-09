@@ -56,6 +56,10 @@ L_P=-1/C(1);
 K_0=exp(C(2));
 
 plot(l, K_0*exp(-l/L_P))
+axis([0,L, 0,1])
+
+typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
+title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
 str=sprintf('$%.3f \\exp(-\\Delta l/%3.f)$', K_0, L_P);
 leg=legend('Ber\"a{}knad korrelation', str);
@@ -63,7 +67,7 @@ set(leg, 'interpreter', 'Latex')
 
 xlabel('$\Delta l$, l\"a{}ngs str\"a{}ngen','Interpreter','Latex');
 ylabel('$<\mathbf{t}(l)\cdot\mathbf{t}(l+\Delta l)>_{l, t}$','Interpreter','Latex')
-set(gca,'Fontsize',24)%, 'yscale','log');
+set(gca,'Fontsize',16)%, 'yscale','log');
 
 
 

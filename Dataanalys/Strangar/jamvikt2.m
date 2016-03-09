@@ -2,19 +2,19 @@
 clc;clf;clear all
 
 filnamn=cell(1,4);
-filnamn{1}='confined_28min_polynom.mat'; 
-filnamn{2}='confined_32min_polynom.mat';
-filnamn{3}='nonconfined_5min_polynom.mat';
-filnamn{4}='nonconfined_167min_polynom.mat';
+filnamn{1}='confined_28min_polynom'; 
+filnamn{2}='confined_32min_polynom';
+filnamn{3}='nonconfined_5min_polynom';
+filnamn{4}='nonconfined_167min_polynom';
 
 fil=4;
-load(['data/', filnamn{fil}])
+load(['data/', filnamn{fil}, '.mat'])
 
 N=size(px, 1);
 %Bara massa punkter för att få en jämn sträng att hitta TP och mäta längd
 S=linspace(0,1,1000);
 
-n=1000;%antalet punkter att kolla korr. i
+n=100;%antalet punkter att kolla korr. i
 
 Kn=zeros(N,1);%init
 
@@ -42,6 +42,9 @@ L=sum(sqrt(sum(diff([polyval(PX_mean, S); polyval(PY_mean, S)] ,2).^2 ,1)));
 
 plot(Kn)
 
+typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
+title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
+
 xlabel('tid', 'interpreter', 'LaTeX', 'fontsize',25)
 ylabel('$(\mathbf{r}-\mathbf{r}_0)\cdot\mathbf{\hat{n}}_0$', 'interpreter', 'LaTeX', 'fontsize',25)
 grid on
@@ -54,13 +57,13 @@ grid on
 clc;clf;clear all
 
 filnamn=cell(1,4);
-filnamn{1}='confined_28min_polynom.mat'; 
-filnamn{2}='confined_32min_polynom.mat';
-filnamn{3}='nonconfined_5min_polynom.mat';
-filnamn{4}='nonconfined_167min_polynom.mat';
+filnamn{1}='confined_28min_polynom'; 
+filnamn{2}='confined_32min_polynom';
+filnamn{3}='nonconfined_5min_polynom';
+filnamn{4}='nonconfined_167min_polynom';
 
 fil=3;
-load(['data/', filnamn{fil}])
+load(['data/', filnamn{fil}, '.mat'])
 
 N=size(px, 1);
 S=linspace(0,1,1000);
@@ -88,6 +91,8 @@ toc
 
 plot(Kt)
 grid on
+typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
+title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 xlabel('tid', 'interpreter', 'LaTeX', 'fontsize',25)
 ylabel('$\mathbf{\hat{t}}_1\cdot\mathbf{\hat{t}}_0$', 'interpreter', 'LaTeX', 'fontsize',25)
 
