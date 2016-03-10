@@ -10,16 +10,19 @@ filnamn{4}='nonconfined_167min_polynom';
 fil=4;
 load(['data/', filnamn{fil}, '.mat'])
 
-N=size(px, 1);
+framestep=1;%om vi vill undersöka bilder som ligger glesare
+
+N=floor(size(px, 1)/framestep);%antalet bilder som undersöks
+
 S=linspace(0,1,1000);
 
-n=100;%antalet punkter att kolla korr. i
+n = 10;%antalet punkter att kolla korr. i
 
-A=zeros(n,N);%init
-KOV_A=zeros(n);
+A     = zeros(n,N);%init
+KOV_A = zeros(n);  %init
 
 tic
-P=linspace(0,1,n);%loopa över hela strängen
+P=linspace(0,1,n);%punkter längs med strängen
 
 %Beräkna normalvektorer i alla punkter och tider. 
 [~, N0]=tangent_normal(PX_mean, PY_mean, P);
@@ -29,9 +32,9 @@ Q0=bsxfun(@minus, Q0,...
     mean([polyval(PX_mean, S); polyval(PY_mean, S)], 2) );%tyngdpunkt i origo
 
 for i=1:N %loopa över alla bilder (tid)
-    Q1=[polyval(px(i,:), P); polyval(py(i,:), P)]; 
+    Q1=[polyval(px(i*framestep,:), P); polyval(py(i*framestep,:), P)]; 
     Q1=bsxfun(@minus, Q1,... 
-        mean([polyval(px(i,:), S); polyval(py(i,:), S)], 2) );%tyngdpunkt i origo
+        mean([polyval(px(i*framestep,:), S); polyval(py(i*framestep,:), S)], 2) );%tyngdpunkt i origo
     
     A(:,i)  = diag(N0.'*(Q1-Q0)); %tidsutv. i dim. 2
     KOV_A=KOV_A+A(:,i)*A(:,i).';
@@ -53,10 +56,9 @@ B=V.'*A;%tidsutveckling längs dim. 2
 
 
 figure(1), clf
-plot(A.') %Massa bröte bara
+plot(A.'), title('A', 'fontsize', 20)%Massa bröte bara
 figure(2), clf
-plot(B.') %mindre bröte, men ändå otydligt
-
+plot(B.'), title('B', 'fontsize', 20)%mindre bröte, men ändå otydligt
 %% Autokorrelation
 clc
 K=zeros(N,n);%init.
@@ -118,7 +120,7 @@ fprintf('sum(K_kors.^2)/max(sum([K_auto1, K_auto2].^2, 1)) = %.3f\n\n',...
      
 toc
 
-
+%plottning
 figure(4), clf
 plot(0:(N-1), K_kors) 
 hold on
@@ -159,7 +161,8 @@ ylabel('Sorterade egenv\"a{}rden /[px$^2$]', 'interpreter', 'latex')
 
 set(gca, 'fontsize', 20, 'yscale', 'log')
 
-
+fprintf('\nHur diagonal är KOV_B? \n   Z = %1.2d   (äkta diagonal har Z=0)\n\n', ...
+        sqrt(sum(sum((KOV_B-diag(diag(KOV_B))).^2))/sum(diag(KOV_B).^2)))
 
 
 
