@@ -106,7 +106,8 @@ subplot(2,3,6),plot(AccPos{fil,1}+AccPos{fil,2}), title('summa av skalarprod nor
 % plot(abs(S(1:end/2)))
 %% avvikelse definerad som skärning mellan jämviktssträngens tangentlinje och sträng
 clc,clear all
-for fil=4:4
+for fil=1:4
+clearvars -except fil
 
 if fil==1
 load('data/confined_28min_polynom.mat', '-mat');
@@ -185,11 +186,11 @@ end
 % plot(x,Nx,'r',x,Tx,'r') %Normal and tangent
 % hold on
 % plot(X_m,Y_m, XP(i,:),YP(i,:)) %Mean string and current string
-% plot(X_m(Q),Y_m(Q),'o',XP(i,Q),YP(i,Q),'*',XP(i,D),YP(i,D),'o') %Chosen s-coordinate on mean and current string and intersection point
+% plot(X_m(Q),Y_m(Q),'o',XP(i,Q),YP(i,Q),'*',XP(i,D(i)),YP(i,D(i)),'o') %Chosen s-coordinate on mean and current string and intersection point
 % axis([min(x)-10 max(x)+10 min(Y_m)-20 max(Y_m)+20])
 % plot(x,abs(Tx-Nx))
 % hold off
-% pause(0.3)
+% pause(0.7)
 
 avs(i,1)=XP(i,D(i))-X_m(Q);   %avstånd från jämviktsläge i x-led
 avs(i,2)=YP(i,D(i))-Y_m(Q);   %avstånd från jämviktsläge i y-led
@@ -204,11 +205,13 @@ for k=1:N
     int(k)=sum(Nprod(1:k))+Nprod(k);   %summerar avvikelser fram till punkten k, motsvarar integral.
 end
  
- 
 int=int/N;
-figure(2)
-subplot(1,2,1),plot(1:N,Nprod,1:N,0*[1:N],'-'),title('Avvikelse från jämviktsläge')
-subplot(1,2,2),plot(int),title('summa av avvikelser (normerad med N)')
 
+figure(2)
+subplot(4,2,2*fil-1)
+plot(1:N,Nprod,1:N,0*[1:N],'-')
+subplot(4,2,2*fil)
+plot(int)
+figtitle({'Avvikelse från jämviktsläge';' och summa av avvikelser (normerad med N)'})
 
 end
