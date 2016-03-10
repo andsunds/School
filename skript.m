@@ -1,22 +1,31 @@
 %% Ladda in data, Aluminium
-clc; clear all;
-volt1 = load('Al_test_volt.lvm', '-ascii');
-time1 = load('Al_test_tid.lvm', '-ascii');
-% Tid i sekunder
-time1 = (time1-min(min(time1)))/1000;
-
-volt2 = load('Al_10min_v.lvm', '-ascii');
-time2 = load('Al_10min_t.lvm', '-ascii');
-time2 = (time2-min(min(time2)))/1000;
-
+clc; clear all; clf;
 Al_order = [4,3,5,2,6]-1;
 Al_x = [0,5,10,15,20];
+addpath('Data')
+volt = load('Al_17min_v.lvm', '-ascii'); % volt
+time = load('Al_17min_t.lvm', '-ascii'); % millisekunder
+% Mätningen skedde vid centrumtiden (size(time)=[:,2])
+time = mean(time,2);
+% Konvertera till minuter och starta från 0
+time = (time-min(min(time)))/36000;
+% Konvertera spänning till temperatur
+cels = V2C(volt,Al_order);
+% Använd rätt ordning på kanalerna
+cels = cels(:,Al_order);
 
-subplot(2,1,1)
-plot(time1,volt1,'-')
+% Beräkna frekvens och DFT
+%dw*T = 2*pi
+N = length(time);
+f = (1:N)/time(end);
+plot(f, abs(fft(cels(:,1),size(cels,1)))/15694,'-')
+%axis([0,5/17,0,1.1])
 
-subplot(2,1,2)
-plot(time2,volt2,'-')
+%legend('0 cm', '5 cm', '10 cm', '15 cm', '20 cm')
+
+%tmp = [time,cels];
+%save('Plots/timeseries.tsv', 'tmp', '-ascii','-tabs')
+
 %%
 
 [log_r1, phi1] = Heterodyn(time1,volt1,5*60,Al_order);
