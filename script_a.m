@@ -34,13 +34,12 @@ for i=1:l
     % Alternativt skulle man kunna ha ett löpande medelvärde som är två
     % perioder långt.
     %num_points = timT(i,1)/(time(end)-time(1))
+    % Högpassfiltrera?
+    %[~ ,cels] = HighAndLowpass_mean(time,cels,60*T(i));
     cels_hat = zeros(size(time,1),5);
     for j=1:5
         cels_hat(:,j) = smooth(time(:,j),cels(:,j), 60*T(i,1),'moving');
     end
-    
-    % Högpassfiltrera?
-    %cels = highpass(time,cels,0.1/T(j));
     
     subplot(2,2,[1,2])
     plot(repmat(time(:,1)/60,1,5),cels)
@@ -113,7 +112,7 @@ for i=1:l
         plot(Pb_x, phi0 - Pb_x*betaC(i,j),'-')
         hold off
         
-        pause(0.1)
+        pause(0.01)
        
     end
 end
@@ -216,30 +215,34 @@ Pb_order = [2 3 4 6 5]-1;
 Pb_x = [0,1,2,3,4].';
 
 for i=1:l
-    %j=floor((1+i)/2);%övertoner
-    j=i;
-    name_t=files_t(j).name;
-    name_v=files_v(j).name;
+    name_t=files_t(i).name;
+    name_v=files_v(i).name;
     time = load(name_t);
     time = (time-min(min(time)))/1000; %Konvertera till sekunder
     volt = load(name_v);
     cels = V2C(volt,Pb_order);
-    T(j) = 60*sscanf(name_t,'Pb_%dmin'); % Periodtid i minuter
+    T(i) = 60*sscanf(name_t,'Pb_%dmin'); % Periodtid i minuter
     
-    cels_highpass = highpass(time,cels,0.1/T(j));
+    [~,cels_highpass] = HighAndLowpass_mean(time,cels,T(i));
     
     subplot(2,1,1)
     plot(repmat(time(:,1)/60,1,5),cels)
-    title(sprintf('Periodtid: %dmin',T(i)/60))
+    title(sprintf('Ofiltrerad signal (Periodtid: %dmin)',T(i)/60))
     xlabel('Tid [min]')
     ylabel('Temperatur [C]')
     
     subplot(2,1,2)
     plot(repmat(time(:,1)/60,1,5),cels_highpass)
-    title('H�gpassfiltrerad signal')
+    title('Högpassfiltrerad signal')
     xlabel('Tid [min]')
     ylabel('Temperatur [C]')
     
     pause()
 end
 
+%%
+x = -40:40;
+y = sign(x);
+[yf, ~] = HighAndLowpass_mean(x',y',50);
+yf = smooth(x,y,50,'moving');
+plot(x,y,x,yf);
