@@ -26,6 +26,18 @@ for i=1:l
     cels = V2C(volt,Pb_order);
     % Läs in excitationens periodtid
     T(i,1) = str2double(name_t(regexp(name_t, '\d')));
+    sample_count = size(time,1);
+    
+    % Allokera minne för en variabel som den återskapade signalen placeras
+    % i efter att frekvenskomponenterna beräknas med heterodynmetoden. Den
+    % initialiseras med DC-värdet (pga transienter förväntas en offset).
+    % Alternativt skulle man kunna ha ett löpande medelvärde som är två
+    % perioder långt.
+    %num_points = timT(i,1)/(time(end)-time(1))
+    cels_hat = zeros(size(time,1),5);
+    for j=1:5
+        cels_hat(:,j) = smooth(time(:,j),cels(:,j), 60*T(i,1),'moving');
+    end
     
     % Högpassfiltrera?
     %cels = highpass(time,cels,0.1/T(j));
@@ -46,8 +58,6 @@ for i=1:l
         [log_rC, phiC] = Heterodyn(time,cels,T(i,j)*60, Nper, Pb_order);
         [log_rV, phiV] = Heterodyn(time,volt,T(i,j)*60, Nper, Pb_order);
         
-        
-        
         %%%%%%Roetzels metod%%%%%%
         %(phi1(:)-phi1(1))
         %k=-(phi1(1:N)-phi1(1))\(log_r1(1:N)-log_r1(1))
@@ -58,10 +68,9 @@ for i=1:l
         N=5;
         
         % Linjär regression för att beräkna faskonstant och dämpning
-        XC = [ones(N,1),Pb_x(1:N)]\[log_rC(1:N),phiC(1:N)];
-        % Fas och amplitud vid x=0
-        log_V0 = XC(1,1);
-        phi0 = XC(1,2);
+        XC = lscov([ones(N,1),Pb_x(1:N)],[log_rC(1:N),phiC(1:N)],exp(log_rC));
+        log_V0 = XC(1,1);  gamma = -XC(2,1);
+        phi0   = XC(1,2);  beta  = -XC(2,2);
         % Spara undan koefficienter
         gammaC(i,j) = -XC(2,1);
         betaC(i,j) = -XC(2,2);
@@ -70,11 +79,33 @@ for i=1:l
         gammaV(i,j) = -XV(2,1);
         betaV(i,j) = -XV(2,2);
         
+        % Lägg till denna frekvenskomponent i den rekonstruerade signalen
+        w = 2*pi/T(i,j);
+        t = repmat(time(:,1)/60,1,5);
+        x = repmat(Pb_x(Pb_order)',size(time,1),1);
+        % Använd regressionskoefficienter
+        cels_hat = cels_hat + cos(phi0+w*t-beta*x).*exp(log_V0-gamma*x);
+        phiC = repmat(phiC', sample_count,1);
+        log_rC = repmat(log_rC', sample_count,1);
+        % Använd frekvensvärdena direkt
+        %cels_hat = cels_hat + cos(phiC+w*t).*exp(log_rC);
+        
+        % Plotta mätt signal tillsammans med rekonstruerad signal
+        subplot(2,2,[1,2])
+        plot(repmat(time(:,1)/60,1,5),cels)
+        legend(reshape(sprintf('%d cm',Pb_x(Pb_order)),4,5)')
+        title(sprintf('Periodtid: %dmin, #Frekvenskomponenter: %d',T(i),j))
+        xlabel('Tid [min]')
+        ylabel('Temperatur [C]')
+        hold on
+        plot(t(:,1:2),cels_hat(:,Pb_order(1:2)),'--')
+        hold off
+    
+        % Plotta regressionen
         subplot(2,2,3)
         plot(Pb_x,log_rC,'o')
         hold on
         plot(Pb_x, log_V0 - Pb_x*gammaC(i,j),'-')
-        title(sprintf('Överton #%d',j))
         hold off
         subplot(2,2,4)
         plot(Pb_x,phiC,'v')
@@ -82,7 +113,7 @@ for i=1:l
         plot(Pb_x, phi0 - Pb_x*betaC(i,j),'-')
         hold off
         
-        pause()
+        pause(0.1)
        
     end
 end
@@ -95,10 +126,17 @@ gammaC = reshape(gammaC,m*l,1);
 clf
 
 plot(w,gammaC,'o',w,betaC,'d')
-legend('\beta','\gamma')
+legend('\beta, Realdel','\gamma, Imaginärdel')
 xlabel('\omega/[rad/min]')
-ylabel('cm^{-1}')
+ylabel('k/[cm^{-1}]')
 grid on
+hold on
+% Plotta vilka mätpunkter som hör ihop (H för Harmonic)
+H = 5;
+for i=(1+(H-1)*l):(H*size(T,1))
+    plot([w(i),w(i)],[gammaC(i),betaC(i)])
+end
+hold off
 
 %%
 clf
