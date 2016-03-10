@@ -45,8 +45,8 @@ plot(Kn)
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
-xlabel('tid', 'interpreter', 'LaTeX', 'fontsize',25)
-ylabel('$(\mathbf{r}-\mathbf{r}_0)\cdot\mathbf{\hat{n}}_0$', 'interpreter', 'LaTeX', 'fontsize',25)
+xlabel('tid /[fr]', 'interpreter', 'LaTeX', 'fontsize',25)
+ylabel('$(\mathbf{r}-\mathbf{r}_0)\cdot\mathbf{\hat{n}}_0$ /[px]', 'interpreter', 'LaTeX', 'fontsize',25)
 grid on
 
 
@@ -93,8 +93,8 @@ plot(Kt)
 grid on
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
-xlabel('tid', 'interpreter', 'LaTeX', 'fontsize',25)
-ylabel('$\mathbf{\hat{t}}_1\cdot\mathbf{\hat{t}}_0$', 'interpreter', 'LaTeX', 'fontsize',25)
+xlabel('tid /[fr]', 'interpreter', 'LaTeX', 'fontsize',25)
+ylabel('$\mathbf{\hat{t}}_1\cdot\mathbf{\hat{t}}_0$ /[px]', 'interpreter', 'LaTeX', 'fontsize',25)
 
 
 

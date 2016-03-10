@@ -26,7 +26,7 @@ INDEX=create_indecis(n);%Tar fram index som sorterar längs med diagonalerna
 
 
 
-punkter=linspace(0,1,n);%loopa över hela strängen
+punkter=linspace(0.1,.9,n);%loopa över hela strängen
 
 %Beräkna normalvektorer i alla punkter och tider. 
 [~, N0]=tangent_normal(PX_mean, PY_mean, punkter);
@@ -51,3 +51,8 @@ Kn=Kn./fliplr(1:n).'/N;
 toc
 
 plot(punkter,Kn)
+
+xlabel('$\Delta l$ /[px]', 'interpreter', 'LaTeX')
+ylabel('$<(\mathbf{r}-\mathbf{r}_0)\cdot\mathbf{\hat{n}}_0>_t$ /[px]', 'interpreter', 'LaTeX')
+
+set(gca, 'fontsize', 20)

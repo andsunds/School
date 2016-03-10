@@ -65,7 +65,7 @@ str=sprintf('$%.3f \\exp(-\\Delta l/%3.f)$', K_0, L_P);
 leg=legend('Ber\"a{}knad korrelation', str);
 set(leg, 'interpreter', 'Latex')
 
-xlabel('$\Delta l$, l\"a{}ngs str\"a{}ngen','Interpreter','Latex');
+xlabel('$\Delta l$, l\"a{}ngs str\"a{}ngen /[px]','Interpreter','Latex');
 ylabel('$<\mathbf{t}(l)\cdot\mathbf{t}(l+\Delta l)>_{l, t}$','Interpreter','Latex')
 set(gca,'Fontsize',16)%, 'yscale','log');
 
@@ -108,7 +108,7 @@ dt = 0:(N-1);
 
 %figure(1)
 plot(dt,(Ks))
-xlabel('$d\tau$ [tid]','Interpreter','Latex');
+xlabel('$d\tau$ /[fr]','Interpreter','Latex');
 ylabel('$<\mathbf{t}(\tau)\cdot\mathbf{t}(\tau+d\tau)>$','Interpreter','Latex')
 set(gca,'Fontsize',24);%'xscale','log','yscale','log');
 
