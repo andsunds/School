@@ -5,26 +5,31 @@ Al_x = [0,5,10,15,20];
 addpath('Data')
 volt = load('Al_17min_v.lvm', '-ascii'); % volt
 time = load('Al_17min_t.lvm', '-ascii'); % millisekunder
-% Mätningen skedde vid centrumtiden (size(time)=[:,2])
+% Mï¿½tningen skedde vid centrumtiden (size(time)=[:,2])
 time = mean(time,2);
-% Konvertera till minuter och starta från 0
-time = (time-min(min(time)))/36000;
-% Konvertera spänning till temperatur
+% Konvertera till minuter och starta frï¿½n 0
+time = (time-min(min(time)))/60000;
+% Konvertera spï¿½nning till temperatur
 cels = V2C(volt,Al_order);
-% Använd rätt ordning på kanalerna
+% Anvï¿½nd rï¿½tt ordning pï¿½ kanalerna
 cels = cels(:,Al_order);
 
-% Beräkna frekvens och DFT
+% Berï¿½kna frekvens och DFT
 %dw*T = 2*pi
+%time = linspace(0,100,1024);
+%cels = sin(time'*2*pi/10);
 N = length(time);
-f = (1:N)/time(end);
-plot(f, abs(fft(cels(:,1),size(cels,1)))/15694,'-')
-%axis([0,5/17,0,1.1])
+f = (0:N-1)/(time(end)-time(1));
+y = abs(fft(cels(:,1),size(cels,1)))/15694;
+%plot(f, abs(fft(cels(:,1),size(cels,1))))   %/15694),'-')
+%plot(time, cels,'-')
+%grid on
+%axis([0,5/17,-10,1.1])
 
 %legend('0 cm', '5 cm', '10 cm', '15 cm', '20 cm')
 
-%tmp = [time,cels];
-%save('Plots/timeseries.tsv', 'tmp', '-ascii','-tabs')
+tmp = [time,cels,f',y];
+save('Plots/timeseries.tsv', 'tmp', '-ascii','-tabs')
 
 %%
 
