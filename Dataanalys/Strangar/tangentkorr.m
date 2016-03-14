@@ -42,7 +42,7 @@ toc
 
 %Strängens totala längd:
 S=linspace(0,1,1000);
-L=sum(sqrt(sum(diff([polyval(PX_mean, S); polyval(PY_mean, S)] ,2).^2 ,1)));
+L=arclength( PX_mean, PY_mean );
 l=L*s;%omvandla från paramaterna s, till längden på strängen
 plot(l, K), hold on
 

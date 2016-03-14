@@ -38,7 +38,7 @@ toc
 
 Kn=Kn/n;%medelvärde av summan
 %Strängens totala längd:
-L=sum(sqrt(sum(diff([polyval(PX_mean, S); polyval(PY_mean, S)] ,2).^2 ,1)));
+L=arclength(PX_mean, PY_mean);
 
 plot(Kn)
 
