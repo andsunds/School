@@ -16,7 +16,7 @@ N=floor(size(px, 1)/framestep);%antalet bilder som undersöks
 
 S=linspace(0,1,1000);
 
-n = 10;%antalet punkter att kolla korr. i
+n = 128;%antalet punkter att kolla korr. i
 
 A     = zeros(n,N);%init
 KOV_A = zeros(n);  %init
@@ -59,6 +59,26 @@ figure(1), clf
 plot(A.'), title('A', 'fontsize', 20)%Massa bröte bara
 figure(2), clf
 plot(B.'), title('B', 'fontsize', 20)%mindre bröte, men ändå otydligt
+%% Fouriertransform av egenvektorerna
+clc
+figure(3);clf
+index=(n-10):n;
+
+%plot(P, V(:,index)) %längddomänen
+
+Spektr=fft(V(:,index), [],1);
+
+k=linspace(0, arclength(PX_mean, PY_mean)/n/(n-1), n/2);
+
+plot(k, (abs(Spektr(1:(n/2), :))));axis([0, 3e-3, 0, 10])
+
+typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
+title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
+
+xlabel('$k$','Interpreter','Latex');
+ylabel('$\mathcal{F}[\mathbf{v}_i](k)$','Interpreter','Latex')
+set(gca,'Fontsize',16, 'yscale','lin', 'xscale', 'lin');
+
 %% Autokorrelation
 clc
 K=zeros(N,n);%init.
@@ -79,7 +99,7 @@ end
 toc
 
 
-figure(3), clf
+figure(4), clf
 plot(0:(N-1), K) %Häftig korrelatinosfunktioner
 
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
@@ -121,7 +141,7 @@ fprintf('sum(K_kors.^2)/max(sum([K_auto1, K_auto2].^2, 1)) = %.3f\n\n',...
 toc
 
 %plottning
-figure(4), clf
+figure(5), clf
 plot(0:(N-1), K_kors) 
 hold on
 plot(0:(N-1), K_auto1) 
