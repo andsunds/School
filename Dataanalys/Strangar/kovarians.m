@@ -65,7 +65,7 @@ figure(3);clf
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
-index=(n-10):n;
+index=(n-10):(n-5);
 L=arclength(PX_mean, PY_mean);
 
 subplot(2,1,1)%längddomänen
@@ -74,20 +74,23 @@ axis([0, L, min(min(V(:,index)))*1.1, max(max(V(:,index)))*1.1])
 
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
-xlabel('$l$','Interpreter','Latex');
+xlabel('$l$ /[px]','Interpreter','Latex');
 ylabel('$\mathbf{v}(l)$','Interpreter','Latex')
 set(gca,'Fontsize',14, 'yscale','lin', 'xscale', 'lin');
 
+
 subplot(2,1,2)%frekvensdomänen 
+
 Spektr=fft(V(:,index), [],1);
+Fs=n/L;
+k=(0:(n/2-1))*Fs/(n-1);
 
-k=linspace(0, L/n/(n-1), n/2);
-
-plot(k, (abs(Spektr(1:(n/2), :))));axis([0, 3e-3, 0, 10])
+plot(k, (abs(Spektr(1:(n/2), :))));
+axis([0, 3e-2, 0, 10])
 
 
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
-xlabel('$k$','Interpreter','Latex');
+xlabel('$k$ /[px$^{-1}$]','Interpreter','Latex');
 ylabel('$\mathcal{F}[\mathbf{v}_i](k)$','Interpreter','Latex')
 set(gca,'Fontsize',14, 'yscale','lin', 'xscale', 'lin');
 
@@ -195,7 +198,7 @@ ylabel('Sorterade egenv\"a{}rden /[px$^2$]', 'interpreter', 'latex')
 set(gca, 'fontsize', 20, 'yscale', 'log')
 
 fprintf('\nHur diagonal är KOV_B? \n   Z = %1.2d   (äkta diagonal har Z=0)\n\n', ...
-        sqrt(sum(sum((KOV_B-diag(diag(KOV_B))).^2))/sum(diag(KOV_B).^2)))
+        sqrt(sum(sum((KOV_B-diag(diag(KOV_B))).^2))/sum(diag(KOV_B).^2)) )
 
 
 
