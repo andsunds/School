@@ -7,7 +7,7 @@ filnamn{2}='confined_32min_polynom';
 filnamn{3}='nonconfined_5min_polynom';
 filnamn{4}='nonconfined_167min_polynom';
 
-fil=4;
+fil=1;
 load(['data/', filnamn{fil}, '.mat'])
 
 framestep=1;%om vi vill undersöka bilder som ligger glesare
@@ -65,10 +65,10 @@ figure(3);clf
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
-index=(n-10):(n-5);
+index=(n-10):(n);
 L=arclength(PX_mean, PY_mean);
 
-subplot(2,1,1)%längddomänen
+subplot(2,2,[1,2])%längddomänen
 plot(P*L, V(:,index)) 
 axis([0, L, min(min(V(:,index)))*1.1, max(max(V(:,index)))*1.1])
 
@@ -77,23 +77,38 @@ title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 xlabel('$l$ /[px]','Interpreter','Latex');
 ylabel('$\mathbf{v}(l)$','Interpreter','Latex')
 set(gca,'Fontsize',14, 'yscale','lin', 'xscale', 'lin');
+grid on
 
+subplot(2,2,3)%frekvensdomänen 
 
-subplot(2,1,2)%frekvensdomänen 
-
-Spektr=fft(V(:,index), [],1);
+Spektr=fft(V, [],1);
 Fs=n/L;
 k=(0:(n/2-1))*Fs/(n-1);
 
-plot(k, (abs(Spektr(1:(n/2), :))));
-axis([0, 3e-2, 0, 10])
-
+plot(repmat(k.', 1, length(index)), (abs(Spektr(1:(n/2), index))));
+axis([0, 5e-2, 0, 10])
 
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 xlabel('$k$ /[px$^{-1}$]','Interpreter','Latex');
 ylabel('$\mathcal{F}[\mathbf{v}_i](k)$','Interpreter','Latex')
 set(gca,'Fontsize',14, 'yscale','lin', 'xscale', 'lin');
 
+
+subplot(2,2,4)%frekvensdomänen 
+
+[~, i]=max(abs(Spektr(2:(n/2), :)));
+
+f_max=k(i);
+
+d=diag(D);
+
+index=(n-15):1:n;
+plot(f_max(index), d(index), '*')
+
+title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
+xlabel('$k$ /[px$^{-1}$]','Interpreter','Latex');
+ylabel('var[$B_i$] /[px$^2$]','Interpreter','Latex')
+set(gca,'Fontsize',14, 'yscale','log', 'xscale', 'lin');
 
 %% Autokorrelation
 clc
@@ -186,7 +201,7 @@ KOV_B=KOV_B/N;%Medelvärde är summan delat på antalaet
 toc
 
 %plottning
-figure(5); clf
+figure(6); clf
 plot(diag(KOV_B))
 hold on;grid on
 plot(abs(diag(D)))
