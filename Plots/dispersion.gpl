@@ -1,0 +1,14 @@
+set decimalsign ','
+
+set terminal epslatex size 16cm,8cm color
+set output "dispersion_Al.eps"
+
+set xrange [0:7]
+set yrange [0:0.4]
+set xlabel "Vinkelfrekvens [\\unit{rad/min}]"
+set ylabel "Vågtal [\\unit{cm^{-1}}]]"
+
+set key opaque box bottom right
+
+plot for [i=0:2] "dispersion_Al.tsv" using 1+2*i:6+2*i:11+2*i with errorbars \
+	 	 		 title ""
