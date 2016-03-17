@@ -17,12 +17,16 @@ for k=1:size(time,2);
 
     time_k = time(n:end,order(k));
     volt_k = volt(n:end,order(k));
-    % Multiplicera
-    P = exp(-1i*2*pi/period*time_k).*volt_k;
+    % Interpolera med styckvis 3:e-gradspolynom
+    pp = spline(time_k,volt_k); %pp=piecewise polynomial
+    % Sampla interpolationen oftare
+    t = (time_k(1):(period*1e-3):time_k(end)).';
+    % Multiplicera med kernel
+    P = exp(-1i*2*pi/period*t).*ppval(pp, t);
     % Integrera
-    I = trapz(time_k,P,1);
+    I = trapz(t,P,1);
     % Medelv�rdera (se f�rstudie f�r 2*xxx)
-    Z(k) = 2*I./(time_k(end)-time_k(1));
+    Z(k) = 2*I./(t(end)-t(1));
 end
 %I = sum(P(1:end-1,:).*diff(time,1,1));
 %disp(abs(Z))
