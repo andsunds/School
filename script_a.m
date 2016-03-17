@@ -15,7 +15,7 @@ files_v=dir([p,'Al','*_v.lvm']);
 l=length(files_t);
 
 % Antal övertoner+grundton
-m = 3;
+m = 5;
 T=zeros(l,m);
 order = Al_order;
 x_loc = Al_x;
@@ -46,7 +46,7 @@ for i=1:l
     % perioder långt.
     %num_points = timT(i,1)/(time(end)-time(1))
     % Högpassfiltrera?
-    [cels_hat ,cels] = HighAndLowpass_mean(time,cels,60*T(i));
+    %[cels_hat ,cels] = HighAndLowpass_mean(time,cels,60*T(i));
     %cels_hat = zeros(size(time,1),5);
     %for j=1:5
     %    cels_hat(:,j) = smooth(time(:,j),cels(:,j), 60*T(i,1),'moving');
@@ -59,7 +59,7 @@ for i=1:l
     ylabel('Temperatur [C]')
     
     for j=1:m
-        Nper = 5;
+        Nper = 8;
          % Se till så att ett helt antal perioder av den exciterande
          % vågformen kommer med
         T(i,j) = T(i,1)/j;
@@ -75,8 +75,7 @@ for i=1:l
         w = 2*pi/T(i,j);
         a(i,j,:)   = w/2*(x_loc(2:end)-x_loc(1)).^2./(lnB.*G);
         tau(i,j,:) = (1-kappa.^2)./(2*w*kappa);
-        
-        
+           
         % Antal punkter i den linjära regressionen
         N=5;
         
@@ -133,6 +132,10 @@ for i=1:l
        
     end
 end
+
+%% Exportera data
+tmp = [T, betaC, betaC_std, gammaC, gammaC_std];
+save('Plots/dispersion.tsv', 'tmp', '-ascii', '-tabs')
 
 %% Plotta dispersionsrelationen
 % Lägg all data i endimensionella vektorer
