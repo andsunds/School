@@ -9,16 +9,16 @@ Pb_x = [0,1,2,3,4].';
 
 p='Data/';addpath(p);
 
-files_t=dir([p,'Al','*_t.lvm']);
-files_v=dir([p,'Al','*_v.lvm']);
+files_t=dir([p,'Pb','*_t.lvm']);
+files_v=dir([p,'Pb','*_v.lvm']);
 
 l=length(files_t);
 
 % Antal övertoner+grundton
 m = 5;
 T=zeros(l,m);
-order = Al_order;
-x_loc = Al_x;
+order = Pb_order;
+x_loc = Pb_x;
 
 betaC  = zeros(l,m); betaV  = zeros(l,m);
 gammaC = zeros(l,m); gammaV = zeros(l,m);
@@ -45,8 +45,11 @@ for i=1:l
     % Alternativt skulle man kunna ha ett löpande medelvärde som är två
     % perioder långt.
     %num_points = timT(i,1)/(time(end)-time(1))
+    disp('HIGHPASS')
+    tic
     % Högpassfiltrera?
-    %[cels_hat ,cels] = HighAndLowpass_mean(time,cels,60*T(i));
+    [cels_hat ,cels] = HighAndLowpass_mean(time,cels,60*T(i));
+    toc
     %cels_hat = zeros(size(time,1),5);
     %for j=1:5
     %    cels_hat(:,j) = smooth(time(:,j),cels(:,j), 60*T(i,1),'moving');
@@ -59,14 +62,22 @@ for i=1:l
     ylabel('Temperatur [C]')
     
     for j=1:m
-        Nper = 8;
+        if T(i,1) == 10
+            Nper = 4;
+        else
+            Nper = 8;
+        end
          % Se till så att ett helt antal perioder av den exciterande
          % vågformen kommer med
         T(i,j) = T(i,1)/j;
         Nper = Nper*j;
+        
+        disp('Heterodyn')
+        tic
         % Plocka ut amplitud och fas för denna frekvenskomponent
         [log_rC, phiC] = Heterodyn(time,cels,T(i,j)*60, Nper, order);
-        [log_rV, phiV] = Heterodyn(time,volt,T(i,j)*60, Nper, order);
+        %[log_rV, phiV] = Heterodyn(time,volt,T(i,j)*60, Nper, order);
+        toc
         
         %%%%%%Roetzels metod%%%%%%
         lnB = log_rC(2:end) - log_rC(1);
@@ -79,8 +90,11 @@ for i=1:l
         % Antal punkter i den linjära regressionen
         N=5;
         
+        disp('LSCOV')
+        tic
         % Linjär regression för att beräkna faskonstant och dämpning
         [XC, STDXC] = lscov([ones(N,1),x_loc(1:N)],[log_rC(1:N),phiC(1:N)],exp(log_rC));
+        toc
         
         log_V0 = XC(1,1);  gamma = -XC(2,1);
         phi0   = XC(1,2);  beta  = -XC(2,2);
@@ -90,24 +104,24 @@ for i=1:l
         betaC(i,j) = -XC(2,2);
         betaC_std (i,j)= STDXC(2,2);
         
-        XV = [ones(N,1),x_loc(1:N)]\[log_rV(1:N),phiV(1:N)];
-        gammaV(i,j) = -XV(2,1);
-        betaV(i,j) = -XV(2,2);
+        %XV = [ones(N,1),x_loc(1:N)]\[log_rV(1:N),phiV(1:N)];
+        %gammaV(i,j) = -XV(2,1);
+        %betaV(i,j) = -XV(2,2);
         
         % Lägg till denna frekvenskomponent i den rekonstruerade signalen
-        w = 2*pi/T(i,j);
-        t = repmat(time(:,1)/60,1,5);
-        x = repmat(x_loc(order)',size(time,1),1);
+        %w = 2*pi/T(i,j);
+        %t = repmat(time(:,1)/60,1,5);
+        %x = repmat(x_loc(order)',size(time,1),1);
         % Använd regressionskoefficienter
         %cels_hat = cels_hat + cos(phi0+w*t-beta*x).*exp(log_V0-gamma*x);
-        phiC = repmat(phiC', sample_count,1);
-        log_rC = repmat(log_rC', sample_count,1);
+        %phiC = repmat(phiC', sample_count,1);
+        %log_rC = repmat(log_rC', sample_count,1);
         % Använd frekvensvärdena direkt
         %cels_hat = cels_hat + cos(phiC+w*t).*exp(log_rC);
         
         % Plotta mätt signal tillsammans med rekonstruerad signal
         subplot(2,2,[1,2])
-        plot(repmat(time(:,1)/60,1,5),cels)
+        %plot(repmat(time(:,1)/60,1,5),cels)
         %legend(reshape(sprintf('%d cm',x_loc(order)),4,5)')
         title(sprintf('Periodtid: %dmin, #Frekvenskomponenter: %d',T(i),j))
         xlabel('Tid [min]')
@@ -117,6 +131,8 @@ for i=1:l
         %hold off
     
         % Plotta regressionen
+        disp('SUBPLOT')
+        tic
         subplot(2,2,3)
         plot(x_loc,log_rC,'o')
         hold on
@@ -127,6 +143,7 @@ for i=1:l
         hold on
         plot(x_loc, phi0 - x_loc*betaC(i,j),'-')
         hold off
+        toc
         
         pause(0.01)
        
@@ -134,39 +151,44 @@ for i=1:l
 end
 
 %% Exportera data
-tmp = [T, betaC, betaC_std, gammaC, gammaC_std];
-save('Plots/dispersion.tsv', 'tmp', '-ascii', '-tabs')
+betaC(betaC*min(diff(x_loc)) > pi) = NaN;
+betaC(betaC_std./betaC > 0.2) = NaN;
+gammaC(gammaC_std./gammaC > 0.2) = NaN;
+tmp = [2*pi./T(:,1), betaC, betaC_std, gammaC, gammaC_std];
+save('Plots/dispersion_Pb.tsv', 'tmp', '-ascii', '-tabs')
 
 %% Plotta dispersionsrelationen
 % Lägg all data i endimensionella vektorer
-w = 2*pi./reshape(T,m*l,1); % Vinkelfrekvens
-bC = reshape(betaC,m*l,1);
-gC = reshape(gammaC,m*l,1);
+w = 2*pi./reshape(T(:,1:2:5),3*l,1); % Vinkelfrekvens
+bC_std = reshape(betaC_std(:,1:2:5),3*l,1);
+gC_std = reshape(gammaC_std(:,1:2:5),3*l,1);
+bC = reshape(betaC(:,1:2:5),3*l,1);
+gC = reshape(gammaC(:,1:2:5),3*l,1);
 k = bC - 1i*gC;
 clf; clc;
 
-tmp = (1:(m*l))';
-inds = find(w<inf & (tmp <= l | tmp > 2*l));
+inds = find(w<inf & ~isnan(bC) & ~isnan(gC));
 bC = bC(inds);
 gC = gC(inds);
-bC_std = betaC_std(inds);
-gC_std = gammaC_std(inds);
+bC_std = bC_std(inds);
+gC_std = gC_std(inds);
 k = k(inds);
 w = w(inds);
 
-P = [ones(length(inds),1),k.^2,w.^2]\(-1i*w);
-alpha_P = P(2)*1e-4/60;
-tau_P = P(3)*60;
-C_P = P(1)/60;
-Q = sqrt([w;w])\[bC;gC];
-R = [ones(length(inds),1),k.^2]\(1i*w);
+%P = [ones(length(inds),1),k.^2,w.^2]\(-1i*w);
+%alpha_P = P(2)*1e-4/60;
+%tau_P = P(3)*60;
+%C_P = P(1)/60;
+inds = w < 3;
+Q = sqrt([w(inds);w(inds)])\[bC(inds);gC(inds)];
+%R = [ones(length(inds),1),k.^2]\(1i*w);
 % alpha*k^2+i*omega - C*alpha = 0
 % i*omega = C*alpha - alpha*k^2
 % k = sqrt(C - i*omega/alpha)
 % k = 1/sqrt(2alpha)
-alpha_Q = 1/Q^2/2; %cm^2/min
-alpha_Q = alpha_Q*0.01^2/60;
-alpha_R = -R(2)*0.01^2/60;
+%alpha_Q = 1/Q^2/2; %cm^2/min
+%alpha_Q = alpha_Q*0.01^2/60;
+%alpha_R = -R(2)*0.01^2/60;
 % alpha*k^2 + 1i*omega - tau*omega^2=0
 % 1i/omega = tau + alpha*k^2/omega^2
 S = [ones(length(inds),1),(k./w).^2]\(1i./w);
@@ -180,6 +202,7 @@ hold on
 errorbar(w,bC,bC_std,'bd')%, ...
      %W,real(sqrt(S(1)*W.^2-1i*W)/sqrt(S(2))),'k-', ...
      %W,imag(sqrt(S(1)*W.^2-1i*W)/sqrt(S(2))),'k--')
+plot(W, Q*sqrt(W))
 hold off
 legend('\gamma, Imaginärdel','\beta, Realdel')
 xlabel('\omega/[rad/min]')
