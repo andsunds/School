@@ -15,13 +15,15 @@ files_v=dir([p,'Al','*_v.lvm']);
 l=length(files_t);
 
 % Antal övertoner+grundton
-m = 3;
+m = 5;
 T=zeros(l,m);
 order = Al_order;
 x_loc = Al_x;
 
 betaC  = zeros(l,m); betaV  = zeros(l,m);
 gammaC = zeros(l,m); gammaV = zeros(l,m);
+betaC_std = zeros(l,m);
+gammaC_std = zeros(l,m);
 tau = zeros(l,m,4);  a = zeros(l,m,4);
 
 for i=1:l
@@ -44,7 +46,7 @@ for i=1:l
     % perioder långt.
     %num_points = timT(i,1)/(time(end)-time(1))
     % Högpassfiltrera?
-    [cels_hat ,cels] = HighAndLowpass_mean(time,cels,60*T(i));
+    %[cels_hat ,cels] = HighAndLowpass_mean(time,cels,60*T(i));
     %cels_hat = zeros(size(time,1),5);
     %for j=1:5
     %    cels_hat(:,j) = smooth(time(:,j),cels(:,j), 60*T(i,1),'moving');
@@ -57,7 +59,7 @@ for i=1:l
     ylabel('Temperatur [C]')
     
     for j=1:m
-        Nper = 5;
+        Nper = 8;
          % Se till så att ett helt antal perioder av den exciterande
          % vågformen kommer med
         T(i,j) = T(i,1)/j;
@@ -73,19 +75,20 @@ for i=1:l
         w = 2*pi/T(i,j);
         a(i,j,:)   = w/2*(x_loc(2:end)-x_loc(1)).^2./(lnB.*G);
         tau(i,j,:) = (1-kappa.^2)./(2*w*kappa);
-        
-        
+           
         % Antal punkter i den linjära regressionen
         N=5;
         
         % Linjär regression för att beräkna faskonstant och dämpning
-        XC = lscov([ones(N,1),x_loc(1:N)],[log_rC(1:N),phiC(1:N)],exp(log_rC));
+        [XC, STDXC] = lscov([ones(N,1),x_loc(1:N)],[log_rC(1:N),phiC(1:N)],exp(log_rC));
         
         log_V0 = XC(1,1);  gamma = -XC(2,1);
         phi0   = XC(1,2);  beta  = -XC(2,2);
         % Spara undan koefficienter
         gammaC(i,j) = -XC(2,1);
+        gammaC_std(i,j) = STDXC(2,1);
         betaC(i,j) = -XC(2,2);
+        betaC_std (i,j)= STDXC(2,2);
         
         XV = [ones(N,1),x_loc(1:N)]\[log_rV(1:N),phiV(1:N)];
         gammaV(i,j) = -XV(2,1);
@@ -130,6 +133,10 @@ for i=1:l
     end
 end
 
+%% Exportera data
+tmp = [T, betaC, betaC_std, gammaC, gammaC_std];
+save('Plots/dispersion.tsv', 'tmp', '-ascii', '-tabs')
+
 %% Plotta dispersionsrelationen
 % Lägg all data i endimensionella vektorer
 w = 2*pi./reshape(T,m*l,1); % Vinkelfrekvens
@@ -142,6 +149,8 @@ tmp = (1:(m*l))';
 inds = find(w<inf & (tmp <= l | tmp > 2*l));
 bC = bC(inds);
 gC = gC(inds);
+bC_std = betaC_std(inds);
+gC_std = gammaC_std(inds);
 k = k(inds);
 w = w(inds);
 
@@ -166,9 +175,12 @@ tau_S = S(1)*60;
 
 W = linspace(0,10,1000);
 %plot(w,gammaC,'ro',w,betaC,'bd', W,Q*sqrt(W),'k-')
-plot(w,gC,'ro',w,bC,'bd', ...
-     W,real(sqrt(S(1)*W.^2-1i*W)/sqrt(S(2))),'k-', ...
-     W,imag(sqrt(S(1)*W.^2-1i*W)/sqrt(S(2))),'k--')
+errorbar(w,gC,gC_std,'ro')
+hold on
+errorbar(w,bC,bC_std,'bd')%, ...
+     %W,real(sqrt(S(1)*W.^2-1i*W)/sqrt(S(2))),'k-', ...
+     %W,imag(sqrt(S(1)*W.^2-1i*W)/sqrt(S(2))),'k--')
+hold off
 legend('\gamma, Imaginärdel','\beta, Realdel')
 xlabel('\omega/[rad/min]')
 ylabel('k/[cm^{-1}]')
