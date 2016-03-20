@@ -47,12 +47,13 @@
 \usepackage{mathtools} %\begin{pmatrix*}[r] ... \end
 %%För att kunna kommentera ut större stycken
 %%Drar in tabell och figurtexter
-\usepackage[margin=10 pt]{caption}
+\usepackage[margin=10 pt, size=small]{caption}
 \usepackage{comment} %\begin{comment}
 %%För att lägga in 'att göra'-noteringar i texten
-\usepackage[disable]{todonotes} %\todo{...}, \todolist
+\usepackage[]{todonotes} %\todo{...}, \todolist
 %\renewcommand{\todo}{\todo {}}
 
+\usepackage{cite}
 
 %%För att inkludera MATLABkod. 
 %%OBS: mcode är ett separat paket och man måste ha mcode.sty i samma
@@ -135,110 +136,248 @@ konstruera motsvarande energinivådiagram.
   aggregat) fick användas istället. }
 
 
-\subsection{Bakgrund}
+\subsection{Teoribakgrund}
 Elektroner är bundna till atomkärnan i väldefinierade kvanttillstånd
 kallade atomorbitaler. Varje sådant tillstånd har en väldefinierad
 energi. Elektroner kan röra sig mellan energinivåerna genom att
 absorbera eller emittera en foton med energi som matchar 
 energiskillnaden mellan atomens orbitaler. 
 
-En elektron kan ''hoppa'' till ett högre energitillstånd genom att absorbera en foton
-som motsvarar den energi som krävs för nå en högre energinivå. Man
-säger då att elektronen exciteras genom att \emph{absorbera} en
-foton. Vid övergång från ett högre till lägre energitillstånd
-\emph{emitteras} istället en foton med den frekvens som svarar mot
-energiskillnaden mellan energinivåerna. 
+En elektron kan ''hoppa'' till ett högre energitillstånd genom att
+absorbera en foton som motsvarar den energi som krävs för nå en högre
+energinivå. Man säger då att elektronen exciteras genom att
+\emph{absorbera} en foton. Vid övergång från ett högre till lägre
+energitillstånd \emph{emitteras} istället en foton med den frekvens
+som svarar mot energiskillnaden mellan energinivåerna. 
  
-Varje grundämne karakteriseras av en unik sammansättning av
-elektroner och orbitaler som är bundna till kärnan i unika
-konfigurationer. Detta leder till att energinivåerna är unika för
-varje grundämne varför spektroskopi är ett kraftfullt verktyg för
-ämnesbestämming. 
+% Varje grundämne karakteriseras av en unik sammansättning av
+% elektroner och orbitaler som är bundna till kärnan i unika
+% konfigurationer. Detta leder till att energinivåerna är unika för
+% varje grundämne varför spektroskopi är ett kraftfullt verktyg för
+% ämnesbestämming. 
  
 Genom att studera vilka ljusvåglängder som emitteras från ett prov
 kan alltså de olika energiskillnadera bestämmas med hjälp av  
 \[\Delta E = h\nu=\frac{hc}{\lambda}.\]
 På så sätt kan alla energinivåer (med $\Delta E$ i de detekterbara
-våglängderna) bestämmas relativt varandra. Att bestämma de absoluta
-energierna på varje nivå är svårare. Man skulle kunna tänka sig
-utnyttja att de högsta energinivåerna ligger mycket tätt och därmed
-kommer att bidra till ett något diffust band i spektrat. Det finns då
-ett sådant band för varje ''lägre'' eneginivå och på så sätt skulle
-dessa energinivåer kunna bestämmas absolut. Dock är det mycket svårt
-att avgöra vilket band som hör till vilken lägre energinivå annan än
-för väteatomen. 
- 
-Ett annat hjälpmedel i bestämmandet av energinivåerna är de så
-kallade urvalreglerna 
+våglängderna) bestämmas relativt varandra. 
+
+Att bestämma de absoluta
+energierna på varje nivå är däremot svårare. Det bästa man kan hoppas
+på är att bestämma de exciterade energinivåerna relativt
+grundtillståndet eller kanske rent av relativt första exciterade
+nivån. Det är nämligen troligt att grundtillståndet ligger betydligt
+lägre än de oftatst mer tätliggande exciterade nivåerna. 
+
+\subsubsection{Kvanttal och elektronskal}
+Kvantmekaniskt beskrivs de olika orbitalerna av i huvudsak två
+kvanttal. Det ena kallas huvudkvanttalet, $n$, och styr vilka andra
+kvanttal som är tillåtna. Det andra är det azimutala kvanttalat, $l$,
+som beskriver banrörelsemängdsmomentet en elektron med det kvanttalet
+har. 
+
+Vidare finns även det magnetiska kvanttalet, $m$, och spinnkvanttalet,
+$s$. Som namen antyder så kommer $m$ in i situationer med magnetfält,
+exempelvis Zeemaneffekten, och $s=\pm\nicefrac{1}{2}$ bestämmer
+elektronens spinn. 
+Av dess är det bara spinnkvanttalet som kommer vara av intresse för
+den här rapporten.  
+
+Med Paulis uteslutningsprincip kan man sedan bygga upp elektronskal
+som fylls upp med elektroner för större grundämnen. Skalen i dessa
+atomer fylls på nerifrån, i energi räknat. Detta leder till att det
+kommer finnas elektroner i fyllda och ofyllda skal. För (optisk)
+spektroskopi är de elektroner i fyllda skal ointressanta, då de är
+mycket hårdare bunda till kärnan än valenselektronerna, de yttersta
+elektronerna, som lättare kan exciteras. 
+
+
+
+\subsubsection{Spektroskopiska termer}\label{sec:term}
+Man brukar alltså bara intressera sig för valenselektronerna och deras
+tillstånd. Men när man har flera elektroner i en atom räcker det
+tyvärr inte att bara titta på valenselektronernas konfiguration. För att
+få det sammanlagda tillståndet, som även bero på hur de olika
+elektronerna Coulomb-växelvärkar med varandra, använder man sig av så
+kallde \emph{LS-termer} eller \emph{spektroskopiska termer}.
+
+Dessa spektroskopiska termer är uppbyggda enligt formen \cite{Bransden}
+\[
+^{2S+1}L_J,
+\]
+där $S$ är de möjliga kombinatinoer av de båda elektronernas
+spinnkvanttal, $L$ antar heltalsvärden från skillnaden till summan av
+de båda elektroneras azimutala kvanttal, det samma för $J$ fast med
+$L$ och $S$ istället. Detta kan för två valenselektroner sammanfattas
+med formlerna \cite{Bransden}
 \begin{equation*}
 \begin{aligned}
-\Delta l &= \pm 1\\
-\Delta m &= 0, \pm 1.
+L &= |l_1-l_2|, |l_1- l_2|+1, \ldots, |l_1+l_2|\\
+S &= |s_1-s_2|, |s_1- s_2|+1, \ldots, |s_1+s_2|\\
+J &= |L-S|, |L-S| +1, \ldots, |L+S|,
 \end{aligned}
 \end{equation*}
-Dessa bestämmer hur det azimutala kvanttalet $l$ och det magnetiska
-kvanttalet $m$ kan ändras. För den här laborationen kommer
-framförallt urvalsregeln för $l$-kvanttalat att vara av intresse. 
+där indexen betecknar att kvanttalen hör till respektive elektron.
+
+När termerna skrivs ut används den spektroskopiska beteckningen (S, P,
+D, o.s.v.) för $L$. Vidare använder man $2S+1$ i termen vilket är för
+att det ger antalet olika termer med samma $L$ och $S$ -- om inte
+$L=0$. Detta gör att termer med $S=0$ och med $S=1$ kallas singeltt-
+respektive triplettillstånd. 
+
+\subsubsection{Urvalsregel för dipolövergångar} 
+\label{sec:regler}
+\todo{Hunds regler?}
+Ett hjälpmedel i bestämmandet av energinivåerna är de så
+kallade urvalreglerna som bygger på hur en elektrisk dipol kan
+växelverka med elektronerna. De bestämmer vilka övergångar mellan
+tillstånd som är tillåtna vid vid växelverkan (absorption eller
+emission) med fotoner. Den regel som är mest intressant i den här
+rapportens sammanhang är  
+\begin{equation*}
+\begin{aligned}
+%\Delta L &= 0, \pm 1\\
+\Delta J &= 0, \pm 1 \quad (J=0\to 0\text{, är inte tillåtet})
+\end{aligned}
+\end{equation*}
+som styr hur $J$ kan förändras vid dipolväxelverkan \cite{Bransden}.
+\todo{Vilka urvalsregler gäller egentligen?}
+
+\subsection{Tillämpning på kvicksilver (icke-joniserat)}
+Kvicksilvers grundkonfiguration är $6\mathrm{s}^2$, vilket betyder att det
+finns två valenselektroner med $n=6$ och $l=0$ för de båda. Utav dessa
+två antas en av dem kunna exciteras till en högre energinivå (högre
+$l$ eller $n$), medan den andra stannar i 6s-tillståndet. 
+
+Detta är en rimlig approximation eftersom detta är de excitationerna
+med lägst energi. Om båda elektronerna hade exciterats till högre
+energier blir det dessutom inte bara en fördubbling av energi, för att
+det blir två elektroner på de högre nivåerna. Det blir dessutom extra
+energi på grund av att den andra elektronen blir hårdare bunden till
+kärnan, när en elektron redan exciterats. 
+
+I \tabref{tab:Hg_termer} visas några av kvicksilvers
+elektronkonfigurationer tillsammans med motsvarnde termer.
+\todo{Vad är dessa bra för?}
+
+\begin{table}
+\centering
+\caption{Tabell med de spektroskopiska termerna för några av de lägsta
+exciterade tillstånden för Hg-atomen. Anledningen till att det bara
+finns en term per konfiguration och $S$-värde är att den elektron som
+inte exciterats är i ett s-tillstånd, vilket motsvarar $l=0$ så det
+finns bara ett $L$-värde. }
+\label{tab:Hg_termer}
+\begin{tabular}{|l|l|l|}\hline
+Konfiguration & Singletter ($S=0$) & Tripletter ($S=1$)
+\\ \hline\hline
+6s6s & $6^1\mathrm{S}_0$ & --- \\
+6s6p & $6^1\mathrm{P}_1$ & $6^3\mathrm{P}_J$, $J=2, 1, 0$ \\
+6s6d & $6^1\mathrm{D}_2$ & $6^3\mathrm{D}_J$, $J=3, 2, 1$ \\
+(6s6f) & $6^1\mathrm{F}_3$ & $6^3\mathrm{F}_J$, $J=4, 3, 2$ \\
+(6s6g) & $6^1\mathrm{G}_4$ & $6^3\mathrm{G}_J$, $J=5, 4, 3$ \\
+\hline
+6s7s & $7^1\mathrm{S}_0$ & $7^3\mathrm{S}_J$, $J=1$ \\
+6s7p & $7^1\mathrm{P}_1$ & $7^3\mathrm{P}_J$, $J=2, 1, 0$ \\
+6s7d & $7^1\mathrm{D}_2$ & $7^3\mathrm{D}_J$, $J=3, 2, 1$ \\ 
+\hline
+\end{tabular}
+\end{table}
+
+
+
+
+
 
 
 \section{Metod}
-%
-
-Spektroskopi är en ganska rättfram mätmetod. Man har ett prov som man
+Spektroskopi är en ganska rätt fram metod. Man har ett prov som man
 kan erhålla ljus ifrån. Ljuset leds sedan in i en monokromator och som
-plockar ut en specifik våglängd. Efter monokromatorn mäts
-ljusintensiteten för alla våglängder man är intresserade utav. På så
+plockar ut en specifik våglängd åt gången. Monokromatorn kan sedan
+variera vilken våglängd som plockas ut. Detta möjliggör mätnig av
+ljusintensiteten för de våglängder man är intresserade utav. På så
 sätt fås spektrumet fram.
 
-Dessa mätningar kommer i stort sett går ut på att sakta arbeta sig
-igenom spektrometerns mätområde och registrera ljusintensiteten. Detta
-görs lämpligast digitalt med t.ex. ett program i LabView som styr
-spektrometern och lagrar intensitetsdata. 
+\subsection{Spektrometern}
 
+Spektrometern som användes, en Spex~270M \cite{Spex270M}, hade all
+nödvändig optisk mät- och styrutrusting inbyggt. Allt som behövde
+göras var att koppla upp den, via GPIB, till ett styrprogram i LabVIEW
+för att styra våglängd från monokromatorn och spaltbredd för
+ljusinsläppet. Sedan kopplades signalen från fotomultiplikatorn i
+spektrometern till en nanoamperemeter som kunde detektera den svaga
+strömmen. Nanoamperemetern konverterade strömmen till en spänning som
+kunde mätas av en digitalmultimeter, kopplad till styrprogrammet via
+GPIB. 
+
+\todo{Kalibrering}
 
 \subsection{Energinivåbestämmning}
-Spektrallinjerna ger oss information om energiskillnaden mellan två
-energinivåer, men inte om vilka nivåer det är talan om. Vi får på egen
-hand försöka bestämma de relativa energinivåerna genom att para ihop
-olika spektrallinjer (energiskillnader) och sedan förlita oss på bland
-annat urvalreglerna och sålla bort förbjudna kombinationer av
-övergångar.
+För att få en så bra noggrannhet i energi som möjligt måste man
+maximera sin noggrannhet i våglängd. Spektrometern, Spex~270M, har en
+våglängdsupplösning på 0,1\,nm \cite{Spex270M}. Dock tar varje
+intensitetsmätning på varje våglängd cirka 10\,s, vilket gör att en
+genomlöpng av hela mätintervallet på högta upplösningen skulle ta i
+storleksordningen tre timmar. 
+
+För att minska körtiden för en mätning skrevs ett program som gick
+fram med steg om 1\,nm. Men för att få bra noggrannhet i topparnas
+position användes ett tröskelvärde. Så varje gång intensiteten steg
+över detta tröskelvärde backade spektrometern ett steg och började gå
+med minsta möjliga våglängdssteg. 
+
+Spaltbredden för det insläppta ljuset hölls dock hela tiden
+konstant. Detta eftersom den, förutom våglängdsnoggrannheten, även
+styr intensiteten på det detekterade ljuset.
 
 \subsection{Absorption i lösningar}
-För att studera absorptionsspektrumet för ett prov är grundtanken
-ganska enkel: man lyser en lampa med känt spektrum på provet och ser
-\href{https://xkcd.com/1517/}{hur det transmitterade ljuset skiljer
-  sig från ursprungsspektrumet}. I verkligheten behöver man vara lite
-mer vaksam. 
 
-Till att börja med så har vi det ''kända spektrumet''. Det man får
-göra där är att göra en torrkörning\footnotemark av sin mätning för
-att få hur det opåverkade spektrumet ser ut. Detta bör göras även om
-man redan känner till spektrumet för att veta hur den opåverkade
-intensiteten är och hur t.ex. provbehållare påverkar ljuset. 
-\footnotetext{''Torrkörningen'' innebär inte nödvändigt vis att man
-  gör en helt \emph{torr} mätning. Optimalt borde torrkörningen göras
-  med enbart lösningsmedlet för att få bakgrundsreferensen. }
+% För att studera absorptionsspektrumet för ett prov är grundtanken
+% ganska enkel: man lyser en lampa med känt spektrum på provet och ser
+% \href{https://xkcd.com/1517/}{hur det transmitterade ljuset skiljer
+%   sig från ursprungsspektrumet}. I verkligheten behöver man vara lite
+% mer vaksam. 
 
-Sedan kan man köra en mätning med provet där man lyser lampan rakt
-igenom provet och undersöker ljuset som kommer ut på andra sidan. Här
-kan man dock behöva passa sig för ifall ens prov uppvisar fluorescens
-och därmed kommer att resultera i en annan ''ljusbakgrund'' för
-mätningen av absorption\cite{flour_spec}. Detta skulle man kunna
-kontrollera genom att göra en spektralmäning från sidan för att se vad
-ämnet självt emitterar för ljus -- denna mätning bör också ha
-föregåtts av en torrkörning för att kalibrera bakgrunden. 
+% Till att börja med så har vi det ''kända spektrumet''. Det man får
+% göra där är att göra en torrkörning\footnotemark av sin mätning för
+% att få hur det opåverkade spektrumet ser ut. Detta bör göras även om
+% man redan känner till spektrumet för att veta hur den opåverkade
+% intensiteten är och hur t.ex. provbehållare påverkar ljuset. 
+% \footnotetext{''Torrkörningen'' innebär inte nödvändigt vis att man
+%   gör en helt \emph{torr} mätning. Optimalt borde torrkörningen göras
+%   med enbart lösningsmedlet för att få bakgrundsreferensen. }
+
+% Sedan kan man köra en mätning med provet där man lyser lampan rakt
+% igenom provet och undersöker ljuset som kommer ut på andra sidan. Här
+% kan man dock behöva passa sig för ifall ens prov uppvisar fluorescens
+% och därmed kommer att resultera i en annan ''ljusbakgrund'' för
+% mätningen av absorption\cite{flour_spec}. Detta skulle man kunna
+% kontrollera genom att göra en spektralmäning från sidan för att se vad
+% ämnet självt emitterar för ljus -- denna mätning bör också ha
+% föregåtts av en torrkörning för att kalibrera bakgrunden. 
 
 
 
 
 \section{Resultat}
-Resultaten från en spektroskopisk mätning 
+Resultaten från de spektroskopiska mätningarna visas i form av
+spektrum från kvicksilverlampan och absorptionsmätningarna i
+Figurerna~\ref{fig:Hg_spektrum} respektive \ref{fig:absorption}.
+Vidare visas vilka våglänger och energier för de detekterade topparna
+i Hg-spektrumet i \tabref{tab:Hg_toppar}. 
+
+I \figref{fig:svartkropp} visas det uppmätta spektrat från en
+(halogen) glödlampa. \figref{fig:svartkropp} visar även
+intensitetsfördelningen från Plancks stråningslag. För att kompensera
+för skillnaden i känslighet hos spektrometern användes en
+korrektionsfakor i \figref{fig:Hg_spektrum}. Mer om hur
+korrektionsfakorn beräknades finns i \appendixname~\ref{sec:korr}.
+
+\todo{Vilka energinivåer finns det?}
 
 
-
-\newgeometry{top=3cm}%, bottom=3cm}
-\begin{sidewaysfigure}\centering
+\begin{sidewaysfigure}
+\centering
 \centerline{ %centrerar även större bilder
 \includegraphics[width=1.2\textwidth]{Hg_spektrum.pdf}
 }
@@ -263,7 +402,43 @@ Resultaten från en spektroskopisk mätning
 }
 \label{fig:Hg_spektrum} 
 \end{sidewaysfigure}
-\restoregeometry
+
+
+\begin{table}
+\centering
+\caption{Våglängder och energier för detekterade toppar (markerade med
+  blå trianglar i \figref{fig:Hg_spektrum}) i Hg-spektrumet. } 
+\label{tab:Hg_toppar}
+\begin{tabular}{|c|c|c|}\hline
+$\lambda$/[nm] & $\Delta E$/[eV]  &$\Delta E/[\unit[10^3]{cm^{-1}}$]
+\\ \hline
+364,94  	& 3,397 	& 27,40 \\ 
+365,38  	& 3,393 	& 27,37 \\ 
+366,19  	& 3,386 	& 27,31 \\ 
+390,50  	& 3,175 	& 25,61 \\ 
+404,69  	& 3,064 	& 24,71 \\ 
+407,62  	& 3,042 	& 24,53 \\ 
+433,75  	& 2,858 	& 23,05 \\ 
+434,50  	& 2,853 	& 23,01 \\ 
+435,62  	& 2,846 	& 22,96 \\ 
+444,44  	& 2,790 	& 22,50 \\ 
+546,00  	& 2,271 	& 18,32 \\ 
+554,44  	& 2,236 	& 18,04 \\ 
+576,94  	& 2,149 	& 17,33 \\ 
+578,94  	& 2,142 	& 17,27 \\ 
+690,94  	& 1,794 	& 14,47 \\ 
+730,31  	& 1,698 	& 13,69 \\ 
+731,25  	& 1,696 	& 13,68 \\ 
+732,81  	& 1,692 	& 13,65 \\ 
+781,44  	& 1,587 	& 12,80 \\ 
+809,44  	& 1,532 	& 12,35 \\ 
+815,94  	& 1,520 	& 12,26 \\ 
+872,00  	& 1,422 	& 11,47 \\ 
+983,88  	& 1,260 	& 10,16 \\ 
+\hline
+\end{tabular}
+\end{table}
+
 
 \begin{figure}\centering
 \centerline{ %centrerar även större bilder
@@ -284,7 +459,7 @@ Resultaten från en spektroskopisk mätning
 \caption{Absoprtionsspektrum från Rhodamin B och Kumarin
   307. Absorptionsspektrumen är framtagna som kvoten mellan
   intensiteten som lyste igenom provet mot intensiteten från samma
-  ljuskälla utan något prov. Spektrat frånglödlampan som användes som
+  ljuskälla utan något prov. Spektrat från glödlampan som användes som
   ljuskälla visas i \figref{fig:svartkropp}. 
 }
 \label{fig:absorption} 
@@ -292,42 +467,43 @@ Resultaten från en spektroskopisk mätning
 
 
 
-\section{Diskussion}
-I uppgiften med att identifiera energinivåerna i en atom nämndes att
-det är lätt att identifiera de olika energinivåernas inbördes avstånd,
-men att det kan bli svårt att bestämma de absoluta energierna. 
+ \section{Diskussion}
 
-Det är förvisso sant att det förmodligen inte kommer gå att bestämma
-de absoluta energierna, men även alla inbördes energiskillnader kan
-bli vanskliga att ta fram. Från spektroskopin kommer vi att få ut ett
-antal våglängder som svarar mot en viss energi\-skillnad mellan två
-nivåer. Här måste man nu vara vaksam. Det är ju oftast inte så att
-alla övergångar sker från en viss nivå till den lägsta möjliga nivån;
-vissa övergångar kan ju ske mellan två exciterade tillstånd. Man får
-alltså se om man kan passa ihop flera våglängder svarande mot
-övergångar dels från en exciterad nivå till grundnivån, dels från en
-exciterad nivå till en mellannivå och sen till grundnivån. Detta kan
-bli lite pilligt men inte omöjligt att göra. I övrigt upplevs
-bestämmadet av energinivåerna inte så svårt. 
+% I uppgiften med att identifiera energinivåerna i en atom nämndes att
+% det är lätt att identifiera de olika energinivåernas inbördes avstånd,
+% men att det kan bli svårt att bestämma de absoluta energierna. 
 
-För undersökningen av absorption i lösning har vi på förhand inte så
-mycket att utgå från. Vi har åtminstone att lösningsmedlet lär påverka
-energinivåerna i molekylen/jonen. Tidigare resultat för olika
-organiska färgämnen påvisar ett frekvensskift av absorptionstoppen
-beroende på hur polärt lösninsmedlet är \cite{Mannekutla2008}, men
-olika lösningmedel kan även starkt påverka absorptionens intensitet
-\cite{Homocianu2011}.
-I övrigt finns det annat som kan påverka absorptionsspektrat som
-exempelvis jonladdning om man undersöker metalljoner i lösning. 
+% Det är förvisso sant att det förmodligen inte kommer gå att bestämma
+% de absoluta energierna, men även alla inbördes energiskillnader kan
+% bli vanskliga att ta fram. Från spektroskopin kommer vi att få ut ett
+% antal våglängder som svarar mot en viss energi\-skillnad mellan två
+% nivåer. Här måste man nu vara vaksam. Det är ju oftast inte så att
+% alla övergångar sker från en viss nivå till den lägsta möjliga nivån;
+% vissa övergångar kan ju ske mellan två exciterade tillstånd. Man får
+% alltså se om man kan passa ihop flera våglängder svarande mot
+% övergångar dels från en exciterad nivå till grundnivån, dels från en
+% exciterad nivå till en mellannivå och sen till grundnivån. Detta kan
+% bli lite pilligt men inte omöjligt att göra. I övrigt upplevs
+% bestämmadet av energinivåerna inte så svårt. 
 
-Andra förväntade resultat för mätningen av laserfärgämnena är som
-nämnts tidigare att de kommer att sakna distinkta toppar och att de
-flourescerar med längre våglängder än det absorberar. 
+% För undersökningen av absorption i lösning har vi på förhand inte så
+% mycket att utgå från. Vi har åtminstone att lösningsmedlet lär påverka
+% energinivåerna i molekylen/jonen. Tidigare resultat för olika
+% organiska färgämnen påvisar ett frekvensskift av absorptionstoppen
+% beroende på hur polärt lösninsmedlet är \cite{Mannekutla2008}, men
+% olika lösningmedel kan även starkt påverka absorptionens intensitet
+% \cite{Homocianu2011}.
+% I övrigt finns det annat som kan påverka absorptionsspektrat som
+% exempelvis jonladdning om man undersöker metalljoner i lösning. 
+
+% Andra förväntade resultat för mätningen av laserfärgämnena är som
+% nämnts tidigare att de kommer att sakna distinkta toppar och att de
+% flourescerar med längre våglängder än det absorberar. 
 
 \subsection{Hg-spektrum}
 %Fattas toppar
 
-\subsubsection{För många toppar}
+\subsubsection{Missade toppar?}
 
 \subsection{Absorptionsspektrum}
 %Varför breda dalar och inte skarpa spikar?
@@ -357,6 +533,8 @@ flourescerar med längre våglängder än det absorberar.
 %Detta ser till att bilagorna kommer in snyggt i rapporten/förstudien
 \clearpage
 \appendix
+%\setcounter{section}{0}
+%\renewcommand{\thesection}{\Alph{section}}
 \setcounter{page}{1}
 \renewcommand*{\thepage}{A\arabic{page}}
 \phantomsection{}
@@ -364,21 +542,118 @@ flourescerar med längre våglängder än det absorberar.
 \addcontentsline{toc}{part}{\appendixname}
 \iflanguage{swedish}{\renewcommand{\appendixname}{Bilaga}}{}
 
-\section{Korrektion}
+
+\section{Intensitetskorrektion}\label{sec:korr}
+Som kan ses i \figref{fig:svartkropp} finns en diskrepans mellan
+formen på det uppmätta sprektrat och vad Plancks strålningslag
+förutspår. Detta leder till att topparnas höjd i
+\figref{fig:Hg_spektrum} inte motsvarar deras faktiska
+intensitet.\footnotemark{} Detta gör det svårt att jämföra dessa
+mätningarna mot andras resultat. För att ändå kunna göra sådana
+jämförelser beräknades korrektionsfaktor, $K$, så att
+\[
+I_\text{verklig}(\lambda) = I_\text{uppmätt}(\lambda) \cdot K(\lambda).
+\]
+\footnotetext{Den här effekten har däremot ingen påverkan på
+  resultatet för absorptionsspektrat, eftersom det som visas i
+  \figref{fig:absorption} är kvoten mellan intensiteterna med och utan
+  proverna. }
+
+%\subsection{Fotomultiplikatorn känslighet}
+Den huvudsakliga orsaken till det branta tappet i uppmätt intensitet
+för våglängder högre än ca 750\,nm beror med största sannolikhet på
+fotomultiplikatorns känslighetsområden. Eftersom fotomultiplikatorer
+bygger på den fotoelektriska effekten kommer det finnas en viss minsta
+fotonenergi som krävs för att slå ut en elektron i det första
+steget. Det är troligtvis det som orsakar nämnt tapp i
+känslighet. Vidare bör även mätningar över denna kritiska våglängd
+betraktas med försiktighet. Detta för att den fotoelektriska effekten,
+teoretiskt, inte över huvud taget borde fungera för fotoner med för
+lång våglängd. 
+
+
+\subsection{Temperaturkänslighet}
+Det räcker inte med att bara säga att man ska korrigera mätningarna
+så att de passar till Plancks strålingslag. Man måste dessutom ange
+till vilken temperatur av svartkroppsstrålning man ska anpassa. I det
+här fallet valdes att anpassa till 3200\,K. 
+
+I allmänhet hade en högre temperatur haft bättre passform till den
+uppmätta spektralkurvan. Men eftersom det var en glödlampa så ligger
+glödtrådens temperatur definitivt under 3700\,K, som är wolframs
+smältpunkt. 
+
+Så 3200\,K valdes lite godtyckligt, men det var den högsta troliga
+temperaturern för glödtråden. Dessutom är den exakta temperaturen att
+anpassa sin svartkroppsstrålning till inte så viktig. Detta syns i
+\figref{fig:svartkropp} där \emph{formen} på kurvorna till de olika
+temperaturerna varierar mycket lite mellan 2600--3200\,K. 
+
+
+\subsection{Polynomanpassning och resultat}
+Korrektionen som beräknas fram behöver kunna beräknas för en
+godtycklig våglängd i mätintervallet eftersom de exakta våglängderna
+som användes skiljer sig mellan mätningarna. Därför valdes att göra en
+polynomanpassning som visas i \figref{fig:korrektionsfaktor}. 
+
+I \figref{fig:korrektionsfaktor} visas de rena kvoterna och
+anpassningen i logaritmisk skala, vilket är lite missvisande ur ett
+numeriskt perspektiv. Det är nämligen mycket svårt att få med alla
+detaljer i de områden där kvoten är liten när variationerna i värde
+går över flera storleksordnigar. För att hantera detta problem gjordes
+polynomanpassningen till den logaritmerade kvoten: 
+\[
+P_\text{anpassad} (\lambda) 
+\approx \log(\frac{I_\text{Planck}}{I_\text{spektrometer}}).
+\]
+Detta leder alltså till att den faktiska korrektionsfaktorn blir
+\[
+K(\lambda) = \exp(P_\text{anpassad}(\lambda)),
+\]
+vilket är vad som visas i \figref{fig:korrektionsfaktor}.
+
+Att göra en polynomanpassning är alltid en avvägning mellan å ena
+sidan att få med så mycket detajer av kurvan som möjligt, och å andra
+sidan inte få ett överanpassat polynom. Eller med andra ord hur hög
+grad på polynomet man ska anpassa med. Överanpassade polynom får
+bättre passning till de punkter som används, men kan resultera i en
+sort oönskad svängning i ändpunkterna. 
+
+Polynomet som användes i anpassningen i den här rapporten var av
+grad~17. Gradtalet på anpassningspolynomet valdes genom att pröva sig
+fram tills det såg ut att passa. Man kan dock redan här se antydningar
+om överanpassning till höger i \figref{fig:korrektionsfaktor}, men de
+ansågs vara så små och i ett intervall av mindre vikt så inget gjordes
+åt dem. 
+
+Det slutglitiga resultatet av korrektionen visas i
+\figref{fig:anpassad_svartkropp}. Man kan se att den korrigerade datan
+föjer Plancks strålningslag mycket väl utom i några enstaka
+punkter. Det är dock inte så farligt, eftersom huvudsyftet med
+korrektionen var att grovt kunna jämföra intensiteten på de
+detekterade topparna med tidigare resultat. 
 
 \begin{figure}\centering
 \centerline{ %centrerar även större bilder
-\includegraphics[width=.9\textwidth]{korrektionsfaktor.pdf}
+\includegraphics[width=.8\textwidth]{korrektionsfaktor.pdf}
 }
-\caption{\label{fig:korrektionsfaktor} }
+\caption{Korrektionsfaktor från kvoten mellan uppmätta spektrumet från
+en glödlampa och från Plancks strålningslag. Här visas även
+polynomanpassningen som används i \figref{fig:Hg_spektrum}.}
+\label{fig:korrektionsfaktor}
 \end{figure}
 
 \begin{figure}\centering
 \centerline{ %centrerar även större bilder
-\includegraphics[width=.9\textwidth]{anpassad_svartkropp.pdf}
+\includegraphics[width=.8\textwidth]{anpassad_svartkropp.pdf}
 }
-\caption{\label{fig:anpassad_svartkropp} }
+\caption{Jämförelse mellan uppmätt spektrum från en glödlampa och
+  Plancks strålnigslag för en svartkropp på 3200\,K tillsammans med
+  det korrigerade sprektrat. }
+\label{fig:anpassad_svartkropp}
 \end{figure}
+
+
 
 
 \end{document}
@@ -395,17 +670,14 @@ flourescerar med längre våglängder än det absorberar.
 %\centerline{ %centrerar även större bilder
 %\includegraphics[width=1\textwidth]{filnamn.pdf}
 %}
-%\caption{\label{figuren} Perioden $T$ som funktion av pendellängden.}
+%\caption{}
+%\label{figuren}
 %\end{figure}
 
 %% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
 %\begin{figure}\centering
 %\input{filnamn.pdf_t}
-%\caption{\label{finafiguren} Perioden $T$ som funktion av
-%  pendellängden.}
+%\caption{}
+%\label{finafiguren}
 %\end{figure}
 
-%http://www.ict.kth.se/courses/IO2651/docs/ElectroOptics_paper.pdf
-
-%Förstärkare:
-%http://www.thinksrs.com/products/SR445A.htm
