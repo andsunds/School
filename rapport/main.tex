@@ -226,23 +226,54 @@ $L=0$. Detta gör att termer med $S=0$ och med $S=1$ kallas singeltt-
 respektive triplettillstånd. 
 
 \subsubsection{Spinn-bankoppling}
-Om man ska använda dess termer som svarar mot en uppsplittring av energinivåerna jämfört med enelektronsystem, så bör man ha koll på vilken typ av uppsplittring som sker. Det finns i huvud sak två olika sorteras uppsplittringar som motsvarar olika typer av kopplingar mellan elektronerna, LS- eller jj-koppling.
+Om man ska använda dess termer som svarar mot en uppsplittring av energinivåerna
+jämfört med enelektronsystem, så bör man ha koll på vilken typ av uppsplittring
+som sker. Det finns i huvud sak två olika sorteras uppsplittringar som motsvarar
+olika typer av kopplingar mellan elektronerna, LS- eller jj-koppling. 
 
-Båda hänger på den å kallade spinn-bankopplingen. Det viktigaste med spinn-bankopplingen är hur stor uppsplittringen blir. Detta för att kunna uppskatta ungefär hur tätt olika energinivåer ligger. Spinn-banuppsplittringen går som\cite{Bransden}
+Båda hänger på den å kallade spinn-bankopplingen. Det viktigaste med
+spinn-bankopplingen är hur stor uppsplittringen blir. Detta för att kunna
+uppskatta ungefär hur tätt olika energinivåer ligger. Spinn-banuppsplittringen
+går som\cite{Bransden} 
 \[
 \Delta E_\text{SB} \propto Z^4 \ev{\frac{1}{r^3}},
 \]
 där $Z$ är atomnumret och $r$ är elektronens avstånd från kärnan.
 
-Om Coulomb-växelverkan mellan valenselektronerna är stor jämfört med spinn-banväxelverkan (spinn -- S, banrörelsemängdsmoment -- L), så kan man börja med att räkna fram uppsplittringen från Coulomb-växelverkan och sedan lägga på sipnn-ban-växelverkan. Detta ger en uppsplittring i först $^{2S+1}L$ och sedan en mindre uppsplittring i $J$.
+I fallet med höga atomnummer och starkt positivt joniserade atomer, så är
+spinn-banväxelverkan mest framträdande. Då beräknas först
+spinn-banuppsplittringen och sedan läggs Coulomb-växelverkan in som en
+finare uppsplittring av energinivåerna. Detta kallas för
+jj-koppling. Man kan lätt se att det blir så för stora $Z$ eftersom
+spin-banväxelverkan går som $Z^4$, men för neutrala atomer blir den
+effektiva kärnladdningen mindre eftersom de inre elektronerna skärmar
+av kärnladdningen för valenselektronerna. 
 
-I fallet med höga atomnummer, $Z$ och starkt positivt joniserade atomer, så är jj-koppling mest framträdande. Detta eftersom spinn-ban-växelverkan går som $Z^4$, men för neutrala atomer blir den effektiva kärnladdningen mindre eftersom de inre elektronerna skärmar av kärnladdningen.
+Om Coulomb-växelverkan mellan valenselektronerna däremot är stor
+jämfört med spinn-banväxelverkan (spinn -- S, banrörelsemängdsmoment
+-- L), så kan man börja med att räkna fram uppsplittringen från
+Coulomb-växelverkan och sedan lägga på sipnn-ban-växelverkan. Detta
+ger en uppsplittring i först $^{2S+1}L$ och sedan en mindre
+uppsplittring i $J$. Detta kallas för LS-koppling. 
 
-\todo{Gäller LS-koppling?}
+I den här rapporten antas LS-koppling råda för
+kvicksilveratomerna. Detta är som nämnts tidigare en ganska bra
+approximation för neutrala atomer, men även det faktum att $\Delta
+E_\text{SB} \propto \ev{r^{-3}}$ bidrar till att göra
+spinn-banväxelverkan liten. 
 
-\subsubsection{Hunds regler och urvalsregel för dipolövergångar} 
+
+
+\subsubsection{Regler för underlättande av energinivåövergångsindentifiering} 
 \label{sec:regler}
-För att avgöra den inbördes ordningen mellan termer hörande till samma konfiguration finns de så kallade Hunds regler \cite{Bransden}.
+För att underlätta identifieringen av övergångar kan man försöka
+sortera upp energinivåerna efter vilken energi de har. Här kan man
+börja med att använda den så kallade \emph{Aufbau principen} eller
+\emph{Madelungregeln} som tumregel för i vilken ordning orbitalerna
+ska fyllas\cite{wiki:aufbau}.
+
+För att avgöra den inbördes ordningen mellan termer hörande till samma
+konfiguration finns de så kallade \emph{Hunds regler} \cite{Bransden}. 
 \begin{enumerate}
     \item Större $S$ ger lägre energi.
     \item För ett givet värde på $S$ så har den term med störst $L$ lägst energi
@@ -254,19 +285,18 @@ För att avgöra den inbördes ordningen mellan termer hörande till samma konfi
 \end{enumerate}
 
 Ett hjälpmedel i bestämmandet av energinivåerna är de så
-kallade urvalreglerna som bygger på hur en elektrisk dipol kan
+kallade \emph{urvalreglerna} som bygger på hur en elektrisk dipol kan
 växelverka med elektronerna. De bestämmer vilka övergångar mellan
 tillstånd som är tillåtna vid vid växelverkan (absorption eller
-emission) med fotoner. Den regel som är mest intressant i den här
-rapportens sammanhang är  
+emission) med fotoner. För LS-koppling är de regler som är mest intressant:  
 \begin{equation*}
 \begin{aligned}
-%\Delta L &= 0, \pm 1 \quad (L=0\to 0\text{, är inte tillåtet})\\
+\Delta L &= 0, \pm 1 \quad (L=0\to 0\text{, är inte tillåtet})\\
 \Delta J &= 0, \pm 1 \quad (J=0\to 0\text{, är inte tillåtet})
 \end{aligned}
 \end{equation*}
-som styr hur $J$ kan förändras vid dipolväxelverkan \cite{Bransden}.
-\todo{Vilka urvalsregler gäller egentligen?}
+som styr hur $L$ och $J$ kan förändras vid dipolväxelverkan \cite{Bransden}.
+
 
 \subsection{Tillämpning på kvicksilver (icke-joniserat)}
 Kvicksilvers grundkonfiguration är $6\mathrm{s}^2$, vilket betyder att det
@@ -282,17 +312,22 @@ energi på grund av att den andra elektronen blir hårdare bunden till
 kärnan, när en elektron redan exciterats. 
 
 I \tabref{tab:Hg_termer} visas några av kvicksilvers
-elektronkonfigurationer tillsammans med motsvarnde termer. Man kan då till att börja med försöka sortera dem 
+elektronkonfigurationer tillsammans med motsvarnde termer. Man kan då
+till att börja med försöka sortera dem med hjälp av bland annat Hunds
+regler. 
 
-Med hjälp av urvalsregeln ovan kan man utifrån dessa termer ta fram ett antal möjliga övergångar som förhoppningsvis kan paras ihop med observerade spektrallinjer. 
+Med hjälp av urvalsregeln ovan kan man utifrån dessa termer ta fram
+ett antal möjliga övergångar som förhoppningsvis kan paras ihop med
+observerade spektrallinjer. 
 
 
 \begin{table}
 \centering
 \caption{Tabell med de spektroskopiska termerna för några av de lägsta
 exciterade tillstånden för Hg-atomen. Anledningen till att det bara
-finns en $L$-term per konfiguration och $S$-värde är att den elektron som inte exciterats är i ett s-tillstånd, vilket motsvarar $l=0$ så det
-finns bara ett $L$-värde. }
+finns en $L$-term per konfiguration och $S$-värde är att den elektron
+som inte exciterats är i ett s-tillstånd, vilket motsvarar $l=0$ så
+det finns bara ett $L$-värde. }
 \label{tab:Hg_termer}
 \begin{tabular}{|l|l|l|}\hline
 Konfiguration & Singletter ($S=0$) & Tripletter ($S=1$)
@@ -336,7 +371,14 @@ strömmen. Nanoamperemetern konverterade strömmen till en spänning som
 kunde mätas av en digitalmultimeter, kopplad till styrprogrammet via
 GPIB. 
 
-Spektrometern hade inbyggd våglängdsavläsning, men den behövde kalibreras inför varje mätning. Det visade sig nämligen att den avlästa våglängden var förskjuten mot den verkliga våglängden. För att åtgärda detta användes en natriumlampa och natriumets två starka toppar vid 589,0\,nm och 589,6\,nm för att kalibrera den avlästa våglängden. Egentligen användes bara den ena toppen för att kalibrera, men man kunde utnyttja den kända våglängdssklinnaden mellan Na-topparna för att identifiera rätt toppar. 
+Spektrometern hade inbyggd våglängdsavläsning, men den behövde
+kalibreras inför varje mätning. Det visade sig nämligen att den
+avlästa våglängden var förskjuten mot den verkliga våglängden. För att
+åtgärda detta användes en natriumlampa och natriumets två starka
+toppar vid 589,0\,nm och 589,6\,nm för att kalibrera den avlästa
+våglängden. Egentligen användes bara den ena toppen för att kalibrera,
+men man kunde utnyttja den kända våglängdssklinnaden mellan
+Na-topparna för att identifiera rätt toppar. 
 
 \todo{Upplösning från spalten}
 
@@ -355,10 +397,15 @@ position användes ett tröskelvärde. Så varje gång intensiteten steg
 med minsta möjliga våglängdssteg. 
 
 Spaltbredden för det insläppta ljuset hölls dock hela tiden
-konstant på 0,10\,mm. Detta eftersom den, förutom våglängdsnoggrannheten, även styr intensiteten på det detekterade ljuset. Så för att inte få problem med olika intensitet i de olika mätlägena hölls spaltbredden konstant. 
+konstant på 0,10\,mm. Detta eftersom den, förutom
+våglängdsnoggrannheten, även styr intensiteten på det detekterade
+ljuset. Så för att inte få problem med olika intensitet i de olika
+mätlägena hölls spaltbredden konstant. 
 
 \subsubsection{Energinivåbestämming}
-Från det uppmätta spektrat kunde ett antal toppar identifieras. Givet dessa toppar kan man sedan identifiera ett antal olika energinivåskillnader. 
+Från det uppmätta spektrat kunde ett antal toppar identifieras. Givet
+dessa toppar kan man sedan identifiera ett antal olika
+energinivåskillnader. 
 \todo{Hur bestämma energinivå}
 
 \subsection{Absorption i lösningar}
@@ -369,14 +416,21 @@ ganska enkel: man lyser en lampa med känt spektrum på provet och ser
   sig från ursprungsspektrumet}. I verkligheten behöver man vara lite
 mer vaksam. 
 
-Man får börja med att ta upp ett bakgrundsspektrum från den lampa man använder för att lysa igenom provet. Därefter kan man göra sin mätning med provet på plats. Då bakgrundsspektrumet inte var en konstant intensitet i alla delar av våglängdsintervallet jämfördes de olika stekrumen genom att undersöka \emph{kvoten} mellan intensiteten med och utan prov.
+Man får börja med att ta upp ett bakgrundsspektrum från den lampa man
+använder för att lysa igenom provet. Därefter kan man göra sin mätning
+med provet på plats. Då bakgrundsspektrumet inte var en konstant
+intensitet i alla delar av våglängdsintervallet jämfördes de olika
+stekrumen genom att undersöka \emph{kvoten} mellan intensiteten med
+och utan prov. 
 
 
 \section{Resultat}
 Resultaten från de spektroskopiska mätningarna visas i form av
 spektrum från kvicksilverlampan och absorptionsmätningarna i
 Figurerna~\ref{fig:Hg_spektrum} respektive \ref{fig:absorption}.
-För en detaljerad lista över vilka våglängder och energier som  detekterades för topparna i Hg-spektrumet hänvisas läsaren till \tabref{tab:Hg_toppar} i Bilaga~\ref{sec:kompl}. 
+För en detaljerad lista över vilka våglängder och energier som
+detekterades för topparna i Hg-spektrumet hänvisas läsaren till
+\tabref{tab:Hg_toppar} i Bilaga~\ref{sec:kompl}.  
 
 I \figref{fig:svartkropp} visas det uppmätta spektrat från en
 (halogen) glödlampa. \figref{fig:svartkropp} visar även
