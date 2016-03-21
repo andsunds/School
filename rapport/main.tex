@@ -225,9 +225,34 @@ att det ger antalet olika termer med samma $L$ och $S$ -- om inte
 $L=0$. Detta gör att termer med $S=0$ och med $S=1$ kallas singeltt-
 respektive triplettillstånd. 
 
-\subsubsection{Urvalsregel för dipolövergångar} 
+\subsubsection{Spinn-bankoppling}
+Om man ska använda dess termer som svarar mot en uppsplittring av energinivåerna jämfört med enelektronsystem, så bör man ha koll på vilken typ av uppsplittring som sker. Det finns i huvud sak två olika sorteras uppsplittringar som motsvarar olika typer av kopplingar mellan elektronerna, LS- eller jj-koppling.
+
+Båda hänger på den å kallade spinn-bankopplingen. Det viktigaste med spinn-bankopplingen är hur stor uppsplittringen blir. Detta för att kunna uppskatta ungefär hur tätt olika energinivåer ligger. Spinn-banuppsplittringen går som\cite{Bransden}
+\[
+\Delta E_\text{SB} \propto Z^4 \ev{\frac{1}{r^3}},
+\]
+där $Z$ är atomnumret och $r$ är elektronens avstånd från kärnan.
+
+Om Coulomb-växelverkan mellan valenselektronerna är stor jämfört med spinn-banväxelverkan (spinn -- S, banrörelsemängdsmoment -- L), så kan man börja med att räkna fram uppsplittringen från Coulomb-växelverkan och sedan lägga på sipnn-ban-växelverkan. Detta ger en uppsplittring i först $^{2S+1}L$ och sedan en mindre uppsplittring i $J$.
+
+I fallet med höga atomnummer, $Z$ och starkt positivt joniserade atomer, så är jj-koppling mest framträdande. Detta eftersom spinn-ban-växelverkan går som $Z^4$, men för neutrala atomer blir den effektiva kärnladdningen mindre eftersom de inre elektronerna skärmar av kärnladdningen.
+
+\todo{Gäller LS-koppling?}
+
+\subsubsection{Hunds regler och urvalsregel för dipolövergångar} 
 \label{sec:regler}
-\todo{Hunds regler?}
+För att avgöra den inbördes ordningen mellan termer hörande till samma konfiguration finns de så kallade Hunds regler \cite{Bransden}.
+\begin{enumerate}
+    \item Större $S$ ger lägre energi.
+    \item För ett givet värde på $S$ så har den term med störst $L$ lägst energi
+    \item 
+    \begin{enumerate}
+        \item Mindre än halvfullt skal ger mins energi för \emph{minsta} $J$.
+        \item Mer än halvfullt skal ger mins energi för \emph{störst} $J$.
+    \end{enumerate}
+\end{enumerate}
+
 Ett hjälpmedel i bestämmandet av energinivåerna är de så
 kallade urvalreglerna som bygger på hur en elektrisk dipol kan
 växelverka med elektronerna. De bestämmer vilka övergångar mellan
@@ -236,7 +261,7 @@ emission) med fotoner. Den regel som är mest intressant i den här
 rapportens sammanhang är  
 \begin{equation*}
 \begin{aligned}
-%\Delta L &= 0, \pm 1\\
+%\Delta L &= 0, \pm 1 \quad (L=0\to 0\text{, är inte tillåtet})\\
 \Delta J &= 0, \pm 1 \quad (J=0\to 0\text{, är inte tillåtet})
 \end{aligned}
 \end{equation*}
@@ -257,15 +282,16 @@ energi på grund av att den andra elektronen blir hårdare bunden till
 kärnan, när en elektron redan exciterats. 
 
 I \tabref{tab:Hg_termer} visas några av kvicksilvers
-elektronkonfigurationer tillsammans med motsvarnde termer.
-\todo{Vad är dessa bra för?}
+elektronkonfigurationer tillsammans med motsvarnde termer. Man kan då till att börja med försöka sortera dem 
+
+Med hjälp av urvalsregeln ovan kan man utifrån dessa termer ta fram ett antal möjliga övergångar som förhoppningsvis kan paras ihop med observerade spektrallinjer. 
+
 
 \begin{table}
 \centering
 \caption{Tabell med de spektroskopiska termerna för några av de lägsta
 exciterade tillstånden för Hg-atomen. Anledningen till att det bara
-finns en term per konfiguration och $S$-värde är att den elektron som
-inte exciterats är i ett s-tillstånd, vilket motsvarar $l=0$ så det
+finns en $L$-term per konfiguration och $S$-värde är att den elektron som inte exciterats är i ett s-tillstånd, vilket motsvarar $l=0$ så det
 finns bara ett $L$-värde. }
 \label{tab:Hg_termer}
 \begin{tabular}{|l|l|l|}\hline
@@ -310,9 +336,11 @@ strömmen. Nanoamperemetern konverterade strömmen till en spänning som
 kunde mätas av en digitalmultimeter, kopplad till styrprogrammet via
 GPIB. 
 
-\todo{Kalibrering}
+Spektrometern hade inbyggd våglängdsavläsning, men den behövde kalibreras inför varje mätning. Det visade sig nämligen att den avlästa våglängden var förskjuten mot den verkliga våglängden. För att åtgärda detta användes en natriumlampa och natriumets två starka toppar vid 589,0\,nm och 589,6\,nm för att kalibrera den avlästa våglängden. Egentligen användes bara den ena toppen för att kalibrera, men man kunde utnyttja den kända våglängdssklinnaden mellan Na-topparna för att identifiera rätt toppar. 
 
-\subsection{Energinivåbestämmning}
+\todo{Upplösning från spalten}
+
+\subsection{Kvicksilverspektrum}
 För att få en så bra noggrannhet i energi som möjligt måste man
 maximera sin noggrannhet i våglängd. Spektrometern, Spex~270M, har en
 våglängdsupplösning på 0,1\,nm \cite{Spex270M}. Dock tar varje
@@ -327,44 +355,28 @@ position användes ett tröskelvärde. Så varje gång intensiteten steg
 med minsta möjliga våglängdssteg. 
 
 Spaltbredden för det insläppta ljuset hölls dock hela tiden
-konstant. Detta eftersom den, förutom våglängdsnoggrannheten, även
-styr intensiteten på det detekterade ljuset.
+konstant på 0,10\,mm. Detta eftersom den, förutom våglängdsnoggrannheten, även styr intensiteten på det detekterade ljuset. Så för att inte få problem med olika intensitet i de olika mätlägena hölls spaltbredden konstant. 
+
+\subsubsection{Energinivåbestämming}
+Från det uppmätta spektrat kunde ett antal toppar identifieras. Givet dessa toppar kan man sedan identifiera ett antal olika energinivåskillnader. 
+\todo{Hur bestämma energinivå}
 
 \subsection{Absorption i lösningar}
 
-% För att studera absorptionsspektrumet för ett prov är grundtanken
-% ganska enkel: man lyser en lampa med känt spektrum på provet och ser
-% \href{https://xkcd.com/1517/}{hur det transmitterade ljuset skiljer
-%   sig från ursprungsspektrumet}. I verkligheten behöver man vara lite
-% mer vaksam. 
+För att studera absorptionsspektrumet för ett prov är grundtanken
+ganska enkel: man lyser en lampa med känt spektrum på provet och ser
+\href{https://xkcd.com/1517/}{hur det transmitterade ljuset skiljer
+  sig från ursprungsspektrumet}. I verkligheten behöver man vara lite
+mer vaksam. 
 
-% Till att börja med så har vi det ''kända spektrumet''. Det man får
-% göra där är att göra en torrkörning\footnotemark av sin mätning för
-% att få hur det opåverkade spektrumet ser ut. Detta bör göras även om
-% man redan känner till spektrumet för att veta hur den opåverkade
-% intensiteten är och hur t.ex. provbehållare påverkar ljuset. 
-% \footnotetext{''Torrkörningen'' innebär inte nödvändigt vis att man
-%   gör en helt \emph{torr} mätning. Optimalt borde torrkörningen göras
-%   med enbart lösningsmedlet för att få bakgrundsreferensen. }
-
-% Sedan kan man köra en mätning med provet där man lyser lampan rakt
-% igenom provet och undersöker ljuset som kommer ut på andra sidan. Här
-% kan man dock behöva passa sig för ifall ens prov uppvisar fluorescens
-% och därmed kommer att resultera i en annan ''ljusbakgrund'' för
-% mätningen av absorption\cite{flour_spec}. Detta skulle man kunna
-% kontrollera genom att göra en spektralmäning från sidan för att se vad
-% ämnet självt emitterar för ljus -- denna mätning bör också ha
-% föregåtts av en torrkörning för att kalibrera bakgrunden. 
-
-
+Man får börja med att ta upp ett bakgrundsspektrum från den lampa man använder för att lysa igenom provet. Därefter kan man göra sin mätning med provet på plats. Då bakgrundsspektrumet inte var en konstant intensitet i alla delar av våglängdsintervallet jämfördes de olika stekrumen genom att undersöka \emph{kvoten} mellan intensiteten med och utan prov.
 
 
 \section{Resultat}
 Resultaten från de spektroskopiska mätningarna visas i form av
 spektrum från kvicksilverlampan och absorptionsmätningarna i
 Figurerna~\ref{fig:Hg_spektrum} respektive \ref{fig:absorption}.
-Vidare visas vilka våglänger och energier för de detekterade topparna
-i Hg-spektrumet i \tabref{tab:Hg_toppar}. 
+För en detaljerad lista över vilka våglängder och energier som  detekterades för topparna i Hg-spektrumet hänvisas läsaren till \tabref{tab:Hg_toppar} i Bilaga~\ref{sec:kompl}. 
 
 I \figref{fig:svartkropp} visas det uppmätta spektrat från en
 (halogen) glödlampa. \figref{fig:svartkropp} visar även
@@ -404,40 +416,6 @@ korrektionsfakorn beräknades finns i \appendixname~\ref{sec:korr}.
 \end{sidewaysfigure}
 
 
-\begin{table}
-\centering
-\caption{Våglängder och energier för detekterade toppar (markerade med
-  blå trianglar i \figref{fig:Hg_spektrum}) i Hg-spektrumet. } 
-\label{tab:Hg_toppar}
-\begin{tabular}{|c|c|c|}\hline
-$\lambda$/[nm] & $\Delta E$/[eV]  &$\Delta E/[\unit[10^3]{cm^{-1}}$]
-\\ \hline
-364,94  	& 3,397 	& 27,40 \\ 
-365,38  	& 3,393 	& 27,37 \\ 
-366,19  	& 3,386 	& 27,31 \\ 
-390,50  	& 3,175 	& 25,61 \\ 
-404,69  	& 3,064 	& 24,71 \\ 
-407,62  	& 3,042 	& 24,53 \\ 
-433,75  	& 2,858 	& 23,05 \\ 
-434,50  	& 2,853 	& 23,01 \\ 
-435,62  	& 2,846 	& 22,96 \\ 
-444,44  	& 2,790 	& 22,50 \\ 
-546,00  	& 2,271 	& 18,32 \\ 
-554,44  	& 2,236 	& 18,04 \\ 
-576,94  	& 2,149 	& 17,33 \\ 
-578,94  	& 2,142 	& 17,27 \\ 
-690,94  	& 1,794 	& 14,47 \\ 
-730,31  	& 1,698 	& 13,69 \\ 
-731,25  	& 1,696 	& 13,68 \\ 
-732,81  	& 1,692 	& 13,65 \\ 
-781,44  	& 1,587 	& 12,80 \\ 
-809,44  	& 1,532 	& 12,35 \\ 
-815,94  	& 1,520 	& 12,26 \\ 
-872,00  	& 1,422 	& 11,47 \\ 
-983,88  	& 1,260 	& 10,16 \\ 
-\hline
-\end{tabular}
-\end{table}
 
 
 \begin{figure}\centering
@@ -654,6 +632,43 @@ polynomanpassningen som används i \figref{fig:Hg_spektrum}.}
 \end{figure}
 
 
+\section{Kompletterande data}\label{sec:kompl}
+Här finns kompletterade, mer noggran presentation av data. I \tabref{tab:Hg_toppar} visas våglängder och motsvarande energier för topparna i \figref{fig:Hg_spektrum}
+
+\begin{table}
+\centering
+\caption{Våglängder och energier för detekterade toppar (markerade med
+  blå trianglar i \figref{fig:Hg_spektrum}) i Hg-spektrumet. } 
+\label{tab:Hg_toppar}
+\begin{tabular}{|c|c|c|}\hline
+$\lambda$/[nm] & $\Delta E$/[eV]  &$\Delta E/[\unit[10^3]{cm^{-1}}$]
+\\ \hline
+364,94  	& 3,397 	& 27,40 \\ 
+365,38  	& 3,393 	& 27,37 \\ 
+366,19  	& 3,386 	& 27,31 \\ 
+390,50  	& 3,175 	& 25,61 \\ 
+404,69  	& 3,064 	& 24,71 \\ 
+407,62  	& 3,042 	& 24,53 \\ 
+433,75  	& 2,858 	& 23,05 \\ 
+434,50  	& 2,853 	& 23,01 \\ 
+435,62  	& 2,846 	& 22,96 \\ 
+444,44  	& 2,790 	& 22,50 \\ 
+546,00  	& 2,271 	& 18,32 \\ 
+554,44  	& 2,236 	& 18,04 \\ 
+576,94  	& 2,149 	& 17,33 \\ 
+578,94  	& 2,142 	& 17,27 \\ 
+690,94  	& 1,794 	& 14,47 \\ 
+730,31  	& 1,698 	& 13,69 \\ 
+731,25  	& 1,696 	& 13,68 \\ 
+732,81  	& 1,692 	& 13,65 \\ 
+781,44  	& 1,587 	& 12,80 \\ 
+809,44  	& 1,532 	& 12,35 \\ 
+815,94  	& 1,520 	& 12,26 \\ 
+872,00  	& 1,422 	& 11,47 \\ 
+983,88  	& 1,260 	& 10,16 \\ 
+\hline
+\end{tabular}
+\end{table}
 
 
 \end{document}
