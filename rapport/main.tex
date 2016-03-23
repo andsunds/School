@@ -136,174 +136,6 @@ konstruera motsvarande energinivådiagram.
   aggregat) fick användas istället. }
 
 
-\subsection{Teoribakgrund}
-Elektroner är bundna till atomkärnan i väldefinierade kvanttillstånd
-kallade atomorbitaler. Varje sådant tillstånd har en väldefinierad
-energi. Elektroner kan röra sig mellan energinivåerna genom att
-absorbera eller emittera en foton med energi som matchar 
-energiskillnaden mellan atomens orbitaler. 
-
-En elektron kan ''hoppa'' till ett högre energitillstånd genom att
-absorbera en foton som motsvarar den energi som krävs för nå en högre
-energinivå. Man säger då att elektronen exciteras genom att
-\emph{absorbera} en foton. Vid övergång från ett högre till lägre
-energitillstånd \emph{emitteras} istället en foton med den frekvens
-som svarar mot energiskillnaden mellan energinivåerna. 
- 
-% Varje grundämne karakteriseras av en unik sammansättning av
-% elektroner och orbitaler som är bundna till kärnan i unika
-% konfigurationer. Detta leder till att energinivåerna är unika för
-% varje grundämne varför spektroskopi är ett kraftfullt verktyg för
-% ämnesbestämming. 
- 
-Genom att studera vilka ljusvåglängder som emitteras från ett prov
-kan alltså de olika energiskillnaderna bestämmas med hjälp av  
-\[\Delta E = h\nu=\frac{hc}{\lambda}.\]
-På så sätt kan alla energinivåer (med $\Delta E$ i de detekterbara
-våglängderna) bestämmas relativt varandra. 
-
-Att bestämma de absoluta
-energierna på varje nivå är däremot svårare. Det bästa man kan hoppas
-på är att bestämma de exciterade energinivåerna relativt
-grundtillståndet eller kanske rent av relativt första exciterade
-nivån. Det är nämligen troligt att grundtillståndet ligger betydligt
-lägre än de oftast mer tätliggande exciterade nivåerna. 
-
-\subsubsection{Kvanttal och elektronskal}
-Kvantmekaniskt beskrivs de olika orbitalerna av i huvudsak två
-kvanttal. Det ena kallas huvudkvanttalet, $n$, och styr vilka andra
-kvanttal som är tillåtna. Det andra är det azimutala kvanttalet, $l$,
-som beskriver banrörelsemängdsmomentet en elektron med det kvanttalet
-har. 
-
-Vidare finns även det magnetiska kvanttalet, $m$, och spinnkvanttalet,
-$s$. Som namnen antyder så kommer $m$ in i situationer med magnetfält,
-exempelvis Zeemaneffekten, och $s=\pm\nicefrac{1}{2}$ bestämmer
-elektronens spinn. 
-Av dess är det bara spinnkvanttalet som kommer vara av intresse för
-den här rapporten.  
-
-Med Paulis uteslutningsprincip kan man sedan bygga upp elektronskal
-som fylls upp med elektroner för större grundämnen. Skalen i dessa
-atomer fylls på nerifrån, i energi räknat. Detta leder till att det
-kommer finnas elektroner i fyllda och ofyllda skal. För (optisk)
-spektroskopi är de elektroner i fyllda skal ointressanta, då de är
-mycket hårdare bundna till kärnan än valenselektronerna, de yttersta
-elektronerna, som lättare kan exciteras. 
-
-
-
-\subsubsection{Spektroskopiska termer}\label{sec:term}
-Man brukar alltså bara intressera sig för valenselektronerna och deras
-tillstånd. Men när man har flera elektroner i en atom räcker det
-tyvärr inte att bara titta på valenselektronernas konfiguration. För att
-få det sammanlagda tillståndet, som även bero på hur de olika
-elektronerna Coulomb-växelvärkar med varandra, använder man sig av så
-kallade \emph{LS-termer} eller \emph{spektroskopiska termer}.
-
-Dessa spektroskopiska termer är uppbyggda enligt formen \cite{Bransden}
-\[
-^{2S+1}L_J,
-\]
-där $S$ är de möjliga kombinatinoer av de båda elektronernas
-spinnkvanttal, $L$ antar heltalsvärden från skillnaden till summan av
-de båda elektroneras azimutala kvanttal, det samma för $J$ fast med
-$L$ och $S$ istället. Detta kan för två valenselektroner sammanfattas
-med formlerna \cite{Bransden}
-\begin{equation*}
-\begin{aligned}
-L &= |l_1-l_2|, |l_1- l_2|+1, \ldots, |l_1+l_2|\\
-S &= |s_1-s_2|, |s_1- s_2|+1, \ldots, |s_1+s_2|\\
-J &= |L-S|, |L-S| +1, \ldots, |L+S|,
-\end{aligned}
-\end{equation*}
-där indexen betecknar att kvanttalen hör till respektive elektron.
-
-När termerna skrivs ut används den spektroskopiska beteckningen (S, P,
-D, o.s.v.) för $L$. Vidare använder man $2S+1$ i termen vilket är för
-att det ger antalet olika termer med samma $L$ och $S$ -- om inte
-$L=0$. Detta gör att termer med $S=0$ och med $S=1$ kallas singeltt-
-respektive triplettillstånd. 
-
-\subsubsection{Spinn-bankoppling}\label{sec:LS}
-Om man ska använda dess termer som svarar mot en uppsplittring av energinivåerna
-jämfört med enelektronsystem, så bör man ha koll på vilken typ av uppsplittring
-som sker. Det finns i huvud sak två olika sorteras uppsplittringar som motsvarar
-olika typer av kopplingar mellan elektronerna, LS- eller jj-koppling. 
-
-Båda hänger på den å kallade spinn-bankopplingen. Det viktigaste med
-spinn-bankopplingen är hur stor uppsplittringen blir. Detta för att kunna
-uppskatta ungefär hur tätt olika energinivåer ligger. Spinn-banuppsplittringen
-går som\cite{Bransden} 
-\[
-\Delta E_\text{SB} \propto Z^4 \ev{\frac{1}{r^3}},
-\]
-där $Z$ är atomnumret och $r$ är elektronens avstånd från kärnan.
-
-I fallet med höga atomnummer och starkt positivt joniserade atomer, så är
-spinn-banväxelverkan mest framträdande. Då beräknas först
-spinn-banuppsplittringen och sedan läggs Coulomb-växelverkan in som en
-finare uppsplittring av energinivåerna. Detta kallas för
-jj-koppling. Man kan lätt se att det blir så för stora $Z$ eftersom
-spin-banväxelverkan går som $Z^4$, men för neutrala atomer blir den
-effektiva kärnladdningen mindre eftersom de inre elektronerna skärmar
-av kärnladdningen för valenselektronerna. 
-
-Om Coulomb-växelverkan mellan valenselektronerna däremot är stor
-jämfört med spinn-banväxelverkan (spinn -- S, banrörelsemängdsmoment
--- L), så kan man börja med att räkna fram uppsplittringen från
-Coulomb-växelverkan och sedan lägga på sipnn-ban-växelverkan. Detta
-ger en uppsplittring i först $^{2S+1}L$ och sedan en mindre
-uppsplittring i $J$. Detta kallas för LS-koppling. 
-
-I den här rapporten antas LS-koppling råda för
-kvicksilveratomerna. Detta är som nämnts tidigare en ganska bra
-approximation för neutrala atomer, men även det faktum att $\Delta
-E_\text{SB} \propto \ev{r^{-3}}$ bidrar till att göra
-spinn-banväxelverkan liten. 
-
-
-
-\subsubsection{Regler för underlättande av energinivåövergångsindentifiering} 
-\label{sec:regler}
-För att underlätta identifieringen av övergångar kan man försöka
-sortera upp energinivåerna efter vilken energi de har. Här kan man
-börja med att använda den så kallade \emph{Aufbau principen} eller
-\emph{Madelungregeln} som tumregel för i vilken ordning orbitalerna
-ska fyllas\cite{wiki:aufbau}. Principen säger att de orbitaler med 
-lägst $n+l$ har lägst energi, med fördel för lägsta $n$ om $n+l$ är
-lika. Detta är bara en tumregel och ska inte tas stenhårt, men det 
-är ändå ett bra hjälpmedel. Dessutom gäller den bara för neutral 
-atomer i sitt grundtillstånd så egentligen gäller den inte i de här
-situationerna, men det är bara som sagt en tumregel.
-
-För att avgöra den inbördes ordningen mellan termer hörande till samma
-konfiguration finns de så kallade \emph{Hunds regler} \cite{Bransden}. 
-\begin{enumerate}
-    \item Större $S$ ger lägre energi.
-    \item För ett givet värde på $S$ så har den term med störst $L$ lägst energi
-    \item 
-    \begin{enumerate}
-        \item Mindre än halvfullt skal ger minst energi för \emph{minsta} $J$.
-        \item Mer än halvfullt skal ger minst energi för \emph{störst} $J$.
-    \end{enumerate}
-\end{enumerate}
-
-Ett hjälpmedel i bestämmandet av energinivåerna är de så
-kallade \emph{urvalsreglerna} som bygger på hur en elektrisk dipol kan
-växelverka med elektronerna. De bestämmer vilka övergångar mellan
-tillstånd som är tillåtna vid vid växelverkan (absorption eller
-emission) med fotoner. För LS-koppling är de regler som är mest intressanta:  
-\begin{equation*}
-\begin{aligned}
-\Delta L &= \pm 1 \\
-\Delta J &= 0, \pm 1 \quad (J=0\to 0\text{, är inte tillåtet})
-\end{aligned}
-\end{equation*}
-som styr hur $L$ och $J$ kan förändras vid dipolväxelverkan \cite{Bransden}. Egentligen kan även $\Delta L=0$, men den här rapporten kommer enbart  behandla tillstånd där en elektron har exciterats från grundtilståndet. Detta gör att eftersom den elektronen som exciterats måste ha ett $\Delta l_i =\pm 1$ 
-\cite{Bransden} så måste även $L$ ändras lika mycket.
-
-
 \subsection{Tillämpning på kvicksilver (icke-joniserat)}
 Kvicksilvers grundkonfiguration är $6\mathrm{s}^2$, vilket betyder att det
 finns två valenselektroner med $n=6$ och $l=0$ för de båda. Utav dessa
@@ -352,15 +184,60 @@ Konfiguration & Singletter ($S=0$) & Tripletter ($S=1$)
 \end{table}
 
 \subsubsection{Termerna ordnade i energiordning}
-Genom att, från avsnitt~\ref{sec:regler}, först utnyttja Madelungreglen och sedan Hunds regler kan man göra en uppskattning om i vilken ordning varje term kommer.
-Hela den uppskattade listan visas i Bilaga~\ref{sec:kompl}. 
+Genom att, från avsnitt~\ref{sec:regler}, först utnyttja
+Madelungreglen och sedan Hunds regler kan man göra en uppskattning om
+i vilken ordning varje term kommer. Hela den uppskattade listan visas
+i \tabref{tab:sorterade_termer}, i Bilaga~\ref{sec:kompl}.
 
-En sak som däremot kan sägas är att ju högre upp i energi man kommer desto närmare varandra kommer nivåerna. Alltså att det med största sannolikhet är större skillnad mellan grundtillståndet och första exciterade nivån än mellan resten av de exciterade nivåerna. 
+En sak som däremot kan sägas är att ju högre upp i energi man kommer
+desto närmare varandra kommer nivåerna. Alltså att det med största
+sannolikhet är större skillnad mellan grundtillståndet och första
+exciterade nivån än mellan resten av de exciterade nivåerna. 
 
-Vidare kan man från avsnitt~\ref{sec:LS} dra slutsatsen att spinn-banuppsplittringen är störst för de tillstånd som i medel befinner sig närmast kärnan. Vilket man kan anta är de med lägst (ouppsplittrad) energi och lägst $l$-kvanttal.\footnotemark{} Alltså att exempelvis $6^3\mathrm{P}_J$-tillstånden har betydligt större uppsplittring än $6^3\mathrm{D}_J$-tillstånden som både har högre energi och högre $l$-kvanttal. 
-%Eftersom $\Delta E_\text{SB} \propto\ev{r^{-3}}$ kan man nog till och med anta att uppsplittringen är obetdlig för $6^3\mathrm{D}_J$ jämfört med $6^3\mathrm{P}_J$
-\footnotetext{Det är mer komplicerat än bara lägst av det ena eller det andra. T.ex. styr $l$-värdet på en viss orbital starkt hur elektronens radiella sannolikhetsfördelning ser ut.}
+Vidare kan man från avsnitt~\ref{sec:LS} dra slutsatsen att
+spinn-banuppsplittringen är störst för de tillstånd som i medel
+befinner sig närmast kärnan. Vilket man kan anta är de med lägst
+(ouppsplittrad) energi och lägst $l$-kvanttal.\footnotemark{} Alltså
+att exempelvis $6^3\mathrm{P}_J$-tillstånden har betydligt större
+uppsplittring än $6^3\mathrm{D}_J$-tillstånden som både har högre
+energi och högre $l$-kvanttal.  
+%Eftersom $\Delta E_\text{SB} \propto\ev{r^{-3}}$ kan man nog till och
+%med anta att uppsplittringen är obetdlig för $6^3\mathrm{D}_J$
+%jämfört med $6^3\mathrm{P}_J$.
+\footnotetext{Det är mer komplicerat än bara lägst av det ena eller
+  det andra. T.ex. styr $l$-värdet på en viss orbital starkt hur
+  elektronens radiella sannolikhetsfördelning ser ut.} 
 
+
+\subsubsection{Att bestämma energinivåer från ett emissionsspektrum}
+\label{sec:teori_nivaer}
+Från det uppmätta spektrat kunde ett antal toppar identifieras. Givet
+dessa toppar kan man sedan direkt identifiera ett antal olika
+energinivåskillnader. 
+
+Därefter kan man utgå från en mer eller mindre ordnad lista,
+exempelvis \tabref{tab:sorterade_termer} i Bilaga~\ref{sec:kompl},
+över LS-termer och antaganden om spinn-banuppsplittringens storlek
+samt urvalsreglerna för att försöka hitta toppar eller grupper av
+toppar som hör till vissa grupper av energinivåer. 
+Tyvärr är enbart dessa regler och metoder inte tillräckliga för att
+entydigt bestämma energinivåerna. Men man kan åtminstone komma fram
+till och troliggöra några hypoteser. 
+
+\paragraph{Grundtillståndet}
+En sådan sak är huruvida ens mätningar innehåller övergångar ner till
+grundnivån. De största stegen i energi är, med strörsta sannolikhet,
+de som går ner till grundtillståndet. Vidare är
+$\mathrm{P}_1$-tillstånden de enda som har tillåtna övergångar till
+grundnivån ($6^1\mathrm{S}_0$).
+
+För varje $n$ finns det två $\mathrm{P}_1$-tillstånd -- 
+$(2S +1) = 1, 3$. De lägsta av dess är de för $n=6$. Nästa sådant
+tillstånd kommer ha en märkbart högre energi. Detta leder nu till
+slutsatsen att om man har med spektraltoppar från övergångar ner till
+grundnivån, så kommer sådana toppar att komma i \emph{par om två}
+(möjligtvis ganska brett emellan) och vara de med \emph{kortast
+  våglängd}. 
 
 
 \section{Metod}
@@ -392,8 +269,7 @@ våglängden. Egentligen användes bara den ena toppen för att kalibrera,
 men man kunde utnyttja den kända våglängdsskillnaden mellan
 Na-topparna för att identifiera rätt toppar. 
 
-
-
+\subsubsection{Upplösning i spektrometern}
 \todo{Upplösning från spalten}
 
 \subsection{Kvicksilverspektrum}
@@ -417,15 +293,19 @@ ljuset. Så för att inte få problem med olika intensitet i de olika
 mätlägena hölls spaltbredden konstant. 
 
 \subsubsection{Energinivåbestämming}
-Från det uppmätta spektrat kunde ett antal toppar identifieras. Givet
-dessa toppar kan man sedan direkt identifiera ett antal olika
-energinivåskillnader. 
+Man kan utgå från resonemangen i avsnitt~\ref{sec:teori_nivaer}. Det
+kan, med viss osäkerhet, ge några energivåer, men det är svårt att på
+det viset lyckas koppla alla topparna man finner med övergångar. Men
+det visade sig gå att göra ett par kvalificerade gissningar. 
 
-Därefter kan man utgå från en ordnad lista över LS-termer och
-antaganden om spinn-uppsplittringens storlek samt urvalsreglerna för
-att försöka hitta gemensamma toppar. 
+Det som presenterades i avsnitt~\ref{sec:teori_nivaer} är grunden till
+metodiken för att bestämma energinivåer utan någon tidigare vetskap om
+dem. Men i vårt fall finns nu för tiden redan mycket, känd data på
+energinivåernna till kvicksilver. Det går alltså att utgå från redan
+kända energinivåer och därifrån se om man kan matcha de uppmätta
+topparna med dessa nivåer. 
 
-\todo{Några enkla nivåer att plocka.}
+\todo{Anpassa till att vi redan har kända energinivåer.}
 
 \subsection{Absorption i lösningar}
 
@@ -458,21 +338,7 @@ för skillnaden i känslighet hos spektrometern användes en
 korrektionsfakor i \figref{fig:Hg_spektrum}. Mer om hur
 korrektionsfakorn beräknades finns i \appendixname~\ref{sec:korr}.
 
-\todo{Vilka energinivåer finns det?}
-
-\subsection{Laserfärgernas absorptionsspektrum tmp:(resultat och diskussion)}
-
-Figur \ref{fig:absorption} visar uppmätt absorptionsspektra för laserfärgämnena Rhodamin B och Kumarin 307. Vi påminner om viss försiktighet vid tolkning den högra delen av spektrat eftersom det är i detta område som fotomultiplikatorn var som minst känslig. Därför är resultatet från den vänstra delen av spektrat mest pålitligt. 
-
-Vi noterar att Rhodamin B genomgår excitation vid ett spektralband som sträcker sig från cirka 470 till 580 nm; med maximal excitation vid våglängden 542 nm. Åt höger i grafen finner vi ett excitationsmaximum vid 1084 nm i området av ett något bredare absorptionsband. Den andra absorptionsdalen ligger nästan dubbla våglängden från den första absorptionsdalen.
-
-Ämnet Kumarin 307, har från vänster i grafen ett absorptionsband mellan 330 och 470 nm med ett excitationsmaximum vid 426 nm; notera att den absorberade ljusintensiteten här är som störst bland de två ämnena. Det andra excitationsmaximat finns vid 876 nm, som också ligger nära dubbla våglängden från den första absorptionsdalen.
-
-I samtliga fall har vi att göra med breda spektrala absorptionsband. Förklaringen består delvis av att dessa laserfärgämnen utgörs av stora organiska molekyler vilka som följd har ett stort antal interna frihetsgrader i form av vibrations- och rotationstillstånd. Dessa breda absorptionsband och motsvarande emissionsband, som allmänt är förskjutna åt höger genom så kallat Stokes-skift, kännetecknar ämnen som är flourescenta. 
-
-Stokes-skiftet tycks förklara de högre trösklarna som syns efter varje absorptionsdal, där ljuset emitteras längs alla rumsliga riktningar och i våglängder som är en aning rödskiftade från absorptionsvåglängderna. Tröskeln för Kumarin 307 är högre än den för Rhodamin B och orsakas sannolikt av att Kumarin absorberar en större mängd energi än Rhodamin B.
-
-Om vi haft mer tid att studera dessa laserfärgämnen hade det varit intressant att undersöka ämnenas emissionsspektra samt hur känsliga ämnena är för fotoblekning. 
+\todo{Inte färdig!}
 
 \begin{sidewaysfigure}
 \centering
@@ -480,7 +346,8 @@ Om vi haft mer tid att studera dessa laserfärgämnen hade det varit intressant 
 \includegraphics[width=1.2\textwidth]{Hg_spektrum.pdf}
 }
 \caption{Spektrum uppmätt från kvicksilverlampa tillsammans med
-  utmarkerade spektraltoppar enligt NIST\cite{NIST_spectrum}. De två olika typerna av tabellerade data från NIST kallas ''persistent''
+  utmarkerade spektraltoppar enligt NIST\cite{NIST_spectrum}. De två
+  olika typerna av tabellerade data från NIST kallas ''persistent'' 
   respektive ''strong lines''; skillnaden mellan dessa två tabeller är
   att ''persistent lines'' är de spektrallinjer som syns tydligast
   då det även förekommer orenheter i provet som kan blockera vissa
@@ -497,20 +364,51 @@ Om vi haft mer tid att studera dessa laserfärgämnen hade det varit intressant 
   tröskelvärdet och alltså inte motsvarande värdet som ges på
   intensitetsaxeln. 
 }
-\label{fig:Hg_spektrum} 
+\label{fig:Hg_spektrum}
 \end{sidewaysfigure}
 
-\begin{figure}\centering
-\centerline{ %centrerar även större bilder
-\includegraphics[width=.9\textwidth]{svartkropp.pdf}
-}
-\caption{Uppmätt spektrum (heldraget) med spektrometern från en
-  glödlampa, jämfört med vad Plancks strålningslag ger (normerade
-  kurvor). Härifrån syns tydligt att spektrometern har ett ganska
-  snävt känslighetsområde där man helst inte bör gå mycket högre än
-  till ca 800\,nm våglängd.}
-\label{fig:svartkropp}
-\end{figure}
+\begin{table}
+\centering
+\caption{Lista över energinivåer som detekterats ur spektrumet i
+  \figref{fig:Hg_spektrum}. Notera här hur de flesta av de uppmätta
+  energinivåerna ligger inom den uppsakttade osäkerhetsgränsen, på
+  0,05\,\%, från de tabellerade värdet från NIST
+  \cite{NIST_levels}. Energierna är angivna relativt grundtillståndet
+  $6^1\mathrm{S}_0$. Eftersom inga övergångar till grundtillståndet
+  förekom i spektrat har $6^3\mathrm{P}_0$ i de egna mätningarna satts
+  till NIST:s värde. } 
+\label{tab:Hg_nivaer}
+\begin{tabular}{|c||c|c|c|c|c|}\cline{2-6}
+\multicolumn{1}{c|}{} &
+\multicolumn{2}{|c|}{Dessa mätningar} & 
+\multicolumn{2}{|c|}{Enligt NIST\cite{NIST_levels}} 
+& Avvikelse från NIST
+\\ \cline{2-6}
+\multicolumn{1}{c|}{} &
+\unit{eV} 
+& $\unit[10^3]{cm^{-1}}$ &\unit{eV} 
+& $\unit[10^3]{cm^{-1}}$
+& \%
+\\ \hline
+$6^1\mathrm{S}_0$ &0 & 0 & 0 & 0 & ---
+\\ \hline
+$6^3\mathrm{P}_0$ &4,667 & 37,65 & 4,667 & 37,64 & --- \\ \hline 
+$6^3\mathrm{P}_1$ &4,885 & 39,40 & 4,886 & 39,41 & 0,03 \\ \hline 
+$6^3\mathrm{P}_2$ &5,460 & 44,04 & 5,461 & 44,04 & 0,01 \\ \hline 
+$6^1\mathrm{P}_1$ &6,705 & 54,08 & 6,704 & 54,07 & 0,01 \\ \hline 
+$7^3\mathrm{S}_1$ &7,731 & 62,36 & 7,730 & 62,35 & 0,01 \\ \hline 
+$7^1\mathrm{S}_0$ &7,709 & 62,18 & 7,926 & 63,93 & 2,74 \\ \hline 
+($6^1\mathrm{D}_2$) &8,846 & 71,35 & 8,844 & 71,33 & 0,02 \\ \hline 
+$6^3\mathrm{D}_1$ &8,846 & 71,35 & 8,845 & 71,34 & 0,02 \\ \hline 
+$6^3\mathrm{D}_2$ &8,854 & 71,41 & 8,852 & 71,40 & 0,02 \\ \hline 
+$6^3\mathrm{D}_3$ &8,858 & 71,44 & 8,856 & 71,43 & 0,02 \\ \hline 
+$8^3\mathrm{P}_2$ &9,526 & 76,83 & 9,525 & 76,82 & 0,01 \\ \hline 
+$7^1\mathrm{D}_2$ &9,558 & 77,09 & 9,555 & 77,06 & 0,03 \\ \hline 
+$7^3\mathrm{D}_2$ &9,563 & 77,13 & 9,560 & 77,11 & 0,03 \\ \hline 
+$8^1\mathrm{D}_2$ &9,880 & 79,68 & 9,877 & 79,66 & 0,04 \\ \hline 
+%$11^1\mathrm{P}_1$ &9,945 & 80,21 &10,160 & 81,94 & 2,11 \\ \hline 
+\end{tabular}
+\end{table}
 
 \begin{figure}\centering
 \centerline{ %centrerar även större bilder
@@ -525,24 +423,104 @@ Om vi haft mer tid att studera dessa laserfärgämnen hade det varit intressant 
 \label{fig:absorption} 
 \end{figure}
 
- \section{Diskussion}
+
+
+
+
+\section{Diskussion}
 
 % I uppgiften med att identifiera energinivåerna i en atom nämndes att
 % det är lätt att identifiera de olika energinivåernas inbördes avstånd,
 % men att det kan bli svårt att bestämma de absoluta energierna. 
 
-% Det är förvisso sant att det förmodligen inte kommer gå att bestämma
-% de absoluta energierna, men även alla inbördes energiskillnader kan
-% bli vanskliga att ta fram. Från spektroskopin kommer vi att få ut ett
-% antal våglängder som svarar mot en viss energi\-skillnad mellan två
-% nivåer. Här måste man nu vara vaksam. Det är ju oftast inte så att
-% alla övergångar sker från en viss nivå till den lägsta möjliga nivån;
-% vissa övergångar kan ju ske mellan två exciterade tillstånd. Man får
-% alltså se om man kan passa ihop flera våglängder svarande mot
-% övergångar dels från en exciterad nivå till grundnivån, dels från en
-% exciterad nivå till en mellannivå och sen till grundnivån. Detta kan
-% bli lite pilligt men inte omöjligt att göra. I övrigt upplevs
-% bestämmadet av energinivåerna inte så svårt. 
+
+% Andra förväntade resultat för mätningen av laserfärgämnena är som
+% nämnts tidigare att de kommer att sakna distinkta toppar och att de
+% flourescerar med längre våglängder än det absorberar. 
+\subsection{Spektrometern}
+\todo{feluppskattning}
+\todo{enpunktskalibrering}
+
+\subsection{Kvicksilverspektrum}
+\todo{Ta bort ''Persistent lines'' i \figref{fig:Hg_spektrum}.}
+Man kan notera att de topparna med kortast våglängd i spektrumet kom i
+ett kluster om tre, tätt liggande toppar. Detta tyder enligt
+resonemanget i avsnitt~\ref{sec:teori_nivaer} på att spektrumet inte
+omfattde några övergångar till kvicksilvers grundnivå,
+$6^1\mathrm{S}_0$. Därför är det motiverat att anta att att alla andra
+detekterade övergångar har skett mellan nivåer ovanför (och till)
+$6^3\mathrm{P}_0$. 
+
+\subsubsection{Diskreptans i spektrumet}
+Som man kan se i \figref{fig:Hg_spektrum} så fattas många av topparna
+som NIST \cite{NIST_spectrum} anger borde finnas. Vidare stämmer inte
+intensiteterna helt överens med alla toppar. 
+
+\paragraph{Missade toppar}
+En möjlig anledning till att det fattas toppar kan ha varit att
+metoden som användes för att ta upp spektrumen gick med stora steg
+till en topp detekterades. Alltså att toppar missades för att de stora
+stegen missade dem. Men upptagningen av spektrumet gjordes flera
+gångar; vilket borde ha lett till att om det missades någon topp i
+någon av mätningarna, så borde den ha kunnat fångas upp av en annan
+mätning. 
+
+Vidare så sattes tröskelvärdet så lågt att allt som stack över
+bakgrundsbruset fångades upp. Och eftersom de starkare topparna blödde
+ut kring bottnen av toppen så att intensiteten var över tröskelvärdet
+under ett intervall som motsvarade flera av de längre stegen, borde
+alla toppar som fanns i lampan som användes ha detekterats. Det är
+alltså inte troligt att mätmetoden orsakade några bortfall av
+spektraltoppar. 
+
+\todo[inline]{Varför fattas toppar?}
+
+\paragraph{Intensiteterna}
+
+\subsection{Laserfärgernas absorptionsspektrum tmp:(resultat och diskussion)}
+%Varför breda dalar och inte skarpa spikar?
+%Varför har kumarin högre absorptionsförmåga?
+%varför går intensiteten upp efter absorptionsdalen?
+
+Figur \ref{fig:absorption} visar uppmätt absorptionsspektra för
+laserfärgämnena Rhodamin B och Kumarin~307. Vi påminner om viss
+försiktighet vid tolkning den högra delen av spektrat eftersom det är
+i detta område som fotomultiplikatorn var som minst känslig. Därför är
+resultatet från den vänstra delen av spektrat mest pålitligt. 
+
+Vi noterar att Rhodamin B genomgår excitation vid ett spektralband som
+sträcker sig från cirka 470 till 580 nm; med maximal excitation vid
+våglängden 542 nm. Åt höger i grafen finner vi ett excitationsmaximum
+vid 1084 nm i området av ett något bredare absorptionsband. Den andra
+absorptionsdalen ligger nästan dubbla våglängden från den första
+absorptionsdalen. 
+
+Ämnet Kumarin 307, har från vänster i grafen ett absorptionsband
+mellan 330 och 470 nm med ett excitationsmaximum vid 426 nm; notera
+att den absorberade ljusintensiteten här är som störst bland de två
+ämnena. Det andra excitationsmaximat finns vid 876 nm, som också
+ligger nära dubbla våglängden från den första absorptionsdalen. 
+
+I samtliga fall har vi att göra med breda spektrala
+absorptionsband. Förklaringen består delvis av att dessa
+laserfärgämnen utgörs av stora organiska molekyler vilka som följd har
+ett stort antal interna frihetsgrader i form av vibrations- och
+rotationstillstånd. Dessa breda absorptionsband och motsvarande
+emissionsband, som allmänt är förskjutna åt höger genom så kallat
+Stokes-skift, kännetecknar ämnen som är flourescenta. 
+
+Stokes-skiftet tycks förklara de högre trösklarna som syns efter varje
+absorptionsdal, där ljuset emitteras längs alla rumsliga riktningar
+och i våglängder som är en aning rödskiftade från
+absorptionsvåglängderna. Tröskeln för Kumarin 307 är högre än den för
+Rhodamin B och orsakas sannolikt av att Kumarin absorberar en större
+mängd energi än Rhodamin B. 
+
+Om vi haft mer tid att studera dessa laserfärgämnen hade det varit
+intressant att undersöka ämnenas emissionsspektra samt hur känsliga
+ämnena är för fotoblekning.
+
+
 
 % För undersökningen av absorption i lösning har vi på förhand inte så
 % mycket att utgå från. Vi har åtminstone att lösningsmedlet lär påverka
@@ -554,32 +532,24 @@ Om vi haft mer tid att studera dessa laserfärgämnen hade det varit intressant 
 % I övrigt finns det annat som kan påverka absorptionsspektrat som
 % exempelvis jonladdning om man undersöker metalljoner i lösning. 
 
-% Andra förväntade resultat för mätningen av laserfärgämnena är som
-% nämnts tidigare att de kommer att sakna distinkta toppar och att de
-% flourescerar med längre våglängder än det absorberar. 
-
-\subsection{Kvicksilverspektrum}
-%Fattas toppar
-
-
-
-\subsubsection{Missade toppar?}
-
-\subsection{Absorptionsspektrum}
-%Varför breda dalar och inte skarpa spikar?
-%Varför har kumarin högre absorptionsförmåga?
-%varför går intensiteten upp efter absorptionsdalen?
 
 
 \subsection{Upptagningen av spektrumen}
 %Enpunktskalibrering
 %Känslighetsområde
 
+
+
+\section{Slutsats/Sammanfattning}
+
+
+
+
+
 %För att lägga in en referens så ska den skrivas in enligt mönstret i filen referenser.bib
 %Använd \cite{} som vanligt för att använda referensen i texten.
 %Här är en bra länk om hur man ska göra:
 %https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management#biblatex
-
 \newpage
 \iflanguage{swedish}{\renewcommand{\refname}{Källförteckning}}{}
 \bibliographystyle{ieeetr}
@@ -597,6 +567,194 @@ Om vi haft mer tid att studera dessa laserfärgämnen hade det varit intressant 
 \iflanguage{swedish}{\renewcommand{\appendixname}{Bilagor}}{}
 \addcontentsline{toc}{part}{\appendixname}
 \iflanguage{swedish}{\renewcommand{\appendixname}{Bilaga}}{}
+
+
+
+
+\section{Teoribakgrund}
+I den här bilagan presenteras delar av den teori som behövs för att
+bestämma energinivåer på egen hand. I den här rapporten används dock
+en referenstabell för att passa in de toppar från det uppmätta
+spektrumet till redan tidigare bestämda energinivåer. Detta gör mycket
+av den här bilagan överflödig för rapportens skull, men om man inte
+hade haft några tidigare referenser måste man använda vad som
+presenteras här (och lite till).
+
+\subsection{Spektroskopins grundläggande idé}
+Elektroner är bundna till atomkärnan i väldefinierade kvanttillstånd
+kallade atomorbitaler. Varje sådant tillstånd har en väldefinierad
+energi. Elektroner kan röra sig mellan energinivåerna genom att
+absorbera eller emittera en foton med energi som matchar 
+energiskillnaden mellan atomens orbitaler. 
+
+En elektron kan ''hoppa'' till ett högre energitillstånd genom att
+absorbera en foton som motsvarar den energi som krävs för nå en högre
+energinivå. Man säger då att elektronen exciteras genom att
+\emph{absorbera} en foton. Vid övergång från ett högre till lägre
+energitillstånd \emph{emitteras} istället en foton med den frekvens
+som svarar mot energiskillnaden mellan energinivåerna. 
+ 
+% Varje grundämne karakteriseras av en unik sammansättning av
+% elektroner och orbitaler som är bundna till kärnan i unika
+% konfigurationer. Detta leder till att energinivåerna är unika för
+% varje grundämne varför spektroskopi är ett kraftfullt verktyg för
+% ämnesbestämming. 
+ 
+Genom att studera vilka ljusvåglängder som emitteras från ett prov
+kan alltså de olika energiskillnaderna bestämmas med hjälp av  
+\[\Delta E = h\nu=\frac{hc}{\lambda}.\]
+På så sätt kan alla energinivåer (med $\Delta E$ i de detekterbara
+våglängderna) bestämmas relativt varandra. 
+
+Att bestämma de absoluta
+energierna på varje nivå är däremot svårare. Det bästa man kan hoppas
+på är att bestämma de exciterade energinivåerna relativt
+grundtillståndet eller kanske rent av relativt första exciterade
+nivån. Det är nämligen troligt att grundtillståndet ligger betydligt
+lägre än de oftast mer tätliggande exciterade nivåerna. 
+
+\subsection{Kvanttal och elektronskal}
+Kvantmekaniskt beskrivs de olika orbitalerna av i huvudsak två
+kvanttal. Det ena kallas huvudkvanttalet, $n$, och styr vilka andra
+kvanttal som är tillåtna. Det andra är det azimutala kvanttalet, $l$,
+som beskriver banrörelsemängdsmomentet en elektron med det kvanttalet
+har. 
+
+Vidare finns även det magnetiska kvanttalet, $m$, och spinnkvanttalet,
+$s$. Som namnen antyder så kommer $m$ in i situationer med magnetfält,
+exempelvis Zeemaneffekten, och $s=\pm\nicefrac{1}{2}$ bestämmer
+elektronens spinn. 
+Av dess är det bara spinnkvanttalet som kommer vara av intresse för
+den här rapporten.  
+
+Med Paulis uteslutningsprincip kan man sedan bygga upp elektronskal
+som fylls upp med elektroner för större grundämnen. Skalen i dessa
+atomer fylls på nerifrån, i energi räknat. Detta leder till att det
+kommer finnas elektroner i fyllda och ofyllda skal. För (optisk)
+spektroskopi är de elektroner i fyllda skal ointressanta, då de är
+mycket hårdare bundna till kärnan än valenselektronerna, de yttersta
+elektronerna, som lättare kan exciteras. 
+
+
+
+\subsection{Spektroskopiska termer}\label{sec:term}
+Man brukar alltså bara intressera sig för valenselektronerna och deras
+tillstånd. Men när man har flera elektroner i en atom räcker det
+tyvärr inte att bara titta på valenselektronernas konfiguration. För att
+få det sammanlagda tillståndet, som även bero på hur de olika
+elektronerna Coulomb-växelvärkar med varandra, använder man sig av så
+kallade \emph{LS-termer} eller \emph{spektroskopiska termer}.
+
+Dessa spektroskopiska termer är uppbyggda enligt formen \cite{Bransden}
+\[
+^{2S+1}L_J,
+\]
+där $S$ är de möjliga kombinatinoer av de båda elektronernas
+spinnkvanttal, $L$ antar heltalsvärden från skillnaden till summan av
+de båda elektroneras azimutala kvanttal, det samma för $J$ fast med
+$L$ och $S$ istället. Detta kan för två valenselektroner sammanfattas
+med formlerna \cite{Bransden}
+\begin{equation*}
+\begin{aligned}
+L &= |l_1-l_2|, |l_1- l_2|+1, \ldots, |l_1+l_2|\\
+S &= |s_1-s_2|, |s_1- s_2|+1, \ldots, |s_1+s_2|\\
+J &= |L-S|, |L-S| +1, \ldots, |L+S|,
+\end{aligned}
+\end{equation*}
+där indexen betecknar att kvanttalen hör till respektive elektron.
+
+När termerna skrivs ut används den spektroskopiska beteckningen (S, P,
+D, o.s.v.) för $L$. Vidare använder man $2S+1$ i termen vilket är för
+att det ger antalet olika termer med samma $L$ och $S$ -- om inte
+$L=0$. Detta gör att termer med $S=0$ och med $S=1$ kallas singeltt-
+respektive triplettillstånd. 
+
+\subsection{Spinn-bankoppling}\label{sec:LS}
+Om man ska använda dess termer som svarar mot en uppsplittring av energinivåerna
+jämfört med enelektronsystem, så bör man ha koll på vilken typ av uppsplittring
+som sker. Det finns i huvud sak två olika sorteras uppsplittringar som motsvarar
+olika typer av kopplingar mellan elektronerna, LS- eller jj-koppling. 
+
+Båda hänger på den å kallade spinn-bankopplingen. Det viktigaste med
+spinn-bankopplingen är hur stor uppsplittringen blir. Detta för att kunna
+uppskatta ungefär hur tätt olika energinivåer ligger. Spinn-banuppsplittringen
+går som\cite{Bransden} 
+\[
+\Delta E_\text{SB} \propto Z^4 \ev{\frac{1}{r^3}},
+\]
+där $Z$ är atomnumret och $r$ är elektronens avstånd från kärnan.
+
+I fallet med höga atomnummer och starkt positivt joniserade atomer, så är
+spinn-banväxelverkan mest framträdande. Då beräknas först
+spinn-banuppsplittringen och sedan läggs Coulomb-växelverkan in som en
+finare uppsplittring av energinivåerna. Detta kallas för
+jj-koppling. Man kan lätt se att det blir så för stora $Z$ eftersom
+spin-banväxelverkan går som $Z^4$, men för neutrala atomer blir den
+effektiva kärnladdningen mindre eftersom de inre elektronerna skärmar
+av kärnladdningen för valenselektronerna. 
+
+Om Coulomb-växelverkan mellan valenselektronerna däremot är stor
+jämfört med spinn-banväxelverkan (spinn -- S, banrörelsemängdsmoment
+-- L), så kan man börja med att räkna fram uppsplittringen från
+Coulomb-växelverkan och sedan lägga på sipnn-ban-växelverkan. Detta
+ger en uppsplittring i först $^{2S+1}L$ och sedan en mindre
+uppsplittring i $J$. Detta kallas för LS-koppling. 
+
+I den här rapporten antas LS-koppling råda för
+kvicksilveratomerna. Detta är som nämnts tidigare en ganska bra
+approximation för neutrala atomer, men även det faktum att $\Delta
+E_\text{SB} \propto \ev{r^{-3}}$ bidrar till att göra
+spinn-banväxelverkan liten. 
+
+
+
+\subsection{Regler för underlättande av energinivåövergångsindentifiering} 
+\label{sec:regler}
+För att underlätta identifieringen av övergångar kan man försöka
+sortera upp energinivåerna efter vilken energi de har. Här kan man
+börja med att använda den så kallade \emph{Aufbau principen} eller
+\emph{Madelungregeln} som tumregel för i vilken ordning orbitalerna
+ska fyllas\cite{wiki:aufbau}. Principen säger att de orbitaler med 
+lägst $n+l$ har lägst energi, med fördel för lägsta $n$ om $n+l$ är
+lika. Detta är bara en tumregel och ska inte tas stenhårt, men det 
+är ändå ett bra hjälpmedel. Dessutom gäller den bara för neutral 
+atomer i sitt grundtillstånd så egentligen gäller den inte i de här
+situationerna, men det är bara som sagt en tumregel.
+
+För att avgöra den inbördes ordningen mellan termer hörande till samma
+konfiguration finns de så kallade \emph{Hunds regler} \cite{Bransden}. 
+\begin{enumerate}
+    \item Större $S$ ger lägre energi.
+    \item För ett givet värde på $S$ så har den term med störst $L$ lägst energi
+    \item 
+    \begin{enumerate}
+        \item Mindre än halvfullt skal ger minst energi för \emph{minsta} $J$.
+        \item Mer än halvfullt skal ger minst energi för \emph{störst} $J$.
+    \end{enumerate}
+\end{enumerate}
+
+Ett hjälpmedel i bestämmandet av energinivåerna är de så
+kallade \emph{urvalsreglerna} som bygger på hur en elektrisk dipol kan
+växelverka med elektronerna. De bestämmer vilka övergångar mellan
+tillstånd som är tillåtna vid vid växelverkan (absorption eller
+emission) med fotoner. För LS-koppling är de regler som är mest intressanta:  
+\begin{equation*}
+\begin{aligned}
+\Delta L &= \pm 1 \\
+\Delta J &= 0, \pm 1 \quad (J=0\to 0\text{, är inte tillåtet})
+\end{aligned}
+\end{equation*}
+som styr hur $L$ och $J$ kan förändras vid dipolväxelverkan
+\cite{Bransden}. Egentligen kan även $\Delta L=0$, men den här
+rapporten kommer enbart  behandla tillstånd där en elektron har
+exciterats från grundtilståndet. Detta gör att eftersom den elektronen
+som exciterats måste ha ett $\Delta l_i =\pm 1$ \cite{Bransden} så
+måste även $L$ ändras lika mycket. 
+
+
+
+
+
 
 
 \section{Intensitetskorrektion}\label{sec:korr}
@@ -626,6 +784,19 @@ känslighet. Vidare bör även mätningar över denna kritiska våglängd
 betraktas med försiktighet. Detta för att den fotoelektriska effekten,
 teoretiskt, inte över huvud taget borde fungera för fotoner med för
 lång våglängd. 
+
+
+\begin{figure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=.9\textwidth]{svartkropp.pdf}
+}
+\caption{Uppmätt spektrum (heldraget) med spektrometern från en
+  glödlampa, jämfört med vad Plancks strålningslag ger (normerade
+  kurvor). Härifrån syns tydligt att spektrometern har ett ganska
+  snävt känslighetsområde där man helst inte bör gå mycket högre än
+  till ca 800\,nm våglängd.}
+\label{fig:svartkropp}
+\end{figure}
 
 
 \subsection{Temperaturkänslighet}
@@ -754,40 +925,74 @@ $6^1\mathrm{S}_0$ & --- & --- & ---
 \end{table}
 
 
+
 \begin{table}
 \centering
 \caption{Våglängder och energier för detekterade toppar (markerade med
   blå trianglar i \figref{fig:Hg_spektrum}) i Hg-spektrumet. } 
 \label{tab:Hg_toppar}
-\begin{tabular}{|c|c|c|}\hline
+\begin{tabular}{|c|c|c||l|}\hline
 $\lambda$/[nm] & $\Delta E$/[eV]  &$\Delta E/[\unit[10^3]{cm^{-1}}$]
-\\ \hline
-364,94  	& 3,397 	& 27,40 \\ 
-365,38  	& 3,393 	& 27,37 \\ 
-366,19  	& 3,386 	& 27,31 \\ 
-390,50  	& 3,175 	& 25,61 \\ 
-404,69  	& 3,064 	& 24,71 \\ 
-407,62  	& 3,042 	& 24,53 \\ 
-433,75  	& 2,858 	& 23,05 \\ 
-434,50  	& 2,853 	& 23,01 \\ 
-435,62  	& 2,846 	& 22,96 \\ 
-444,44  	& 2,790 	& 22,50 \\ 
-546,00  	& 2,271 	& 18,32 \\ 
-554,44  	& 2,236 	& 18,04 \\ 
-576,94  	& 2,149 	& 17,33 \\ 
-578,94  	& 2,142 	& 17,27 \\ 
-690,94  	& 1,794 	& 14,47 \\ 
-730,31  	& 1,698 	& 13,69 \\ 
-731,25  	& 1,696 	& 13,68 \\ 
-732,81  	& 1,692 	& 13,65 \\ 
-781,44  	& 1,587 	& 12,80 \\ 
-809,44  	& 1,532 	& 12,35 \\ 
-815,94  	& 1,520 	& 12,26 \\ 
-872,00  	& 1,422 	& 11,47 \\ 
-983,88  	& 1,260 	& 10,16 \\ 
+& Övergång\\ \hline
+364,94  	& 3,397 	& 27,40
+& $6^3\mathrm{D}_3\to 6^3\mathrm{P}_2$ 
+\\ 
+365,38  	& 3,393 	& 27,37 
+& $6^3\mathrm{D}_2\to 6^3\mathrm{P}_2$ 
+\\ 
+366,19  	& 3,386 	& 27,31 
+& $6^3\mathrm{D}_1\to 6^3\mathrm{P}_2$ 
+  ($6^1\mathrm{D}_2\to 6^3\mathrm{P}_2$)
+\\ 
+390,50  	& 3,175 	& 25,61 
+& $8^1\mathrm{D}_2\to 6^1\mathrm{P}_1$ (?)
+\\ 
+404,69  	& 3,064 	& 24,71 
+& $7^3\mathrm{S}_1\to 6^3\mathrm{P}_0$ 
+\\ 
+407,62  	& 3,042 	& 24,53 
+& $7^1\mathrm{S}_0\to 6^3\mathrm{P}_0$ 
+\\ 
+433,75  	& 2,858 	& 23,05 
+& $7^3\mathrm{D}_2\to 6^1\mathrm{P}_1$ (?)
+\\ 
+434,50  	& 2,853 	& 23,01 
+& $7^1\mathrm{D}_2\to 6^1\mathrm{P}_1$ (?)
+\\ 
+435,62  	& 2,846 	& 22,96 
+& $7^3\mathrm{S}_1\to 6^3\mathrm{P}_2$ 
+\\ 
+444,44  	& 2,790 	& 22,50 
+& --- 
+\\ 
+546,00  	& 2,271 	& 18,32 
+& $7^3\mathrm{S}_1\to 6^3\mathrm{P}_2$ 
+\\ 
+554,44  	& 2,236 	& 18,04 
+& $11^1\mathrm{P}_1\to 7^1\mathrm{S}_0$ (?)
+\\ 
+576,94  	& 2,149 	& 17,33 
+& $6^3\mathrm{D}_2\to 6^1\mathrm{P}_1$ 
+\\ 
+578,94  	& 2,142 	& 17,27 
+& $6^3\mathrm{D}_1\to 6^1\mathrm{P}_1$ 
+  ($6^1\mathrm{D}_2\to 6^1\mathrm{P}_1$) 
+\\ 
+690,94  	& 1,794 	& 14,47 
+& $8^3\mathrm{P}_2\to 7^3\mathrm{S}_1$ 
+\\ 
+730,31  	& 1,698 	& 13,69 & --- \\ 
+731,25  	& 1,696 	& 13,68 & --- \\ 
+732,81  	& 1,692 	& 13,65 & --- \\ 
+781,44  	& 1,587 	& 12,80 & --- \\ 
+809,44  	& 1,532 	& 12,35 & --- \\ 
+815,94  	& 1,520 	& 12,26 & --- \\ 
+872,00  	& 1,422 	& 11,47 & --- \\ 
+983,88  	& 1,260 	& 10,16 & --- \\ 
 \hline
 \end{tabular}
 \end{table}
+
 
 
 \end{document}

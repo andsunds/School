@@ -84,18 +84,23 @@ ylabel('Intensitet /[godt. enhet]', 'interpreter', 'latex', 'fontsize', 20)
 xlabel('$\lambda$/[nm]', 'interpreter', 'latex', 'fontsize', 20)
 
 %% Energier
-clc;figure(2),clf; hold on
+clc;
+%figure(2),
+clf; 
+hold on
 load('constants.mat', 'h', 'c', 'e')
 
 E1=h*c./(L1(toppar)*1e-9)/e;
 E3=h*c./(L3*1e-9)/e;
 
+A=[L1(toppar), E1,   1e-5./(L1(toppar)*1e-9)];
+
 %repmat(E1, 1, length(E1)+1) - [zeros(size(E1)), E1.'.*ones(length(E1))]
 % v- nm,     v- eV,     v- 10^3 cm^-1
-str1=sprintf('%3.2f  \t& %3.3f \t& %3.2f \\\\ \n',[L1(toppar), E1,   1e-5./(L1(toppar)*1e-9)].')
+str1=sprintf('%3.2f  \t& %3.3f \t& %3.2f \\\\ \n',A.')
 
 
-
+save('toppar.mat', 'A', '-mat')
 
 
 xline=[-1 1];
@@ -112,6 +117,13 @@ set(gca, 'xtick', [], 'ytick', 1:.1:3.5, 'ylim', [0,3.5])
 
 % yyaxis right
 % set(gca, 'ydir', 'reverse','ytick', e*1e9/h/c./fliplr([0:0.5:3.5]),'ylim', [200, 1100])
+%%
+clc;clf;clear all
+
+load('constants.mat', 'h', 'c', 'e');
+
+data=load('Data/NIST_energylevels_Hg.tsv');
+[data-data(1),data]
 
 %% Kr-plot, egna mätningar
 clc;clear all; clf
