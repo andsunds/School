@@ -108,7 +108,7 @@
 Spektroskopi har varit, och är fortfarnde, ett kraftfullt verktyg för
 exempelvis kemister och astronomer för att avgöra vad för grundämnen
 och molekyler som undersöks. Tack vare att alla grundämnen har sina
-egna emissions- och absorptionsspektra har man utan att direkt
+egna emissions- och absorptionsspektra har man utan direkt
 tillgång till en substans kunnat avgöra dess innehåll genom dess
 spektrum. 
 
@@ -129,23 +129,28 @@ emissionspektrat för kvicksilver\footnotemark{} och
 absorptionsspektrumen från två laserfärgämne och utifrån det
 konstruera motsvarande energinivådiagram. 
 \footnotetext{Anmärkning: Det var egentligen sagt att vi skulle
-  undersöka Kadmium, men kadmiumlampan (eller aggregatet till den
+  undersöka kadmium, men kadmiumlampan (eller aggregatet till den
   typen av spektrallampor) gick sönder när mätningarna skulle
   starta. På grund av att laborationen utfördes över en helg gick det
   inte att ersätta spektrallampan, så en annan lampa (med ett annat
-  aggregat) fick användas istället. }
+  aggregat) fick användas istället. Så kvicksilver valdes som en
+  ersättare, utan egentlig eftertanke. }
 
 
 \subsection{Tillämpning på kvicksilver (icke-joniserat)}
-\todo{Kolla över hela avsnittet!}
+I fortsättningen av denna rapport förutsätts att läsaren är bekant med
+den kvantfysik och de vanligaste benämningar som förekommer i studiet
+av atomer. Om så inte är fallet finns en kortare genomgång om detta i
+Bilaga~\ref{sec:teori}.
+
 Kvicksilvers grundkonfiguration är $6\mathrm{s}^2$, vilket betyder att det
 finns två valenselektroner med $n=6$ och $l=0$ för de båda. Utav dessa
 två antas en av dem kunna exciteras till en högre energinivå (högre
 $l$ eller $n$), medan den andra stannar i 6s-tillståndet. 
 
-Detta är en rimlig approximation eftersom detta är de excitationerna
+Detta är en rimlig approximation eftersom det är de excitationerna
 med lägst energi. Om båda elektronerna hade exciterats till högre
-energier blir det dessutom inte bara en fördubbling av energi, för att
+energier blir det inte bara en fördubbling av energi för att
 det blir två elektroner på de högre nivåerna. Det blir dessutom extra
 energi på grund av att den andra elektronen blir hårdare bunden till
 kärnan, när en elektron redan exciterats. 
@@ -162,9 +167,8 @@ med observerade spektrallinjer.
 \centering
 \caption{Tabell med de spektroskopiska termerna för några av de lägsta
 exciterade tillstånden för Hg-atomen. Anledningen till att det bara
-finns en $L$-term per konfiguration och $S$-värde är att den elektron
-som inte exciterats är i ett s-tillstånd, vilket motsvarar $l=0$ så
-det finns bara ett $L$-värde. }
+finns en $L$-term per konfiguration  är att den elektron
+som inte exciterats är i ett s-tillstånd, vilket motsvarar $l=0$.}
 \label{tab:Hg_termer}
 \begin{tabular}{|l|l|l|}\hline
 Konfiguration & Singletter ($S=0$) & Tripletter ($S=1$)
@@ -205,7 +209,7 @@ energi och högre $l$-kvanttal.
 %Eftersom $\Delta E_\text{SB} \propto\ev{r^{-3}}$ kan man nog till och
 %med anta att uppsplittringen är obetdlig för $6^3\mathrm{D}_J$
 %jämfört med $6^3\mathrm{P}_J$.
-\footnotetext{Det är mer komplicerat än bara lägst av det ena eller
+\footnotetext{Det är mer komplicerat än bara ''lägst'' av det ena eller
   det andra. T.ex. styr $l$-värdet på en viss orbital starkt hur
   elektronens radiella sannolikhetsfördelning ser ut.} 
 
@@ -223,27 +227,29 @@ samt urvalsreglerna för att försöka hitta toppar eller grupper av
 toppar som hör till vissa grupper av energinivåer. 
 Tyvärr är enbart dessa regler och metoder inte tillräckliga för att
 entydigt bestämma energinivåerna. Men man kan åtminstone komma fram
-till och troliggöra några hypoteser. 
+till och troliggöra några hypoteser. Därefter får man konsultera
+referensverk med kända värden på energinivåerna, och utifrån detta
+anpassa de egna observationerna.
 
 \paragraph{Grundtillståndet}
-En sådan sak är huruvida ens mätningar innehåller övergångar ner till
-grundnivån. De största stegen i energi är, med strörsta sannolikhet,
-de som går ner till grundtillståndet. Vidare är
-$\mathrm{P}_1$-tillstånden de enda som har tillåtna övergångar till
-grundnivån ($6^1\mathrm{S}_0$).
+En sådan sak, som går att teoretiskt försöka förutsäga, är huruvida
+ens mätningar innehåller övergångar ner till grundnivån. De största
+stegen i energi är, med strörsta sannolikhet, de som går ner till
+grundtillståndet. Vidare är $\mathrm{P}_1$-tillstånden de enda som har
+tillåtna övergångar till grundnivån ($6^1\mathrm{S}_0$).
 
 För varje $n$ finns det två $\mathrm{P}_1$-tillstånd -- 
 $(2S +1) = 1, 3$. De lägsta av dess är de för $n=6$. Nästa sådant
 tillstånd kommer ha en märkbart högre energi. Detta leder nu till
 slutsatsen att om man har med spektraltoppar från övergångar ner till
-grundnivån, så kommer sådana toppar att komma i \emph{par om två}
-(möjligtvis ganska brett emellan) och vara de med \emph{kortast
-  våglängd}. 
+grundnivån, så kommer sådana toppar att vara de med \emph{kortast
+  våglängd} och komma i \emph{par om två} (möjligtvis ganska brett
+emellan).
 
 
 \section{Metod}
 Spektroskopi är en ganska rätt fram metod. Man har ett prov som man
-kan erhålla ljus ifrån. Ljuset leds sedan in i en monokromator och som
+kan erhålla ljus ifrån. Ljuset leds sedan in i en monokromator som
 plockar ut en specifik våglängd åt gången. Monokromatorn kan sedan
 variera vilken våglängd som plockas ut. Detta möjliggör mätning av
 ljusintensiteten för de våglängder man är intresserade utav. På så
@@ -253,31 +259,31 @@ sätt fås spektrumet fram.
 
 Spektrometern som användes, en Spex~270M \cite{Spex270M}, hade all
 nödvändig optisk mät- och styrutrusting inbyggt. Allt som behövde
-göras var att koppla upp den, via GPIB, till ett styrprogram i LabVIEW
+göras var att koppla upp den, via GPIB, till ett egenkonstruerat
+styrprogram i LabVIEW 
 för att styra våglängd från monokromatorn och spaltbredd för
 ljusinsläppet. Sedan kopplades signalen från fotomultiplikatorn i
 spektrometern till en nanoamperemeter som kunde detektera den svaga
 strömmen. Nanoamperemetern konverterade strömmen till en spänning som
-kunde mätas av en digitalmultimeter, kopplad till styrprogrammet via
+kunde mätas av en digital multimeter kopplad till styrprogrammet via
 GPIB. 
 
 Spektrometern hade inbyggd våglängdsavläsning, men den behövde
-kalibreras inför varje mätning. Det visade sig nämligen att den
-avlästa våglängden var förskjuten mot den verkliga våglängden. För att
-åtgärda detta användes en natriumlampa och natriumets två starka
-toppar vid 589,0\,nm och 589,6\,nm för att kalibrera den avlästa
-våglängden. Egentligen användes bara den ena toppen för att kalibrera,
-men man kunde utnyttja den kända våglängdsskillnaden mellan
-Na-topparna för att identifiera rätt toppar. 
+kalibreras inför varje mätning. För att göra detta användes en
+natriumlampa och natriumets två starka toppar vid 589,0\,nm och
+589,6\,nm för att kalibrera den avlästa våglängden. Egentligen
+användes bara den ena toppen för att kalibrera, men man kunde utnyttja
+den kända våglängdsskillnaden mellan Na-topparna för att identifiera
+rätt toppar. 
 
 
 \subsection{Kvicksilverspektrum}
 För att få en så bra noggrannhet i energi som möjligt måste man
 maximera sin noggrannhet i våglängd. Spektrometern hade en minsta
 våglängds\emph{steglängd}\footnotemark{} på 0,03\,nm. Dock tar varje
-intensitetsmätning på varje våglängd cirka 10\,s, vilket gör att en
+intensitetsmätning cirka 5\,s, vilket gör att en
 genomlöpng av hela mätintervallet på högta upplösningen skulle ta i
-storleksordningen tre timmar. 
+storleksordningen fem timmar. 
 \footnotetext{Ej att förväxla med våglängds\emph{upplösningen} i en
   mätning.} 
 
@@ -288,29 +294,28 @@ position användes ett tröskelvärde. Så varje gång intensiteten steg
 med minsta möjliga våglängdssteg. 
 
 Spaltbredden för det insläppta ljuset hölls dock hela tiden
-konstant på 0,10\,mm. Detta eftersom den, förutom
+konstant på (0,10\,mm). Detta eftersom den, förutom
 våglängdsnoggrannheten, även styr intensiteten på det detekterade
 ljuset. Så för att inte få problem med olika intensitet i de olika
 mätlägena hölls spaltbredden konstant. 
 
 \subsubsection{Energinivåbestämming}
-Man kan utgå från resonemangen i avsnitt~\ref{sec:teori_nivaer}. Det
-kan, med viss osäkerhet, ge några energivåer, men det är svårt att på
-det viset lyckas koppla alla topparna man finner med övergångar. Men
-det visade sig gå att göra ett par kvalificerade gissningar. 
+För att bestämma energinivåerna kan man, till att börja med, utgå från
+resonemangen i avsnitt~\ref{sec:teori_nivaer}. Det kan, med viss
+osäkerhet, ge några energivåer, men det är svårt att på det viset
+lyckas koppla alla topparna man finner med övergångar. 
 
 Det som presenterades i avsnitt~\ref{sec:teori_nivaer} är grunden till
 metodiken för att bestämma energinivåer utan någon tidigare vetskap om
-dem. Men i vårt fall finns nu för tiden redan mycket, känd data på
+dem. Men i vårt fall finns nuförtiden redan känd data på
 energinivåernna till kvicksilver. Det går alltså att utgå från redan
 kända energinivåer och därifrån se om man kan matcha de uppmätta
 topparna med dessa nivåer. 
 
-\todo{Anpassa till att vi redan har kända energinivåer.}
 
 \subsection{Absorption i lösningar}
 
-För att studera absorptionsspektrumet för ett prov är grundtanken
+För att studera absorptionsspektret från ett prov är grundtanken
 ganska enkel: man lyser en lampa med känt spektrum på provet och ser
 \href{https://xkcd.com/1517/}{hur det transmitterade ljuset skiljer
   sig från ursprungsspektrumet}. I verkligheten behöver man vara lite
@@ -320,28 +325,30 @@ Man får börja med att ta upp ett bakgrundsspektrum från den lampa man
 använder för att lysa igenom provet. Därefter kan man göra sin mätning
 med provet på plats. Då bakgrundsspektrumet inte var en konstant
 intensitet i alla delar av våglängdsintervallet jämfördes de olika
-spektrumen genom att undersöka \emph{kvoten} mellan intensiteten med
-och utan prov. 
+spektrumen genom att undersöka \emph{kvoten} mellan intensiteterna med
+och utan prov. Dessutom gjordes fem svep genom hela spektrumet för
+varje prov, för att kunna ta ett medelvärde och minska bruset i datan. 
 
 
 \section{Resultat}
 Resultaten från de spektroskopiska mätningarna visas i form av
 spektrum från kvicksilverlampan och absorptionsmätningarna i
-Figurerna~\ref{fig:Hg_spektrum} respektive \ref{fig:absorption}.
+figurerna~\ref{fig:Hg_spektrum} respektive \ref{fig:absorption}.
 
 I \figref{fig:Hg_spektrum} finns dels det uppmätta spektrumet från
 spektrallampan, dels vilka toppar som borde finnas enligt en lista
-från NIST~\cite{NIST_spectrum}, dels vilka toppar dom detekterats. Man
-kan notera att det som kan se ut som en topp i bilden faktiskt är
-flera vilket syns bland de utmarkerade topparna. 
+från NIST~\cite{NIST_spectrum}, dels vilka toppar som detekterats. Man
+kan notera att det som kan se ut som \emph{en} topp i bilden faktiskt
+är flera vilket syns bland de utmarkerade topparna.
 
 Från spektrallinjerna i \figref{fig:Hg_spektrum} kan man sedan
 rekonstruera energinivåerna med hjälp från redan känd data om
-kvicksilvers energinivåer~\cite{NIST_levels}. REsultatet från denna
-rekonstruktion visaas i \tabref{tab:Hg_nivaer}.
-För en detaljerad lista över vilka våglängder och energier som
-detekterades för topparna i kvicksilverspektrumet hänvisas läsaren
-till \tabref{tab:Hg_toppar} i Bilaga~\ref{sec:kompl}. 
+kvicksilvers energinivåer~\cite{NIST_levels}. Resultatet från denna
+rekonstruktion visas i \tabref{tab:Hg_nivaer}.
+För en detaljerad lista över vilka våglängder och energier, tillsammans
+med motsvarande övergång, som detekterades för topparna i
+kvicksilverspektrumet hänvisas läsaren till \tabref{tab:Hg_toppar} i
+Bilaga~\ref{sec:kompl}. 
 
 
 %% I \figref{fig:svartkropp} visas det uppmätta spektrat från en
@@ -355,9 +362,20 @@ I \figref{fig:absorption} visas absortionsspektrumen från rohdamin~B
 och kumarin~307 i form av kvoten mellan den absorberade intensiteten
 och bakgrundsintensiteten. Man kan se två absortionsdalar för båda
 ämnena. En annan sak att notera 
-\todo{Noteras det i diskussionen?} 
 är att åtminstone för kumarinet kan man märka en liten ökning i
 intensitet vid våglängderna närmas efter en absorptionsdal. 
+
+Vidare syns att rhodamin~B exciteras i ett spektralband som
+sträcker sig från cirka 470 till 580\,nm; med maximal
+excitation/absoption vid ungefär 540\,nm. Åt höger i grafen finns ett
+andra excitationsmaximum vid cirka 1080\,nm i området av ett något
+bredare absorptionsband. Notera hur den andra dalen verkar ligga vid
+ungefär dubbla våglängden jämfört med den första. 
+
+Kumarin~307 har från vänster i grafen ett absorptionsband
+mellan 330 och 470\,nm med ett excitationsmaximum vid ungefär 430\,nm. Det
+andra excitationsmaximat finns vid cirka 880\,nm, som också ligger
+nära dubbla våglängden från den första absorptionsdalen. 
 
 
 \begin{sidewaysfigure}
@@ -373,10 +391,10 @@ intensitet vid våglängderna närmas efter en absorptionsdal.
   steglängden i våglängd, och den andra tröskeln styr när korrektionen
   ska användas. Korrektionen används bara för de toppar som når över
   den andra tröskeln för att inte den bredare basen på en topp ska
-  orsaka att hela toppen ser allt för bred ut. Notera att intensiteten
+  orsaka att hela toppen ser onaturligt bred ut. Notera att intensiteten
   är ritad med log-skala, vilket gör att korrektionsfaktorn effektivt
   adderas till toppens höjd varför korrektionen är utritad relativt
-  tröskelvärdet och alltså inte motsvarande värdet som ges på
+  tröskelvärdet och alltså inte spegler värdet som ges på
   intensitetsaxeln. 
 }
 \label{fig:Hg_spektrum}
@@ -407,7 +425,7 @@ intensitet vid våglängderna närmas efter en absorptionsdal.
 \\ \hline
 $6^1\mathrm{S}_0$ &0 & 0 & 0 & 0 & ---
 \\ \hline
-$6^3\mathrm{P}_0$ &4,667 & 37,65 & 4,667 & 37,64 & --- \\ \hline 
+$6^3\mathrm{P}_0$ &4,667 & 37,64 & 4,667 & 37,64 & --- \\ \hline 
 $6^3\mathrm{P}_1$ &4,885 & 39,40 & 4,886 & 39,41 & 0,03 \\ \hline 
 $6^3\mathrm{P}_2$ &5,460 & 44,04 & 5,461 & 44,04 & 0,01 \\ \hline 
 $6^1\mathrm{P}_1$ &6,705 & 54,08 & 6,704 & 54,07 & 0,01 \\ \hline 
@@ -433,7 +451,7 @@ $8^1\mathrm{D}_2$ &9,880 & 79,68 & 9,877 & 79,66 & 0,04 \\ \hline
   307. Absorptionsspektrumen är framtagna som kvoten mellan
   intensiteten som lyste igenom provet mot intensiteten från samma
   ljuskälla utan något prov. Spektrat från glödlampan som användes som
-  ljuskälla visas i \figref{fig:svartkropp}. 
+  ljuskälla visas i \figref{fig:svartkropp} i Bilaga~\ref{sec:korr}.
 }
 \label{fig:absorption} 
 \end{figure}
@@ -444,7 +462,7 @@ $8^1\mathrm{D}_2$ &9,880 & 79,68 & 9,877 & 79,66 & 0,04 \\ \hline
 
 \section{Diskussion}
 Överlag verkar laborationen vara ganska lyckad. Mycket av resultaten
-stämmer överens med tidigare kända värden,
+stämmer överens med tidigare kända värden.
 % I uppgiften med att identifiera energinivåerna i en atom nämndes att
 % det är lätt att identifiera de olika energinivåernas inbördes avstånd,
 % men att det kan bli svårt att bestämma de absoluta energierna. 
@@ -456,22 +474,25 @@ stämmer överens med tidigare kända värden,
 \subsection{Spektrometern}
 Spektrometern var som sagts tidigare en halvautomatisk maskin som
 kunde styras tämligen enkelt från ett LabVIEW-program. Man bör i
-sådana sammanhang försöka undersöka vad för bergränsningar som finns. 
+sådana sammanhang vara extra försiktig och inte förledas att tro på
+allt maskinen ger ifrån sig. Man ska även själv försöka undersöka vad
+för bergränsningar som finns. 
 
 \subsubsection{Upplösning i spektrometern}
 \label{sec:diskussion_upplosning}
-Spektrometern, Spex~270M, har en elingt tillverkaren \cite{Spex270M}
-våglängdsupplösning på $\Delta\lambda=\unit[0,1]{nm}$. Men den faktiska upplösningen beror i
-högsta grad på vilka inställningar man använder; i synnerhet beror
-upplösningen på spaltbredden för det insläppta ljuset. 
+Spektrometern, Spex~270M, har en enligt tillverkaren \cite{Spex270M}
+en våglängdsupplösning på $\Delta\lambda=\unit[0,1]{nm}$. Men den
+faktiska upplösningen beror i högsta grad på vilka inställningar man
+använder; i synnerhet beror upplösningen på spaltbredden för det
+insläppta ljuset. 
 
-I mätningarna på kvicksilverspektrat, där våglängds upplösning är av
+I mätningarna på kvicksilverspektrat, där våglängdsupplösning är av
 stor betydelse, användes därför den minsta spaltbredd som tilläts av
 spektrometern. Det är alltså rimligt att anta att våglängsupplösningen
 i mätningarna var samma som tillverkaren angav.
 
-För att relatera detta till upplösning i energinivåerna kan vara mer
-intressant att studera den relativa upplösningen,
+För att relatera detta till upplösning i energinivåerna\fotnotemark{}
+kan vara mer intressant att studera den relativa upplösningen,
 $\Delta\lambda/\lambda$. Den kommer att variera för olika våglängder,
 men man får en övre begränsning genom att ta den minsta våglängd som
 man använder. Detta ger, med lite extra säkerhetsmarginal, att 
@@ -480,14 +501,17 @@ man använder. Detta ger, med lite extra säkerhetsmarginal, att
 \]
 Detta kan, och görs i avsnitt~\ref{sec:diskussion_energi}, jämföras
 med avvikelserna i \tabref{tab:Hg_nivaer}.
+\footnotetext{Eftersom $\delta E\propto \lambda^{-1}$ blir
+  $\frac{\Delta(\delta E)}{\delta E} = \frac{\Delta\lambda}{\lambda}$.}
+
 
 \subsubsection{Våglängdskalibreringen}
-En annan möjligorsak till fel i kvicksilverspektrat är
+En annan möjlig orsak till fel i kvicksilverspektrat är
 våglängdskalibreringen. Den gjordes bara mot en punkt
-(Na-dubbletten). Det kan hända att spektrometern är byggd så bra att
-det bara behövs. Men i princip hade det varit skönt om man kunde
+(i Na-dubbletten). Det kan hända att spektrometern är byggd så bra att
+det bara behövs. Men i princip hade det varit bättre om man kunde
 kalibrera spektrometern mot åtminstone två punkter, för att upptäcka
-om våglängdsstegen, som spektrometern tar, faktiskt motsvarar samma
+om våglängdsstegen som spektrometern tar, faktiskt motsvarar samma
 steg i verklig våglängd. 
 
 Man kan dock indirekt se den goda överensstämmelsen med NITS:s data, i
@@ -499,19 +523,19 @@ var tillräcklig.
 Hittills har bara aspekter av spektrometern som berör
 kvicksilvermätningar påtalats, men för absorptionsspektrumet kan det
 vara intressant att studera hur väl spektrometern mäter inensitet. Här
-kommer vi nu gå igenom några spakter, men i Bilaga~\ref{sec:korr}
-finns vidare material på detta område. 
+kommer vi nu gå igenom några aspekter rörande intensiteterna. I
+Bilaga~\ref{sec:korr} finns ytterligare material på detta område. 
 
-Jämför man spektrat det uppmätta och det teoretiska spektrat
+Jämför man det uppmätta och det teoretiska spektrat
 från en glödlampa finner man att spektrometern har en högsta
 känslighet ungefär i våglängdsområdet 400--800\,nm. Detta kan ses i
 figurerna~\ref{fig:svartkropp} och \ref{fig:korrektionsfaktor} i
 Bilaga~\ref{sec:korr}. För att kompensera för den varierande
-känsligheten beräknades en korrektionsfaktor som varierade mellan
-1--100. 
+känsligheten beräknades en korrektionsfaktor som varierade från 1 upp
+till omkring 100.
 Detta föranleder bland annat att mätningar
 utanför detta område bör betraktas med försiktighet -- en topp där kan
-bara ha varit brus som gick över tröskeln och blev förstorat av
+ha varit brus som gick över tröskeln och blev förstorat av
 korrektionsfaktorn. 
 
 Den huvudsakliga orsaken till det branta tappet i uppmätt intensitet
@@ -520,7 +544,9 @@ fotomultiplikatorns känslighetsområden. Eftersom fotomultiplikatorer
 bygger på den fotoelektriska effekten kommer det finnas en viss minsta
 fotonenergi som krävs för att slå ut en elektron i det första
 steget. Det är troligtvis det som orsakar nämnt tapp i
-känslighet. 
+känslighet för långa våglängder. Att känsligheten går ner i den
+kortvågiga ändan är däremot märkligare och kräver en annan
+förklaring. 
 
 I fallet med mätningarna på absorptionsspektrat är detta dock inga
 problem. Detta eftersom den uppmätta absorptionen mättes genom att
@@ -540,7 +566,8 @@ resonemanget i avsnitt~\ref{sec:teori_nivaer} på att spektrumet inte
 omfattde några övergångar till kvicksilvers grundnivå,
 $6^1\mathrm{S}_0$. Därför är det motiverat att anta att att alla andra
 detekterade övergångar har skett mellan nivåer ovanför (och till)
-$6^3\mathrm{P}_0$ som är det lägsta exciterade tillståndet. 
+$6^3\mathrm{P}_0$ som är det lägsta exciterade tillståndet. Så är
+också fallet i den här rapporten.
 
 \subsubsection{Diskreptans i spektrumet}
 Som man kan se i \figref{fig:Hg_spektrum} så fattas många av topparna
@@ -550,8 +577,8 @@ intensiteterna helt överens med alla toppar.
 \paragraph{Missade toppar}
 En möjlig anledning till att det fattas toppar kan ha varit att
 metoden som användes för att ta upp spektrumen gick med stora steg
-till en topp detekterades. Alltså att toppar missades för att de stora
-stegen missade dem. Men upptagningen av spektrumet gjordes flera
+tills en topp detekterades. Alltså att toppar missades på grund av att
+de stora stegen. Men upptagningen av spektrumet gjordes flera
 gångar; vilket borde ha lett till att om det missades någon topp i
 någon av mätningarna, så borde den ha kunnat fångas upp av en annan
 mätning. 
@@ -559,9 +586,9 @@ mätning.
 Vidare så sattes tröskelvärdet så lågt att allt som stack över
 bakgrundsbruset fångades upp. Och eftersom de starkare topparna blödde
 ut kring bottnen av toppen så att intensiteten var över tröskelvärdet
-under ett intervall som motsvarade flera av de längre stegen, borde
-alla toppar som fanns i lampan som användes ha detekterats. Det är
-alltså inte troligt att mätmetoden orsakade några bortfall av
+under ett intervall som motsvarade flera av de längre steglängderna,
+borde alla toppar som fanns i lampan som användes ha detekterats. Det
+är alltså inte troligt att mätmetoden orsakade några bortfall av
 spektraltoppar. 
 
 I \cite{NIST_spectrum} finns det utöver ''strong lines'' även en
@@ -573,7 +600,7 @@ finns också med i \figref{fig:Hg_spektrum}, så av de topparna verkar
 inga ha missats i våra mätningar. Det är alltså tänkbart att alla
 ''strong lines'' inte fanns med för att det förekom föroreningar i
 spektrallampan, men att föroreningarna var så små att alla de känsliga
-topparna påverkades. 
+topparna inte påverkades. 
 \footnotetext{Som ligger i intervallet 400--800\,nm.}
 
 
@@ -587,8 +614,8 @@ mycket över.
 Eftersom jämförelsen här är mellan absoluta intensiteter kommer
 fotomultiplikatorn känslighet att påverka mätningarna. Nu visas
 förvisso de korrigerade intensiteterna i \figref{fig:Hg_spektrum}, men
-korrektionsfaktorn är tämligen osäker om den stämmer. För vidare
-dislussion om detta, se Bilaga~\ref{sec:korr}. 
+det är tämligen osäker om korrektionsfaktorn stämmer. För vidare
+diskussion om detta, se Bilaga~\ref{sec:korr}. 
 
 För energinivåernas del är det bara varje topps våglängd som
 påverkar. Så vad för intensitet topparna har är egentligen inte
@@ -600,22 +627,22 @@ NIST:s \cite{NIST_spectrum} värden.
 Det listade energinivåerna i \tabref{tab:Hg_nivaer} har en
 anmärkningsvärt god överensstämmelse med NITS:s
 \cite{NIST_levels}. Detta talar för att våglängsupplösningen som
-beräknades i avsnitt~\ref{sec:diskussion_upplosning} verkar
-stämma. 
+beräknades i avsnitt~\ref{sec:diskussion_upplosning} verkar vara den
+avgörande källan till osäkerhet. 
 
 Det finns dock ett iögonfallande utstickande värde: det för
 $7^1\mathrm{S}_0$ som skiljer sig från \cite{NIST_levels} med hela
 2,74\,\%. Det är dessutom extra anmärkningsvärt eftersom den
 energinivån beräknades från övergången 
 $7^1\mathrm{S}_0 \to 6^3\mathrm{P}_0$ som ger en av de starkaste
-topparna vid ungefär 407\,nm. Det finns dessutom inte andra möjliga
+topparna, vid ungefär 407\,nm. Det finns dessutom inte andra möjliga
 kandidater kring den våglängden. Det borde inte ha blivit fel här helt
 enkelt, men även de andra mätningarna ger att toppen ligger vid den
 våglängden. 
 
 De övriga energinivåernas goda överensstämmelse verkar dock peka på
 att mätnigarna i övrigt var riktiga. Och att det relativa felet i
-energier begränsas av våglängds upplösningen\footnotemark{}
+energier begränsas av våglängdsupplösningen\footnotemark{}
 \[
 \frac{\Delta E}{E} \sim \frac{\Delta\lambda}{\lambda} \le 0,05\,\%.
 \]
@@ -634,43 +661,36 @@ det främst de topparna med kortast våglängd som användes. Detta är
 framför allt för att de långvågiga topparna svarar mot små steg
 mellan energinivåer, och att ju högre upp i energinivå man kommer
 destu tätare ligger nivåerna. Detta gör att det för de korta
-våglängderna oftast inns många möjliga kandiadater. Detta gör det
+våglängderna oftast finns många möjliga kandiadater. Detta gör det
 svårt att vara säker på vilka nivåer en viss topp gäller. 
 
 Det finns faktiskt redan en sådan konflikt bland de längre
 våglängderna. Det är mellan $6^3\mathrm{D}_1$ oc $6^1\mathrm{D}_2$,
-som enligt \cite{NIST_levels} bara sklijer sig med 1\,meV som är
+som enligt \cite{NIST_levels} bara skiljer sig med 1\,meV som är
 mindre än osäkerheten som uppstår från våglängdsupplösningen. Vad
 detta betyder är egentligen att dessa mätningar inte kan urskilja
-dessa två nivåer, varför de båda kan betraktas samma i den här
-rapporten. 
+dessa två nivåer, varför de båda kan betraktas ha samma energi i den
+här rapporten. 
 
 
-\subsection{Laserfärgernas absorptionsspektrum tmp:(resultat och diskussion)}
+\subsection{Laserfärgämnenas absorptionsspektrum}
 %Varför breda dalar och inte skarpa spikar?
 %Varför har kumarin högre absorptionsförmåga?
 %varför går intensiteten upp efter absorptionsdalen?
 
 Figur \ref{fig:absorption} visar uppmätt absorptionsspektra för
-laserfärgämnena Rhodamin B och Kumarin~307. Vi påminner om viss
-försiktighet vid tolkning den högra delen av spektrat eftersom det är
-i detta område som fotomultiplikatorn var som minst känslig. Därför är
+laserfärgämnena rhodamin~B och kumarin~307. Vi påminner om viss
+försiktighet vid betrakande av ändarna på spektrat eftersom
+fotomultiplikatorn verkar vara som okänsligast i detta område. Därför är
 resultatet från den vänstra delen av spektrat mest pålitligt. 
 
-\todo{Vad är excitationsmaximum?}
 
-Vi noterar att Rhodamin B genomgår excitation vid ett spektralband som
-sträcker sig från cirka 470 till 580 nm; med maximal excitation vid
-våglängden 542 nm. Åt höger i grafen finner vi ett excitationsmaximum
-vid 1084 nm i området av ett något bredare absorptionsband. Den andra
-absorptionsdalen ligger nästan dubbla våglängden från den första
-absorptionsdalen. 
-
-Ämnet Kumarin 307, har från vänster i grafen ett absorptionsband
-mellan 330 och 470 nm med ett excitationsmaximum vid 426 nm; notera
-att den absorberade ljusintensiteten här är som störst bland de två
-ämnena. Det andra excitationsmaximat finns vid 876 nm, som också
-ligger nära dubbla våglängden från den första absorptionsdalen. 
+En intressant iaktagelse är att den andra absorptionsdalen, för båda
+ämnena, ligger vid ungefär dubbla våglängden jämfört med den
+första. Detta kan eventuellt bero på någon form av resonans i
+molekylen -- jämför övertoner i en sträng. Resonansen skulle alltså du
+kunna ge upphov till mellanliggande nivåer som orsakar absorption vid
+halva energin. 
 
 I samtliga fall har vi att göra med breda spektrala
 absorptionsband. Förklaringen består delvis av att dessa
@@ -706,8 +726,19 @@ intressant att undersöka ämnenas emissionsspektra samt hur känsliga
 
 
 
-\section{Slutsats/Sammanfattning}
-\todo{Inte glömma!}
+\section{Sammanfattning}
+Sammanfattningsvis kan vi konstatera att det gick bra
+att ta upp olika typer av spektrum med den spektrometer som
+användes. Detta ledde sen till att energinivåerna för
+kvicksilveratomen kunde identifieras och bestämmas med förvånansvärt
+hög överensstämmelse med tidigare data. 
+
+Resultaten visar också hur
+spektrumen skiljer sig dramatiskt mellan olika typer av prov. Atomära
+spektrum uppvisar distinkta spektrallinjer. Medan spektrum från större
+molekyler har betydligt bredare excitationsområden, vilket beror på
+det stora antalet tättliggande energinivåer i vad som kan betraktas
+som ''energiband''. 
 
 
 
@@ -737,7 +768,7 @@ intressant att undersöka ämnenas emissionsspektra samt hur känsliga
 
 
 
-\section{Teoribakgrund}
+\section{Teoribakgrund} \label{sec:teori}
 I den här bilagan presenteras delar av den teori som behövs för att
 bestämma energinivåer på egen hand. I den här rapporten används dock
 en referenstabell för att passa in de toppar från det uppmätta
@@ -768,8 +799,8 @@ som svarar mot energiskillnaden mellan energinivåerna.
  
 Genom att studera vilka ljusvåglängder som emitteras från ett prov
 kan alltså de olika energiskillnaderna bestämmas med hjälp av  
-\[\Delta E = h\nu=\frac{hc}{\lambda}.\]
-På så sätt kan alla energinivåer (med $\Delta E$ i de detekterbara
+\[\delta E = h\nu=\frac{hc}{\lambda}.\]
+På så sätt kan alla energinivåer (med $\delta E$ i de detekterbara
 våglängderna) bestämmas relativt varandra. 
 
 Att bestämma de absoluta
@@ -1094,7 +1125,7 @@ $6^1\mathrm{S}_0$ & --- & --- & ---
   blå trianglar i \figref{fig:Hg_spektrum}) i Hg-spektrumet. } 
 \label{tab:Hg_toppar}
 \begin{tabular}{|c|c|c||l|}\hline
-$\lambda$/[nm] & $\Delta E$/[eV]  &$\Delta E/[\unit[10^3]{cm^{-1}}$]
+$\lambda$/[nm] & $\delta E$/[eV]  &$\delta E/[\unit[10^3]{cm^{-1}}$]
 & Övergång\\ \hline
 364,94  	& 3,397 	& 27,40
 & $6^3\mathrm{D}_3\to 6^3\mathrm{P}_2$ 
@@ -1155,6 +1186,13 @@ $\lambda$/[nm] & $\Delta E$/[eV]  &$\Delta E/[\unit[10^3]{cm^{-1}}$]
 \end{tabular}
 \end{table}
 
+
+
+\newpage
+\stepcounter{section}
+\phantomsection{}
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg}
+\includepdf[pages={1-}]{bilder/labblogg_kvant.pdf}
 
 
 \end{document}
