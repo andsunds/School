@@ -137,6 +137,7 @@ konstruera motsvarande energinivådiagram.
 
 
 \subsection{Tillämpning på kvicksilver (icke-joniserat)}
+\todo{Kolla över hela avsnittet!}
 Kvicksilvers grundkonfiguration är $6\mathrm{s}^2$, vilket betyder att det
 finns två valenselektroner med $n=6$ och $l=0$ för de båda. Utav dessa
 två antas en av dem kunna exciteras till en högre energinivå (högre
@@ -327,18 +328,37 @@ och utan prov.
 Resultaten från de spektroskopiska mätningarna visas i form av
 spektrum från kvicksilverlampan och absorptionsmätningarna i
 Figurerna~\ref{fig:Hg_spektrum} respektive \ref{fig:absorption}.
+
+I \figref{fig:Hg_spektrum} finns dels det uppmätta spektrumet från
+spektrallampan, dels vilka toppar som borde finnas enligt en lista
+från NIST~\cite{NIST_spectrum}, dels vilka toppar dom detekterats. Man
+kan notera att det som kan se ut som en topp i bilden faktiskt är
+flera vilket syns bland de utmarkerade topparna. 
+
+Från spektrallinjerna i \figref{fig:Hg_spektrum} kan man sedan
+rekonstruera energinivåerna med hjälp från redan känd data om
+kvicksilvers energinivåer~\cite{NIST_levels}. REsultatet från denna
+rekonstruktion visaas i \tabref{tab:Hg_nivaer}.
 För en detaljerad lista över vilka våglängder och energier som
-detekterades för topparna i Hg-spektrumet hänvisas läsaren till
-\tabref{tab:Hg_toppar} i Bilaga~\ref{sec:kompl}.  
+detekterades för topparna i kvicksilverspektrumet hänvisas läsaren
+till \tabref{tab:Hg_toppar} i Bilaga~\ref{sec:kompl}. 
 
-I \figref{fig:svartkropp} visas det uppmätta spektrat från en
-(halogen) glödlampa. \figref{fig:svartkropp} visar även
-intensitetsfördelningen från Plancks stråningslag. För att kompensera
-för skillnaden i känslighet hos spektrometern användes en
-korrektionsfakor i \figref{fig:Hg_spektrum}. Mer om hur
-korrektionsfakorn beräknades finns i \appendixname~\ref{sec:korr}.
 
-\todo{Inte färdig!}
+%% I \figref{fig:svartkropp} visas det uppmätta spektrat från en
+%% (halogen) glödlampa. \figref{fig:svartkropp} visar även
+%% intensitetsfördelningen från Plancks stråningslag. För att kompensera
+%% för skillnaden i känslighet hos spektrometern användes en
+%% korrektionsfakor i \figref{fig:Hg_spektrum}. Mer om hur
+%% korrektionsfakorn beräknades finns i \appendixname~\ref{sec:korr}.
+
+I \figref{fig:absorption} visas absortionsspektrumen från rohdamin~B
+och kumarin~307 i form av kvoten mellan den absorberade intensiteten
+och bakgrundsintensiteten. Man kan se två absortionsdalar för båda
+ämnena. En annan sak att notera 
+\todo{Noteras det i diskussionen?} 
+är att åtminstone för kumarinet kan man märka en liten ökning i
+intensitet vid våglängderna närmas efter en absorptionsdal. 
+
 
 \begin{sidewaysfigure}
 \centering
@@ -407,7 +427,7 @@ $8^1\mathrm{D}_2$ &9,880 & 79,68 & 9,877 & 79,66 & 0,04 \\ \hline
 
 \begin{figure}\centering
 \centerline{ %centrerar även större bilder
-\includegraphics[width=1\textwidth]{absorption.pdf}
+\includegraphics[width=.9\textwidth]{absorption.pdf}
 }
 \caption{Absorptionsspektrum från Rhodamin B och Kumarin
   307. Absorptionsspektrumen är framtagna som kvoten mellan
@@ -441,7 +461,7 @@ sådana sammanhang försöka undersöka vad för bergränsningar som finns.
 \subsubsection{Upplösning i spektrometern}
 \label{sec:diskussion_upplosning}
 Spektrometern, Spex~270M, har en elingt tillverkaren \cite{Spex270M}
-våglängdsupplösning på $\Delta\lambda=0,1\,nm$. Men den faktiska upplösningen beror i
+våglängdsupplösning på $\Delta\lambda=\unit[0,1]{nm}$. Men den faktiska upplösningen beror i
 högsta grad på vilka inställningar man använder; i synnerhet beror
 upplösningen på spaltbredden för det insläppta ljuset. 
 
@@ -594,7 +614,37 @@ enkelt, men även de andra mätningarna ger att toppen ligger vid den
 våglängden. 
 
 De övriga energinivåernas goda överensstämmelse verkar dock peka på
-att \todo{inte färdig.}
+att mätnigarna i övrigt var riktiga. Och att det relativa felet i
+energier begränsas av våglängds upplösningen\footnotemark{}
+\[
+\frac{\Delta E}{E} \sim \frac{\Delta\lambda}{\lambda} \le 0,05\,\%.
+\]
+\footnotetext{Egentligen kommer osäkerheterna i varje enskild
+  energinivå att variera beroende på hur många övergångar man måste
+  använda för att komma till den energinivån från
+  $6^3\mathrm{P}_0$. Men detta ger en bra uppskattning om felets
+  storleksordning. }
+
+\subsubsection{Ej använda toppar 
+               och eventuella oklarheter bland energinivåerna}
+
+Som kan ses i \tabref{tab:Hg_toppar} i Bilaga~\ref{sec:kompl} så
+användes bara ungefär hälften av de observerade topparna. Dessutom var
+det främst de topparna med kortast våglängd som användes. Detta är
+framför allt för att de långvågiga topparna svarar mot små steg
+mellan energinivåer, och att ju högre upp i energinivå man kommer
+destu tätare ligger nivåerna. Detta gör att det för de korta
+våglängderna oftast inns många möjliga kandiadater. Detta gör det
+svårt att vara säker på vilka nivåer en viss topp gäller. 
+
+Det finns faktiskt redan en sådan konflikt bland de längre
+våglängderna. Det är mellan $6^3\mathrm{D}_1$ oc $6^1\mathrm{D}_2$,
+som enligt \cite{NIST_levels} bara sklijer sig med 1\,meV som är
+mindre än osäkerheten som uppstår från våglängdsupplösningen. Vad
+detta betyder är egentligen att dessa mätningar inte kan urskilja
+dessa två nivåer, varför de båda kan betraktas samma i den här
+rapporten. 
+
 
 \subsection{Laserfärgernas absorptionsspektrum tmp:(resultat och diskussion)}
 %Varför breda dalar och inte skarpa spikar?
@@ -606,6 +656,8 @@ laserfärgämnena Rhodamin B och Kumarin~307. Vi påminner om viss
 försiktighet vid tolkning den högra delen av spektrat eftersom det är
 i detta område som fotomultiplikatorn var som minst känslig. Därför är
 resultatet från den vänstra delen av spektrat mest pålitligt. 
+
+\todo{Vad är excitationsmaximum?}
 
 Vi noterar att Rhodamin B genomgår excitation vid ett spektralband som
 sträcker sig från cirka 470 till 580 nm; med maximal excitation vid
@@ -655,7 +707,7 @@ intressant att undersöka ämnenas emissionsspektra samt hur känsliga
 
 
 \section{Slutsats/Sammanfattning}
-
+\todo{Inte glömma!}
 
 
 
@@ -1055,7 +1107,7 @@ $\lambda$/[nm] & $\Delta E$/[eV]  &$\Delta E/[\unit[10^3]{cm^{-1}}$]
   ($6^1\mathrm{D}_2\to 6^3\mathrm{P}_2$)
 \\ 
 390,50  	& 3,175 	& 25,61 
-& $8^1\mathrm{D}_2\to 6^1\mathrm{P}_1$ (?)
+& $8^1\mathrm{D}_2\to 6^1\mathrm{P}_1$ %(?)
 \\ 
 404,69  	& 3,064 	& 24,71 
 & $7^3\mathrm{S}_1\to 6^3\mathrm{P}_0$ 
@@ -1064,10 +1116,10 @@ $\lambda$/[nm] & $\Delta E$/[eV]  &$\Delta E/[\unit[10^3]{cm^{-1}}$]
 & $7^1\mathrm{S}_0\to 6^3\mathrm{P}_0$ 
 \\ 
 433,75  	& 2,858 	& 23,05 
-& $7^3\mathrm{D}_2\to 6^1\mathrm{P}_1$ (?)
+& $7^3\mathrm{D}_2\to 6^1\mathrm{P}_1$ %(?)
 \\ 
 434,50  	& 2,853 	& 23,01 
-& $7^1\mathrm{D}_2\to 6^1\mathrm{P}_1$ (?)
+& $7^1\mathrm{D}_2\to 6^1\mathrm{P}_1$ %(?)
 \\ 
 435,62  	& 2,846 	& 22,96 
 & $7^3\mathrm{S}_1\to 6^3\mathrm{P}_2$ 
@@ -1079,7 +1131,7 @@ $\lambda$/[nm] & $\Delta E$/[eV]  &$\Delta E/[\unit[10^3]{cm^{-1}}$]
 & $7^3\mathrm{S}_1\to 6^3\mathrm{P}_2$ 
 \\ 
 554,44  	& 2,236 	& 18,04 
-& $11^1\mathrm{P}_1\to 7^1\mathrm{S}_0$ (?)
+& ---
 \\ 
 576,94  	& 2,149 	& 17,33 
 & $6^3\mathrm{D}_2\to 6^1\mathrm{P}_1$ 
