@@ -269,16 +269,16 @@ våglängden. Egentligen användes bara den ena toppen för att kalibrera,
 men man kunde utnyttja den kända våglängdsskillnaden mellan
 Na-topparna för att identifiera rätt toppar. 
 
-\subsubsection{Upplösning i spektrometern}
-\todo{Upplösning från spalten}
 
 \subsection{Kvicksilverspektrum}
 För att få en så bra noggrannhet i energi som möjligt måste man
-maximera sin noggrannhet i våglängd. Spektrometern, Spex~270M, har en
-våglängdsupplösning på 0,1\,nm \cite{Spex270M}. Dock tar varje
+maximera sin noggrannhet i våglängd. Spektrometern hade en minsta
+våglängds\emph{steglängd}\footnotemark{} på 0,03\,nm. Dock tar varje
 intensitetsmätning på varje våglängd cirka 10\,s, vilket gör att en
 genomlöpng av hela mätintervallet på högta upplösningen skulle ta i
 storleksordningen tre timmar. 
+\footnotetext{Ej att förväxla med våglängds\emph{upplösningen} i en
+  mätning.} 
 
 För att minska körtiden för en mätning skrevs ett program som gick
 fram med steg om 1\,nm. Men för att få bra noggrannhet i topparnas
@@ -346,13 +346,8 @@ korrektionsfakorn beräknades finns i \appendixname~\ref{sec:korr}.
 \includegraphics[width=1.2\textwidth]{Hg_spektrum.pdf}
 }
 \caption{Spektrum uppmätt från kvicksilverlampa tillsammans med
-  utmarkerade spektraltoppar enligt NIST\cite{NIST_spectrum}. De två
-  olika typerna av tabellerade data från NIST kallas ''persistent'' 
-  respektive ''strong lines''; skillnaden mellan dessa två tabeller är
-  att ''persistent lines'' är de spektrallinjer som syns tydligast
-  då det även förekommer orenheter i provet som kan blockera vissa
-  övergångar, medan ''strong lines'' är alla starka spektrallinjer som
-  förekommer hos ett rent prov.
+  utmarkerade spektraltoppar enligt NIST\cite{NIST_spectrum}. 
+  De tabellerade topperna kallas ''strong lines'' av NIST.
   Av de två trösklarna som är utritade, styr den första när en en topp
   ska anses stor nog för att det ska vara intressant att minska
   steglängden i våglängd, och den andra tröskeln styr när korrektionen
@@ -428,7 +423,8 @@ $8^1\mathrm{D}_2$ &9,880 & 79,68 & 9,877 & 79,66 & 0,04 \\ \hline
 
 
 \section{Diskussion}
-
+Överlag verkar laborationen vara ganska lyckad. Mycket av resultaten
+stämmer överens med tidigare kända värden,
 % I uppgiften med att identifiera energinivåerna i en atom nämndes att
 % det är lätt att identifiera de olika energinivåernas inbördes avstånd,
 % men att det kan bli svårt att bestämma de absoluta energierna. 
@@ -438,18 +434,93 @@ $8^1\mathrm{D}_2$ &9,880 & 79,68 & 9,877 & 79,66 & 0,04 \\ \hline
 % nämnts tidigare att de kommer att sakna distinkta toppar och att de
 % flourescerar med längre våglängder än det absorberar. 
 \subsection{Spektrometern}
-\todo{feluppskattning}
-\todo{enpunktskalibrering}
+Spektrometern var som sagts tidigare en halvautomatisk maskin som
+kunde styras tämligen enkelt från ett LabVIEW-program. Man bör i
+sådana sammanhang försöka undersöka vad för bergränsningar som finns. 
+
+\subsubsection{Upplösning i spektrometern}
+\label{sec:diskussion_upplosning}
+Spektrometern, Spex~270M, har en elingt tillverkaren \cite{Spex270M}
+våglängdsupplösning på $\Delta\lambda=0,1\,nm$. Men den faktiska upplösningen beror i
+högsta grad på vilka inställningar man använder; i synnerhet beror
+upplösningen på spaltbredden för det insläppta ljuset. 
+
+I mätningarna på kvicksilverspektrat, där våglängds upplösning är av
+stor betydelse, användes därför den minsta spaltbredd som tilläts av
+spektrometern. Det är alltså rimligt att anta att våglängsupplösningen
+i mätningarna var samma som tillverkaren angav.
+
+För att relatera detta till upplösning i energinivåerna kan vara mer
+intressant att studera den relativa upplösningen,
+$\Delta\lambda/\lambda$. Den kommer att variera för olika våglängder,
+men man får en övre begränsning genom att ta den minsta våglängd som
+man använder. Detta ger, med lite extra säkerhetsmarginal, att 
+\[ 
+\frac{\Delta\lambda}{\lambda}\le 0,05\,\%. 
+\]
+Detta kan, och görs i avsnitt~\ref{sec:diskussion_energi}, jämföras
+med avvikelserna i \tabref{tab:Hg_nivaer}.
+
+\subsubsection{Våglängdskalibreringen}
+En annan möjligorsak till fel i kvicksilverspektrat är
+våglängdskalibreringen. Den gjordes bara mot en punkt
+(Na-dubbletten). Det kan hända att spektrometern är byggd så bra att
+det bara behövs. Men i princip hade det varit skönt om man kunde
+kalibrera spektrometern mot åtminstone två punkter, för att upptäcka
+om våglängdsstegen, som spektrometern tar, faktiskt motsvarar samma
+steg i verklig våglängd. 
+
+Man kan dock indirekt se den goda överensstämmelsen med NITS:s data, i
+både \tabref{tab:Hg_nivaer} och den lägre delen av spektrat i
+\figref{fig:Hg_spektrum}, som en indikation på att enpunktskalibreringen
+var tillräcklig.  
+
+\subsubsection{Intensitetsmätning} 
+Hittills har bara aspekter av spektrometern som berör
+kvicksilvermätningar påtalats, men för absorptionsspektrumet kan det
+vara intressant att studera hur väl spektrometern mäter inensitet. Här
+kommer vi nu gå igenom några spakter, men i Bilaga~\ref{sec:korr}
+finns vidare material på detta område. 
+
+Jämför man spektrat det uppmätta och det teoretiska spektrat
+från en glödlampa finner man att spektrometern har en högsta
+känslighet ungefär i våglängdsområdet 400--800\,nm. Detta kan ses i
+figurerna~\ref{fig:svartkropp} och \ref{fig:korrektionsfaktor} i
+Bilaga~\ref{sec:korr}. För att kompensera för den varierande
+känsligheten beräknades en korrektionsfaktor som varierade mellan
+1--100. 
+Detta föranleder bland annat att mätningar
+utanför detta område bör betraktas med försiktighet -- en topp där kan
+bara ha varit brus som gick över tröskeln och blev förstorat av
+korrektionsfaktorn. 
+
+Den huvudsakliga orsaken till det branta tappet i uppmätt intensitet
+för våglängder högre än ca 800\,nm beror med största sannolikhet på
+fotomultiplikatorns känslighetsområden. Eftersom fotomultiplikatorer
+bygger på den fotoelektriska effekten kommer det finnas en viss minsta
+fotonenergi som krävs för att slå ut en elektron i det första
+steget. Det är troligtvis det som orsakar nämnt tapp i
+känslighet. 
+
+I fallet med mätningarna på absorptionsspektrat är detta dock inga
+problem. Detta eftersom den uppmätta absorptionen mättes genom att
+undersöka \emph{kvoterna} mellan intensiterna. Detta gör att
+korrektionsfaktorn försvinner, och fotomultiplikatorn känslighet inte
+påverkar resultatet i \figref{fig:absorption}.
+
+% Vidare bör även mätningar över denna kritiska våglängd
+% betraktas med försiktighet. Detta för att den fotoelektriska effekten,
+% teoretiskt, inte över huvud taget borde fungera för fotoner med för
+% lång våglängd. 
 
 \subsection{Kvicksilverspektrum}
-\todo{Ta bort ''Persistent lines'' i \figref{fig:Hg_spektrum}.}
 Man kan notera att de topparna med kortast våglängd i spektrumet kom i
 ett kluster om tre, tätt liggande toppar. Detta tyder enligt
 resonemanget i avsnitt~\ref{sec:teori_nivaer} på att spektrumet inte
 omfattde några övergångar till kvicksilvers grundnivå,
 $6^1\mathrm{S}_0$. Därför är det motiverat att anta att att alla andra
 detekterade övergångar har skett mellan nivåer ovanför (och till)
-$6^3\mathrm{P}_0$. 
+$6^3\mathrm{P}_0$ som är det lägsta exciterade tillståndet. 
 
 \subsubsection{Diskreptans i spektrumet}
 Som man kan se i \figref{fig:Hg_spektrum} så fattas många av topparna
@@ -473,9 +544,57 @@ alla toppar som fanns i lampan som användes ha detekterats. Det är
 alltså inte troligt att mätmetoden orsakade några bortfall av
 spektraltoppar. 
 
-\todo[inline]{Varför fattas toppar?}
+I \cite{NIST_spectrum} finns det utöver ''strong lines'' även en
+kategori som kallas ''persistent lines''. Denna andra kategori
+innehåller en lista över de spektrallinjer som fins kvar även om det
+förekommer föroreningar i provet. Denna lista inehåller betydligt
+färre antal toppar. De toppar som finns med i listan\footnotemark{}
+finns också med i \figref{fig:Hg_spektrum}, så av de topparna verkar
+inga ha missats i våra mätningar. Det är alltså tänkbart att alla
+''strong lines'' inte fanns med för att det förekom föroreningar i
+spektrallampan, men att föroreningarna var så små att alla de känsliga
+topparna påverkades. 
+\footnotetext{Som ligger i intervallet 400--800\,nm.}
 
-\paragraph{Intensiteterna}
+
+\paragraph{Intensitetsavvikelser}
+Studerar man \figref{fig:Hg_spektrum} ser man att det finns en god
+våglängdsöverensstämmelse mellan identifierade och tabellerade toppar
+i det neder delen av spektrat, men intensiterna passar
+sämmre. Detta är lite anmärkningsvärt men inget att oroa sig allt för
+mycket över.
+
+Eftersom jämförelsen här är mellan absoluta intensiteter kommer
+fotomultiplikatorn känslighet att påverka mätningarna. Nu visas
+förvisso de korrigerade intensiteterna i \figref{fig:Hg_spektrum}, men
+korrektionsfaktorn är tämligen osäker om den stämmer. För vidare
+dislussion om detta, se Bilaga~\ref{sec:korr}. 
+
+För energinivåernas del är det bara varje topps våglängd som
+påverkar. Så vad för intensitet topparna har är egentligen inte
+inressant, vilket betyder att avvikelser i intensitet bara ska ses som
+en fingervisning om hur väl mätningarna stämmer överens med
+NIST:s \cite{NIST_spectrum} värden.
+
+\subsubsection{Energinivåerna}\label{sec:diskussion_energi}
+Det listade energinivåerna i \tabref{tab:Hg_nivaer} har en
+anmärkningsvärt god överensstämmelse med NITS:s
+\cite{NIST_levels}. Detta talar för att våglängsupplösningen som
+beräknades i avsnitt~\ref{sec:diskussion_upplosning} verkar
+stämma. 
+
+Det finns dock ett iögonfallande utstickande värde: det för
+$7^1\mathrm{S}_0$ som skiljer sig från \cite{NIST_levels} med hela
+2,74\,\%. Det är dessutom extra anmärkningsvärt eftersom den
+energinivån beräknades från övergången 
+$7^1\mathrm{S}_0 \to 6^3\mathrm{P}_0$ som ger en av de starkaste
+topparna vid ungefär 407\,nm. Det finns dessutom inte andra möjliga
+kandidater kring den våglängden. Det borde inte ha blivit fel här helt
+enkelt, men även de andra mätningarna ger att toppen ligger vid den
+våglängden. 
+
+De övriga energinivåernas goda överensstämmelse verkar dock peka på
+att \todo{inte färdig.}
 
 \subsection{Laserfärgernas absorptionsspektrum tmp:(resultat och diskussion)}
 %Varför breda dalar och inte skarpa spikar?
@@ -532,11 +651,6 @@ intressant att undersöka ämnenas emissionsspektra samt hur känsliga
 % I övrigt finns det annat som kan påverka absorptionsspektrat som
 % exempelvis jonladdning om man undersöker metalljoner i lösning. 
 
-
-
-\subsection{Upptagningen av spektrumen}
-%Enpunktskalibrering
-%Känslighetsområde
 
 
 
@@ -773,18 +887,6 @@ I_\text{verklig}(\lambda) = I_\text{uppmätt}(\lambda) \cdot K(\lambda).
   \figref{fig:absorption} är kvoten mellan intensiteterna med och utan
   proverna. }
 
-%\subsection{Fotomultiplikatorn känslighet}
-Den huvudsakliga orsaken till det branta tappet i uppmätt intensitet
-för våglängder högre än ca 750\,nm beror med största sannolikhet på
-fotomultiplikatorns känslighetsområden. Eftersom fotomultiplikatorer
-bygger på den fotoelektriska effekten kommer det finnas en viss minsta
-fotonenergi som krävs för att slå ut en elektron i det första
-steget. Det är troligtvis det som orsakar nämnt tapp i
-känslighet. Vidare bör även mätningar över denna kritiska våglängd
-betraktas med försiktighet. Detta för att den fotoelektriska effekten,
-teoretiskt, inte över huvud taget borde fungera för fotoner med för
-lång våglängd. 
-
 
 \begin{figure}\centering
 \centerline{ %centrerar även större bilder
@@ -799,7 +901,8 @@ lång våglängd.
 \end{figure}
 
 
-\subsection{Temperaturkänslighet}
+\subsection{Temperaturkänslighet 
+               och riktigheten i Plancksstrålingslag} 
 Det räcker inte med att bara säga att man ska korrigera mätningarna
 så att de passar till Plancks strålingslag. Man måste dessutom ange
 till vilken temperatur av svartkroppsstrålning man ska anpassa. I det
@@ -815,6 +918,13 @@ temperaturern för glödtråden. Dessutom är den exakta temperaturen att
 anpassa sin svartkroppsstrålning till inte så viktig. Detta syns i
 \figref{fig:svartkropp} där \emph{formen} på kurvorna till de olika
 temperaturerna varierar mycket lite mellan 2600--3200\,K. 
+
+Vidare är det inte säkert att det går att använda Plancks strålingslag
+rakt av. Den förutsätter en perfekt svartkropp, men det är inte säkert
+att glödtråden har samma emittans i hela det anpassade spektrat. Det
+bör dock inte vara ett jättestort problem eftersom de absoluta
+inensiteterna inte är helt avgörande för resultaten i den här
+rapporten. 
 
 
 \subsection{Polynomanpassning och resultat}
