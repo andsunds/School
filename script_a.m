@@ -9,16 +9,16 @@ Pb_x = [0,1,2,3,4].';
 
 p='Data/';addpath(p);
 
-files_t=dir([p,'Pb','*_t.lvm']);
-files_v=dir([p,'Pb','*_v.lvm']);
+files_t=dir([p,'Al','*_t.lvm']);
+files_v=dir([p,'Al','*_v.lvm']);
 
 l=length(files_t);
 
 % Antal övertoner+grundton
 m = 5;
 T=zeros(l,m);
-order = Pb_order;
-x_loc = Pb_x;
+order = Al_order;
+x_loc = Al_x;
 
 betaC  = zeros(l,m); betaV  = zeros(l,m);
 gammaC = zeros(l,m); gammaV = zeros(l,m);
@@ -48,7 +48,7 @@ for i=1:l
     disp('HIGHPASS')
     tic
     % Högpassfiltrera?
-    [cels_hat ,cels] = HighAndLowpass_mean(time,cels,60*T(i));
+    %[cels_hat ,cels] = HighAndLowpass_mean(time,cels,60*T(i));
     toc
     %cels_hat = zeros(size(time,1),5);
     %for j=1:5
@@ -145,7 +145,7 @@ for i=1:l
         hold off
         toc
         
-        pause(0.01)
+        pause()
        
     end
 end
@@ -175,47 +175,26 @@ gC_std = gC_std(inds);
 k = k(inds);
 w = w(inds);
 
-%P = [ones(length(inds),1),k.^2,w.^2]\(-1i*w);
-%alpha_P = P(2)*1e-4/60;
-%tau_P = P(3)*60;
-%C_P = P(1)/60;
 inds = w < 3;
-Q = sqrt([w(inds);w(inds)])\[bC(inds);gC(inds)];
-%R = [ones(length(inds),1),k.^2]\(1i*w);
-% alpha*k^2+i*omega - C*alpha = 0
-% i*omega = C*alpha - alpha*k^2
-% k = sqrt(C - i*omega/alpha)
-% k = 1/sqrt(2alpha)
-%alpha_Q = 1/Q^2/2; %cm^2/min
-%alpha_Q = alpha_Q*0.01^2/60;
-%alpha_R = -R(2)*0.01^2/60;
-% alpha*k^2 + 1i*omega - tau*omega^2=0
-% 1i/omega = tau + alpha*k^2/omega^2
-S = [ones(length(inds),1),(k./w).^2]\(1i./w);
-alpha_S = -S(2)*0.01^2/60;
-tau_S = S(1)*60;
+A = [w(inds);w(inds)].^(0.5);
+B = [bC(inds);gC(inds)];
+W = [bC_std(inds);gC_std(inds)].^(-2);
+[Q, Q_std] = lscov(A, B, W);
+%Q = sqrt([w(inds);w(inds)])\[bC(inds);gC(inds)];
 
 W = linspace(0,10,1000);
-%plot(w,gammaC,'ro',w,betaC,'bd', W,Q*sqrt(W),'k-')
-errorbar(w,gC,gC_std,'ro')
+tau = 10/60;
+Q = 1.0*Q;
+plot(W,Q*sqrt(W).*sqrt(sqrt((tau*W).^2+1)-tau*W),'k-',W,Q*sqrt(W).*sqrt(sqrt((tau*W).^2+1)+tau*W),'k-')
 hold on
-errorbar(w,bC,bC_std,'bd')%, ...
-     %W,real(sqrt(S(1)*W.^2-1i*W)/sqrt(S(2))),'k-', ...
-     %W,imag(sqrt(S(1)*W.^2-1i*W)/sqrt(S(2))),'k--')
-plot(W, Q*sqrt(W))
+errorbar(w,gC,gC_std,'ro')
+errorbar(w,bC,bC_std,'bd')
 hold off
-legend('\gamma, Imaginärdel','\beta, Realdel')
+%legend('\gamma, Imaginärdel','\beta, Realdel')
 xlabel('\omega/[rad/min]')
 ylabel('k/[cm^{-1}]')
 grid on
 hold on
-% Plotta vilka mätpunkter som hör ihop (H för Harmonic)
-% H = 3;
-% for i=(1+(H-1)*l):(H*size(T,1))
-%     plot([w(i),w(i)],[gammaC(i),betaC(i)])
-% end
-% hold off
-%axis([0,3.5,0,0.25])
 
 %%
 clf
@@ -247,10 +226,6 @@ hold off
 
 title('beta')
 legend('temperatur', 'spänning', 'location', 'Best')
-
-
-
-
 
 subplot(1,2,2)
 plot(w,gammaC,'bv'), hold on

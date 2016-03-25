@@ -11,12 +11,22 @@ set ylabel offset 2,0 "V\\aa gtal [$\\mathrm{cm^{-1}}$]"
 set grid
 set key width -5.7 spacing 1.05 opaque box bottom right
 
-plot 0.102053466343384*sqrt(x) with lines lt 1 lc 0 title "Anpassning till {\\small $Q\\sqrt{\\omega}$}", \
+Q = 0.102597494632771
+Q_std = 3.948714093254723e-04
+Ql = Q-2.58*Q_std;
+Qh = Q+2.58*Q_std;
+
+set style fill solid 0.3
+
+plot NaN with lines lt 1 lc 0 title "Anpassning till {\\small $Q\\sqrt{\\omega}$}", \
+	 NaN with filledcurves closed lc 9 title "99\\% konfidensintervall", \
 	 NaN with lines ls 1 lc 3 title "Faskonstant $\\beta$", \
 	 NaN with lines ls 1 lc 1 title "D\\\"ampning $\\gamma$", \
 	 NaN with points pt 7 lc 0 title "1:a deltonen", \
 	 NaN with points pt 9 lc 0 title "3:e deltonen", \
 	 NaN with points pt 15 lc 0 title "5:e deltonen", \
+	 '+' using 1:(Ql*sqrt($1)):(Qh*sqrt($1)) with filledcurves closed lc 9 title "", \
+	 Q*sqrt(x) with lines lt 1 lc 0 title "", \
 	 "dispersion_Al.tsv" using 1:2:(1.96*$7) with errorbars ls 1 pt 7 lc 3 title "", \
 	 "dispersion_Al.tsv" using ($1*3):4:(1.96*$9) with errorbars ls 1 pt 9 lc 3 title "", \
 	 "dispersion_Al.tsv" using ($1*5):6:(1.96*$11) with errorbars ls 1 pt 15 lc 3 title "", \
@@ -24,23 +34,34 @@ plot 0.102053466343384*sqrt(x) with lines lt 1 lc 0 title "Anpassning till {\\sm
 	 "dispersion_Al.tsv" using ($1*3):14:(1.96*$19) with errorbars ls 1 pt 9 lc 1 title "", \
 	 "dispersion_Al.tsv" using ($1*5):16:(1.96*$21) with errorbars ls 1 pt 15 lc 1 title ""
 
-set terminal epslatex size 12cm,7.5cm color
+set terminal epslatex size 16cm,7.5cm color
 set output "dispersion_Pb.tex"
 
 set xrange [0:5]
-set yrange [0:3.5]
+set yrange [0:2.5]
 set xlabel offset 0,0.25 "Vinkelfrekvens [$\\mathrm{rad/min}$]"
 set ylabel offset 2,0 "V\\aa gtal [$\\mathrm{cm^{-1}}$]"
 
 set grid
-set key width -5.7 spacing 1.05 opaque box top left
+#set key width -5.7 spacing 1.05 opaque box top left
+set key outside center right
 
-plot 1.094528610133686*sqrt(x) with lines lt 1 lc 0 title "Anpassning till {\\small $Q\\sqrt{\\omega}$}", \
+Q = 1.070827126609920
+Q_std = 0.020310461016836
+Ql = Q-1.96*Q_std;
+Qh = Q+1.96*Q_std;
+
+set style fill solid 0.2
+set samples 200
+plot NaN with lines lt 1 lc 0 title "Anpassning till {\\small $Q\\sqrt{\\omega}$}", \
+	 NaN with filledcurves closed lc 9 title "95\\% konfidensintervall", \
 	 NaN with lines ls 1 lc 3 title "Faskonstant $\\beta$", \
 	 NaN with lines ls 1 lc 1 title "D\\\"ampning $\\gamma$", \
 	 NaN with points pt 7 lc 0 title "1:a deltonen", \
 	 NaN with points pt 9 lc 0 title "3:e deltonen", \
 	 NaN with points pt 15 lc 0 title "5:e deltonen", \
+	 '+' using 1:(Ql*sqrt($1)):(Qh*sqrt($1)) with filledcurves closed lc 9 title "", \
+	 Q*sqrt(x) with lines lt 1 lc 0 title "", \
 	 "dispersion_Pb.tsv" using 1:2:(1.96*$7) with errorbars ls 1 pt 7 lc 3 title "", \
 	 "dispersion_Pb.tsv" using ($1*3):4:(1.96*$9) with errorbars ls 1 pt 9 lc 3 title "", \
 	 "dispersion_Pb.tsv" using ($1*5):6:(1.96*$11) with errorbars ls 1 pt 15 lc 3 title "", \

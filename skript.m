@@ -1,10 +1,10 @@
 %% Ladda in data, Aluminium
-clc; clear all; clf;
+clear all; clf;%clc;
 Al_order = [4,3,5,2,6]-1;
 Al_x = [0,5,10,15,20];
 addpath('Data')
-volt = load('Al_17min_v.lvm', '-ascii'); % volt
-time = load('Al_17min_t.lvm', '-ascii'); % millisekunder
+volt = load('Al_30min_v.lvm', '-ascii'); % volt
+time = load('Al_30min_t.lvm', '-ascii'); % millisekunder
 % M�tningen skedde vid centrumtiden (size(time)=[:,2])
 time = mean(time,2);
 % Konvertera till minuter och starta fr�n 0
@@ -20,16 +20,16 @@ cels = cels(:,Al_order);
 %cels = sin(time'*2*pi/10);
 N = length(time);
 f = (0:N-1)/(time(end)-time(1));
-y = abs(fft(cels(:,1),size(cels,1)))/15694;
-%plot(f, abs(fft(cels(:,1),size(cels,1))))   %/15694),'-')
+y = abs(fft(cels(:,1),size(cels,1)))/37720;
+plot(f, y,'-')
 %plot(time, cels,'-')
 %grid on
-%axis([0,5/17,-10,1.1])
+axis([0,5/5,0,1])
 
 %legend('0 cm', '5 cm', '10 cm', '15 cm', '20 cm')
 
 tmp = [time,cels,f',y];
-save('Plots/timeseries.tsv', 'tmp', '-ascii','-tabs')
+%save('Plots/timeseries.tsv', 'tmp', '-ascii','-tabs')
 
 %%
 

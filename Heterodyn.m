@@ -13,14 +13,15 @@ end
 
 Z = zeros(size(time,2),1);
 for k=1:size(time,2);
-    n = find(time(end,k)-time(:,k) < nper*period,1);
-
-    time_k = time(n:end,order(k));
-    volt_k = volt(n:end,order(k));
+    time_k = time(:,order(k));
+    volt_k = volt(:,order(k));
     % Interpolera med styckvis 3:e-gradspolynom
     pp = spline(time_k,volt_k); %pp=piecewise polynomial
     % Sampla interpolationen oftare
-    t = (time_k(1):(period*1e-3):time_k(end)).';
+    tend = time_k(end)-period;
+    tstart = tend-period*nper;
+    t = (tstart:(period*1e-4):tend).';
+   
     % Multiplicera med kernel
     P = exp(-1i*2*pi/period*t).*ppval(pp, t);
     % Integrera
