@@ -8,7 +8,7 @@ filnamn{2}='confined_32min.mat';
 filnamn{3}='nonconfined_5min.mat';
 filnamn{4}='nonconfined_167min.mat';
 
-fil=1;
+fil=4;
 load([filnamn{fil}]);
 
 
@@ -65,9 +65,10 @@ filnamn{2}='confined_32min_polynom.mat';
 filnamn{3}='nonconfined_5min_polynom.mat';
 filnamn{4}='nonconfined_167min_polynom.mat';
 
+framerate=10;% fr/s
 
-save(filnamn{fil}, 'px', 'py', 'PX_mean', 'PY_mean', '-mat')
-disp('save successfull')
+save(filnamn{fil}, 'px', 'py', 'PX_mean', 'PY_mean', 'framerate', '-mat')
+disp('save successfull'),
 
 
 
@@ -99,8 +100,8 @@ for i=2:N
     set(p, 'XData',XP(i,:)-mean(x) ,'YData',YP(i,:)-mean(y));
     set(h, 'XData',x-mean(x),'YData',y-mean(y));
     %formatering av bilden:
-    axis equal, axis([-300,300, -200, 200])
-    %pause(.1)
+    axis equal, axis([-30,30, -20, 20]*1e-6)
+    pause(.1)
 end
 hold off
 

@@ -11,6 +11,8 @@ fil=4;
 load(['data/', filnamn{fil}, '.mat'])
 
 N=size(px, 1);
+
+t=(0:(N-1)).'/framerate;
 %Bara massa punkter för att få en jämn sträng att hitta TP och mäta längd
 S=linspace(0,1,1000);
 
@@ -40,12 +42,12 @@ Kn=Kn/n;%medelvärde av summan
 %Strängens totala längd:
 L=arclength(PX_mean, PY_mean);
 
-plot(Kn)
+plot(t,Kn)
 
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
-xlabel('tid /[fr]', 'interpreter', 'LaTeX', 'fontsize',25)
+xlabel('tid /[s]', 'interpreter', 'LaTeX', 'fontsize',25)
 ylabel('$(\mathbf{r}-\mathbf{r}_0)\cdot\mathbf{\hat{n}}_0$ /[px]', 'interpreter', 'LaTeX', 'fontsize',25)
 grid on
 
@@ -66,6 +68,7 @@ fil=3;
 load(['data/', filnamn{fil}, '.mat'])
 
 N=size(px, 1);
+t=(0:(N-1)).'/framerate;
 S=linspace(0,1,1000);
 
 
@@ -89,12 +92,12 @@ for i=1:N
 end
 toc
 
-plot(Kt)
+plot(t,Kt)
 grid on
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
-xlabel('tid /[fr]', 'interpreter', 'LaTeX', 'fontsize',25)
-ylabel('$\mathbf{\hat{t}}_1\cdot\mathbf{\hat{t}}_0$ /[px]', 'interpreter', 'LaTeX', 'fontsize',25)
+xlabel('tid /[s]', 'interpreter', 'LaTeX', 'fontsize',25)
+ylabel('$\mathbf{\hat{t}}_1\cdot\mathbf{\hat{t}}_0$ ', 'interpreter', 'LaTeX', 'fontsize',25)
 
 
 

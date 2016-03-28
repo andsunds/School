@@ -1,12 +1,16 @@
 %% Plocka ut koordinater
 clear all; clc;clf
+
+lengthscale=64.5e-9; % m/px, storlek av en pixel i bilden i meter
+
+
 filnamn=cell(1,4);
 filnamn{1}='confined_270304-6-28-min.mat'; % Några konstiga hopp i denna.
 filnamn{2}='confined_280204-2-32min.mat';
 filnamn{3}='nonconfined_180304-1-5min.mat';
 filnamn{4}='nonconfined_250104-1-167min.mat';
 
-fil=1;
+fil=4;
 
 a = importdata(filnamn{fil});
 
@@ -39,6 +43,7 @@ for i = 1:N_pics
 end
 
 
+coordinates=coordinates*lengthscale;
 
 
 %% Sort points along the string
@@ -95,14 +100,14 @@ size(L_endtoend)
 subplot(1,2,1)
 plot(L_string(:,end)), hold on
 plot(L_endtoend)
-axis([0 N_pics min(L_endtoend)-50 max(max(L_string))+50])
+%axis([0 N_pics min(L_endtoend)-50 max(max(L_string))+50])
 title('Length and end-to-end length')
 xlabel('pictureframe')
 legend('Length','End-to-end','Location','Best')
 
 subplot(1,2,2)
 plot(L_endtoend./L_string(:,end))
-axis([0 N_pics min(L_endtoend./L_string(:,end))-0.05 1])
+%axis([0 N_pics min(L_endtoend./L_string(:,end))-0.05 1])
 title('end-to-end/length')
 xlabel('pictureframe')
 
