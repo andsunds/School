@@ -44,7 +44,7 @@ toc
 S=linspace(0,1,1000);
 L=arclength( PX_mean, PY_mean );
 l=L*s;%omvandla från paramaterna s, till längden på strängen
-plot(l, K), hold on
+plot(l*1e6, K), hold on
 
 
 % Anpassa exponentialkurva
@@ -55,8 +55,8 @@ C=[l(i_bra)' ones(size(i_bra))]\log(K(i_bra));
 L_P=-1/C(1);
 K_0=exp(C(2));
 
-plot(l, K_0*exp(-l/L_P))
-axis([0,L, 0,1])
+plot(l*1e6, K_0*exp(-l/L_P))
+axis([0,L*1e6, 0,1])
 
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
@@ -65,7 +65,7 @@ str=sprintf('$%.3f \\exp(-\\Delta l/%3.f)$', K_0, L_P);
 leg=legend('Ber\"a{}knad korrelation', str);
 set(leg, 'interpreter', 'Latex')
 
-xlabel('$\Delta l$, l\"a{}ngs str\"a{}ngen /[px]','Interpreter','Latex');
+xlabel('$\Delta l$, l\"a{}ngs str\"a{}ngen /[$\mu$m]','Interpreter','Latex');
 ylabel('$<\mathbf{t}(l)\cdot\mathbf{t}(l+\Delta l)>_{l, t}$','Interpreter','Latex')
 set(gca,'Fontsize',16)%, 'yscale','log');
 
@@ -104,7 +104,7 @@ for i=1:N
 end
 
 Ks = sum(K,2)'/n; % Summera �ver alla punkter p� str�ngen
-dt = 0:(N-1);
+dt = (0:(N-1))/framerate;
 
 %figure(1)
 plot(dt,(Ks))

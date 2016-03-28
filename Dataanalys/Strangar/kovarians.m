@@ -11,8 +11,11 @@ fil=1;
 load(['data/', filnamn{fil}, '.mat'])
 
 framestep=1;%om vi vill undersöka bilder som ligger glesare
-
 N=floor(size(px, 1)/framestep);%antalet bilder som undersöks
+
+
+
+t=(0:(N-1)).'/framerate;
 
 S=linspace(0,1,1000);
 
@@ -56,9 +59,16 @@ B=V.'*A;%tidsutveckling längs dim. 2
 
 
 figure(1), clf
-plot(A.'), title('A', 'fontsize', 20)%Massa bröte bara
+plot(t,A.'*1e6), title('A', 'fontsize', 20)%Massa bröte bara
+xlabel('$t$ /[s]','Interpreter','Latex');
+ylabel('$\mathbf{v}(l) /[\mu \mathrm{m}]$','Interpreter','Latex')
+set(gca,'Fontsize',14, 'yscale','lin', 'xscale', 'lin');
+
 figure(2), clf
-plot(B.'), title('B', 'fontsize', 20)%mindre bröte, men ändå otydligt
+plot(t,B.'*1e6), title('B', 'fontsize', 20)%mindre bröte, men ändå otydligt
+xlabel('$t$ /[s]','Interpreter','Latex');
+ylabel('$\mathbf{v}(l) /[\mu \mathrm{m}]$','Interpreter','Latex')
+set(gca,'Fontsize',14, 'yscale','lin', 'xscale', 'lin');
 %% Fouriertransform av egenvektorerna
 clc
 figure(3);clf
@@ -74,7 +84,7 @@ axis([0, L, min(min(V(:,index)))*1.1, max(max(V(:,index)))*1.1])
 
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
-xlabel('$l$ /[px]','Interpreter','Latex');
+xlabel('$l /[\mathrm{m}]$','Interpreter','Latex');
 ylabel('$\mathbf{v}(l)$','Interpreter','Latex')
 set(gca,'Fontsize',14, 'yscale','lin', 'xscale', 'lin');
 grid on
@@ -86,15 +96,15 @@ Fs=n/L;
 k=(0:(n/2-1))*Fs/(n-1);
 
 plot(repmat(k.', 1, length(index)), (abs(Spektr(1:(n/2), index))));
-axis([0, 5e-2, 0, 10])
+axis([0, 1e6, 0, 10])
 
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
-xlabel('$k$ /[px$^{-1}$]','Interpreter','Latex');
+xlabel('$k /[\mathrm{m}^{-1}]$','Interpreter','Latex');
 ylabel('$\mathcal{F}[\mathbf{v}_i](k)$','Interpreter','Latex')
 set(gca,'Fontsize',14, 'yscale','lin', 'xscale', 'lin');
 
 
-subplot(2,2,4)%frekvensdomänen 
+subplot(2,2,4)%frekvensberoende
 
 [~, i]=max(abs(Spektr(2:(n/2), :)));
 
@@ -106,8 +116,8 @@ index=(n-15):1:n;
 plot(f_max(index), d(index), '*')
 
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
-xlabel('$k$ /[px$^{-1}$]','Interpreter','Latex');
-ylabel('var[$B_i$] /[px$^2$]','Interpreter','Latex')
+xlabel('$k /[\mathrm{m}^{-1}]$','Interpreter','Latex');
+ylabel('var[$B_i] /[\mathrm{m}^2$]','Interpreter','Latex')
 set(gca,'Fontsize',14, 'yscale','log', 'xscale', 'lin');
 
 %% Autokorrelation
@@ -117,6 +127,8 @@ K=zeros(N,n);%init.
 addpath('../');
 %Tar fram index som sorterar längs med diagonalerna
 INDEX=create_indecis(N);
+
+dt=t;
 
 tic
 for i=1:n;
@@ -131,13 +143,13 @@ toc
 
 
 figure(4), clf
-plot(0:(N-1), K) %Häftig korrelatinosfunktioner
+plot(dt, K) %Häftig korrelatinosfunktioner
 
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
-xlabel('$\Delta t$','Interpreter','Latex');
-ylabel('$<B_i(t)B_i(t+\Delta t)>_{t}$','Interpreter','Latex')
+xlabel('$\Delta t /[\mathrm{s}]$','Interpreter','Latex');
+ylabel('$<B_i(t)B_i(t+\Delta t)>_{t} /[\mathrm{m}^2]$','Interpreter','Latex')
 set(gca,'Fontsize',16)%, 'yscale','log', 'xscale', 'lin');
 
 
@@ -173,10 +185,10 @@ toc
 
 %plottning
 figure(5), clf
-plot(0:(N-1), K_kors) 
+plot(dt, K_kors) 
 hold on
-plot(0:(N-1), K_auto1) 
-plot(0:(N-1), K_auto2) 
+plot(dt, K_auto1) 
+plot(dt, K_auto2) 
 
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
@@ -186,9 +198,10 @@ leg=legend(sprintf('$i=%d$, $j=%d$', i, j), ...
            sprintf('$i=%d$, $j=%d$', j, j));
 set(leg, 'interpreter', 'Latex')
 
-xlabel('$\Delta t$','Interpreter','Latex');
-ylabel('$<B_i(t)B_j(t+\Delta t)>_{t}$','Interpreter','Latex')
-set(gca,'Fontsize',16)%, 'yscale','log');
+xlabel('$\Delta t /[\mathrm{s}]$','Interpreter','Latex');
+ylabel('$<B_i(t)B_i(t+\Delta t)>_{t} /[\mathrm{m}^2]$','Interpreter','Latex')
+set(gca,'Fontsize',16)%, 'yscale','log', 'xscale', 'lin');
+
 
 %% Kovarians för B
 clc;
@@ -208,7 +221,7 @@ plot(abs(diag(D)))
 plot(abs(diag(KOV_B-D)))
 
 xlabel('Sortering', 'interpreter', 'latex')
-ylabel('Sorterade egenv\"a{}rden /[px$^2$]', 'interpreter', 'latex')
+ylabel('Sorterade egenv\"a{}rden /[$\mathrm{m}^2$]', 'interpreter', 'latex')
 
 set(gca, 'fontsize', 20, 'yscale', 'log')
 
