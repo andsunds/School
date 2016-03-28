@@ -87,17 +87,23 @@ U = linspace(0,lagsauto,lagsauto+1); % Vektor med diskreta punkter, lags
 figure(2)
 subplot(1,2,1)
 plot(U(2:end),corrT(2:end),'*','MarkerSize',2)
+set(gca,'fontsize',14)
 hold on
-title('Korrelation T')
+title('Korrelation t-koordinat','fontsize',16)
 subplot(1,2,2)
 plot(U,corrN,'v','MarkerSize',2)
+set(gca,'fontsize',14)
 hold on
-title('Korrelation N')
+title('Korrelation n-koordinat','fontsize',16)
 
 
 end
 
 subplot(1,2,1)
 legend('Dvala','Aktiva','Location','Best') %Placerar en legend p?? l??mplig plats
+axis([min(U) max(U) -0.3 1])
+xlabel('Lags','fontsize',14)
 subplot(1,2,2)
 legend('Dvala','Aktiva','Location','Best')
+axis([min(U) max(U) -0.3 1])
+xlabel('Lags','fontsize',14)
