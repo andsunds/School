@@ -25,6 +25,7 @@ figure(1)
 autocorr(avst1) %Correlation of step length
 
 %% Alla partiklar 
+clf
 
 for i=1:length(data)
     if data{i}(:,4)<20 % Upper limit for particle size
@@ -46,7 +47,8 @@ plot(U(2:end),corr(2:end),'*')
 title('Autokorrelation')
 subplot(1,2,2)
 plot(V,cross,'v')
-title('Crosskorrelation')
+axis([V(1) V(end) -0.08 0.08])
+title('Korskorrelation')
 
 
 %% Korrelation i normal och tangential koordinater
@@ -68,7 +70,7 @@ corrN = zeros(lagsauto+1,1);
 
 data = separera(load(filnamn{fil}));
 for i=1:length(data)
-    if data{i}(1,4)<22 % Gr???ns f???r storlek p??? partiklar
+    if data{i}(1,4)<40 % Gr???ns f???r storlek p??? partiklar
     
     TN=koordinatbyte( bsxfun(@minus, data{i}(:,2:3), mean(data{i}(:,2:3), 1)) );
     T=TN(:,1);
@@ -86,24 +88,56 @@ U = linspace(0,lagsauto,lagsauto+1); % Vektor med diskreta punkter, lags
 
 figure(2)
 subplot(1,2,1)
-plot(U(2:end),corrT(2:end),'*','MarkerSize',2)
-set(gca,'fontsize',14)
+U_s=U*0.1; %To plot in seconds if 10fps
+plot(U_s,corrT,'*','MarkerSize',3)
+set(gca,'fontsize',16)
 hold on
-title('Korrelation t-koordinat','fontsize',16)
+title('Korrelation t-koordinat','fontsize',18)
 subplot(1,2,2)
-plot(U,corrN,'v','MarkerSize',2)
-set(gca,'fontsize',14)
+plot(U_s,corrN,'*','MarkerSize',3)
+set(gca,'fontsize',16)
 hold on
-title('Korrelation n-koordinat','fontsize',16)
+title('Korrelation n-koordinat','fontsize',18)
 
 
 end
 
 subplot(1,2,1)
 legend('Dvala','Aktiva','Location','Best') %Placerar en legend p?? l??mplig plats
-axis([min(U) max(U) -0.3 1])
-xlabel('Lags','fontsize',14)
+axis([min(U_s) 20 -0.1 1])
+xlabel('dt (s)','fontsize',16)
 subplot(1,2,2)
 legend('Dvala','Aktiva','Location','Best')
-axis([min(U) max(U) -0.3 1])
-xlabel('Lags','fontsize',14)
+axis([min(U_s) 20 -0.1 1])
+xlabel('dt (s)','fontsize',16)
+
+%%
+%Korskorrelation i N och T-variablerna
+%Hur de båda signalerna liknar varandra
+
+filnamn=cell(1,2);
+filnamn{1}='energydepletedcells.csv';
+filnamn{2}='logphasecells.csv';
+
+data = separera(load(filnamn{fil}));
+
+lagscross = 900;
+cross = zeros(2*lagscross+1,1); 
+
+for i=1:length(data)
+    %if data{i}(:,4)<40 % Upper limit for particle size
+    TN=koordinatbyte( bsxfun(@minus, data{i}(:,2:3), mean(data{i}(:,2:3), 1)) );
+    T=TN(:,1);
+    N=TN(:,2);
+    %cross = cross+crosscorr(diff(data{i}(:,2)),diff(data{i}(:,3)),lagscross);
+    cross = cross+crosscorr(diff(T),diff(N),lagscross);
+    %end
+end
+
+cross = cross/length(data);
+V = linspace(-lagscross+1,lagscross+1,2*lagscross+1); % Vektor med diskreta punkter, lags
+
+figure(3)
+plot(V,cross,'v')
+axis([V(1) V(end) -0.08 0.08])
+title('Korskorrelation')
