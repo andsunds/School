@@ -42,6 +42,66 @@ plot(U(1:end),corrN(1:end),'v','MarkerSize',2)
 hold on
 title('Korrelation N')
 
+%%
+
+clc;clf;clear all
+
+filnamn=cell(1,2);
+filnamn{1}='energydepletedcells.csv';
+filnamn{2}='logphasecells.csv';
+
+fil=2;
+data =load(filnamn{fil});
+C = separera(data);
+n=length(C);%antal partiklar
+
+gyr = zeros(2,2);
+D = zeros(n,2,2);
+V = zeros(n,2,2);
+NT = cell(n,1);
+for i=1:n
+    X = C{i}(:,2)-mean(C{i}(:,2));
+    Y = C{i}(:,3)-mean(C{i}(:,3));
+    R = [C{i}(:,2),C{i}(:,3)];
+    gyr(:,:) = [X'*X,X'*Y;
+                Y'*X,Y'*Y]./length(C{i});
+    [V(i,:,:),D(i,:,:)] = eig(gyr(:,:));
+    Vort = [V(i,2,2),-V(i,1,2)];
+    NT{i} = [R*V(i,:,2)' R*Vort'];  
+end
+
+%Antal "lags", dvs hur l???ngt i tiden vill man unders???ka korrelation
+R=800;
+lagsauto =R-1;
+lagscross = 900;
+corrT = zeros(lagsauto+1,1);
+corrN = zeros(lagsauto+1,1);
+
+
+for i=1:n 
+    T=NT{i}(:,1);
+    N=NT{i}(:,2);
+    corrT = corrT+autocorr(T,lagsauto); % Summera autokorrelation f???r alla partiklar
+    corrN = corrN+autocorr(N,lagsauto); % Summera autokorrelation f???r alla partiklar
+end
+corrT=corrT/n;
+corrN=corrN/n;
+
+U = linspace(0,lagsauto,lagsauto+1); % Vektor med diskreta punkter, lags
+
+
+figure(2)
+subplot(1,2,1)
+plot(U(1:end),corrT(1:end),'*','MarkerSize',2)
+hold on
+title('Korrelation T')
+subplot(1,2,2)
+plot(U(1:end),corrN(1:end),'v','MarkerSize',2)
+hold on
+title('Korrelation N')
+
+
+
 
 
 
