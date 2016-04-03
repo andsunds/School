@@ -7,6 +7,8 @@
 
 
 \pagenumbering{roman} %%Romersk sidnumrering i början
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
 \begin{titlepage}
 \newgeometry{top=3cm, bottom=2cm}
 
@@ -18,7 +20,7 @@
 %	HEADING SECTIONS
 %------------------------------------------------------------------------------------
 
-\textsc{\LARGE Chalmers tekniska högskola}\\[1.5cm] % Name of your university/college
+\textsc{\huge Chalmers tekniska högskola}\\[1.5cm] % Name of your university/college
 \textsc{\Large Kandidatarbetesrapport}\\[0.2cm] % Major heading such as course name
 \textsc{\large Institutionen för fysik }\\[0.5cm] % Minor heading such as course title
 
@@ -27,7 +29,9 @@
 %------------------------------------------------------------------------------------
 
 \HRule \\[0.4cm]
-{ \huge \bfseries Titel}\\[0.4cm] % Title of your document
+{ \huge \bfseries 
+Titel 
+}\\[0.4cm] % Title of your document
 \HRule \\[1.5cm]
  
 %------------------------------------------------------------------------------------
@@ -52,7 +56,7 @@ Daniel Midtvedt
 \end{flushright}
 \end{minipage}\\[3cm]
 
-\addtocounter{footnote}{-4} %3=n
+\setcounter{footnote}{0} 
 \stepcounter{footnote}
   \footnotetext{\href{mailto:\andsunds}{\texttt{\andsunds}}}
 \stepcounter{footnote}
@@ -107,3 +111,6 @@ Daniel Midtvedt
 \clearpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\setcounter{footnote}{0} 
