@@ -1,0 +1,218 @@
+%stokastiska processer och Brownsk rörelse
+
+För att beskriva beskriva de system som undersöks i det här arbetet
+behöver man ta till stokastisk analys. I vanliga fall brukar
+det räcka med ordinära eller partiella differential\-ekvationer (ODE:er
+eller PDE:er) för att beskriva fysikaliska stystem. Men för exempelvis
+små objekt kommer termiska fluktuationer att påverka deras
+betenden. Dessa termiska fluktuationer kan anses vara helt
+slumpmässiga, varför de kan betraktas som \emph{stokastiska
+  processer}. Påverkan på ett system från en stokastisk process leder
+till att den styrande DE:n behöver modifieras med en stokastisk term,
+det blir då en \emph{stokastisk differentialekvation} (SDE).
+
+Ett exempel på när ett system består av så ''små objekt'' att termiska
+fluktuationer behöver beaktas är i så kallad \emph{Brownsk
+  rörelse}. Detta är ett fenomen där pollenkorn på en vattenyta såg ut
+att vandra runt slumpmässigt. Fenomenet först beskrevs av Robert Brown
+1828~\cite{Brown1828}, men förklarades först av Einstein
+1905~\cite{Einstein1905}. Förklaringen går ut på att pollenkornen är
+små nog för att när vattenmolekylerna krockar med med så överförs
+tillräckligt med rörelsemängd för pollenkornen ska ses flytta på sig. 
+
+\section{Stokastiska processer}
+En \emph{stokastisk variabel} $X$ är ett objekt som kan anta värden
+$x$ från en viss värdemängd $\Omega$. Vilka värden som antas styrs av
+sannolikhetsfördelningen $P_X(x)$. I fallet med diskreta stokastiska
+variabler är sannolikhetsfördelningen helt enkelt sannolikheten att
+$X$ antar värdet $x$. Men i det här arbetet ligger fokus på
+kontinuerliga stokastiska variabler. För dessa gäller att 
+\begin{equation}
+P(X\in[x, x+\dd{x}]) =P_X(x)\dd{x}
+\end{equation}
+för någon infinitesimal intervallbredd $\dd{x}$. 
+I fortsättningen av detta arbete kommer ''stokastisk variabel'' att
+avse en \emph{kontinuerlig} stokastisk variabel om inget annat anges.
+
+
+Från detta kan en så kallad \emph{stokastisk process} definieras som en
+samling av objekt som beror på en stokastiska variabel $X$ och en
+deterministisk variabel, oftast betrakad som tiden\footnotemark{}
+$t$. Speciellt brukar dessa objekt vara 
+funktioner, $f_X(t)$. För ett givet värde $X=x$ blir alltså den
+stokastiska processen en funktion $f_x(t)$, vilket medför att $F_X(t)$
+definierar en samling av funktioner. 
+\footnotetext{Att tiden väljs som deterministisk variabel är
+  anledning till att det kallas stokastisk \emph{process}; man tänker
+  sig att ett tidsförlopp som beror av den stokastiska variabeln
+  utspelar sig. Mer generellt kan en godtycklig deterministisk
+  variabel användas istället för tid.}  
+
+\subsection{Statisktiska verktyg för att undersöka stokastiska processer}
+Stokastiska processer är som sagt slumpartade processer. Därmed kan
+det vara svårt att avgöra processens natur utifrån enbart ett fåtal
+observationer. För att kunna undersöka den stokastiska processen
+behövs olika statistiska verktyg som exempelvis väntevärde, varians
+och korrelation. 
+
+För en stokastisk variabel $X$ och en dess sannolikhetsfördelning kan
+man definiera dess \emph{väntevärde}
+\begin{equation}
+    \ev{X} = \int_{\Omega} x P(x) \id{x}.
+\end{equation}
+Något löst sett kan det betraktas som medelvärdet man förväntas få vid
+upprepade mätningar av $X$. 
+Väntevärdet går även att utvidga till att även omfatta funktioner av
+den stokastiska variabeln. Man får då 
+\begin{equation}
+    \ev{f(X)} = \int_{\Omega} f(x) P(x) \id{x}.
+\end{equation}
+Speciellt i fallet med stokastiska processer blir väntevärdet 
+\begin{equation}
+    \ev{F_X(t)} = \int_{\Omega} F_x(t)P_X(x) \id{x}.
+\end{equation}
+Notera här att väntevärdet är beroende av $t$.
+
+Om väntevärdet är ett mått på vad man får som medelvärde, så behövs
+även ett mått på hur spridda värden man kan tänkas få. För det används
+\emph{variansen}, som går att skriva på några olika sätt
+\begin{equation}
+\sigma_X^2=\VAR{X} = \ev{\left(X-\ev{X} \right)^2} = \ev{X^2}-\ev{X}^2.
+\end{equation}
+Dock ger variansen, som man kan se, ett kvadratiskt mått på
+avvikelser från medelvärdet. Därför kan det, exempelvis i sammanhang
+där man vill jämföra spridningen i en mätserie, vara mer intressant
+att betrakta \emph{standardavvikelsen} $\sigma_X$ som ges av roten ur
+variandsen.
+
+Man kan på analogt sätt definiera en \emph{kovarians}
+\begin{equation}
+\COV{X}{Y}  = \ev{XY}-\ev{X}\ev{Y}.
+\end{equation}
+Kovariansen är ett mått på hur mycket två stokastiska variabler
+samvarierar. 
+
+I fallet med stokastiska processer kan det vara intressant att veta
+hur korrelerade processerna är i till exempel tiden. För det används
+korrelationsfunktionen 
+\begin{equation}
+C(t, t') = \frac{\COV{F_X(t)}{F_Y(t')}}{\sigma_{F_x}\sigma_{F_Y}}.
+\end{equation}
+Här har kovariansen delats med respektive standardavvikelse för att
+korrelationsfuntionen ska ge ett värde mellan 
+\todo{Detta fås av Cauchy-Schwarzs olikhet. Ska man säga det?}
+$-1$ och $1$. 
+Oftast brukar även translationssymmetri i $t$ gälla, varför man kan
+ersätta de båda variablerna $t$ och $t'$ med deras skilnad:
+\begin{equation}
+C(\Delta t) = C(t, t+\Delta t).
+\end{equation}
+
+
+\subsubsection{Diskret data}
+
+Som man kan se så bygger alla dessa 
+\todo{Något annat än ''verktyg''?} 
+verktyg på olika väntevärden. Man ser nu att för att kunna tillämpa
+dessa statistiska metoder behövs ett stort statistiskt underlag av
+många observationer. Detta eftersom väntevärdet är det medelvärde
+som förväntas av en variabel efter tillräckligt måga observationer.
+
+
+
+
+
+\subsection{Stokastiska differentialekvationer}
+\todo[inline]{Gammalt}
+En differentialekvation som innehåller termer med stokastiska processer
+betecknas stokastiska differentialekvationer (SDE). Lösningen till en
+SDE kommer representeras av en stokastisk process eftersom. Eftersom
+många fysikaliska sy
+
+Inom fysiken modellerar man ofta system med fluktuationer genom att betrakta
+tidsutvecklingen av ett system via motsvarande differentialekvation
+och man adderar sedan en stokastisk process för att representera
+fluktuationen. 
+Detta kallas Langevin formalism och motsvarande
+stokastiska differentialekvation kallas systemets Langevin ekvation. Ett
+illustrerande exempel av Langevin formalismen är fallet för brownsk
+rörelse som beskrivs i avsnitt~\ref{sec:brown}.
+
+Som tidigare nämnts så är den stokastiska
+processen som beskriver systemets fluktuation oftast okänd, istället
+antas att fluktuationen har vissa karakteristiska egenskaper. Exempel
+på sådana egenskaper är att väntevärdet är $0$ enligt $\ev{F(t)} = 0$
+eller att fluktuationen är okorrelerad i tiden
+$\ev{F(t)F(t')}\propto\delta(t-t')$. 
+Enligt 
+\todo{Vaddå?}tidigare 
+är lösningar till
+stokastiska differentialekvationer stokastiska processer, och om
+fluktuationen beskrivs med karakteristiska egenskaper och okänd
+sannolikhetsfördelning kommer detta speglas i lösningen till
+differentialekvationen. Således kommer inte sannolikhetsfördelningen
+av lösning att kunna finnas, istället betraktar man motsvarande
+karakteristiska egenskaper för lösningen som de hos
+fluktuationen. 
+\todo{De sista meningarna här  beskrivs nog tydligare
+  med brownsk rörelse som exempel.} 
+
+
+
+
+
+
+\section{Brownsk rörelse}\label{sec:brown}
+\todo[inline]{Gammalt}
+Hastigheten för en partikel som utför ren Brownsk rörelse styrs av
+Langevinekvationen~\cite{Mazo_Brownian2002} 
+\begin{equation} \label{eq:Brownian_SDE}
+    M\dv{v}{t}=-\zeta v + F(t),
+\end{equation}
+där $M$ är partikelmassan, $\zeta$ en friktionskonstant och $F(t)$ en
+fluktuerande kraft. Kraften utgör här det stokastiska bidraget till
+differentialekvationen och är deltakorrelerat i tiden,
+$\ev{F(t)F(t')}=\sigma^2\delta(t-t')$, 
+med väntevärde 0, $\ev{F(t)}=0$. 
+Det vill säga att den beter sig som vitt brus. 
+
+Den fysikaliska tolkningen av denna stokastiska kraft är att partikeln
+får små impulser från omgivande vätskepartiklar vilka kolliderar
+slumpmässigt med den brownska partikeln.  Deltakorrelationen för
+kraften uppkommer då impulserna modelleras som deltafunktioner i
+tiden. Denna kraftterm kan vidare tolkas som derivatan av en
+Wienerprocess i gränsen då kollisionerna infaller med hög frekvens. En
+Wienerprocess är en tidskontinuerlig stokastisk process där varje
+förändringssteg är oberoende av tidigare steg samtidigt som
+\todo{Bättre ord än ökningar}ökningarna är normalfördelade med
+väntevärde 0.
+%Motivation att derivata av Wienerprocess s63
+
+Lösningen till den stokastiska differentialekvationen \eqref{eq:Brownian_SDE} ges av \todo{Vill vi ändra till 2D?}
+\begin{equation}
+    v(t)=v(0)\ee^{-\nicefrac{\zeta t}{M}}+\frac{1}{M}\int^t_0 F(s)e^{-\nicefrac{\zeta (t-s)}{M}}ds.
+\end{equation}
+Detta får dock inte den stokastiska termen att försvinna och lösningen kan inte skrivas på en deterministisk form. För att ändå kunna göra några förutsägelser kan man titta på väntevärdet och korrelationen i tiden.
+
+För $t \gg \nicefrac{\zeta}{M}$ blir $\nicefrac{\dd{v}}{\dd{t}}$-termen i ekvation \eqref{eq:Brownian_SDE} försumbar \todo{Visa detta?} och ekvationen kan då skrivas på formen
+\begin{equation}
+    \zeta \dv{x}{t}=F(t),
+\end{equation}
+där $x$ är partikelns position. Detta ger lösningen
+\begin{equation}
+    x(t)=x(0)+\frac{1}{\zeta} \int^t_0 F(s)ds.
+\end{equation}
+Utifrån denna lösning kan medelvärdet av den kvadrerade avvikelsen beräknas, kallat ''mean squared displacement'' (MSD), vilken blir 
+\begin{equation}
+    \ev{(x(t)-x(0))^2}=\frac{2k_BTt}{\zeta}
+\end{equation}
+där fluktuation-dissipationsteoremet gett att $\sigma^2=2k_BT\zeta$. \todo{ska vi visa flukt.diss.teoremet?} MSD:n kommer därmed att öka linjärt med tiden, något som enkelt kan jämföras med uppmätt data.
+
+
+
+
+%Bara en liten kodsnutt som behövs när man kompilerar lokalt
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main.tex"
+%%% End: 

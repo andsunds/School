@@ -1,90 +1,14 @@
-\documentclass[11pt,a4paper, notitlepage]{report}
+\documentclass[11pt,a4paper, notitlepage, german, english, swedish]{report}
 \pdfoutput=1
-%vons grund
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[english, swedish]{babel} %OBS! Se till att vi får rätt språk.
-\usepackage{amsmath}
-\usepackage{lmodern}
-\usepackage{units}
-\usepackage{icomma}
-\usepackage{color}
-\usepackage{graphicx}
-\graphicspath{ {bilder/} } %Gör så att man kan lägga alla bilder i en egen katalog
-\usepackage{bbm}
-\newcommand{\N}{\ensuremath{\mathbbm{N}}}
-\newcommand{\Z}{\ensuremath{\mathbbm{Z}}}
-\newcommand{\Q}{\ensuremath{\mathbbm{Q}}}
-\newcommand{\R}{\ensuremath{\mathbbm{R}}}
-\newcommand{\C}{\ensuremath{\mathbbm{C}}}
-\newcommand{\rd}{\ensuremath{\mathrm{d}}}
-\newcommand{\id}{\ensuremath{\,\rd}}
-\usepackage{hyperref}
 
-%%%%%%%%%%%%%%%%%%%%%%%Egna tillägg%%%%%%%%%%%%%%%%%%%%%%%
-%%För att få referenser 'på svenska'
-\usepackage[fixlanguage]{babelbib}
-%\selectbiblanguage{swedish}
-%\renewcommand\btxauthorcolon{:}
-%%För att figurtext i underfigurer
-\usepackage{subfigure} 
-%%För att kunna inkludera andra PDF-dokument
-\usepackage{pdfpages}
-%%För att kunna ha roterade bilder
-\usepackage{rotating}
-%%För att kunna byta uppräkningsvisare t.ex. [label=\alph*)]
-\usepackage{enumitem}
-%%För att kunna lägga till 'bilagor' utan sidnumrering.
-\usepackage{tocstyle}
-\usetocstyle{standard}%För att få en vanlig TOC
-                %no page numbers for part
-\settocstylefeature[-1]{pagenumberbox}{\csname @gobble\endcsname}
-\usepackage[nottoc]{tocbibind} %Puts an 'Reference' entry in the ToC.
-%%För att kunna använda bra och ket
-\usepackage{physics} %\bra{}\ket{} eller \expval{H}{\psi}
-%%För att kunna rita snygga matriser
-\usepackage{mathtools} %\begin{pmatrix*}[r] ... \end
-%%För att kunna kommentera ut större stycken
+\usepackage{custom_as}
+
+\graphicspath{ {bilder/} } %Gör så att man kan lägga alla bilder i en egen katalog
+
 %%Drar in tabell och figurtexter
 \usepackage[margin=10 pt]{caption}
-\usepackage{comment} %\begin{comment}
 %%För att lägga in 'att göra'-noteringar i texten
-\usepackage{todonotes} %\todo{...}, \todolist
-\usepackage{cite}
-
-
-%%För att inkludera MATLABkod. 
-%%OBS: mcode är ett separat paket och man måste ha mcode.sty i samma
-%%katalog som dokumentet.
-%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
-%\usepackage{listings} 
-%\lstloadlanguages{matlab} 
-%\lstset{language=matlab} 
-%\lstset{literate= {å}{{\r{a}}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {Å}{{\r{A}}}1
-%  {Ä}{{\"A}}1 {Ö}{{\"O}}1}%För att få svenska bokstäver från MATLAB.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%Formatering%%%%%%%%%%%%%%%%%%%%%%%%
-%%Partiell derivata
-\newcommand{\pd}{\ensuremath{\partial}}
-%%Följer ISO-8601 oberoende av språk.
-\usepackage[iso, swedish]{isodate}
-%%Göra grader Celcius
-\newcommand{\degC}{\ifmmode \,^\circ\mathrm{C} \else $\,^\circ\mathrm{C}$ \fi}
-%%Figurreferenser
-\newcommand{\figref}{\figurename~\ref} 
-%%Tabellreferenser
-\newcommand{\tabref}{\tablename~\ref} %Stor bokstav i början
-
-%%Det ska vara ett rakt µ i prefixet
-\usepackage{upgreek}
-\newcommand{\micro}{\upmu}
-%%Ohm enhetskommando
-\newcommand{\ohm}{\ifmmode \Upomega \else $\Upomega$ \fi}
-
-%%'e' och 'i' ska vara upprätt
-\newcommand{\e}{\mathrm{e}}
-\newcommand{\ii}{\mathrm{i}}
+\usepackage{todonotes} %\todo{...}
 
 %%För att själv bestämma marginalerna. 
 \usepackage[
@@ -93,7 +17,10 @@
 %            left   = 3cm, right  = 3cm
 ]{geometry}
 
-
+%egna kommandon för statistik
+\newcommand{\VAR}[1]{\text{var}\left[#1\right]}
+\newcommand{\COV}[2]{\text{cov}\left[#1,\;#2\right]}
+\newcommand{\CORR}[2]{\text{corr}\left[#1,\;#2\right]}
 
 
 
@@ -114,6 +41,9 @@
 
 %\part{Huvuddel}
 
+\chapter{Stokastiska processer och Brownsk rörelse}
+\input{stokastik.tex}
+
 \chapter{Partikelrörelse i celler}
 \input{Partikel.tex}
 
@@ -131,7 +61,7 @@
 \newpage
 %Ser till att det blir rätt namn i rubriken
 \iflanguage{swedish}{\renewcommand{\bibname}{Källförteckning}}{}
-\bibliographystyle{babunsrt}
+\bibliographystyle{ieeetr}
 \bibliography{referenser_kandidat}%kräver en fil som heter 'referenser.bib'          
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bilagor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -188,3 +118,10 @@
 \stepcounter{section} %Till exempel en 'section'
 \addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
 
+
+
+%Bara en liten kodsnutt som behövs när man kompilerar lokalt
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main.tex"
+%%% End: 
