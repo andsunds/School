@@ -46,6 +46,7 @@
 \chapter{Stokastiska processer och Brownsk rörelse}
 \input{stokastik.tex}
 
+
 \chapter{Partikelrörelse i celler}
 \input{Partikel.tex}
 
@@ -61,22 +62,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Källförteckning %%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-%Ser till att det blir rätt namn i rubriken
-\iflanguage{swedish}{\renewcommand{\bibname}{Källförteckning}}{}
 \bibliographystyle{ieeetr}
 \bibliography{referenser_kandidat}%kräver en fil som heter 'referenser.bib'          
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bilagor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
-\appendix%Resets the section counter and changes it to Alph                 
-\setcounter{page}{1} %Resets the pgenumbering                               
-\renewcommand*{\thepage}{A\arabic{page}}%Changes the pagenubering to 'A...'
-%Ser till att det blir rätt namn
-\iflanguage{swedish}{\renewcommand{\appendixname}{Bilagor}}{}
-\phantomsection{}%This one is needed to make 'Appendix' show up in the TOC
-\addcontentsline{toc}{part}{\appendixname} %Makes 'Appendix' show up in the TOC
-%Byter tillbaks till det gamla namnet
-\iflanguage{swedish}{\renewcommand{\appendixname}{Bilaga}}{}
+\appendix
 
 
 
