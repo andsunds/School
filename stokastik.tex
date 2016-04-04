@@ -36,7 +36,7 @@ avse en \emph{kontinuerlig} stokastisk variabel om inget annat anges.
 
 
 Från detta kan en så kallad \emph{stokastisk process} definieras som en
-samling av objekt som beror på en stokastiska variabel $X$ och en
+samling av objekt som beror på en stokastisk variabel $X$ och en
 deterministisk variabel, oftast betrakad som tiden\footnotemark{}
 $t$. Speciellt brukar dessa objekt vara 
 funktioner, $f_X(t)$. För ett givet värde $X=x$ blir alltså den
@@ -48,7 +48,7 @@ definierar en samling av funktioner.
   utspelar sig. Mer generellt kan en godtycklig deterministisk
   variabel användas istället för tid.}  
 
-\subsection{Statisktiska verktyg för att undersöka stokastiska processer}
+\subsection{Statistiska verktyg för att undersöka stokastiska processer}
 Stokastiska processer är som sagt slumpartade processer. Därmed kan
 det vara svårt att avgöra processens natur utifrån enbart ett fåtal
 observationer. För att kunna undersöka den stokastiska processen
@@ -71,7 +71,7 @@ Speciellt i fallet med stokastiska processer blir väntevärdet
 \begin{equation}
     \ev{F_X(t)} = \int_{\Omega} F_x(t)P_X(x) \id{x}.
 \end{equation}
-Notera här att väntevärdet är beroende av $t$.
+Notera här att väntevärdet är beroende av $t$. 
 
 Om väntevärdet är ett mått på vad man får som medelvärde, så behövs
 även ett mått på hur spridda värden man kan tänkas få. För det används
@@ -83,7 +83,7 @@ Dock ger variansen, som man kan se, ett kvadratiskt mått på
 avvikelser från medelvärdet. Därför kan det, exempelvis i sammanhang
 där man vill jämföra spridningen i en mätserie, vara mer intressant
 att betrakta \emph{standardavvikelsen} $\sigma_X$ som ges av roten ur
-variandsen.
+variansen.
 
 Man kan på analogt sätt definiera en \emph{kovarians}
 \begin{equation}
@@ -96,7 +96,7 @@ I fallet med stokastiska processer kan det vara intressant att veta
 hur korrelerade processerna är i till exempel tiden. För det används
 korrelationsfunktionen 
 \begin{equation}
-C(t, t') = \frac{\COV{F_X(t)}{F_Y(t')}}{\sigma_{F_x}\sigma_{F_Y}}.
+C(t, t') = \frac{\COV{F_X(t)}{F_Y(t')}}{\sigma_{F_X}\sigma_{F_Y}}.
 \end{equation}
 Här har kovariansen delats med respektive standardavvikelse för att
 korrelationsfuntionen ska ge ett värde mellan 
@@ -192,7 +192,24 @@ Lösningen till den stokastiska differentialekvationen \eqref{eq:Brownian_SDE} g
 \begin{equation}
     v(t)=v(0)\ee^{-\nicefrac{\zeta t}{M}}+\frac{1}{M}\int^t_0 F(s)e^{-\nicefrac{\zeta (t-s)}{M}}ds.
 \end{equation}
-Detta får dock inte den stokastiska termen att försvinna och lösningen kan inte skrivas på en deterministisk form. För att ändå kunna göra några förutsägelser kan man titta på väntevärdet och korrelationen i tiden.
+Detta får dock inte den stokastiska termen att försvinna och lösningen kan inte skrivas på en deterministisk form. För att ändå kunna göra några förutsägelser kan man titta på väntevärdet och korrelationen i tiden. Betrakta därför följande korrelation 
+\begin{equation}
+    \ev{v(t)v(t+\delta t)} = v(0)^2\ee^{-\nicefrac{2\zeta t}{M}}+\frac{1}{M^2}\ee^{-\nicefrac{\zeta (2t+\delta t)}{M}}\int_0^t\int_0^{t+\delta t}dt'dt''\ee^{\nicefrac{\zeta (t'+t'')}{M}}\ev{F(t')F(t'')}
+\end{equation}
+och utnyttja att $F(t)$ är deltakorrelerad i tid vilket ger 
+\begin{equation}
+    \ev{v(t)v(t+\delta t)} = v(0)^2\ee^{-\nicefrac{2\zeta t}{M}}+\frac{\sigma^2}{M^2}\ee^{-\nicefrac{\zeta (2t+\delta t)}{M}}\int_0^tdt'\ee^{\nicefrac{\zeta 2t}{M}}
+\end{equation}
+Korrelationen ovan kan nu enkelt beräknas och genom att låta $\delta t\to 0$ samt $t\to \infty$ fås följande samband
+\begin{equation}
+    \ev{v(t)^2} = \frac{\sigma^2}{2M\zeta}
+\end{equation}
+
+Med hjälp av detta samband samt ekvipartitionsteoremet $\frac{1}{2}M\ev{v^2}=\frac{1}{2}k_BT$, där $k_B$ är Boltzmanns konstant och $T$ är temperaturem, kan man nu relatera variansen $\sigma^2$ till fysikaliska storheter vilket ger 
+\begin{equation}
+    \sigma^2 = 2k_BT\zeta
+\end{equation}
+
 
 För $t \gg \nicefrac{\zeta}{M}$ blir $\nicefrac{\dd{v}}{\dd{t}}$-termen i ekvation \eqref{eq:Brownian_SDE} försumbar \todo{Visa detta?} och ekvationen kan då skrivas på formen
 \begin{equation}
@@ -203,6 +220,7 @@ där $x$ är partikelns position. Detta ger lösningen
     x(t)=x(0)+\frac{1}{\zeta} \int^t_0 F(s)ds.
 \end{equation}
 Utifrån denna lösning kan medelvärdet av den kvadrerade avvikelsen beräknas, kallat ''mean squared displacement'' (MSD), vilken blir 
+
 \begin{equation}
     \ev{(x(t)-x(0))^2}=\frac{2k_BTt}{\zeta}
 \end{equation}

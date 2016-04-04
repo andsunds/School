@@ -8,7 +8,9 @@
 %%Drar in tabell och figurtexter
 \usepackage[margin=10 pt]{caption}
 %%För att lägga in 'att göra'-noteringar i texten
-\usepackage{todonotes} %\todo{...}
+\usepackage[
+%disable
+]{todonotes} %\todo{...}
 
 %%För att själv bestämma marginalerna. 
 \usepackage[
@@ -69,7 +71,7 @@
 \appendix%Resets the section counter and changes it to Alph                 
 \setcounter{page}{1} %Resets the pgenumbering                               
 \renewcommand*{\thepage}{A\arabic{page}}%Changes the pagenubering to 'A...'
-%Ser till at det blir rätt namn
+%Ser till att det blir rätt namn
 \iflanguage{swedish}{\renewcommand{\appendixname}{Bilagor}}{}
 \phantomsection{}%This one is needed to make 'Appendix' show up in the TOC
 \addcontentsline{toc}{part}{\appendixname} %Makes 'Appendix' show up in the TOC

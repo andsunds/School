@@ -65,6 +65,7 @@ till partiklarnas förflytning.
   motorproteinen (vad/hur de gör). Kanske hade varit en bra idé att ha
   ett litet större avsnitt (eller eget kapitel) om celler innan vi
   börjar prata om partiklar och strängar.}
+  \todo{Frågan är hur mycket vi bör uttala oss om motorprotein då dessa inte är aktiva under våra mätningar}
 
 \subsubsection{Metabola tillståndets påverkan på partikelrörelsen}
 Jästceller har förmågan att kunna gå i dvala, ett tillstånd där de
@@ -114,10 +115,10 @@ Till en första approximation skulle rörelsen för en partikel i cytoplasman ku
 \todo[inline]{Se över vad som kan tas bort nu när det finns ett eget
   kapitel om stokastik.}
 
-\subsubsection{Brownsk rörelse}
+\subsubsection{Brownsk rörelse} \label{sec:Brownsk}
 Hastigheten för en partikel som utför ren Brownsk rörelse styrs av
 Langevinekvationen~\cite{Mazo_Brownian2002} \todo{Föklara Langevin.}
-\begin{equation} \label{eq:Brownian_SDE}
+\begin{equation} %\label{eq:Brownian_SDE}
     M\dv{v}{t}=-\zeta v + F(t),
 \end{equation}
 där $M$ är partikelmassan, $\zeta$ en friktionskonstant och $F(t)$ en
@@ -145,7 +146,7 @@ där $x$ är partikelns position. Detta ger lösningen
     x(t)=x(0)+\frac{1}{\zeta} \int^t_0 F(s)ds.
 \end{equation}
 Utifrån denna lösning kan medelvärdet av den kvadrerade avvikelsen beräknas, kallat ''mean squared displacement'' (MSD), vilken blir 
-\begin{equation}
+\begin{equation} \label{eq:MSD_Brownsk}
     \ev{(x(t)-x(0))^2}=\frac{2k_BTt}{\zeta}
 \end{equation}
 där fluktuation-dissipationsteoremet gett att $\sigma^2=2k_BT\zeta$. \todo{ska vi visa flukt.diss.teoremet?} MSD:n kommer därmed att öka linjärt med tiden, något som enkelt kan jämföras med uppmätt data.
@@ -246,6 +247,8 @@ av lösning att kunna finnas, istället betraktar man motsvarande
 karakteristiska egenskaper för lösningen som de hos
 fluktuationen. \todo{De sista meningarna här  beskrivs nog tydligare
   med brownsk rörelse som exempel.} 
+  
+  
 
 \subsection{Analys av diskret data}
 
@@ -253,8 +256,7 @@ fluktuationen. \todo{De sista meningarna här  beskrivs nog tydligare
 \section{Tillhandahållen data}
 Datan som denna första del av arbetet baserats på kommer från Max
 Planck Institutet i Dresden och utgörs av mätningar av positionen för
-fluorescerande partiklar i jästceller. Jästcellerna har genmodifierats
-till att producera flourecerande protein som lätt bildar
+fluorescerande partiklar i jästceller. Jästcellerna har genmodifierats till att producera flourecerande protein som lätt bildar
 kluster. 
 \todo[author=Andréas]{Detta var vad Daniel sa på något av de första mötena.}
 Dessa kluster brukar vara av storleksordning 10--100\,nm,
@@ -289,6 +291,17 @@ inledningen.}
     \caption{Korrelation i tangent- och normal-koordinaterna för aktiva celler och celler i dvala. I båda fall sjunker korrelationen initialt snabbare för cellerna i dvala. Korrelationen tycks även bestå längre i tangentialkoordinaten än normalkoordinaten vilket tyder på att det finns en föredragen väg.}
     \label{fig:Korr_tn}
 \end{figure}
+
+\paragraph{Avvikelse från brownsk rörelse}
+%Har vi exempel på avvikelse från teorin kan dessa läggas under seprata underrubriker här
+Utifrån teorin kring brownsk rörelse kan vissa förutsägelser göras för partiklar som strikt följer denna typ av rörelse. Bland annat räknades det fram i sektion \ref{sec:Brownsk} att mean square displacement (MSD) för en sådan partikel skulle öka linjärt med tiden, se ekvation \eqref{eq:MSD_Brownsk}. Utifrån givna data för arbetet har ett potenssamband kunnat anpassas med en exponent som är skilld från och betydligt lägre än 1. Detta tyder på att partikeln inte utför en ren brownsk rörelse utan genomgår en så kallad subdiffusion, karakteriserat att partikelns MSD beror av tiden via ett potenssamband med exponent mindre än 1 men större än 0.
+\todo{Här kan bild infogas}
+
+Vidare finns det minst två sätt att beräkna partiklarnas MSD. För stationära processer, dvs processer som inte explicit beror på när i tiden de inleds, kan man skapa ett medelvärde mellan alla möjliga mätpunkter separerade med givet tidsintervall så som beskrivet i ekvation ...
+\todo{Kanske bör vi lägga till ett stycke om hur egenskaperna beräknas utifrån diskret data}
+Genom att jämföra resultatet från denna typ av beräkning med att istället bara ta medelvärdet mellan alla partiklars kvadrerade radiella avvikelse från startpunkten vid given tid från start kan man avgöra om processen är stationär.
+\todo{Bild för jämförelse mellan lilla och stora delta}
+Båda dessa beräkningar har utförts för given data och exponentens värde i sambandet mellan MSD och tid skiljer sig/överensstämmer för lite för att någon tydlig slutsats hurvida processen är stationär eller ej ska kunna dras. \todo{Eller?}
 
 
 \section{Diskussion och slutsats}
