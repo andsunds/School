@@ -7,57 +7,62 @@ filnamn=cell(1,2);
 filnamn{1}='energydepletedcells.csv';
 filnamn{2}='logphasecells.csv';
 
-fil=2;
+fil=1;
 data =load(filnamn{fil});
 
 C = separera(data);
 n=length(C);%antal partiklar
 
-lutn_x=zeros(n,1); R_sq_v=zeros(n,1);
-lutn_v=zeros(n,1); R_sq  =zeros(n,1);
+lutn1=zeros(n,1); R_sq=zeros(n,1);
+kvot=zeros(n,1);
 
 for i=1:n
 
     X=C{i}(:,2)-mean(C{i}(:,2));
     Y=C{i}(:,3)-mean(C{i}(:,3));
-    dX=diff(X);
-    dY=diff(Y);
+    
+    
+    gyr = [sum(X.^2), sum(X.*Y); 
+           sum(Y.*X), sum(Y.^2)]/length(X);
+    [V,D]=eig(gyr);
+    kvot(i)=D(4)/D(1);
+    
         
     %Hittar min. kv. anpassning
     [koef, R_sq(i)] =minsta_kvadrat( X, Y );
-    [koef_v, R_sq_v(i)] =minsta_kvadrat( dX, dY );
-    
-    lutn_x(i)=-koef(1)/koef(2);
-    lutn_v(i)=-koef_v(1)/koef_v(2);
-    
-%     subplot(1,2,1)
-%     title('Rumskoordinat')
-%     M=max(max(abs([X,Y])));
-%     x=[-M, M]*1.1;
-%     y=lutn_x(i)*x;
-%     plot(X,Y, '.');hold on
-%     p=plot(x,y);hold off; legend(p,sprintf('y=%0.2fx, R^2=%0.2f',lutn_x(i),R_sq(i)))
-%     axis equal; axis([-M, M, -M, M]*1.1)
     
     
-%     subplot(1,2,2)
-%     title('Hastighet')
-%     Mv=max(max(abs([dX,dY])));
-%     vx=[-Mv, Mv]*1.1;
-%     xy=lutn_v(i)*vx;
-%     plot(dX,dY, '.');hold on
-%     h=plot(vx,xy);hold off; legend(h,sprintf('y=%0.2fx, R^2=%0.2f',lutn_v(i),R_sq_v(i)))
-%     axis equal; axis([-Mv, Mv, -Mv, Mv]*1.1)
-
-    %pause(1)
+    lutn1(i)=-koef(1)/koef(2);
+    lutn2=V(2,2)/V(1,2);
+    
+    %{
+    title('Rumskoordinat')
+    M=max(max(abs([X,Y])));
+    x=[-M, M]*1.1;
+    y1=lutn1(i)*x;
+    y2=lutn2*x;
+    plot(X,Y, '.');hold on
+    p=plot(x,y1);
+    q=plot(x,y2);
+    hold off; 
+    legend([p,q],...
+           sprintf('y=%0.2fx, R^2=%0.2f',lutn1(i),R_sq(i)),...
+           sprintf('y=%0.2fx',lutn2) )
+    axis equal; axis([-M, M, -M, M]*1.1)
+    
+    
+    pause(1)
+    %}
 end
 disp('Färdig')
+
+% %save('kvot_energydepleted.mat', 'kvot', '-mat')
 
 
 %% Korrelationmellan hastighet och position?
 clc;clf
 %subplot(1,2,1)
-hist(lutn_x),%hist(lutn_v)
+hist(lutn1),%hist(lutn_v)
 %plot(lutn_x,lutn_v, '.')
 %subplot(1, 2, 2)
 %hist(R_sq), hold on
