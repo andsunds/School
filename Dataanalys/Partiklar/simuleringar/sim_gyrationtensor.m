@@ -1,4 +1,4 @@
-%% Simuleringar
+%% Simuleringar, Wienerprocess
 clc;clf; clear all
 
 N_steps=1000;
@@ -16,7 +16,7 @@ for i=1:N_trials
     %gyr = [sum(X(:,i).^2), sum(X(:,i).*Y(:,i)); sum(Y(:,i).*X(:,i)), sum(Y(:,i).^2)]/N_steps;
     [~,D] = eig(gyr);
 
-    kvot(i)=(D(4)/D(1))^((randn>0)*2 -1 );
+    kvot(i)=(D(4)/D(1));%^((randn>0)*2 -1 );
     egen(i,:)=[D(1), D(4)];
 end
 %sparar sim
@@ -29,39 +29,82 @@ end
 %}
 end
 toc
-%%
+%
 clf,clc
 [N_X, X]=hist(kvot,100);
 hold on
 plot(X+0*.5*mean(diff(X)), (N_X)/sum(N_X), '.')
 
-G=@(n) (exp(-1)/sqrt(2*pi)) * (2*(n-1)/(n-2))^(n-1)*sqrt(n-1);
+%% Simuleringar, Ornstein-Uhlenbeck
+clc;clf; clear all
 
-f=@(w, n) G(n) .*(sqrt(w)./(1+w)).^n ./w;
-            %.* w.^(n/2-1).*(1+w).^(-n);
-x=linspace(0,1.5);
+N_steps=1000;
+N_trials=1000;
 
-plot(x,f(x,1000)/200)
+k=0.004;
+
+tic
+
+kvot=zeros(N_trials,1);
+egen=zeros(N_trials,2);
+for i=1:N_trials
+    W=randn(N_steps-1,2);
+    X=zeros(N_steps,1);
+    Y=zeros(N_steps,1);
+    for j=2:N_steps
+        X(j)=(1-k)*X(j-1)+W(j-1,1);
+        Y(j)=(1-k)*Y(j-1)+W(j-1,2);
+    end
+    gyr = [sum(X.^2), sum(X.*Y); 
+           sum(Y.*X), sum(Y.^2)]/N_steps;
+       
+    %gyr = [sum(X(:,i).^2), sum(X(:,i).*Y(:,i)); sum(Y(:,i).*X(:,i)), sum(Y(:,i).^2)]/N_steps;
+    [~,D] = eig(gyr);
+
+    kvot(i)=(D(4)/D(1));
+    egen(i,:)=[D(1), D(4)];
+end
+
+toc
+bins=logspace(0,2);
+[N_X, X]=hist(kvot,bins);
+hold on
+plot(X+.5*[diff(X),0], 1-cumsum(N_X)/sum(N_X), '-o')
+set(gca, 'fontsize', 20, 'yscale', 'log', 'xscale', 'log')
+%
+
+leg_str=cell(2,1);
+leg_str{1}='kvot_logphase.mat';
+leg_str{2}='kvot_energydepleted.mat';
+
+for i=1:2
+    load(leg_str{i})
+    [N_X, X]=hist(kvot,bins);
+    hold on
+    plot(X+.5*[diff(X),0], 1-cumsum(N_X)/sum(N_X), '-o')
+    %plot(X, N_X/sum(N_X), '*');hold on
+end
 
 
 
-%clear all
-%%
+set(gca, 'fontsize', 20, 'yscale', 'log', 'xscale', 'log')
+
+%% Plottar ALLT
 clc;clear all;clf
 
 
 b=dir('kvot*.mat');
 leg_str=cell(length(b),1);
-n_bins=1000;
+bins=1000;
 for i=1:length(b)
     leg_str{i}=b(i).name;
     load(leg_str{i})
-    [N_X, X]=hist(kvot,n_bins);
+    [N_X, X]=hist(kvot,bins);
     hold on
-    plot(X+.5*mean(diff(X)), cumsum(N_X)/sum(N_X), '.')
+    plot(X+.5*[diff(X),0], 1-cumsum(N_X)/sum(N_X), '.')
     %plot(X, N_X/sum(N_X), '*');hold on
 end
 l=legend(leg_str);set(l, 'fontsize', 20)
-set(gca, 'fontsize', 20, 'yscale', 'log', 'xscale', 'lin')
+set(gca, 'fontsize', 20, 'yscale', 'log', 'xscale', 'log')
 
 
