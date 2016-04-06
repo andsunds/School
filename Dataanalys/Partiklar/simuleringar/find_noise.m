@@ -23,7 +23,7 @@ for i=index;
     TN=koordinatbyte(C{i}(1:n,2:3));%laddar in data för partikeln
     %TN=C{i}(:,2:3);%laddar in data för partikeln
     
-    VAR=VAR+sum(var(diff(TN,1,1),1),2);
+    VAR=VAR+sum(var(diff(TN,1,1),0,1),2);
     
     Spektr=Spektr+abs(fft(TN, [],1)).^2;
 end
@@ -66,7 +66,7 @@ f=(0:(n/2-1))'/dt/(n-1);
 
 n_sim=1000;
 
-sigma_brus=20e-9;
+sigma_brus=.5e-9;
 
 X=2.256e-9*cumsum(randn(n,n_sim)) + sigma_brus*randn(n,n_sim);%laddar in data för partikeln
 
