@@ -1,6 +1,6 @@
 %% Hitta hur stort bruset är i datan, samt plottar 
 % x_mät = x + brus
-clc;clf;clear all
+clc;clf;clearvars
 addpath('../');
 
 filnamn=cell(1,2);
@@ -10,7 +10,7 @@ filnamn{2}='logphasecells.csv';
 fil=2;
 C=separera(load( filnamn{fil} ));
 
-n=992;
+n=1000;
 dt=10e-3;
 f=(0:(n/2-1))'/dt/(n-1);
 
@@ -18,10 +18,15 @@ Spektr=zeros(n,2);
 VAR=0;
 
 index=find(cellfun('length',C)>=n).'; 
+l=length(index);
 tic
 for i=index;
-    TN=koordinatbyte(C{i}(1:n,2:3));%laddar in data för partikeln
-    %TN=C{i}(:,2:3);%laddar in data för partikeln
+    if mean(C{i}(:,4))>12
+        l=l-1;
+        continue
+    end
+    %TN=koordinatbyte(C{i}(1:n,2:3));%laddar in data för partikeln
+    TN=C{i}(1:n,2:3);%laddar in data för partikeln
     
     VAR=VAR+sum(var(diff(TN,1,1),0,1),2);
     
@@ -58,7 +63,7 @@ plot(x, exp(c(2))*x.^c(1))
 
 
 %% Simulera Wienerprocess med olika muckat brus
-clc;clf;clear all
+clc;clf;clearvars
 
 n=2^10;
 dt=10e-3;
@@ -86,7 +91,7 @@ grid on
 
 
 %% simulera O-U
-clc;clf;clear all
+clc;clf;clearvars
 
 
 N_steps=1024;
@@ -129,7 +134,7 @@ pause(.1)
 end
 
 %% Plottar ALLT
-clc;clf;clear all;
+clc;clf;clearvars
 hold on
 
 b=dir('spektrum*.mat');

@@ -1,8 +1,8 @@
 %% Simuleringar, Wienerprocess
-clc;clf; clear all
+clc;clf; clearvars
 hold on
 N_steps=1000;
-N_trials=1000000;
+N_trials=10000;
 
 for brus=[9, 14];
 
@@ -36,8 +36,8 @@ end
 
 
 leg_str=cell(2,1);
-leg_str{1}='kvot_logphase.mat';
-leg_str{2}='kvot_energydepleted.mat';
+leg_str{1}='kvot_energydepleted.mat';
+leg_str{2}='kvot_logphase.mat';
 
 
 for i=1:2
@@ -55,7 +55,7 @@ set(gca, 'fontsize', 20, 'yscale', 'log', 'xscale', 'log')
 
 
 %% Simuleringar, Ornstein-Uhlenbeck
-clc;clf; clear all
+clc;clf; clearvars
 
 N_steps=1000;
 N_trials=1000000;
@@ -98,8 +98,8 @@ set(gca, 'fontsize', 20, 'yscale', 'log', 'xscale', 'log')
 %
 
 leg_str=cell(3,1);
-leg_str{1}='kvot_logphase.mat';
-leg_str{2}='kvot_energydepleted.mat';
+leg_str{1}='kvot_energydepleted.mat';
+leg_str{2}='kvot_logphase.mat';
 leg_str{3}='kvot.mat';
 
 for i=1:2
@@ -115,7 +115,7 @@ axis([1,1e2, 1e-3, 1])
 set(gca, 'fontsize', 20, 'yscale', 'log', 'xscale', 'log')
 
 %% Plottar ALLT
-clc;clear all;clf
+clc;clearvars;clf
 
 
 b=dir('kvot*.mat');
