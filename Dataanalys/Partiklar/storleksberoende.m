@@ -1,18 +1,19 @@
 %% Steglängd och rörlighet(std) som fkn av storlek
 clc;
-figure(1);clf;
-clear all
+figure(1);clf;pause(.1)
+clearvars
 
 filnamn=cell(1,2);
 filnamn{1}='energydepletedcells.csv';
 filnamn{2}='logphasecells.csv';
 
 %cellinitialisering
-intensitet=cell(1,2);
-medelsteg=cell(1,2);
-steg_osakerhet=cell(1,2);
-rorlighet_t=cell(1,2);
-rorlighet_n=cell(1,2);
+intensitet=cell(2,1);
+medelsteg=cell(2,1);
+steg_std=cell(2,1);
+std_t=cell(2,1);
+std_n=cell(2,1);
+sigma_brus=zeros(2,1);
 
 
 for fil=1:2 %för att undersöka datan för båda celltyperna
@@ -24,10 +25,10 @@ n=length(C);%antal partiklar
 %Initialisering av enskilda celler
 intensitet{fil}=zeros(n,1);%stoleken på partiklarna
 medelsteg{fil}=zeros(n,1);%medelstegen på en prtikel
-steg_osakerhet{fil}=zeros(n,1);%avvikelen från medelsteglängden
+steg_std{fil}=zeros(n,1);%avvikelen från medelsteglängden
 
-rorlighet_t{fil}=zeros(n,1);%hur stort område vandrar partikeln runt i
-rorlighet_n{fil}=zeros(n,1);%hur stort område vandrar partikeln runt i
+std_t{fil}=zeros(n,1);%hur stort område vandrar partikeln runt i
+std_n{fil}=zeros(n,1);%hur stort område vandrar partikeln runt i
 
 for i=1:n
     intensitet{fil}(i)=mean(C{i}(:,4));
@@ -35,47 +36,55 @@ for i=1:n
     TN=koordinatbyte(C{i}(:,2:3));%positionsdata i TN-koordinater
     
     steglangd=(sum(diff(TN).^2, 2));%alla steglängder
-    medelsteg{fil}(i)=mean(steglangd);
-    steg_osakerhet{fil}(i)=std(steglangd);%/sqrt(length(steglangd));
+    medelsteg{fil}(i)=sqrt(mean(steglangd));
+    steg_std{fil}(i)=std(steglangd);
     
-    rorlighet_t{fil}(i)=sqrt(var(TN(:,1)));
-    rorlighet_n{fil}(i)=sqrt(var(TN(:,2)));
+    std_t{fil}(i)=sqrt(var(TN(:,1)));
+    std_n{fil}(i)=sqrt(var(TN(:,2)));
 end
+
+index=find(intensitet{fil}>12);
+sigma_brus(fil) = 0.5*mean( medelsteg{fil}(index) );
 
 %plottar rörrilghet
 subplot(2,2,2*fil-1)
-plot(intensitet{fil}, rorlighet_t{fil}, 'or'), hold on
-plot(intensitet{fil}, rorlighet_n{fil}, 'xg')
+%plot(intensitet{fil}, rorlighet_t{fil}, 'or'), hold on
+%plot(intensitet{fil}, rorlighet_n{fil}, 'xg')
+plot(intensitet{fil}, sqrt(std_n{fil}.^2+std_t{fil}.^2), 'k*')
+hold on
+plot([0,25], sqrt(2)*sigma_brus(fil)*[1,1], 'r');hold off
+
 title(filnamn{fil}(1:end-4))
 xlabel('Intensitet', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
-ylabel('R\"o{}rlighet', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
-set(gca,'FontSize',15)%,'XScale','log','YScale','log');
-
+ylabel('Standardavvikelse /[m]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+set(gca,'FontSize',15,'XScale','lin','YScale','log');
+axis([0,25,5e-10,10e-8])
 
 subplot(2,2,2*fil)
 %errorbar(intensitet{fil}, medelsteg{fil}, steg_osakerhet{fil}, '.')
-index=find(intensitet{fil}>15);
-sigma = 0.5*mean(sqrt(medelsteg{fil}(index)) )
 
-plot(intensitet{fil}, sqrt(medelsteg{fil}), '.'); hold on
-plot([0,20], 2*sigma*[1,1]);hold off
+plot(intensitet{fil}, medelsteg{fil}, '.'); hold on
+plot([0,25], 2*sigma_brus(fil)*[1,1], 'r');hold off
 title(filnamn{fil}(1:end-4))
 xlabel('Intensitet', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
-ylabel('Stegl\"a{}ngd', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
-set(gca,'FontSize',15, 'ylim', [0,4e-17],'XScale','lin','YScale','lin');
-axis([0,20,0,8e-9])
+ylabel('Stegl\"a{}ngd /[m]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+set(gca,'FontSize',15, 'ylim', [0,4e-17],'XScale','lin','YScale','log');
+axis([0,25,7e-10,1e-8])
 
 %pause(0.1)%för att rita ut efter hand
-
 
 end
 
 
+% % save('kompleterande_data.mat', 'filnamn', 'intensitet', 'medelsteg', 'steg_std', 'std_t', 'std_n', 'sigma_brus', '-mat')
+
 
 %% s(dt) = 1/'#particles' * sum( ((x(t)-x(0)).^2 ) over all particles
-clc;
+clc; clearvars
 figure(2);clf;pause(.1)
 
+load('kompleterande_data.mat',...
+     'filnamn', 'intensitet', 'std_n', 'std_t', 'sigma_brus', '-mat')
 
 for fil=1:2;
 data =load(filnamn{fil});
@@ -83,18 +92,10 @@ C = separera(data);
 
 %kortare namn
 I=intensitet{fil};
-lambda_t=rorlighet_t{fil};
-lambda_n=rorlighet_n{fil};
 
-%beräkna koefficienter för lutning i loglog
-% %Olika koef för T och N leder till samma rörlighet i slutet
-% koef_t=[ones(size(I)), log(I)]\log(lambda_t);
-% koef_t(1)=exp(koef_t(1));%konverterar till potenssamband
-% koef_n=[ones(size(I)), log(I)]\log(lambda_n);
-% koef_n(1)=exp(koef_n(1));%konverterar till potenssamband
 
 %Sammanvägd koef för T och N ger rörligheter som går att jämföra
-lambda=sqrt(rorlighet_n{fil}.^2+rorlighet_t{fil}.^2);
+lambda=sqrt(std_n{fil}.^2+std_t{fil}.^2 - 2*sigma_brus(fil)^2 );
 %beräkna koefficienter för lutning i loglog
 koef=[ones(size(I)), log(I)]\log(lambda);
 koef(1)=exp(koef(1));%konverterar till potenssamband
@@ -114,7 +115,8 @@ s=zeros(1000,2);
 %STD_n=zeros(1000,1);
 %loop över alla partiklar med tidsdata upp till 10s
 tic
-for i=find(cellfun('length',C)==1000).'; 
+index=find(cellfun('length',C)==1000).'; 
+for i=index;
     TN=koordinatbyte(C{i}(:,2:3));%laddar in data för partikeln
     %{
     tmp=zeros(1000,2);%initialisering
@@ -130,7 +132,7 @@ for i=find(cellfun('length',C)==1000).';
 end
 toc
 
-s=sum(s,2);
+s=sum(s,2)/length(index);
 
 
 start=10;
@@ -155,16 +157,19 @@ str1=sprintf('%.1d t^{%1.2f}', exp(c(1,1)), c(2,1));
 legend('Data', str1, 'location', 'NorthWest')
 title(filnamn{fil}(1:end-4))
 xlabel('Tid/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
-ylabel('Varians', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+ylabel('', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15,'XScale','log','YScale','log');
 pause(.1)
 end
 
 %% S(dt)=(1/T) sum((f(t)-f(t+dt)).^2) over all t
-clc;
+clc; clearvars
 figure(3);clf;
 %figure(4);clf;
 pause(.1)
+
+load('kompleterande_data.mat',...
+     'filnamn', 'intensitet', 'std_n', 'std_t', 'sigma_brus', '-mat')
 
 N=1000;
 DT=(1:N).';
@@ -180,12 +185,9 @@ C = separera(data);
 
 %kortare namn
 I=intensitet{fil};
-lambda_t=rorlighet_t{fil};
-lambda_n=rorlighet_n{fil};
 
 %Detta är just nu samma normering som för rörligheten...
-%Sammanvägd koef för T och N ger rörligheter som går att jämföra
-lambda=sqrt(rorlighet_n{fil}.^2+rorlighet_t{fil}.^2);
+lambda=sqrt(std_n{fil}.^2+std_t{fil}.^2 -2*sigma_brus(fil).^2 );
 %beräkna koefficienter för lutning i loglog
 koef=[ones(size(I)), log(I)]\log(lambda);
 koef(1)=exp(koef(1));%konverterar till potenssamband
@@ -194,11 +196,12 @@ koef(1)=exp(koef(1));%konverterar till potenssamband
 
 S=zeros(N,2);
 tic
-for i=find(cellfun('length',C)==N).'; 
+index=find(cellfun('length',C)==N).'; 
+for i=index
     TN=koordinatbyte(C{i}(:,2:3));%laddar in data för partikeln
     
     tmp=zeros(length(DT),2);
-
+    
     %Hög minnesåtgång
     A=repmat(TN(:,1), 1,N);
     A=triu(A.'-A);
@@ -208,13 +211,14 @@ for i=find(cellfun('length',C)==N).';
     A=triu(A.'-A);
     tmp(:,2)=sum(A(INDECIES).^2, 2)./LENGHTS;
     
+    
     % Detta är samma normering som för rörligheten, 
     % kanske skulle man hitta på något annat.
-    S=S+tmp/(koef(1)*I(i).^koef(2));
+    S=S+(tmp)/(koef(1)*I(i).^koef(2));
 end
 toc
 
-S=sum(S,2);
+S=sum(S,2)/length(index);
 
 show=101; %hur många tidssteg ska undersökas
 
