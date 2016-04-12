@@ -44,11 +44,11 @@ V = linspace(-lagscross+1,lagscross+1,2*lagscross+1); % Vektor med diskreta punk
 figure(2)
 subplot(1,2,1)
 plot(U(2:end),corr(2:end),'*')
-title('Autokorrelation')
+title('Autokorrelation XY')
 subplot(1,2,2)
 plot(V,cross,'v')
 axis([V(1) V(end) -0.08 0.08])
-title('Korskorrelation')
+title('Korskorrelation XY')
 
 
 %% Korrelation i normal och tangential koordinater
@@ -113,7 +113,13 @@ xlabel('dt (s)','fontsize',16)
 
 %%
 %Korskorrelation i N och T-variablerna
-%Hur de båda signalerna liknar varandra
+%Hur de båda signalerna liknar varandra, används för att hitta en mindre
+%känd signal i en längre samplad bit.
+%Om den ena hade varit en tidsförskjutning av den andra hade tydlig topp
+%fåtts efter den givna tidsförskjutningen. I detta fall fås endast små
+%avvikelser.
+
+%Att vi får ett aningen större bidrag vid 0
 
 filnamn=cell(1,2);
 filnamn{1}='energydepletedcells.csv';
@@ -140,4 +146,4 @@ V = linspace(-lagscross+1,lagscross+1,2*lagscross+1); % Vektor med diskreta punk
 figure(3)
 plot(V,cross,'v')
 axis([V(1) V(end) -0.08 0.08])
-title('Korskorrelation')
+title('Korskorrelation NT')
