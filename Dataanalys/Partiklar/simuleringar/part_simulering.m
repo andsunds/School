@@ -1,9 +1,13 @@
-%% 
+%%Brownian motion
 
-clear all;clc;
+%Kör autokorr.m, korrelation i N och T koordinater först för att få
+%jämförelse mellan simulering och data
+
+clear all;clc;%clf;
+for j=1:10 %Bör köra fler för statistisk säkerhet men tar låg tid
 hold on
-n=1000;% Antal partiklar
-R=3000;
+n=304;% Antal partiklar (i energydepleted=304, logphase=193)
+R=916; %Antal steg
 X = randn(R,2,n);
 
 XY = cumsum(X,1);
@@ -34,13 +38,16 @@ U = linspace(0,lagsauto,lagsauto+1); % Vektor med diskreta punkter, lags
 
 figure(2)
 subplot(1,2,1)
-plot(U(1:end),corrT(1:end),'*','MarkerSize',2)
+plot(U(1:end)*0.1,corrT(1:end),'*','MarkerSize',2)
+axis([0 R*0.02 -0.2 1]) %För att samma plot som riktiga partiklarna
 hold on
 title('Korrelation T')
 subplot(1,2,2)
-plot(U(1:end),corrN(1:end),'v','MarkerSize',2)
+plot(U(1:end)*0.1,corrN(1:end),'v','MarkerSize',2)
+axis([0 R*0.02 -0.2 1])
 hold on
 title('Korrelation N')
+end
 
 %%
 
