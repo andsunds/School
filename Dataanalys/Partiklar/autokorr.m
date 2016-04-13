@@ -88,7 +88,7 @@ U = linspace(0,lagsauto,lagsauto+1); % Vektor med diskreta punkter, lags
 
 figure(2)
 subplot(1,2,1)
-U_s=U*0.1; %To plot in seconds if 10fps
+U_s=U*0.01; %To plot in seconds if 10fps
 plot(U_s,corrT,'*','MarkerSize',3)
 set(gca,'fontsize',16)
 hold on
@@ -104,11 +104,11 @@ end
 
 subplot(1,2,1)
 legend('Dvala','Aktiva','Location','Best') %Placerar en legend p?? l??mplig plats
-axis([min(U_s) 20 -0.1 1])
+axis([min(U_s) 2 -0.1 1])
 xlabel('dt (s)','fontsize',16)
 subplot(1,2,2)
 legend('Dvala','Aktiva','Location','Best')
-axis([min(U_s) 20 -0.1 1])
+axis([min(U_s) 2 -0.1 1])
 xlabel('dt (s)','fontsize',16)
 
 %%
