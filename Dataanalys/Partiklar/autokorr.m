@@ -106,10 +106,13 @@ subplot(1,2,1)
 legend('Dvala','Aktiva','Location','Best') %Placerar en legend p?? l??mplig plats
 axis([min(U_s) 2 -0.1 1])
 xlabel('dt (s)','fontsize',16)
+set(gca, 'fontsize', 20, 'yscale', 'log', 'xscale', 'lin')
+
 subplot(1,2,2)
 legend('Dvala','Aktiva','Location','Best')
 axis([min(U_s) 2 -0.1 1])
 xlabel('dt (s)','fontsize',16)
+set(gca, 'fontsize', 20, 'yscale', 'log', 'xscale', 'lin')
 
 %%
 %Korskorrelation i N och T-variablerna
