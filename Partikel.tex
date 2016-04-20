@@ -1,93 +1,23 @@
+\chapter{Partikelrörelse i celler}
 
 
-Bakgrund teori om cellen
-\begin{itemize}
-    \item Cytoplasmans uppbyggnad och struktur
-    \item Brownsk rörelse, CTRW, Fractional Brownian motion
-    \item Metabola tillståndets påverkan på partikelrörelsen
-\end{itemize}
-Bakgrund för dataanalysen
-\begin{itemize}
-    \item Anisotrop miljö
-    \item Skillnad mellan energydepleted och logphase (för alla nedan)
-    \item Radius of gyration = Rörlighet
-    \item MSD(vilken modell passar bäst)
-    \item Korrelationsfunktioner
-\end{itemize}
+%\section{Teori} \todo[inline]{Inga tomma rubriker.}
 
+%\todo[inline]{Fylla ut med lite mera bakgrund/inledning till partikelrörelse.}
 
-%%%%%%%%%%%%%%%%Riktig text nedan%%%%%%%%%%%%%%%%%%%%%
-
-\section{Teori}
-\todo[inline]{Inga tomma rubriker.}
-
-\subsection{Jästceller}
-Miljontals år av evolution har lett till att det idag finns en mängd
-olika sorters celler med sina enga inre strukturer. %Kanske lite väl brett?
-Det finns allt från bakteriers tillsynes oordnade inre till
-djurcellers högst strukturellt ordnade innanmäte. Datan som detta
-arbete bygger på kommer från observationer av partikelrörelse i
-jästceller. 
-
-Jäst~\cite{SGD_yeast} hör till riket svampar och utgörs av encelliga
-organismer.  Att den är en encellig organism möjliggör snabb
-reproduktion vilket gör den smidig att arbeta med i
-laboratorium. Dessutom uppvisar de större likhet med  djurceller än de
-likväl encelliga bakterierna och ger därmed större möjlighet för att i
-försök på jästceller dra paralleller till djurceller. 
-
-
-\subsection{Jästcellers cytoplasma}
-Att jästceller är svampar innebär att de därmed varken är djur, växter
-eller bakterier men delar vissa likheter med de alla tre. Med sitt
-arvsanlag samlat i en cellkärna~\cite{SGD_yeast}, precis som djur- och
-växtceller, 
-%(karakteristiskt för eukaryoter) 
-skiljer sig jästceller från bakterier där arvsanlaget ligger blandat
-med resten av beståndsdelarna i cytoplasman.
-%(karakteristiskt för prokaryoter). 
-De har även en vakuol och stabiliserande cellvägg som växtceller men
-saknar växtcellens kloroplaster och kan därmed inte utföra någon
-fotosyntes.
-
-
-Djurcellernas komplicerade nät av proteintrådar, som möjliggör en aktiv
-transport inom cellen, finns inte hos jästceller som istället får
-förlita sig på passiv transport, förutom vid just
-celldelning. \todo{Källa?} 
-Med jästceller kan man därför undersöka om anomalier från Brownsk
-rörelse uppkommer även utan de 
-\todo{Hur stokastiska är motorproteinens krafter?} 
-stokastiska krafter som har sitt ursprung i motorproteinernas bidrag
-till partiklarnas förflytning.
-
-\todo[inline]{Jag skulle vilja få en lite mer utvecklad förklaring av
-  motorproteinen (vad/hur de gör). Kanske hade varit en bra idé att ha
-  ett litet större avsnitt (eller eget kapitel) om celler innan vi
-  börjar prata om partiklar och strängar.}
-  \todo{Frågan är hur mycket vi bör uttala oss om motorprotein då dessa inte är aktiva under våra mätningar}
-
-\subsubsection{Metabola tillståndets påverkan på partikelrörelsen}
-Jästceller har förmågan att kunna gå i dvala, ett tillstånd där de
-intracellulära aktiviteterna minskar. Då delar av den tillhandahållna
-datan kommer från celler i dvala möjliggör detta undersökningar om
-huruvida cytoplasmans beståndsdelars rörlighet i cellen beror på
-cellens metabola tillstånd. 
-
+%\subsubsection{Metabola tillståndets påverkan på partikelrörelsen}
 Tidigare studier~\cite{Gou_etal2014} på eukaryota celler har visat att
 partiklars rörlighet i cytoplasman beror på hur aktiv cellen
-är. Rörligheten i de undersökta cellerna ökade exempelvis
+är. Rörligheten för de i dessa studier undersökta cellerna ökade exempelvis
 trefaldigt om cellen drabbats av cancer jämfört med en normalt
 fungerande cell. En cell som drabbats av cancer kommer att ha en
-förhöjd metabolism för att öka på celldelningstakten. Den sammanlagda
+förhöjd metabolism för att öka på celldelningstakten och kanske är det i samband med detta som även diffusionen i cytoplasman ökar. Den sammanlagda
 påverkan av motorproteinerna utpekas i dessa studier
-\todo{Vilka studier? Är det Gou eller Parry?} 
 som en möjlig kandidat till fenomenet. 
 
 Studier~\cite{Parry_etal2014} på bakterier har samtidigt visat att
 partiklarnas rörlighet minskade drastiskt om den metabola aktiviteten
-minskade. Då bakterier saknar aktiv transport i sina celler försökte
-\todo{Är det Parry?} man här istället nå en förklaring via att
+minskade. Då bakterier saknar aktiv transport i sina celler försökte man här istället nå en förklaring via att
 cytoplasman blir mer vätskelik ju högre aktiviteten är och börjar
 likna ett mer elastiskt fast material då aktiviteten
 minskar. Partikelstorleken tycks också vara en faktor för dess förmåga
@@ -96,222 +26,261 @@ storleken av organellerna i cytoplasman blir förklaringen uppenbar;
 partikeln kommer då på grund av sin storlek inte att kunna röra sig
 runt i cellen som vid fri diffusion. 
 
+Jästceller har förmågan att kunna gå i dvala, ett tillstånd där de
+intracellulära aktiviteterna minskar. Då delar av den tillhandahållna
+datan kommer från celler i dvala möjliggör detta undersökningar om
+huruvida cytoplasmans beståndsdelars rörlighet i cellen även i detta arbete kan bekräftas bero på
+cellens metabola tillstånd. 
 
-\section{Modeller för rörelse i cytoplasman}
-\todo{Detta stycket skulle t.ex. kunna sägas i kapitlet om celler i
-  stället.}
-I celler talar man om två typer av transport: den aktiva och den
-passiva transporten. Under den aktiva transporten vandrar motorprotein
-längs med proteintrådar och för med sig det som ska transporteras.
-% under användande av kroppens energikälla ATP. 
-Under den passiva transporten tillåts ämnena diffundera fritt genom
-cytoplasman. Vilket transportsystem som är dominerande beror på vilken
-celltyp man betraktar. Jästceller har, som beskrivet ovan, endast
-passiv transport mellan celldelning. Så detta arbete kommer att
-fokusera på just passiv transport, det vill säga diffusion av partiklar. 
 
-Till en första approximation skulle rörelsen för en partikel i cytoplasman kunna beskrivas med klassisk Brownsk rörelse där partiklarna krockar med mindre partiklar från omgivningen och där rörelsen kan beskrivas med en stokastisk gaussisk propagator. Denna teori bygger dock på att man har termisk jämvikt och att partiklar rör sig i en helt viskös vätska, två kriterier som inte uppfylls i cytoplasman bland annat på grund av mitokondriernas energiutvinning. Andra modeller måste sålunda tillämpas för att nå en bättre beskrivning. Två kandidater är ''Continuous Time Random Walk'' (CTRW) och ''Fractional Brownian motion''.
+\section{Alternativa modeller för partikelrörelse i vätskor}
 
-\todo[inline]{Se över vad som kan tas bort nu när det finns ett eget
-  kapitel om stokastik.}
-
-\subsubsection{Brownsk rörelse} \label{sec:Brownsk}
-Hastigheten för en partikel som utför ren Brownsk rörelse styrs av
-Langevinekvationen~\cite{Mazo_Brownian2002} \todo{Föklara Langevin.}
-\begin{equation} %\label{eq:Brownian_SDE}
-    M\dv{v}{t}=-\zeta v + F(t),
-\end{equation}
-där $M$ är partikelmassan, $\zeta$ en friktionskonstant och $F(t)$ en
-fluktuerande kraft. Kraften utgör här det stokastiska bidraget till
-differentialekvationen och är deltakorrelerat i tiden,
-$\ev{F(t)F(t')}=\sigma^2\delta(t-t')$, 
-med väntevärde 0, $\ev{F(t)}=0$. 
-Det vill säga att den beter sig som vitt brus. 
-
-Den fysikaliska tolkningen av denna stokastiska kraft är att partikeln får små impulser från omgivande vätskepartiklar vilka kolliderar slumpmässigt med den brownska partikeln.  Deltakorrelationen för kraften uppkommer då impulserna modelleras som deltafunktioner i tiden. Denna kraftterm kan vidare tolkas som derivatan av en Wienerprocess i gränsen då kollisionerna infaller med hög frekvens. En Wienerprocess är en tidskontinuerlig stokastisk process där varje förändringssteg är oberoende av tidigare steg samtidigt som \todo{Bättre ord än ökningar}ökningarna är normalfördelade med väntevärde 0..
-%Motivation att derivata av Wienerprocess s63
-
-Lösningen till den stokastiska differentialekvationen \eqref{eq:Brownian_SDE} ges av \todo{Vill vi ändra till 2D?}
+Till en första approximation skulle rörelsen för en partikel i en jästcells cytoplasma kunna beskrivas med klassisk brownsk rörelse. Partiklarna krockar där med mindre partiklar från omgivningen och rörelsen kan här beskrivas med en stokastisk gaussisk propagator~\cite{Einstein1905}
 \begin{equation}
-    v(t)=v(0)e^{-\nicefrac{\zeta t}{M}}+\frac{1}{M}\int^t_0 F(s)e^{-\nicefrac{\zeta (t-s)}{M}}ds.
-\end{equation}
-Detta får dock inte den stokastiska termen att försvinna och lösningen kan inte skrivas på en deterministisk form. För att ändå kunna göra några förutsägelser kan man titta på väntevärdet och korrelationen i tiden.
-
-För $t \gg \nicefrac{\zeta}{M}$ blir $\nicefrac{\dd{v}}{\dd{t}}$-termen i ekvation \eqref{eq:Brownian_SDE} försumbar \todo{Visa detta?} och ekvationen kan då skrivas på formen
+P(x,t)=\frac{1}{\sqrt{4\pi Dt}}e^{-\nicefrac{x^2}{4Dt}}
+\end{equation} %Obs n=1 då endast en partikel följs
+som utgörs av sannolikhetsfunktionen för partikelns förflyttning $x$ vid en given tid $t$, där konstanten D är dess diffusionskonstant. Om partikeln betraktas som en boll med radie $R$ nedsänkt i en vätska med viskositet $\eta$ och absolut temperatur $T$ kan D approximeras till~\cite{Einstein1905}
 \begin{equation}
-    \zeta \dv{x}{t}=F(t),
+D=\frac{RT}{N}\frac{1}{6\pi \eta R}
 \end{equation}
-där $x$ är partikelns position. Detta ger lösningen
+där R är allmänna gaskonstanten och N antalet molekyler som ryms i 1 gram för omgivande fluiden.
+\todo{Utveckla mer eller räcker det så här?}
+%Man betraktar då cytoplasman som en homogen vätska. %Denna teori bygger dock på att man har termisk jämvikt och att partiklar rör sig i en enbart viskös vätska, två kriterier som inte uppfylls i cytoplasman bland annat på grund av mitokondriernas energiutvinning.
+
+Experiment\cite{Midtveldt_etal2016} har dock visat att diffusionen av partiklar i celler är fundamentalt långsammare än vad man får ut från klassisk brownsk rörelse. Det finns ett par verktyg man kan använda för att undersöka detta. Ett av dem är MSD. Som visades i avsnitt~\ref{sec:brown} är MSD:n för brownsk rörelse proportionell mot förlupen tid. Speciellt kan \eqref{eq:MSD_brown} skrivas om till
 \begin{equation}
-    x(t)=x(0)+\frac{1}{\zeta} \int^t_0 F(s)ds.
+\ev{x(t)^2} \propto t,
 \end{equation}
-Utifrån denna lösning kan medelvärdet av den kvadrerade avvikelsen beräknas, kallat ''mean squared displacement'' (MSD), vilken blir 
-\begin{equation} \label{eq:MSD_Brownsk}
-    \ev{(x(t)-x(0))^2}=\frac{2k_BTt}{\zeta}
+där $x(0)=0$. Vad man\cite{Midtveldt_etal2016} då har funnit i tidigare studier är att exponenten på $t$ är lägre än $1$, vilket tyder på att andra förklaringsmodeller kan behövas. %Två sådana kandidater är ''Continuous Time Random Walk'' (CTRW) och ''Fractional Brownian motion''.
+\todo[inline]{Lägg in fler anledningar varför Brown inte funkar.}
+
+%\subsubsection{Brownsk rörelse} \label{sec:Brownsk}
+%\todo[inline]{Skriv ihop kort sammanfattning av det som står i stokastikavsnittet}
+%\todo[]{Förklara varför anomal transport ens är intressant att studera.}
+
+
+\subsection{Ornstein-Uhlenbeck-process}
+En första utvidgning av modellen för Brownsk rörelse fås om man lägger till en återförande term som drar partikeln mot någon medelpunkt. Man får då en så kallad Ornstein-Uhlenbeck-process
+\begin{equation}\label{eq:SDE_o-u}
+\pd_t x = -\gamma ( x-\bar{x} ) + \pd_t W,
 \end{equation}
-där fluktuation-dissipationsteoremet gett att $\sigma^2=2k_BT\zeta$. \todo{ska vi visa flukt.diss.teoremet?} MSD:n kommer därmed att öka linjärt med tiden, något som enkelt kan jämföras med uppmätt data.
+där $\gamma$ är en tidsskala som styr hur hårt bunden partikeln är till medelpositionen $\bar{x}$, och $\pd_t W$ är den stokastiska drivningen av partikeln som uppfyller $\ev{\pd_t W}=0$ och $\ev{\pd_t W(t)\pd_t W(t')} = \sigma^2\delta(t-t')$. Detta är en inte helt orimlig modell eftersom en partikel i en cell rimligtvis inte kan vandra hur långt som helst. Typiskt kommer en partikel att tränga ihop cytoplasmans beståndsdelar i den riktning som den rör sig åt, vilket leder till en sorts återförande kraft.
 
+Med hälp av \eqref{eq:SDE_o-u} och metoderna från avsnitt~\ref{sec:brown} kan man härleda modellens intressanta förhållanden. Kovariansen i gränsen mot ett stationärtillstånd ($\gamma t\gg 1$) blir då
+\begin{equation}\label{eq:COV_o-u}
+\ev{x(t)x(t+\Delta{t})} \approx \frac{\sigma^2}{2\gamma} \ee^{-\gamma\Delta{t}},
+\end{equation}
+där $\bar{x}$ har satts till 0. Vidare kan också MSD beräknas till:
+\begin{equation}\label{eq:MSD_o-u}
+\ev{x(t)^2} 
+\approx \frac{\sigma^2}{2\gamma} \left( 1-\ee^{-2\gamma t} \right),
+%\approx \frac{\sigma^2}{2\gamma}t\qcomma \text{för } \gamma t\ll1
+\end{equation}
+med $\bar{x}=0$. Notera att både \eqref{eq:COV_o-u} och \eqref{eq:MSD_o-u} ger att variansen, då $\gamma t\gg 1$, blir konstant lika med~$\nicefrac{\sigma^2}{2\gamma}$ eftersom $\ev{x(t)}=\bar{x}=0$.
 
+%Notera likheten här till den styrande SDE:n för Brownsk rörelse.
 
-\subsubsection{Continuous Time Random Walk (CTRW)}
-En möjlig förklaringsmodell för anomal transport\todo{Förklara varför
-  anomal transport ens är intressant att studera.}
-i celler utgörs av CTRW (continuous-time random
-walks)\cite{Hofling&Franosch2013}. Här beskrivs rörelsemönstret av att
-partiklarna under majoriteten av tiden sitter bundna till olika
-strukturer för att sedan plötsligt ta sig vidare till en ny position
-efter en viss väntetid, där positionsändringen och väntetiden beskrivs
-av en stokastisk variabel. Anomal transport uppkommer här genom att
-medelväntetiden mellan två hopp blir oändlig och därmed att centrala
-gränsvärdessatsen ej uppfylls. Summan av de stokastiska variablerna
-går således ej mot att bli normalfördelad, något som är grundläggande
-i teorin kring Brownsk rörelse. 
+%\todo[inline]{Kommer mera så småningom...}
+  
+\subsection{Continuous Time Random Walk (CTRW)}
+En möjlig förklaringsmodell för anomal transport i celler utgörs av CTRW (Continuous-Time Random Walk)~\cite{Hofling&Franosch2013}. Här beskrivs rörelsemönstret av att partiklarna under majoriteten av tiden sitter bundna till olika nätliknande strukturer för att sedan plötsligt ta sig vidare till en ny position efter en viss väntetid. Positionsändringen och väntetiden beskrivs av två oberoende stokastiska variabler. 
+MSD för denna typ av rörelse blir\cite{Barilan_CTRW}
+\begin{equation}\label{eq:CTRW_MSD}
+    \ev{x^2(t)} \approx \frac{\ev{\Delta x^2}}{A \Gamma(1+\alpha)}t^{\alpha} + \frac{2\ev{\Delta x}^2}{\Gamma(1+2\alpha)A^2} t^{2\alpha}, 
+\end{equation}
+där $A$ är en konstant som dyker upp i fördelningsfunktionen för väntetiderna, $\alpha$ en konstant som uppfyller $0<\alpha<1$ och $\Delta x$ steget mellan två positioner. Om $\ev{\Delta x}=0 $ försvinner andra termen och rörelsens MSD blir proportionell mot $t^\alpha$. Eftersom $\alpha < 1$ blir MSD:n inte linjär i tiden, utan ändringstakten kommer att avta med tiden och man får en rörelse som skiljer sig från den klassiska brownska rörelsen.
+Denna anomala transport uppstår då medelväntetiden mellan två hopp blir oändlig så att centrala gränsvärdessatsen därmed ej uppfylls. Summan av de stokastiska variablerna går således ej mot att bli normalfördelad, något som är grundläggande i teorin kring brownsk rörelse. 
 
+Teorin har visat sig kunna beskriva vissa aspekter av partikelrörelse i nät av F-aktin filament\cite{Barilan_CTRW}. Om partikelns radie var av samma storleksordning som genomsnittliga maskstorleken bands partiklarna tillfälligt i nätet, bortsett från termiska fluktuationer, för att sedan ta sig igenom en maska och fastna i ett nytt hålrum i nätet. MSD:n för dessa partiklar uppfyllde ett $t^{\alpha}$ beroende som i \eqref{eq:CTRW_MSD}. Partiklar med radie av mindre storleksordning än maskstorleken hade ett rörelsemönster mer likt brownsk rörelse medan de större partiklarna fastnade i nätet utan att kunna ta sig loss.
+%Om en liknande nätstruktur kan uppstå i jästceller kan man alltså förvänta sig olika resultat vad gäller rörelsen för partiklar av olika storlek.
+
+%Lästips:
 %https://faculty.biu.ac.il/~barkaie/chapter4.pdf
+%https://faculty.biu.ac.il/~barkaie/jstatBarkaiSokolov.pdf
+%https://faculty.biu.ac.il/~barkaie/Pathways.pdf
 
-\subsubsection{Fractional Brownian Motion}
 
-En annan modell som kan undersökas är Fractional Brownian motion~\cite{Hofling&Franosch2013} som bygger på superpositioner av Brownska processer med brus som uppvisar en beständig korrelation. Detta får transporten av partiklar att sakta ner med tiden jämfört med vanlig Brownsk rörelse.
+\subsection{Fractional Brownian Motion (fBm)}
 
-%Ger att lilla och stora delta lika
+En annan modell som kan undersökas är fractional Brownian motion~\cite{Hofling&Franosch2013} som bygger på superpositioner av Brownska processer med brus som uppvisar en beständig korrelation. Detta kan få transporten av partiklar att sakta ner med tiden jämfört med vanlig Brownsk rörelse.
 
-\subsection{Lösning av stokastiska differentialekvationer}
-\todo[inline]{Ska vi att ett separat teoriavsnitt om stokastiska
-  processer, SDE och korrelationsfunktioner m.m? Då skulle man kunna
-  ha lösningen av brownsk SDE ovan som exempel, och sedan fortsatt med
-  mer avancerade modeller under teorin för partikel/sträng.}
-\todo[inline, author=Andréas]{Jag tycker det blir bättre med ett eget
-  kapitel om detta. }
-
-\subsubsection{Stokastiska processer och korrelationsfunktioner}
-Ett slumptal, även kallat en stokastisk variabel, $X$ är ett objekt som kan anta värden $x$ med en viss sannolikhetsfördelning $P(X=x)=P_X(x)$. För en stokastisk variabel $X$ och en dess sannolikhetsfördelning kan man definiera objekt som förväntansvärdet av en funktion $f(X)$
+En normaliserad fBm $B_H(t)$ kan karakteriseras helt från följande egenskaper\cite{Dieker_fBm}: $B_H(t)$ har stationära ökningar, gaussisk fördelning för $t>0$ och $B_H(0)=0$ samt att
+\begin{align}
+    \ev{B_H(t)}&=0 \\
+    \ev{B^2_H(t)}&=t^{2H}
+\end{align}
+för $t\geq 0$ där Hurst parametern $H$ uppfyller $0< H <1$. För $H=\nicefrac{1}{2}$ återfås vanlig Brownsk rörelse. Kovariansen kan räknas ut teoretiskt med $0<
+t_1\leq t_2$ till
 \begin{equation}
-    \ev{f(X)} = \int_{\Omega} f(x)P(x) \id{x}
+\ev{B_H(t_1)B_H(t_2)}
+= \frac{1}{2} \left(t_1^{2H}+t_2^{2H}-(t_2-t_1)^{2H}\right)
 \end{equation}
-där $\Omega$ är området av alla möjliga värden på $x$, och $P_X(x)\dd{x}$ är sannolikheten att $X\in[x,x+\dd{x}]$. 
+vilket ger att för $H<\nicefrac{1}{2}$ fås positiv korrelation för två positioner i rörelsen och för  $H>\nicefrac{1}{2}$ fås negativ korrelation. Den negativa korrelationen ger brusigt utseende åt plotten över rörelsen då rörelsen ofta byter riktning medan den positiva korrelationen ger kurvan ett mer slätt utseende som tenderar att dra iväg i en bestämd riktning. Man kan även visa att fBm är den enda gaussiska process som uppträder självliknande, det vill säga att $B_H(at)$ och $a^H B_H(t)$ har samma ändligtdimensionella fördelning.
 
-Vidare kan en så kallad stokastisk process definieras från en stokastisk variabel $X$ som en samling av objekt som beror på den stokastiska variabeln $X$ och tiden $t$\footnotemark. Speciellt kan dessa objekt vara funktioner $f$ och $g$ enligt 
-\begin{equation}
-    f_X(t) = g(X,t)
-\end{equation}
-För ett givet värde på $X=x$ antar alltså den stokastiska processen en funktion
-\begin{equation}
-    f_x(t) = g(x,t)
-\end{equation}
-och således inses att, för alla värden på $X$ definierar $F_X(t)$ en
-samling av funktioner. 
+Stegen mellan varje positionsändring $\Delta{B_H}_k=B_H(k+1)-B_H(k)$ är standardnormalfördelad för varje $k$ men tillskillnad från ren brownsk rörelse är stegen i allmänhet inte oberoende. Ovan utpekades dessa ökningars  stationära egenskap som en av de karakteristiska dragen för fBm. Att ökningarna är stationära innebär att de saknar explicit tidsberoende, de beror bara på tidsintervallets storlek.
 
-Analogt med stokastiska variabler kan man definiera förväntansvärdet av en stokastisk process $F(t)$ enligt 
-\begin{equation}
-    \ev{F(t)} = \int_{\Omega} F_x(t)P_X(x) \id{x}
-\end{equation}
-
-Vidare definieras korrelationsfunktioner som beskriver korrelationen
-mellan objekt som förväntasvärdet av produkter av dessa objekt. Ett
-specialfall som ofta är intressant är
-autokorrelationsfunktionen\todo{Egentligen är väl detta kovariansen
-  (a.korr. måsta vara mellan $-1$ och $1$.)} 
-som definieras enligt
-\begin{equation}
-\Big\langle(F(t_1)-\ev{F(t_1)})(F(t_2)-\ev{F(t_2)})\Big\rangle 
-= \ev{F(t_1)F(t_2)} - \ev{F(t_1)}\ev{F(t_2)}
-\end{equation}
-som reducerar till variansen av $F(t)$ då $t_1=t_2$.
-
-Ur ett fysikaliskt perspektiv är ofta den stokastiska processen okänd, istället definieras den stokastiska processen via förväntansvärdet av olika storheter. Således är förväntansvärden av central betydelse för modeller av stokastiska processer. 
-
-\footnotetext{Att tiden $t$ väljs som deterministisk variabel är anledning till att det kallas stokastisk \textit{process}, mer generellt kan en godtycklig deterministisk variabel användas istället för tid.}
-
-\subsubsection{Stokastiska differentialekvationer}
-Differentialekvationer som innehåller termer med stokastiska processer
-betecknas stokastiska differentialekvationer och lösningen kommer
-således även den representeras av en stokastisk process. 
-Inom fysiken modellerar man ofta system med fluktuationer genom att betrakta
-tidsutvecklingen av ett system via motsvarande differentialekvation
-och man adderar sedan en stokastisk process för att representera
-fluktuationen. 
-Detta kallas Langevin formalism och motsvarande
-stokastiska differentialekvation kallas systemets Langevin ekvation. Ett
-illustrerande exempel av Langevin formalismen är fallet för brownsk
-rörelse som beskrivs ... 
-Som tidigare nämnts så är den stokastiska
-processen som beskriver systemets fluktuation oftast okänd, istället
-antas att fluktuationen har vissa karakteristiska egenskaper. Exempel
-på sådana egenskaper är att väntevärdet är $0$ enligt $\ev{F(t)} = 0$
-eller att fluktuationen är okorrelerad i tiden
-$\ev{F(t)F(t')}\propto\delta(t-t')$. Enligt tidigare
-\todo{Vaddå?} är lösningar till
-stokastiska differentialekvationer stokastiska processer, och om
-fluktuationen beskrivs med karakteristiska egenskaper och okänd
-sannolikhetsfördelning kommer detta speglas i lösningen till
-differentialekvationen. Således kommer inte sannolikhetsfördelningen
-av lösning att kunna finnas, istället betraktar man motsvarande
-karakteristiska egenskaper för lösningen som de hos
-fluktuationen. \todo{De sista meningarna här  beskrivs nog tydligare
-  med brownsk rörelse som exempel.} 
-  
-  
-
-\subsection{Analys av diskret data}
+\todo[inline]{Mer om fysikalisk tolkning och vad den används till idag}
+    
+%Förväntad spektral densitet finns även i källan
 
 
-\section{Tillhandahållen data}
-Datan som denna första del av arbetet baserats på kommer från Max
-Planck Institutet i Dresden och utgörs av mätningar av positionen för
-fluorescerande partiklar i jästceller. Jästcellerna har genmodifierats till att producera flourecerande protein som lätt bildar
-kluster. 
-\todo[author=Andréas]{Detta var vad Daniel sa på något av de första mötena.}
-Dessa kluster brukar vara av storleksordning 10--100\,nm,
-vilket kan jämföras med själva cellernas storlek på omkring
-1\,\micro{}m.
-% \todo{Kolla upp: Fästes de efteråt eller var de fluorescerande från
-%   början?} Fluorescerande ämnen fästes sedan på dessa massiva
-% proteinkluster för att man sedan lätt skulle kunna avläsa deras
-% Position med en kamera. 
-% Partiklarnas olika storlek speglas av att de har olika stark
-% ljusintensitet då fler fluorescerande ämnen tenderar att fästa på
-% större partiklar.
+%\section{Metod för dataundersökning} \todo[inline]{Inga tomma rubriker!}
 
-Data för ett hundratal partiklar från olika jästceller ingick i mätserien, både för aktiva celler och celler som försatts i dvala med sänkt metabol aktivitet. \todo{Källa}. Mätningen genomfördes med 10 bilder per sekund varur varje partikels position kunde följas.
 
-\todo[inline]{Det här käns som en hel del upprepning av vad som står i
-inledningen.}
+\section{Undersökning av de olika typerna av MSD}
 
-\section{Resultat}
-\todo[inline, author=Andréas]{Kanske ska vi fundera på en annan
-  struktur. \\ 
-  Kanske ska man ha ett kapitel om partikar och ett om strängar, men
-  spara alla resultat till ett eget kapitel?} 
+För att avgöra hur väl approximationen för partikelrörelsen som en brownsk rörelse gäller kan man jämföra om vissa förutsägelser från teorin kring brownsk rörelse stämmer överens med vad som kan observeras från uppmätt data. Bland annat räknades det fram i avsnitt~\ref{sec:brown} att mean square displacement (MSD) för en sådan partikel skulle öka linjärt med tiden, se \eqref{eq:MSD_brown}.
 
-\paragraph{Anisometri} Från givna data kunde en viss tendens till anisometri anas då partiklarna tenderade att röra sig längs med vissa riktningar. En minstakvadratanpassning för en rät linje gjordes för att kunna transformera de givna $x$- och $y$-koordinaterna till tangent- och normalkoordinater relativt den anpassade linjen för varje partikel. För dessa nya koordinater beräknades en tidskorrelation vilket visas i \figref{fig:Korr_tn} för både aktiva celler och celler i dvala.
+Vidare finns det minst två sätt att beräkna partiklarnas MSD. För stationära processer, det vill säga processer som inte explicit beror på när i tiden de inleds, kan man skapa ett medelvärde mellan alla möjliga mätpunkter separerade med givet tidsintervall $\Delta{t}$ enligt
+\begin{equation} \label{eq:lilla_delta}
+    \delta^2(\Delta t)= \frac{1}{N}\sum^N_{i=1}\frac{1}{m}\sum^m_{j=1}(x_i(t_j+\Delta t)-x_i(t_j))^2
+\end{equation} 
+där $N$ är antalet partiklar och $m$ antalet möjliga tidsintervall av längd $\Delta t$.
+Genom att jämföra resultatet från denna typ av beräkning med att istället bara ta medelvärdet mellan alla partiklars kvadrerade radiella avvikelse från startpunkten vid given tid från start, det vill säga
+\begin{equation} \label{eq:stora_delta}%Byta plats?
+    \Delta^2(\Delta t)= \frac{1}{N}\sum^N_{i=1}(x_i(\Delta t)-x_i(0))^2,
+\end{equation} 
+kan man avgöra om processen är stationär då dessa därmed borde ge samma resultat. Att beräkna MSD med hjälp av \eqref{eq:stora_delta} kan dock ge en kurva med betydligt brusigare utseende då färre medelvärden fås med i denna summa. 
 
-%Tillfällig bild, kan förbättras
-%Bör definitivt ändras till eps eller pdf.
+\subsection{Resultat}
+Utifrån givna data för arbetet har ett potenssamband kunnat anpassas till partiklarnas MSD med en exponent som är lägre än 1. Detta tyder på att partikeln inte utför en ren brownsk rörelse utan genomgår en så kallad subdiffusion, karakteriserat av att partikelns MSD beror av tiden via ett potenssamband med exponent mindre än 1 men större än 0.
+
 \begin{figure}
     \centering
-    \includegraphics[width=.8\textwidth]{Korrelation_tnkoordinat.png}
-    \caption{Korrelation i tangent- och normal-koordinaterna för aktiva celler och celler i dvala. I båda fall sjunker korrelationen initialt snabbare för cellerna i dvala. Korrelationen tycks även bestå längre i tangentialkoordinaten än normalkoordinaten vilket tyder på att det finns en föredragen väg.}
-    \label{fig:Korr_tn}
+    \includegraphics[width=.8\textwidth]{MSD_lilla_delta_alla.png}
+    \caption{MSD beräknad under antagande att processen är stationär enligt \eqref{eq:lilla_delta} för energydepleted- och logphaseceller. Ett potenssamband har anpassats för att kunna göra jämförelser med teorin i tidigare avsnitt.}
+    \label{fig:MSD_ld}
+\end{figure}
+\todo{Strecka anpassning för att tydligare se data}
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\textwidth]{MSD_stora_delta_alla.png}
+    \caption{MSD beräknat genom positionsförändring jämfört med startögonblicket efter $\Delta$t sekunder, beräknat enligt \eqref{eq:stora_delta}. Från potenssambandsanpassningen ses att exponenten för logphasecellerna skiljer sig väsentligt åt mellan $\Delta^2$ och $\delta^2$, se figur \ref{fig:MSD_ld} medan exponenterna för energydepleted-cellerna sammanfaller nästan exakt. Detta tyder på att de sistnämnda cellerna undergår en mer stationär process.}
+    \label{fig:MSD_sd}
 \end{figure}
 
-\paragraph{Avvikelse från brownsk rörelse}
-%Har vi exempel på avvikelse från teorin kan dessa läggas under seprata underrubriker här
-Utifrån teorin kring brownsk rörelse kan vissa förutsägelser göras för partiklar som strikt följer denna typ av rörelse. Bland annat räknades det fram i sektion \ref{sec:Brownsk} att mean square displacement (MSD) för en sådan partikel skulle öka linjärt med tiden, se ekvation \eqref{eq:MSD_Brownsk}. Utifrån givna data för arbetet har ett potenssamband kunnat anpassas med en exponent som är skilld från och betydligt lägre än 1. Detta tyder på att partikeln inte utför en ren brownsk rörelse utan genomgår en så kallad subdiffusion, karakteriserat att partikelns MSD beror av tiden via ett potenssamband med exponent mindre än 1 men större än 0.
-\todo{Här kan bild infogas}
+Båda dessa beräkningar har utförts för given data och exponentens värde i sambandet mellan MSD och tid skiljer sig olika mycket åt för energydepleted (dvala) och logphase (aktiva) cellerna, se figur \ref{fig:MSD_ld} och \ref{fig:MSD_sd}. Mest relevant är kanske att jämföra exponenterna i det anpassade potenssambandet som för energydepleted cellerna blev 0,64 för $\delta^2$ och 0,65 för $\Delta^2$. Med denna lilla skillnad ter sig partikelrörelsen för celler i dvala vara en ganska stationär process, något som inte lika säkert kan uttalas för resultatet från de aktiva logphase cellerna. Där blev exponenten 0,83 för $\delta^2$ och 0,69 för $\Delta^2$. En väsentlig skillnad, men hurvida resultatet säger något om att processen är stationär eller ej kan ej uttalas utan att hänsyn tagits till relevanta felgränser.
 
-Vidare finns det minst två sätt att beräkna partiklarnas MSD. För stationära processer, dvs processer som inte explicit beror på när i tiden de inleds, kan man skapa ett medelvärde mellan alla möjliga mätpunkter separerade med givet tidsintervall så som beskrivet i ekvation ...
-\todo{Kanske bör vi lägga till ett stycke om hur egenskaperna beräknas utifrån diskret data}
-Genom att jämföra resultatet från denna typ av beräkning med att istället bara ta medelvärdet mellan alla partiklars kvadrerade radiella avvikelse från startpunkten vid given tid från start kan man avgöra om processen är stationär.
-\todo{Bild för jämförelse mellan lilla och stora delta}
-Båda dessa beräkningar har utförts för given data och exponentens värde i sambandet mellan MSD och tid skiljer sig/överensstämmer för lite för att någon tydlig slutsats hurvida processen är stationär eller ej ska kunna dras. \todo{Eller?}
+Från dessa beräknade MSD-plottar kan man även avläsa att logphase-cellerna har högre exponent  för både $\delta^2$ och $\Delta^2$ vilket tyder på att partiklarna sprids ut snabbare i dessa cellers cytoplasma jämfört med energydepleted-cellerna. Ökad aktivitet i cellen tycks därmed ge ökad diffusion.
 
 
-\section{Diskussion och slutsats}
+\begin{comment} %För att dölja för fackspråk
+\section{Spektraltäthet och brushantering}
+Ett annat verktyg för att undersöka partilarnas rörelser är att titta på vad för spektraläthet partiklarnas position har. Spektraltätheten erhålls genom att ta Fouriertransformen av partikelns position som funktion av tid. På så sätt erhålls ett mått på hur mycket av varje frekvens som finns. Detta kan vara användbart på flera olika sätt; bland annat ger det ett annat sätt att \todo{Jag vet fortfarande inte hur man gör här}ta fram hur MSD:n beter sig, men spektraltätheten kan också användas för att 
+
+Om man 
+\begin{equation}
+\hat{x} = x + \sigma\eta
+\end{equation}
 
 
+\todo[inline]{Mer kommer sen.}
+
+Ett annat sätt att upptäcka bruset i en mätning är att titta på 
 
 
+\subsection{Resultat}
 
+
+\end{comment}
+
+
+\section{Anisotropi}
+Om man misstänker att cellens inre struktur påverkar partikelrörelserna skulle eventuell anisotropi kunna ge ett bidrag till dessa. Alltså ifall det finns föredragna riktningar för partikeln att röra sig i. Ett sätt att undersöka detta är genom att betrakta koordinaternas \todo{Anpassa till kap. 2!}kovarianstensor som är en tensor med de olika koordinaternas statistiska andramoment:
+\begin{equation}
+C_{ij} = \frac{1}{N} \sum_{n=1}^{N} r_i^{(n)}r_j^{(n)},
+\end{equation}
+där $r_i^{(n)}$ är den $i$:te koordinaten ($x$ eller $y$) i den $n$:te datapunkten. Man kan också skriva $C$ på matrisform enligt
+\begin{equation}
+C=
+\begin{bmatrix} \label{eq:C_matrix}
+\ev{x^2} & \ev{xy}\\
+\ev{yx} & \ev{y^2}
+\end{bmatrix}.
+\end{equation}
+
+Notera hur snarlik $C$ är med tröghetstensorn för en kropps olika tröghetsmoment som uppkommer i mekaniken. Och precis som i mekaniken kan man hitta två principalaxlar genom att ta fram dess egenvektorer och diagonalisera tensorn. I mekaniken svarar principalaxlarna mot de riktningar av rörelsemängdsmoment som är oberoende av rotation längs andra axlar. I de här statistiska sammanhangen finns det en liknande tolkning nämligen att principalaxlarna svarar mot de riktningar i cellen där rörelserna är oberoende av varandra. Egenvärdena i dessa två riktningarna svarar mot variansen i den oberoende koordinaten längs med den riktningen.
+
+\todo[inline]{Byta till assymetrimåttet: $A=\dfrac{\ev{(\lambda_1 - \lambda_2)^2}}{\ev{(\lambda_1 + \lambda_2)^2}}$. }
+
+För att ur kovarianstensorn få ut ett mått på hur isotrop partikelns position är kan man undersöka kvoten
+\begin{equation}
+\varLambda = \frac{\lambda_2}{\lambda_1} >1
+\end{equation}
+mellan det större, $\lambda_2$, och det mindre, $\lambda_1$,  egenvärdet till $C$. Egenvärdena själva svarar som sagt mot variansen i de olika riktningarna, vilket motsvarar hur mycket partikeln har rört sig i respektive rikting. Hade positionerna varit helt isotropt fördelade så hade alltså $\varLambda=1$. 
+
+Något som också kan ge en vink om hur asymmetrisk partikelns rörelse är, är följande asymmetrimått \cite{Hong_asymmetri1998}
+\begin{equation}
+A=\dfrac{\ev{(\lambda_1 - \lambda_2)^2}}{\ev{(\lambda_1 + \lambda_2)^2}}.
+\end{equation}
+A=0 svarar här mot att rörelsen i snitt sker helt cirkulärt symmetriskt medan A=1 ger att rörelsen endast sker i en riktning, längs en linje. Man kan enkelt visa att egenvärdena till \todo{Eller gyration tensorn?}kovarianstensorn i ekvation \todo{Dra bort medelvärde?} \eqref{eq:C_matrix} uppfyller
+\begin{align}
+    \lambda_1+\lambda_2 &= \ev{x^2}+\ev{y^2} \\
+    \abs{\lambda_1-\lambda_2} &= \sqrt{(\ev{x^2}-\ev{y^2})^2 + 4\ev{xy}^2}.
+\end{align} %&= för att den ska linjera efter "="
+För en given fördelningsfunktion med ändliga moment blir det därmed nu möjligt att beräkna denna kvot teoretiskt.
+
+\todo{Lägga under respektive underrubrik istället?}För fBm fås en approximativ formel i gränsen där antalet mätpunkter blir mycket stort
+\begin{equation} \label{eq:A_fBm}
+A=2-\frac{\frac{1}{2(H+1)^2}}{\frac{1}{2(H+1)^2}+\frac{2H+1}{4(4H+1)}-\frac{1}{4H+3}-\frac{\Gamma^2(2H+2)}{\Gamma(4H+4)}},
+\end{equation}
+där $H$ är Hurst parametern som karakteriserar rörelsen och $\Gamma$ gamma-funktionen. För $H=\nicefrac{1}{2}$ fås en vanlig brownsk rörelse med motsvarnade  assymetrimått $A=\nicefrac{4}{7}$.
+
+%Även http://iopscience.iop.org/article/10.1088/0305-4470/19/4/004/pdf
+
+\subsection{Simuleringar}
+Eftersom en mätning bara kan bestå av ett ändligt antal datapunkter kan även en äkta, isotrop Brownsk rörelse ge upphov till $\varLambda>1$. Vidare är \emph{kvoten} mellan egenvärden inte linjär, vilket gör en teoretisk analys av fördelningarna mycket svår. För att ändå kunna säga något om den riktiga datan kan man ganska enkelt ta fram en fördelning för $\varLambda$ för några olika modeller genom simulering. 
+
+De modeller som testats är en vanlig Wienerprocess, en Wienerprocess med ett ''mätbrus'' pålagt och en Ornstein–Uhlenbeck-process. Från dessa processer samt från datan över partikelrörelsen erhölls olika fördelningar av egenvärdeskvoter. 
+%För att vara konsekvent vid beräkningen av fördelningarna användes alltid kvoten av det större egenvärdet delat med det mindre. Detta ger att $\varLambda$ kan anta värden från $1$ och uppåt. 
+
+Wienerprocessen simulerade fram partikelns position i varje ny tidpunkt genom att gå ett normalfördelat steg från positionen i den förra tidpunkten. Detta kan skrivas som
+\begin{equation}\label{eq:sim_wiener}
+x_{i+1} = x_i + \delta 
+\qcomma  \delta \sim N(0, \sigma)
+\end{equation}
+och där $x_1=0$. Sedan gör man samma sak för $y$. Eftersom $\varLambda$ ger ett mått på hur mycket partikeln \emph{föredrar en viss riktning}, finner man att värdet på $\sigma$ inte påverkar fördelningen -- så länge $\sigma$ är samma för både $x$ och $y$. Detta blir uppenbart när man tänker på att \eqref{eq:sim_wiener} kan skrivas som 
+\begin{equation}
+x_{i+1} =\sigma\,\hat{x}_{i+i} = \sigma\,\left( \hat{x}_i + \hat{\delta} \right) 
+\qcomma  \hat{\delta} \sim N(0, 1).
+\end{equation}
+Alltså att $\sigma$ bara är en multiplikativ konstant framför positionen.
+
+För att istället simulera en Wienerprocess med mätbrus användes \eqref{eq:sim_wiener} för att först simulera själva Wienerprocessen för att sedan \emph{efteråt} addera en slumpad brusterm $\eta \sim N(0, \sigma')$ till varje $x_i$. Den väsentliga skillnaden mot en ren Wienerprocess är att mätbruset $\eta$ inte påverkar nästkommande position. Till skillnad från den rena Wienerprocessen så kommer värdena på $\sigma$ och $\sigma'$ att påverka $\varLambda$, men enligt samma argument som ovan kommer bara kvoten $\nicefrac{\sigma'}{\sigma}$ vara det som påverkar. Detta gör att simuleringarna med mätbrus går att genomföra med olika värden på parametern $\nicefrac{\sigma'}{\sigma}$ för att få olika fördelningar av $\varLambda$. 
+
+Ornstein-Uhlenbeck-processen i \eqref{eq:SDE_o-u} simulerades genom att använda derivatan för tidsutveckling och genom att sätta $\bar{x}=0$. Man får då
+\begin{equation}
+x_{i+1} = x_i + \Delta{t}\,\pd_{t}x  = (1-k) x_i +  \delta 
+\qcomma  \delta \sim N(0, \sigma),
+\end{equation}
+där $x_1=0$. Notera här att den styrande parametern i simuleringarna är $k=\gamma\Delta{t}$, samt att $\sigma$ på samma sätt som för den rena Wienerprocessen kan väljas godtyckligt utan att påverka $\varLambda$. 
+
+Eftersom resultatet för Asymmetrimåttet i ekvation \eqref{eq:A_fBm} gäller för riktigt långa mätningar medan den data som analyseras i detta arbete är ganska begränsad kan man försöka simulera fram sannolikheter istället. Genom att simulera många mätserier för samma antal steg och antal partiklar som i datan kan man bedöma sannolikheten att det framräknade asymmetrimåttet till exempel skulle ha kommit från en ren klassisk brownsk rörelse. 
+
+\subsection{Resultat}
+En anledning till att kolla om en tydlig asymmetri kan uttydas ur datan över partiklarnas rörelse är att bedöma hurvida man istället för de givna x- och y-koordinaterna bör gå över till tangential- och normal-koordinater. Eftersom ingen sådan uttalad assymetri verkar finnas borde koordinatsystemet lämnas som det är.
+
+Genom att spela upp datan över partikelpositionerna som en film blir det tydligt att vissa partiklar stöter på större strukturer i cytoplasman som de inte kan rubba ur vägen utan måste ta sig runt. För dessa partiklar ter sig cytoplasman alltså inte helt isotrop. \todo{Vad kan man säga mer här?}
+
+
+%Mer isotropt än vid brownsk rörelse. Påverkas kanske av cellens inre utformning och hålls på plats
+
+
+\begin{comment}%För att gömma för fackspråk
+\section{Storleksberoende}
+
+%Om värdena skiljer sig åt väsentligt för små och stora partiklar -> CTRW mer trolig. 
+
+\subsection{Resultat}
+\end{comment}
+
+
+\section{Diskussion}
+
+%Om sambandet mellan intensitet och partikelstorleken påverkar resultatet
+
+%Byter man till normal- och tangential-koordinater bygger man in ett bias som påverkar resultaten till att det verkar finnas egenskaper som egentligen inte finns. 
+%Av slumpskäl kommer vissa vägar att vara mer raka än andra medan andra får mer symmetriska banor.
 
 
 %Bara en liten kodsnutt som behövs när man kompilerar lokalt

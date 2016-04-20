@@ -1,0 +1,314 @@
+\chapter{Stokastiska processer och differentialekvationer}
+
+För att beskriva de system som undersöks i det här arbetet
+behöver man ta till stokastisk analys. I vanliga fall brukar
+det räcka med ordinära eller partiella differential\-ekvationer (ODE:er
+eller PDE:er) för att beskriva fysikaliska stystem. Tillräckligt små objekts beteende kommer dock att påverkas betydligt av termiska fluktuationer. Dessa termiska fluktuationer kan betraktas som helt
+slumpmässiga, varför de då kan beskrivas med \emph{stokastiska processer}. Påverkan på ett system från en stokastisk process leder
+till att den styrande differentialekvationen behöver modifieras med en stokastisk term,
+det blir då en \emph{stokastisk differentialekvation} (SDE). Således 
+ämnar följande avsnitt att introducera viktiga begrepp och metoder 
+som senare används för att studera rörelsen av partiklar i celler samt 
+strängar i vätskor. 
+
+Ett exempel på när ett system består av så ''små objekt'' att termiska
+fluktuationer behöver beaktas är i så kallad \emph{Brownsk rörelse}. 
+Detta är ett fenomen där pollenkorn och andra små partiklar vandrar
+runt tillsynes slumpmässigt på en vattenyta. Fenomenet beskrevs först av Robert Brown
+1828~\cite{Brown1828}, men förklarades först senare av Einstein
+1905~\cite{Einstein1905}. Förklaringen går ut på att pollenkornen är
+små nog för att kollisioner med vattenmolekyler ska överföra
+tillräckligt med rörelsemängd för att pollenkornens rörelseändring ska bli synbar med ett mikroskop. 
+
+
+\section{Stokastiska processer}
+En \emph{stokastisk variabel} $X$ är ett objekt som kan anta värden
+$x$ från en viss värdemängd $\Omega$. Vilka värden som antas styrs av
+sannolikhetsfördelningen $P(X=x)$. I fallet med diskreta stokastiska
+variabler är sannolikhetsfördelningen helt enkelt sannolikheten att
+$X$ antar värdet $x$. Men i det här arbetet ligger fokus på
+kontinuerliga stokastiska variabler. För dessa gäller att sannolikheten för att X antar ett värde i intervallet $[x, x+\dd{x}]$ ges av
+\begin{equation}
+P(X\in[x, x+\dd{x}]) =p_X(x)\dd{x}
+\end{equation}
+för någon infinitesimal intervallbredd $\dd{x}$ och där $p_X$ är sannolikhetsfördelningen för $X$. 
+I fortsättningen av detta arbete kommer ''stokastisk variabel'' att
+avse en \emph{kontinuerlig} stokastisk variabel om inget annat anges.
+
+
+Från detta kan en så kallad \emph{stokastisk process} definieras som en
+samling av objekt som beror på en stokastisk variabel $X$ och en
+deterministisk variabel, ofta betraktad som en tid\footnotemark{}
+$t$. Speciellt brukar dessa objekt vara 
+funktioner, $F_X(t)$. För ett givet värde $X=x$ blir alltså den
+stokastiska processen en funktion $F_x(t)$, vilket medför att $F_X(t)$
+definierar en samling av funktioner. 
+\footnotetext{Att tiden väljs som deterministisk variabel är
+  anledning till att det kallas stokastisk \emph{process}; man tänker
+  sig att ett tidsförlopp som beror av den stokastiska variabeln
+  utspelar sig. Mer generellt kan en godtycklig deterministisk
+  variabel användas istället för tid.}  
+
+\subsection{Statistiska verktyg för att undersöka stokastiska processer}
+Stokastiska processer är som sagt \emph{slumpartade} processer. Därmed kan
+det vara svårt att avgöra processens natur enbart utifrån ett fåtal
+observationer. För att kunna undersöka en stokastisk process
+behövs olika statistiska verktyg som exempelvis väntevärde, varians
+och korrelation. 
+
+För en stokastisk variabel $X$ kan man definiera ett \emph{väntevärde} med hjälp av variabelns sannolikhetsfördelning $P(x)$ enligt
+\begin{equation}\label{eq:EV}
+    \ev{X} = \int_{\Omega} x P(x) \id{x}.
+\end{equation}
+Något löst sett kan det betraktas som medelvärdet man förväntas få vid
+upprepade mätningar av $X$. 
+Väntevärdet går även att utvidga till att även omfatta funktioner av
+den stokastiska variabeln. Man får då 
+\begin{equation}\label{eq:EV_f}
+    \ev{f(X)} = \int_{\Omega} f(x) P(x) \id{x}.
+\end{equation}
+Speciellt i fallet med stokastiska processer blir väntevärdet 
+\begin{equation}\label{eq:EV_process}
+    \ev{F_X(t)} = \int_{\Omega} F_x(t)P_X(x) \id{x}.
+\end{equation}
+Notera här att väntevärdet är beroende av $t$. 
+
+Vidare definierar man det n:te momentet enligt 
+\begin{equation}
+    \ev{F(t_1)F(t_2)..F(t_n)} = \int_{\Omega} F(t_1)F(t_2)...F(t_n)P_X(x)dx.
+\end{equation}
+Om momentfunktionen är oberoende av en translation $t_i\to t_i+\tau$, där $i=1,2,..n$, för alla val av $n$ och $t_i$ definieras den stokastiska processen som \emph{stationär}. Speciellt har stationära processer ett  väntevärdet $\ev{F(t)}$ som är oberoende av $t$. 
+
+Om väntevärdet är ett mått på vad man får som medelvärde, så behövs
+även ett mått på hur spridda värden man kan tänkas få. För det används
+\emph{variansen}, som går att formulera på några olika sätt
+\begin{equation}\label{eq:VAR}
+\sigma_X^2=\VAR{X} = \ev{\left(X-\ev{X} \right)^2} = \ev{X^2}-\ev{X}^2.
+\end{equation}
+Dock ger variansen, som man kan se, ett kvadratiskt mått på
+avvikelser från medelvärdet. Därför kan det, exempelvis i sammanhang
+där man vill jämföra spridningen i en mätserie, vara mer intressant
+att betrakta \emph{standardavvikelsen} $\sigma_X$ som ges av roten ur
+variansen.
+
+Man kan på analogt sätt definiera en \emph{kovarians}
+\begin{equation}\label{eq:COV}
+\COV{X}{Y} 
+= \Big\langle \big(\, X-\ev{X}\big)\;\big(\, Y-\ev{Y}\big) \Big\rangle
+= \ev{XY}-\ev{X}\ev{Y}.
+\end{equation}
+Kovariansen är ett mått på hur mycket två stokastiska variabler
+samvarierar. Speciellt syns också att $\COV{X}{X}=\VAR{X}$; alltså att
+kovariansen övergår i variansen för $Y=X$. Vidare gäller att om
+variablerna är \emph{statisktiskt oberoende} så är kovariansen 0.
+%\todo{Ska detta betraktas som en definition av ''oberoende''?}
+%\todo[color=green]{Tror inte kovariansen är noll medför stat oberoende. Bör definieras med betingad sannolikhet.}
+
+I fallet med stokastiska processer kan det vara intressant att veta
+hur korrelerade processerna är i till exempel tiden. För det används
+korrelationsfunktionen 
+\begin{equation}\label{eq:CORR}
+c(t, t') = \frac{\COV{F_X(t)}{F_Y(t')}}{\sigma_{F_X}\sigma_{F_Y}}.
+\end{equation}
+Här har kovariansen delats med respektive standardavvikelse för att
+korrelationsfuntionen ska ge ett värde mellan 
+%\todo{Detta fås av Cauchy-Schwarzs olikhet. Ska man säga det?}\todo[color=green]{La till olikheten här}
+$-1$ och $1$, där $1$ motsvarar perfekt korrelation och $-1$ perfekt antikorrelation, vilket följer av Cauchy-Schwarzs\cite{Engelberg_noise2007} olikhet 
+\begin{equation}
+\sigma_{F_X}^2\sigma_{F_Y}^2\geq \Big(\COV{F_X}{F_Y}\Big)^2.
+\end{equation}
+
+Om den stokastiska processen är stationär, vilket ofta gäller, innehar korrelationsfunktionen
+translationssymmetri i $t$, varför man kan
+ersätta de båda variablerna $t$ och $t'$ med deras differens $\Delta t$:
+\begin{equation}
+c(\Delta t) = C(t, t+\Delta t).
+\end{equation}
+Från korrelationsfunktionen för en stationär stokastisk process kan en karakteristisk tid definieras som den tid $\tau_k$ sådan att korrelationsfunktionen $c(\Delta t\geq\tau_k)$ blir försumbart liten. 
+
+Vid studie av en stokastisk process med flera diskreta komponenter $F_i$ är det fördelaktigt att definiera en kovariansmatris som beskriver kovariansen mellan dessa komponenter. Kovariansmatrisen definieras enligt 
+\begin{equation}
+\label{eq:kovmatris}
+    C_{ij}(t, t') = \COV{F_i(t)}{F_j(t')}.
+\end{equation}
+Diagonalen i $C_{ij}$ svarar så autokorrelationsfunktioner, det vill säga hur en stokastisk process korrelerar med sig själv, och avdiagonala element blir kovariansen mellan komponenenterna $F_i(t)$ och $F_j(t')$. Betraktas en stationär stokastisk process så reduceras kovariansmatrisen likt tidigare enligt $C_{ij}(t,t')\to C_{ij}(t,t+\Delta t)$ där $\Delta t = |t-t'|$. 
+
+
+\subsubsection{Diskret data}
+\label{seq:diskretdata}
+Som man kan se så bygger alla dessa 
+verktyg på olika väntevärden. Så för att kunna tillämpa
+dessa statistiska metoder behövs ett stort statistiskt underlag baserat på
+många observationer. Detta eftersom väntevärdet är det medelvärde
+som förväntas av en variabel efter tillräckligt många observationer.
+
+När man gör statistiska analyser använder man alltså medelvärdet i en
+mätserie för att approximera väntevärden. Man får helt enkelt
+\begin{equation}\label{eq:mean}
+\ev{X} \approx \bar{x} = \frac{1}{N} \sum_{i=1}^N x_i,
+\end{equation}
+där $x_i$ är de olika observationerna av $X$ och N dess totala antal. 
+
+När man ska beräkna variansen från ett stickprov kräver båda uttrycken
+i \eqref{eq:VAR} två väntevärden. Om inte $\ev{X}$ är känt får man
+alltså in två approximationer när man använder \eqref{eq:mean} för att
+beräkna väntevärdena i \eqref{eq:VAR}. Detta bidrar bland annat till att en approximation av standardavvikelsen kan göras enligt
+\begin{equation}
+\sigma_X^2 \approx \bar{\sigma}_X^2
+=  \frac{1}{N-1} \sum_{i=1}^N \left(x_i-\bar{x}\right)^2.
+\end{equation}
+Detta är standardfelet, $\bar{\sigma}_X$, i kvadrat beräknat med
+Bessels korrektion~\cite{Rice_matstat2006}, som innebär att man använder ${N-1}$
+i nämnaren istället för bara $N$. Approximationen av kovariansen
+följer helt analogt från \eqref{eq:COV}.
+
+\todo[inline]{Lägga kovariansmatrisen nedan under egen rubrik?}
+
+Vidare kan kovariansmatrisen $C$ beräknas från observerad data av en samling stokastiska processer $A_i(t)$ där $i=1,2,..n$ och $n$ antal processer. För observerad data under en tid $T$ kan denna således beräknas enligt 
+\begin{equation}
+     \COV{A_i}{A_j} \approx \frac{1}{T-1}\sum_{t=1}^T \left(A_i-\bar{A_i}\right)\left(A_j-\bar{A_j}\right),
+\end{equation}
+från vilket det ses att $C$ är symmetrisk samt reell, givet att $A$ är en reell stokastisk process. Linjär algebra och spektralsatsen medför vidare att den allmänt icke-diagonala symmetriska samt reella kovariansmatrisen är diagonaliserbar. På matrisform fås kovariansmatrisen till att bli precis $C=AA^T$ där $A$ är en matris med de stokastiska processerna $A_i(t)$ som kolonnvektorer. Den diagonaliserade kovariansmatrisen fås då enligt 
+\begin{equation}
+    D = V^TCV,
+\end{equation}
+där $D$ är en diagonal matris med egenvärdena till $C$ och $V$ är en matris med egenvektorerna $b_\alpha$ som kolonner. De statiskt beroende variablerna $A_i(t)$ kan nu uttryckas i basen bestående av egenvektorer som
+\begin{equation}
+\label{eq:B}
+    B_{\alpha}(t) = \sum_i V_{\alpha i}A_i(t),
+\end{equation}
+för $\alpha = 1,2,..n$. På matrisform kan detta beskrivas med matrisen $B_{\alpha t}$, där varje rad beskriver utvecklingen i tid av egenvektorerna till $C$. Betrakta nu kovariansen mellan komponenter till $B_{\alpha}$  enligt 
+\begin{equation}
+    \COV{B_{\alpha}}{B_{\beta}} = BB^T. 
+\end{equation}
+Från ekvation \ref{eq:B} ses att $B=V^TA$ vilket ger 
+\begin{equation}
+    \COV{B_{\alpha}}{B_{\beta}} = V^TAA^TV = D,
+\end{equation}
+där enligt tidigare $C=AA^T$, således ses att $B_{\alpha}(t)$ är statistiskt oberoende då alla avdiagonala element i kovariansmatrisen är noll och där de diagonala elementen, egenvärdena till kovariansmatrisen $C$, svarar mot variansen av $B_{\alpha}(t)$. Till skillnad från de stokastiska komponenterna $A_i$ som allmänt ej är statistiskt oberoende så är alltså $B_\alpha$ statistiskt oberoende. %Egenskaper hos kovariansmatrisen samt linjär algebra ger alltså ett recept på hur man utvinner statistiskt oberoende komponenter från en mängd statistiskt beroende. 
+\todo[inline]{detta kanske inte bör ligga under diskret data. Tyckte dock det var lättast att ''visa'' att kovmatrisen var symmetrisk här. Kanske placera under strängar eller ev appendix ist?}
+
+\subsection{Wienerprocessen}
+
+
+\section{Stokastiska differentialekvationer}
+En differentialekvation som innehåller termer bestående av stokastiska
+processer kallas en stokastisk differentialekvation (SDE). Lösningen
+till en SDE kommer representeras av en stokastisk process eftersom
+minst en av de ingående termerna är stokastisk. Detta gör att man även
+får en stokastisk utveckling av systemet. 
+
+Inom fysiken modellerar man ofta system med fluktuationer genom
+att betrakta tidsutvecklingen av ett system via dess styrande
+differentialekvation. 
+För att studera systemet under påverkan av en stokastisk fluktuation,
+exempelvis brus i en elektrisk krets, lägger man till en term i
+differentialekvationen som representerar fluktuationen. 
+Detta kallas \emph{Langevinformalism} och motsvarande stokastiska
+differentialekvation kallas systemets \emph{Langevinekvation}. 
+Ett illustrerande exempel av Langevinformalismen är fallet för
+Brownsk rörelse som beskrivs i avsnitt~\ref{sec:brown}.
+
+Ett problem som här kan uppstå är att man inte känner till
+fluktuationens fördelning. Oftast brukar man dock göra vissa
+antaganden om fluktuationen, till exempel följande:
+\begin{equation}\label{eq:white_noise}
+\begin{aligned}
+\ev{W_\omega(t)}&=0 \\
+\ev{W_\omega(t)W_\omega(t')}&= \sigma_W^2 \, \delta(t-t'), \\
+\end{aligned}
+\end{equation}
+\todo{Skriv om stycket!}
+där $W_\omega(t)$ är den stokastiska process som beskriver
+fluktuationen. Vad dessa antaganden säger är att medelvärdet av
+$W_\omega(t)$ ska vara noll och att fluktuationerna ska vara oberoende i skilda tidpunkter. Vidare utgör faktiskt \eqref{eq:white_noise} definitionen 
+\cite{Engelberg_noise2007} för \emph{vitt brus}. Så ur en fysikalisk synpunkt är detta ganska rimliga
+antaganden för att ge en intuitiv bild av ''brus''. 
+
+Antaganden om fluktationens 
+väntevärde och korrelation men med en okänd sannolikhetsfördelning leder
+till att lösningen till Langevinekvationen endast kan beskriva motsvarande
+storheter. Alltså studeras under dessa antaganden oftast inte lösningen som sådan, utan 
+istället motsvarande väntevärde samt 
+korrelation för lösningen.  
+
+%\subsubsection{Integrering}
+%\todo[inline]{Hur och varför flytta in $\ev{\cdot}$ under integral.}
+
+
+
+
+
+\subsection{Brownsk rörelse}\label{sec:brown}
+Hastigheten för en partikel som utför ren Brownsk rörelse styrs av
+Langevinekvationen~\cite{Mazo_Brownian2002} 
+\begin{equation} \label{eq:Brownian_SDE}
+    M\dv{v}{t}=-\zeta v + F(t),
+\end{equation}
+där $M$ är partikelmassan, $\zeta$ en friktionskonstant och $F(t)$ en
+stokastisk, fluktuerande kraft. Kraften utgör här det stokastiska
+bidraget och uppfyller egenskaperna för vitt brus enligt \eqref{eq:white_noise}.
+
+Den fysikaliska tolkningen av denna stokastiska kraft är att partikeln
+får små impulser från omgivande vätskepartiklar vilka kolliderar
+slumpmässigt med partikeln.  
+Denna kraftterm kan vidare tolkas som derivatan av en
+Wienerprocess i gränsen då kollisionerna infaller med hög frekvens. En
+Wienerprocess är en tidskontinuerlig stokastisk process där varje steg är oberoende av tidigare steg och är normalfördelat med väntevärde 0.
+%Motivation att derivata av Wienerprocess s63
+
+Lösningen till den stokastiska differentialekvationen
+\eqref{eq:Brownian_SDE} ges av  
+\begin{equation}
+v(t)
+=v(0)\ee^{-\nicefrac{\zeta t}{M}}
+ +\frac{1}{M}\int^t_0 F(\tau)e^{-\nicefrac{\zeta (t-\tau)}{M}} \id\tau.
+\end{equation}
+Detta får dock inte den stokastiska termen att försvinna och lösningen kan inte skrivas på en deterministisk form. För att ändå kunna göra några förutsägelser kan man titta på väntevärdet och korrelationen i tiden. Betrakta därför följande korrelation, där $\delta t\geq0$,
+\begin{equation}
+\ev{v(t)v(t+\delta t)} 
+= v(0)^2\ee^{-\nicefrac{\zeta}{M}(2t+\delta t)}
++ \frac{1}{M^2}\ee^{-\nicefrac{\zeta (2t+\delta t)}{M}}
+  \int_0^t\int_0^{t+\delta t}\dd\tau\dd\tau'\, 
+    \ee^{\nicefrac{\zeta (\tau+\tau')}{M}}\ev{F(\tau)F(\tau')}.
+\end{equation}
+Utnyttja att $F(t)$ är deltakorrelerad i tid vilket ger 
+\begin{equation}
+\ev{v(t)v(t+\delta t)} 
+= v(0)^2\ee^{-\nicefrac{\zeta}{M}(2t+\delta t)}
+ +\frac{\sigma^2}{M^2}\ee^{-\nicefrac{\zeta (2t+\delta t)}{M}}
+  \int_0^t\dd\tau\ee^{\nicefrac{2\zeta \tau}{M}}.
+\end{equation}
+Korrelationen ovan kan nu enkelt beräknas och genom att låta $\delta t\to 0$ samt $t\to \infty$ fås följande samband
+\begin{equation}
+    \ev{v(t)^2} = \frac{\sigma^2}{2M\zeta}.
+\end{equation}
+
+Med hjälp av detta samband samt ekvipartitionsteoremet som gäller vid termisk jämvikt: $\frac{1}{2}M\ev{v^2}=\frac{1}{2}k_BT$, där $k_B$ är Boltzmanns konstant och $T$ är absoluta temperaturen, kan man nu relatera variansen $\sigma^2$ till fysikaliska storheter vilket ger 
+\begin{equation}
+    \sigma^2 = 2k_BT\zeta.
+\end{equation}
+Detta resultat är ett exempel på fluktuation-dissipationsteoremet som relaterar dissipationen av energi, friktionen, med fluktuationen av molekyler som träffar partikeln, \todo{Vad menar vi med detta sista? Saknas ett ord?} brownsk rörelse. 
+
+För $t \gg \nicefrac{M}{\zeta}$ blir $\nicefrac{\dd{v}}{\dd{t}}$-termen i ekvation \eqref{eq:Brownian_SDE} \todo{Visa detta} försumbar och ekvationen kan då skrivas på formen
+\begin{equation}
+    \zeta \dv{x}{t}=F(t),
+\end{equation}
+där $x$ är partikelns position. Detta ger lösningen
+\begin{equation}
+    x(t)=x(0)+\frac{1}{\zeta} \int^t_0 F(\tau)\id\tau.
+\end{equation}
+Utifrån denna lösning kan medelvärdet av den kvadrerade avvikelsen beräknas, kallat ''mean squared displacement'' (MSD), vilken blir 
+\begin{equation}\label{eq:MSD_brown}
+    \ev{(x(t)-x(0))^2}=\frac{2k_BTt}{\zeta} \propto t,
+\end{equation}
+där enligt fluktuation-dissipationsteoremet  $\sigma^2=2k_BT\zeta$. MSD:n kommer därmed att öka linjärt med tiden, något som enkelt kan jämföras med uppmätt data.
+
+
+
+
+%Bara en liten kodsnutt som behövs när man kompilerar lokalt
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main.tex"
+%%% End: 

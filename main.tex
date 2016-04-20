@@ -18,11 +18,13 @@
 %            bottom = 3cm,
 %            left   = 3cm, right  = 3cm
 ]{geometry}
+\usepackage{amsmath}
 
 %egna kommandon för statistik
 \newcommand{\VAR}[1]{\text{var}\left[#1\right]}
 \newcommand{\COV}[2]{\text{cov}\left[#1,\;#2\right]}
 \newcommand{\CORR}[2]{\text{corr}\left[#1,\;#2\right]}
+
 
 
 
@@ -34,28 +36,33 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%% Här börjar huvudtexten %%%%%%%%%%%%%%%%%%%%%%
+
 %\part{Inledning}
 
-\chapter{Inledning}
 \input{Inledning.tex}
+
+\input{cellbiologi.tex}
 
 
 
 %\part{Huvuddel}
 
-\chapter{Stokastiska processer och Brownsk rörelse}
-\input{stokastik.tex}
+\input{Stokastik.tex}
 
 
-\chapter{Partikelrörelse i celler}
 \input{Partikel.tex}
 
-\chapter{Strängars rörelse i vätskor}
+
 \input{Strang.tex}
 
 
+%\input{Obsolete/Resultat.tex}
 
 
+%\input{Obsolete/Diskussion.tex}
+
+
+\input{Slutsats.tex}
 
 
 
@@ -63,7 +70,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% Källförteckning %%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \bibliographystyle{ieeetr}
-\bibliography{referenser_kandidat}%kräver en fil som heter 'referenser.bib'          
+\bibliography{referenser_kandidat}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bilagor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
@@ -72,7 +79,14 @@
 
 
 
+
+
+
+
 \end{document}
+
+
+
 
 
 

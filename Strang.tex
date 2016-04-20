@@ -1,51 +1,108 @@
+\chapter{Strängars rörelse i vätskor}
 
-Bakgrund
-\begin{itemize}
-    \item WLC model, ev annan modell (Måns)
-    \item Protein-filament
-    \item Korrelationer, tangent, tid, rum
-    \item Egenmoder
-\end{itemize}
+%\section{Teori}
 
-Resultat som kan tas med
-\begin{itemize}
-    \item Uppdelningen i egenmoder, olika relaxationstid
-    \item Dispersionsrelation?
-    \item Skillnad mellan confined och unconfined
+%\subsubsection{Strängrörelser inom cellen}
+Aktinfilament är polymerer vilka utgör en viktig byggsten för cellens cytoskelett och transportväg för motorprotein vilka formar och bidrar till cellens utseende, dynamik och stadga. För att kunna ge en mer detaljerad beskrivning av dessa egenskaper är studien av enstaka aktinfilaments dynamik av stort intresse. I detta arbete har olika dynamiska egenskaper för aktinfilament studerats, både för filament som fluktuerar fritt i en vätska och filament instängda i en rektangulär kvasi-2D mikrokanal. Mikrokanalen är till för att simulera beteendet hos aktinfilament i cytoskelettet där det omges av andra filament och därmed har en begränsad möjlighet till rörelse.
+
+
+\section{Modeller för strängrörelser}
+Aktinfilamenten precis som tidigare studerade partiklar påverkas av diffusionsprocessen inuti celler och således krävs stokastiska modeller för att beskriva rörelsen. En vanligt använd modell inom polymerfysiken är Worm Like Chain-model som beskrivs nedan. Vidare studeras en modell i form av en langevinekvation med en brusterm som innehar brownsk karaktär.
+\subsection{Worm Like Chain-model}
+Worm like chain modellen \cite{Milstein2013} (WLC) är en modell som ämnar beskriva fluktuationerna hos en semi-flexibel polymer. I modellen antas att polymeren är helt oelastisk, enbart påverkas av termiskt brus och styv på små längdskalor. Då polymeren fluktuerar fritt utan att vara instängd i en mikrokanal ges en minimalistisk WLC beskrivning av att filamentets fluktuationer regleras av böjningsenergin. För en polymer av $N$ segment vardera med riktning \textbf{r}$_i$ och längd $\abs{r_{i}}=l$ samt polymerens böjstyvhet $\kappa$ ges böjningsenergin av 
+\begin{equation}
+    H = -\kappa\sum_{i=1}^{N}\textbf{r}_{i}\cdot \textbf{r}_{i+1}.
+\end{equation}
+Maximalt bidrag till energin från två på varandra följande segment fås alltså om dessa har antiparallell riktning. Givet identiteten $\textbf{r}_{i}\cdot\textbf{r}_{i+1}=\frac{2l^2-(\textbf{r}_{i+1}-\textbf{r}_{i})^2}{2}$ kan summan skrivas om som en integral i gränsen då $N \rightarrow \infty$, $\kappa\to\infty$, $l \rightarrow 0$ samt produkten \todo{Någon annan variabelnamn än $\xi$?}$\kappa l=\xi$ finit 
+\begin{equation}
+    H=\frac{\xi}{2}\int_{0}^{L}ds(\partial_{s}\textbf{t}(s))^2
+\end{equation}
+där $\textbf{t}(s)$ är enhetstangentvektorn längs polymeren parametriserad med båglängden. Detta är den kontinuerliga WLC modellen vilket ger en bra approximation av en polymer där längden hos enstaka molekyler kan försummas. Korrelationen mellan två tangentvektorer ges av \todo{note to self: referera physic chem. bok}:
+\begin{equation}
+\ev{\textbf{t}(s)\textbf{t}(s+\Delta s)}=e^{-\frac{\abs{\Delta s}}{2L_{p}}}
+\end{equation}
+Där $L_{p}=\frac{\xi l}{k_{B}T}$ är kvoten mellan styvheten hos polymeren och termiska energin hos fluiden. Denna kallas \emph{persistent length} och ger ett mått på hur snabbt tangentkorrelationen avtar längs polymeren. I fallet då $\nicefrac{L_{p}}{L}>1$ sägs polymeren vara styv. Ytterligare kan ett tidsmedelvärde av dessa tangentkorrelationer definieras som
+\begin{equation}
+    \ev{cos\theta(\Delta s)}\equiv\overline{\ev{\textbf{t}(s)\textbf{t}(s+\Delta s)}}
+\end{equation}\todo{Vad förutspår denna ekvation?}
+Givet ett dataset av bilder kan medelvärdet tas över de olika bilderna samt för olika punkter längs strängen vilket om modellen stämmer kan ge ett värde på filamentets persistent length.
+
+\subsection{Tvåpunktskorrelation av punkter på polymer}\todo{Byta rubrik}
+\todo{ett bra namn för denna ekvation?}
+Betrakta en semi-flexibel polymer utsatt för ett stokastiskt termiskt brus. Polymerens jämviktstillstånd sätts till att vara fixerad längs $z$-axeln med fluktuationer i $x$/$y$ - planet. Då fluktuationerna är små relativt polymeren kan de approximeras som oberoende i $x$/$y$ -planet, låt $A(t,z)$ beteckna fluktuationerna i x-riktningen. Då polymerens jämviktstillstånd tillstånd minimerar dess potentiella energi införs en parabolisk potential för att återställa avvikelser från detta läge. Likt WLC modellen lagras även potentiell energi i formen av krökning av polymeren. Tidsutvecklingen av $A(t,z)$ ges då av
+\begin{equation}
+\label{mans}
+    \partial_{t}A(t,z)=-\gamma A(t,z)+\alpha \partial_{x}^{2}A(t,z)+\sigma \partial_{t}W(t,z)
+\end{equation}
+Där $W(t,z)$ är en stokastisk brusterm och konstanterna $\alpha,\gamma,\sigma$ är positiva reella tal definerade av det fysikaliska systemet. \\
+Definera fouriertransformation som \todo{Låta $s\to k$, ev förvirrning med båglängdsparametern?}
+\begin{equation}
+    \hat{A}(t,s)=\int_{-\infty}^{\infty}\dd{z} A(t,z)\ee^{-\ii sz}
+\end{equation}
+Genom fouriertransformation av \eqref{mans} fås en ordinär stokastisk differentialekvation
+\begin{equation}
+        \partial_{t}\hat{A}(t,s)=-\left(\gamma+\alpha s^2\right)\hat{A}(t,z)+\sigma \partial_{t}\hat{W}(t,z)
+\end{equation}
+vars lösning enkelt kan visas vara
+\begin{equation}
+        \hat{A}(t,s)=\ee^{-(\gamma+\alpha s^2)t}\left(\hat{A}(0,s)+\sigma\int_{0}^{t}\dd\tau \ee^{(\gamma+\alpha s^2)\tau}\partial_{t}\hat{W}(\tau,z)\right)
+\end{equation}
+Tvåpunktskorrelationen för den fouriertransformerade stokastiska variabeln $\hat{A}(t,s)$ kan då beräknas till
+\begin{equation}
+\begin{aligned}
+    \ev{\hat{A}(t,s)\hat{A}(t',s')} =& \ev{\hat{A}(0,s)\hat{A}(0,s')} \ee^{-(\gamma+\alpha s^2)(t+t')}\\ 
+    &+ \sigma^2 \int_{0}^{t}\int_{0}^{t'}\dd\tau\dd\tau' \ee^{(\gamma+\alpha s^2)(\tau+\tau')} \ev{\partial_{t}\hat{W}(\tau,s)\partial_{t}\hat{W}(\tau',s')}
+\end{aligned}
+\end{equation}
+Definera nu $\Delta t=t-t'$ samt $\Delta s=s-s'$ och betrakta korrelationen i gränsen då $t,t'\rightarrow\infty$ medan $\Delta t$ hålls finit. Då fås
+\begin{equation}\label{jobbig}
+     \ev{\hat{A}(t,s)\hat{A}(t',s')}=\sigma^2\int_{0}^{t}\int_{0}^{t'}\dd\tau\dd\tau'\ee^{(\gamma+\alpha s^2)(\tau+\tau')}\ev{\partial_{t}\hat{W}(\tau,s)\partial_{t}\hat{W}(\tau',s')}
+\end{equation}
+Notera att integranden i \eqref{jobbig} är korrelationen av fouriertransformerade brustermen $W(t,z)$. Då termiska bruset antas vara brownskt defineras det av följande tvåpunktskorrelation
+\begin{equation}\label{brus}
+    \ev{\partial_{t}W(t,z)\partial_{t}W(t',z')}=\delta(t- t')\delta(z-z')
+\end{equation}
+Fouriertransformation av \eqref{brus} ger \todo{ekvation 4.13+4.14 kanske kan skippas om man vill minska antal ekvationer.}
+\begin{equation}
+    \ev{\partial_{t}\hat{W}(t,s)\partial_{t}\hat{W}(t',s')}=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\dd z \dd z'\ev{\partial_{t}W(t,z)\partial_{t}W(t',z')}\ee^{-izs}\ee^{-iz's'}
+\end{equation}
+Genom insättning av \eqref{brus} kan integralen i högerledet beräknas.
+\begin{equation}\label{fourbrus}
+    \ev{\partial_{t}\hat{W}(t,s)\partial_{t}\hat{W}(t',s')}=\delta(t-t')\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\dd z \dd z'\delta(z-z')\ee^{-i(sz+s'z')}=\delta(t-t')\delta(s+s')
+\end{equation}
+Insättning av \eqref{fourbrus} i \eqref{jobbig} reducerar ekvationen till en enkelintegral och tvåpunktskorrelationen i fourierrummet ges av
+\begin{equation}
+    \ev{\hat{A}(t,s)\hat{A}(t',s')}=\frac{\sigma^2}{2(\gamma+\alpha s^2)}\delta(s+s')\ee^{(\gamma+\alpha s^2)\abs{t-t'}}
+\end{equation}
+Genom invers fouriertransform fås tvåpunktskorrelationen för de rumsliga variblerna $z$,$z'$ som
+\begin{equation}
+    \ev{A(t,s)A(t',s')}=\frac{1}{(2\pi)^2}\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\dd s \dd s'\frac{\sigma^2}{2(\gamma+\alpha s^2)}\delta(s+s')\ee^{(\gamma+\alpha s^2)\abs{t-t'}}\ee^{-izs}\ee^{-iz's'}
+\end{equation}
+Förenkling av integralen kan göras genom insättning av variabeln $p$ definerad enligt $\frac{dp}{dk}=\sqrt{\frac{\alpha}{\gamma}}$.  Tvåpunktskorrelationen kan slutligen beräknas och ges av 
+\begin{equation}
+    \ev{A(t,s)A(t',s')}=\frac{1}{(2\pi)^2\sqrt{\gamma\alpha}}\int_{-\infty}^{\infty}\dd p \frac{\ee^{-(1+p^2)\gamma \abs{t-t'}+i\sqrt{\frac{\gamma}{\alpha}}(s-s')}}{1+p^2}.
+\end{equation}
+
+
+
+\section{Egenmoder}
+Ett vanligt sätt att studera svängningar är att dela upp svängningarna i egenmoder. Genom en linjärkombination av dessa egenmoder kan en godtycklig svängning representeras. Anledningen till att det är intressant att studera egenmoder är på grund av att de är oberoende av varandra. Precis som \todo{beskriva mer tydligt hur data ser ut samt hur avst etc beräknas.} svängningen på en gitarrsträng kan man eventuellt dela in svängningen av en sträng i cellen som en linjärkombination av dess egenmoder. 
+
+Metoden för att åstadkomma denna sönderläggning av strängens rörelse i egenmoder beskrivs i avsnitt \ref{seq:diskretdata} som en diagonalisering av kovariansmatrisen, där kovariansmatrisen i detta fallet byggs upp av avståndskomponenter till strängen. Hädanefter betecknas därför det transversella avståndet till strängen relativt sitt jämviktsläge $A_s(t)$ där $s$ är en diskret båglängdsparameter längs med strängen. Diagonalisering av denna kovariansmatris med hjälp av spektralsatsen leder effektivt till ett basbyte från en bas bestående av det transversella avståndet i varje $s$ längs strängen, till en bas bestående av egenmoderna för strängen.
     
-\end{itemize}
 
+\subsection{Resultat}
 
-\section{Teori}
+%Resultat som kan tas med
 
-\subsection{Proteinfilament}
-
-Aktinfilament består av glubulära aktinprotein formade som bollar vilka kopplats ihop till en lång kedja.
-
-\subsection{Modeller för strängrörelser}
-
-\subsubsection{Worm Like Chain-model}
-
-\subsubsection{Månsmodell}
-
-
-\subsection{Egenomder}
-
-
-\subsection{Lösning arv stokastisk differentialekvation}
+%Motivera att jämviktsläge fanns
+%Uppdelningen i egenmoder, olika relaxationstid
+%Dispersionsrelation?
+%Skillnad mellan confined och unconfined
 
 
 
-\section{Tillhandahållen data}
-
-Datan som analyserats i denna andra del av arbetet kommer från \todo{Var kommer datan från?}... och består av filmer av aktinfilament som tilåts röra sig i en vätska. Dessa strängar hade en storlek kring 10--30\,\micro{m} och befann sig i kanaler av olika bredd. Datan hade redan behandlats något så att strängens läge kunde beskrivas genom lägena för ett antal punker på strängen vilka angivna som pixlar i ett koordinatsystem. Genom att bildförstoringen och kamerans pixelstorlek var känd kunde de olika strängarnas längd beräknas. Mätningarna hade utförst på två ''fria'' strängar (strängar i breda skåror) och två strängar instängda i smala skåror, alla fyra filmade med 10 bilder per sekund. Rörelsen utfördes till största del i två dimensioner då skårornas djup var litet i förhållande till skårornas och filamentens bredd.
-
-\section{Resultat}
-
-
-
-\section{Diskussion och slutsats}
-
+\section{Diskussion}
 
 
 
