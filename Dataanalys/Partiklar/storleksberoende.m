@@ -74,7 +74,7 @@ axis([0,25,7e-10,1e-8])
 end
 
 
-% % save('kompleterande_data.mat', 'intensitet', 'medelsteg', 'steg_std', 'std_t', 'std_n', 'sigma_brus', '-mat')
 
+% % save('kompleterande_data.mat', 'intensitet', 'medelsteg', 'steg_std', 'std_t', 'std_n', 'sigma_brus', '-mat')
 
 

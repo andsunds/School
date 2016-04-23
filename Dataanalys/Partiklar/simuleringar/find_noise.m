@@ -10,27 +10,28 @@ filnamn{2}='logphasecells.csv';
 fil=2;
 C=separera(load( filnamn{fil} ));
 
-n=1000;
+n=992;
 dt=10e-3;
 f=(0:(n/2-1))'/dt/(n-1);
 
 Spektr=zeros(n,2);
 VAR=0;
 
-index=find(cellfun('length',C)>=n).'; 
+index=find(cellfun('length',C)>=(n+1) ).'; 
 l=length(index);
 tic
+
 for i=index;
     if mean(C{i}(:,4))>12
         l=l-1;
         continue
     end
     %TN=koordinatbyte(C{i}(1:n,2:3));%laddar in data för partikeln
-    TN=C{i}(1:n,2:3);%laddar in data för partikeln
-    
+    TN=C{i}(1:(n+1),2:3);%laddar in data för partikeln
+        
     VAR=VAR+sum(var(diff(TN,1,1),0,1),2);
     
-    Spektr=Spektr+abs(fft(TN, [],1)).^2;
+    Spektr=Spektr+abs(fft(diff(TN,1,1), [],1)).^2;
 end
 toc
 S=sum(Spektr(1:(n/2),:), 2)/length(index)/(n);
@@ -53,6 +54,7 @@ grid on
 
 show=101;
 c=[log(f(2:show)), ones(show-1,1)]\log(S(2:show));
+%c=[log(f(100:end)), ones(n/2-99,1)]\log(S(100:end));
 
 x=logspace(-1,1.6);
 fprintf('Anpassad lutning till de första %2.0f %% av spektrat var: %2.2f\n\n',...
@@ -71,11 +73,11 @@ f=(0:(n/2-1))'/dt/(n-1);
 
 n_sim=1000;
 
-sigma_brus=.5e-9;
+sigma_brus=.3e-9;
 
 X=2.256e-9*cumsum(randn(n,n_sim)) + sigma_brus*randn(n,n_sim);%laddar in data för partikeln
 
-Spektr=abs(fft(X, [],1)).^2;
+Spektr=abs(fft(diff(X), [],1)).^2;
 
 
 S=sum(Spektr(1:(n/2),:), 2)/n_sim/n;
@@ -94,7 +96,7 @@ grid on
 clc;clf;clearvars
 
 
-N_steps=1024;
+N_steps=1024*4;
 N_trials=10000;
 
 dt=10e-3;
@@ -116,7 +118,7 @@ for i=1:N_trials
         X(j)=(1-k)*X(j-1)+W(j-1,1);
         Y(j)=(1-k)*Y(j-1)+W(j-1,2);
     end
-    Spektr=Spektr+abs(fft([X,Y], [],1)).^2;
+    Spektr=Spektr+abs(fft([X-0*mean(X),Y-0*mean(Y)], [],1)).^2;
     
 end
 
