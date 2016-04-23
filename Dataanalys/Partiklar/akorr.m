@@ -1,6 +1,6 @@
 %% akorr
 clc; 
-figure(3), clf; 
+figure(4), clf; 
 clearvars
 load('kompleterande_data.mat', '-mat')
 
@@ -43,16 +43,20 @@ for i=find(cellfun('length',C)==N).';
     korr_N=korr_N+tmp2/(I(i).^koef(2));
 end
 toc
-korr_T=korr_T./fliplr(1:N).';
-korr_N=korr_N./fliplr(1:N).';
+s=1;
+korr_T=korr_T(s:end)./fliplr(s:N).';
+korr_N=korr_N(s:end)./fliplr(s:N).';
 
 korr=[korr_T/korr_T(1), korr_N/korr_N(1)];
+
 
 dt=(0:(N-1)).'*1e-2;
 
 %vilka punkter som ska undersökas
 start=2;
-stop =200;
+stop =1000;
+
+
 
 c=dt(start:stop)\log(korr(start:stop, :));%anpassar exponentialsamband
 
@@ -62,7 +66,62 @@ fprintf('Med medelvärdet: %1.3f s \n\n', mean(-1./c))
 
 subplot(1,2,fil)
 plot(dt(1:stop), korr(1:stop, :)), hold on
-plot(dt(1:stop), exp( bsxfun(@times,dt(1:stop), c))  )
-set(gca, 'fontsize', 20, 'yscale', 'log', 'xscale', 'lin')
+plot(dt(1:stop), exp( bsxfun(@times,dt(1:stop), c) ) )
+title(filnamn{fil}(1:end-4))
+set(gca, 'fontsize', 20, 'yscale', 'lin', 'xscale', 'lin')
 pause(.1)
 end
+
+
+%% simulering
+clc; 
+figure(5), clf; 
+clearvars
+
+
+
+N_step=1000;
+N_sim=100;
+
+addpath('../');%Lägger till så att create_indecis kan användas
+INDEX=create_indecis(N_step);%Tar fram index som sorterar längs med diagonalerna
+
+
+korr=zeros(N_step,1);%init
+
+
+tic
+for i=1:N_sim; 
+    %TN=koordinatbyte(C{i}(1:N,2:3));%positionsdata i TN-koordinater
+    TN=cumsum(randn(N_step,1));
+    
+    %Nedan har vi den magiska korrelationsfunktionsberäknaren
+    tmp1=triu(TN*TN.');
+    korr=korr+sum(tmp1(INDEX), 2);
+end
+toc
+s=1;
+korr=korr(s:end)./fliplr(s:N_step).'/N_sim;
+
+
+dt=(0:(N_step-1)).'*1e-2;
+
+%vilka punkter som ska undersökas
+start=2;
+stop =1000;
+
+
+
+
+c=dt(start:stop)\log(korr(start:stop, :));%anpassar exponentialsamband
+
+%fprintf('%s\nErhållen tidskonstant: T: %1.3f s,  N: %1.3f s \n', filnamn{fil}, -1/c(1), -1/c(2))
+fprintf('Med medelvärdet: %1.3f s \n\n', mean(-1./c))
+
+
+
+plot(dt(1:stop), korr(1:stop, :)), hold on
+%plot(dt(1:stop), exp( bsxfun(@times,dt(1:stop), c) ) )
+
+set(gca, 'fontsize', 20, 'yscale', 'lin', 'xscale', 'lin')
+pause(.1)

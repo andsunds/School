@@ -9,7 +9,7 @@ filnamn{2}='confined_32min_polynom';
 filnamn{3}='nonconfined_5min_polynom';
 filnamn{4}='nonconfined_167min_polynom';
 
-fil=3;
+fil=1;
 load(['data/', filnamn{fil}, '.mat'])
 
 N=size(px, 1);
@@ -61,7 +61,7 @@ axis([0,L*1e6, 0,1])
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
-str=sprintf('$%.3f \\exp(-\\Delta l/%3.f)$', K_0, L_P);
+str=sprintf('$%.3f \\exp(-\\Delta l/(%3.2f \\mathrm{\\mu m})$', K_0, L_P*1e6);
 leg=legend('Ber\"a{}knad korrelation', str);
 set(leg, 'interpreter', 'Latex')
 

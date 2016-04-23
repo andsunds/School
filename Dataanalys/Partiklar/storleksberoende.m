@@ -115,7 +115,7 @@ s=zeros(1000,2);
 %STD_n=zeros(1000,1);
 %loop över alla partiklar med tidsdata upp till 10s
 tic
-index=find(cellfun('length',C)==1000).'; 
+index=find(cellfun('length',C)==1000 & I<7).'; 
 for i=index;
     TN=koordinatbyte(C{i}(:,2:3));%laddar in data för partikeln
     %{
@@ -195,8 +195,10 @@ koef(1)=exp(koef(1));%konverterar till potenssamband
 %koef = [1, -1/3];
 
 S=zeros(N,2);
+VAR=zeros(N,2);
 tic
-index=find(cellfun('length',C)==N).'; 
+index=find( (cellfun('length',C)==N) & (I<7) ).'; 
+size(index)
 for i=index
     TN=koordinatbyte(C{i}(:,2:3));%laddar in data för partikeln
     
@@ -205,11 +207,16 @@ for i=index
     %Hög minnesåtgång
     A=repmat(TN(:,1), 1,N);
     A=triu(A.'-A);
-    tmp(:,1)=sum(A(INDECIES).^2, 2)./LENGHTS;
+    A=A(INDECIES).^2;
+    VAR(:,1)=VAR(:,1)+( sum(A.^2,2)./LENGHTS- (sum(A,2)./LENGHTS).^2 );
+    tmp(:,1)=sum(A, 2)./LENGHTS;
     
     A=repmat(TN(:,2), 1,N);
     A=triu(A.'-A);
-    tmp(:,2)=sum(A(INDECIES).^2, 2)./LENGHTS;
+    A=A(INDECIES).^2;
+    VAR(:,2)=VAR(:,2)+( sum(A.^2,2)./LENGHTS- (sum(A,2)./LENGHTS).^2 );
+    tmp(:,2)=sum(A, 2)./LENGHTS;
+    
     
     
     % Detta är samma normering som för rörligheten, 
@@ -217,7 +224,7 @@ for i=index
     S=S+(tmp)/(koef(1)*I(i).^koef(2));
 end
 toc
-
+VAR=sum(VAR,2)/length(index);
 S=sum(S,2)/length(index);
 
 show=101; %hur många tidssteg ska undersökas
@@ -232,10 +239,12 @@ y=repmat(exp(c(1,:)), length(x),1).* bsxfun(@power, x, c(2,:));
 
 
 % plottar data
-figure(3);
+figure(3); 
 subplot(1,2,fil)
-plot(Dt,S), hold on
-plot(x,y)
+hold on
+p1=plot(Dt,S);
+p2=plot(Dt, S+sqrt(VAR), '--k', Dt, S-sqrt(VAR), '--k' );
+p3=plot(x,y);
 
 %uncertainty=1./sqrt(N+1-DT(1:show));
 %plot(Dt, S(1:show,:).*(1+repmat(uncertainty,1,2)), '--k')
@@ -248,7 +257,7 @@ str1=sprintf('%.1d dt^{%1.2f}', exp(c(1,1)), c(2,1));
 %str2=sprintf('%.1d dt^{%1.2f}', exp(c(1,2)), c(2,2));
 
 %legend('T', 'N', str1,str2, 'location', 'NorthWest')%Om man seprarerar T och N
-legend('T', str1, 'location', 'NorthWest')
+legend([p1 p3], 'Data', str1)%, 'location', 'NorthWest')
 title(filnamn{fil}(1:end-4))
 xlabel('Tidssteg dt/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 ylabel('S(dt)', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
