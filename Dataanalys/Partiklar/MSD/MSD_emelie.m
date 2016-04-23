@@ -3,8 +3,8 @@ figure(2), clf, figure(3), clf, figure(1), clf
 clear
 
 filnamn=cell(1,2);
-filnamn{1}='energydepletedcells.csv';
-filnamn{2}='logphasecells.csv';
+filnamn{1}='../energydepletedcells.csv';
+filnamn{2}='../logphasecells.csv';
 filstr={'energydepleted' 'logphase'};%For usage in titles
 
 for k=1:2 %For both files
