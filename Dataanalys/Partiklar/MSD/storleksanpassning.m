@@ -2,8 +2,10 @@ function [ koef ] = storleksanpassning( fil )
 %Tar fram potenssamband för att vikta om ett medelvärde beroende på
 %partikelns intensitet.
 
-load('../kompleterande_data.mat',...
-     'filnamn', 'intensitet', 'std_n', 'std_t', 'sigma_brus', '-mat')
+load('../filnamn.mat')
+
+load(['../', kompl],...
+      'intensitet', 'std_n', 'std_t', 'sigma_brus', '-mat')
 
 I=intensitet{fil};
 

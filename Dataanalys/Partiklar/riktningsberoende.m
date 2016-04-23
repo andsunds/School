@@ -2,10 +2,7 @@
 
 %% för ögoninspektion utan koordinatbyte
 clc;clf;clear all
-
-filnamn=cell(1,2);
-filnamn{1}='energydepletedcells.csv';
-filnamn{2}='logphasecells.csv';
+load('filnamn.mat')
 
 fil=1;
 data =load(filnamn{fil});
@@ -73,16 +70,9 @@ hist(lutn1),%hist(lutn_v)
 
 
 
-
-
-
-
 %% Jämförelse mot storleken
 clc;clf;clear all
-
-filnamn=cell(1,2);
-filnamn{1}='energydepletedcells.csv';
-filnamn{2}='logphasecells.csv';
+load('filnamn.mat')
 
 
 

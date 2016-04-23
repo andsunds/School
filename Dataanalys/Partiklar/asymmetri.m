@@ -42,9 +42,8 @@ Asym_litterature=2*(d+2)/(5*d+4) %Då N_trials går mot oändligheten
 %%
 %Asymmetrin för datan
 
-filnamn=cell(1,2);
-filnamn{1}='energydepletedcells.csv';
-filnamn{2}='logphasecells.csv';
+load('filnamn.mat')
+
 
 Asym_data_mean=[0,0]; %Medelvärde för energydepleted och logphase
 

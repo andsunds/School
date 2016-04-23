@@ -2,17 +2,21 @@ function [ S ] = MSD_S( fil, N_steps  )
 %Beräknar MSD enligt
 % S(dt)=(1/T) sum((f(t)-f(t+dt)).^2) over all t
 
+addpath('../')
 
-load('../kompleterande_data.mat', 'filnamn', 'intensitet', '-mat')
+load('filnamn.mat')
+load(['../', kompl], 'intensitet', '-mat')
+
+data =load(['../',filnamn{fil}]);
+C = separera(data);
+
+
 
 
 addpath('../../');%Lägger till så att create_indecis kan användas
 INDECIES=create_indecis(N_steps);
 LENGHTS=fliplr(1:N_steps).';
 
-
-data =load(['../',filnamn{fil}]);
-C = separera(data);
 
 
 

@@ -3,9 +3,7 @@ clc;
 figure(1);clf;pause(.1)
 clearvars
 
-filnamn=cell(1,2);
-filnamn{1}='energydepletedcells.csv';
-filnamn{2}='logphasecells.csv';
+load('filnamn.mat')
 
 %cellinitialisering
 intensitet=cell(2,1);
@@ -76,7 +74,7 @@ axis([0,25,7e-10,1e-8])
 end
 
 
-% % save('kompleterande_data.mat', 'filnamn', 'intensitet', 'medelsteg', 'steg_std', 'std_t', 'std_n', 'sigma_brus', '-mat')
+% % save('kompleterande_data.mat', 'intensitet', 'medelsteg', 'steg_std', 'std_t', 'std_n', 'sigma_brus', '-mat')
 
 
 

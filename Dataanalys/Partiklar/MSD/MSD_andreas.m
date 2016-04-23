@@ -2,8 +2,12 @@
 clc; clearvars
 figure(2);clf;pause(.1)
 
-load('../kompleterande_data.mat',...
-     'filnamn', 'intensitet', 'std_n', 'std_t', 'sigma_brus', '-mat')
+addpath('../')
+
+load('filnamn.mat')
+
+load(['../', kompl],...
+      'intensitet', 'std_n', 'std_t', 'sigma_brus', '-mat')
 
 for fil=1:2;
 data =load(['../', filnamn{fil}]);
@@ -59,7 +63,7 @@ str1=sprintf('%.1d t^{%1.2f}', exp(c(1,1)), c(2,1));
 
 %legend('T', 'N', str1, str2, 'location', 'NorthWest')
 legend('Data', str1, 'location', 'NorthWest')
-title(filnamn{fil}(1:end-4))
+title(filnamn{fil}(6:end-4))
 xlabel('Tid/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 ylabel('', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15,'XScale','log','YScale','log');
@@ -72,8 +76,13 @@ figure(3);clf;
 %figure(4);clf;
 pause(.1)
 
-load('../kompleterande_data.mat',...
-     'filnamn', 'intensitet', 'std_n', 'std_t', 'sigma_brus', '-mat')
+addpath('../')
+
+load('../filnamn.mat')
+
+load(['../', kompl],...
+      'intensitet', 'std_n', 'std_t', 'sigma_brus', '-mat')
+
 
 N=1000;
 DT=(1:N).';
@@ -147,7 +156,7 @@ str1=sprintf('%.1d dt^{%1.2f}', exp(c(1,1)), c(2,1));
 
 %legend('T', 'N', str1,str2, 'location', 'NorthWest')%Om man seprarerar T och N
 legend('T', str1, 'location', 'NorthWest')
-title(filnamn{fil}(1:end-4))
+title(filnamn{fil}(6:end-4))
 xlabel('Tidssteg dt/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 ylabel('S(dt)', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15,'XScale','log','YScale','log');
@@ -160,7 +169,8 @@ end
 clc;clearvars
 figure(4), pause(.1);clf
 
-load('../kompleterande_data.mat', 'filnamn', '-mat')
+load('../filnamn.mat')
+
 
 N=1000;
 Dt=(0:(N-1)).'*1e-2;
@@ -187,7 +197,7 @@ for fil=1:2;
     l=legend('$S$','$s$');
     set(l, 'Interpreter', 'Latex','FontSize',15)
 
-    title(filnamn{fil}(1:end-4))
+    title(filnamn{fil}(6:end-4))
     xlabel('Tidssteg dt/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
     ylabel('MSD', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
     set(gca, 'FontSize' ,15,'XScale','log','YScale','log');

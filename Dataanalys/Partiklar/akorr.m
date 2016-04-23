@@ -2,7 +2,8 @@
 clc; 
 figure(3), clf; 
 clearvars
-load('kompleterande_data.mat', '-mat')
+load('filnamn.mat')
+load(kompl, '-mat')
 
 fil=1;
 N=1000;

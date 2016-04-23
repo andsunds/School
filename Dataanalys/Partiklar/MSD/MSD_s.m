@@ -2,10 +2,12 @@ function [ s ] = MSD_s( fil, N_steps )
 %Beräknar MSD enligt
 % s(dt) = 1/(#particles) * sum( ((x(t)-x(0)).^2 ) over all particles
 
-load('kompleterande_data.mat', 'filnamn', 'intensitet', '-mat')
+addpath('../')
 
+load('filnamn.mat')
+load(['../', kompl], 'intensitet', '-mat')
 
-data =load(['../', filnamn{fil}]);
+data =load(['../',filnamn{fil}]);
 C = separera(data);
 
 
