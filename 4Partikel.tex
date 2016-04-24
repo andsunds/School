@@ -57,7 +57,7 @@ där $x(0)=0$. Vad man\cite{Midtveldt_etal2016} då har funnit i tidigare studie
 
 
 \subsection{Ornstein-Uhlenbeck-process}
-En första utvidgning av modellen för Brownsk rörelse fås om man lägger till en återförande term som drar partikeln mot någon medelpunkt. Man får då en så kallad Ornstein-Uhlenbeck-process
+En första utvidgning av modellen för brownsk rörelse fås om man lägger till en återförande term som drar partikeln mot någon medelpunkt. Man får då en så kallad Ornstein-Uhlenbeck-process
 \begin{equation}\label{eq:SDE_o-u}
 \pd_t x = -\gamma ( x-\bar{x} ) + \pd_t W,
 \end{equation}
@@ -75,7 +75,7 @@ där $\bar{x}$ har satts till 0. Vidare kan också MSD beräknas till:
 \end{equation}
 med $\bar{x}=0$. Notera att både \eqref{eq:COV_o-u} och \eqref{eq:MSD_o-u} ger att variansen, då $\gamma t\gg 1$, blir konstant lika med~$\nicefrac{\sigma^2}{2\gamma}$ eftersom $\ev{x(t)}=\bar{x}=0$.
 
-%Notera likheten här till den styrande SDE:n för Brownsk rörelse.
+%Notera likheten här till den styrande SDE:n för brownsk rörelse.
 
 %\todo[inline]{Kommer mera så småningom...}
   
@@ -99,14 +99,14 @@ Teorin har visat sig kunna beskriva vissa aspekter av partikelrörelse i nät av
 
 \subsection{Fractional Brownian Motion (fBm)}
 
-En annan modell som kan undersökas är fractional Brownian motion~\cite{Mandelbrot_fBm1968} som bygger på superpositioner av Brownska processer med brus som uppvisar en beständig korrelation i tiden. Mätningar på slumpfenomen har visat på starkt beroende även mellan brett spridda stickprov~\cite{Mandelbrot_fBm1968} något som inte kan förklaras med den brownska rörelsens exponentiellt avtagande korrelation \todo{Eller är det de okorrelerade stegen man avser här?}i ekvation \eqref{eq:Brown_korr}. Detta motiverar införandet av denna modell som kandidat för att beskriva   diffusion i celler. Modellen förutsäger också en minskad diffusionstakt jämfört med vanlig Brownsk rörelse, något som observerats i verkliga celler ~\cite{Hofling&Franosch2013}.
+En annan modell som kan undersökas är fractional Brownian motion~\cite{Mandelbrot_fBm1968} som bygger på superpositioner av brownska processer med brus som uppvisar en beständig korrelation i tiden. Mätningar på slumpfenomen har visat på starkt beroende även mellan brett spridda stickprov~\cite{Mandelbrot_fBm1968} något som inte kan förklaras med den brownska rörelsens exponentiellt avtagande korrelation \todo{Eller är det de okorrelerade stegen man avser här?}i ekvation \eqref{eq:Brown_korr}. Detta motiverar införandet av denna modell som kandidat för att beskriva   diffusion i celler. Modellen förutsäger också en minskad diffusionstakt jämfört med vanlig brownsk rörelse, något som observerats i verkliga celler ~\cite{Hofling&Franosch2013}.
 
 En normaliserad fBm $B_H(t)$ kan karakteriseras helt från följande egenskaper\cite{Dieker_fBm}: $B_H(t)$ har stationära ökningar, gaussisk fördelning för $t>0$ och $B_H(0)=0$ samt att
 \begin{align}
     \ev{B_H(t)}&=0 \\
     \ev{B^2_H(t)}&=t^{2H}
 \end{align}
-för $t\geq 0$ där Hurst parametern $H$ uppfyller $0< H <1$. För $H=\nicefrac{1}{2}$ återfås vanlig Brownsk rörelse. Kovariansen kan räknas ut teoretiskt med $0<
+för $t\geq 0$ där Hurst parametern $H$ uppfyller $0< H <1$. För $H=\nicefrac{1}{2}$ återfås vanlig brownsk rörelse. Kovariansen kan räknas ut teoretiskt med $0<
 t_1\leq t_2$ till
 \begin{equation}
 \ev{B_H(t_1)B_H(t_2)}
@@ -124,7 +124,7 @@ Stegen mellan varje positionsändring $\Delta{B_H}_k=B_H(k+1)-B_H(k)$ är standa
 %\section{Metod för dataundersökning} \todo[inline]{Inga tomma rubriker!}
 
 
-\section{Undersökning av de olika typerna av MSD}
+\section{Undersökning av olika typer av MSD}
 
 För att avgöra hur väl approximationen för partikelrörelsen som en brownsk rörelse gäller kan man jämföra om vissa förutsägelser från teorin kring brownsk rörelse stämmer överens med vad som kan observeras från uppmätt data. Bland annat räknades det fram i avsnitt~\ref{sec:brown} att mean square displacement (MSD) för en sådan partikel skulle öka linjärt med tiden, se \eqref{eq:MSD_brown}.
 
@@ -174,7 +174,7 @@ Från dessa beräknade MSD-plottar kan man även avläsa att logphase-cellerna h
 
 
 
-\begin{comment} %För att dölja för fackspråk
+%\begin{comment} %För att dölja för fackspråk
 \section{Spektraltäthet och brushantering}
 Ett annat verktyg för att undersöka partilarnas rörelser är att titta på vad för spektraläthet partiklarnas position har. Spektraltätheten erhålls genom att ta Fouriertransformen av partikelns position som funktion av tid. På så sätt erhålls ett mått på hur mycket av varje frekvens som finns. Detta kan vara användbart på flera olika sätt; bland annat ger det ett annat sätt att \todo{Jag vet fortfarande inte hur man gör här}ta fram hur MSD:n beter sig, men spektraltätheten kan också användas för att 
 
@@ -186,16 +186,15 @@ Om man
 
 \todo[inline]{Mer kommer sen.}
 
-Ett annat sätt att upptäcka bruset i en mätning är att titta på 
+Ett annat sätt att upptäcka bruset i en mätning är att titta på...
 
 
-\subsection{Resultat}
+\subsection{Resultat -- }
+
+%\end{comment}
 
 
-\end{comment}
-
-
-\section{Anisotropi}
+\section{Anisotropi i partikelrörelsen}
 Om man misstänker att cellens inre struktur påverkar partikelrörelserna skulle eventuell anisotropi kunna ge ett bidrag till dessa. Alltså ifall det finns föredragna riktningar för partikeln att röra sig i. Ett sätt att undersöka detta är genom att betrakta koordinaternas \todo{Anpassa till kap. 2!}kovarianstensor som är en tensor med de olika koordinaternas statistiska andramoment:
 \begin{equation}
 C_{ij} = \frac{1}{N} \sum_{n=1}^{N} r_i^{(n)}r_j^{(n)},
@@ -211,19 +210,17 @@ C=
 
 Notera hur snarlik $C$ är med tröghetstensorn för en kropps olika tröghetsmoment som uppkommer i mekaniken. Och precis som i mekaniken kan man hitta två principalaxlar genom att ta fram dess egenvektorer och diagonalisera tensorn. I mekaniken svarar principalaxlarna mot de riktningar av rörelsemängdsmoment som är oberoende av rotation längs andra axlar. I de här statistiska sammanhangen finns det en liknande tolkning nämligen att principalaxlarna svarar mot de riktningar i cellen där rörelserna är oberoende av varandra. Egenvärdena i dessa två riktningarna svarar mot variansen i den oberoende koordinaten längs med den riktningen.
 
-\todo[inline]{Byta till assymetrimåttet: $A=\dfrac{\ev{(\lambda_1 - \lambda_2)^2}}{\ev{(\lambda_1 + \lambda_2)^2}}$. }
-
 För att ur kovarianstensorn få ut ett mått på hur isotrop partikelns position är kan man undersöka kvoten
 \begin{equation}
 \varLambda = \frac{\lambda_2}{\lambda_1} >1
 \end{equation} \todo{Kallas "shape parameter"?}
 mellan det större, $\lambda_2$, och det mindre, $\lambda_1$,  egenvärdet till $C$. Egenvärdena själva svarar som sagt mot variansen i de olika riktningarna, vilket motsvarar hur mycket partikeln har rört sig i respektive rikting. Hade positionerna varit helt isotropt fördelade så hade alltså $\varLambda=1$. 
 
-Något som också kan ge en vink om hur asymmetrisk partikelns rörelse är, är följande asymmetrimått \cite{Hong_asymmetri1998}
+Något som också kan ge en vink om hur asymmetrisk partikelns rörelse är, är \todo{Gå över till dimension d istället?}följande asymmetrimått \cite{Hong_asymmetri1998}
 \begin{equation}
 A=\dfrac{\ev{(\lambda_1 - \lambda_2)^2}}{\ev{(\lambda_1 + \lambda_2)^2}},
 \end{equation}
-kallat \todo{Översätta till svenska?} \emph{asphericity} \cite{Rudnick_Asphericity1986}. A=0 svarar här mot att rörelsen i snitt sker helt cirkulärt symmetriskt medan A=1 ger att rörelsen endast sker i en riktning, längs en linje. Man kan enkelt visa att egenvärdena till \todo{Eller gyration tensorn?}kovarianstensorn i ekvation \todo{Dra bort medelvärde?} \eqref{eq:C_matrix} uppfyller
+kallat \todo{Översätta till svenska?} \emph{asphericity} \cite{Rudnick_Asphericity1986}. A=0 svarar här mot att rörelsen i snitt sker helt cirkulärt symmetriskt medan A=1 ger att rörelsen endast sker i en riktning, längs en linje. Man kan enkelt visa att egenvärdena till \todo{Eller gyration tensorn?}kovarianstensorn i ekvation \eqref{eq:C_matrix} uppfyller
 \begin{align}
     \lambda_1+\lambda_2 &= \ev{x^2}+\ev{y^2} \\
     \abs{\lambda_1-\lambda_2} &= \sqrt{(\ev{x^2}-\ev{y^2})^2 + 4\ev{xy}^2}.
@@ -240,12 +237,12 @@ För fBm fås en approximativ formel i två dimensioner i gränsen där antalet 
 \begin{equation} \label{eq:A_fBm}
 A=2-\frac{\frac{1}{2(H+1)^2}}{\frac{1}{2(H+1)^2}+\frac{2H+1}{4(4H+1)}-\frac{1}{4H+3}-\frac{\Gamma^2(2H+2)}{\Gamma(4H+4)}},
 \end{equation}
-där $H$ är Hurst parametern som karakteriserar rörelsen och $\Gamma$ gamma-funktionen. För $H=\nicefrac{1}{2}$ fås en vanlig brownsk rörelse med motsvarande  asymmetrimått $A=\nicefrac{4}{7}$ vilket stämmer överens med ekvation \eqref{eq:Asphericity_Brownian}. Samma värde fås även approximativt för CTRW-modellen \cite{Ernst_ACTRW2012} då denna rörelse vid varje tidsögonblick ser ut som brownsk rörelse. \todo{Kolla upp}.
+där $H$ är Hurst parametern som karakteriserar rörelsen och $\Gamma$ gamma-funktionen. För $H=\nicefrac{1}{2}$ fås en vanlig brownsk rörelse med motsvarande  asymmetrimått $A=\nicefrac{4}{7}$ vilket stämmer överens med ekvation \eqref{eq:Asphericity_Brownian} för $d=2$. Samma värde fås även approximativt för CTRW-modellen \cite{Ernst_ACTRW2012} då denna rörelse vid varje tidsögonblick ser ut som brownsk rörelse. \todo{Vad menas här? Kolla upp}.
 
 %Även http://iopscience.iop.org/article/10.1088/0305-4470/19/4/004/pdf
 
-\subsection{Simulering} %Något om egenvärdes kvoter i titel
-Eftersom en mätning bara kan bestå av ett ändligt antal datapunkter kan även en äkta, isotrop Brownsk rörelse ge upphov till $\varLambda>1$. Vidare är \emph{kvoten} mellan egenvärden inte linjär, vilket gör en teoretisk analys av fördelningarna mycket svår. För att ändå kunna säga något om den riktiga datan kan man ganska enkelt ta fram en fördelning för $\varLambda$ för några olika modeller genom simulering. 
+\subsection{Simulering -- Numerisk beräkning av asymmetrimått} %Något om egenvärdes kvoter i titel
+Eftersom en mätning bara kan bestå av ett ändligt antal datapunkter kan även en äkta, isotrop brownsk rörelse ge upphov till $\varLambda>1$. Vidare är \emph{kvoten} mellan egenvärden inte linjär, vilket gör en teoretisk analys av fördelningarna mycket svår. För att ändå kunna säga något om den riktiga datan kan man ganska enkelt ta fram en fördelning för $\varLambda$ för några olika modeller genom simulering. 
 
 De modeller som testats är en vanlig Wienerprocess, en Wienerprocess med ett ''mätbrus'' pålagt och en Ornstein–Uhlenbeck-process. Från dessa processer samt från datan över partikelrörelsen erhölls olika fördelningar av egenvärdeskvoter. 
 %För att vara konsekvent vid beräkningen av fördelningarna användes alltid kvoten av det större egenvärdet delat med det mindre. Detta ger att $\varLambda$ kan anta värden från $1$ och uppåt. 
@@ -271,28 +268,26 @@ x_{i+1} = x_i + \Delta{t}\,\pd_{t}x  = (1-k) x_i +  \delta
 \end{equation}
 där $x_1=0$. Notera här att den styrande parametern i simuleringarna är $k=\gamma\Delta{t}$, samt att $\sigma$ på samma sätt som för den rena Wienerprocessen kan väljas godtyckligt utan att påverka $\varLambda$. 
 
-Eftersom resultatet för Asymmetrimåttet i ekvation \eqref{eq:A_fBm} gäller för riktigt långa mätningar medan den data som analyseras i detta arbete är ganska begränsad kan man försöka simulera fram sannolikheter istället. Genom att simulera många mätserier för samma antal steg och antal partiklar som i datan kan man bedöma sannolikheten att det framräknade asymmetrimåttet till exempel skulle ha kommit från en ren klassisk brownsk rörelse. 
+Eftersom resultatet för asymmetrimåttet i ekvation \eqref{eq:A_fBm} gäller för riktigt långa mätningar medan den data som analyseras i detta arbete är ganska begränsad kan man försöka simulera fram sannolikheter istället. Genom att simulera många mätserier för samma antal steg och antal partiklar som i datan kan man bedöma sannolikheten att det framräknade asymmetrimåttet till exempel skulle ha kommit från en ren klassisk brownsk rörelse. 
 
-\subsection{Resultat -- partiklarna är mer isotropa än Wienerprocessen}
+\subsection{Resultat -- partikelrörelsen är mer isotrop än brownsk rörelse}
 En anledning till att kolla om en tydlig asymmetri kan uttydas ur datan över partiklarnas rörelse är att bedöma hurvida man istället för de givna x- och y-koordinaterna bör gå över till tangential- och normalkoordinater. Eftersom ingen sådan uttalad assymetri verkar finnas borde koordinatsystemet lämnas som det är.
 
-Genom att spela upp datan över partikelpositionerna som en film blir det tydligt att vissa partiklar stöter på större strukturer i cytoplasman som de inte kan rubba ur vägen utan måste ta sig runt. För dessa partiklar ter sig cytoplasman alltså inte helt isotrop. \todo{Vad kan man säga mer här?}
+Genom att spela upp datan över partikelpositionerna som en film blir det tydligt att vissa partiklar stöter på större strukturer i cytoplasman som de inte kan rubba ur vägen utan måste ta sig runt. För dessa partiklar ter sig cytoplasman alltså inte helt isotrop på större tidsskalor. \todo{Vad kan man säga mer här?}
 
 
 %Mer isotropt än vid brownsk rörelse. Påverkas kanske av cellens inre utformning och hålls på plats
 
 
-\begin{comment}%För att gömma för fackspråk
 \section{Storleksberoende}
 
 %Om värdena skiljer sig åt väsentligt för små och stora partiklar -> CTRW mer trolig. 
 
 \subsection{Resultat}
-\end{comment}
 
 
 \section{Diskussion}
-\todo[inline]{Inga tomma rubriker!}
+\todo[inline]{Inga tomma rubriker}
 
 \subsection{Ornstein-Uhlenbeck-modellen}
 \todo[inline]{Varsågod att ändra så mycket ni vill.}

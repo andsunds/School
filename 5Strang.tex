@@ -3,7 +3,7 @@
 %\subsubsection{Strängrörelser inom cellen}
 Aktinfilament är polymerer vilka utgör en viktig byggsten för cellens cytoskelett och transportväg för motorprotein vilka formar och bidrar till cellens utseende, dynamik och stadga. För att kunna ge en mer detaljerad beskrivning av dessa egenskaper är studien av enstaka aktinfilaments dynamik av stort intresse. I detta arbete har olika dynamiska egenskaper för aktinfilament studerats, både för filament som fluktuerar fritt i en vätska och filament instängda i en rektangulär kvasi-2D mikrokanal. Mikrokanalen är till för att simulera beteendet hos aktinfilament i cytoskelettet där det omges av andra filament och därmed har en begränsad möjlighet till rörelse.
 
-\section{}
+%\section{}
 
 
 \section{Modeller för strängrörelser}
@@ -29,7 +29,7 @@ Där $L_{p}=\frac{\xi}{k_{B}T}$ är kvoten mellan styvheten hos polymeren och te
 \end{equation}
 Denna minimalistiska WLC modell är intressant då den utgår från att strängen kan fluktuera fritt. Givet ett dataset av fria strängar samt strängar placerade i mikrokanaler kan påverkan av denna studeras. En sträng i en mikrokanal antas uppleva en återställande kraft riktad mot centrum av kanalen. Det resulterar i att tangentkorrelationen är mer ihärdig.
 
-\subsection{WLC-model för sträng i mikrokanal}
+\subsection{WLC-modell för sträng i mikrokanal}
 
 En mer sofistikerad modell kan konstrueras med avseende till mikrokanalens egenskaper och dess dynamik. Då interaktionen mellan strängen och kanalens väggar beskrivs som rent sterisk \cite{Koster_etal2007} kan denna approximeras med en parabolisk potential. Därmed införs en återställande kraft $F \propto z(s)^2$ där $z(s)$ svarar mot avståndet vinkelrätt mot centrum av kanalen. \emph{Persistent length} definerades tidigare som den karakterisktiska längdskalan på vilket termiska fluktuationerna kan ge upphov till signifikant böjning av strängen. Eftersom potentialen fixerar strängen längs kanalens centrum fås \emph{persistent length} mycket stor $\nicefrac{L_{p}}{L}\gg 1$. Det resulterar i att krökninsenergin enligt den tidigare härledda WLC-modellen blir försummbar \cite{PhysRevE.60.4671} $\ev{(\partial_{s}\mathbf{t})^2}\ll 1$ och \todo{kanske ge bättre förklaring} krökningsenergin defineras istället med avseende på strängens avvikelse relativt kanalens centrum. Hamiltonianen fås som
 \begin{equation}
@@ -68,7 +68,7 @@ Definera nu $\Delta t=t-t'$ samt $\Delta s=s-s'$ och betrakta korrelationen i gr
 \begin{equation}\label{jobbig}
      \ev{\hat{A}(t,s)\hat{A}(t',s')}=\sigma^2\int_{0}^{t}\int_{0}^{t'}\dd\tau\dd\tau'\ee^{(\gamma+\alpha s^2)(\tau+\tau')}\ev{\partial_{t}\hat{W}(\tau,s)\partial_{t}\hat{W}(\tau',s')}
 \end{equation}
-Notera att integranden i \eqref{jobbig} är korrelationen av fouriertransformerade brustermen $W(t,z)$. Då termiska bruset antas vara brownskt defineras det av följande tvåpunktskorrelation
+Notera att integranden i \eqref{jobbig} är korrelationen av fouriertransformerade brustermen $W(t,z)$. Då termiska bruset antas vara brownskt definieras det av följande tvåpunktskorrelation
 \begin{equation}\label{brus}
     \ev{\partial_{t}W(t,z)\partial_{t}W(t',z')}=\delta(t- t')\delta(z-z')
 \end{equation}
@@ -105,7 +105,6 @@ Motsvarande \emph{Persistent length} defineras ur denna modell som $L_{p}=\sqrt{
 
 
 
-
 \section{Egenmoder}
 Ett vanligt sätt att studera svängningar är att dela upp svängningarna i egenmoder. Genom en linjärkombination av dessa egenmoder kan en godtycklig svängning representeras. Anledningen till att det är intressant att studera egenmoder är på grund av att de är oberoende av varandra. Precis som \todo{beskriva mer tydligt hur data ser ut samt hur avst etc beräknas.} svängningen på en gitarrsträng kan man eventuellt dela in svängningen av en sträng i cellen som en linjärkombination av dess egenmoder. 
 
@@ -113,7 +112,7 @@ Metoden för att åstadkomma denna sönderläggning av strängens rörelse i ege
 
 
 
-\subsection{Resultat -- Resultat}
+\subsection{Resultat -- }
 
 \begin{figure}
     \centering
