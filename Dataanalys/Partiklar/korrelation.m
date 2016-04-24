@@ -1,9 +1,7 @@
 %% Korrelation i r??relsen
 clc;clf;clear all
 
-filnamn=cell(1,2);
-filnamn{1}='energydepletedcells.csv';
-filnamn{2}='logphasecells.csv';
+load('filnamn.mat')
 
 for fil=1:2 %to plot data for both cell types
 
@@ -30,9 +28,8 @@ end
 %% Korrelation i TN
 clc;clf;clear all
 
-filnamn=cell(1,2);
-filnamn{1}='energydepletedcells.csv';
-filnamn{2}='logphasecells.csv';
+load('filnamn.mat')
+
 
 for fil=1:2 %to plot data for both cell types
 
