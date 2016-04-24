@@ -4,7 +4,7 @@
 clc;clf;clear all
 load('filnamn.mat')
 
-fil=1;
+fil=2;
 data =load(filnamn{fil});
 
 C = separera(data);
@@ -12,6 +12,7 @@ n=length(C);%antal partiklar
 
 lutn1=zeros(n,1); R_sq=zeros(n,1);
 kvot=zeros(n,1);
+egen=zeros(n,2);
 
 for i=1:n
 
@@ -23,7 +24,7 @@ for i=1:n
            sum(Y.*X), sum(Y.^2)]/length(X);
     [V,D]=eig(gyr);
     kvot(i)=D(4)/D(1);
-    
+    egen(i,:)=[D(1), D(4)];
         
     %Hittar min. kv. anpassning
     [koef, R_sq(i)] =minsta_kvadrat( X, Y );
@@ -53,7 +54,7 @@ for i=1:n
 end
 disp('Färdig')
 
-% %save('kvot_energydepleted.mat', 'kvot', '-mat')
+% % save('simuleringar/kvot_logphase.mat', 'kvot', 'egen', '-mat')
 
 
 %% Korrelationmellan hastighet och position?
