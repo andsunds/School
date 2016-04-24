@@ -112,7 +112,7 @@ t_1\leq t_2$ till
 \ev{B_H(t_1)B_H(t_2)}
 = \frac{1}{2} \left(t_1^{2H}+t_2^{2H}-(t_2-t_1)^{2H}\right)
 \end{equation}
-vilket ger att för $H<\nicefrac{1}{2}$ fås positiv korrelation för två positioner i rörelsen och för  $H>\nicefrac{1}{2}$ fås negativ korrelation. Den negativa korrelationen ger brusigt utseende åt plotten över rörelsen då rörelsen ofta byter riktning medan den positiva korrelationen ger kurvan ett mer slätt utseende som tenderar att dra iväg i en bestämd riktning. Man kan även visa att fBm är den enda gaussiska process som uppträder självliknande \todo{Källa}\cite{}, det vill säga att $B_H(at)$ och $a^H B_H(t)$ har samma ändligtdimensionella fördelning.
+vilket ger att för $H<\nicefrac{1}{2}$ fås positiv korrelation för två positioner i rörelsen och för  $H>\nicefrac{1}{2}$ fås negativ korrelation. Den negativa korrelationen ger brusigt utseende åt plotten över rörelsen då rörelsen ofta byter riktning medan den positiva korrelationen ger kurvan ett mer slätt utseende som tenderar att dra iväg i en bestämd riktning. Man kan även visa att fBm är den enda gaussiska process som uppträder självliknande \todo{Källa}[], det vill säga att $B_H(at)$ och $a^H B_H(t)$ har samma ändligtdimensionella fördelning.
 
 Stegen mellan varje positionsändring $\Delta{B_H}_k=B_H(k+1)-B_H(k)$ är standardnormalfördelad för varje $k$ men tillskillnad från ren brownsk rörelse är stegen i allmänhet inte oberoende. Ovan utpekades dessa ökningars stationära egenskap som en av de karakteristiska dragen för fBm. Att ökningarna är stationära innebär att de saknar explicit tidsberoende, de beror bara på tidsintervallets storlek.
 
@@ -130,12 +130,12 @@ För att avgöra hur väl approximationen för partikelrörelsen som en brownsk 
 
 Vidare finns det minst två sätt att beräkna partiklarnas MSD. För stationära processer, det vill säga processer som inte explicit beror på när i tiden de inleds, kan man skapa ett medelvärde mellan alla möjliga mätpunkter separerade med givet tidsintervall $\Delta{t}$ enligt
 \begin{equation} \label{eq:lilla_delta}
-    \delta^2(\Delta t)= \frac{1}{N}\sum^N_{i=1}\frac{1}{m}\sum^m_{j=1}(x_i(t_j+\Delta t)-x_i(t_j))^2
+    S(\Delta t)= \frac{1}{N}\sum^N_{i=1}\frac{1}{m}\sum^m_{j=1}(x_i(t_j+\Delta t)-x_i(t_j))^2
 \end{equation} 
 där $N$ är antalet partiklar och $m$ antalet möjliga tidsintervall av längd $\Delta t$.
 Genom att jämföra resultatet från denna typ av beräkning med att istället bara ta medelvärdet mellan alla partiklars kvadrerade radiella avvikelse från startpunkten vid given tid från start, det vill säga
 \begin{equation} \label{eq:stora_delta}%Byta plats?
-    \Delta^2(\Delta t)= \frac{1}{N}\sum^N_{i=1}(x_i(\Delta t)-x_i(0))^2,
+    s(\Delta t)= \frac{1}{N}\sum^N_{i=1}(x_i(\Delta t)-x_i(0))^2,
 \end{equation} 
 kan man avgöra om processen är stationär då dessa därmed borde ge samma resultat. Att beräkna MSD med hjälp av \eqref{eq:stora_delta} kan dock ge en kurva med betydligt brusigare utseende då färre medelvärden fås med i denna summa. 
 
@@ -156,9 +156,22 @@ Utifrån givna data för arbetet har ett potenssamband kunnat anpassas till part
     \label{fig:MSD_sd}
 \end{figure}
 
-Båda dessa beräkningar har utförts för given data och exponentens värde i sambandet mellan MSD och tid skiljer sig olika mycket åt för energydepleted (dvala) och logphase (aktiva) cellerna, se figur \ref{fig:MSD_ld} och \ref{fig:MSD_sd}. Mest relevant är kanske att jämföra exponenterna i det anpassade potenssambandet som för energydepleted cellerna blev 0,64 för $\delta^2$ och 0,65 för $\Delta^2$. Med denna lilla skillnad ter sig partikelrörelsen för celler i dvala vara en ganska stationär process, något som inte lika säkert kan uttalas för resultatet från de aktiva logphase cellerna. Där blev exponenten 0,83 för $\delta^2$ och 0,69 för $\Delta^2$. En väsentlig skillnad, men hurvida resultatet säger något om att processen är stationär eller ej kan ej uttalas utan att hänsyn tagits till relevanta felgränser.
+\begin{figure}\centerline{
+\subfigure[][]{
+\resizebox{0.5\textwidth}{!}{\input{bilder/partiklar/MSD_ed.tex}}
+}
+\subfigure[][]{
+\resizebox{0.5\textwidth}{!}{\input{bilder/partiklar/MSD_lp.tex}}
+}}
+\caption{}
+\label{fig:MSD}
+\end{figure}
 
-Från dessa beräknade MSD-plottar kan man även avläsa att logphase-cellerna har högre exponent  för både $\delta^2$ och $\Delta^2$ vilket tyder på att partiklarna sprids ut snabbare i dessa cellers cytoplasma jämfört med energydepleted-cellerna. Ökad aktivitet i cellen tycks därmed ge ökad diffusion.
+
+Båda dessa beräkningar har utförts för given data och exponentens värde i sambandet mellan MSD och tid skiljer sig olika mycket åt för energydepleted (dvala) och logphase (aktiva) cellerna, se figur \ref{fig:MSD_ld} och \ref{fig:MSD_sd}. Mest relevant är kanske att jämföra exponenterna i det anpassade potenssambandet som för energydepleted cellerna blev 0,64 för $S$ och 0,65 för $s$. Med denna lilla skillnad ter sig partikelrörelsen för celler i dvala vara en ganska stationär process, något som inte lika säkert kan uttalas för resultatet från de aktiva logphase cellerna. Där blev exponenten 0,83 för $S$ och 0,69 för $s$. En väsentlig skillnad, men hurvida resultatet säger något om att processen är stationär eller ej kan ej uttalas utan att hänsyn tagits till relevanta felgränser.
+
+Från dessa beräknade MSD-plottar kan man även avläsa att logphase-cellerna har högre exponent  för både $S$ och $s$ vilket tyder på att partiklarna sprids ut snabbare i dessa cellers cytoplasma jämfört med energydepleted-cellerna. Ökad aktivitet i cellen tycks därmed ge ökad diffusion.
+
 
 
 %\begin{comment} %För att dölja för fackspråk
@@ -289,5 +302,5 @@ Genom att spela upp datan över partikelpositionerna som en film blir det tydlig
 %Bara en liten kodsnutt som behövs när man kompilerar lokalt
 %%% Local Variables: 
 %%% mode: latex
-%%% TeX-master: "main.tex"
+%%% TeX-master: "00main.tex"
 %%% End: 
