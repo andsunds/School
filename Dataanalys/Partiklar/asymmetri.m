@@ -79,7 +79,10 @@ end
 %fBm
 
 Asym_fBm=@(H)2-(1/(2*(H+1)^2))/(1/(2*(H+1)^2)+(2*H+1)/(4*(4*H+1))-1/(4*H+3)-(gamma(2*H+2))^2/(gamma(4*H+4)));
-Asym_fBm(0.5) %f?r Wienerproces
-A_find=@(H,A)abs(Asym_fBm(H)-A); %Skillnad mellan ber?knad och teoretisk
+A_Wiener=Asym_fBm(0.5); %f?r Wienerproces
+A_find_H=@(H,A)abs(Asym_fBm(H)-A); %Skillnad mellan ber?knad och teoretisk
 
-H_data=fminbnd(@(H)A_find(H,Asym_data_mean(1)),0,1)
+H_data=zeros(1,2); %H-v?rde f?r datan
+H_data(1)=fminbnd(@(H)A_find_H(H,Asym_data_mean(1)),0,1);
+H_data(2)=fminbnd(@(H)A_find_H(H,Asym_data_mean(2)),0,1);
+H_data
