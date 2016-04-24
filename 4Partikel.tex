@@ -1,5 +1,5 @@
 \chapter{Partikelrörelse i celler}
-
+\todo[inline]{Flytta till cellbiologi. Motivera istället kapitlet.}
 
 %\section{Teori} \todo[inline]{Inga tomma rubriker.}
 
@@ -10,15 +10,12 @@ Tidigare studier~\cite{Gou_etal2014} på eukaryota celler har visat att
 partiklars rörlighet i cytoplasman beror på hur aktiv cellen
 är. Rörligheten för de i dessa studier undersökta cellerna ökade exempelvis
 trefaldigt om cellen drabbats av cancer jämfört med en normalt
-fungerande cell. En cell som drabbats av cancer kommer att ha en
-förhöjd metabolism för att öka på celldelningstakten och kanske är det i samband med detta som även diffusionen i cytoplasman ökar. Den sammanlagda
-påverkan av motorproteinerna utpekas i dessa studier
-som en möjlig kandidat till fenomenet. 
+fungerande cell. En cell som drabbats av cancer \todo{källa}kommer att ha en
+förhöjd metabolism för att öka på celldelningstakten och kanske är det i samband med detta som även diffusionen i cytoplasman ökar. En möjlig förklaring till fenomenet utpekas i dessa studier som icke-termiska fluktuationer orsakade av motorproteinernas sammanlagda aktivitet.
 
 Studier~\cite{Parry_etal2014} på bakterier har samtidigt visat att
 partiklarnas rörlighet minskade drastiskt om den metabola aktiviteten
-minskade. Då bakterier saknar aktiv transport i sina celler försökte man här istället nå en förklaring via att
-cytoplasman blir mer vätskelik ju högre aktiviteten är och börjar
+minskade. Då bakterier saknar aktiv transport i sina celler försökte man här istället nå en förklaring där cytoplasman blir mer vätskelik ju högre aktiviteten är och börjar
 likna ett mer elastiskt fast material då aktiviteten
 minskar. Partikelstorleken tycks också vara en faktor för dess förmåga
 att röra sig runt i cellen. I gränsen när partiklarna närmar sig
@@ -39,7 +36,7 @@ Till en första approximation skulle rörelsen för en partikel i en jästcells 
 \begin{equation}
 P(x,t)=\frac{1}{\sqrt{4\pi Dt}}e^{-\nicefrac{x^2}{4Dt}}
 \end{equation} %Obs n=1 då endast en partikel följs
-som utgörs av sannolikhetsfunktionen för partikelns förflyttning $x$ vid en given tid $t$, där konstanten D är dess diffusionskonstant. Om partikeln betraktas som en boll med radie $R$ nedsänkt i en vätska med viskositet $\eta$ och absolut temperatur $T$ kan D approximeras till~\cite{Einstein1905}
+som utgörs av sannolikhetsfunktionen för partikelns förflyttning $x$ vid en given tid $t$, där konstanten D är dess diffusionskonstant. Om partikeln betraktas som en sfär med radie $R$ nedsänkt i en vätska med viskositet $\eta$ och absolut temperatur $T$ kan D approximeras till~\cite{Einstein1905}
 \begin{equation}
 D=\frac{RT}{N}\frac{1}{6\pi \eta R}
 \end{equation}
@@ -64,9 +61,9 @@ En första utvidgning av modellen för Brownsk rörelse fås om man lägger till
 \begin{equation}\label{eq:SDE_o-u}
 \pd_t x = -\gamma ( x-\bar{x} ) + \pd_t W,
 \end{equation}
-där $\gamma$ är en tidsskala som styr hur hårt bunden partikeln är till medelpositionen $\bar{x}$, och $\pd_t W$ är den stokastiska drivningen av partikeln som uppfyller $\ev{\pd_t W}=0$ och $\ev{\pd_t W(t)\pd_t W(t')} = \sigma^2\delta(t-t')$. Detta är en inte helt orimlig modell eftersom en partikel i en cell rimligtvis inte kan vandra hur långt som helst. Typiskt kommer en partikel att tränga ihop cytoplasmans beståndsdelar i den riktning som den rör sig åt, vilket leder till en sorts återförande kraft.
+där $\gamma$ är en tidsskala som styr hur hårt bunden partikeln är till medelpositionen $\bar{x}$, och $\pd_t W$ är den stokastiska drivningen av partikeln som uppfyller $\ev{\pd_t W}=0$ och $\ev{\pd_t W(t)\pd_t W(t')} = \sigma^2\delta(t-t')$. Detta är en inte helt orimlig modell eftersom en partikel i en cell rimligtvis inte kan vandra hur långt som helst. Typiskt kommer en partikel att tränga ihop cytoplasmans beståndsdelar i den riktning som den rör sig åt, vilket leder till en återförande kraft.
 
-Med hälp av \eqref{eq:SDE_o-u} och metoderna från avsnitt~\ref{sec:brown} kan man härleda modellens intressanta förhållanden. Kovariansen i gränsen mot ett stationärtillstånd ($\gamma t\gg 1$) blir då
+Med hjälp av \eqref{eq:SDE_o-u} och metoderna från avsnitt~\ref{sec:brown} kan man härleda modellens kovarians och MSD. Kovariansen i gränsen mot ett stationärtillstånd ($\gamma t\gg 1$) blir då
 \begin{equation}\label{eq:COV_o-u}
 \ev{x(t)x(t+\Delta{t})} \approx \frac{\sigma^2}{2\gamma} \ee^{-\gamma\Delta{t}},
 \end{equation}
@@ -84,14 +81,14 @@ med $\bar{x}=0$. Notera att både \eqref{eq:COV_o-u} och \eqref{eq:MSD_o-u} ger 
   
 \subsection{Continuous Time Random Walk (CTRW)}
 En möjlig förklaringsmodell för anomal transport i celler utgörs av CTRW (Continuous-Time Random Walk)~\cite{Hofling&Franosch2013}. Här beskrivs rörelsemönstret av att partiklarna under majoriteten av tiden sitter bundna till olika nätliknande strukturer för att sedan plötsligt ta sig vidare till en ny position efter en viss väntetid. Positionsändringen och väntetiden beskrivs av två oberoende stokastiska variabler. 
-MSD för denna typ av rörelse blir\cite{Barilan_CTRW}
+MSD för denna typ av rörelse blir\cite{Barkai_CTRW}
 \begin{equation}\label{eq:CTRW_MSD}
     \ev{x^2(t)} \approx \frac{\ev{\Delta x^2}}{A \Gamma(1+\alpha)}t^{\alpha} + \frac{2\ev{\Delta x}^2}{\Gamma(1+2\alpha)A^2} t^{2\alpha}, 
 \end{equation}
-där $A$ är en konstant som dyker upp i fördelningsfunktionen för väntetiderna, $\alpha$ en konstant som uppfyller $0<\alpha<1$ och $\Delta x$ steget mellan två positioner. Om $\ev{\Delta x}=0 $ försvinner andra termen och rörelsens MSD blir proportionell mot $t^\alpha$. Eftersom $\alpha < 1$ blir MSD:n inte linjär i tiden, utan ändringstakten kommer att avta med tiden och man får en rörelse som skiljer sig från den klassiska brownska rörelsen.
+där $A$ är en konstant som dyker upp i fördelningsfunktionen för väntetiderna, $\Gamma$ är gammafunktionen, $\alpha$ en konstant som uppfyller $0<\alpha<1$ och $\Delta x$ steget mellan två positioner. Om $\ev{\Delta x}=0 $ försvinner andra termen och rörelsens MSD blir proportionell mot $t^\alpha$. Eftersom $\alpha < 1$ blir MSD:n inte linjär i tiden, utan ändringstakten kommer att avta med tiden och man får en rörelse som skiljer sig från den klassiska brownska rörelsen.
 Denna anomala transport uppstår då medelväntetiden mellan två hopp blir oändlig så att centrala gränsvärdessatsen därmed ej uppfylls. Summan av de stokastiska variablerna går således ej mot att bli normalfördelad, något som är grundläggande i teorin kring brownsk rörelse. 
 
-Teorin har visat sig kunna beskriva vissa aspekter av partikelrörelse i nät av F-aktin filament\cite{Barilan_CTRW}. Om partikelns radie var av samma storleksordning som genomsnittliga maskstorleken bands partiklarna tillfälligt i nätet, bortsett från termiska fluktuationer, för att sedan ta sig igenom en maska och fastna i ett nytt hålrum i nätet. MSD:n för dessa partiklar uppfyllde ett $t^{\alpha}$ beroende som i \eqref{eq:CTRW_MSD}. Partiklar med radie av mindre storleksordning än maskstorleken hade ett rörelsemönster mer likt brownsk rörelse medan de större partiklarna fastnade i nätet utan att kunna ta sig loss.
+Teorin har visat sig kunna beskriva vissa aspekter av partikelrörelse i nät av F-aktin filament\cite{Barkai_CTRW}. Om partikelns radie var av samma storleksordning som genomsnittliga maskstorleken bands partiklarna tillfälligt i nätet, bortsett från termiska fluktuationer, för att sedan ta sig igenom en maska och fastna i ett nytt hålrum i nätet. MSD:n för dessa partiklar uppfyllde ett $t^{\alpha}$ beroende som i \eqref{eq:CTRW_MSD}. Partiklar med radie av mindre storleksordning än maskstorleken hade ett rörelsemönster mer likt brownsk rörelse medan de större partiklarna fastnade i nätet utan att kunna ta sig loss.
 %Om en liknande nätstruktur kan uppstå i jästceller kan man alltså förvänta sig olika resultat vad gäller rörelsen för partiklar av olika storlek.
 
 %Lästips:
@@ -102,7 +99,7 @@ Teorin har visat sig kunna beskriva vissa aspekter av partikelrörelse i nät av
 
 \subsection{Fractional Brownian Motion (fBm)}
 
-En annan modell som kan undersökas är fractional Brownian motion~\cite{Hofling&Franosch2013} som bygger på superpositioner av Brownska processer med brus som uppvisar en beständig korrelation. Detta kan få transporten av partiklar att sakta ner med tiden jämfört med vanlig Brownsk rörelse.
+En annan modell som kan undersökas är fractional Brownian motion~\cite{Mandelbrot_fBm1968} som bygger på superpositioner av Brownska processer med brus som uppvisar en beständig korrelation i tiden. Mätningar på slumpfenomen har visat på starkt beroende även mellan brett spridda stickprov~\cite{Mandelbrot_fBm1968} något som inte kan förklaras med den brownska rörelsens exponentiellt avtagande korrelation \todo{Eller är det de okorrelerade stegen man avser här?}i ekvation \eqref{eq:Brown_korr}. Detta motiverar införandet av denna modell som kandidat för att beskriva   diffusion i celler. Modellen förutsäger också en minskad diffusionstakt jämfört med vanlig Brownsk rörelse, något som observerats i verkliga celler ~\cite{Hofling&Franosch2013}.
 
 En normaliserad fBm $B_H(t)$ kan karakteriseras helt från följande egenskaper\cite{Dieker_fBm}: $B_H(t)$ har stationära ökningar, gaussisk fördelning för $t>0$ och $B_H(0)=0$ samt att
 \begin{align}
@@ -115,9 +112,9 @@ t_1\leq t_2$ till
 \ev{B_H(t_1)B_H(t_2)}
 = \frac{1}{2} \left(t_1^{2H}+t_2^{2H}-(t_2-t_1)^{2H}\right)
 \end{equation}
-vilket ger att för $H<\nicefrac{1}{2}$ fås positiv korrelation för två positioner i rörelsen och för  $H>\nicefrac{1}{2}$ fås negativ korrelation. Den negativa korrelationen ger brusigt utseende åt plotten över rörelsen då rörelsen ofta byter riktning medan den positiva korrelationen ger kurvan ett mer slätt utseende som tenderar att dra iväg i en bestämd riktning. Man kan även visa att fBm är den enda gaussiska process som uppträder självliknande, det vill säga att $B_H(at)$ och $a^H B_H(t)$ har samma ändligtdimensionella fördelning.
+vilket ger att för $H<\nicefrac{1}{2}$ fås positiv korrelation för två positioner i rörelsen och för  $H>\nicefrac{1}{2}$ fås negativ korrelation. Den negativa korrelationen ger brusigt utseende åt plotten över rörelsen då rörelsen ofta byter riktning medan den positiva korrelationen ger kurvan ett mer slätt utseende som tenderar att dra iväg i en bestämd riktning. Man kan även visa att fBm är den enda gaussiska process som uppträder självliknande \todo{Källa}\cite{}, det vill säga att $B_H(at)$ och $a^H B_H(t)$ har samma ändligtdimensionella fördelning.
 
-Stegen mellan varje positionsändring $\Delta{B_H}_k=B_H(k+1)-B_H(k)$ är standardnormalfördelad för varje $k$ men tillskillnad från ren brownsk rörelse är stegen i allmänhet inte oberoende. Ovan utpekades dessa ökningars  stationära egenskap som en av de karakteristiska dragen för fBm. Att ökningarna är stationära innebär att de saknar explicit tidsberoende, de beror bara på tidsintervallets storlek.
+Stegen mellan varje positionsändring $\Delta{B_H}_k=B_H(k+1)-B_H(k)$ är standardnormalfördelad för varje $k$ men tillskillnad från ren brownsk rörelse är stegen i allmänhet inte oberoende. Ovan utpekades dessa ökningars stationära egenskap som en av de karakteristiska dragen för fBm. Att ökningarna är stationära innebär att de saknar explicit tidsberoende, de beror bara på tidsintervallets storlek.
 
 \todo[inline]{Mer om fysikalisk tolkning och vad den används till idag}
     
@@ -142,7 +139,7 @@ Genom att jämföra resultatet från denna typ av beräkning med att istället b
 \end{equation} 
 kan man avgöra om processen är stationär då dessa därmed borde ge samma resultat. Att beräkna MSD med hjälp av \eqref{eq:stora_delta} kan dock ge en kurva med betydligt brusigare utseende då färre medelvärden fås med i denna summa. 
 
-\subsection{Resultat}
+\subsection{Resultat -- MSD skiljer sig mellan de olika måtten och faserna}
 Utifrån givna data för arbetet har ett potenssamband kunnat anpassas till partiklarnas MSD med en exponent som är lägre än 1. Detta tyder på att partikeln inte utför en ren brownsk rörelse utan genomgår en så kallad subdiffusion, karakteriserat av att partikelns MSD beror av tiden via ett potenssamband med exponent mindre än 1 men större än 0.
 
 \begin{figure}
@@ -206,29 +203,35 @@ Notera hur snarlik $C$ är med tröghetstensorn för en kropps olika tröghetsmo
 För att ur kovarianstensorn få ut ett mått på hur isotrop partikelns position är kan man undersöka kvoten
 \begin{equation}
 \varLambda = \frac{\lambda_2}{\lambda_1} >1
-\end{equation}
+\end{equation} \todo{Kallas "shape parameter"?}
 mellan det större, $\lambda_2$, och det mindre, $\lambda_1$,  egenvärdet till $C$. Egenvärdena själva svarar som sagt mot variansen i de olika riktningarna, vilket motsvarar hur mycket partikeln har rört sig i respektive rikting. Hade positionerna varit helt isotropt fördelade så hade alltså $\varLambda=1$. 
 
 Något som också kan ge en vink om hur asymmetrisk partikelns rörelse är, är följande asymmetrimått \cite{Hong_asymmetri1998}
 \begin{equation}
-A=\dfrac{\ev{(\lambda_1 - \lambda_2)^2}}{\ev{(\lambda_1 + \lambda_2)^2}}.
+A=\dfrac{\ev{(\lambda_1 - \lambda_2)^2}}{\ev{(\lambda_1 + \lambda_2)^2}},
 \end{equation}
-A=0 svarar här mot att rörelsen i snitt sker helt cirkulärt symmetriskt medan A=1 ger att rörelsen endast sker i en riktning, längs en linje. Man kan enkelt visa att egenvärdena till \todo{Eller gyration tensorn?}kovarianstensorn i ekvation \todo{Dra bort medelvärde?} \eqref{eq:C_matrix} uppfyller
+kallat \todo{Översätta till svenska?} \emph{asphericity} \cite{Rudnick_Asphericity1986}. A=0 svarar här mot att rörelsen i snitt sker helt cirkulärt symmetriskt medan A=1 ger att rörelsen endast sker i en riktning, längs en linje. Man kan enkelt visa att egenvärdena till \todo{Eller gyration tensorn?}kovarianstensorn i ekvation \todo{Dra bort medelvärde?} \eqref{eq:C_matrix} uppfyller
 \begin{align}
     \lambda_1+\lambda_2 &= \ev{x^2}+\ev{y^2} \\
     \abs{\lambda_1-\lambda_2} &= \sqrt{(\ev{x^2}-\ev{y^2})^2 + 4\ev{xy}^2}.
 \end{align} %&= för att den ska linjera efter "="
 För en given fördelningsfunktion med ändliga moment blir det därmed nu möjligt att beräkna denna kvot teoretiskt.
 
-\todo{Lägga under respektive underrubrik istället?}För fBm fås en approximativ formel i gränsen där antalet mätpunkter blir mycket stort
+För en obegränsad slumpvandring i $d$ dimensioner fås 
+\begin{equation} \label{eq:Asphericity_Brownian}
+    A_d=\frac{2(d+2)}{5d+4}.
+\end{equation}
+och för två dimensioner $d=2$ fås därmed $A=\nicefrac{4}{7}$. Detta innebär att även långvariga slumpvandringar i snitt kommer att uppvisa viss asymmetri mellan de två riktningarna. \todo{Kan kanske formuleras bättre?}
+
+För fBm fås en approximativ formel i två dimensioner i gränsen där antalet mätpunkter blir mycket stort ~\cite{Hong_asymmetri1998}
 \begin{equation} \label{eq:A_fBm}
 A=2-\frac{\frac{1}{2(H+1)^2}}{\frac{1}{2(H+1)^2}+\frac{2H+1}{4(4H+1)}-\frac{1}{4H+3}-\frac{\Gamma^2(2H+2)}{\Gamma(4H+4)}},
 \end{equation}
-där $H$ är Hurst parametern som karakteriserar rörelsen och $\Gamma$ gamma-funktionen. För $H=\nicefrac{1}{2}$ fås en vanlig brownsk rörelse med motsvarnade  assymetrimått $A=\nicefrac{4}{7}$.
+där $H$ är Hurst parametern som karakteriserar rörelsen och $\Gamma$ gamma-funktionen. För $H=\nicefrac{1}{2}$ fås en vanlig brownsk rörelse med motsvarande  asymmetrimått $A=\nicefrac{4}{7}$ vilket stämmer överens med ekvation \eqref{eq:Asphericity_Brownian}. Samma värde fås även approximativt för CTRW-modellen \cite{Ernst_ACTRW2012} då denna rörelse vid varje tidsögonblick ser ut som brownsk rörelse. \todo{Kolla upp}.
 
 %Även http://iopscience.iop.org/article/10.1088/0305-4470/19/4/004/pdf
 
-\subsection{Simuleringar}
+\subsection{Simulering} %Något om egenvärdes kvoter i titel
 Eftersom en mätning bara kan bestå av ett ändligt antal datapunkter kan även en äkta, isotrop Brownsk rörelse ge upphov till $\varLambda>1$. Vidare är \emph{kvoten} mellan egenvärden inte linjär, vilket gör en teoretisk analys av fördelningarna mycket svår. För att ändå kunna säga något om den riktiga datan kan man ganska enkelt ta fram en fördelning för $\varLambda$ för några olika modeller genom simulering. 
 
 De modeller som testats är en vanlig Wienerprocess, en Wienerprocess med ett ''mätbrus'' pålagt och en Ornstein–Uhlenbeck-process. Från dessa processer samt från datan över partikelrörelsen erhölls olika fördelningar av egenvärdeskvoter. 
@@ -257,8 +260,8 @@ där $x_1=0$. Notera här att den styrande parametern i simuleringarna är $k=\g
 
 Eftersom resultatet för Asymmetrimåttet i ekvation \eqref{eq:A_fBm} gäller för riktigt långa mätningar medan den data som analyseras i detta arbete är ganska begränsad kan man försöka simulera fram sannolikheter istället. Genom att simulera många mätserier för samma antal steg och antal partiklar som i datan kan man bedöma sannolikheten att det framräknade asymmetrimåttet till exempel skulle ha kommit från en ren klassisk brownsk rörelse. 
 
-\subsection{Resultat}
-En anledning till att kolla om en tydlig asymmetri kan uttydas ur datan över partiklarnas rörelse är att bedöma hurvida man istället för de givna x- och y-koordinaterna bör gå över till tangential- och normal-koordinater. Eftersom ingen sådan uttalad assymetri verkar finnas borde koordinatsystemet lämnas som det är.
+\subsection{Resultat -- partiklarna är mer isotropa än Wienerprocessen}
+En anledning till att kolla om en tydlig asymmetri kan uttydas ur datan över partiklarnas rörelse är att bedöma hurvida man istället för de givna x- och y-koordinaterna bör gå över till tangential- och normalkoordinater. Eftersom ingen sådan uttalad assymetri verkar finnas borde koordinatsystemet lämnas som det är.
 
 Genom att spela upp datan över partikelpositionerna som en film blir det tydligt att vissa partiklar stöter på större strukturer i cytoplasman som de inte kan rubba ur vägen utan måste ta sig runt. För dessa partiklar ter sig cytoplasman alltså inte helt isotrop. \todo{Vad kan man säga mer här?}
 
@@ -276,6 +279,11 @@ Genom att spela upp datan över partikelpositionerna som en film blir det tydlig
 
 
 \section{Diskussion}
+\todo[inline]{Inga tomma rubriker!}
+
+\subsection{Ornstein-Uhlenbeck-modellen}
+\todo[inline]{Varsågod att ändra så mycket ni vill.}
+
 
 %Om sambandet mellan intensitet och partikelstorleken påverkar resultatet
 

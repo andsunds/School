@@ -3,7 +3,7 @@
 
 \usepackage{custom_as}
 
-\graphicspath{ {bilder/} } %Gör så att man kan lägga alla bilder i en egen katalog
+\graphicspath{ {bilder/} {bilder/Strangar/}{bilder/Partiklar/}} %Gör så att man kan lägga alla bilder i en egen katalog
 
 %%Drar in tabell och figurtexter
 \usepackage[margin=10 pt]{caption}
@@ -21,9 +21,9 @@
 \usepackage{amsmath}
 
 %egna kommandon för statistik
-\newcommand{\VAR}[1]{\text{var}\left[#1\right]}
-\newcommand{\COV}[2]{\text{cov}\left[#1,\;#2\right]}
-\newcommand{\CORR}[2]{\text{corr}\left[#1,\;#2\right]}
+\newcommand{\VAR}[1]{\text{var}\!\left[#1\right]}
+\newcommand{\COV}[2]{\text{cov}\!\left[#1,\;#2\right]}
+\newcommand{\CORR}[2]{\text{corr}\!\left[#1,\;#2\right]}
 
 
 
@@ -31,7 +31,7 @@
 \begin{document}
 
 %Alla inledande sidor finns i 'titlepages.tex'.
-\input{titlepages.tex}
+\input{0titlepages.tex}
 
 
 
@@ -39,21 +39,21 @@
 
 %\part{Inledning}
 
-\input{Inledning.tex}
+\input{1Inledning.tex}
 
-\input{cellbiologi.tex}
+\input{2cellbiologi.tex}
 
 
 
 %\part{Huvuddel}
 
-\input{Stokastik.tex}
+\input{3Stokastik.tex}
 
 
-\input{Partikel.tex}
+\input{4Partikel.tex}
 
 
-\input{Strang.tex}
+\input{5Strang.tex}
 
 
 %\input{Obsolete/Resultat.tex}
@@ -62,7 +62,7 @@
 %\input{Obsolete/Diskussion.tex}
 
 
-\input{Slutsats.tex}
+\input{6Slutsats.tex}
 
 
 
@@ -74,12 +74,13 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Bilagor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
+
 \appendix
 
+\input{A1databehandling.tex}
 
 
-
-
+\input{A2beteckningar}
 
 
 
