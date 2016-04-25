@@ -1,22 +1,22 @@
 %% Autokorrelation med Wiener-Khinchin teoremet
 clf;clear all;clc;
-filnamn=cell(1,2);
-filnamn{1}='energydepletedcells.csv';
-filnamn{2}='logphasecells.csv';
+
+load('filnamn.mat')
+
 
 figure(1)
-nbrlags = 999; % Välj 999 för steglängd och 1000 för position
+nbrlags = 999; % Vï¿½lj 999 fï¿½r steglï¿½ngd och 1000 fï¿½r position
 for fil = 1:2
     AN = zeros(nbrlags,1);
     AT = zeros(nbrlags,1);
     data =load(filnamn{fil});
     C = separera(data);
     n=length(C);%antal partiklar
-    np = 0; %Antalet partiklar som beräkningen använder
+    np = 0; %Antalet partiklar som berï¿½kningen anvï¿½nder
     
     
     for i=1:n
-        if length(C{i})==1000 && C{i}(1,4) < 5 % Om man vill begränsa storlek
+        if length(C{i})==1000 && C{i}(1,4) < 5 % Om man vill begrï¿½nsa storlek
             np = np+1;
             TN=koordinatbyte(C{i}(:,2:3));
             T = TN(:,1); % Ta fram tangential och normalkoord
@@ -35,7 +35,7 @@ for fil = 1:2
             autokorrT = autokorrT/autokorrT(1,1);
             autokorrN = autokorrN/autokorrN(1,1);
             
-            % Summera ihop för alla partiklar
+            % Summera ihop fï¿½r alla partiklar
             AN = AN+autokorrT;
             AT = AT+autokorrN;
         end

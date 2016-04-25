@@ -2,10 +2,8 @@
 %ca 2 nm. Mätfel?
 clf
 clear
+load('filnamn.mat')
 
-filnamn=cell(1,2);
-filnamn{1}='energydepletedcells.csv';
-filnamn{2}='logphasecells.csv';
 
 fil=1;
 data =load(filnamn{fil});

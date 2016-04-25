@@ -57,7 +57,7 @@ Y=polyval(PY_mean,S);
 plot(X-mean(X),Y-mean(Y), 'K', 'linewidth',10)
 axis equal
 
-%%
+%% Spara
 
 filnamn=cell(1,4);
 filnamn{1}='confined_28min_polynom.mat'; 
@@ -67,7 +67,7 @@ filnamn{4}='nonconfined_167min_polynom.mat';
 
 framerate=10;% fr/s
 
-save(filnamn{fil}, 'px', 'py', 'PX_mean', 'PY_mean', 'framerate', '-mat')
+% % save(filnamn{fil}, 'px', 'py', 'PX_mean', 'PY_mean', 'framerate', '-mat')
 disp('save successfull'),
 
 
@@ -82,23 +82,23 @@ hold on
 i=1;
 XP=polyval(px(i,:),S);
 YP=polyval(py(i,:),S);
-x=coordinates(i,1:N_points(i), 1);
-y=coordinates(i,1:N_points(i), 2);
+%x=coordinates(i,1:N_points(i), 1);
+%y=coordinates(i,1:N_points(i), 2);
 
-h=plot(x-mean(XP),y-mean(YP));
+%h=plot(x-mean(XP),y-mean(YP));
 p=plot(XP-mean(XP),YP-mean(YP));
 pause(.1)
 %sen fortsätter filmen
 for i=2:N
     %Uppdatera x- och y-koordinaterna:
-    x=coordinates(i,1:N_points(i), 1);
-    y=coordinates(i,1:N_points(i), 2);
+    %x=coordinates(i,1:N_points(i), 1);
+    %y=coordinates(i,1:N_points(i), 2);
     %uppdatera polynomanpassningen:
     XP(i,:)=polyval(px(i,:),S);
     YP(i,:)=polyval(py(i,:),S);
     %Snabbare med set(...) när man vill uppdatera bilder.
     set(p, 'XData',XP(i,:)-mean(x) ,'YData',YP(i,:)-mean(y));
-    set(h, 'XData',x-mean(x),'YData',y-mean(y));
+    %set(h, 'XData',x-mean(x),'YData',y-mean(y));
     %formatering av bilden:
     axis equal, axis([-30,30, -20, 20]*1e-6)
     pause(.1)

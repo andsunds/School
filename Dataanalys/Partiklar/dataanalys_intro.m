@@ -1,9 +1,10 @@
 %%
 clc;clf;clear all
+load('filnamn.mat')
 
-data_energydepleted =load('energydepletedcells.csv');
+data_energydepleted =load(filnamn{1});
 %size(data_energydepleted)
-data_logphase=load('logphasecells.csv');
+data_logphase=load(filnamn{2});
 
 
 %%
