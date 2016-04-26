@@ -1,3 +1,52 @@
+%% Båda samtidigt
+% s(dt) = 1/(#particles) * sum( ((x(t)-x(0)).^2 ) over all particles
+% S(dt)=(1/T) sum((f(t)-f(t+dt)).^2) over all t
+
+clc;clearvars
+figure(4), pause(.1);clf
+
+load('../filnamn.mat')
+
+
+N=1000;
+Dt=(0:(N-1)).'*1e-2;
+
+data_MSD=zeros(N,5);
+data_MSD(:,1)=Dt;
+
+for fil=1:2;
+    tic
+    s=MSD_s(fil, N);
+    S=MSD_S(fil, N);
+    toc
+    
+    
+    %Sparar data för sep. plottning
+    data_MSD(:,2*fil)=S;
+    data_MSD(:,2*fil+1)=s;
+
+
+    
+    subplot(1,2,fil)
+    plot(Dt,S), hold on
+    plot(Dt,s)
+
+    l=legend('$S$','$s$');
+    set(l, 'Interpreter', 'Latex','FontSize',15)
+
+    title(filnamn{fil}(6:end-4))
+    xlabel('Tidssteg dt/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+    ylabel('MSD', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+    set(gca, 'FontSize' ,15,'XScale','log','YScale','log');
+    pause(.1)
+
+end
+
+
+%save('MSD.tsv', 'data_MSD', '-ascii', '-tabs'), disp('Data saved')
+
+
+
 %% s(dt) = 1/(#particles) * sum( ((x(t)-x(0)).^2 ) over all particles
 clc; clearvars
 figure(2);clf;pause(.1)
@@ -164,49 +213,4 @@ pause(.1)
 
 end
 
-
-%% Båda samtidigt
-clc;clearvars
-figure(4), pause(.1);clf
-
-load('../filnamn.mat')
-
-
-N=1000;
-Dt=(0:(N-1)).'*1e-2;
-
-data_S=zeros(N,3);
-data_c=zeros(2,2);
-
-for fil=1:2;
-    tic
-    s=MSD_s(fil, N);
-    S=MSD_S(fil, N);
-    toc
-    
-    
-    %Sparar data för sep. plottning
-    data_S(:,fil+1)=S;
-
-
-    
-    subplot(1,2,fil)
-    plot(Dt,S), hold on
-    plot(Dt,s)
-
-    l=legend('$S$','$s$');
-    set(l, 'Interpreter', 'Latex','FontSize',15)
-
-    title(filnamn{fil}(6:end-4))
-    xlabel('Tidssteg dt/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
-    ylabel('MSD', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
-    set(gca, 'FontSize' ,15,'XScale','log','YScale','log');
-    pause(.1)
-
-end
-
-%data_S(:,1)=Dt;
-
-%save('MSD_S.tsv', 'data_S', '-ascii', '-tabs')
-%save('MSD_S_linreg.tsv', 'data_S', '-ascii', '-tabs')
 
