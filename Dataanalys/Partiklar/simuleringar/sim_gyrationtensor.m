@@ -32,7 +32,7 @@ bins=200;%logspace(0,2);
 [N_X, X]=hist(kvot,bins);
 plot([0, X+.5*[diff(X),0]], 1- [0, cumsum(N_X)]/sum(N_X), '-')
 set(gca, 'fontsize', 20, 'yscale', 'lin', 'xscale', 'lin')
-end
+%end
 
 %%
 leg_str=cell(2,1);
@@ -160,7 +160,6 @@ L=length(b);
 bins=100;%logspace(0,2,50);
 
 data=zeros(bins+1, 2*L);
-
 
 for i=1:L
     leg_str{i}=b(i).name;

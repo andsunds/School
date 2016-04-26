@@ -77,4 +77,22 @@ end
 
 % % save('kompleterande_data.mat', 'intensitet', 'medelsteg', 'steg_std', 'std_t', 'std_n', 'sigma_brus', '-mat')
 
+%% Spara för plottning
+clc;clearvars
+
+load('filnamn.mat')
+load(kompl)
+
+n=[length(intensitet{1}),length(intensitet{2})];
+plot_data=NaN(max(n), 6);
+
+for fil=1:2
+plot_data(1:n(fil),(3*fil-2):(3*fil))=[intensitet{fil}, std_n{fil}.^2+std_t{fil}.^2, medelsteg{fil}];
+end
+
+% % save('storleksberoende.tsv', 'plot_data', '-ascii')
+
+
+
+
 

@@ -7,7 +7,6 @@ figure(4), pause(.1);clf
 
 load('../filnamn.mat')
 
-
 N=1000;
 Dt=(0:(N-1)).'*1e-2;
 
@@ -92,8 +91,8 @@ toc
 s=sum(s,2)/length(index);
 
 
-start=10;
-stop=101;
+start=2;
+stop=900;
 t=C{i}(:,1);
 c=[ones(stop+1-start,1), log(t(start:stop))]\log(s(start:stop,:));
 
