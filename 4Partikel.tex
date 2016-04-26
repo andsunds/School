@@ -1,33 +1,9 @@
 \chapter{Partikelrörelse i celler}
-\todo[inline]{Flytta till cellbiologi. Motivera istället kapitlet.}
 
-%\section{Teori} \todo[inline]{Inga tomma rubriker.}
 
-%\todo[inline]{Fylla ut med lite mera bakgrund/inledning till partikelrörelse.}
 
-%\subsubsection{Metabola tillståndets påverkan på partikelrörelsen}
-Tidigare studier~\cite{Gou_etal2014} på eukaryota celler har visat att
-partiklars rörlighet i cytoplasman beror på hur aktiv cellen
-är. Rörligheten för de i dessa studier undersökta cellerna ökade exempelvis
-trefaldigt om cellen drabbats av cancer jämfört med en normalt
-fungerande cell. En cell som drabbats av cancer \todo{källa}kommer att ha en
-förhöjd metabolism för att öka på celldelningstakten och kanske är det i samband med detta som även diffusionen i cytoplasman ökar. En möjlig förklaring till fenomenet utpekas i dessa studier som icke-termiska fluktuationer orsakade av motorproteinernas sammanlagda aktivitet.
 
-Studier~\cite{Parry_etal2014} på bakterier har samtidigt visat att
-partiklarnas rörlighet minskade drastiskt om den metabola aktiviteten
-minskade. Då bakterier saknar aktiv transport i sina celler försökte man här istället nå en förklaring där cytoplasman blir mer vätskelik ju högre aktiviteten är och börjar
-likna ett mer elastiskt fast material då aktiviteten
-minskar. Partikelstorleken tycks också vara en faktor för dess förmåga
-att röra sig runt i cellen. I gränsen när partiklarna närmar sig
-storleken av organellerna i cytoplasman blir förklaringen uppenbar;
-partikeln kommer då på grund av sin storlek inte att kunna röra sig
-runt i cellen som vid fri diffusion. 
-
-Jästceller har förmågan att kunna gå i dvala, ett tillstånd där de
-intracellulära aktiviteterna minskar. Då delar av den tillhandahållna
-datan kommer från celler i dvala möjliggör detta undersökningar om
-huruvida cytoplasmans beståndsdelars rörlighet i cellen även i detta arbete kan bekräftas bero på
-cellens metabola tillstånd. 
+\todo[inline]{Fylla ut med lite mera bakgrund/inledning till partikelrörelse.}
 
 
 \section{Alternativa modeller för partikelrörelse i vätskor}
@@ -36,19 +12,19 @@ Till en första approximation skulle rörelsen för en partikel i en jästcells 
 \begin{equation}
 P(x,t)=\frac{1}{\sqrt{4\pi Dt}}e^{-\nicefrac{x^2}{4Dt}}
 \end{equation} %Obs n=1 då endast en partikel följs
-som utgörs av sannolikhetsfunktionen för partikelns förflyttning $x$ vid en given tid $t$, där konstanten D är dess diffusionskonstant. Om partikeln betraktas som en sfär med radie $R$ nedsänkt i en vätska med viskositet $\eta$ och absolut temperatur $T$ kan D approximeras till~\cite{Einstein1905}
+som utgörs av sannolikhetsfunktionen för partikelns förflyttning $x$ vid en given tid $t$, där konstanten $D$ är dess diffusionskonstant. Om partikeln betraktas som en sfär med radie $r$ nedsänkt i en vätska med viskositet $\eta$ och absolut temperatur $T$ kan $D$ approximeras till~\cite{Einstein1905}
 \begin{equation}
-D=\frac{RT}{N}\frac{1}{6\pi \eta R}
+D=\frac{RT}{N}\frac{1}{6\pi \eta r}
 \end{equation}
 där R är allmänna gaskonstanten och N antalet molekyler som ryms i 1 gram för omgivande fluiden.
 \todo{Utveckla mer eller räcker det så här?}
 %Man betraktar då cytoplasman som en homogen vätska. %Denna teori bygger dock på att man har termisk jämvikt och att partiklar rör sig i en enbart viskös vätska, två kriterier som inte uppfylls i cytoplasman bland annat på grund av mitokondriernas energiutvinning.
 
-Experiment\cite{Midtveldt_etal2016} har dock visat att diffusionen av partiklar i celler är fundamentalt långsammare än vad man får ut från klassisk brownsk rörelse. Det finns ett par verktyg man kan använda för att undersöka detta. Ett av dem är MSD. Som visades i avsnitt~\ref{sec:brown} är MSD:n för brownsk rörelse proportionell mot förlupen tid. Speciellt kan \eqref{eq:MSD_brown} skrivas om till
+Experiment\cite{Midtveldt_etal2016} har dock visat att diffusionen av partiklar i celler är fundamentalt långsammare än förväntat från klassisk brownsk rörelse. Det finns ett par verktyg man kan använda för att undersöka detta. Ett av dem är MSD. Som visades i avsnitt~\ref{sec:brown} är MSD:n för brownsk rörelse proportionell mot förlupen tid. Speciellt kan \eqref{eq:MSD_brown} skrivas om till
 \begin{equation}
 \ev{x(t)^2} \propto t,
 \end{equation}
-där $x(0)=0$. Vad man\cite{Midtveldt_etal2016} då har funnit i tidigare studier är att exponenten på $t$ är lägre än $1$, vilket tyder på att andra förklaringsmodeller kan behövas. %Två sådana kandidater är ''Continuous Time Random Walk'' (CTRW) och ''Fractional Brownian motion''.
+där $x(0)=0$. Vad \cite{Midtveldt_etal2016} då har funnit i tidigare studier är att exponenten på $t$ är lägre än $1$, vilket tyder på att andra förklaringsmodeller kan behövas. %Två sådana kandidater är ''Continuous Time Random Walk'' (CTRW) och ''Fractional Brownian motion''.
 \todo[inline]{Lägg in fler anledningar varför Brown inte funkar.}
 
 %\subsubsection{Brownsk rörelse} \label{sec:Brownsk}
@@ -57,13 +33,13 @@ där $x(0)=0$. Vad man\cite{Midtveldt_etal2016} då har funnit i tidigare studie
 
 
 \subsection{Ornstein-Uhlenbeck-process}
-En första utvidgning av modellen för brownsk rörelse fås om man lägger till en återförande term som drar partikeln mot någon medelpunkt. Man får då en så kallad Ornstein-Uhlenbeck-process
+En första utvidgning av modellen för brownsk rörelse fås genom att lägga till en återförande term som drar partikeln mot någon medelpunkt. Detta är en så kallad Ornstein-Uhlenbeck-process
 \begin{equation}\label{eq:SDE_o-u}
 \pd_t x = -\gamma ( x-\bar{x} ) + \pd_t W,
 \end{equation}
 där $\gamma$ är en tidsskala som styr hur hårt bunden partikeln är till medelpositionen $\bar{x}$, och $\pd_t W$ är den stokastiska drivningen av partikeln som uppfyller $\ev{\pd_t W}=0$ och $\ev{\pd_t W(t)\pd_t W(t')} = \sigma^2\delta(t-t')$. Detta är en inte helt orimlig modell eftersom en partikel i en cell rimligtvis inte kan vandra hur långt som helst. Typiskt kommer en partikel att tränga ihop cytoplasmans beståndsdelar i den riktning som den rör sig åt, vilket leder till en återförande kraft.
 
-Med hjälp av \eqref{eq:SDE_o-u} och metoderna från avsnitt~\ref{sec:brown} kan man härleda modellens kovarians och MSD. Kovariansen i gränsen mot ett stationärtillstånd ($\gamma t\gg 1$) blir då
+Med hjälp av \eqref{eq:SDE_o-u} och metoderna från avsnitt~\ref{sec:brown} kan modellens kovarians och MSD härledas. Kovariansen i gränsen mot ett stationärtillstånd ($\gamma t\gg 1$) blir då
 \begin{equation}\label{eq:COV_o-u}
 \ev{x(t)x(t+\Delta{t})} \approx \frac{\sigma^2}{2\gamma} \ee^{-\gamma\Delta{t}},
 \end{equation}
@@ -85,7 +61,7 @@ MSD för denna typ av rörelse blir\cite{Barkai_CTRW}
 \begin{equation}\label{eq:CTRW_MSD}
     \ev{x^2(t)} \approx \frac{\ev{\Delta x^2}}{A \Gamma(1+\alpha)}t^{\alpha} + \frac{2\ev{\Delta x}^2}{\Gamma(1+2\alpha)A^2} t^{2\alpha}, 
 \end{equation}
-där $A$ är en konstant som dyker upp i fördelningsfunktionen för väntetiderna, $\Gamma$ är gammafunktionen, $\alpha$ en konstant som uppfyller $0<\alpha<1$ och $\Delta x$ steget mellan två positioner. Om $\ev{\Delta x}=0 $ försvinner andra termen och rörelsens MSD blir proportionell mot $t^\alpha$. Eftersom $\alpha < 1$ blir MSD:n inte linjär i tiden, utan ändringstakten kommer att avta med tiden och man får en rörelse som skiljer sig från den klassiska brownska rörelsen.
+där $A$ är en konstant som dyker upp i fördelningsfunktionen för väntetiderna, $\Gamma$ är gammafunktionen, $\alpha$ en konstant som uppfyller $0<\alpha<1$ och $\Delta x$ steget mellan två positioner. Om $\ev{\Delta x}=0 $ försvinner andra termen och rörelsens MSD blir proportionell mot $t^\alpha$. Eftersom $\alpha < 1$ blir MSD:n inte linjär i tiden, utan ändringstakten kommer att avta med tiden och rörelsen skiljer sig från den klassiska brownska rörelsen.
 Denna anomala transport uppstår då medelväntetiden mellan två hopp blir oändlig så att centrala gränsvärdessatsen därmed ej uppfylls. Summan av de stokastiska variablerna går således ej mot att bli normalfördelad, något som är grundläggande i teorin kring brownsk rörelse. 
 
 Teorin har visat sig kunna beskriva vissa aspekter av partikelrörelse i nät av F-aktin filament\cite{Barkai_CTRW}. Om partikelns radie var av samma storleksordning som genomsnittliga maskstorleken bands partiklarna tillfälligt i nätet, bortsett från termiska fluktuationer, för att sedan ta sig igenom en maska och fastna i ett nytt hålrum i nätet. MSD:n för dessa partiklar uppfyllde ett $t^{\alpha}$ beroende som i \eqref{eq:CTRW_MSD}. Partiklar med radie av mindre storleksordning än maskstorleken hade ett rörelsemönster mer likt brownsk rörelse medan de större partiklarna fastnade i nätet utan att kunna ta sig loss.
@@ -124,37 +100,46 @@ Stegen mellan varje positionsändring $\Delta{B_H}_k=B_H(k+1)-B_H(k)$ är standa
 %\section{Metod för dataundersökning} \todo[inline]{Inga tomma rubriker!}
 
 
+\section{Intensitets- och storleksberoende}
+
+%Om värdena skiljer sig åt väsentligt för små och stora partiklar -> CTRW mer trolig. 
+
+\subsection{Resultat}
+
+
+
+
+
+
 \section{Undersökning av olika typer av MSD}
 
 För att avgöra hur väl approximationen för partikelrörelsen som en brownsk rörelse gäller kan man jämföra om vissa förutsägelser från teorin kring brownsk rörelse stämmer överens med vad som kan observeras från uppmätt data. Bland annat räknades det fram i avsnitt~\ref{sec:brown} att mean square displacement (MSD) för en sådan partikel skulle öka linjärt med tiden, se \eqref{eq:MSD_brown}.
 
 Vidare finns det minst två sätt att beräkna partiklarnas MSD. För stationära processer, det vill säga processer som inte explicit beror på när i tiden de inleds, kan man skapa ett medelvärde mellan alla möjliga mätpunkter separerade med givet tidsintervall $\Delta{t}$ enligt
-\begin{equation} \label{eq:lilla_delta}
+\begin{equation} \label{eq:MSD_S}
     S(\Delta t)= \frac{1}{N}\sum^N_{i=1}\frac{1}{m}\sum^m_{j=1}(x_i(t_j+\Delta t)-x_i(t_j))^2
 \end{equation} 
 där $N$ är antalet partiklar och $m$ antalet möjliga tidsintervall av längd $\Delta t$.
 Genom att jämföra resultatet från denna typ av beräkning med att istället bara ta medelvärdet mellan alla partiklars kvadrerade radiella avvikelse från startpunkten vid given tid från start, det vill säga
-\begin{equation} \label{eq:stora_delta}%Byta plats?
+\begin{equation} \label{eq:MSD_s}%Byta plats?
     s(\Delta t)= \frac{1}{N}\sum^N_{i=1}(x_i(\Delta t)-x_i(0))^2,
 \end{equation} 
-kan man avgöra om processen är stationär då dessa därmed borde ge samma resultat. Att beräkna MSD med hjälp av \eqref{eq:stora_delta} kan dock ge en kurva med betydligt brusigare utseende då färre medelvärden fås med i denna summa. 
+kan man avgöra om processen är stationär då dessa därmed borde ge samma resultat. 
 
-\subsection{Resultat -- MSD skiljer sig mellan de olika måtten och faserna}
-Utifrån givna data för arbetet har ett potenssamband kunnat anpassas till partiklarnas MSD med en exponent som är lägre än 1. Detta tyder på att partikeln inte utför en ren brownsk rörelse utan genomgår en så kallad subdiffusion, karakteriserat av att partikelns MSD beror av tiden via ett potenssamband med exponent mindre än 1 men större än 0.
+En annan skillnad som kan uppstå när man beräknar MSD med \eqref{eq:MSD_S} respektive \eqref{eq:MSD_s} är att i en praktisk tillämpning, med begränsad datamängd, så kan $S(\Delta{t})$ bli betydligt jämnare än $s(\Delta{t})$. Detta på grund av att \eqref{eq:MSD_S} innehåller betydligt fler termer i varje medelvärde. 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=.8\textwidth]{MSD_lilla_delta_alla.png}
-    \caption{MSD beräknad under antagande att processen är stationär enligt \eqref{eq:lilla_delta} för energydepleted- och logphaseceller. Ett potenssamband har anpassats för att kunna göra jämförelser med teorin i tidigare avsnitt.}
-    \label{fig:MSD_ld}
-\end{figure}
-\todo{Strecka anpassning för att tydligare se data}
-\begin{figure}
-    \centering
-    \includegraphics[width=.8\textwidth]{MSD_stora_delta_alla.png}
-    \caption{MSD beräknat genom positionsförändring jämfört med startögonblicket efter $\Delta$t sekunder, beräknat enligt \eqref{eq:stora_delta}. Från potenssambandsanpassningen ses att exponenten för logphasecellerna skiljer sig väsentligt åt mellan $\Delta^2$ och $\delta^2$, se figur \ref{fig:MSD_ld} medan exponenterna för energydepleted-cellerna sammanfaller nästan exakt. Detta tyder på att de sistnämnda cellerna undergår en mer stationär process.}
-    \label{fig:MSD_sd}
-\end{figure}
+\subsubsection{Databehandling}
+Den studerade datan består av ett hundratal partiklar i respektive fas med, alla av olika storlek. Men då olika stora partiklar 
+
+
+\subsection{Resultat -- MSD skiljer sig mellan de olika faserna}
+
+För att undersöka om partikelrörelsen utgör en stationär process beräknas den stationära och icke-stationära MSD:n för partiklarna enligt ekvation \eqref{eq:MSD_S} och \eqref{eq:MSD_s}. Ett potenssamband har anpassats till resultaten i de båda beräkningarna och visas i figur \ref{fig:MSD}. 
+Ingen väsentlig skillnad i exponenten kan uttydas från anpassningen mellan de båda MSD typerna, vilket tyder på att processen är stationär. Modellen tordes därför inom detta område beskrivas bättre av en stationär fBm snarare än en icke-stationär CTRW.
+
+Jämförs exponenterna i potensanpassningen mellan energydepleted och logphase-cellerna, (a) respektive (b) i figur \ref{fig:MSD}, finns en markant skillnad. Exponenten för energydepleted cellerna är \todo{Samma antal värdesiffror i figurerna?} 0,65 mot logphase-cellernas 0,80. Båda processeran skiljer sig därmed från klassisk brownk rörelse där den förväntade exponenten är 1 \todo{Källa eller referens}\cite{}. Båda processerna är därmed exempel på subdiffusion, karakteriserat av att partikelns MSD beror av tiden via ett potenssamband med exponent mindre än 1 men större än 0. Då MSD:n ger en hint om hur snabbt partiklarna sprids verkar partiklarna i cellerna i dvala diffundera långsammare än partiklarna i de aktiva cellerna. De undersökta cellernas metabola tillstånd verkar alltså påverka diffusionen i cytoplasman vilket bekräftar resultat från tidigare studier~\cite{Parry_etal2014}. Dessa studier har, liksom här, utförts på celler utan motorprotein. Detta utesluter förklaringsmodellen där de utpekas som största bidragsfaktor som möjlig förklaring det det observerade fenomenet. 
+
+Den icke-stationära MSD är som förväntat mer brusig än den stationära då färre medelvärden tas men samtidigt är linjen tillräckligt tydlig för att anpassningen ska kunna göras med liten felgräns.
 
 \begin{figure}\centerline{
 \subfigure[][]{
@@ -163,18 +148,11 @@ Utifrån givna data för arbetet har ett potenssamband kunnat anpassas till part
 \subfigure[][]{
 \resizebox{0.5\textwidth}{!}{\input{bilder/partiklar/MSD_lp.tex}}
 }}
-\caption{}
+\caption{Log-logplott av de olika sorternas MSD, beräknade enligt \eqref{eq:MSD_S} respektive \eqref{eq:MSD_s}, för de olika cellfaserna, dvala (a) och aktiv (b). På grund av normeringen som användes kommer $S(\Delta{t})$ och  $s(\Delta{t})$ att ha samma värde i $\Delta{t}=\unit[10]{s}$. Detta är dock av liten betydelse eftersom det intressanta att undersöka är exponenten på $\Delta{t}$ (lutningen i dessa grafer). I de olika cellfaserna syns att lutningarna i diagrammen är samma inom varje fas, men skiljger sig åt mellan (a) och (b). Detta tyder på ett stationärt beteende, men att det ändå finns en tydlig skilnad mellan aktiva celler och de i dvala. Notera också att $S$ är jämnare än $s$, vilket bara beror på att $S$ innehåller fler termer som medelvärderats. }
 \label{fig:MSD}
 \end{figure}
 
 
-Båda dessa beräkningar har utförts för given data och exponentens värde i sambandet mellan MSD och tid skiljer sig olika mycket åt för energydepleted (dvala) och logphase (aktiva) cellerna, se figur \ref{fig:MSD_ld} och \ref{fig:MSD_sd}. Mest relevant är kanske att jämföra exponenterna i det anpassade potenssambandet som för energydepleted cellerna blev 0,64 för $S$ och 0,65 för $s$. Med denna lilla skillnad ter sig partikelrörelsen för celler i dvala vara en ganska stationär process, något som inte lika säkert kan uttalas för resultatet från de aktiva logphase cellerna. Där blev exponenten 0,83 för $S$ och 0,69 för $s$. En väsentlig skillnad, men hurvida resultatet säger något om att processen är stationär eller ej kan ej uttalas utan att hänsyn tagits till relevanta felgränser.
-
-Från dessa beräknade MSD-plottar kan man även avläsa att logphase-cellerna har högre exponent  för både $S$ och $s$ vilket tyder på att partiklarna sprids ut snabbare i dessa cellers cytoplasma jämfört med energydepleted-cellerna. Ökad aktivitet i cellen tycks därmed ge ökad diffusion.
-
-
-
-%\begin{comment} %För att dölja för fackspråk
 \section{Spektraltäthet och brushantering}
 Ett annat verktyg för att undersöka partilarnas rörelser är att titta på vad för spektraläthet partiklarnas position har. Spektraltätheten erhålls genom att ta Fouriertransformen av partikelns position som funktion av tid. På så sätt erhålls ett mått på hur mycket av varje frekvens som finns. Detta kan vara användbart på flera olika sätt; bland annat ger det ett annat sätt att \todo{Jag vet fortfarande inte hur man gör här}ta fram hur MSD:n beter sig, men spektraltätheten kan också användas för att 
 
@@ -191,15 +169,13 @@ Ett annat sätt att upptäcka bruset i en mätning är att titta på...
 
 \subsection{Resultat -- }
 
-%\end{comment}
-
 
 \section{Anisotropi i partikelrörelsen}
 Om man misstänker att cellens inre struktur påverkar partikelrörelserna skulle eventuell anisotropi kunna ge ett bidrag till dessa. Alltså ifall det finns föredragna riktningar för partikeln att röra sig i. Ett sätt att undersöka detta är genom att betrakta koordinaternas \todo{Anpassa till kap. 2!}kovarianstensor som är en tensor med de olika koordinaternas statistiska andramoment:
 \begin{equation}
 C_{ij} = \frac{1}{N} \sum_{n=1}^{N} r_i^{(n)}r_j^{(n)},
 \end{equation}
-där $r_i^{(n)}$ är den $i$:te koordinaten ($x$ eller $y$) i den $n$:te datapunkten. Man kan också skriva $C$ på matrisform enligt
+där $r_i^{(n)}$ är den $i$:te koordinaten ($x$ eller $y$) i den $n$:te datapunkten. På matrisform kan $C$ skrivas som
 \begin{equation}
 C=
 \begin{bmatrix} \label{eq:C_matrix}
@@ -289,12 +265,6 @@ Genom att spela upp datan över partikelpositionerna som en film blir det tydlig
 \label{fig:asymmetri}
 \end{figure}
 
-
-\section{Storleksberoende}
-
-%Om värdena skiljer sig åt väsentligt för små och stora partiklar -> CTRW mer trolig. 
-
-\subsection{Resultat}
 
 
 \section{Diskussion}
