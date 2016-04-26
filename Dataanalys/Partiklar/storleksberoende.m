@@ -87,10 +87,10 @@ n=[length(intensitet{1}),length(intensitet{2})];
 plot_data=NaN(max(n), 6);
 
 for fil=1:2
-plot_data(1:n(fil),(3*fil-2):(3*fil))=[intensitet{fil}, std_n{fil}.^2+std_t{fil}.^2, medelsteg{fil}];
+plot_data(1:n(fil),(3*fil-2):(3*fil))=[intensitet{fil}, sqrt(std_n{fil}.^2+std_t{fil}.^2), medelsteg{fil}];
 end
 
-% % save('storleksberoende.tsv', 'plot_data', '-ascii')
+save('storleksberoende.tsv', 'plot_data', '-ascii')
 
 
 
