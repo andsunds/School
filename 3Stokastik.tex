@@ -129,7 +129,7 @@ translationssymmetri i $t$, varför $t$ och $t'$ kan ersättas med deras differe
 c(\Delta t) = c(t, t+\Delta t).
 \end{equation}
 
-\subsubsection{Kovariansmatris}
+\subsubsection{Kovariansmatris}\label{sec:kovmatris}
 För att studera kovarians mellan flera stokastiska processer $Y_i(t)$, där $i=1,2,..,n$ där $n$ är antalet processer, kan en kovariansmatris definieras där varje element svarar mot kovariansen mellan process $i$ och process $j$. I denna studie används en tidsoberoende kovariansmatris definierad enligt 
 \begin{equation}
 \label{eq:kovmatris}
@@ -137,41 +137,6 @@ För att studera kovarians mellan flera stokastiska processer $Y_i(t)$, där $i=
 \end{equation}
 där väntevärdet är bildat med avseende på tiden. Om kovariansmatrisen är icke-diagonal är de stokastiska processerna korrelerade. Kovariansmatrisen ses dock enligt denna definition vara symmetrisk samt reell, givet att $Y_i(t)$ är reella stokastiska processer, och således även diagonaliserbar enligt spektralsatsen.  Diagonalisering av kovariansmatrisen åstadkoms genom ett basbyte till en bas bestående av linjärkombinationer av de stokastiska processerna, dessa linjärkombinationer är okorrelerade och är egenvektorer\cite{Shlens_PCA2014} till $C$. Egenvärdena till kovariansmatrisen svarar mot variansen av motsvarande egenvektor.
 
-\begin{comment}
-Vid studie av en stokastisk process med flera diskreta komponenter $Y_i(t)$ är det fördelaktigt att definiera en kovariansmatris som beskriver kovariansen mellan dessa komponenter. Kovariansmatrisen definieras enligt 
-\begin{equation}
-\label{eq:kovmatris}
-    C_{ij}(t, t') = \COV{Y_i(t)}{Y_j(t')}.
-\end{equation}
-Diagonalen i $C_{ij}$ är autokorrelationsfunktioner, det vill säga hur en stokastisk process korrelerar med sig själv, och avdiagonala element är kovariansen mellan komponenenterna $Y_i(t)$ och $Y_j(t')$. Betraktas en stationär stokastisk process så reduceras kovariansmatrisen likt tidigare enligt $C_{ij}(t,t')\to C_{ij}(\Delta t)$ där $\Delta t = |t-t'|$. I denna rapport studeras endast den tidsoberoende kovariansmatrisen
-\begin{equation}
-    C_{ij} = \ev{C_{ij}(t,t)}_{t}
-\end{equation}
-
-Vidare kan kovariansmatrisen $C$ beräknas från observerad data av en samling stokastiska processer $A_i(t)$ där $i=1,2,..n$ och $n$ antal processer. För observerad data under en tid $T$ kan denna således beräknas enligt 
-\begin{equation}
-\label{eq:covmatrix}
-     \COV{A_i}{A_j} \approx \frac{1}{T-1}\sum_{t=1}^T \left(A_i-\bar{A_i}\right)\left(A_j-\bar{A_j}\right),
-\end{equation}
-från vilket det ses att $C$ är symmetrisk samt reell, givet att $A$ är en reell stokastisk process. Linjär algebra och spektralsatsen medför vidare att den allmänt icke-diagonala symmetriska samt reella kovariansmatrisen är diagonaliserbar. På matrisform blir \eqref{eq:covmatrix} precis $C=\frac{1}{T-1}AA^T$ där $A$ är en matris med de stokastiska processerna $A_i(t)$ som kolonnvektorer. Den diagonaliserade kovariansmatrisen fås då enligt 
-\begin{equation}
-    D = V^TCV,
-\end{equation}
-där $D$ är en diagonal matris med egenvärdena till $C$ och $V$ är en matris med egenvektorerna $b_\alpha$ som kolonner. De statistiskt beroende variablerna $A_i(t)$ kan nu uttryckas i basen bestående av egenvektorer som
-\begin{equation}
-\label{eq:B}
-    B_{\alpha}(t) = \sum_i V_{\alpha i}A_i(t),
-\end{equation}
-för $\alpha = 1,2,..n$. På matrisform kan detta beskrivas med matrisen $B_{\alpha t}$, där varje rad beskriver utvecklingen i tid av koefficienterna $B_{\alpha}$. Betrakta nu kovariansen mellan komponenter till $B_{\alpha}$  enligt 
-\begin{equation}
-    \COV{B_{\alpha}}{B_{\beta}} = \frac{1}{n-1}BB^T.
-\end{equation}
-Från ekvation \ref{eq:B} ses att $B=V^TA$ vilket ger 
-\begin{equation}
-    \COV{B_{\alpha}}{B_{\beta}} = V^TAA^TV = D,
-\end{equation}
-där enligt tidigare $C=AA^T$, således ses att $B_{\alpha}(t)$ är statistiskt oberoende då alla avdiagonala element i kovariansmatrisen är noll och där de diagonala elementen, egenvärdena till kovariansmatrisen $C$, svarar mot variansen av $B_{\alpha}(t)$. Till skillnad från de stokastiska komponenterna $A_i$ som allmänt ej är statistiskt oberoende så är alltså $B_\alpha$ statistiskt oberoende. %Egenskaper hos kovariansmatrisen samt linjär algebra ger alltså ett recept på hur man utvinner statistiskt oberoende komponenter från en mängd statistiskt beroende. 
-\end{comment}
 
 \subsubsection{Spektral effekttäthet}
 \todo[inline]{Ska vi nämna något om Wiener-Khinthchine-teoremet?}
@@ -241,11 +206,20 @@ Vitt brus, $\pd_tW_\omega(t)$,\footnotemark{} är ett brus med konstant PSD. All
 \begin{equation}\label{eq:white_noise}
 \begin{aligned}
 \ev{\pd_tW_\omega(t)}&=0 \\
-\ev{\pd_tW_\omega(t)\pd_tW_\omega(t')}&= \sigma_W^2 \, \delta(t-t'),
+\ev{\pd_tW_\omega(t)\pd_{t'}W_\omega(t')}&= \sigma_W^2 \, \delta(t-t'),
 \end{aligned}
 \end{equation}
 samt är normalfördelat. 
-Det bör nämnas att äkta vitt brus inte är fysikaliskt eftersom det innehåller oändligt mycket energi. I de flesta tillämpningar brukar dock fluktuationer antas vara vitt brus för att det oftast ger enkla teoretiska analyser. Vidare kan även verkligt brus i många fall~\cite{Engelberg_noise2007} betraktas som vitt till en god approximation -- det vill säga har en konstant spektralfördelning i ett begränsat frekvensintervall.
+Det bör nämnas att äkta vitt brus inte är fysikaliskt eftersom det innehåller oändligt mycket energi. I de flesta tillämpningar brukar dock fluktuationer antas vara vitt brus för att det oftast ger enkla teoretiska analyser. Vidare kan även verkligt brus i många fall~\cite{Engelberg_noise2007} betraktas som vitt till en god approximation -- det vill säga har en konstant spektralfördelning i ett begränsat frekvensintervall. Att \eqref{eq:white_noise} medför konstant PSD inses enligt  
+\begin{equation}
+    \ev{|\pd_t\hat{W}_\omega(f)|^2} = \int_{-T}^{T}\id{t}\int_{-T}^{T}\id{t'}\ev{\pd_tW_\omega(t)\pd_{t'}W_\omega(t')}\ee^{-i2\pi f(t-t')},
+\end{equation}
+där den trunkerade fouriertransformen \eqref{eq:truncated_F} används. Denna integral kan enkelt beräknas till $2T\sigma_W^2$ vilket ger 
+\begin{equation}
+    S(f) = \lim_{T\to\infty}\dfrac{2T\sigma_W^2}{2T} = \sigma_W^2
+\end{equation}
+och visar att PSD:n är konstant för brus med egenskapen \eqref{eq:white_noise}. 
+
 \footnotetext{Beteckningen med en tidsderivata $\pd_t$ kan verka märklig, men anledningen framgår i stycket nedan. }
 
 %Strikt talat ges en Wienerprocess genom att börja med att betrakta \cite{Miller_probability2012}
@@ -281,6 +255,13 @@ Genom att betrakta \eqref{eq:wiener_approx} som grunden för en Wienerprocess ä
 Dess egenskaper utnyttjas i avsnitt~\ref{sec:brown} om brownsk rörelse.
 
 
+\subsection{Integraler med stokastiska integrationsvariabler}
+\label{sec:Stok_int}
+
+Integraler med stokastiska intebrationsvaribler skiljer sig från integraler i den reella analysen då de ofta behandlar icke-deriverbara processer. Därav behövs en ny definition av hur en sådan stokastisk integral ska beräknas. Följande avsnitt här till stor del hämtat från \textit{Brownian motion and stochastic calculus} av I. Karatzas och S. E. Shreve \cite{Karatzas_stokint1991}, t ex.
+
+\cite{Dieker_fBm} har bra enklare info.
+
 
 \section{Stokastiska differentialekvationer}
 En differentialekvation som innehåller termer bestående av stokastiska
@@ -310,6 +291,7 @@ Antaganden om fluktationens väntevärde och korrelation men med en okänd sanno
 
 
 \subsection{Brownsk rörelse}\label{sec:brown}
+\label{brownsk}
 Hastigheten för en partikel som utför ren brownsk rörelse styrs av
 Langevinekvationen~\cite{Mazo_Brownian2002} 
 \begin{equation} \label{eq:Brownian_SDE}

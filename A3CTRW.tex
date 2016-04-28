@@ -1,0 +1,96 @@
+\chapter{CTRW och subdiffusion}
+\todo{Sidnumrering i appendix stämmer inte?}
+
+Continous time random walk är modell där rörelsen beskrivs av 
+\begin{equation}
+    X(t) = \sum_{i=1}^{n(t)} x_i
+\end{equation}
+där $x_i$ identiskt oberoende fördelade steg med sannolikhetsfördelning $p(x)$. Till skillnad mot en enklare slumpvandring så sker inte stegen med jämna tidsintervall, utan tiden mellan stegen är slumpmässiga med en sannolikhetsfördelning $\psi (t)$. Vidare betecknas sannolikheten att $n$ stycken steg har skett efter en tid $t$ som $P'(n,t)$ och $p_n(x)$ som sannolikheten att befinna sig vid $x$ efter $n$ stycken steg. Givet dessa definitioner är sannolikheten att befinna sig vid $x$ efter en tid $t$ precis 
+\begin{equation}
+\label{eq:P(x,t)}
+    P(x,t) =\sum_{n=0}^{\infty} P'(n,t)p_n(x).
+\end{equation}
+
+För att beräkna godtyckliga moment av $X(t)$, av speciellt intresse är väntevärdet och variansen, så betraktar vi fouriertransformen av $P(x,t)$
+\begin{equation}\label{eq:four}
+\tilde{P}(k,t) = \int_{-\infty}^{\infty} P(x,t)\ee^{\ii kx}dx.
+\end{equation}
+Från fouriertransformen kan godtyckligt moment beräknas enligt 
+\begin{equation}\label{eq:moment}
+\ev{X(t)^n} = (-i)^n\frac{\pd^n \tilde{P}(k,t)}{\pd k^n}\big |_{k=0}
+\end{equation}. 
+
+Det visar sig att 
+\begin{equation}
+p_n(x) = p(x)*p(x)...*p(x),
+\end{equation}
+där $*$ betecknar faltning och $p(x)$ är faltad $n$ gånger med sig själv. \todo{motivera} Således är 
+\begin{equation}\label{eq:Pfour}
+P(k,t) =\sum_{n=0}^{\infty} P'(n,t)p(k)^n,
+\end{equation}
+där $p(k)$ är fouriertransformen av $p(x)$ och vi har utnyttjat faltning av två funktioner i $x$-rummet motsvarar multiplikation i $k$-rummet. Det underlättar nu genom att beskriva $P'(n,t)$ i termer av sannolikhetsfördelningen $\psi (t)$ som enligt motsvarar sannolikheten att ett steg sker efter en tid $t$. Detta görs enklast genom att notera att sannolikheten att inget steg sker under en tid $t$ är 
+\begin{equation}\label{eq:nojump}
+\Psi (t) = 1-\int_0^t \psi(t')dt' = \int_t^{\infty} \psi(t)dt. 
+\end{equation}
+Givet detta är sannolikheten att ett steg sker under en tid $t$
+\begin{equation}
+P'(1,t) = \int_0^t\psi(t')\Psi(t-t')dt',
+\end{equation}
+där vi alltså summerar sannolikheten att ett steg sker vid $t'$ och sedan inget mer under en tid $t-t'$ över alla $t'$. Således är $P'(1,t) = \psi(t)*\Psi(t)$ och från detta inses
+\begin{equation}
+P(n,t) = \psi(t)*\psi(t)*...*\psi(t)*\Psi(t).
+\end{equation}
+Detta uttryck kan förenklas genom ensidig laplacetransformera i $t$ enligt 
+\begin{equation}
+P'(n,s) = \int_0^\infty P'(n,t)\ee^{-st},
+\end{equation}
+vilket ger 
+\begin{equation}
+P(n,s) = \psi(s)^n\Psi(s),
+\end{equation}
+där $\psi(s)$ är laplacetransformen av $\psi(t)$ och likvärdigt för $\Psi(s)$ samt. Från definitionen \eqref{eq:nojump} fås 
+\begin{equation}
+\Psi(s) = \frac{1-\psi(s)}{s}.
+\end{equation}
+Vi är nu redo att presentera \eqref{eq:four} där vi utnyttjar laplacetransformen av $P(n,t)$ vilket ger 
+\begin{equation}
+P(k,s) = \sum_{n=0}^{\infty} \frac{1-\psi(s)}{s}[\psi(s)p(k)]^n,
+\end{equation}
+och slutligen med hjälp av en geometrisk summa får vi 
+\begin{equation}\label{eq:master}
+P(k,s) = \frac{1-\psi(s)}{s}\frac{1}{1-\psi(s)p(k)}.
+\end{equation}
+
+Genom att applicera \eqref{eq:moment} på detta samband kan väntevärdet samt variansen för $X(t)$ beräknas vilket visas nedan. Väntevärdet blir 
+\begin{equation}
+\ev{X(s)} = -i\frac{\pd \tilde{P}(k,s)}{\pd k}\big |_{k=0},
+\end{equation}
+som med \eqref{eq:master} ger 
+\begin{equation}
+\ev{X(s)} = \frac{1-\psi(s)}{s}\frac{\psi(s)(-i\frac{\pd p(k)}{\pd k})}{(1-\psi(s)p(k))^2}\bigg |_{k=0}.
+\end{equation}
+och ser vid en första anblick inte ut som framsteg. Men uttrycket förenklas genom att inse att 
+\begin{equation}
+(-i\frac{\pd p(k)}{\pd k})\bigg |_{k=0} = \ev{x}, \quad p(k)\bigg |_{k=0} = 1. 
+\end{equation}
+Väntevärdet blir således 
+\begin{equation}\label{eq:medel}
+\ev{X(s)} = \frac{\psi(s)\ev{x}}{s(1-\psi(s))},
+\end{equation}
+med antagandet $\ev{x}\equiv l< \infty$. Analogt kan variansen beräknas enligt 
+\begin{equation}
+\ev{X(s)^2} = -\frac{\pd^2 \tilde{P}(k,s)}{\pd k^2}\bigg |_{k=0},
+\end{equation}
+vilket efter en liten exercis ger 
+\begin{equation}\label{eq:var}
+\ev{X(s)^2} = \frac{\ev{x^2}\psi(s)}{s(1-\psi(s))}+\frac{2\ev{x}\psi(s)}{s(1-\psi(s))^2},
+\end{equation}
+där $\ev{x^2}\equiv \sigma_x^2< \infty$. Vi har således uttryck väntevärdet samt variansen för $X(s)$ i termer av transformen av sannolikhetsfördelningen $\psi(t)$. 
+
+\todo[inline]{exempel på normal samt anomal diffusion kommer nedan.}
+\section{Normal diffusion}
+Vid normal diffusion är väntetiden $\tau\equiv\ev{t}$ finit och väntevärde samt varians kan beräknas i gränsen då $t\to\infty$ vilket är ekvivalent med $s\to0$. I denna gräns gäller sannolikhetsfördelning 
+\begin{equation}
+\psi(s) \sim 1-\tau+s+\frac{\ev{t^2}s^2}{2} 
+\end{equation}
+
