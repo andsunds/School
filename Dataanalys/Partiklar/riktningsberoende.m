@@ -22,6 +22,10 @@ for i=1:n
     
     gyr = [sum(X.^2), sum(X.*Y); 
            sum(Y.*X), sum(Y.^2)]/length(X);
+    
+    %N_steps=length(X);
+    %gyr = [sum(X.^2)-sum(X).^2/N_steps, sum(X.*Y)-sum(X).*sum(Y)/N_steps; 
+    %       sum(Y.*X)-sum(X).*sum(Y)/N_steps, sum(Y.^2)-sum(Y).^2/N_steps]/N_steps;
     [V,D]=eig(gyr);
     kvot(i)=D(4)/D(1);
     egen(i,:)=[D(1), D(4)];
@@ -52,6 +56,13 @@ for i=1:n
     pause(1)
     %}
 end
+bins=50;
+A=(egen(:,2)-egen(:,1)).^2./(egen(:,2)+egen(:,1)).^2;%assymetri
+    [N_X, X]=hist(A,bins);
+    hold on
+    plot(X+.5*[diff(X),0], 1-cumsum(N_X)/sum(N_X), '-o')
+
+
 disp('Färdig')
 
 % % save('simuleringar/kvot_logphase.mat', 'kvot', 'egen', '-mat')
