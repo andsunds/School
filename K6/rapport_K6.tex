@@ -3,8 +3,9 @@
 \pdfoutput=1
 
 \usepackage{custom_as}
+\usepackage{multirow}
 
-%\graphicspath{ {figurer/} }
+\graphicspath{ {fig_and_code/} }
 
 %%Drar in tabell och figurtexter
 \usepackage[margin=10 pt]{caption}
@@ -21,7 +22,7 @@
 %%För att ändra hur rubrikerna ska formateras
 %\renewcommand{\thesection}{...}
 
-
+\newcommand{\Thalv}[2]{\ensuremath{}T_{\nicefrac{1}{2}}\left(^{#1}\text{#2}\right)}
 
 
 \begin{document}
@@ -35,19 +36,78 @@
 
 \maketitle
 
-\begin{abstract}
-
-
-\end{abstract}
+%\begin{abstract}
+%\end{abstract}
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
 %Om man vill ha en lista med vilka todo:s som finns.
 %\todolist
 
-\section{}
+\section{Inledning}
+
+\section{Metod}
+Silvret först behöver först och främst neutronaktiveras, men då
+behöver neutronera bromsas till rätt energier för att silverkärna
+effektivt ska kunna ta upp netronerna. För att bormsa neutronerna
+används framför allt väte; i den här laborationen användes parafin,
+som är stora kol-vätekedjor, för att bromsa neutronerna. Alltså måste
+man börja med att bestämma hur mycket parafin som behövs för att
+bromsa neutronerna tillräckligt men inte heller för mycket.
 
 
-\subsection{}
+\begin{figure}\centering
+\resizebox{.5\textwidth}{!}{\input{fig_and_code/aktivering.pdf_t}}
+\caption{}
+\label{fig:aktivering}
+\end{figure}
+
+
+\section{Resultat och Diskussion}
+
+\begin{table}
+\centering
+\caption{ }
+\label{tab:diffusivitet}
+\centerline{
+\begin{tabular}{ll|c|c|c|}\cline{3-5}
+    & & \multicolumn{1}{c|}{Rådata} & \multicolumn{1}{c|}{Bakgrundskorrigerad} & \multicolumn{1}{c|}{Rymdvinkelkorrigerad} 
+    \\\hline
+    % Första raden av första delen
+    \multicolumn{1}{|l|}{\multirow{2}{*}{Utan kadmium}}
+    &Pos. 3 & 1\,798& 1\,784& 20,5\,$\times 10^3$
+    \\ \cline{2-5}
+    % Andra raden av första delen
+    \multicolumn{1}{|l|}{} 
+    & Pos. 2 & \phantom{1\,}458& \phantom{1\,}444& \phantom{1}4,0\,$\times 10^3$
+    \\\hline\hline
+    % Första raden av sista delen
+    \multicolumn{1}{|l|}{\multirow{3}{*}{Med kadmium}} 
+    &Pos. 3 & 1\,506 & 1\,492 & 17,1\,$\times 10^3$
+    \\ \cline{2-5}
+    % Andra raden av sista delen
+    \multicolumn{1}{|l|}{} 
+    & Pos. 2 & 3\,968 & 3\,954 & 18,8\,$\times 10^3$ 
+    \\ \cline{2-5}
+    % Tredje raden av sista delen
+    \multicolumn{1}{|l|}{} 
+    & Pos. 1 & 5\,940 & 5\,926 & \phantom{1}5,9\,$\times 10^3$ 
+    \\\hline
+\end{tabular}}
+\end{table}
+
+
+\begin{figure}\centering
+\input{fig_and_code/dataanpassning.tex}
+\caption{Uppmätt och korrigerad aktivitet som funktion av tid med
+  kurvanpassningar. De båda isotopernas aktivitet kan särskiljas genom
+att i princip bara den ena isotopen finns kvar vid stora tider. Så en
+exponentalanpassning kan göras till datan i den högra änden av
+plotten. Därefter kan den kortlivade isotopens aktivitet extraheras
+genom att subtrahera den första anpassingen från datan i den vänsta
+änden. De anpassade havleringstiderna blev
+$\Thalv{110}{Ag}=\unit[146]{s}$ och $\Thalv{108}{Ag}=\unit[24]{s}$.}
+\label{fig:data}
+\end{figure}
 
 
 % \newpage
