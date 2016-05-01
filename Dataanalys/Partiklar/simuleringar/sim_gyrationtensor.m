@@ -26,7 +26,7 @@ for i=1:N_trials
 end
 %sparar sim
 
-save(sprintf('egen_brus_%2.1f.mat', brus), 'egen', '-mat')
+% % save(sprintf('egen_brus_%2.1f.mat', brus), 'egen', '-mat')
 
 toc
 %
@@ -50,6 +50,8 @@ for i=1:2
     [N_X, X]=hist(A,bins);
     hold on
     plot(X+.5*[diff(X),0], 1-cumsum(N_X)/sum(N_X), '-o')
+    Asym=mean((egen(:,2)-egen(:,1)).^2)/mean((egen(:,2)+egen(:,1)).^2);
+    fprintf('Assymmetri %s: %2.3f\n',leg_str{i}, Asym)
     %plot(X, N_X/sum(N_X), '*');hold on
 end
 
@@ -63,7 +65,7 @@ end
 clc;clf; clearvars
 
 N_steps=1000;
-N_trials=100000;
+N_trials=10000;
 
 tau=[4];
 bins=50;%logspace(0,2);
@@ -107,11 +109,13 @@ hold on
 plot(X+.5*[diff(X),0], 1-cumsum(N_X)/sum(N_X), '-*')
 pause(0.1)
 
-save(sprintf('egen_spring_%1.1fs.mat', tau(l)), 'egen', '-mat')
+% %save(sprintf('egen_spring_%1.1fs.mat', tau(l)), 'egen', '-mat')
 
 end
 %set(gca, 'fontsize', 20, 'yscale', 'log', 'xscale', 'log')
 %
+Asym=mean((egen(:,2)-egen(:,1)).^2)/mean((egen(:,2)+egen(:,1)).^2);
+fprintf('Assymmetri %s: %2.3f\n', 'spring', Asym)
 
 leg_str=cell(3,1);
 leg_str{1}='egen_energydepleted.mat';
@@ -124,6 +128,8 @@ for i=1:2
     [N_X, X]=hist(A,bins);
     hold on
     plot(X+.5*[diff(X),0], 1-cumsum(N_X)/sum(N_X), '-o')
+    Asym=mean((egen(:,2)-egen(:,1)).^2)/mean((egen(:,2)+egen(:,1)).^2);
+fprintf('Assymmetri %s: %2.3f\n', leg_str{i}(1:end-4) , Asym)
     %plot(X, N_X/sum(N_X), '*');hold on
 end
 
@@ -190,8 +196,12 @@ for i=1:L
     
     plot(data(:,2*i-1), data(:,2*i), '-', 'linewidth', 2)
     
-    Asym=mean((egen(:,2)-egen(:,1)).^2)/mean((egen(:,2)+egen(:,1)).^2);
-    fprintf('Assymmetri %s: %2.3f\n', leg_str{i}, Asym)
+    l1=(egen(:,2)-egen(:,1)).^2;
+    l2=(egen(:,2)+egen(:,1)).^2;
+    
+    Asym=mean(l1)/mean(l2);
+    Asym_std=Asym*sqrt( (std(l1)/mean(l1))^2+(std(l2)/mean(l2))^2 )/sqrt(length(l1));
+    fprintf('Assymmetri %s: %2.3f +- %0.3f\n', leg_str{i}, Asym, Asym_std )
     
     %plot(X, N_X/sum(N_X), '-*');hold on
         

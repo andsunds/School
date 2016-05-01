@@ -33,16 +33,21 @@ for i=1:n
     
     TN=koordinatbyte(C{i}(:,2:3));%positionsdata i TN-koordinater
     
-    steglangd=(sum(diff(TN).^2, 2));%alla steglängder
-    medelsteg{fil}(i)=sqrt(mean(steglangd));
-    steg_std{fil}(i)=std(steglangd);
+    steglangd_sq=(sum(diff(TN).^2, 2));%alla steglängder
+    medelsteg{fil}(i)=mean(sqrt(steglangd_sq));
+    steg_std{fil}(i)=std(sqrt(steglangd_sq));
     
     std_t{fil}(i)=sqrt(var(TN(:,1)));
     std_n{fil}(i)=sqrt(var(TN(:,2)));
 end
+mean(steg_std{fil})
+std(steg_std{fil})
 
-index=find(intensitet{fil}>12);
-sigma_brus(fil) = 0.5*mean( medelsteg{fil}(index) );
+
+index=find(intensitet{fil}>16);
+
+k=(sqrt(2)*gamma((2+1)/2)/gamma((2)/2)*sqrt(2));
+sigma_brus(fil) = mean( medelsteg{fil}(index) )/k;
 
 %plottar rörrilghet
 subplot(2,2,2*fil-1)
@@ -62,7 +67,7 @@ subplot(2,2,2*fil)
 %errorbar(intensitet{fil}, medelsteg{fil}, steg_osakerhet{fil}, '.')
 
 plot(intensitet{fil}, medelsteg{fil}, '.'); hold on
-plot([0,25], 2*sigma_brus(fil)*[1,1], 'r');hold off
+plot([0,25], k*sigma_brus(fil)*[1,1], 'r');hold off
 title(filnamn{fil}(1:end-4))
 xlabel('Intensitet', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 ylabel('Stegl\"a{}ngd /[m]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
@@ -72,7 +77,7 @@ axis([0,25,7e-10,1e-8])
 %pause(0.1)%för att rita ut efter hand
 
 end
-
+sigma_brus
 
 
 % % save('kompleterande_data.mat', 'intensitet', 'medelsteg', 'steg_std', 'std_t', 'std_n', 'sigma_brus', '-mat')
