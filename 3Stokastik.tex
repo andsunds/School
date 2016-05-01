@@ -138,8 +138,8 @@ För att studera kovarians mellan flera stokastiska processer $Y_i(t)$, där $i=
 där väntevärdet är bildat med avseende på tiden. Om kovariansmatrisen är icke-diagonal är de stokastiska processerna korrelerade. Kovariansmatrisen ses dock enligt denna definition vara symmetrisk samt reell, givet att $Y_i(t)$ är reella stokastiska processer, och således även diagonaliserbar enligt spektralsatsen.  Diagonalisering av kovariansmatrisen åstadkoms genom ett basbyte till en bas bestående av linjärkombinationer av de stokastiska processerna, dessa linjärkombinationer är okorrelerade och är egenvektorer\cite{Shlens_PCA2014} till $C$. Egenvärdena till kovariansmatrisen svarar mot variansen av motsvarande egenvektor.
 
 
-\subsubsection{Spektral effekttäthet}
-\todo[inline]{Ska vi nämna något om Wiener-Khinthchine-teoremet?}
+\subsection{Spektral effekttäthet}
+
 Inom signalbehandling kan det vara intressant att veta vilka frekvenskomponenter en signal innehåller. Generellt sett används Fouriertransformen för att ta fram en signals spektrum.
 För stokastiska processer kan liknande metoder användas, men tyvärr är i allmänhet stokastiska processer inte Fouriertransformerbara. Istället används den den spektrala effekttätheten, även kallad PSD (en. power spectral density), en nära släkting till Fouriertransformen.
 
@@ -169,6 +169,17 @@ där
 \end{equation}
 är den trunkerade Fouriertransformen av $X$. Genom att ta med kvoten $\nicefrac{1}{2T}$ i \eqref{eq:PSD} erhålls en spektraltäthet av effekter som kan konvergera även om \eqref{eq:truncated_F} på egen hand divergerar när $T\to\infty$. 
 
+\subsubsection{Wiener-Khinthchine-teoremet}
+
+
+\subsubsection{Icke-stationära processer}
+
+Konceptet med PSD kan generaliseras till icke-stationära processer via Wigner-Ville-spektrumet (WVS) för en process $x(t)$ med kovarians funktion $\gamma_x(t,s)$ \cite{Flandrin_fBmspektrum1989}
+\begin{equation} \label{eq:WVS}
+    W_x(t,\omega)=\int^{\infty}_{-\infty} \gamma_x\left(t+\frac{\tau}{2},t-\frac{\tau}{2}\right) \ee^{-i\omega}\tau \dd\tau,
+\end{equation}
+WVS kan därmed ha ett tidsberoende. Man kan visa att WVS övergår i PSD för stationära processer.
+\todo{Sätta i bilaga}
 
 \subsection{Skattningar med diskret data} \label{sec:diskret_data}
 \todo[inline]{Hur bra är skattningarna.}
@@ -202,7 +213,7 @@ Genom att utnyttja väntevärdets
 
 
 \subsection{Vitt brus och Wienerprocessen}\label{sec:white_noise}
-Vitt brus, $\pd_tW_\omega(t)$,\footnotemark{} är ett brus med konstant PSD. Alltså att det, likt vitt brus, har lika mycket av alla frekvenskomponenter. Det går dock att visa att vitt brus uppfyller \cite{Miller_probability2012}
+Vitt brus, $\pd_tW_\omega(t)$,\footnotemark{} är ett brus med konstant PSD, det har alltså lika mycket av alla frekvenskomponenter. Det går dock att visa att vitt brus uppfyller \cite{Miller_probability2012}
 \begin{equation}\label{eq:white_noise}
 \begin{aligned}
 \ev{\pd_tW_\omega(t)}&=0 \\
@@ -214,11 +225,16 @@ Det bör nämnas att äkta vitt brus inte är fysikaliskt eftersom det innehåll
 \begin{equation}
     \ev{|\pd_t\hat{W}_\omega(f)|^2} = \int_{-T}^{T}\id{t}\int_{-T}^{T}\id{t'}\ev{\pd_tW_\omega(t)\pd_{t'}W_\omega(t')}\ee^{-i2\pi f(t-t')},
 \end{equation}
-där den trunkerade fouriertransformen \eqref{eq:truncated_F} används. Denna integral kan enkelt beräknas till $2T\sigma_W^2$ vilket ger 
+där den trunkerade fouriertransformen \eqref{eq:truncated_F} används. Denna integral kan beräknas med hjälp av \eqref{eq:white_noise}
 \begin{equation}
-    S(f) = \lim_{T\to\infty}\dfrac{2T\sigma_W^2}{2T} = \sigma_W^2
+    \int_{-T}^{T}\id{t}\int_{-T}^{T}\id{t'} \sigma_W^2 \delta(t-t')\ee^{-i2\pi f(t-t')} = \sigma_W^2 \int_{-T}^{T}\id{t} =2T\sigma_W^2.
 \end{equation}
-och visar att PSD:n är konstant för brus med egenskapen \eqref{eq:white_noise}. 
+
+Således ses att \eqref{eq:white_noise} medför 
+\begin{equation}
+    S(f) = \lim_{T\to\infty}\dfrac{2T\sigma_W^2}{2T} = \sigma_W^2,
+\end{equation}
+vilket visar att PSD:n är konstant. 
 
 \footnotetext{Beteckningen med en tidsderivata $\pd_t$ kan verka märklig, men anledningen framgår i stycket nedan. }
 
@@ -314,7 +330,7 @@ v(t)
  +\frac{1}{M}\int^t_0 F(\tau)e^{-\nicefrac{\zeta (t-\tau)}{M}} \id\tau.
 \end{equation}
 Detta får dock inte den stokastiska termen att försvinna och lösningen kan inte skrivas på en deterministisk form. För att ändå kunna göra några förutsägelser betraktas väntevärdet och korrelationen i tiden. Korrelationen ges av, där $\delta t\geq0$,
-\begin{equation}
+\begin{equation}\label{Brownian_korr}
 \begin{aligned}
 \ev{v(t)v(t+\delta t)} 
 =& v(0)^2\ee^{-\frac{\zeta}{M}(2t+\delta t)}\\
@@ -341,7 +357,7 @@ Med hjälp av detta samband samt ekvipartitionsteoremet som gäller vid termisk 
 \end{equation}
 Detta resultat är ett exempel på fluktuation-dissipationsteoremet som relaterar dissipationen av energi, friktionen, med fluktuationen, brownsk rörelse. 
 
-För $t \gg \nicefrac{M}{\zeta}$ blir $\pd_t v$-termen i ekvation \eqref{eq:Brownian_SDE} \todo{Visa detta} försumbar och ekvationen kan då skrivas på formen
+För $t \gg \nicefrac{M}{\zeta}$ blir $\pd_t v$-termen i ekvation \eqref{eq:Brownian_SDE} \todo{Källa} försumbar och ekvationen kan då skrivas på formen
 \begin{equation}
     \zeta \pd_t x=F(t),
 \end{equation}

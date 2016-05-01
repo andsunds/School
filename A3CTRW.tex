@@ -1,11 +1,10 @@
 \chapter{CTRW och subdiffusion}
-\todo{Sidnumrering i appendix stämmer inte?}
-
+\label{app:CTRW}
 Continous time random walk är modell där rörelsen beskrivs av 
 \begin{equation}
     X(t) = \sum_{i=1}^{n(t)} x_i
 \end{equation}
-där $x_i$ identiskt oberoende fördelade steg med sannolikhetsfördelning $p(x)$. Till skillnad mot en enklare slumpvandring så sker inte stegen med jämna tidsintervall, utan tiden mellan stegen är slumpmässiga med en sannolikhetsfördelning $\psi (t)$. Vidare betecknas sannolikheten att $n$ stycken steg har skett efter en tid $t$ som $P'(n,t)$ och $p_n(x)$ som sannolikheten att befinna sig vid $x$ efter $n$ stycken steg. Givet dessa definitioner är sannolikheten att befinna sig vid $x$ efter en tid $t$ precis 
+där $x_i$ är identiskt oberoende fördelade steg med sannolikhetsfördelning $p(x)$. Till skillnad mot en enklare slumpvandring så sker inte stegen med jämna tidsintervall, utan tiden mellan stegen är slumpmässiga och följer en sannolikhetsfördelning $\psi (t)$. Hädanefter antas att $\psi(t)$ är identiska samt oberoende för alla steg, det finns teorier som studerar så kallad ''aging CTRW''\cite{Barkai_ACTRW2002} där detta inte gäller. Vidare betecknas sannolikheten att $n$ stycken steg har skett efter en tid $t$ som $P'(n,t)$ och $p_n(x)$ som sannolikheten att befinna sig vid $x$ efter $n$ stycken steg. Givet dessa definitioner är sannolikheten att befinna sig vid $x$ efter en tid $t$ precis 
 \begin{equation}
 \label{eq:P(x,t)}
     P(x,t) =\sum_{n=0}^{\infty} P'(n,t)p_n(x).
@@ -17,24 +16,36 @@ För att beräkna godtyckliga moment av $X(t)$, av speciellt intresse är vänte
 \end{equation}
 Från fouriertransformen kan godtyckligt moment beräknas enligt 
 \begin{equation}\label{eq:moment}
-\ev{X(t)^n} = (-i)^n\frac{\pd^n \tilde{P}(k,t)}{\pd k^n}\big |_{k=0}
+\ev{X(t)^n} = (-i)^n \eval{\frac{\pd^n \tilde{P}(k,t)}{\pd k^n}}_{k=0}
 \end{equation}. 
 
-Det visar sig att 
+Sannolikheten för att nå $x$ efter $n$ antal steg visar sig beskrivas av en faltning $p(x)^{*n}$, där notationen betyder 
 \begin{equation}
-p_n(x) = p(x)*p(x)...*p(x),
+p_n(x) = p(x)*p(*\ldots*p(x),
 \end{equation}
-där $*$ betecknar faltning och $p(x)$ är faltad $n$ gånger med sig själv. \todo{motivera} Således är 
+%\begin{comment}
+\begin{figure}
+    \centering
+    \input{ctrw.pdf_t}
+    \caption{Caption}
+    \label{fig:ctrw}
+\end{figure}
+%\end{comment}
+$*$ betecknar faltning och $p(x)$ är faltad $n$ gånger med sig själv. Vilket inses lättast genom att betrakta två steg
+\begin{equation}\label{eq:nfaltning}
+    p_2(x) = \int_{-\infty}^{\infty} p(x-x')p(x')\id{x'},
+\end{equation}
+där man summerar över alla $x'$ sannolikheten att första steget sker till en position $x'$ och andra steget till $x$ från $x'$. Från detta inses det att \eqref{eq:nfaltning} gäller för $n$ antal steg.
 \begin{equation}\label{eq:Pfour}
 P(k,t) =\sum_{n=0}^{\infty} P'(n,t)p(k)^n,
 \end{equation}
-där $p(k)$ är fouriertransformen av $p(x)$ och vi har utnyttjat faltning av två funktioner i $x$-rummet motsvarar multiplikation i $k$-rummet. Det underlättar nu genom att beskriva $P'(n,t)$ i termer av sannolikhetsfördelningen $\psi (t)$ som enligt motsvarar sannolikheten att ett steg sker efter en tid $t$. Detta görs enklast genom att notera att sannolikheten att inget steg sker under en tid $t$ är 
+där $p(k)$ är fouriertransformen av $p(x)$ och vi har utnyttjat faltning i $x$-rummet motsvarar multiplikation i $k$-rummet. Det underlättar nu att beskriva $P'(n,t)$ i termer av sannolikhetsfördelningen $\psi (t)$ som enligt tidigare motsvarar sannolikheten att ett steg sker efter en tid $t$. Detta görs enklast genom att notera att sannolikheten att inget steg sker under en tid $t$ är 
 \begin{equation}\label{eq:nojump}
-\Psi (t) = 1-\int_0^t \psi(t')dt' = \int_t^{\infty} \psi(t)dt. 
+\Psi (t) = 1-\int_0^t \psi(t')\id{t'} = \int_t^{\infty} \psi(t')\id{t'}. 
 \end{equation}
 Givet detta är sannolikheten att ett steg sker under en tid $t$
 \begin{equation}
-P'(1,t) = \int_0^t\psi(t')\Psi(t-t')dt',
+P'(1,t) = \int_0^t\psi(t')\Psi(t-t')\id{t'},
 \end{equation}
 där vi alltså summerar sannolikheten att ett steg sker vid $t'$ och sedan inget mer under en tid $t-t'$ över alla $t'$. Således är $P'(1,t) = \psi(t)*\Psi(t)$ och från detta inses
 \begin{equation}
@@ -42,7 +53,7 @@ P(n,t) = \psi(t)*\psi(t)*...*\psi(t)*\Psi(t).
 \end{equation}
 Detta uttryck kan förenklas genom ensidig laplacetransformera i $t$ enligt 
 \begin{equation}
-P'(n,s) = \int_0^\infty P'(n,t)\ee^{-st},
+P'(n,s) = \int_0^\infty P'(n,t)\ee^{-st}\id{t},
 \end{equation}
 vilket ger 
 \begin{equation}
@@ -56,12 +67,13 @@ Vi är nu redo att presentera \eqref{eq:four} där vi utnyttjar laplacetransform
 \begin{equation}
 P(k,s) = \sum_{n=0}^{\infty} \frac{1-\psi(s)}{s}[\psi(s)p(k)]^n,
 \end{equation}
-och slutligen med hjälp av en geometrisk summa får vi 
+och slutligen genom att notera att detta är en geometrisk summa \todo{motivera konvergens}
 \begin{equation}\label{eq:master}
-P(k,s) = \frac{1-\psi(s)}{s}\frac{1}{1-\psi(s)p(k)}.
+P(k,s) = \frac{1-\psi(s)}{s(1-\psi(s)p(k))}.
 \end{equation}
+Detta är Montroll-Weiss ekvationen för CTRW.
 
-Genom att applicera \eqref{eq:moment} på detta samband kan väntevärdet samt variansen för $X(t)$ beräknas vilket visas nedan. Väntevärdet blir 
+Genom att applicera \eqref{eq:moment} på detta samband kan väntevärdet samt variansen för $X(t)$ beräknas. Väntevärdet blir 
 \begin{equation}
 \ev{X(s)} = -i\frac{\pd \tilde{P}(k,s)}{\pd k}\big |_{k=0},
 \end{equation}
@@ -74,7 +86,7 @@ och ser vid en första anblick inte ut som framsteg. Men uttrycket förenklas ge
 (-i\frac{\pd p(k)}{\pd k})\bigg |_{k=0} = \ev{x}, \quad p(k)\bigg |_{k=0} = 1. 
 \end{equation}
 Väntevärdet blir således 
-\begin{equation}\label{eq:medel}
+\begin{equation}\label{eq:medels}
 \ev{X(s)} = \frac{\psi(s)\ev{x}}{s(1-\psi(s))},
 \end{equation}
 med antagandet $\ev{x}\equiv l< \infty$. Analogt kan variansen beräknas enligt 
@@ -82,15 +94,116 @@ med antagandet $\ev{x}\equiv l< \infty$. Analogt kan variansen beräknas enligt
 \ev{X(s)^2} = -\frac{\pd^2 \tilde{P}(k,s)}{\pd k^2}\bigg |_{k=0},
 \end{equation}
 vilket efter en liten exercis ger 
-\begin{equation}\label{eq:var}
-\ev{X(s)^2} = \frac{\ev{x^2}\psi(s)}{s(1-\psi(s))}+\frac{2\ev{x}\psi(s)}{s(1-\psi(s))^2},
+\begin{equation}\label{eq:vars}
+\ev{X(s)^2} = \frac{\ev{x^2}\psi(s)}{s(1-\psi(s))}+\frac{2\ev{x}^2\psi(s)}{s(1-\psi(s))^2},
 \end{equation}
-där $\ev{x^2}\equiv \sigma_x^2< \infty$. Vi har således uttryck väntevärdet samt variansen för $X(s)$ i termer av transformen av sannolikhetsfördelningen $\psi(t)$. 
-
-\todo[inline]{exempel på normal samt anomal diffusion kommer nedan.}
-\section{Normal diffusion}
-Vid normal diffusion är väntetiden $\tau\equiv\ev{t}$ finit och väntevärde samt varians kan beräknas i gränsen då $t\to\infty$ vilket är ekvivalent med $s\to0$. I denna gräns gäller sannolikhetsfördelning 
+där $\ev{x^2}< \infty$. Vi har således uttryck väntevärdet samt variansen för $X(s)$ i termer av transformen av sannolikhetsfördelningen $\psi(t)$. Både väntevärdet och andramomentet kan uttryckas något mer intuitivt i termer av väntevärde samt andramoment av antalet steg. Detta ses enligt följande 
 \begin{equation}
-\psi(s) \sim 1-\tau+s+\frac{\ev{t^2}s^2}{2} 
+   \ev{N(s)} = \frac{1-\psi(s)}{s}\sum_{N=0}^{\infty}N\psi (s)^N,
 \end{equation}
+som kan skrivas om som 
+\begin{equation}
+   \ev{N(s)} = \frac{1-\psi(s)}{s}\psi (s)\frac{\pd}{\pd \psi}\sum_{N=0}^{\infty}\psi (s)^N
+\end{equation}
+vilket efter lite algebra ger 
+\begin{equation}
+   \ev{N(s)} = \frac{\psi (s)}{s(1-\psi(s)}.
+\end{equation}
+Således kan \eqref{eq:medels} även skrivas som $\ev{X(s)}=\ev{N(s)}\ev{x}$, och väntevärdet för positionen som funktion av tid 
+\begin{equation}
+   \ev{X(t)} = \ev{N(t)}\ev{x}.
+\end{equation}
+Analogt ses att $\ev{N(s)^2}$ kan skrivas som
+\begin{equation}
+   \frac{1-\psi (s)}{s}\sum_{N=0}^{\infty}N^2\psi (s)^N = \frac{1-\psi (s)}{s}\bigg (\psi (s)\frac{\pd}{\pd \psi} \bigg )^2\sum_{N=0}^{\infty}\psi (s)^N,
+\end{equation}
+vilket kan förenklas till 
+\begin{equation}
+   \ev{N(s)^2} = \frac{\psi (s)}{s(1-\psi (s))}+\frac{2\psi(s)^2}{s(1-\psi (s))^2}.
+\end{equation}
+Givet detta kan \eqref{eq:vars} uttryckas som 
+\begin{equation}
+   \ev{X(s)^2} = \ev{N(s)}\ev{x^2}+\bigg (\ev{N(s)^2}-\ev{N(s)}\bigg )\ev{x}^2,
+\end{equation}
+och således
+\begin{equation}
+      \ev{X(t)^2} = \ev{N(t)}\ev{x^2}+\bigg (\ev{N(t)^2}-\ev{N(t)}\bigg )\ev{x}^2.
+\end{equation}
+
+
+
+
+
+\section{Normal diffusion}
+Vid normal diffusion är väntetiden $\tau\equiv\ev{t}$ finit och väntevärde samt varians kan beräknas i gränsen då $t\to\infty$ vilket är ekvivalent med $s\to0$. I denna gräns gäller för  sannolikhetsfördelning 
+\begin{equation}
+\psi(s) \sim 1-\tau s.
+\end{equation}
+Givet denna fördelning blir väntevärdet \eqref{eq:medels}
+\begin{equation}
+\ev{X(s)} \sim \frac{(1-\tau s)\ev{x}}{\tau s^2},
+\end{equation}
+genom fouriertransform fås motsvarande i $t$-rummet
+\begin{equation}
+\ev{X(t)} \sim \bigg (\frac{t}{\tau}-1\bigg )\ev{x}.
+\end{equation}
+Väntevärdet för $X(t)$ ses således vara noll om $\ev{x}=0$, vilket är precis vad som förväntas för normal diffusion. 
+
+
+\section{Subdiffusion}
+
+Normal diffusion ses erhållas från CTRW när väntetiden mellan steg vara finit, $\ev{t}<\infty$. Det visar sig att subdiffusion erhålls om väntetiden mellan steg inte är definierad och detta är detta vi skall visa. Antag att för stora tider så gäller 
+\begin{equation}
+\psi(t) \propto \frac{1}{t^{\alpha+1}}\quad 0<\alpha<1,
+\end{equation}
+vilket är en sannolikhetsfördelning med odefinerad väntetid. Enligt Tauberians teorem\cite{Feller_prob1971} medför det att 
+\begin{equation}
+    \psi(s) \sim 1-As^{\alpha}.
+\end{equation}
+
+Medelvärdet $\ev{X(s)}$ när $s\to 0$ för denna fördelning beräknas enligt \eqref{eq:medels} till
+\begin{equation}
+    \ev{X(s)} \sim \frac{1-As^{\alpha}}{As^{\alpha+1}} \sim \frac{1}{As^{\alpha}},
+\end{equation}
+och genom invers laplace transform fås \todo{Daniels superintegral}
+\begin{equation}
+    \ev{X(t)} \sim \frac{\ev{x}t^{\alpha}}{A\Gamma (1+\alpha)}
+\end{equation}
+där $\Gamma (1+\alpha)$ är gammafunktionen. Således om väntevärdet av steglängden är nollskild är väntevärdet för positionen proportionell mot $t^{\alpha}$. Motsvarande beräkningar för andramoment fås från \eqref{eq:vars}
+\begin{equation}
+   \ev{X(s)^2} \sim \frac{(1-As^{\alpha})\ev{x^2}}{As^{\alpha+1}}+\frac{2(1-As^{\alpha})^2\ev{x}^2}{A^2s^{2\alpha+1}}.
+\end{equation}
+
+Givet detta betraktas två fall: $\ev{x}\neq0$ samt $\ev{x}=0$, för det första av dessa gäller 
+\begin{equation}
+   \ev{X(s)^2} \sim \frac{2\ev{x}^2}{A^2s^{2\alpha+1}}
+\end{equation}
+och enligt Tauberians teorem 
+\begin{equation}
+   \ev{X(t)^2} \sim \frac{2\ev{x}^2t^{2\alpha}}{A^2\Gamma (2\alpha+1)}.
+\end{equation}
+Variansen $\sigma_X^2 = \ev{X(t)^2}-\ev{X(t)}^2$ blir 
+\begin{equation}
+    \sigma_X^2 = \frac{2\ev{x}^2t^{2\alpha}}{A^2\Gamma (2\alpha+1)}-\frac{\ev{x}^2t^{2\alpha}}{A^2\Gamma (1+\alpha)^2}
+\end{equation}
+
+
+Då $\ev{x}=0$ gäller istället 
+
+\begin{equation}
+   \ev{X(s)^2}\sim \frac{\ev{x^2}}{As^{\alpha+1}},
+\end{equation}
+och motsvarande med avseende på tid 
+
+\begin{equation}
+   \ev{X(t)^2} \sim \frac{\ev{x^2}t^{\alpha}}{A\Gamma (\alpha+1)}.
+\end{equation}
+
+Variansen då $\ev{x}=0$ ges av 
+\begin{equation}
+   \sigma_X^2 \sim \frac{\ev{x^2}t^{\alpha}}{A\Gamma (\alpha+1)}.
+\end{equation}
+
+Eftersom $0<\alpha<1$ ses att får båda fallen så kommer fördelningen $\psi(t)\sim \frac{1}{t^{\alpha+1}}$ leda till ett subdiffusivt beteende, rörelsen blir alltså långsammare än vid klassisk brownsk rörelse. Det subdiffusiva beteendet ses i denna modell härstamma från att väntetiden mellan stegen är odefinierad. 
+
 
