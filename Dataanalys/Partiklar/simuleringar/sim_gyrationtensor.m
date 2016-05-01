@@ -202,7 +202,7 @@ l=legend(leg_str);set(l, 'fontsize', 14)
 xlabel('$(\lambda_1-\lambda_2)^2/(\lambda_1+\lambda_2)^2$','interpreter', 'latex')
 ylabel('$1-\mathrm{CDF}$','interpreter', 'latex')
 
-set(gca, 'fontsize', 20, 'yscale', 'lin', 'xscale', 'lin')
+set(gca, 'fontsize', 20, 'yscale', 'lin', 'xscale', 'lin') 
 
 % %save('asymmetri.tsv', 'data', '-ascii')
 
