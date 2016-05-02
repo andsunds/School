@@ -7,7 +7,7 @@ filnamn{2}='confined_32min_polynom';
 filnamn{3}='nonconfined_5min_polynom';
 filnamn{4}='nonconfined_167min_polynom';
 
-fil=4;
+fil=2;
 load(['data/', filnamn{fil}, '.mat'])
 
 framestep=1;%om vi vill undersÃ¶ka bilder som ligger glesare
@@ -140,7 +140,6 @@ tmp=triu(B(i,:).'*B(i,:));
 K(:,i)=sum( tmp(INDEX), 2)./fliplr(1:N).';
 end
 toc
-
 figure(4), clf
 plot(dt, K) %HÃ¤ftig korrelatinosfunktioner
 
@@ -152,19 +151,31 @@ ylabel('$<B_i(t)B_i(t+\Delta t)>_{t} /[\mathrm{m}^2]$','Interpreter','Latex')
 set(gca,'Fontsize',16, 'yscale','log', 'xscale', 'lin');
 
 %%  Anpassning av relaxationstider
-index = (n-4):(n); % Vilka moder studeras
+% Vissa tider ska tas med en nypa salt. Ibland svårt att välja tiderna i
+% h1,h2,h3,h4. De med 1-2 tidssteg är kanske tveksamma. 
 % h bestämmer antalet tidssteg för mod 1,2,3 osv
-h1 = [];%Fil1
-h2 = [];%Fil2
-h3 = [];%Fil3
+h1 = [10 8 22 5 3 3 2 2 3];%Fil1
+h2 = [4 12 4 3 1 3 1];%Fil2
+h3 = [15 24 15 9 5 7 3 2 10 1 2 1];%Fil3
 h4 = [35 15 12 4 2]; %Fil4 
-h = h4; %Välj  fil 
-k=size(h,2); % Antal moder som vill undersökas
-H = zeros(N,k);
-for j=1:k
-    H(:,j) = [ones(h(j),1);NaN(N-h(j),1)]; % Placera ettor de som ska va kvar och NaN på de som ej ska va med.
+if fil==1
+    h=h1;
+    elseif fil==2
+    h=h2;
+    elseif fil==3
+    h=h3;
+    else
+    h=h4;
 end
-T=fliplr(K(:,index)).*H; % Flippa K för att placera första moden i kolumn 1, andra i kolumn 2 etc.
+
+
+k=size(h,2); % Antal moder som vill undersökas
+Y = zeros(N,k);
+index = (n-k+1):(n); % Vilka moder studeras
+for j=1:k
+    Y(:,j) = [ones(h(j),1);NaN(N-h(j),1)]; % Placera ettor de som ska va kvar och NaN på de som ej ska va med.
+end
+T=fliplr(K(:,index)).*Y; % Flippa K för att placera första moden i kolumn 1, andra i kolumn 2 etc.
                          % Spara tillräckligt många element dt
 
 figure(5), clf
