@@ -7,7 +7,7 @@ filnamn{2}='confined_32min_polynom';
 filnamn{3}='nonconfined_5min_polynom';
 filnamn{4}='nonconfined_167min_polynom';
 
-fil=1;
+fil=4;
 load(['data/', filnamn{fil}, '.mat'])
 
 framestep=1;%om vi vill undersÃ¶ka bilder som ligger glesare
@@ -121,7 +121,7 @@ ylabel('var[$B_i] /[\mathrm{m}^2$]','Interpreter','Latex')
 set(gca,'Fontsize',14, 'yscale','log', 'xscale', 'lin');
 
 %% Autokorrelation
-clc
+clc;clf;
 K=zeros(N,n);%init.
 %LÃ¤gger till sÃ¥ att create_indecis kan anvÃ¤ndas
 addpath('../');
@@ -141,7 +141,6 @@ K(:,i)=sum( tmp(INDEX), 2)./fliplr(1:N).';
 end
 toc
 
-
 figure(4), clf
 plot(dt, K) %HÃ¤ftig korrelatinosfunktioner
 
@@ -150,8 +149,41 @@ title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
 xlabel('$\Delta t /[\mathrm{s}]$','Interpreter','Latex');
 ylabel('$<B_i(t)B_i(t+\Delta t)>_{t} /[\mathrm{m}^2]$','Interpreter','Latex')
-set(gca,'Fontsize',16)%, 'yscale','log', 'xscale', 'lin');
+set(gca,'Fontsize',16, 'yscale','log', 'xscale', 'lin');
 
+%%  Anpassning av relaxationstider
+index = (n-4):(n); % Vilka moder studeras
+% h bestämmer antalet tidssteg för mod 1,2,3 osv
+h1 = [];%Fil1
+h2 = [];%Fil2
+h3 = [];%Fil3
+h4 = [35 15 12 4 2]; %Fil4 
+h = h4; %Välj  fil 
+k=size(h,2); % Antal moder som vill undersökas
+H = zeros(N,k);
+for j=1:k
+    H(:,j) = [ones(h(j),1);NaN(N-h(j),1)]; % Placera ettor de som ska va kvar och NaN på de som ej ska va med.
+end
+T=fliplr(K(:,index)).*H; % Flippa K för att placera första moden i kolumn 1, andra i kolumn 2 etc.
+                         % Spara tillräckligt många element dt
+
+figure(5), clf
+plot(dt, T) %HÃ¤ftig korrelatinosfunktioner
+set(gca,'Fontsize',16, 'yscale','log', 'xscale', 'lin');
+hold on;
+tau = zeros(1,k);
+for i=1:k
+    x = dt(1:h(i));
+    y = log(T(1:h(i),i));
+    p = polyfit(x,y,1);
+    tau(i) = p(1);
+    D = exp(p(1).*x).*exp(p(2));
+    plot(dt(1:h(i)),D,'--')
+end
+
+
+figure(6)
+plot(tau,'*')
 
 %% Korskorrelation 
 clc;
