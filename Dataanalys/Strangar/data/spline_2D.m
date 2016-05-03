@@ -1,6 +1,6 @@
 %% Detta verkar ge en spline kurva.
 clc;clf;clear all
-load('data/nonconfined_167min.mat')
+load('nonconfined_167min.mat')
 i=1;
 t=1:N_points(i);
 xy = [coordinates(i,t,1); coordinates(i,t,2)];
