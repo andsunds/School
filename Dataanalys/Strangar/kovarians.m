@@ -94,9 +94,9 @@ subplot(2,2,3)%frekvensdomÃ¤nen
 
 Spektr=fft(V, [],1);
 Fs=n/L;
-k=(0:(n/2-1))*Fs/(n-1);
+k0=(0:(n/2-1))*Fs/(n-1);
 
-plot(repmat(k.', 1, length(index)), (abs(Spektr(1:(n/2), index))));
+plot(repmat(k0.', 1, length(index)), (abs(Spektr(1:(n/2), index))));
 axis([0, 1e6, 0, 10])
 
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
@@ -109,7 +109,7 @@ subplot(2,2,4)%frekvensberoende
 
 [~, i]=max(abs(Spektr(2:(n/2), :)));
 
-f_max=k(i);
+f_max=k0(i);
 
 d=diag(D);
 
@@ -119,6 +119,62 @@ title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 xlabel('$k /[\mathrm{m}^{-1}]$','Interpreter','Latex');
 ylabel('var[$B_i] /[\mathrm{m}^2$]','Interpreter','Latex')
 set(gca,'Fontsize',14, 'yscale','log', 'xscale', 'lin');
+
+%% Anpassning av vÃ¥gtal
+clc;
+figure(3);clf
+typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strÃ¤ngtypen
+title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
+
+index=(n-10):1:(n-8);
+
+L=arclength(PX_mean, PY_mean);
+
+subplot(2,1,1)%lÃ¤ngddomÃ¤nen
+plot(P*L, V(:,index) ) 
+axis([0, L, min(min(V(:,index)))*1.1, max(max(V(:,index)))*1.1])
+
+typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strÃ¤ngtypen
+title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
+xlabel('$l /[\mathrm{m}]$','Interpreter','Latex');
+ylabel('$\mathbf{v}(l)$','Interpreter','Latex')
+set(gca,'Fontsize',14, 'yscale','lin', 'xscale', 'lin');
+grid on
+
+
+
+hold on
+
+k0=(0:(n/2-1))*Fs/(n-1);
+
+k=zeros(length(index),1);
+
+for i=1:length(index)
+    j=index(i);
+    f=@(X) X(1)+ X(2)*cos( X(3)*P*L+X(4) );
+    
+    Spektr=fft(V(:,j)-mean(V(:,j)), [],1);
+    [~, inx]=max(abs(Spektr(2:(n/2), :)));
+        
+    start=[0, 1, 10*k0(inx) ,0];
+    
+    K=fminsearch(@(X) sum((f(X)-V(:,j).').^2) , start);
+    
+    k(i)=K(3);
+    
+    plot(P*L, f(K),'--')
+end
+
+subplot(2,1,2)%frekvensdomÃ¤nen 
+d=diag(D);
+
+plot(k, d(index), '*')
+
+title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
+xlabel('$k /[\mathrm{m}^{-1}]$','Interpreter','Latex');
+ylabel('var[$B_i] /[\mathrm{m}^2$]','Interpreter','Latex')
+set(gca,'Fontsize',14, 'yscale','log', 'xscale', 'lin');
+
 
 %% Autokorrelation
 clc;clf;
@@ -151,8 +207,8 @@ ylabel('$<B_i(t)B_i(t+\Delta t)>_{t} /[\mathrm{m}^2]$','Interpreter','Latex')
 set(gca,'Fontsize',16, 'yscale','log', 'xscale', 'lin');
 
 %%  Anpassning av relaxationstider
-% Kör alla delar ovan innan denna.
-% h bestämmer antalet tidssteg för mod 1,2,3,4
+% Kï¿½r alla delar ovan innan denna.
+% h bestï¿½mmer antalet tidssteg fï¿½r mod 1,2,3,4
 t=6;
 h1 = [9 6 22 4 3 0 2 2 3].*[repmat(1,1,t) repmat(0,1,9-t)];%Fil1
 h2 = [4 12 4 3];%Fil2
@@ -169,15 +225,15 @@ if fil==1
 end
 
 
-k=size(h,2); % Antal moder som vill undersökas
-Y = zeros(N,k);
-Index = (n-k+1):(n); % Vilka moder studeras
+k0=size(h,2); % Antal moder som vill undersï¿½kas
+Y = zeros(N,k0);
+Index = (n-k0+1):(n); % Vilka moder studeras
 
-for j=1:k
-    Y(:,j) = [ones(h(j),1);NaN(N-h(j),1)]; % Placera ettor för de intervall som ska va kvar och NaN på de som ej ska va med.
+for j=1:k0
+    Y(:,j) = [ones(h(j),1);NaN(N-h(j),1)]; % Placera ettor fï¿½r de intervall som ska va kvar och NaN pï¿½ de som ej ska va med.
 end
-T=fliplr(K(:,Index)).*Y; % Flippa K för att placera första moden i kolumn 1, andra i kolumn 2 etc.
-                         % Spara tillräckligt många element dt
+T=fliplr(K(:,Index)).*Y; % Flippa K fï¿½r att placera fï¿½rsta moden i kolumn 1, andra i kolumn 2 etc.
+                         % Spara tillrï¿½ckligt mï¿½nga element dt
 
 figure(5), clf
 subplot(2,2,[1,2])
@@ -187,15 +243,15 @@ xlabel('$\Delta t /[\mathrm{s}]$','Interpreter','Latex');
 ylabel('$<B_i(t)B_i(t+\Delta t)>_{t} /[\mathrm{m}^2]$','Interpreter','Latex')
 set(gca,'Fontsize',16, 'yscale','log', 'xscale', 'lin');
 hold on;
-tau = zeros(1,k);
-nbr = zeros(1,k);
+tau = zeros(1,k0);
+nbr = zeros(1,k0);
 
-for i=1:k
+for i=1:k0
     x = dt(1:h(i));
     y = log(T(1:h(i),i));
     p = polyfit(x,y,1);
     
-    tau(i) = abs(1/p(1)); % Ordnad s.a. tau(1) motsvarar mod med störst egenvärde
+    tau(i) = abs(1/p(1)); % Ordnad s.a. tau(1) motsvarar mod med stï¿½rst egenvï¿½rde
     D = exp(p(1).*x).*exp(p(2));
     plot(dt(1:h(i)),D,'--')
 end
