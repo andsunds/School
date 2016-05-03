@@ -7,7 +7,7 @@ filnamn{2}='confined_32min_polynom';
 filnamn{3}='nonconfined_5min_polynom';
 filnamn{4}='nonconfined_167min_polynom';
 
-fil=4;
+fil=3;
 load(['data/', filnamn{fil}, '.mat'])
 
 framestep=1;%om vi vill undersÃ¶ka bilder som ligger glesare
@@ -126,7 +126,7 @@ figure(3);clf
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strÃ¤ngtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
-index=(n-5):1:(n-0);
+index=(n-8):1:(n-0);
 %index=n-9;
 
 L=arclength(PX_mean, PY_mean);
@@ -230,11 +230,13 @@ set(gca,'Fontsize',16, 'yscale','log', 'xscale', 'lin');
 
 %%  Anpassning av relaxationstider
 % Kï¿½r alla delar ovan innan denna.
-% h bestï¿½mmer antalet tidssteg fï¿½r mod 1,2,3,4
-t=6;
-h1 = [9 6 22 4 3 0 2 2 3].*[repmat(1,1,t) repmat(0,1,9-t)];%Fil1
+% h1 hör till fil1. h2 till fil 2 etc.
+% h bestï¿½mmer antalet tidssteg fï¿½r mod 1,2,3,4,.. Där 1 är största 
+t=2;
+h1 = [9 6 22 4 3 0 2 2 3];%.*[ones(1,9-t) zeros(1,t)];%Fil1  
+                          %Använd ones+zeros vektorn för att ta bort de t sista moderna
 h2 = [4 12 4 3];%Fil2
-h3 = [15 21 14 6 4 4 3 2 10];%.*[repmat(1,1,t) repmat(0,1,9-t)];%Fil3
+h3 = [15 21 14 6 4 4 3 2 10].*[ones(1,9-t) zeros(1,t)];%Fil3
 h4 = [35 15 12 4 2]; %Fil4 
 if fil==1
     h=h1;
@@ -258,8 +260,11 @@ T=fliplr(K(:,Index)).*Y; % Flippa K fï¿½r att placera fï¿½rsta moden i kolumn 1,
                          % Spara tillrï¿½ckligt mï¿½nga element dt
 
 figure(5), clf
-subplot(2,2,[1,2])
+
+subplot(2,1,1)
+
 plot(dt, T) %HÃ¤ftig korrelatinosfunktioner
+title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
 xlabel('$\Delta t /[\mathrm{s}]$','Interpreter','Latex');
 ylabel('$<B_i(t)B_i(t+\Delta t)>_{t} /[\mathrm{m}^2]$','Interpreter','Latex')
@@ -278,26 +283,14 @@ for i=1:k0
     plot(dt(1:h(i)),D,'--')
 end
 
-subplot(2,2,3)
-vagtal = fliplr(f_max(Index));
-plot(vagtal,tau,'*r')
-axis([0 10^5 0 15])
-
-set(gca,'yscale','log','xscale','lin','Fontsize',14)
+subplot(2,1,2)
+vagtal = fliplr(k');
+plot(vagtal(1:length(tau)),tau,'*r')
+set(gca,'yscale','log','xscale','lin','Fontsize',26)
 ylabel('$\tau_n$','Interpreter','Latex','Fontsize',26)
 xlabel('$k /[\mathrm{m}^{-1}]$','Interpreter','Latex');
 
-subplot(2,2,4)
-plot(f_max(Index), d(Index), '*')
-xlabel('$k /[\mathrm{m}^{-1}]$','Interpreter','Latex');
-ylabel('var[$B_i] /[\mathrm{m}^2$]','Interpreter','Latex')
-set(gca,'Fontsize',14, 'yscale','log', 'xscale', 'lin');
-
-
-
-disp(fliplr(f_max(index)))
 %save('relaxtiderfil4.mat','vagtal','tau')
-
 
 figure(6)
 plot(fliplr(d(Index)'),tau,'*')
