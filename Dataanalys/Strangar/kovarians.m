@@ -7,7 +7,7 @@ filnamn{2}='confined_32min_polynom';
 filnamn{3}='nonconfined_5min_polynom';
 filnamn{4}='nonconfined_167min_polynom';
 
-fil=3;
+fil=4;
 load(['data/', filnamn{fil}, '.mat'])
 
 framestep=1;%om vi vill undersöka bilder som ligger glesare
@@ -126,13 +126,14 @@ figure(3);clf
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
-index=(n-10):1:(n-8);
+index=(n-5):1:(n-0);
+%index=n-9;
 
 L=arclength(PX_mean, PY_mean);
 
 subplot(2,1,1)%längddomänen
 plot(P*L, V(:,index) ) 
-axis([0, L, min(min(V(:,index)))*1.1, max(max(V(:,index)))*1.1])
+%axis([0, L, min(min(V(:,index)))*1.1, max(max(V(:,index)))*1.1])
 
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strängtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
@@ -144,7 +145,7 @@ grid on
 
 
 hold on
-
+Fs=n/L;
 k0=(0:(n/2-1))*Fs/(n-1);
 
 k=zeros(length(index),1);
@@ -155,11 +156,32 @@ for i=1:length(index)
     
     Spektr=fft(V(:,j)-mean(V(:,j)), [],1);
     [~, inx]=max(abs(Spektr(2:(n/2), :)));
-        
-    start=[0, 1, 10*k0(inx) ,0];
     
-    K=fminsearch(@(X) sum((f(X)-V(:,j).').^2) , start);
+    if 10*k0(inx)>2e5
+        start=[0, 1, 10*k0(inx) ,0];
+    else
+        start=[0, 1, 1e5 ,0];
+    end
+    [K, fval]=fminsearch(@(X) sum((f(X)-V(:,j).').^2) , start, ...
+        optimset('MaxFunEvals',4000, 'MaxIter',1000, 'tolfun', 1e-9));
     
+    tol=0.5;
+    if fval>tol
+        fprintf('Miss på första försöket, \t \t n-index = %d\n',n-j)
+    counter=0;
+    for korr=linspace(-.5,5,50);
+       start(3)=start(3)*(1+korr);
+       [K, fval]=fminsearch(@(X) sum((f(X)-V(:,j).').^2) , start, ...
+       optimset('MaxFunEvals',4000, 'MaxIter',1000, 'tolfun', 1e-9));
+       counter=counter+1;    
+       if fval<tol
+           break
+       end
+    end
+    fprintf('Använde, %d försök\n',counter)
+    end
+    
+    fprintf('fval = %f,\t n-index = %d\n\n',fval,n-j)
     k(i)=K(3);
     
     plot(P*L, f(K),'--')
