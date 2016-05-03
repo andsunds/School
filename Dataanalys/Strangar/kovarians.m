@@ -153,10 +153,10 @@ set(gca,'Fontsize',16, 'yscale','log', 'xscale', 'lin');
 %%  Anpassning av relaxationstider
 % Kör alla delar ovan innan denna.
 % h bestämmer antalet tidssteg för mod 1,2,3,4
-t=4;
-h1 = [9 8 22 4 3 3 2 2 3].*[repmat(1,1,t) repmat(0,1,9-t)];%Fil1
+t=6;
+h1 = [9 6 22 4 3 0 2 2 3].*[repmat(1,1,t) repmat(0,1,9-t)];%Fil1
 h2 = [4 12 4 3];%Fil2
-h3 = [15 21 14 6 4 4 3 2 10 0 2];%.*[repmat(1,1,t) repmat(0,1,11-t)];%Fil3
+h3 = [15 21 14 6 4 4 3 2 10];%.*[repmat(1,1,t) repmat(0,1,9-t)];%Fil3
 h4 = [35 15 12 4 2]; %Fil4 
 if fil==1
     h=h1;
@@ -182,6 +182,9 @@ T=fliplr(K(:,Index)).*Y; % Flippa K för att placera första moden i kolumn 1, and
 figure(5), clf
 subplot(2,2,[1,2])
 plot(dt, T) %HÃ¤ftig korrelatinosfunktioner
+
+xlabel('$\Delta t /[\mathrm{s}]$','Interpreter','Latex');
+ylabel('$<B_i(t)B_i(t+\Delta t)>_{t} /[\mathrm{m}^2]$','Interpreter','Latex')
 set(gca,'Fontsize',16, 'yscale','log', 'xscale', 'lin');
 hold on;
 tau = zeros(1,k);
@@ -198,7 +201,9 @@ for i=1:k
 end
 
 subplot(2,2,3)
-plot(fliplr(f_max(Index)),tau,'*')
+vagtal = fliplr(f_max(Index));
+plot(vagtal,tau,'*r')
+axis([0 10^5 0 15])
 
 set(gca,'yscale','log','xscale','lin','Fontsize',14)
 ylabel('$\tau_n$','Interpreter','Latex','Fontsize',26)
@@ -211,9 +216,16 @@ ylabel('var[$B_i] /[\mathrm{m}^2$]','Interpreter','Latex')
 set(gca,'Fontsize',14, 'yscale','log', 'xscale', 'lin');
 
 
+
 disp(fliplr(f_max(index)))
+%save('relaxtiderfil4.mat','vagtal','tau')
 
 
+figure(6)
+plot(fliplr(d(Index)'),tau,'*')
+set(gca,'yscale','lin','Fontsize',26)
+ylabel('$\tau_n /[\mathrm{s}]$','Interpreter','Latex');
+xlabel('var[$B_i] /[\mathrm{m}^2$]','Interpreter','Latex')
 %% Korskorrelation 
 clc;
 %LÃ¤gger till sÃ¥ att create_indecis kan anvÃ¤ndas
@@ -245,7 +257,7 @@ fprintf('sum(K_kors.^2)/max(sum([K_auto1, K_auto2].^2, 1)) = %.3f\n\n',...
 toc
 
 %plottning
-figure(5), clf
+figure(7), clf
 plot(dt, K_kors) 
 hold on
 plot(dt, K_auto1) 
@@ -275,7 +287,7 @@ KOV_B=KOV_B/N;%MedelvÃ¤rde Ã¤r summan delat pÃ¥ antalaet
 toc
 
 %plottning
-figure(6); clf
+figure(8); clf
 plot(diag(KOV_B))
 hold on;grid on
 plot(abs(diag(D)))
