@@ -35,7 +35,7 @@ for k=1:nbrB
     end
 end
 
-%% Ber�kning av sp�ret av G samt dess egenv�rden
+% Ber�kning av sp�ret av G samt dess egenv�rden
 %1:a delen beh�ver k�ras f�rst
 
 clf
@@ -95,6 +95,8 @@ set(gca,'Fontsize',30)
 bilder_s=3; %bilder/sekund
 disp('speltid=')
 disp(size(A,3)/bilder_s)
+
+%%
 figure(4)
 for i = 1:size(A,3)
   image(A(:,:,i))

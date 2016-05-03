@@ -7,7 +7,7 @@ filnamn{2}='confined_32min_polynom';
 filnamn{3}='nonconfined_5min_polynom';
 filnamn{4}='nonconfined_167min_polynom';
 
-fil=2;
+fil=3;
 load(['data/', filnamn{fil}, '.mat'])
 
 framestep=1;%om vi vill undersÃ¶ka bilder som ligger glesare
@@ -75,7 +75,8 @@ figure(3);clf
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strÃ¤ngtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
-index=(n-10):(n);
+index=(n-3):1:(n);
+
 L=arclength(PX_mean, PY_mean);
 
 subplot(2,2,[1,2])%lÃ¤ngddomÃ¤nen
@@ -112,7 +113,6 @@ f_max=k(i);
 
 d=diag(D);
 
-index=(n-15):1:n;
 plot(f_max(index), d(index), '*')
 
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
@@ -151,12 +151,12 @@ ylabel('$<B_i(t)B_i(t+\Delta t)>_{t} /[\mathrm{m}^2]$','Interpreter','Latex')
 set(gca,'Fontsize',16, 'yscale','log', 'xscale', 'lin');
 
 %%  Anpassning av relaxationstider
-% Vissa tider ska tas med en nypa salt. Ibland svårt att välja tiderna i
-% h1,h2,h3,h4. De med 1-2 tidssteg är kanske tveksamma. 
-% h bestämmer antalet tidssteg för mod 1,2,3 osv
-h1 = [10 8 22 5 3 3 2 2 3];%Fil1
-h2 = [4 12 4 3 1 3 1];%Fil2
-h3 = [15 24 15 9 5 7 3 2 10 1 2 1];%Fil3
+% Kör alla delar ovan innan denna.
+% h bestämmer antalet tidssteg för mod 1,2,3,4
+t=4;
+h1 = [9 8 22 4 3 3 2 2 3].*[repmat(1,1,t) repmat(0,1,9-t)];%Fil1
+h2 = [4 12 4 3];%Fil2
+h3 = [15 21 14 6 4 4 3 2 10 0 2];%.*[repmat(1,1,t) repmat(0,1,11-t)];%Fil3
 h4 = [35 15 12 4 2]; %Fil4 
 if fil==1
     h=h1;
@@ -171,30 +171,48 @@ end
 
 k=size(h,2); % Antal moder som vill undersökas
 Y = zeros(N,k);
-index = (n-k+1):(n); % Vilka moder studeras
+Index = (n-k+1):(n); % Vilka moder studeras
+
 for j=1:k
-    Y(:,j) = [ones(h(j),1);NaN(N-h(j),1)]; % Placera ettor de som ska va kvar och NaN på de som ej ska va med.
+    Y(:,j) = [ones(h(j),1);NaN(N-h(j),1)]; % Placera ettor för de intervall som ska va kvar och NaN på de som ej ska va med.
 end
-T=fliplr(K(:,index)).*Y; % Flippa K för att placera första moden i kolumn 1, andra i kolumn 2 etc.
+T=fliplr(K(:,Index)).*Y; % Flippa K för att placera första moden i kolumn 1, andra i kolumn 2 etc.
                          % Spara tillräckligt många element dt
 
 figure(5), clf
+subplot(2,2,[1,2])
 plot(dt, T) %HÃ¤ftig korrelatinosfunktioner
 set(gca,'Fontsize',16, 'yscale','log', 'xscale', 'lin');
 hold on;
 tau = zeros(1,k);
+nbr = zeros(1,k);
+
 for i=1:k
     x = dt(1:h(i));
     y = log(T(1:h(i),i));
     p = polyfit(x,y,1);
-    tau(i) = p(1);
+    
+    tau(i) = abs(1/p(1)); % Ordnad s.a. tau(1) motsvarar mod med störst egenvärde
     D = exp(p(1).*x).*exp(p(2));
     plot(dt(1:h(i)),D,'--')
 end
 
+subplot(2,2,3)
+plot(fliplr(f_max(Index)),tau,'*')
 
-figure(6)
-plot(tau,'*')
+set(gca,'yscale','log','xscale','lin','Fontsize',14)
+ylabel('$\tau_n$','Interpreter','Latex','Fontsize',26)
+xlabel('$k /[\mathrm{m}^{-1}]$','Interpreter','Latex');
+
+subplot(2,2,4)
+plot(f_max(Index), d(Index), '*')
+xlabel('$k /[\mathrm{m}^{-1}]$','Interpreter','Latex');
+ylabel('var[$B_i] /[\mathrm{m}^2$]','Interpreter','Latex')
+set(gca,'Fontsize',14, 'yscale','log', 'xscale', 'lin');
+
+
+disp(fliplr(f_max(index)))
+
 
 %% Korskorrelation 
 clc;
