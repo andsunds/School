@@ -1,6 +1,6 @@
-function [ S ] = MSD_S( fil, N_steps  )
+function [ s ] = MSD_s( fil, N_steps  )
 %Beräknar MSD enligt
-% S(dt)=(1/T) sum((f(t)-f(t+dt)).^2) over all t
+% s(dt) = 1/(#particles) * sum( ((x(t)-x(0)).^2 ) over all particles
 
 addpath('../')
 
@@ -13,39 +13,24 @@ C = separera(data);
 
 
 
-addpath('../../');%Lägger till så att create_indecis kan användas
-INDECIES=create_indecis(N_steps);
-LENGHTS=fliplr(1:N_steps).';
-
-
 
 
 koef=storleksanpassning( fil );
 
-S=zeros(N_steps,1);
+s=zeros(N_steps,1);
 
 index=find(cellfun('length',C)==N_steps).'; 
-for i=index
+
+for i=index;
     TN=koordinatbyte(C{i}(:,2:3));%laddar in data för partikeln
+    tmp=sum(TN.^2,2);
     
-    tmp=zeros(N_steps,2);
+    %bygger "medelvärde"
+    s=s+tmp/(koef(1)*intensitet{fil}(i).^koef(2));%normerat medelvärde
     
-    %Hög minnesåtgång
-    A=repmat(TN(:,1), 1,N_steps);
-    A=triu(A.'-A);
-    tmp(:,1)=sum(A(INDECIES).^2, 2)./LENGHTS;
-    
-    A=repmat(TN(:,2), 1,N_steps);
-    A=triu(A.'-A);
-    tmp(:,2)=sum(A(INDECIES).^2, 2)./LENGHTS;
-    
-    
-    % Detta är samma normering som för rörligheten, 
-    % kanske skulle man hitta på något annat.
-    S=S+sum(tmp,2)/(koef(1)*intensitet{fil}(i).^koef(2));
 end
 
-S=S/length(index);
+s=s/length(index);
 
 end
 
