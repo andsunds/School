@@ -15,7 +15,7 @@ data_MSD(:,1)=Dt;
 
 for fil=1:2;
     tic
-    s=MSD_s(fil, N);
+    [s, std_s]=MSD_s(fil, N);
     S=MSD_S(fil, N);
     toc
     
@@ -28,7 +28,7 @@ for fil=1:2;
     
     subplot(1,2,fil)
     plot(Dt,S), hold on
-    plot(Dt,s)
+    plot(Dt,s, Dt, s+std_s, '--', Dt, s-std_s, '--')
 
     l=legend('$S$','$s$');
     set(l, 'Interpreter', 'Latex','FontSize',15)
