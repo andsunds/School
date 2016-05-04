@@ -61,7 +61,7 @@ title(filnamn{fil}(1:end-4))
 xlabel('Intensitet', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 ylabel('Standardavvikelse /[m]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15,'XScale','lin','YScale','log');
-axis([0,25,5e-10,10e-8])
+axis([0,25,5e-9,10e-7])
 
 subplot(2,2,2*fil)
 %errorbar(intensitet{fil}, medelsteg{fil}, steg_osakerhet{fil}, '.')
@@ -72,7 +72,7 @@ title(filnamn{fil}(1:end-4))
 xlabel('Intensitet', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 ylabel('Stegl\"a{}ngd /[m]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
 set(gca,'FontSize',15, 'ylim', [0,4e-17],'XScale','lin','YScale','log');
-axis([0,25,7e-10,1e-8])
+axis([0,25,7e-9,1e-7])
 
 %pause(0.1)%för att rita ut efter hand
 
