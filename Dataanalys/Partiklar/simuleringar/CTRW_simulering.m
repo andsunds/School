@@ -41,8 +41,8 @@ XY=cumsum(X_CTRW,1); %x,y separerade
 %Asymmetri
 
 %Sampla med jämna tidssteg
-N_sampl=10000;
-t_even=linspace(0,2e-3,N_sampl);
+N_sampl=1000;
+t_even=linspace(0,1e1,N_sampl);
 t_begin=1;
 XY_even=zeros(N_sampl,2);
 for i=1:N_sampl
@@ -74,11 +74,23 @@ end
 
 end
 
-kvot
+%kvot
+toc
 
 %hist(kvot)
 
 bins=200;%logspace(0,2);
 [N_X, X]=hist(kvot,bins);
+plot([0, X+.5*[diff(X),0]], 1- [0, cumsum(N_X)]/sum(N_X), '-')
+set(gca, 'fontsize', 20, 'yscale', 'lin', 'xscale', 'lin')
+
+%%
+%Plotta ~6000 simulerade CTRW
+
+egen_CTRW=load('egenCTRW.tsv');
+kvot_CTRW=(abs(egen_CTRW(:,1)-egen_CTRW(:,2)))./(egen_CTRW(:,1)+egen_CTRW(:,2));
+
+bins=200;%logspace(0,2);
+[N_X, X]=hist(kvot_CTRW,bins);
 plot([0, X+.5*[diff(X),0]], 1- [0, cumsum(N_X)]/sum(N_X), '-')
 set(gca, 'fontsize', 20, 'yscale', 'lin', 'xscale', 'lin')
