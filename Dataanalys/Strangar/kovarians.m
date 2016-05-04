@@ -126,8 +126,14 @@ figure(3);clf
 typ=regexp(filnamn{fil}, '_\d+', 'split');%plockar ut strÃ¤ngtypen
 title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 
-index=(n-8):1:(n-0);
-%index=n-9;
+index=(n-5):1:(n);
+%index=n-1;
+
+%Fil1: n-2 sådär. Åtminstone till n-10 ok. 
+%Fil2: n ej svängig. n-5 ej bra. n-8 sådär 
+%Fil3: upp till n-7 är ok.
+%Fil4: n-1 ok men lite tveksam. n-6 ej bra. kollat till n-10
+
 
 L=arclength(PX_mean, PY_mean);
 
@@ -149,6 +155,8 @@ Fs=n/L;
 k0=(0:(n/2-1))*Fs/(n-1);
 
 k=zeros(length(index),1);
+FVAL = zeros(length(index),1);
+X = zeros(length(index),4);
 
 for i=1:length(index)
     j=index(i);
@@ -183,7 +191,8 @@ for i=1:length(index)
     
     fprintf('fval = %f,\t n-index = %d\n\n',fval,n-j)
     k(i)=K(3);
-    
+    FVAL(i) = fval;
+    X(i,:) = K;
     plot(P*L, f(K),'--')
 end
 
@@ -196,6 +205,48 @@ title(sprintf('Fil nr: %d (%s)', fil, typ{1}))%titel
 xlabel('$k /[\mathrm{m}^{-1}]$','Interpreter','Latex');
 ylabel('var[$B_i] /[\mathrm{m}^2$]','Interpreter','Latex')
 set(gca,'Fontsize',14, 'yscale','log', 'xscale', 'lin');
+
+%% Uppskatta osäkerhet i k
+clc
+andel = .5;
+deltakproc=.001;
+F=@(X) X(1)+ X(2)*cos( X(3)*P*L+X(4));
+
+k_osak = zeros(length(k),2);
+
+for i=1:length(k) 
+    j = index(i);
+    
+    deltak = X(i,3)*deltakproc;
+
+       
+    fval = 0;
+    while fval<((1+andel)*FVAL(i))
+       fval = sum((F(X(i,:))-V(:,j)').^2);
+       X(i,3) = X(i,3)+deltak;
+    end
+    k_osak(i,1) = X(i,3)-deltak;
+    subplot(2,1,1)
+    plot(P*L, f([X(i,1) X(i,2) k_osak(i,1) X(i,4)]),'--')
+    X(i,3) = k(i);
+    disp('plus klar')
+    
+    fval=0;
+    while fval<((1+andel)*FVAL(i))
+       fval = sum((F(X(i,:))-V(:,j)').^2);
+       X(i,3) = X(i,3)-deltak;
+    end
+    k_osak(i,2) = X(i,3)+deltak;
+    plot(P*L, f([X(i,1) X(i,2) k_osak(i,2) X(i,4)]),'--')
+    X(i,3) = k(i);
+    subplot(2,1,2)
+    hold on;
+    plot(k_osak(i,1), d(j), 'vk')
+    hold on;
+    plot(k_osak(i,2), d(j), 'vk')
+    i
+    
+end
 
 
 %% Autokorrelation
@@ -232,12 +283,12 @@ set(gca,'Fontsize',16, 'yscale','log', 'xscale', 'lin');
 % Kï¿½r alla delar ovan innan denna.
 % h1 hör till fil1. h2 till fil 2 etc.
 % h bestï¿½mmer antalet tidssteg fï¿½r mod 1,2,3,4,.. Där 1 är största 
-t=2;
-h1 = [9 6 22 4 3 0 2 2 3];%.*[ones(1,9-t) zeros(1,t)];%Fil1  
+t=3;
+h1 = [9 6 22 4 3];%.*[ones(1,9-t) zeros(1,t)];%Fil1  
                           %Använd ones+zeros vektorn för att ta bort de t sista moderna
 h2 = [4 12 4 3];%Fil2
-h3 = [15 21 14 6 4 4 3 2 10].*[ones(1,9-t) zeros(1,t)];%Fil3
-h4 = [35 15 12 4 2]; %Fil4 
+h3 = [15 21 14 6 4 4];%.*[ones(1,9-t) zeros(1,t)];%Fil3
+h4 = [35 15 12 4]; %Fil4 
 if fil==1
     h=h1;
     elseif fil==2
@@ -271,15 +322,23 @@ ylabel('$<B_i(t)B_i(t+\Delta t)>_{t} /[\mathrm{m}^2]$','Interpreter','Latex')
 set(gca,'Fontsize',16, 'yscale','log', 'xscale', 'lin');
 hold on;
 tau = zeros(1,k0);
+
 nbr = zeros(1,k0);
+PARAM = zeros(2,k0);
+S = zeros(2,k0);
+msd = zeros(1,k0);
 
 for i=1:k0
     x = dt(1:h(i));
     y = log(T(1:h(i),i));
-    p = polyfit(x,y,1);
+    %p = polyfit(x,y,1);
+    AA = [ones(h(i),1) x];
+   
+    [PARAM(:,i),S(:,i)] = lscov(AA,y);
+    msd(i) = S(2,i);
     
-    tau(i) = abs(1/p(1)); % Ordnad s.a. tau(1) motsvarar mod med stï¿½rst egenvï¿½rde
-    D = exp(p(1).*x).*exp(p(2));
+    tau(i) = abs(1/PARAM(2,i)); % Ordnad s.a. tau(1) motsvarar mod med stï¿½rst egenvï¿½rde
+    D = exp(-x./tau(i)).*exp(PARAM(1,i));
     plot(dt(1:h(i)),D,'--')
 end
 
