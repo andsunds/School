@@ -58,7 +58,7 @@ for fil=1:2;
 end
 
 
-% %save('MSD.tsv', 'data_MSD', '-ascii', '-tabs'), disp('Data saved')
+save('MSD.tsv', 'data_MSD', '-ascii', '-tabs'), disp('Data saved')
 
 %% pill med plottar
 clc;clearvars

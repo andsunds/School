@@ -1,4 +1,4 @@
-function [ S, std_S ] = MSD_S( fil, N_steps  )
+function [ S, std_MSD ] = MSD_S( fil, N_steps  )
 %Beräknar MSD enligt
 % S(dt)=(1/T) sum((f(t)-f(t+dt)).^2) over all t
 
@@ -22,11 +22,13 @@ LENGHTS=fliplr(1:N_steps).';
 
 koef=storleksanpassning( fil );
 
-%S=zeros(N_steps,1);
+S=zeros(N_steps,1);
+S_sq=zeros(N_steps,1);
+
 index=find(cellfun('length',C)==N_steps).'; 
 L_i=length(index);
 
-S_matrix=zeros(N_steps, L_i);
+%S_matrix=zeros(N_steps, L_i);
 
 for j=1:L_i
     i=index(j);
@@ -37,22 +39,27 @@ for j=1:L_i
     %Hög minnesåtgång
     A=repmat(TN(:,1), 1,N_steps);
     A=triu(A.'-A);
-    tmp(:,1)=sum(A(INDECIES).^2, 2)./LENGHTS;
+    tmp(:,1)=sum(A(INDECIES).^2, 2);
     
     A=repmat(TN(:,2), 1,N_steps);
     A=triu(A.'-A);
-    tmp(:,2)=sum(A(INDECIES).^2, 2)./LENGHTS;
+    tmp(:,2)=sum(A(INDECIES).^2, 2);
     
+    tmp=tmp/(koef(1)*intensitet{fil}(i).^koef(2));
     
-    % Detta är samma normering som för rörligheten, 
-    % kanske skulle man hitta på något annat.
-    %S=S+sum(tmp,2)/(koef(1)*intensitet{fil}(i).^koef(2));
+    S=S+sum(tmp,2);
+    S_sq=S_sq+sum(tmp.^2,2);
     
-    S_matrix(:,j)=sum(tmp,2)/(koef(1)*intensitet{fil}(i).^koef(2));
+    %S_matrix(:,j)=sum(tmp,2)/(koef(1)*intensitet{fil}(i).^koef(2));
 end
 
-S=sum(S_matrix,2)/L_i;
-std_S=std(S_matrix,0, 2)/sqrt(L_i);
+%S=sum(S_matrix,2)/L_i;
+%std_S=std(S_matrix,0, 2)/sqrt(L_i);
+
+S=S./(L_i*LENGHTS);
+S_sq=S_sq./(L_i*LENGHTS);
+
+std_MSD=sqrt(S_sq-S.^2)./sqrt(L_i*(LENGHTS-1));
 
 end
 
