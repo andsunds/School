@@ -155,7 +155,10 @@ För en icke-normaliserad fBm fås en extra faktor $V_H$, se \eqref{eq:fBm_onorm
 \begin{equation}
     V_{\hat{\Delta}}(t,\omega) = V_H 4\Gamma{(2H+1)}\sin(H\pi) \left( \sin(\frac{\omega T}{2}) \right) ^2 = 4 \left( \sin(\frac{\omega T}{2}) \right) ^2\abs{\omega}^{-(2H+1)},
 \end{equation}
-vilken saknar explicit tids beroende. För $\omega$
+vilken saknar explicit tids beroende. För $\nicefrac{\omega T}{2} \ll 1$, det vill säga små $\omega$, kan den kvadrerade sinustermen Taylorutvecklas så att
+\begin{equation}
+    4 \left( \left(\frac{\omega T}{2} \right)^2 + \mathcal{0}(\omega^) \right) \abs{\omega}^{-(2H+1)}
+\end{equation}
 
 \todo[color=lime]{Kanske även lägga till för fBm}
 
