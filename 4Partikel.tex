@@ -141,13 +141,18 @@ Den studerade datan består av ett hundratal olika partiklar i respektive fas. A
 
 För det första behövs en definition på ''hur mycket partikeln rör sig''. En sådan definition bör spegla den egenskap som man vill undersöka via medelvärdering. I de flesta fall, exempelvis MSD, visar sig positionens varians vara ett lämpligt mått att använda för normering. Dock används inte variansen som direkt normering eftersom det egentligen är \emph{intensiteten} som ska korrigeras för.
 
-Ett samband behöver alltså anpassas mellan intensitet, $I$, och summan av varianserna i $x$- och $y$-led $\sigma_r^2=\sigma_x^2+\sigma_y^2$. Ett av de enklaste sambanden att ansätta vore ett potenssamband:
+Ett samband behöver alltså anpassas mellan intensitet, $I$, och positionens varians
+\begin{equation}
+\sigma_r^2=\sigma_x^2+\sigma_y^2,
+\end{equation}
+som alltså ges av summan av varianserna i $x$- och $y$-led.
+Ett av de enklaste sambanden att ansätta är ett potenssamband:
 \begin{equation}
 \sigma_r^2 \propto I^{\tilde\alpha} 
 \Longleftrightarrow 
 \sigma_r \propto I^\alpha.
 \end{equation}
-Ett sådant samband svarar mot en sorts trendlinje i en dubbellogplott, där $\alpha$ blir linjens lutning. I efterföljande undersöknnigar kan sedan denna trendlinje användas för att korrigera, eller snarare vikta, termer från olika partiklar i medelvärden.
+Ett sådant samband svarar mot en trendlinje i en dubbellogplott, där $\alpha$ blir linjens lutning. I efterföljande undersöknnigar kan sedan denna trendlinje användas för att korrigera, eller snarare vikta, termer från olika partiklar i medelvärden.
 
 \subsubsection{Undersökning av mätbrus}
 En viktig aspekt i alla fysikaliska mätningar är hur mycket brus datan innehåller. Så även i den här studien. Dock kan det verka motsägelsefullt att försökta uppskatta hur mycket brus man har i data som består av slumpvandrande partiklar -- också det en sorts ''brus''. Det går dock att göra några försök. 
@@ -258,7 +263,7 @@ En annan skillnad som kan uppstå när man beräknar MSD med \eqref{eq:MSD_S} re
 
 \subsection{Resultat -- ingen märkbar skillnad mellan olika MSD-mått}
 
-För att undersöka om partikelrörelsen utgör en stationär process beräknas den stationära och icke-stationära MSD:n för partiklarna enligt ekvation \eqref{eq:MSD_S} och \eqref{eq:MSD_s}. Ett potenssamband har anpassats till resultaten i de båda beräkningarna och visas i \figref{fig:MSD}. 
+För att undersöka om partikelrörelsen utgör en stationär process beräknas deolika MSD:arna för partiklarna enligt \eqref{eq:MSD_S} och \eqref{eq:MSD_s}. Ett potenssamband har anpassats till resultaten i de båda beräkningarna och visas i \figref{fig:MSD}. 
 Ingen väsentlig skillnad i exponenten kan uttydas från anpassningen mellan de båda MSD typerna, vilket tyder på att processen är stationär. Modellen torde därför inom detta område beskrivas bättre av den stationära fBm snarare än den icke-stationära CTRW.
 
 %\newgeometry{top=2cm, bottom=4cm} %Den här används för att få plats med båda figurerna på samma sida.
@@ -288,25 +293,13 @@ Ingen väsentlig skillnad i exponenten kan uttydas från anpassningen mellan de 
 \end{figure}
 %\restoregeometry
 
-
 Jämförs exponenterna i potensanpassningen mellan cellerna i dvala och log-fas, (a) respektive (b) i \figref{fig:MSD}, finns en viss skillnad. Exponenten för cellerna i dvala är $0,6$ mot log-fas-cellernas $0,8$. Med osäkerhetsgränser som i \figref{fig:MSD_error} syns att dessa värden på exponenterna själva får en osäkerhet på ungeför $\pm 0,05$. Även om \figref{fig:MSD_error} bara visar detta för partiklar från celler i dvala så gäller samma osäkerhet i exponenten för celler i log-fas.
 
-Även med felgränserna för exponenterna syns dock att båda processerna ändå är exempel på subdiffusion. Alltså att partiklarnas MSD beror av tiden som ett potenssamband med exponent mindre än $1$. Subdiffusion är en avvikelse från klassiska brownsk rörelse, där exponenten enligt \eqref{eq:MSD_brown} ska vara $1$. 
+Även med felgränserna i \figref{fig:MSD_error} för exponenterna syns dock att båda processerna ändå är exempel på subdiffusion. Alltså att partiklarnas MSD beror av tiden som ett potenssamband med exponent mindre än $1$. Subdiffusion är en avvikelse från klassiska brownsk rörelse, där exponenten enligt \eqref{eq:MSD_brown} ska vara $1$. 
 
 
-MSD:n från \eqref{eq:MSD_s} är som förväntat mer ojämn än den stationära då färre medelvärden tas. Samtidigt är linjen tillräckligt tydlig för att anpassningen ska kunna göras med liten felgräns.
+I \figref{fig:MSD} syns att MSD:n från \eqref{eq:MSD_s} är som förväntat mer ojämn än den stationära då färre medelvärden tas. Vidare ser $S$ och $s$ ut att ha ungefär samma värde i samtliga fall. Detta beror på normeringen från avsnitt~\ref{sec:resultat-storleksberoende} som använts för att normera mot inensiteten. Men då det bara är lutnigen, i dubbellogplot, på MSD:n som är intressant så påverkas inte resultaten av vilka absoluta värden MSD:n har.
 
-
-
-\begin{comment}
-\section{Spektraltäthet}
-%Ett annat verktyg för att undersöka partilarnas rörelser är att titta på vad för spektraltäthet partiklarnas position har. Spektraltätheten erhålls genom att ta Fouriertransformen av partikelns position som funktion av tid. På så sätt erhålls ett mått på hur mycket av varje frekvens som finns. 
-\todo[color=lime]{för position eller steg?}
-
-\todo[inline]{Mer kommer sen.}
-
-\subsection{Resultat -- }
-\end{comment}
 
 
 
@@ -478,7 +471,16 @@ Om istället det riktiga asfärisitetsmåttet, $A$ från \eqref{eq:asph._2D}, be
 \section{PSD}
 
 
-\subsection{Resultat}
+
+%Lite om hur det borde se ut om det var brownsk
+Som sagts i avsnitt~\ref{sec:white_noise} så beskriver Wiernerprocessen brownsk rörelse matematiskt. Detta gör att Man kan få PSD:n för brownsk rörelse genom att undersöka Wiernerprocessen. En sak som också nämndes i avsnitt~\ref{sec:white_noise} är att Wienerprocessen kan tolkas som \emph{integralen av vitt brus}. Så PSD:n för Wienerprocessen kan alltså uttryckas med hjälp av den konstanta PSD:n för vitt brus.
+På ett lite handviftande vis bör alltså 
+\begin{equation}
+S_\text{Wiener} (f) \propto f^{-2} S_\text{Vitt brus}(f) \propto f^{-2}.
+\end{equation}
+Här har man utnyttjat PSD:ns koppling till Fouriertransformen, så att integrering kan skrivas som att transformen multipliceras med $(\ii f)^{-1}$. Sedan följer kvadraten av att PSD använder beloppskvadraten av transformen. 
+
+\subsection{Resultat -- }
 
 
 \section{Diskussion}

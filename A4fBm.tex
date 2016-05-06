@@ -1,6 +1,8 @@
 \chapter{Fördjupning i fBm och fGn}
 \label{sec:App_fBm}
 
+\todo[inline]{Inga tomma rubriker}
+
 \section{Definition}
 
 Varje fractional Brownian motion (fBm) är kopplat till en parameter H kallad Hurst parametern, $0<H<1$, som är med och avgör många av rörelsens egenskaper. Ett sätt att formellt representera fBm är att utgå från en vanlig brownsk rörelse $B(t)$ och vikta tidigare steg i rörelsen med $((t-s)^{H-\nicefrac{1}{2}})$, med $t$ och $s$ olika tidpunkter, så att fBm:n blir ett glidande medelvärde av $\dd{B}(t)$ enligt \cite{Mandelbrot_fBm1968}
@@ -128,13 +130,15 @@ vilket utgör fouriertransformen för $\abs{\tau}^{(2H+1)-1}$, $2H\in (0,1)$ ree
 \end{equation}
 Andra termen kan uttryckas i termer av F med hjälp av variabelbytet $s=\tau+T$
 \begin{equation}
-    \int^{\infty}_{-\infty}\frac{1}{2}((\tau+T)^{2H})e^{-i\omega\tau} d\tau) = \frac{1}{2}\int^{\infty}_{-\infty} \abs{s}^{2H} \ee^{-\ii\omega(s-T)} \dd\tau = -\frac{1}{2} F \ee^{\ii\omega T} 
+\int^{\infty}_{-\infty}\frac{1}{2}((\tau+T)^{2H})e^{-i\omega\tau} d\tau) 
+= \frac{1}{2}\int^{\infty}_{-\infty} \abs{s}^{2H} \ee^{-\ii\omega(s-T)} \dd\tau 
+= -\frac{1}{2} F \ee^{\ii\omega T} 
 \end{equation}
-och analogt fås för tredje termen: $-\frac{1}{2} F \ee^{-\ii\omega T}$. Läggs dessa tre termer ihop fås
+och analogt fås för tredje termen $-\frac{1}{2}F\ee^{-\ii\omega T}$. Läggs dessa tre termer ihop fås
 \begin{equation}
 \begin{aligned}
     V_{\Delta}(t,\omega)
-    &= F\left(1-\frac{1}{2}(e^{i\omega T}+e^{-i\omega T})\right) 
+    &= F\left(1-\frac{1}{2}\left(e^{i\omega T}+e^{-i\omega T}\right)\right) 
     = F\Big( 1-\cos(\omega T) \Big) 
     = 2F\left(\sin(\frac{\omega T}{2})\right)^2 \\
     &= 
@@ -144,21 +148,27 @@ och analogt fås för tredje termen: $-\frac{1}{2} F \ee^{-\ii\omega T}$. Läggs
 \end{equation}
 Genom att utnyttja följande egenskaper för gammafunktionen
 \begin{align}
-    \Gamma(1-z)\Gamma(z)&=\frac{\pi}{\sin(\pi z)} \\
-    \Gamma(z+1)&=z\Gamma(z),
+\Gamma(1-z)\Gamma(z)&=\frac{\pi}{\sin(\pi z)} \\
+\Gamma(z+1)&=z\Gamma(z),
 \end{align}
 kan gammatermen i \eqref{eq:fGn_PSD_halvklar} skrivas om till
 \begin{equation}
-    \Gamma(2H+1) = 2 \Gamma(2H) = 2H\frac{\pi}{\sin(2H\pi)}\frac{1}{\Gamma(1-2H)} = \frac{H\pi}{\cos(H\pi)\sin(H\pi)\Gamma(1-2H)}.
+\Gamma(2H+1) 
+= 2 \Gamma(2H) = 2H\frac{\pi}{\sin(2H\pi)}\frac{1}{\Gamma(1-2H)} 
+= \frac{H\pi}{\cos(H\pi)\sin(H\pi)\Gamma(1-2H)}.
 \end{equation}
 För en icke-normaliserad fBm fås en extra faktor $V_H$, se \eqref{eq:fBm_onorm_var}, i PSD:n för dess fGn: $\hat{\Delta}$ enligt
 \begin{equation}
-    V_{\hat{\Delta}}(t,\omega) = V_H 4\Gamma{(2H+1)}\sin(H\pi) \left( \sin(\frac{\omega T}{2}) \right) ^2 = 4 \left( \sin(\frac{\omega T}{2}) \right) ^2\abs{\omega}^{-(2H+1)},
+V_{\hat{\Delta}}(t,\omega) 
+= V_H 4\Gamma{(2H+1)}\sin(H\pi) \left( \sin(\frac{\omega T}{2}) \right) ^2 
+= 4 \left( \sin(\frac{\omega T}{2}) \right) ^2\abs{\omega}^{-(2H+1)},
 \end{equation}
-vilken saknar explicit tids beroende. För $\nicefrac{\omega T}{2} \ll 1$, det vill säga små $\omega$, kan den kvadrerade sinustermen Taylorutvecklas så att
+
+vilken saknar explicit tidsberoende. För $\nicefrac{\omega T}{2} \ll 1$, det vill säga små $\omega$, kan den kvadrerade sinustermen Taylorutvecklas så att
 \begin{equation}
     4 \left( \left(\frac{\omega T}{2} \right)^2 + \mathcal{0}(\omega^) \right) \abs{\omega}^{-(2H+1)}
 \end{equation}
+
 
 \todo[color=lime]{Kanske även lägga till för fBm}
 
