@@ -2,6 +2,9 @@ function [ koef ] = storleksanpassning( fil )
 %Tar fram potenssamband för att vikta om ett medelvärde beroende på
 %partikelns intensitet.
 
+%Energydepleted: fil=1
+%Logphase: fil=2
+
 load('../filnamn.mat')
 
 load(['../', kompl],...
