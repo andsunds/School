@@ -2,8 +2,10 @@
 \pdfoutput=1
 
 \usepackage{custom_as}
+\usepackage{multirow}
+\usepackage{adjustbox}
 
-\graphicspath{ {bilder/} {bilder/strangar/} {bilder/partiklar/} } %Gör så att man kan lägga alla bilder i en egen katalog
+\graphicspath{ {bilder/} {bilder/strangar/} {bilder/partiklar/} {bilder/bilaga/} } %Gör så att man kan lägga alla bilder i en egen katalog
 
 %%Drar in tabell och figurtexter
 \usepackage[margin=10 pt]{caption}
@@ -26,7 +28,8 @@
 \newcommand{\CORR}[2]{\text{corr}\!\left[#1,\;#2\right]}
 
 
-
+\let\oldint\int
+\renewcommand{\int}{\oldint\limits}
 
 \begin{document}
 
@@ -42,8 +45,6 @@
 \input{1Inledning.tex}
 
 \input{2cellbiologi.tex}
-
-
 
 %\part{Huvuddel}
 
@@ -71,11 +72,11 @@
 
 \appendix
 
-\input{A1databehandling.tex}
 
 
-\input{A2beteckningar}
+\input{A1ordlista}
 
+\input{A2noggrannhet}
 
 \input{A3CTRW.tex}
 

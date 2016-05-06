@@ -102,7 +102,7 @@ För att beräkna variansen av en linjärkombination av stokastiska variabler ut
 \VAR{a+\sum_{i=1}^N b_i X_i} = \VAR{\sum_{i=1}^N b_i X_i} 
 = \sum_{i=1}^N\sum_{j=1}^N b_i b_j\, \COV{X_i}{X_j}.
 \end{equation}
-Om $X_i$ är oberoende, så att $\COV{X_i}{X_j}\propto\delta_{ij}$, kan det sista ledet skrivas om till
+Om $X_i$ är oberoende, så att $\COV{X_i}{X_j}=0$ för $i\neq j$, kan det sista ledet skrivas om till
 \begin{equation}\label{eq:VAR_linkomb}
 \VAR{a+\sum_{i=1}^N b_i X_i} = \sum_{i=1}^N b_i^2\, \VAR{X_i}.
 \end{equation}
@@ -112,22 +112,29 @@ Om $X_i$ är oberoende, så att $\COV{X_i}{X_j}\propto\delta_{ij}$, kan det sist
 
 \subsubsection{Korrelationsfunktioner}
 I fallet med stokastiska processer kan det vara intressant att veta
-hur korrelerade två processer $Y_1(t)$ och $Y_2(t)$ är i till exempel tiden. För det används
-korrelationsfunktionen 
-\begin{equation}\label{eq:CORR}
-c(t, t') = \frac{\COV{Y_1(t)}{Y_2(t')}}{\sigma_{Y_1}\sigma_{Y_2}}.
+hur korrelerade två processer $Y_1(t)$ och $Y_2(t)$ är i till exempel tiden. För det används \emph{korrelationsfunktionen}
+\begin{equation}\label{eq:corr}
+\kappa_{12}(t, t') = \ev{Y_1(t)Y_2(t')}.
 \end{equation}
-Här har kovariansen delats med respektive standardavvikelse för att
-korrelationsfuntionen ska ge ett värde mellan $-1$ och $1$, där $1$ motsvarar perfekt korrelation och $-1$ perfekt antikorrelation, vilket följer av Cauchy-Schwarzs\cite{Engelberg_noise2007} olikhet 
-\begin{equation}
-\sigma_{Y_1}^2\sigma_{Y_2}^2\geq \Big(\COV{Y_1}{Y_2}\Big)^2.
-\end{equation}
+Oftast brukar de undersökta processerna ha väntevärde $0$. Då övergår $\kappa_{12}$ till att bli kovariansen mellan $Y_1(t)$ och $Y_2(t')$, vilket underlättar tolkningen om att $\kappa_{12}$ svarar mot en sorts korrelation. 
 
-Om den stokastiska processen är stationär, vilket ofta gäller, innehar korrelationsfunktionen
-translationssymmetri i $t$, varför $t$ och $t'$ kan ersättas med deras differens $\Delta t$:
-\begin{equation}
-c(\Delta t) = c(t, t+\Delta t).
+Ett specialfall som ofta används är den så kallade \emph{autokorrelationsfunktionen}
+\begin{equation}\label{eq:autocorr}
+\kappa_{YY}(t, t') = \ev{Y(t)Y(t')}.
 \end{equation}
+Som helt enkelt är när samma process undersöks i olika tidpunkter. 
+
+Om de stokastiska processerna är stationära, vilket ofta gäller, innehar korrelationsfunktionen translationssymmetri i $t$, alltså att när man väljer sitt origo inte spelar någon roll. Vilket gör att $t$ och $t'$ kan ersättas med deras differens~$\tau=\Delta t= t-t'$:
+\begin{equation}
+\kappa_{12}(\tau) = \kappa_{12}(t, t+\tau).
+\end{equation}
+Detta är en egenskap som kommer utnyttjas flitigt under resten av den här studien.
+
+Här bör också påpekas att en \emph{normerad} korrelationsfunktion ibland används men ändå bara kallas ''korrelationsfunktion''. Det kännetecknande för den normerade korrelationsfunktionen är att den bara antar värden mellan $-1$ och $1$.
+%Här har kovariansen delats med respektive standardavvikelse för att korrelationsfuntionen ska ge ett värde mellan $-1$ och $1$, där $1$ motsvarar perfekt korrelation och $-1$ perfekt antikorrelation, vilket följer av Cauchy-Schwarzs\cite{Engelberg_noise2007} olikhet 
+%\begin{equation}
+%\sigma_{Y_1}^2\sigma_{Y_2}^2\geq \Big(\COV{Y_1}{Y_2}\Big)^2.
+%\end{equation}
 
 \subsubsection{Kovariansmatris}\label{sec:kovmatris}
 För att studera kovarians mellan flera stokastiska processer $Y_i(t)$, där $i=1,2,..,n$ där $n$ är antalet processer, kan en kovariansmatris definieras där varje element svarar mot kovariansen mellan process $i$ och process $j$. I denna studie används en tidsoberoende kovariansmatris definierad enligt 
@@ -136,6 +143,33 @@ För att studera kovarians mellan flera stokastiska processer $Y_i(t)$, där $i=
     C_{ij} = \COV{Y_i(t)}{Y_j(t)}_t
 \end{equation}
 där väntevärdet är bildat med avseende på tiden. Om kovariansmatrisen är icke-diagonal är de stokastiska processerna korrelerade. Kovariansmatrisen ses dock enligt denna definition vara symmetrisk samt reell, givet att $Y_i(t)$ är reella stokastiska processer, och således även diagonaliserbar enligt spektralsatsen.  Diagonalisering av kovariansmatrisen åstadkoms genom ett basbyte till en bas bestående av linjärkombinationer av de stokastiska processerna, dessa linjärkombinationer är okorrelerade och är egenvektorer\cite{Shlens_PCA2014} till $C$. Egenvärdena till kovariansmatrisen svarar mot variansen av motsvarande egenvektor.
+
+
+\subsection{Skattningar med diskret data} \label{sec:diskret_data}
+Alla dessa verktyg ses bygga på olika väntevärden. Så för att kunna tillämpa dessa statistiska metoder behövs ett stort statistiskt underlag baserat på många observationer. Detta eftersom väntevärdet är det medelvärde som förväntas av en variabel efter tillräckligt många observationer.
+
+Vid statistiska analyser används alltså medelvärdet i en
+mätserie för att approximera väntevärden och ges av
+\begin{equation}\label{eq:mean}
+\ev{X} \approx \bar{x} = \frac{1}{N} \sum_{i=1}^N x_i,
+\end{equation}
+där $x_i$ är de olika observationerna av $X$ och $N$ dess totala antal. 
+
+När man ska beräkna variansen från ett stickprov kräver båda uttrycken i \eqref{eq:VAR} två väntevärden. Om inte $\ev{X}$ är känt får man alltså in två approximationer när man använder \eqref{eq:mean} för att beräkna väntevärdena i \eqref{eq:VAR}. Detta bidrar bland annat till att en approximation av standardavvikelsen kan göras enligt
+\begin{equation}\label{eq:standard_error}
+\sigma_X^2 \approx s_X^2
+=  \frac{1}{N-1} \sum_{i=1}^N \left(x_i-\bar{x}\right)^2.
+\end{equation}
+Detta är standardfelet, $s_X$, i kvadrat beräknat med Bessels korrektion, som innebär att man använder $N-1$~\cite{Rice_matstat2006} i nämnaren istället för bara $N$. Approximationen av kovariansen följer helt analogt från \eqref{eq:COV}.
+
+\subsubsection{Noggrannheten av skattningarna}
+För att dessa skattningar ska kunna användas behöver man veta hur bra de är. I bilaga~\ref{sec:noggrannhet} bevisas att både \eqref{eq:mean} och \eqref{eq:standard_error} är obiaserade i väntevärdesmening. Alltså att väntevärdet av skattningarna faktiskt är den storhet som skattas.
+
+Vidare behövs även hur stor standardavvikelse man förväntas få i skattningarna. I bilaga~\ref{sec:noggrannhet} beräknas även denna noggrannhet. I huvudsak kan man säga att felet i en skattning av väntevärdet eller varians\footnotemark{} minskar ungefär som $1/\sqrt{N}$ i båda fallen -- ska man däremot skatta en populations standardavvikelse blir felet roten av detta. 
+Detta betyder att man i princip kan komma godtyckligt nära det verkliga värdet genom att öka antalet mätvärden.
+\footnotetext{I beräkningarna av osäkerheteten i skattningen av variansen användes att $N$ behövde vara stort. För osäkerheten i skattningen av väntevärde behövs dock ingen sådant antagande. }
+
+
 
 
 \subsection{Spektral effekttäthet}
@@ -161,55 +195,43 @@ I det här läget är det också viktigt att påpeka att trots att $P_Y$ kallas 
 
 För att tillslut koppla samman detta med spektraltätheter används den spektrala effekttätheten eller PSD:n
 \begin{equation}\label{eq:PSD}
-S(f) =  \lim_{T\to\infty}\dfrac{1}{2T} \ev{\abs{\hat{X}_T(f)}^2},
+S(f) =  \lim_{T\to\infty}\dfrac{1}{2T} \ev{\abs{\hat{Y}_T(f)}^2},
 \end{equation} 
 där
 \begin{equation}\label{eq:truncated_F}
-\hat{X}_T(f) = \int_{-T}^{T} X(t)\,\ee^{-\ii 2\pi f t} \id{t}
+\hat{Y}_T(f) = \int_{-T}^{T} Y(t)\,\ee^{-\ii 2\pi f t} \id{t}
 \end{equation}
-är den trunkerade Fouriertransformen av $X$. Genom att ta med kvoten $\nicefrac{1}{2T}$ i \eqref{eq:PSD} erhålls en spektraltäthet av effekter som kan konvergera även om \eqref{eq:truncated_F} på egen hand divergerar när $T\to\infty$. 
+är den trunkerade Fouriertransformen av $Y$. Genom att ta med kvoten $\nicefrac{1}{2T}$ i \eqref{eq:PSD} erhålls en spektraltäthet av effekter som kan konvergera även om \eqref{eq:truncated_F} på egen hand divergerar när $T\to\infty$. 
 
 \subsubsection{Wiener-Khinthchine-teoremet}
-
-
-\subsubsection{Icke-stationära processer}
-
-Konceptet med PSD kan generaliseras till icke-stationära processer via Wigner-Ville-spektrumet (WVS) för en process $x(t)$ med kovarians funktion $\gamma_x(t,s)$ \cite{Flandrin_fBmspektrum1989}
-\begin{equation} \label{eq:WVS}
-    W_x(t,\omega)=\int^{\infty}_{-\infty} \gamma_x\left(t+\frac{\tau}{2},t-\frac{\tau}{2}\right) \ee^{-i\omega}\tau \dd\tau,
+För att sen koppla ihop PSD med några av processens reella egenskaper används Wiener-Khinthchine-teoremet. Kortfattat så säger det att stationära processer som är tillräckligt ''snälla'' är \cite{Miller_probability2012}
+\begin{equation}\label{eq:W-K-theorem}
+S(f) = \mathcal{F}\left[\kappa_{YY}(\tau)\right] 
+= \int_{-\infty}^{\infty} 
+\kappa_{YY}(\tau) \ee^{-\ii 2\pi f\tau} \id\tau.
 \end{equation}
-WVS kan därmed ha ett tidsberoende. Man kan visa att WVS övergår i PSD för stationära processer.
-\todo{Sätta i bilaga}
+Alltså att PSD:n och autokorrelationsfunktionen är kopplade genom Fouriertransform. 
 
-\subsection{Skattningar med diskret data} \label{sec:diskret_data}
-\todo[inline]{Hur bra är skattningarna.}
-Alla dessa verktyg ses bygga på olika väntevärden. Så för att kunna tillämpa
-dessa statistiska metoder behövs ett stort statistiskt underlag baserat på
-många observationer. Detta eftersom väntevärdet är det medelvärde
-som förväntas av en variabel efter tillräckligt många observationer.
-
-Vid statistiska analyser används alltså medelvärdet i en
-mätserie för att approximera väntevärden och ges av
-\begin{equation}\label{eq:mean}
-\ev{X} \approx \bar{x} = \frac{1}{N} \sum_{i=1}^N x_i,
-\end{equation}
-där $x_i$ är de olika observationerna av $X$ och N dess totala antal. 
-
-När man ska beräkna variansen från ett stickprov kräver båda uttrycken
-i \eqref{eq:VAR} två väntevärden. Om inte $\ev{X}$ är känt får man
-alltså in två approximationer när man använder \eqref{eq:mean} för att
-beräkna väntevärdena i \eqref{eq:VAR}. Detta bidrar bland annat till att en approximation av standardavvikelsen kan göras enligt
+Vad som menas med ''tillräckligt snälla'' processer framgår om man tittar på inledningen av resonemanget som leder fram till beviset av \eqref{eq:W-K-theorem}. Den börjar med att betrakta högerledet i \eqref{eq:PSD}~\cite{Miller_probability2012}
 \begin{equation}
-\sigma_X^2 \approx s_X^2
-=  \frac{1}{N-1} \sum_{i=1}^N \left(x_i-\bar{x}\right)^2.
+\begin{aligned}
+\ev{\abs{\hat{Y}_T(f)}^2}&=\ev{\hat{Y}_T(f)\,\hat{Y}_T^*(f)}\\
+&=\ev{
+\int_T^T\int_T^T\!\dd{t}\dd{t'} Y(t)\ee^{-\ii 2\pi ft}
+ \;Y(t')\ee^{+\ii 2\pi ft'}
+}\\
+&=\int_T^T\int_T^T\!\dd{t}\dd{t'} 
+\ev{Y(t)Y(t')} \ee^{-\ii 2\pi f(t-t')}.
+\end{aligned}
 \end{equation}
-Detta är standardfelet, $\bar{\sigma}_X$, i kvadrat beräknat med
-Bessels korrektion~\cite{Rice_matstat2006}, som innebär att man använder ${N-1}$
-i nämnaren istället för bara $N$. Approximationen av kovariansen
-följer helt analogt från \eqref{eq:COV}.
+Efter det här steget utnyttjas \eqref{eq:autocorr} och att $Y$ är stationär så att
+\begin{equation}
+\ev{Y(t)Y(t')} = \kappa_{YY}(t, t') = \kappa_{YY}(t-t').
+\end{equation}
+Härifrån noteras att $(t-t')$ även förekommer i exponenten så att transformen ser ut att gå ihop. Därefter används lite finurliga variabelsubstitutioner och geometriska resonemang~\cite{Miller_probability2012} för att slutligen landa i \eqref{eq:W-K-theorem}.
 
-\subsubsection{Noggrannheten hos skattningarna}
-Genom att utnyttja väntevärdets 
+En tillräckligt snäll process är alltså en process som tillåter att väntevärdet flyttas in under integraltecknen. Detta är oftast inga problem i de flesta fysikaliska tillämpningar. 
+
 
 
 \subsection{Vitt brus och Wienerprocessen}\label{sec:white_noise}
@@ -223,11 +245,15 @@ Vitt brus, $\pd_tW_\omega(t)$,\footnotemark{} är ett brus med konstant PSD, det
 samt är normalfördelat. 
 Det bör nämnas att äkta vitt brus inte är fysikaliskt eftersom det innehåller oändligt mycket energi. I de flesta tillämpningar brukar dock fluktuationer antas vara vitt brus för att det oftast ger enkla teoretiska analyser. Vidare kan även verkligt brus i många fall~\cite{Engelberg_noise2007} betraktas som vitt till en god approximation -- det vill säga har en konstant spektralfördelning i ett begränsat frekvensintervall. Att \eqref{eq:white_noise} medför konstant PSD inses enligt  
 \begin{equation}
-    \ev{|\pd_t\hat{W}_\omega(f)|^2} = \int_{-T}^{T}\id{t}\int_{-T}^{T}\id{t'}\ev{\pd_tW_\omega(t)\pd_{t'}W_\omega(t')}\ee^{-i2\pi f(t-t')},
+    \ev{|\pd_t\hat{W}_\omega(f)|^2} =
+    \int_{-T}^{T}\int_{-T}^{T}\!\dd{t}\dd{t'}
+    \ev{\pd_tW_\omega(t)\pd_{t'}W_\omega(t')}\ee^{-i2\pi f(t-t')},
 \end{equation}
 där den trunkerade fouriertransformen \eqref{eq:truncated_F} används. Denna integral kan beräknas med hjälp av \eqref{eq:white_noise}
 \begin{equation}
-    \int_{-T}^{T}\id{t}\int_{-T}^{T}\id{t'} \sigma_W^2 \delta(t-t')\ee^{-i2\pi f(t-t')} = \sigma_W^2 \int_{-T}^{T}\id{t} =2T\sigma_W^2.
+    \int_{-T}^{T}\int_{-T}^{T}\!\dd{t}\dd{t'} 
+    \sigma_W^2 \delta(t-t')\ee^{-i2\pi f(t-t')} 
+    = \sigma_W^2 \int_{-T}^{T}\dd{t} =2T\sigma_W^2.
 \end{equation}
 
 Således ses att \eqref{eq:white_noise} medför 
@@ -271,12 +297,15 @@ Genom att betrakta \eqref{eq:wiener_approx} som grunden för en Wienerprocess ä
 Dess egenskaper utnyttjas i avsnitt~\ref{sec:brown} om brownsk rörelse.
 
 
-\subsection{Integraler med stokastiska integrationsvariabler}
-\label{sec:Stok_int}
 
-Integraler med stokastiska intebrationsvaribler skiljer sig från integraler i den reella analysen då de ofta behandlar icke-deriverbara processer. Därav behövs en ny definition av hur en sådan stokastisk integral ska beräknas. Följande avsnitt här till stor del hämtat från \textit{Brownian motion and stochastic calculus} av I. Karatzas och S. E. Shreve \cite{Karatzas_stokint1991}, t ex.
+%Tror det blir onödigt formellt att matematiskt definiera dessa
 
-\cite{Dieker_fBm} har bra enklare info.
+%\subsection{Integraler med stokastiska integrationsvariabler}
+%\label{sec:Stok_int}
+
+%Integraler med stokastiska intebrationsvaribler skiljer sig från integraler i den reella analysen då de ofta behandlar icke-deriverbara processer. Därav behövs en ny definition av hur en sådan stokastisk integral ska beräknas. Följande avsnitt här till stor del hämtat från \emph{Brownian motion and stochastic calculus} av I. Karatzas och S. E. Shreve \cite{Karatzas_stokint1991}, t ex.
+
+%\cite{Dieker_fBm} har bra enklare info.
 
 
 \section{Stokastiska differentialekvationer}
@@ -307,20 +336,18 @@ Antaganden om fluktationens väntevärde och korrelation men med en okänd sanno
 
 
 \subsection{Brownsk rörelse}\label{sec:brown}
-\label{brownsk}
+Ett illustrerande exempel på en SDE är brownsk rörelse. Här utgår man från Newtons andra lag för att ställa upp en Langevinekvation för partikelns hastighet. Man antar att varje kollision med de omgivande molekylerna ger en stokastiskt bidrag till partikelns rörelsemängd, vilket ger en stokastisk kraftterm i Newtons andra lag.
+
 Hastigheten för en partikel som utför ren brownsk rörelse styrs av
 Langevinekvationen~\cite{Mazo_Brownian2002} 
 \begin{equation} \label{eq:Brownian_SDE}
     M\pd_tv=-\zeta v + F(t),
 \end{equation}
-där $M$ är partikelmassan, $\zeta$ en friktionskonstant och $F(t)$ en
-stokastisk, fluktuerande kraft. Kraften utgör här det stokastiska
+där $M$ är partikelmassan, $\zeta$ en friktionskonstant och $F(t)$ den
+stokastiskt, fluktuerande kraften. Kraften utgör här det stokastiska
 bidraget och uppfyller egenskaperna för vitt brus enligt \eqref{eq:white_noise}.
-Den fysikaliska tolkningen av denna stokastiska kraft är att partikeln
-får små impulser från omgivande vätskepartiklar vilka kolliderar
-slumpmässigt med partikeln.  
-%Denna kraftterm kan vidare tolkas som derivatan av en Wienerprocess i gränsen då kollisionerna infaller med hög frekvens. 
-%Motivation att derivata av Wienerprocess s63
+%Den fysikaliska tolkningen av denna stokastiska kraft är att partikeln får små impulser från omgivande vätskepartiklar vilka kolliderar slumpmässigt med partikeln.  
+
 
 Lösningen till den stokastiska differentialekvationen
 \eqref{eq:Brownian_SDE} ges av  
@@ -335,7 +362,7 @@ Detta får dock inte den stokastiska termen att försvinna och lösningen kan in
 \ev{v(t)v(t+\delta t)} 
 =& v(0)^2\ee^{-\frac{\zeta}{M}(2t+\delta t)}\\
  &+ \frac{1}{M^2}\ee^{-\frac{\zeta}{M} (2t+\delta t)}
-  \int_0^t\int_0^{t+\delta t}\dd\tau\dd\tau'\, 
+  \int_0^t\int_0^{t+\delta t}\!\dd\tau\dd\tau'\, 
      \ee^{\nicefrac{\zeta (\tau+\tau')}{M}}\ev{F(\tau)F(\tau')}.
 \end{aligned}
 \end{equation}
@@ -344,7 +371,7 @@ Utnyttja att $F(t)$ korrelerar enligt \eqref{eq:white_noise} vilket ger
 \ev{v(t)v(t+\delta t)} 
 = v(0)^2\ee^{-\frac{\zeta}{M}(2t+\delta t)}
  +\frac{\sigma^2}{M^2}\ee^{-\frac{\zeta}{M} (2t+\delta t)}
-  \int_0^t\dd\tau\ee^{\nicefrac{2\zeta \tau}{M}}.
+  \int_0^t\!\dd\tau\ee^{\nicefrac{2\zeta \tau}{M}}.
 \end{equation}
 Korrelationen ovan kan nu enkelt beräknas och genom att låta $\delta t\to 0$ samt $t\to \infty$ fås följande samband
 \begin{equation}

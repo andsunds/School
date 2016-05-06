@@ -1,9 +1,9 @@
 %!PS-Adobe-2.0 EPSF-2.0
-%%Title: medelsteg_ed.tex
-%%Creator: gnuplot 4.6 patchlevel 4
-%%CreationDate: Fri May  6 11:59:07 2016
+%%Title: strang_anpassning.tex
+%%Creator: gnuplot 4.6 patchlevel 0
+%%CreationDate: Tue May  3 13:38:22 2016
 %%DocumentFonts: 
-%%BoundingBox: 50 50 254 220
+%%BoundingBox: 50 50 390 191
 %%EndComments
 %%BeginProlog
 /gnudict 256 dict def
@@ -27,7 +27,7 @@ gnudict begin
 /Gamma 1.0 def
 /BackgroundColor {-1.000 -1.000 -1.000} def
 %
-/vshift -66 def
+/vshift -73 def
 /dl1 {
   10.0 Dashlength mul mul
   Rounded { currentlinewidth 0.75 mul sub dup 0 le { pop 0.01 } if } if
@@ -42,12 +42,12 @@ gnudict begin
 /vpt vpt_ def
 /doclip {
   ClipToBoundingBox {
-    newpath 50 50 moveto 254 50 lineto 254 220 lineto 50 220 lineto closepath
+    newpath 50 50 moveto 390 50 lineto 390 191 lineto 50 191 lineto closepath
     clip
   } if
 } def
 %
-% Gnuplot Prolog Version 4.6 (September 2012)
+% Gnuplot Prolog Version 4.4 (August 2010)
 %
 %/SuppressPDFMark true def
 %
@@ -314,8 +314,7 @@ gnudict begin
 /PatternFill {gsave /PFa [ 9 2 roll ] def
   PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
   PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
-  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
-  clip
+  gsave 1 setgray fill grestore clip
   currentlinewidth 0.5 mul setlinewidth
   /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
   0 0 M PFa 5 get rotate PFs -2 div dup translate
@@ -427,13 +426,13 @@ systemdict /pdfmark known not {
   userdict /pdfmark systemdict /cleartomark get put
 } if
 SDict begin [
-  /Title (medelsteg_ed.tex)
+  /Title (strang_anpassning.tex)
   /Subject (gnuplot plot)
-  /Creator (gnuplot 4.6 patchlevel 4)
-  /Author (andreas)
+  /Creator (gnuplot 4.6 patchlevel 0)
+  /Author (andsunds)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Fri May  6 11:59:07 2016)
+  /CreationDate (Tue May  3 13:38:22 2016)
   /DOCINFO pdfmark
 end
 } ifelse
@@ -450,741 +449,179 @@ newpath
 1.000 UL
 LTb
 LCb setrgbcolor
-980 640 M
-31 0 V
-2708 0 R
--31 0 V
-980 766 M
-31 0 V
-2708 0 R
--31 0 V
-980 878 M
-31 0 V
-2708 0 R
--31 0 V
-stroke
-LTa
-LCa setrgbcolor
-980 978 M
-2739 0 V
-stroke
-LTb
-LCb setrgbcolor
-980 978 M
-63 0 V
-2676 0 R
--63 0 V
-stroke
-LTb
-980 1634 M
-31 0 V
-2708 0 R
--31 0 V
-980 2019 M
-31 0 V
-2708 0 R
--31 0 V
-980 2291 M
-31 0 V
-2708 0 R
--31 0 V
-980 2502 M
-31 0 V
-2708 0 R
--31 0 V
-980 2675 M
-31 0 V
-2708 0 R
--31 0 V
-980 2821 M
-31 0 V
-2708 0 R
--31 0 V
-980 2948 M
-31 0 V
-2708 0 R
--31 0 V
-980 3059 M
-31 0 V
-2708 0 R
--31 0 V
-stroke
-LTa
-LCa setrgbcolor
-980 3159 M
-2739 0 V
-stroke
-LTb
-LCb setrgbcolor
-980 3159 M
-63 0 V
-2676 0 R
--63 0 V
-stroke
-LTb
 1.000 UL
-LTa
-LCa setrgbcolor
-980 640 M
-0 2519 V
-stroke
 LTb
-LCb setrgbcolor
-980 640 M
-0 63 V
-0 2456 R
-0 -63 V
-stroke
-LTb
-1324 640 M
-0 31 V
-0 2488 R
-0 -31 V
-1525 640 M
-0 31 V
-0 2488 R
-0 -31 V
-1668 640 M
-0 31 V
-0 2488 R
-0 -31 V
-1778 640 M
-0 31 V
-0 2488 R
-0 -31 V
-1869 640 M
-0 31 V
-0 2488 R
-0 -31 V
-1945 640 M
-0 31 V
-0 2488 R
-0 -31 V
-2012 640 M
-0 31 V
-0 2488 R
-0 -31 V
-2070 640 M
-0 31 V
-0 2488 R
-0 -31 V
-stroke
-LTa
-LCa setrgbcolor
-2122 640 M
-0 2519 V
-stroke
-LTb
-LCb setrgbcolor
-2122 640 M
-0 63 V
-0 2456 R
-0 -63 V
-stroke
-LTb
-2466 640 M
-0 31 V
-0 2488 R
-0 -31 V
-2667 640 M
-0 31 V
-0 2488 R
-0 -31 V
-2810 640 M
-0 31 V
-0 2488 R
-0 -31 V
-2921 640 M
-0 31 V
-0 2488 R
-0 -31 V
-3011 640 M
-0 31 V
-0 2488 R
-0 -31 V
-3088 640 M
-0 31 V
-0 2488 R
-0 -31 V
-3154 640 M
-0 31 V
-0 2488 R
-0 -31 V
-3212 640 M
-0 31 V
-0 2488 R
-0 -31 V
-stroke
-LTa
-LCa setrgbcolor
-3264 640 M
-0 1760 V
-0 700 R
-0 59 V
-stroke
-LTb
-LCb setrgbcolor
-3264 640 M
-0 63 V
-0 2456 R
-0 -63 V
-stroke
-LTb
-3608 640 M
-0 31 V
-0 2488 R
-0 -31 V
-stroke
-980 3159 N
-980 640 L
-2739 0 V
-0 2519 V
--2739 0 V
+1062 2569 N
+0 -2305 V
+4611 0 V
+0 2305 V
+-4611 0 V
 Z stroke
 1.000 UP
 1.000 UL
 LTb
 1.000 UL
 LTb
-2199 2400 N
-0 700 V
-1479 0 V
-0 -700 V
--1479 0 V
+1194 1758 N
+0 748 V
+3231 0 V
+0 -748 V
+-3231 0 V
 Z stroke
 1.000 UP
 1.000 UL
-LT1
-LC1 setrgbcolor
-0.00 0.00 1.00 C LCb setrgbcolor
-LT1
-LC1 setrgbcolor
-0.00 0.00 1.00 C 1386 2040 Crs
-1362 2374 Crs
-1159 2312 Crs
-1607 2007 Crs
-1623 1690 Crs
-1333 2026 Crs
-991 1866 Crs
-1833 1290 Crs
-3329 889 Crs
-1581 1679 Crs
-2599 1002 Crs
-2231 1178 Crs
-1592 1516 Crs
-1623 1727 Crs
-1201 2030 Crs
-2386 933 Crs
-3187 799 Crs
-2468 1072 Crs
-1434 1754 Crs
-1082 1638 Crs
-3349 703 Crs
-1453 1943 Crs
-1848 1134 Crs
-1732 1922 Crs
-1673 1804 Crs
-1833 1849 Crs
-1835 1335 Crs
-1435 1814 Crs
-2876 1000 Crs
-2542 1081 Crs
-3513 749 Crs
-2937 754 Crs
-3266 742 Crs
-3484 875 Crs
-2568 908 Crs
-2568 1094 Crs
-1873 2024 Crs
-1913 1563 Crs
-2586 1157 Crs
-2076 1312 Crs
-1433 1585 Crs
-2868 910 Crs
-2079 1243 Crs
-1743 1553 Crs
-2293 1151 Crs
-2679 810 Crs
-2292 1548 Crs
-2292 1543 Crs
-2106 1696 Crs
-3583 739 Crs
-1800 1678 Crs
-1355 2212 Crs
-2446 876 Crs
-3355 813 Crs
-1151 1972 Crs
-2942 864 Crs
-1664 1426 Crs
-1338 1755 Crs
-1947 2221 Crs
-1716 1587 Crs
-1484 2004 Crs
-2984 788 Crs
-2185 1014 Crs
-1432 1615 Crs
-2053 1057 Crs
-1095 1102 Crs
-1526 2106 Crs
-3157 937 Crs
-3204 860 Crs
-2618 827 Crs
-2445 1279 Crs
-1121 1733 Crs
-2168 1313 Crs
-2069 1290 Crs
-3465 714 Crs
-3037 873 Crs
-1685 1714 Crs
-3166 1209 Crs
-2128 1194 Crs
-1365 1441 Crs
-2557 792 Crs
-1708 1697 Crs
-2412 1175 Crs
-1964 1106 Crs
-1795 1750 Crs
-1698 1670 Crs
-2357 1118 Crs
-1681 1328 Crs
-1654 1619 Crs
-1157 1657 Crs
-1650 1449 Crs
-2153 1409 Crs
-1809 1475 Crs
-1511 1570 Crs
-2139 1257 Crs
-2984 690 Crs
-1962 1388 Crs
-2001 852 Crs
-3294 768 Crs
-1856 1195 Crs
-2650 1045 Crs
-2117 1484 Crs
-1790 1381 Crs
-2687 935 Crs
-3340 788 Crs
-1840 2273 Crs
-3053 805 Crs
-1801 1353 Crs
-3026 816 Crs
-2243 1309 Crs
-1940 1778 Crs
-1811 1769 Crs
-2005 1510 Crs
-1875 1213 Crs
-1921 1204 Crs
-3239 711 Crs
-2798 1023 Crs
-1482 1597 Crs
-1531 1665 Crs
-2396 979 Crs
-3064 918 Crs
-1913 994 Crs
-2064 1374 Crs
-2350 900 Crs
-2252 934 Crs
-2254 970 Crs
-1184 1638 Crs
-2086 1412 Crs
-1817 1736 Crs
-2144 1148 Crs
-2949 953 Crs
-1626 2025 Crs
-2301 1213 Crs
-1385 1780 Crs
-1967 1294 Crs
-3161 734 Crs
-1506 1753 Crs
-2016 1429 Crs
-2482 1078 Crs
-1982 969 Crs
-1426 1729 Crs
-1764 1243 Crs
-2184 1027 Crs
-1466 1409 Crs
-2362 936 Crs
-2197 957 Crs
-1650 1582 Crs
-2263 1266 Crs
-2253 1249 Crs
-1345 1948 Crs
-2113 1729 Crs
-1856 1048 Crs
-2558 953 Crs
-1495 1816 Crs
-1946 1873 Crs
-3110 767 Crs
-3187 869 Crs
-2282 1322 Crs
-2035 1227 Crs
-3041 891 Crs
-1649 2445 Crs
-2291 1404 Crs
-1586 2164 Crs
-2951 819 Crs
-2679 847 Crs
-1705 1788 Crs
-1817 1830 Crs
-2296 938 Crs
-2641 1090 Crs
-2500 973 Crs
-3564 742 Crs
-1910 1430 Crs
-3030 1309 Crs
-3341 708 Crs
-2120 1138 Crs
-1228 2152 Crs
-1585 1449 Crs
-2197 1443 Crs
-1443 1548 Crs
-2749 982 Crs
-3347 744 Crs
-2249 1668 Crs
-2285 1355 Crs
-2842 773 Crs
-2115 1624 Crs
-2052 1744 Crs
-3362 748 Crs
-1839 1621 Crs
-2142 1316 Crs
-2236 1529 Crs
-2124 1398 Crs
-3152 738 Crs
-2777 796 Crs
-2096 1448 Crs
-1561 2175 Crs
-2719 1131 Crs
-1575 1924 Crs
-2605 1321 Crs
-1548 1901 Crs
-1353 1606 Crs
-2969 766 Crs
-2714 1043 Crs
-2706 919 Crs
-1694 1760 Crs
-1966 1291 Crs
-2946 787 Crs
-1624 2373 Crs
-1692 1789 Crs
-2114 1391 Crs
-2799 940 Crs
-1424 1979 Crs
-1339 1224 Crs
-2021 1467 Crs
-1409 1727 Crs
-1231 1677 Crs
-3043 800 Crs
-2417 1108 Crs
-1825 1267 Crs
-1833 1469 Crs
-1770 1562 Crs
-1635 1859 Crs
-1164 1742 Crs
-2722 1092 Crs
-1725 1582 Crs
-2043 1262 Crs
-1802 1144 Crs
-1809 1501 Crs
-1791 1262 Crs
-1756 1271 Crs
-1592 1793 Crs
-1772 1270 Crs
-1640 1912 Crs
-1175 1562 Crs
-2128 1606 Crs
-2593 923 Crs
-1839 1459 Crs
-2405 1029 Crs
-1468 1454 Crs
-1178 2224 Crs
-2569 839 Crs
-2917 757 Crs
-2239 1067 Crs
-1393 1603 Crs
-1057 2288 Crs
-2335 1206 Crs
-2288 1063 Crs
-2340 965 Crs
-1815 2210 Crs
-1679 1614 Crs
-2738 1061 Crs
-3028 776 Crs
-2314 943 Crs
-1087 2218 Crs
-2820 964 Crs
-1999 1370 Crs
-2263 1145 Crs
-3445 742 Crs
-2286 902 Crs
-1528 1568 Crs
-2086 1305 Crs
-1395 1877 Crs
-1910 1329 Crs
-3183 886 Crs
-1283 1905 Crs
-3285 806 Crs
-1356 1686 Crs
-1749 1559 Crs
-2422 1107 Crs
-2799 904 Crs
-1930 1826 Crs
-3014 827 Crs
-1375 2380 Crs
-2172 1056 Crs
-2319 947 Crs
-1665 1126 Crs
-2116 1394 Crs
-1111 1782 Crs
-1447 1656 Crs
-3001 811 Crs
-2216 1298 Crs
-2422 882 Crs
-1607 1966 Crs
-1756 2151 Crs
-1564 1686 Crs
-2072 1244 Crs
-1468 2368 Crs
-2829 949 Crs
-2252 1199 Crs
-1809 1217 Crs
-1491 1553 Crs
-1984 1046 Crs
-1623 1690 Crs
-1690 1630 Crs
-2247 1150 Crs
-2515 1100 Crs
-2245 992 Crs
-1385 1449 Crs
-2029 1693 Crs
-1020 1884 Crs
-992 1860 Crs
-3466 2950 Crs
+LT0
+LC0 setrgbcolor
+0.00 0.00 0.00 C LCb setrgbcolor
+LT0
+LC0 setrgbcolor
+0.00 0.00 0.00 C 3966 2352 M
+327 0 V
+1062 670 M
+279 0 V
+297 0 V
+298 297 V
+297 0 V
+298 0 V
+297 297 V
+297 0 V
+298 0 V
+297 298 V
+298 0 V
+297 0 V
+297 297 V
+298 0 V
+297 297 V
+298 0 V
+168 0 V
+1341 670 BoxF
+1638 670 BoxF
+1936 967 BoxF
+2233 967 BoxF
+2531 967 BoxF
+2828 1264 BoxF
+3125 1264 BoxF
+3423 1264 BoxF
+3720 1562 BoxF
+4018 1562 BoxF
+4315 1562 BoxF
+4612 1859 BoxF
+4910 1859 BoxF
+5207 2156 BoxF
+5505 2156 BoxF
+4129 2352 BoxF
 2.000 UL
-LT1
-LC1 setrgbcolor
-1.00 0.00 0.00 C LCb setrgbcolor
-LT1
-LC1 setrgbcolor
-1.00 0.00 0.00 C 3375 2750 M
-183 0 V
-980 742 M
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
+LTb
+LCb setrgbcolor
+0.00 0.00 1.00 C LCb setrgbcolor
+LTb
+0.00 0.00 1.00 C 3966 2132 M
+327 0 V
+1062 483 M
+77 31 V
+109 43 V
+110 44 V
+110 42 V
+110 43 V
+110 42 V
+110 43 V
+111 41 V
+110 42 V
+111 41 V
+111 41 V
+111 41 V
+111 41 V
+111 40 V
+111 41 V
+112 39 V
+111 40 V
+112 40 V
+112 39 V
+112 39 V
+112 39 V
+112 39 V
+113 39 V
+112 39 V
+113 38 V
+113 38 V
+112 38 V
+113 39 V
+113 37 V
+113 38 V
+113 38 V
+113 38 V
+114 38 V
+113 37 V
+113 38 V
+114 38 V
+113 37 V
+114 38 V
+113 38 V
+114 37 V
+113 38 V
+56 19 V
 stroke
-LT6
-LC6 setrgbcolor
+3.000 UL
+LT2
+LC2 setrgbcolor
 1.00 0.00 0.00 C LCb setrgbcolor
-LT6
-LC6 setrgbcolor
-1.00 0.00 0.00 C 3375 2550 M
-183 0 V
-980 1610 M
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
-28 0 V
-27 0 V
-28 0 V
+LT2
+LC2 setrgbcolor
+1.00 0.00 0.00 C 3966 1912 M
+327 0 V
+1062 675 M
+88 32 V
+108 -12 V
+109 -34 V
+109 -27 V
+108 9 V
+109 72 V
+109 120 V
+108 113 V
+109 53 V
+109 -3 V
+108 -32 V
+109 -31 V
+108 -1 V
+109 57 V
+109 115 V
+108 119 V
+109 68 V
+109 6 V
+108 -28 V
+109 -34 V
+109 -9 V
+108 42 V
+109 106 V
+109 123 V
+108 83 V
+109 18 V
+109 -24 V
+108 -36 V
+109 -19 V
+109 31 V
+108 103 V
+109 128 V
+109 82 V
+108 -1 V
+109 -18 V
+109 41 V
+108 116 V
+109 123 V
+109 61 V
+108 -3 V
+109 -26 V
+109 -12 V
+68 2 V
 stroke
 1.000 UL
 LTb
 LCb setrgbcolor
-980 3159 N
-980 640 L
-2739 0 V
-0 2519 V
--2739 0 V
+1062 2569 N
+0 -2305 V
+4611 0 V
+0 2305 V
+-4611 0 V
 Z stroke
 1.000 UP
 1.000 UL
