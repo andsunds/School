@@ -3,7 +3,7 @@ clf
 %F?rs?k till att simulera CTRW
 n=1;% Antal partiklar
 N=900000;%Anpassas efter hur alpha v?ljs
-N_trials=100;
+N_trials=1e5;
 
 %Generera v?ntetider, lite hokus pokus och sopande under mattan
 F_i=@(U,eps,alpha,A)(eps^(-alpha)-alpha*U/A).^(-1/alpha); %Invers CDF, CDF=tau^-(1+alpha)
@@ -85,9 +85,9 @@ plot([0, X+.5*[diff(X),0]], 1- [0, cumsum(N_X)]/sum(N_X), '-')
 set(gca, 'fontsize', 20, 'yscale', 'lin', 'xscale', 'lin')
 
 %%
-%Plotta ~6000 simulerade CTRW
+%Plotta ~58k simulerade CTRW
 
-egen_CTRW=load('egenCTRW.tsv');
+egen_CTRW=load('egenCTRW58k.tsv');
 kvot_CTRW=(abs(egen_CTRW(:,1)-egen_CTRW(:,2)))./(egen_CTRW(:,1)+egen_CTRW(:,2));
 
 bins=200;%logspace(0,2);
