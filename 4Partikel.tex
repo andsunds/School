@@ -468,7 +468,9 @@ Som kan ses i \figref{fig:asymmetri} skiljer sig den simulerade asfärisiteten $
 
 Om istället det riktiga asfärisitetsmåttet, $A$ från \eqref{eq:asph._2D}, betraktas erhålls värdena i \tabref{tab:asph._values} där uppmätta, teoretiska och simulerade värden presenteras med felgränser. Det bör dock nämnas att det teoretiska värdet gäller i gräns mot när antalet steg går mot oändligheten medan de simulerade och uppmätta värdena beräknats från diskreta datamängder. Viss avvikelse kan därför vara att vänta. Från tabellen ses att de uppmätta värdena på $A$ för partiklarna, $0,41\pm0,23$ för log-fas och $0,49\pm0,15$ för cellerna i dvala, på grund av sin stora felgräns omsluter både resultatet för Wienerprocessen och O-U-processen med tidskonstant $\nicefrac{1}{\gamma}=\unit[4]{s}$. Partikelrörelsen är alltså minst lika isotrop som dessa båda processer.
 
-\section{PSD}
+
+
+\section{Partiklarnas spektrala effekttäthet (PSD)}
 
 
 
@@ -549,11 +551,14 @@ Intensitetsoberoendet här verkar alltså peka mot att olika stora partiklar än
 
 \subsection{Ornstein-Uhlenbeck-modellen kan inte förklara subdiffusion men skulle kunna användas i andra sammanhang}
 
-Notera att för $\gamma\Delta{t}\ll 1$ så ger \eqref{eq:MSD_o-u} att 
-$\ev{(x(t)-x(t') )^2}\widetilde{\propto}\,\Delta{t}$. Detta betyder alltså att Ornstein-Uhlenbeck-processen inte kan användas för att förklara tidigare observerade avvikelser\cite{Hofling&Franosch2013} i partiklars MSD. Dock så är den här modellen bara en första utveckling av brownsk rörelse, så det är inte så förvånane att den inte skulle klara av att förklara allt. Men förhoppningsvis skulle den kunna förklara vissa beteenden som observeras. 
+Notera att för $\gamma\Delta{t}\ll 1$ så ger \eqref{eq:MSD_o-u} att $\ev{(x(t)-x(t') )^2}\widetilde{\propto}\,\Delta{t}$. Detta betyder alltså att Ornstein-Uhlenbeck-processen inte kan användas för att förklara de observerade avvikelser i partiklars MSD. Dock så är den här modellen bara en första utveckling av brownsk rörelse, så det är inte så förvånande att den inte skulle klara av att förklara allt. Men förhoppningsvis skulle den kunna förklara vissa beteenden som observeras. 
 
 
 \subsubsection{Modell för att förklara skillnad i isotropi mellan cellfaserna}
+
+Som kan ses i \figref{fig:asymmetri} så kan tidsskalan $\nicefrac{1}{\gamma}$ anpassas så att fördelningen av $\mathcal{A}$ stämmer mot observationerna av pariklarna från celler i dvala. Detta behöver dock inte betyda något om modellen fulla giltighet -- se avsnittet ovan om varför brusmodellen inte är tillfredsställande. Men i fallet med Ornstein-Uhlenbeck-modellen så finns det indikationer som skulle kunna förklara skillnaden mellan cellfaserna i \figref{fig:asymmetri}.
+
+I \cite{Midtveldt_etal2016} dras slutsatsen att 
 
 
 
