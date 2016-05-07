@@ -1,5 +1,5 @@
-\NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesPackage{custom_as}[2016/04/11 Custom (Andréas)]
+\NeedsTeXFormat{LaTeX2e}[2011/06/27]%Godtyckligt valt men inte för gammalt
+\ProvidesPackage{custom_as}[2016/05/07 Custom (Andréas)]
 
 
 %%För att inkludera MATLABkod. 
@@ -22,7 +22,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage{babel} %OBS! Se till att vi får rätt språk.
 \usepackage{amsmath}
+\usepackage{textcomp}
 \usepackage{lmodern}
+\usepackage{helvet}
 \usepackage{units}
 \usepackage{icomma}
 \usepackage{color}
@@ -71,12 +73,6 @@
 \usepackage{comment} %\begin{comment}
 
 
-
-
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%Formatering%%%%%%%%%%%%%%%%%%%%%%%%
 %%Partiell derivata
 \newcommand{\pd}{\ensuremath{\partial}}
@@ -100,6 +96,8 @@
 %%'e' och 'i' ska vara upprätt
 \newcommand{\ee}{\mathrm{e}}
 \newcommand{\ii}{\mathrm{i}}
+
+
 
 
 
@@ -151,11 +149,6 @@
    \lstset{literate= {å}{{\r{a}}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {Å}{{\r{A}}}1
            {Ä}{{\"A}}1 {Ö}{{\"O}}1}%För att få svenska bokstäver från MATLAB.
 \fi
-
-
-
-
-
 
 
 
