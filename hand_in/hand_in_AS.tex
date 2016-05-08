@@ -1,0 +1,120 @@
+\documentclass[11pt,a4paper, german, english, swedish
+]{article}
+\pdfoutput=1
+
+\usepackage{custom_as}
+
+%\graphicspath{ {figurer/} }
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+%\renewcommand{\thesection}{...}
+
+
+\newcommand{\BM}{\ifmmode\upbeta^{-}\else$\upbeta^{-}$\fi}
+\newcommand{\BP}{\ifmmode\upbeta^{+}\else$\upbeta^{+}$\fi}
+\newcommand{\G}{\ifmmode\upgamma\else$\upgamma$\fi}
+\newcommand{\Thalv}{\ifmmode{T_{\nicefrac{1}{2}}}\else$T_{\nicefrac{1}{2}}$\fi}
+
+\begin{document}
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{ Isotopproduktion för PET: \\[1mm] \Large Räkneuppgift nr.\,10, subatomär fysik}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+
+\section{Inledning}
+Innan Röntgens upptäckt 1895\cite{Roentgen1895} av den strålning som nu är uppkallade efter honom, röntgenstrålar, har det enda sättet att undersöka människokroppens inre varit att skära upp den. Men även röntgenstrålning har sina baksidor. Exempelvis kan man bara se täta och hårda strukturer så som ben med dem. Det har därför med åren utvecklats fler tekniker för att skåda in i kroppen. 
+
+En av dessa tekniker är \emph{positronemissionstomografi} (PET)\cite{Sweet&Brownell1955,Phelps_etal1975}. Den bygger på att en radioisotop som sönderfaller med \BP-sönderfall kan lokaliseras i kroppen genom att detektera koincidenta \G-strålar från elektron-positronanhileringen. För att detta ska kunna användas medicinskt krävs även att radioisotopen i fråga kan ansamlas i exempelvis tumörer som man vill undersöka.
+
+I nuläget är PET-skanning en etablerad metod runt om i värdens sjukhus. Eftersom man vill ha tillräckligt hög strålningsintensitet vid skanningstillfället, men samtidigt inte vara för länge efteråt, så används oftast isotoper med relativt korta halveringstider. Detta betyder att sjukhusen behöver ha egna cyklotroner för isotopproduktion.
+
+\subsubsection*{Specifikationer}
+I den här rapporten beskrivs hur man kan gå tillväga, ur ett fysiklaiskt perspektiv, för att välja ut och förbereda en sådan radioisotop. Det finns två huvudsakliga delar här: att välja ut en lämplig isotop och hur produktionen ska dimensioneras.
+
+Den cyklotron som används kan ge protoner med maximal energi på $E_\text{max}=\unit[10]{MeV}$ och ström på $I=\unit[10]{\micro{A}}$. Utgående från denna cyklotron, behövs en isotop med halveringstid på ungefär $\Thalv=\unit[17]{timmar}$. Självklart måste även isotopen \BP-sönderfalla för att kunna vara akutell för PET.
+
+Produktionen ska sedan kunna vara stor nog för att kunna injecera fem patienter med ett antal av dessa kärnor motsvarande en strålningsintensitet på $\unit[2.1]{MBq}$. Detta ska dessutom kunna göras efter att isotoperna har extraherats ur strålmålet som tar $t_0=\unit[54]{timmar}$ från avslutad betrålning. Samtidigt ska protonenergin inte vara så hög att det inte bildas några exciterade kärnor med högre än \unit[200]{keV} excitationsenergi. 
+
+
+
+\section{Isotopval}
+I National Nuclear Data Centers ''Nuclear Wallet Cards''\cite{NNDC_wallet} kan man specificera vilken typ av sönderfall och hur lång halveringstid man söker, så tar de fram de isotoper som matchar sökningen. Gör man en sökning efter \BP-sönderfallande isotoper med en halveringstid på $\unit[17\pm 1]{timmar}$ får man 12 möjliga kandidater. 
+
+
+\section{Produktion}
+
+
+\section{Diskussion}
+
+
+
+\newpage
+\bibliographystyle{ieeetr}
+\bibliography{referenser}%kräver en fil som heter 'referenser.bib'          
+
+
+
+\end{document}
+
+
+
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer (två enkelfjongar): ''.
+
+
+%% Inkludera PDF-dokument
+\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+
+%% Figurer inkluderade som pdf-filer
+\begin{figure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer roterade 90 grader
+\begin{sidewaysfigure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{sidewaysfigure}
+
+
+%%Om man vill lägga till något i TOC
+\stepcounter{section} %Till exempel en 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
