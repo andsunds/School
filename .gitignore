@@ -5,6 +5,7 @@
 *.log
 *.out
 rapport*.pdf
+hand_in_AS.pdf
 *.toc
 *-eps-converted-to.pdf
 *.bak
