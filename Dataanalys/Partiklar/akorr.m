@@ -26,30 +26,32 @@ koef=[ones(size(I)), log(I)]\log(lambda);
 koef(1)=exp(koef(1));%konverterar till potenssamband
 
 
-korr_T=zeros(N,1);%init
-korr_N=zeros(N,1);%init
+korr=zeros(N,1);%init
+korr_sq=zeros(N,1);%init
 
+index=find(cellfun('length',C)==N).'; 
+L_i=length(index);
 tic
-for i=find(cellfun('length',C)==N).'; 
+for i=index
     %TN=koordinatbyte(C{i}(1:N,2:3));%positionsdata i TN-koordinater
     TN=(C{i}(1:N,2:3));%positionsdata i TN-koordinater
     
     %Nedan har vi den magiska korrelationsfunktionsberäknaren
-    tmp1=triu(TN(:,1)*TN(:,1).');
-    tmp2=sum(tmp1(INDEX), 2);
-    korr_T=korr_T+tmp2/(I(i).^koef(2));
-    
-    tmp1=triu(TN(:,2)*TN(:,2).');
-    tmp2=sum(tmp1(INDEX), 2);
-    korr_N=korr_N+tmp2/(I(i).^koef(2));
+    tmpx=triu(TN(:,1)*TN(:,1).');
+    tmpy=triu(TN(:,2)*TN(:,2).');
+    korr=korr+sum([tmpx(INDEX),tmpy(INDEX)], 2)/(I(i).^koef(2));
+    korr_sq=korr_sq+sum([tmpx(INDEX),tmpy(INDEX)].^2, 2)/(I(i).^koef(2));
 end
 toc
 s=1;
-LEN=fliplr(s:N).';
-korr_T=korr_T(s:end)./LEN;
-korr_N=korr_N(s:end)./LEN;
 
-korr=[korr_T/korr_T(1), korr_N/korr_N(1)];
+LEN=2*fliplr(s:N).';
+korr=korr(s:end)./LEN/L_i;
+korr_sq=korr_sq(s:end)./LEN/L_i;
+
+std_korr=sqrt(korr_sq-korr.^2);
+
+korr=korr/korr(1);
 
 
 dt=(0:(N-1)).'*1e-2;
@@ -98,8 +100,8 @@ for i=1:N_sim;
     TN=cumsum(randn(N_step,1));
     
     %Nedan har vi den magiska korrelationsfunktionsberäknaren
-    tmp1=triu(TN*TN.');
-    korr=korr+sum(tmp1(INDEX), 2);
+    tmpx=triu(TN*TN.');
+    korr=korr+sum(tmpx(INDEX), 2);
 end
 toc
 s=1;
