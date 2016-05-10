@@ -10,25 +10,28 @@ load('../filnamn.mat')
 N=1000;
 Dt=(0:(N-1)).'*1e-2;
 
-data_MSD=zeros(N,5);
+data_MSD=zeros(N,9);
 data_MSD(:,1)=Dt;
 
 for fil=1:2;
     tic
     [s, std_s]=MSD_s(fil, N);
-    S=MSD_S(fil, N);
+    [S, std_S]=MSD_S(fil, N);
     toc
     
     
     %Sparar data för sep. plottning
-    data_MSD(:,2*fil)=S;
-    data_MSD(:,2*fil+1)=s;
+    data_MSD(:,4*fil-2)=S;
+    data_MSD(:,4*fil-1)=std_S;
+    data_MSD(:,4*fil-0)=s;
+    data_MSD(:,4*fil+1)=std_s;
 
 
-    
+    figure(4)
     subplot(1,2,fil)
-    plot(Dt,S), hold on
-    plot(Dt,s, Dt, s+std_s, '--', Dt, s-std_s, '--')
+    plot(Dt,S, 'b'), hold on
+    plot(Dt,s, 'r')
+    
 
     l=legend('$S$','$s$');
     set(l, 'Interpreter', 'Latex','FontSize',15)
@@ -38,11 +41,93 @@ for fil=1:2;
     ylabel('MSD', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
     set(gca, 'FontSize' ,15,'XScale','log','YScale','log');
     pause(.1)
-
+    
+    figure(4+fil)
+    subplot(1,2,1)
+    plot(Dt,S,'-b',Dt, S+std_S, '--k', Dt, S-std_S, '--k')
+    %set(gca, 'FontSize' ,15,'XScale','log','YScale','log');
+    
+    subplot(1,2,2)
+    plot(Dt,s,'-r',Dt, s+std_s, '--k', Dt, s-std_s, '--k')
+    %set(gca, 'FontSize' ,15,'XScale','log','YScale','log');
+    
+    figure(7)
+    subplot(1,2,fil)
+    plot(Dt,std_S./S, Dt,std_s./s)
+    
 end
 
 
-%save('MSD.tsv', 'data_MSD', '-ascii', '-tabs'), disp('Data saved')
+% %save('MSD.tsv', 'data_MSD', '-ascii', '-tabs'), disp('Data saved')
+
+%% pill med plottar
+clc;clearvars
+clf
+%for i=4:7
+%    figure(i);clf
+%end
+pause(.1)
+
+load('../filnamn.mat')
+
+data_MSD=load('MSD.tsv', '-ascii');
+
+Dt=data_MSD(:,1);
+
+for fil=1
+    
+    S=data_MSD(:,4*fil-2);
+    std_S=1.96*data_MSD(:,4*fil-1);
+    s=data_MSD(:,4*fil-0);
+    std_s=1.96*data_MSD(:,4*fil+1);
+    
+    %{
+    figure(4)
+    subplot(1,2,fil)
+    plot(Dt,S, 'b'), hold on
+    plot(Dt,s, 'r')
+    
+    plot(Dt,S,'-b',Dt, S+std_S, '--k', Dt, S-std_S, '--k')
+    plot(Dt,s,'-r',Dt, s+std_s, '--k', Dt, s-std_s, '--k')
+
+    l=legend('$S$','$s$');
+    set(l, 'Interpreter', 'Latex','FontSize',15)
+
+    title(filnamn{fil}(6:end-4))
+    xlabel('Tidssteg dt/[s]', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+    ylabel('MSD', 'Interpreter', 'Latex', 'FontSize', 16, 'Color', 'k');
+    set(gca, 'FontSize' ,15,'XScale','log','YScale','log');
+    pause(.1)
+    %}
+    
+    figure(4+fil)
+    x=logspace(-2,1);
+    a=0.6;
+    %k=fminbnd(@(k) sum( (S - k*Dt.^a).^2 ), 1e-8, 2e-7, optimset('tolX', 1e-10))
+    y=S(100)*x.^a;
+    subplot(1,2,1)
+    plot(Dt,S,'-b',Dt, S+std_S, '--k', Dt, S-std_S, '--k')
+    hold on
+    plot(x,y)
+    set(gca, 'FontSize' ,15,'XScale','log','YScale','log');
+    title(filnamn{fil}(6:end-4))
+    
+    subplot(1,2,2)
+    plot(Dt,s,'-r',Dt, s+std_s, '--k', Dt, s-std_s, '--k')
+    hold on
+    plot(x,y)
+    
+    set(gca, 'FontSize' ,15,'XScale','log','YScale','log');
+    title(filnamn{fil}(6:end-4))
+    
+    
+    %{
+    figure(7)
+    subplot(1,2,fil)
+    plot(Dt,std_S./S, Dt,std_s./s)
+    title(filnamn{fil}(6:end-4))
+    %}
+end
 
 
 
