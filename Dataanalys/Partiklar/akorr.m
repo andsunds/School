@@ -12,6 +12,10 @@ N=1000;
 addpath('../');%Lägger till så att create_indecis kan användas
 INDEX=create_indecis(N);%Tar fram index som sorterar längs med diagonalerna
 
+plot_data=NaN(N,5);
+dt=(0:(N-1)).'*1e-2;
+plot_data(:,1)=dt;
+
 for fil=1:2 %för att undersöka datan för båda celltyperna
 %laddar in data
 data =load(filnamn{fil});
@@ -33,10 +37,11 @@ korr_sq=zeros(N,1);%init
 index=find(cellfun('length',C)==N).'; 
 L_i=length(index);
 tic
-
 for i=index
     %TN=koordinatbyte(C{i}(1:N,2:3));%positionsdata i TN-koordinater
     TN=(C{i}(1:N,2:3));%positionsdata i TN-koordinater
+    
+    TN=bsxfun(@minus , TN, mean(TN,1));
     
     %Nedan har vi den magiska korrelationsfunktionsberäknaren
     tmpx=triu(TN(:,1)*TN(:,1).');
@@ -58,23 +63,27 @@ std_korr=std_korr/korr(1);
 korr=korr/korr(1);
 
 
-dt=(0:(N-1)).'*1e-2;
+
+plot_data(:,2*fil:(2*fil+1))= [korr, std_korr];
 
 %vilka punkter som ska undersökas
 start=2;
-stop =700;
+stop =150;
 
 
-c=[ones(stop+1-start, 1) dt(start:stop)]\log(korr(start:stop));%anpassar exponentialsamband
+konfidens=0.05;
+konfidensfaktor=(norminv(1-konfidens/2,0,1)-norminv(konfidens/2,0,1))/2;
+
+[c, std_c]=lscov([ones(stop+1-start, 1) dt(start:stop)],log(korr(start:stop)));%anpassar exponentialsamband
+
+fprintf('Anpassningar: exp(%f + %f * x)\n', c(1), c(2))
 
 %fprintf('%s\nErhållen tidskonstant: T: %1.3f s,  N: %1.3f s \n', filnamn{fil}, -1/c(1), -1/c(2))
-fprintf('Med medelvärdet: %1.3f s \n\n', -1./c(end))
+fprintf('Med medelvärdet: %1.3f +- %1.3f s \n\n', -1./c(2), konfidensfaktor*std_c(2)/c(2)^2)
 
 
 subplot(1,2,fil)
 
-konfidens=0.01;
-konfidensfaktor=(norminv(1-konfidens/2,0,1)-norminv(konfidens/2,0,1))/2;
 
 plot(dt, korr, dt,...
      korr+std_korr*konfidensfaktor, '--k', dt, korr-std_korr*konfidensfaktor, '--k')
@@ -82,10 +91,13 @@ plot(dt, korr, dt,...
 hold on
 plot(dt, exp(c(1)+ c(2)*dt) )
 title(filnamn{fil}(6:end-4))
-set(gca, 'fontsize', 15, 'yscale', 'log', 'xscale', 'lin')
-axis([0,10, .1, 1])
+%set(gca, 'fontsize', 15, 'yscale', 'log', 'xscale', 'lin')
+%axis([0,10, .01, 1])
+grid on
 pause(.1)
 end
+
+% %save('pos_korr.tsv', 'plot_data', '-ascii')
 
 
 %% simulering
