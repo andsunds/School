@@ -1,7 +1,7 @@
 \chapter{Kompletterande beräkningar kring skattning av väntevärde och varians}
 \label{sec:noggrannhet}
 
-I den här bilagan bevisas att skattningarna i avsnitt~\ref{sec:diskret_data} är väntevärdesriktiga och hur stor varian man får i en skattning.
+I den här bilagan bevisas att skattningarna i avsnitt~\ref{sec:diskret_data} är väntevärdesriktiga och hur stor varians man får i respektive skattning.
 
 För att göra beräkningar av hur bra skattningarna är betraktas i båda fallen en uppsättning likafördelade oberoende stokastisk variabler $X_i$ med väntevärde $\mu$ standardavvikelse $\sigma$. Med dessa stokastiska variabler kan man bilda en stokastisk motsvarighet\footnotemark{} till \eqref{eq:mean} och \eqref{eq:standard_error}. Det är sedan dessa stokastiska motsvarigheter som används i beräkningarna nedan. 
 
@@ -9,7 +9,7 @@ För att göra beräkningar av hur bra skattningarna är betraktas i båda falle
 
 
 \section{Skattning av väntevärde}
-Medelvärdet i \eqref{eq:mean} blir alltså
+Medelvärdet i \eqref{eq:mean} blir alltså den nya stokastiska variabeln
 \begin{equation}
 \bar{X} = \frac{1}{N} \sum_{i=1}^N X_i = \sum_{i=1}^N \frac{X_i}{N}.
 \end{equation}
@@ -25,7 +25,7 @@ och
 Som förväntat förblir väntevärdet av medelvärdet oförändrat, men det anmärkningsvärda här är att variansen i medelvärdet minskar med antalet termer som medelvärderas. Detta betyder att medelvärdets standardavvikelse går som $\sigma/\sqrt{N}$.
 Från detta kan man dra slutsatsen att skattningen av väntevärdet i \eqref{eq:mean} bör närma sig det verkliga värdet med en osäkerhet i storleksordningen $\sigma/\sqrt{N}$. 
 
-Hur många termer man bör använda i \eqref{eq:mean} beror på hur noggran skattning man vill få i slutändan. Alternativt begränsas $N$ av hur mycket experimentell data man har till gång till; i så fall kan man använda \eqref{eq:standard_error} för att uppskatta hur noggrant ens medelvärde blir. 
+Hur många termer man bör använda i \eqref{eq:mean} beror på hur noggran skattning man vill få i slutändan. Alternativt begränsas $N$ av hur mycket experimentell data man har tillgång till; i så fall kan man använda \eqref{eq:standard_error} för att uppskatta hur noggrant ens medelvärde blir. 
 
 
 \section{Skattning av varians}
@@ -77,7 +77,7 @@ Till att börja med kan kvadraten av summan skrivas om till
 \end{equation}
 Hade de två faktorerna här varit statistiskt oberoende blir väntevärdet av produkten samma som produkten av väntevärdena\cite{Rice_matstat2006}. Så är tyvärr inte fallet eftersom $\bar{X}$ beror av alla $X_i$.
 
-För att kunna jobba vidare används approximationen att sätta $\bar{X}\approx \mu$, vilket ju sen tidigare visade sig fungera för stora $N$. Detta ger att de två faktorerna blir oberoende för $i\neq j$ eftersom $X_i$ var satta att vara en uppsättning oberoende stokastiska variabler. Nu kan summan skrivas om till
+För att kunna jobba vidare används approximationen att sätta $\bar{X}\approx \mu$, vilket ju sen tidigare visade sig fungera bra för stora $N$. Detta ger att de två faktorerna blir oberoende för $i\neq j$ eftersom $X_i$ var satta att vara en uppsättning oberoende stokastiska variabler. Nu kan summan skrivas om till
 \begin{equation}\label{eq:sum_of_moments}
 \ev{\left(\sum_{i=1}^N\left(X_i-\bar{X}\right)^2 \right)^2} 
 \approx
@@ -85,7 +85,7 @@ För att kunna jobba vidare används approximationen att sätta $\bar{X}\approx 
 +\sum_{i=1}^N\sum_{j\neq i} 
 \ev{\left(X_i-\mu \right)^2}\ev{\left(X_j-\mu \right)^2}.
 \end{equation}
-Dubbelsumman är inga problem att evaluera; den innehåller bara varianserna multiplicerade. Däremot behövs mer information om hur $X_i$ är fördelade för att kunna säga något om den första summan -- som är över fjärde momenten.
+Dubbelsumman är inga problem att evaluera; den innehåller bara varianserna multiplicerade. Däremot behövs mer information om hur $X_i$ är fördelade för att kunna säga något om den första summan -- som är över fjärdemomenten.
 
 Här behöver nästa approximation införas. Den bygger också på att $N$ är stort. Eftersom dubbelsumman innehåller i storleksordningen $N^2$ termer medan summan över fjärdemomenten endast är över $N$ termer, så kommer dubbelsumman att dominera för stora $N$. Detta gör att \eqref{eq:sum_of_moments} kan approximeras med
 \begin{equation}\label{eq:EV_squared_sum}
@@ -93,9 +93,9 @@ Här behöver nästa approximation införas. Den bygger också på att $N$ är s
 \approx
 N^2\sigma^4.
 \end{equation}
-Man kan motivera att sätta $N^2$ istället för $N^2-N$ med att säga att fjärdemomenten alltid är positiva så att man får en underskattning av att helt bort se från den summan. Samtidigt så är det rimligt att anta att $\ev{\left(X_i-\mu\right)^4}\approx\sigma^4$, alltså att de är i samma storleksordning som variansen i kvadrat. 
+Man kan motivera att sätta $N^2$, istället för $(N^2-N)$, med att säga att fjärdemomenten alltid är positiva så att man får en underskattning av att helt bortse från den summan. Samtidigt så är det rimligt att anta att $\ev{\left(X_i-\mu\right)^4}\approx\sigma^4$, alltså att de är i samma storleksordning som variansen i kvadrat. Tillsammans ger detta $N^2\sigma^4$.
 
-Slutligen erhålls nu en uppskattning av variansen av $S^2$. Så, om man kombinerar \eqref{eq:VAR_S_square} med \eqref{eq:EV_squared_sum} fås för stora $N$ 
+Slutligen erhålls nu en uppskattning av variansen av $S^2$. Så om man kombinerar \eqref{eq:VAR_S_square} med \eqref{eq:EV_squared_sum} fås för stora $N$: 
 \begin{equation}
 \VAR{S^2} 
 \approx \sigma^4\left(\frac{N^2}{(N-1)^2} -1 \right) 

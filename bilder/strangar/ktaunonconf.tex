@@ -71,31 +71,41 @@
       \expandafter\def\csname LT8\endcsname{\color{black}}%
     \fi
   \fi
-  \setlength{\unitlength}{0.0500bp}%
-  \begin{picture}(4250.00,3968.00)%
+    \setlength{\unitlength}{0.0500bp}%
+    \ifx\gptboxheight\undefined%
+      \newlength{\gptboxheight}%
+      \newlength{\gptboxwidth}%
+      \newsavebox{\gptboxtext}%
+    \fi%
+    \setlength{\fboxrule}{0.5pt}%
+    \setlength{\fboxsep}{1pt}%
+\begin{picture}(4250.00,3968.00)%
     \gplgaddtomacro\gplbacktext{%
       \csname LTb\endcsname%
       \put(740,640){\makebox(0,0)[r]{\strut{}0,1}}%
       \csname LTb\endcsname%
-      \put(740,2184){\makebox(0,0)[r]{\strut{}1}}%
+      \put(740,1918){\makebox(0,0)[r]{\strut{}1}}%
       \csname LTb\endcsname%
-      \put(740,3727){\makebox(0,0)[r]{\strut{}10}}%
+      \put(740,3197){\makebox(0,0)[r]{\strut{}10}}%
       \csname LTb\endcsname%
       \put(860,440){\makebox(0,0){\strut{}0}}%
       \csname LTb\endcsname%
-      \put(1466,440){\makebox(0,0){\strut{}0,2}}%
+      \put(1365,440){\makebox(0,0){\strut{}0,1}}%
       \csname LTb\endcsname%
-      \put(2072,440){\makebox(0,0){\strut{}0,4}}%
+      \put(1870,440){\makebox(0,0){\strut{}0,2}}%
       \csname LTb\endcsname%
-      \put(2677,440){\makebox(0,0){\strut{}0,6}}%
+      \put(2375,440){\makebox(0,0){\strut{}0,3}}%
       \csname LTb\endcsname%
-      \put(3283,440){\makebox(0,0){\strut{}0,8}}%
+      \put(2879,440){\makebox(0,0){\strut{}0,4}}%
       \csname LTb\endcsname%
-      \put(3889,440){\makebox(0,0){\strut{}1}}%
-      \put(160,2183){\rotatebox{-270}{\makebox(0,0){\strut{}$\tau$ /[s]}}}%
-      \put(2374,140){\makebox(0,0){\strut{}$k$ /[$\micro$m$^{-1}$]}}%
+      \put(3384,440){\makebox(0,0){\strut{}0,5}}%
+      \csname LTb\endcsname%
+      \put(3889,440){\makebox(0,0){\strut{}0,6}}%
     }%
     \gplgaddtomacro\gplfronttext{%
+      \csname LTb\endcsname%
+      \put(160,2183){\rotatebox{-270}{\makebox(0,0){\strut{}$\tau$ /[s]}}}%
+      \put(2374,140){\makebox(0,0){\strut{}$k$ /[$\micro$m$^{-1}$]}}%
       \csname LTb\endcsname%
       \put(3226,3514){\makebox(0,0)[r]{\strut{}Fri sträng nr. 1}}%
       \csname LTb\endcsname%

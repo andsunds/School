@@ -5,28 +5,46 @@
 
 %\paragraph{Bakgrund}
 Transport inuti celler är en av grundstenarna för cellers överlevnad. Exempel på en livsnödvändig intracellulär transport är hur ATP, molekylen som driver \emph{alla} biologiska processer, kan ta sig från mitokondrien till alla delar av cellen. Detta är ett fall av passiv transport, där molekylerna eller partiklarna förflyttas genom att slumpvis diffundera genom cellen. Det är därför viktigt att kunna beskriva transport inuti cellerna för att förstå cellens inre processer.
-I cellens inre finns även trådliknande strukturer, uppbyggda av proteinfilament, som ger både stadga och möjliggör en aktiv transport inom cellen. \todo[color=lime]{Varför studera filamentrörelse?}Dessa filaments dynamik kan därför också vara av intresse att studera.
+
+I cellens inre finns även trådliknande strukturer, uppbyggda av proteinfilament, som ger både stadga och möjliggör en aktiv transport inom cellen. Den aktiva transporten kompletterar den passiva genom att kunna transportera länge sträckor och styra vart transporten går. Eftersom den aktiva transporten går längs med dessa proteinfilament är det av motsvarande vikt att förstå deras dynamik som att förstå den passiva transporten. 
 
 
-Som en första approximation skulle partiklars rörelse i cytoplasman kunna beskrivas med klassisk brownsk rörelse. Studier av diffusion i celler [\cite{Hofling&Franosch2013}, \cite{Dix_Crowdingeffects2008}, \cite{Gou_etal2014}, \cite{Parry_etal2014}] har dock visat på avvikelser från denna teori, där partiklarna diffunderar långsammare än förväntat inuti cellen. Ytterligare skillnad i partikelrörelser har tidigare observerats om cellen befinner sig i dvala eller i sitt normala metabola tillstånd \cite{Parry_etal2014}. En alltäckande teori för vad som kan förklara dessa observationer finns i dagsläget inte och ämnet utgör därför ett aktuellt forskningsområde. Rörelsens stokastiska natur och cellens avancerade inre struktur är troligtvis varför det har varit svårt att finna en modell för rörelsen. Ett flertal modeller finns dock som beskriver delar av de observerade egenskaperna, bland annat ''fractional Brownian motion'' (fBm) \cite{Mandelbrot_fBm1968} och ''Continous Time Random Walk'' (sv. tidskontinuerlig slumpvandring) (CTRW) \cite{Hofling&Franosch2013} för partikelrörelse och ''Worm Like Chain'' (WLC) \cite{Milstein2013} för strängrörelse som alla presenteras senare i detta arbete.
-%Rörelsens stokastiska natur och cellens avancerade inre struktur ligger troligtvis bakom svårigheten man hittills stött på när man sökt en förklaringsmodell till rörelsen.
+Som en första approximation skulle partiklars rörelse i cytoplasman kunna beskrivas med klassisk brownsk rörelse. Studier av diffusion i celler \cite{Hofling&Franosch2013,Dix_Crowdingeffects2008,Gou_etal2014,Parry_etal2014} har dock visat på avvikelser från denna teori, där partiklarna diffunderar långsammare än förväntat inuti cellen. Ytterligare skillnad i partikelrörelser har tidigare observerats om cellen befinner sig i dvala eller i sitt normala metabola tillstånd \cite{Parry_etal2014,Midtveldt_etal2016}. En alltäckande teori för vad som kan förklara dessa observationer finns i dagsläget inte, och ämnet utgör därför ett aktuellt forskningsområde. Rörelsens stokastiska natur och cellens avancerade inre struktur är troligtvis varför det har varit svårt att finna en bra modell för rörelsen. 
 
+På samma sätt är även strängdynamiken outforskad. Förståelsen här är, om något, till och med mer ofullständig än för partiklar\cite{Koster_etal2005,Koster_etal2007,Koster_etal2008}. Här finns inte heller en lika självklar utgångspunkt att börja modellera rörelserna. Istället för att utgå från en enkel modell får man här istället direkt fösöka beskriva de observationer som görs.
 
+%Det finns idag olika teorier om vad som påverkar partiklars och filaments rörelse i cytoplasman. Vissa \cite{Gou_etal2014} försöker beskriva vad som sker i celler med aktiv transport medan andra \cite{Parry_etal2014} lägger mer fokus på den passiva transporten inom cellen, mycket beroende på vilken celltyp som studerats. Då jästceller endast har aktiv transport under celldelning, undersöks framför allt den passiva transporten i den här studien. Detta eftersom den tillgängliga datan var insamlad i log-fas under korta tidsperioder så att endast ett fåtal celler delade sig under datainsamlingen. 
+Det finns dock i nuläget ett flertal modeller för både partikel- och strängrörelser. Bland annat ''fractional Brownian motion'', fBm, 
+%(sv. )
+\cite{Mandelbrot_fBm1968} och ''Continous Time Random Walk'', CTRW, 
+%(sv. tidskontinuerlig slumpvandring) 
+\cite{Hofling&Franosch2013} för partikelrörelse samt ''Worm Like Chain'', WLC, 
+%(sv. masklik kedja) 
+\cite{Milstein2013} för strängrörelse. %Alla dessa modeller presenteras senare i den här rapporten.
 %\paragraph{Syfte} 
-Syftet med denna rapport är att studera rörelser orsakade av passiv transport i celler för att utifrån denna studie förhoppningsvis kunna ge en klarare bild av cytoplasmans natur. Detta görs genom att jämföra vedertagna teoretiska diffusionsmodeller med den tillgängliga datan, både för rörelsen hos partiklar genom cytoplasman och filaments (proteintrådar) rörelse i en vätska. %Filamenten befann sig alltså inte inuti en levande cell men studien av dessa borde ändå kunna ge en någorlunda bra bild av hur en sträng i cytoplasman skulle bete sig.
+I den här studien har partikelrörelser inuti jästceller och strängdynamiken för aktinfilament undersökts med ett antal olika statistiska metoder. Observationerna från datan jämförs även med förutsägelser från bland annat modellerna.
+
+Rapporten börjar med en översikt av den stokastiska teoribakgrund som används i de efterföljande kapitlen. 
+Här presenteras huvuddelen av den stokastiska och statisktska analys som behövs för studierna av partiklar och strängar. Därefter följer två kapitel där undersökningarna som gjorts i den här studien presenteras.
+
+Partikarna undersöks bland annat med hjälp av deras ''mean squared displacement'', MSD, (sv. medel av den kvadrarade förflyttningen) och hur isotropt de rör sig.
+Undersökningarna av MSD:n börjar med att bekräfta att partikelrörelsen är subdiffusiv\cite{Hofling&Franosch2013}, alltså att partiklarna rör sig fundamentalt långsammare än i vanlig brownsk rörelse. Vidare erhålls också en tydlig skillnad mellan aktiva och passiva celler. 
+I isotropiundersökningarna erhålls en viss skillnad mellan partiklar i olika cellfaser. Det verkar heller inte finnas några märkbara anisotropier inuti cellerna som påverkar partikelrörelsen. 
+
+För strängarna studeras bland annat deras tangentkorrelation och uppdelning i egenmoder. 
+Tangentkorrelationen är ett mått på hur mycket och snabbt strängen ändrar from. Där erhålls ...
+För egenmoderna undersöks om strängarnas svängningsrörelser kan delas upp i oberoende moder. Detta kan ses som en analogi till svängningar på exempelvis en gitarrsträng, där det finns olika oberoende svängningsmoder med olika frekvens. Här erhålls ...
+
+
 
 
 %\paragraph{Avgränsningar}
-Att avbilda små partiklar och filament innebär stora svårigheter vilket har försvårat analysen av deras egenskaper. I dagsläget finns heller ingen fullständig modell som beskriver partiklars och filaments rörelse \todo[color=lime]{Någon källa för strängarna}[\cite{Hofling&Franosch2013}, []]. %Den teoretiska modellen som undersöks i det här kandidatarbetet behöver verka under vissa antaganden som begränsar dess användningsområde. 
-Exempelvis kan variationer som uppstår vid betraktande av rörelser under olika tidsskalor komma att leda till svårigheter. %, bland annat i att finna en teoretisk modell som korrekt beskriver rörelsen oberoende av tidsskala. 
-Således är det mer rimligt att modellera rörelsen under antagandet att modellen i första hand beskriver rörelser under en viss tidsskala.%, förslagsvis observationer som varar i intervallet $\unit[10]{ms}$ till $\unit[10]{s}$ vilket speglar den data som analyseras i detta arbete.
-
-Det finns idag olika teorier om vad som påverkar partiklars och filaments rörelse i cytoplasman. Vissa \cite{Gou_etal2014} försöker beskriva vad som sker i celler med aktiv transport medan andra \cite{Parry_etal2014} lägger mer fokus på den passiva transporten inom cellen, mycket beroende på vilken celltyp som studerats. Då jästceller endast har aktiv transport under celldelning, undersöks framför allt den passiva transporten i den här studien. Detta eftersom den tillgängliga datan var insamlad i log-fas under korta tidsperioder så att endast ett fåtal celler delade sig under datainsamlingen. 
+Att avbilda små partiklar och filament innebär dock stora svårigheter vilket har försvårat analysen av deras egenskaper. I dagsläget finns heller ingen fullständig modell som beskriver partiklars och filaments rörelse \todo[color=lime]{Någon källa för strängarna}\cite{Hofling&Franosch2013,}.  
+Exempelvis kan variationer som uppstår vid betraktande av rörelser under olika tidsskalor komma att leda till svårigheter.
+Således är det mer rimligt att modellera rörelsen under antagandet att modellen i första hand beskriver rörelser under en viss tidsskala.
 
 
-
-
-
+\todo[inline]{Lägga till: vad gör vi och varför är just vårt arbete värdefullt. Tillägg: Eventuellt mer avgränsningar också}
 
 
 

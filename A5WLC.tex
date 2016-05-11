@@ -1,0 +1,105 @@
+\chapter{WLC}
+\label{A5}
+
+I denna bilaga diskuteras övergången från den potentiella energi för WLC modellen 
+\begin{equation}\label{eq:Htot}
+    \frac{H_\text{tot}}{\kbT}=\int_{0}^{L}\!\dd{s}\,\left[\frac{\mu}{L_\text{p}}(\pd_{s}r(s))^{2}+\frac{L_\text{p}}{2}(\partial_{s}^{2}A(s))^2 + \frac{\nu}{2L_\text{p}^3} A(s)^2\right]
+\end{equation}
+till Langevinekvationen 
+\begin{equation}\label{eq:wlclangevin}
+    \gamma\pd_tA(s,t) = \kbT\left[-L_\text{p}\pd_s^4A(s,t)+\frac{2\mu}{L_\text{p}}\pd_s^2A(s,t)-\frac{\nu}{L_\text{p}^3}A(s,t) \right]+\sigma\pd_tW(s,t).
+\end{equation}
+
+Den potentiella energin $H_\text{tot} = H + H_f + H_p$ studeras term för term. I analogi med klassisk mekanik där kraften ges av $—\nicefrac{\dd{V}}{\dd{x}}$ för en potentiell energi $V$, studeras hur den potentiella energi \eqref{eq:Htot} ändras vid en variation $\delta A$, alltså $-\frac{\delta H_\text{tot}}{\delta A}$. Vi startar med att studera termen $H_p = H_p(A,s)$ genom att betrakta variationen 
+\begin{equation}
+    \delta H_p = \frac{\pd H_p}{\pd A}\delta A,
+\end{equation}
+där 
+\begin{equation}
+    H_p = \frac{\nu\kbT}{2L_\text{p}^3}\int_0^L\!\dd{s} A(s)^2.
+\end{equation}
+Vilket ger 
+\begin{equation}
+    \delta H_p = \frac{\nu\kbT}{2L_\text{p}^3}\int_0^L\!\dd{s} 2A(s)\delta A.
+\end{equation}
+De övriga termerna beror på första- respektive andraderivatan av $A(s)$ vilket kräver lite mer arbete. Starta därför med $H_f=H_f(\pd_sA,s)$ som innehåller förstaderivatan enligt
+\begin{equation}
+    H_f = \frac{\mu\kbT}{L_\text{p}}\int_0^L\!\dd{s}\left[\pd_s A(s)\right]^2,
+\end{equation}
+eftersom vi inför en variation $\delta A$ i den transversella riktningen kommer inte den tangentiella riktningen förändras vilket motiverar ersättandet av $\pd_s\mathbf{r}$ med $\pd_sA$. Denna term ger på analogt vis 
+\begin{equation}
+    \delta H_f = \frac{\pd H_f}{\pd (\pd_s A)}\delta(\pd_sA),
+\end{equation}
+vilket ger 
+\begin{equation}
+    \label{eq:deltaHf}
+    \delta H_f =  \frac{\mu\kbT}{L_\text{p}}\int_0^L\!\dd{s} 2\pd_sA(s)\delta (\pd_s A).
+\end{equation}
+Då $H_f$ beror av derivatan $\pd_sA(s)$ ses att $\delta H_f$ innehåller variationen av derivatan av $A(s)$ alltså $\delta (\pd_sA)$. För att komma vidare utnyttjas produktregeln som ger följande relation \todo{$\delta \pd = \pd\delta$ Varför?}
+\begin{equation}
+    \pd_s\left[\frac{\pd H_f}{\pd \left(\pd_sA\right)}\delta A\right] = \pd_s\left(\frac{\pd H_f}{\pd \left(\pd_sA\right)}\right)\delta A+\frac{\pd H_f}{\pd \left(\pd_sA\right)}\delta(\pd_sA).
+\end{equation}
+Genom insättning av denna i relation i \eqref{eq:deltaHf} fås 
+\begin{equation}
+    \delta H_f = \frac{\mu\kbT}{L_\text{p}}\int_0^L\!\dd{s} \left[\pd_s\left[\frac{\pd H_f}{\pd \left(\pd_sA\right)}\delta A\right]-\pd_s\left(\frac{\pd H_f}{\pd \left(\pd_sA\right)}\right)\delta A \right].
+\end{equation}
+Den första termen i denna ekvation kan nu integreras och genom att kräva att variationen $\delta A$ är noll vid $s=0$ samt $s=L$ försvinner bidraget från denna termen och slutligen fås 
+\begin{equation}
+    \delta H_f = -\frac{\mu\kbT}{L_\text{p}}\int_0^L\!\dd{s} \pd_s\left(\frac{\pd H_f}{\pd \left(\pd_sA\right)}\right)\delta A.
+\end{equation}
+Denna termen blir nu 
+\begin{equation}
+     \delta H_f = -\frac{\mu\kbT}{L_\text{p}}\int_0^L\!\dd{s} 2\pd_s^2(A)\delta A.
+\end{equation}
+
+För $H$ behöver produktregeln appliceras två gånger, vilket är en följd av att $H = H(\pd_s^2A,s)$ enligt 
+\begin{equation}
+     H = \frac{ L_\text{p}\kbT}{2}\int_0^L\!\dd{s}\left(\pd_s^2A\right)^2,
+\end{equation}
+vilket efter en analog beräkning ger 
+\begin{equation}
+     \delta H = \kbT L_\text{p}\int_0^L\!\dd{s} \pd_s^4A.
+\end{equation}
+
+Slutligen studeras den totala potentiella energin $\delta H_\text{tot} = \delta H + \delta H_p + \delta H_f$ 
+\begin{equation}
+     \delta H_\text{tot} = \kbT\int_0^L\!\dd{s} \left[L_\text{p}\pd_s^4A-\frac{2\mu}{L_\text{p}}\pd_s^2A+\frac{\nu}{L_\text{p}^3}A \right]\delta A. 
+\end{equation}
+Kraften på ett längdelement $\dd{s}$ ges av 
+\begin{equation}\label{eq:F}
+      F = -\frac{\delta H_\text{tot}}{\delta A} = -\kbT\left[L_\text{p}\pd_s^4A-\frac{2\mu}{L_\text{p}}\pd_s^2A+\frac{\nu}{L_\text{p}^3}A \right]\dd{s} .
+\end{equation}
+Givet denna kraft kan Newtons andra lag ställas upp enligt 
+\begin{equation}
+      \rho\dd{s}\pd_t^2A = -\kbT\left[L_\text{p}\pd_s^4A-\frac{2\mu}{L_\text{p}}\pd_s^2A+\frac{\nu}{L_\text{p}^3}A \right]\dd{s},
+\end{equation}
+där $\rho$ är masstätheten per längd. Detta är en deterministisk rörelseekvation och för att kunna beskriva de stokastiska fluktationerna på en mikroskopisk sträng används langevinformalismen. För att få en Langevinekvationen adderas två termer till kraften \cite{Bullerjahn2011,Dhar,VanKampen2007}: en friktionskraft $-\dd{s}\,\rho\gamma'\pd_tA$, där $[\gamma'] = \unit[]{s^{-1}}$ och $\rho$ masstätheten, samt ett vitt brus $\sigma\pd_t W$ med egenskaperna 
+\todo{ev inte faktorn 2 }
+\begin{equation}
+\begin{aligned}
+    \ev{\pd_t W(s,t)} &= 0\\
+    \ev{\sigma^2\pd_t W(s,t)\pd_{t'} W(s',t')} &= 2\gamma \kbT\delta(t-t')\delta(s-s').
+    \end{aligned}
+\end{equation}
+Definiera $\gamma \equiv \rho\gamma'$, sådan att $[\gamma]=\unit[]{kg/sm}$, och dividera med $\dd{s}$ enligt 
+\begin{equation}
+      \rho\pd_t^2A = -\gamma\pd_tA+ \kbT\left[-L_\text{p}\pd_s^4A+\frac{2\mu}{L_\text{p}}\pd_s^2A-\frac{\nu}{L_\text{p}^3}A \right]+\sigma\pd_tW.
+\end{equation}
+För att slutligen nå ekvation \eqref{eq:wlclangevin} antas att tröghetstermen är försumbar, vilket gäller under antagandet att polymeren är placerad i en vätska med hög viskositet \cite{Dhar} -- alltså att Reynoldstalet är lågt. Slutligen fås således Langevinekvationen för WLC-modellen
+\begin{equation}
+    \gamma\pd_tA(s,t) = \kbT\left[-L_\text{p}\pd_s^4A(s,t)+\frac{2\mu}{L_\text{p}}\pd_s^2A(s,t)-\frac{\nu}{L_\text{p}^3}A(s,t) \right]+\sigma\pd_tW(s,t).
+\end{equation}
+
+\subsubsection{Kommentar:}
+Eventuellt byta notation till  $\delta H = H(A+\delta A)-H(A)$, i.e. beräkningar enligt (mer intuitiv?)
+\begin{equation}
+    \delta H_f = \frac{\kbT\mu}{L_\text{p}}\int_0^L\,\id{s}\left[\left[\pd_s \left(A+\delta A\right)\right]^2-\left[\pd_sA\right]^2\right],
+\end{equation}
+
+\begin{equation}
+    \delta H_f = \frac{\kbT\mu}{L_\text{p}}\int_0^L\!\dd{s} \left[\left(\pd_sA\right)^2+\left(\pd_s\delta A\right)^2+2\left(\pd_sA\right)\left(\pd_s\delta A\right)\right]
+\end{equation}
+Om andra ordningens variationer försummas fås
+\begin{equation}
+    \delta H_f = \frac{\kbT\mu}{L_\text{p}}\int_0^L\,\id{s}2(\pd_sA)\pd_sA.
+\end{equation}

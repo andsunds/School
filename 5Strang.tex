@@ -1,12 +1,12 @@
 \chapter{Strängars rörelse i vätskor}
 
 %\subsubsection{Strängrörelser inom cellen}
-Aktinfilament är polymerer som utgör en viktig byggsten för cellens cytoskelett och transportväg för motorprotein vilka formar och bidrar till cellens utseende, dynamik och stadga. För att kunna ge en mer detaljerad beskrivning av dessa egenskaper är studien av enstaka aktinfilaments dynamik av stort intresse. I detta arbete har olika dynamiska egenskaper för aktinfilament studerats, både för filament som fluktuerar fritt i en vätska och filament instängda i en rektangulär kvasi-2D-mikrokanal -- alltså att kanalen har försumbart djup. Mikrokanalen är till för att simulera beteendet hos aktinfilament i cytoskelettet där det omges av andra filament och därmed har en begränsad möjlighet till rörelse.
+Aktinfilament är polymerer som utgör en viktig byggsten för cellens cytoskelett och transportväg för motorprotein vilka formar och bidrar till cellens utseende, dynamik och stadga. För att kunna ge en mer detaljerad beskrivning av dessa egenskaper är studien av enstaka aktinfilaments dynamik av stort intresse. I detta arbete har olika dynamiska egenskaper för aktinfilament i en miljö utanförcellen studerats, både för filament som fluktuerar fritt och filament instängda i en rektangulär kvasi-2D-mikrokanal -- alltså att kanalen har försumbart djup. Mikrokanalen är till för att simulera beteendet hos aktinfilament i cytoskelettet där det omges av andra filament och därmed har en begränsad möjlighet till rörelse; vidare underlättar mikrokanalerna att hålla strängarna i mikroskopets fokalplan.
 
-Det här kapitlet börjar med en översikt över hur mikroskopidatan behandlas för att kunna användas i studien av strängarna. Därefter presenteras och undersöks en modell för fria strängröreler samt en modifikation av modellen som beskriver inneslutna strängar. Till sist beskrivs en undersökning av strängarnas egenmoder.
+Det här kapitlet börjar med en översikt över hur mikroskopidatan behandlas för att kunna användas i studien av strängarna. Därefter presenteras och undersöks en modell för fria strängröreler samt en modifikation av modellen som beskriver inneslutna strängar. Till sist beskrivs en undersökning av strängarnas egenmoder och en dispersionsrelation mellan vågtalet och relaxationstiden presenteras.
 
 \section{Undersökt data}
-Datan som analyseras för strängrörelse i vätska är sammma som Köster et~al.~\cite{Koster_etal2005,Koster_etal2007} använde och består av filmer av aktinfilament som tillåts röra sig i en vätska. Dessa strängar hade en längd kring 10--30\,\micro{m} och befann sig i kanaler av olika bredd. %\todo{Kanaler av olika bredd?Inte helt konsistent med stycket nedan}
+Datan som analyseras för strängrörelse i vätska är samma som Köster et~al.~\cite{Koster_etal2005,Koster_etal2007} använde och, består av filmer av aktinfilament som tillåts röra sig i en vätska. Dessa strängar hade en längd kring 10--30\,\micro{m} och befann sig i kanaler av olika bredd. %\todo{Kanaler av olika bredd?Inte helt konsistent med stycket nedan}
 
 Två typer av strängar studeras: fria strängar i breda kanaler och inneslutna strängar i en kvasi-2D-mikrokanal. Upplösning på filmerna är 10 bilder per sekund. Rörelsen utfördes till största del i två dimensioner då kanalernas djup var litet i förhållande till kanalernas och filamentens bredd.
 
@@ -27,7 +27,7 @@ För att kunna arbeta effektivt med strängarna behövs dock någon form av anpa
 
 För att kunna göra en anpassning behövs först och främst en parameter som kan användas för att anpassa mot. 
 Strängens position i varje tidsögonblick parametriserades med en normerad båglängdsparametern $s\in[0,1]$. Alltså att $s$ svarar mot hur stor andel av strängens längd som ligger bakom punkten svarande mot det $s$-värdet. 
-För att i MATLAB bilda båglängsdparametern sorterades först punkterna i en ordnad följd längs med strängen. Efter detta uppskattades hur långt längs med strängen varje pixel på strängen låg. Detta gjordes genom att ackumulera längderna på de förbindande linjerna mellan varje pixel. På så sätt erhålls ett $s$-värde för varje pixel och nu kan en anpassnings göras av pixlarnas $x$- och $y$-koordinaterna mot $s$.
+För att i MATLAB bilda båglängsdparametern sorterades först punkterna i en ordnad följd längs med strängen. Efter detta uppskattades hur långt längs med strängen varje pixel låg genom att ackumulera längderna på de förbindande linjerna mellan varje dem. På så sätt erhålls ett $s$-värde för varje pixel och nu kan en anpassnings göras av pixlarnas $x$- och $y$-koordinaterna mot $s$.
 
 I den här studien valde vi att anpassa positionerna i varje tidpunkt med ett polynom av grad $20$ för vardera $x_t$ och $y_t$ enligt
 \begin{equation}\label{eq:anpassning}
@@ -35,15 +35,16 @@ x_t(s) = \sum_{n=0}^{20} a_n^{(t)} \,s^n,
 \end{equation}
 där koefficienterna $a_n^{(t)}$ anpassades med hjälp av MATLABs \texttt{polyfit}-funktion till varje pixels position och $s$-värde. På samma sätt kunde även ett polynom för $y$ anpassas. Att det skulle krävas ett 20-gradspolynom för att följa strängen syns inte i \figref{fig:strang_anpassning} på grund av att figuren bara visar en mycket liten del av strängen. Graden behövde dock vara så hög för att de anpassade polynomen skulle kunna följa strängen bra längs med hela strängens längd. 
 
-Sedan får inte graden väljas mycket högre än cirka 20 för att inte få med andra artefakter från polynomanpassning såsom en variant av Runges fenomen\cite{Gustafsson_LaNa}. Alltså att polynomet börja svänga kraftigt för att exakt gå igenom alla punkter som det ska anpassas till. Detta är i regel ett problem för interpolationer och inte anpassningar, men om gradtalet väljs ungefär lika stort som antalet punkter som ska anpassas så tenderar anpassningen att bli som en interpolation.
+Sedan får inte graden väljas mycket högre än cirka 20 för att inte få med andra artefakter från polynomanpassning, som exempelvis en variant av Runges fenomen\cite{Gustafsson_LaNa}. Alltså att polynomet börja svänga kraftigt för att exakt gå igenom alla punkter som det ska anpassas till. Detta är i regel ett problem för interpolationer och inte anpassningar, men om gradtalet väljs ungefär lika stort som antalet punkter som ska anpassas så tenderar anpassningen att bli som en interpolation.
 
 
 \subsubsection{Alternativa metoder för att anpassa en kurva till strängdata}
 
 \figref{fig:strang_anpassning} visar också en kubisk splineinterpolation som också är ett sätt som använts för att anpassa en kurva till strängen~\cite{Koster_etal2005,Koster_etal2007}. Dock anser vi att beteendet som splineinterpolationen uppvisar i \figref{fig:strang_anpassning} inte speglar den verkliga strängens form. Det är inte särskilt troligt att den verkliga strängen helt skulle följa varje pixel, utan det är mer rimligt att den verkliga strängen följer en sorts medelposition av pixlarna. 
 
-En sak som ytterligare talar för att splineinterpolation inte är en optimal anpassningsmetod är svängningarna\footnotemark{} som syns i \figref{fig:strang_anpassning} mellan pixlarna. Dessa svängningar är över längdskalor som är mindre än mikroskopets upplösning. Det är alltså inte motiverat att använda sig av en metod som ger information som inte går att observera. 
-\footnotetext{Dessa svängningar är dock inte ett exempel på Runges fenomen. Eftersom en kubisk spline är flera olika tredjegradspolynom fås inte beteendet från ett höggradit polynom\cite{Gustafsson_LaNa}. }
+En sak som ytterligare talar för att splineinterpolation inte är en optimal anpassningsmetod är svängningarna %\footnotemark{} 
+som syns i \figref{fig:strang_anpassning} mellan pixlarna. Dessa svängningar är över längdskalor som är mindre än mikroskopets upplösning. Det är alltså inte motiverat att använda sig av en metod som ger information som inte går att observera. 
+%\footnotetext{Dessa svängningar är dock inte ett exempel på Runges fenomen. Eftersom en kubisk spline är flera olika tredjegradspolynom fås inte beteendet från ett höggradigt polynom\cite{Gustafsson_LaNa}. }
 
 
 \subsection{Mäta avstånd från jämviktsläge}
@@ -58,7 +59,7 @@ En sak som ytterligare talar för att splineinterpolation inte är en optimal an
 \label{fig:transv_avst}
 \end{figure}
 
-I denna rapport har strängens translationsrörelse till stor del försummats genom att i varje tidpunkt placerat strängens masscentrum i origo. Givet detta är det intressant att studera huruvida strängarna fluktuerar kring något jämviktsläge. En uppskattning av jämviktsläget $\mathbf{r}_0(s)$ tas fram genom att beräkna medelvärdeskurvan som representerar strängrörelsen. 
+Strängens translationsrörelse har till stor del försummats genom att i varje tidpunkt placerat strängens masscentrum i origo. Givet detta är det intressant att studera huruvida strängarna fluktuerar kring något jämviktsläge. En uppskattning av jämviktsläget $\mathbf{r}_0(s)$ tas fram genom att beräkna medelvärdeskurvan som representerar strängrörelsen. 
 
 Från detta jämviktsläge har det transversella avståndet beräknats enligt 
 \begin{equation}
@@ -76,85 +77,89 @@ illustreras i \figref{fig:transv_avst}.
 
 \section{Modeller för strängrörelser}
 
-Aktinfilamenten precis som tidigare studerade partiklar påverkas av diffusionsprocessen inuti celler och således krävs stokastiska modeller för att beskriva rörelsen. En vanligt använd modell inom polymerfysiken är Worm Like Chain-modellen som beskrivs nedan. Vidare studeras en annan, fenomenologisk modell baserad på en langevinekvation. 
+Aktinfilament, precis som tidigare studerade partiklar, påverkas av diffusionsprocesser inuti celler. Således krävs stokastiska modeller för att beskriva rörelsen. En vanligt använd modell inom polymerfysiken är Worm Like Chain-modellen som beskrivs nedan. Vidare studeras en annan, fenomenologisk modell baserad på en Langevinekvation. 
 
 
 
-\subsection{Worm Like Chain-model}
+\subsection{Worm Like Chain-model}\label{WLCmodel}
 
-Worm like chain modellen \cite{Milstein2013} (WLC) är en modell som ämnar beskriva fluktuationerna hos en semi-flexibel polymer. I modellen antas att polymeren är helt oelastisk, enbart påverkas av termiskt brus och styv på små längdskalor. Om polymeren fluktuerar fritt %utan att vara instängd i en mikrokanal 
+Worm like chain-modellen \cite{Milstein2013} (WLC) är en modell som ämnar beskriva fluktuationerna i en semiflexibel polymer. I modellen antas att polymeren är helt oelastisk, enbart påverkas av termiskt brus och är styv på små längdskalor. 
+
+Om polymeren fluktuerar fritt %utan att vara instängd i en mikrokanal 
 ges en minimalistisk WLC beskrivning av att filamentets fluktuationer regleras av böjningsenergin. För en polymer med $N$ segment vardera med riktning \textbf{r}$_i$ och längd $\abs{r_{i}}=l$ samt polymerens böjstyvhet $\kappa$ ges böjningsenergin av
 \begin{equation}
     H = -\kappa\sum_{i=1}^{N}\textbf{r}_{i}\cdot \textbf{r}_{i+1}.
 \end{equation}
 Maximalt bidrag till energin från två på varandra följande segment fås alltså om dessa har antiparallell riktning. Givet identiteten $\textbf{r}_{i}\cdot\textbf{r}_{i+1}=(2l^2-(\textbf{r}_{i+1}-\textbf{r}_{i})^2)/2$ kan summan skrivas om som en integral i gränsen då $N \to \infty$, $\kappa\to\infty$, $l \to 0$ men där produkten $\kappa l=\xi$ är finit som 
 \begin{equation}\label{böj}
-    H=\frac{\xi}{2}\int_{0}^{L}\!\dd{s}\,(\partial_{s}\textbf{t}(s))^2,
+    \frac{H}{k_{B}T}H=\frac{L_\text{p}}{2}\int_{0}^{L}\!\dd{s}\,(\partial_{s}\textbf{t}(s))^2,
 \end{equation}
-där $\textbf{t}(s)$ är enhetstangentvektorn längs polymeren parametriserad med båglängden. Detta är den kontinuerliga WLC modellen \cite{Fixman_WLC1973} vilket ger en bra approximation av en polymer där längden av enskilda molekyler kan försummas. Korrelationen mellan två tangentvektorer medelvärdsbildat över tid ges av \cite{Landau1958}:
-\begin{equation}
-\ev{\textbf{t}(s)\textbf{t}(s+\Delta s)}=\ee^{-\frac{\abs{\Delta s}}{2L_{p}}},
-\end{equation}
-där $L_{p}=\frac{\xi}{k_{B}T}$ är kvoten mellan styvheten hos polymeren och termiska energin hos fluiden. Denna kallas \emph{persistence length} och ger ett mått på hur snabbt tangentkorrelationen avtar längs polymeren. I fallet då $\nicefrac{L_{p}}{L}>1$ sägs polymeren vara styv. 
-För att öka noggrannheten kan även ett rumsligt medelvärde tas över tangentkorrelationerna, låt denna betecknas med ett heldraget streck. Tangentkorrelationen beror då inte längre av var på strängen korrelationen tas utan bara på avståndet mellan tangentvektorerna, $\Delta s$, och defineras som
-\begin{equation}
-\label{tangkorr}
-    \ev{\cos\theta(\Delta s)}\equiv\overline{\ev{\mathbf{t}(s)\mathbf{t}(s+\Delta s)}}.
-\end{equation}
-Denna minimalistiska WLC modell förutspår alltså tangentkorrelationens utseende utifrån antagandet att strängen tillåts fluktuera fritt.
-
-
-
-\subsubsection{Resultat -- mikrokanalen påverkar strängens tangentkorrelation}
-
-
-
-För att undersöka hurvida mikrokanalen påverkar strängen beräknas tangentkorrelation enligt \eqref{tangkorr} för både ''fria'' samt inneslutna strängar. \todo[color=olive]{fixa figur på tangentkorrelation för sträng 1 samt 3.}I figur .. ses tangentkorrelationer för de olika proverna plottade med anpassade potensamband i $\Delta s$. Det ses att en sträng påverkas av en mindre mikrokanal då dess tangentkorrelation upplevs mer ihärdig. Persistence length fås för strängarna som \todo[color=olive]{kontrollera dessa}.. respektive .. . Eftersom strängarna i de olika proverna är snarlika aktinfilament, vars enda signifikanta skillnad är båglängd, tolkas skillnaden i persistence length som ett mått på hur en strängs möjlighet att fluktuera begränsas av mikrokanalen. 
-
+där $\textbf{t}(s)$ är enhetstangentvektorn längs polymeren parametriserad med båglängden och $L_\text{p}=\frac{\kappa l}{k_{B}T}$ kallas  \emph{persistence length}. $L_\text{p}$ definerar mått på strängens flexibilitet och fås som kvoten mellan polymerens böjstyvhet och termiska energin hos fluiden. Detta är den kontinuerliga WLC modellen \cite{Fixman_WLC1973} vilket ger en bra approximation av en polymer där längden av enskilda molekyler kan försummas. 
 
 
 \subsection{WLC-modell för sträng i mikrokanal}
 \label{WLCkanal}
 
 
-En mer sofistikerad modell kan konstrueras med avseende på mikrokanalens egenskaper och dess dynamik. Då interaktionen mellan strängen och kanalens väggar beskrivs som rent sterisk \cite{Koster_etal2007} kan denna approximeras med en parabolisk potential. Inför därför kraften $F \propto A(s)$ där $A(s)$ svarar mot strängens vinkelräta avstånd från centrum av kanalen. Potentiella energi med avseende på dessa avvikelser fås som
-\begin{equation}
-    H_{pot}=\int_{0}^{L} \!\dd{s} \, [\gamma A(s)^2],
+En mer sofistikerad modell kan konstrueras med avseende på mikrokanalens egenskaper och dess dynamik. Då interaktionen mellan strängen och kanalens väggar beskrivs som rent sterisk \cite{Koster_etal2007}, alltså att det finns en mjuk potential, kan denna approximeras med en parabolisk potential. Inför därför kraften $F \propto A(s)$ där $A(s)$ svarar mot strängens vinkelräta avstånd från centrum av kanalen. För att dessa vinkelräta avstånd skall vara begränsade av mikrokanalen införs tidsmedelvärdet
+\begin{equation}\label{jäm1}
+\ev{\frac{1}{L}\int_{0}^{L}\dd{s} \, A(s)^{2}}=R^2,
 \end{equation}
-där $\gamma$ är en positiv konstant vilket avger styrkan hos potentialen. 
+där $R$ är mikrokanalens radie. Potentiella energin med avseende på de vinkelräta fluktuationerna blir då \cite{Harnau&Reineker1999}
+\begin{equation}
+    \frac{H_{p}}{k_{B}T}=\frac{\nu}{2L_\text{p}^3}\int_{0}^{L} \!\dd{s} \, A(s)^2,
+\end{equation}
+där $\nu$ är en dimensionslös Lagrangemultiplikator \cite{Harnau&Reineker1999}.
 
-Då tangentvektorn till strängen kan defineras som $\mathbf{t}(s)=\partial_sA(s)$, adderas denna energi till den tidigare härledda hamiltonianen enligt
+Låt nu $r(s)$ beteckna strängens position längs båglängdsparametern $s$. Tidigare, i avsnitt~\ref{WLCmodel}, antogs det även att polymeren var helt oelastisk, vilket är ekvivalent med att $\abs{\partial_{s}r(s)}^2\equiv1$, dock försvårar det beräkningen av strängens jämviktstillstånd. Betrakta därför istället \cite{Harnau&Reineker1999}
+\begin{equation}\label{jäm2}
+\ev{\frac{1}{L}\int_{0}^{L}\dd s[\partial_{s}r(s)]^2}=1,
+\end{equation}
+vars tolkning att strängens totala längd hålls konstant men avståndet mellan två efterföljande punkter på strängen kan variera. Fysikaliskt kan det liknas med en fjäderkraft längs hela strängen. Inför därför den potentiella energin med avseende på denna kraft som
+\begin{equation}
+\frac{H_{f}}{k_{B}T}=\frac{\mu}{L_\text{p}}\int_{0}^{L}\dd s\,[\partial_{s}r(s)]^{2},
+\end{equation}
+där $\mu$ är ytterliggare en dimensionslös Lagrangemultiplikator.
 
+Strängens totala potentiella energi fås genom att summera de individuella bidragen från mikrokanalens potential samt strängens böjstyvheten och fjäderkraft. Eftersom tangentvektorn till strängen kan defineras som $\mathbf{t}(s)=\partial_{s}r(s)$ fås att
 \begin{equation}
 \label{Htot}
-    H_{tot}=\int_{0}^{L}\!\dd{s}\,[\xi\partial_{s}^{2}A(s)^2 + \gamma A(s)^2],
+    \frac{H_\text{tot}}{k_{\text{B}}T}=\int_{0}^{L}\!\dd{s}\,\left[\frac{\mu}{L_\text{p}}(\partial_{s}r(s))^{2}+\frac{L_\text{p}}{2}(\partial_{s}^{2}A(s))^2 + \frac{\nu}{2L_\text{p}^3} A(s)^2\right],
 \end{equation}
-där första termen i integranden svarar mot energin enligt den tidigare modellen \eqref{böj}.
+där andra termen i integranden svarar mot energin enligt den tidigare modellen \eqref{böj} nu betraktad med avseende på vinkelräta avståndet $A(s)$.
 
-Hamiltonianen ger nu en modell av den kraft vilket kan tänkas verka på en sträng i en mikrokanal. Det ses att potentiella energin för strängen minimeras i fallet då denna är rak och fixerad längs kanalens centrum. Alltså återställer kraften eventuella avvikelser från jämviktsläget. Då avvikelserna uppstår på grund av termiska fluktuationer, vilka antas vara stokastiska, kan som tidigare i avsnitt~\ref{sec:brown} systemet betraktas med en langevinekvation. Då strängens intrinsiska tröghet, svarandes mot högre ordningens tidsderivata, försummas fås\cite{PhysRevE.60.4671}
-\todo{jobba på övergången}
+I bilaga~\ref{A5} ses hur strängens jämviktsläge kan studeras genom att studera hur potentiella energin påverkas av små förflyttningar $\delta A$. Därur erhålls en modell av den återställande kraft vilket är i jämvikt med fluidens termiska fluktuationer. Då de termiska fluktuationerna kan betraktas med en stokastisk brusterm kan likt avsnitt~\ref{sec:brown} jämvikten studeras med en Langevinekvation \cite{Bullerjahn2011}
+\begin{equation}\label{mikrokanel}
+\zeta\partial_{t}A=-\frac{\delta H_\text{tot}}{\delta A}+\sigma\partial_{t}W,
+\end{equation}
+där $\gamma$ är en friktionskoefficient per längdenhet av strängen och W(t,s) ett vitt brus. 
+Här ger $\frac{\delta H_\text{tot}}{\delta A}$ en återställande kraft för en liten fluktuation, vilket i \eqref{eq:F} fås som 
+\begin{equation}
+F=-\frac{\delta H_\text{tot}}{\delta A} = \kbT\left[-L_\text{p}\pd_s^4A+\frac{2\mu}{L_\text{p}}\pd_s^2A-\frac{\nu}{L_\text{p}^3}A \right]\dd{s} .
+\end{equation}
 
+
+\subsubsection{(månsmodell)}
+
+Med inspiration från modellen tidigare härledd utifrån strängens potentiella energi kan en alternativ modell konstrueras. Likt tidigare approximeras mikrokanalens begränsande egenskaper med en parabolisk potential, inför därför en kraftterm proportionell mot strängens vinkelräta avstånd från centrum av kanalen. Dess styrka sätts att vara proportionell mot parametern $\gamma$. Strängen antas likt \eqref{böj} även lagra potentiell energi då denna böjs och därmed ha jämviktsläge likt en stavformation. Intruducera därför en kraftterm kopplad till strängens krökning vars styrka styrs av parametern $\alpha$. I fallet då strängens intrinsiska tröghet, svarandes mot högre ordningens tidsderivata, försummas fås
+\todo{okej intro?}
+\todo[color=olive]{i detta kapitel skall $\xi$ skrivas om till $\alpha$. :)}
 \begin{equation}
 \label{mans}
-    \partial_{t}A(t,s)=-\gamma A(t,s)+\xi \partial_{s}^{2}A(t,s)+\sigma \partial_{t}W(t,s).
+    \partial_{t}A(t,s)=-\gamma A(t,s)+\alpha \partial_{s}^{2}A(t,s)+\sigma \partial_{t}W(t,s).
 \end{equation}
-Fluktuationerna approximeras med termen $W(t,s)$, ett stokastiskt vitt brus vars intensitet är proportionellt mot reella talet $\sigma>0$. Notera hur langevinekvationen även beskriver tidsutveckling av systemet.
+Fluktuationerna approximeras här igen med termen $\partial_{t}W(t,s)$, ett stokastiskt vitt brus. De modellerande konstanterna antas alla vara positiva.
 
-\todo{eget kapitel? ev. flytta ner beräkningarna i apendix}
+% För att lösa denna stokasktiska PDE introduceras följande fouriertransform 
+% \begin{equation}
+%     \hat{A}(t,k)=\int_{-\infty}^{\infty}\!\dd{s}\, A(t,s)\ee^{-\ii sk}
+% \end{equation}
 
-Definera fouriertransformation som 
-\begin{equation}
-    \hat{A}(t,k)=\int_{-\infty}^{\infty}\!\dd{s}\, A(t,s)\ee^{-\ii sk}
-\end{equation}
 Genom fouriertransformation av \eqref{mans} fås en ordinär stokastisk differentialekvation av första ordningen
 \begin{equation}
         \partial_{t}\hat{A}(t,k)=-\left(\gamma+\xi k^2\right)\hat{A}(t,k)+\sigma \partial_{t}\hat{W}(t,k).
 \end{equation}
-I fallet då $\gamma+\xi k^2=\zeta$ ses det att denna ekvation är ekvivalent med \eqref{eq:Brownian_SDE} vars lösning är känd. Vidare kan kovariansen formuleras likt \eqref{Brownian_korr} det fås att
-%\begin{equation}
-%        \hat{A}(t,s)=\ee^{-(\gamma+\alpha s^2)t}\left(\hat{A}(0,s)+\sigma\int_{0}^{t}\dd\tau \ee^{(\gamma+\alpha s^2)\tau}\partial_{t}\hat{W}(\tau,z)\right)
-%\end{equation}
-%Tvåpunktskorrelationen för den fouriertransformerade stokastiska variabeln $\hat{A}(t,s)$ kan då beräknas till
+I fallet då $\gamma+\xi k^2=\zeta$ ses det att denna ekvation är ekvivalent med \eqref{eq:Brownian_SDE} vars lösning är känd. Vidare kan kovariansen formuleras likt \eqref{Brownian_korr}. Då fås att
 \begin{equation}\label{jobbig}
 \begin{aligned}
     \ev{\hat{A}(t,k)\hat{A}(t',k')} =& \ev{\hat{A}(0,k)\hat{A}(0,k')} \ee^{-(\gamma+\xi k^2)(t+t')}\\ 
@@ -165,129 +170,163 @@ Integralen i \eqref{jobbig} beror på vitt brus i fourierrummet $\hat{W}(t,k)$. 
 \begin{equation}
     \ev{\partial_{t}\hat{W}(t,k)\partial_{t}\hat{W}(t',k')}=\delta(t-t')\delta(k+k').
 \end{equation}
-Insättning av detta resultat i \eqref{jobbig} samtidigt som ekvationen betraktas i gränsen då $t,t'\rightarrow\infty$ medan $\Delta t=\abs{t-t'}$ hålls finit erhålls
-%\begin{equation}\label{jobbig}
-%     \ev{\hat{A}(t,s)\hat{A}(t',s')}=\sigma^2\int_{0}^{t}\int_{0}^{t'}\dd\tau\dd\tau'\ee^{(\gamma+\alpha s^2)(\tau+\tau')}\ev{\partial_{t}\hat{W}(\tau,s)\partial_{t}\hat{W}(\tau',s')}.
-%\end{equation}
 
-%Då termiska bruset antas vara brownskt definieras det av följande tvåpunktskorrelation
-%\begin{equation}\label{brus}
-%    \ev{\partial_{t}W(t,z)\partial_{t}W(t',z')}=\delta(t- t')\delta(z-z')
-%\end{equation}
-%Fouriertransformation av \eqref{brus} ger \todo{ekvation 4.13+4.14 kanske kan skippas om man vill minska antal ekvationer.}
-%\begin{equation}
-%    \ev{\partial_{t}\hat{W}(t,s)\partial_{t}\hat{W}(t',s')}=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\dd z \dd z'\ev{\partial_{t}W(t,z)\partial_{t}W(t',z')}\ee^{-izs}\ee^{-iz's'}
-%\end{equation}
-%\begin{equation}\label{fourbrus}
-%    \ev{\partial_{t}\hat{W}(t,s)\partial_{t}\hat{W}(t',s')}=\delta(t-t')\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}\dd z \dd z'\delta(z-z')\ee^{-i(sz+s'z')}=\delta(t-t')\delta(s+s')
-%\end{equation}
+Insättning av detta resultat i \eqref{jobbig} samtidigt som ekvationen betraktas i gränsen då $t, t'\rightarrow\infty$ medan $\Delta t=\abs{t-t'}$ hålls finit ger
 \begin{equation}
     \ev{\hat{A}(t,k)\hat{A}(t',k')}=\frac{\sigma^2}{2(\gamma+\xi k^2)}\delta(k+k')\ee^{(\gamma+\xi k^2)\abs{t-t'}}.
 \end{equation}
-Slutligen återfås kovariansen för de rumsliga variblerna $s$,$s'$ genom invers fouriertransform
+Slutligen återfås kovariansen för de rumsliga variblerna $s$ och $s'$ genom invers fouriertransform
 \begin{equation}
 \label{2korr}
     \ev{A(t,s)A(t',s')}=\frac{\sigma^2}{(2\pi)^2\sqrt{\gamma\xi}}\int_{-\infty}^{\infty}\!\dd{p} \frac{\exp[-(1+p^2)\gamma \abs{t-t'}+\ii p\sqrt{\frac{\gamma}{\xi}}(s-s')]}{1+p^2},
 \end{equation}
-där variabeln $p$ är en hjälpvariabel definerad som $\frac{dp}{dk}=\sqrt{\frac{\xi}{\gamma}}$. 
+där variabeln $p$ är en hjälpvariabel $\nicefrac{\dd{p}}{\dd{k}}=\sqrt{\frac{\xi}{\gamma}}$. 
 
-Då kovariansen beror på differensen mellan variablerna $\Delta t=t-t'$ samt $\Delta s=s-s'$ är denna translationsinvariant. Det kan visas då för en godtycklig förflyttning i tiden $\delta{t}$ fås att $\ev{A(t,s)A(t',s')}=\ev{A(t+\delta t,s)A(t'+\delta t,s')}$. Därmed kan tvåpunktkorrelationen defineras som
+Då kovariansen beror på differensen mellan variablerna $\Delta t=t-t'$ samt $\Delta s=s-s'$ är denna translationsinvariant. Det kan visas då för en godtycklig förflyttning i tiden $\delta{t}$ fås att $\ev{A(t,s)A(t',s')}=\ev{A(t+\delta t,s)A(t'+\delta t,s')}$. Därmed kan tvåpunktkorrelationen för \eqref{mans} defineras som
 \begin{equation}
-    c(\Delta t,\Delta s)=\frac{\ev{A(\Delta t,\Delta s)A(0,0)}}{\ev{A(0,0)^2}}.
+    \kappa (\Delta t,\Delta s)=\frac{\ev{A(\Delta t,\Delta s)A(0,0)}}{\ev{A(0,0)^2}}.
 \end{equation}
-Tolkningen av tvåpunktskorrelationen är att ge mått på hur snabbt avvikelser från strängens jämviktsläge skingras med tid samt avstånd på strängen. Givet data från strängar i mikrokanaler kan tvåpunktskorrelationen beräknas numeriskt och de fysikaliska parametrarna $\xi,\gamma,\sigma$ kan bestämmas. 
 
+
+
+
+
+
+
+\section{Tangentkorrelation}
+
+
+Korrelationen mellan två tangentvektorer beräknade från den minimalistiska WLC-modellen fås genom att studera \eqref{böj}, medelvärdsbildad över tid ges denna av \cite{Landau1958}
+\begin{equation}
+\ev{\textbf{t}(s)\textbf{t}(s+\Delta s)}=\ee^{-\frac{\abs{\Delta s}}{2L_\text{p}}},
+\end{equation}
+där $L_\text{p}$ är \emph{persistence length} och ger ett mått på hur snabbt tangentkorrelationen avtar längs polymeren. I fallet då $\nicefrac{L_\text{p}}{L}>1$ sägs polymeren vara styv. 
+För att öka noggrannheten kan även ett rumsligt medelvärde tas över tangentkorrelationerna, låt denna betecknas med ett heldraget streck. Tangentkorrelationen beror då inte längre av var på strängen korrelationen tas utan bara på avståndet mellan tangentvektorerna, $\Delta s$, och defineras som
+\begin{equation}
+\label{tangkorr}
+    \ev{\cos\theta(\Delta s)}\equiv\overline{\ev{\mathbf{t}(s)\mathbf{t}(s+\Delta s)}}.
+\end{equation}
+Denna minimalistiska WLC modell förutspår alltså tangentkorrelationens utseende utifrån antagandet att strängen tillåts fluktuera fritt.
+
+
+\subsection{Resultat -- mikrokanalen påverkar observerad persistence length}
+
+För att undersöka hurvida mikrokanalen påverkar strängen beräknas tangentkorrelation enligt \eqref{tangkorr} för fria samt inneslutna strängar. \todo[color=olive]{fixa figur på tangentkorrelation för sträng 1 samt 3.}I figur .. ses tangentkorrelationer för de olika proverna plottade med anpassade potenssamband. Persistence length fås för fria strängarna som $L_\text{p} = \unit[22.26]{\micro m}$ och $L_\text{p} = \unit[48.63]{\micro m}$ för de begränsade strängarna. Eftersom strängarna i de olika proverna är snarlika aktinfilament, vars enda signifikanta skillnad är dess båglängd\todo{skillnad är total längd?}, reflekterar skillnaden i persistence length mikrokanalens påverkan på strängen. Då persistent length ger mått på strängens böjstyvhet och en sträng i en smal mikrokanal begränsas till att fluktuerar längs kanalens mitten förklarar det varför denna fås större.
+
+\eqref{tangkorr} förutsäger även att en sträng går mot att bli okorrelerad för stora avstånd ($\cos\theta(\Delta s) \to 0 \text{ då } \Delta s \to \infty$). Det ses dock att tangentkorrelation för en sträng i en mindre mikrokanal inte avtar exponentiellt utan fås ihärdig; den går snabbt ett lokalt minimum och sedan asymptotiskt gå mot ett konstant värde. Strängen korrelerar alltså bra för avstånd mycket längre än persistent length för aktinfilament. Det kan tänkas förklaras med att en sträng i en mikrokanal kolliderar mot dess väggar och byter riktning och därmed återkorrelerar till punkter långt bort på strängen. 
+
+Modeller för att förklara detta beteende introducerar parametern \emph{deflection length} $\lambda$ vilket likt $L_\text{p}$ defineras som kvoten mellan böjningsenergin och den paraboliska potentialen. Det fås att \cite{Koster_etal2007}
+\begin{equation}
+\ev{\cos\theta(\Delta s)}=1-\ev{\partial_{s}z(s)^2}=1-\frac{\lambda}{4L_\text{p}},
+\end{equation}
+vilket i överensstämmelse med \ref{fig:tangentkorrfil2} ger att tangentkorrelationen för en sträng i en mikrokanal asymptotiskt konvergerar mot ett konstant värde
+
+
+\begin{figure}
+    \centering
+    \input{bilder/strangar/tangentkorr.tex}
+    \caption{Tangentkorrelation för en fri sträng (a) och instängd sträng (b) visas. Ett exponentialsamband anpassas med en karakteristisk längd, \emph{persistence length}, som för den fria strängen är $L_\text{p} = \unit[48.63]{\micro m}$.}
+    \label{fig:tangentkorr}
+\end{figure}
+
+\subsection{Resultat -- (tvåpunktskorrelation)}
+\todo[inline]{ev skippa tvåpunktskorrelation?}
+
+
+Fysikaliska tolkningen av en tvåpunktskorrelationsfunktion är att ge mått på hur snabbt avvikelser från strängens jämviktsläge skingras med tid samt avstånd på strängen. Korrelationen beräknas numeriskt från strängdatan, vilket betraktats i ett godtyckligt antal ekvidistanta diskreta punkter längs strängen, $\Delta s$ är avståndet mellan två efterföljande punkter. Tvåpunktskorrelationen beräknas för data som en normerad kovariansmatris enligt \todo[color=olive]{referera till eq från stoc. kap}. Temporala korrelationen fås genom att studera strängens utveckling i bildspelet, där $\Delta t$ svarar mot tidsintervallet mellan två följande bilder. Kovariansmatrisen härleddes även teoretiskt för strängar begränsade av mikrokanaler \eqref{2korr}. Den teoretiska korrelationen  beräknas för samma temporala samt rumsliga förskjutningar $\Delta s, \Delta t$ som i strängdatan fås den att helt bestämmas av parametrarna $\gamma,\xi,\sigma$. Genom att matcha dessa olika kovariansmatriser erhålls ett mycket överbestämt ekvationssystem ur vilket dessa parametrar kan bestämmas.
+\todo{fixa 3D-plots på dessa och förklara deras utseende} \\ \\
 Tvåpunktskorrelationen kan även betraktas i två specialfall; då $\Delta t=0$, vilket likt den minimalisktiska WLC modellen svarar mot korrelation längs strängen, samt då $\Delta s=0$, vilket ger temporal korrelation. För båda fallen kan \eqref{2korr} lösas analytiskt, korrelationen längs strängen ges av
-\begin{equation}
-\ev{A(s)A(s')}=\exp(-\sqrt{\frac{\gamma}{\xi}}\abs{\Delta s}).
+\begin{equation}\label{eq:tangentkorr}
+\ev{A(s)A(s')}=\exp(-\sqrt{\frac{\gamma}{\xi}}\abs{\Delta s}),
 \end{equation}
-Motsvarande ''persistence length'' för en sträng i en mikrokanal fås då som $L_{p}=\sqrt{\frac{\xi}{\gamma}}$.
+vilket är samma som tangentkorrelationen \eqref{tangkorr} för minimalistiska WLC-modellen. Motsvarigheten till $L_{\text{p}}$ för en sträng i en mikrokanal som $L_\text{p}=\sqrt{\frac{\xi}{\gamma}}$.
 Temporala korrelationen ges av
 \begin{equation}
-    \ev{A(t)A(t')}=erfc(\sqrt{\Delta t}),
+    \ev{A(t)A(t')}=\mathrm{erfc}(\sqrt{\gamma\abs{\Delta t}}),
 \end{equation}
-där $erfc(.)$ är \emph{complementary error function} definerad som $erfc(x)=\frac{2}{\sqrt{\pi}}\int_{x}^{\infty}\ee^{-y^2}\dd y$.
+där $\mathrm{erfc}(.)$ är \emph{complementary error function} definerad som $\mathrm{erfc}(x)=\frac{2}{\sqrt{\pi}}\int_{x}^{\infty}\ee^{-y^2}\dd y$.
+
+I figur \todo[color=olive]{figur på 2-korr för confined strängar}.. ses ytor svarandes mot tvåpunktskorrelationerna, där den teoretiska modellen anpassats med avseende på parametrarna $\gamma,\xi,\sigma$ för att matcha numeriska korrelationen. 
 
 
-\subsubsection{Resultat -- ''tvåpunktskorrelation''}
 
-
-
-\subsection{Egenmoder}
-\todo{namn?}
-
+\section{Egenmoder -- Cosinustransform}
 Ett vanligt sätt att studera svängningar är att dela upp dem i egenmoder. Genom en linjärkombination av dessa egenmoder kan en godtycklig svängning representeras. Anledningen till att det är intressant att studera egenmoder är på grund av att de är oberoende av varandra. Precis som svängningen på en gitarrsträng kan strängens svängningar i cellen eventuellt representeras som en linjärkombination av dess egenmoder. 
-\todo[color=olive]{flyttade runt ett par stycken, se till att övergången här är bra }
-Återigen betrakta \eqref{mans}, då denna modell beskriver strängens svängningar kan det tänkas att dess lösningar kan uttryckas i en sådan linjärkombination. Alltså att positionsvektorn kan utvecklas i en bas av egenmoder
+Återigen betrakta \eqref{mikrokanel}, då denna modell beskriver strängens svängningar kan det tänkas att dess lösningar kan uttryckas i en sådan linjärkombination. Alltså att positionsvektorn kan utvecklas i en bas av egenmoder
 \begin{equation}
+\label{basutv}
     A(t,s)=\sum_{n=1}^{\infty}a_{n}(t)\psi_{n}(s),
 \end{equation}
-där $a_{n}(t)$ är egenvärdet till respektive egenmod $\psi_{n}(s)$. Värdet på $a_{n}(t)$ svarar mot egenmodens amplitud vilket ansätts vara tidsberoende. Insättning i \eqref{mans} ger följande differentialekvation
+där $a_{n}(t)$ är egenvärdet till respektive egenmod $\psi_{n}(s)$. Värdet på $a_{n}(t)$ svarar mot egenmodens amplitud vilket ansätts vara tidsberoende. Insättning i \eqref{mikrokanel} ger följande differentialekvation
 \begin{equation}\label{egenvard}
-    \sum_{n=1}^{\infty}\partial_{t}a_{n}(t)\psi_{n}(s)=\sum_{n=1}^{\infty}a_{n}(t)[\xi\partial_{s}^{2}-\gamma]\psi_{n}(s)+\sigma\partial_{t}W(t,s).
+    \gamma\sum_{n=1}^{\infty}\partial_{t}a_{n}(t)\psi_{n}(s)=\kbT\sum_{n=1}^{\infty}a_{n}(t)\left[-L_{\text{p}}\partial_{s}^{4}+\frac{2\mu}{L_{\text{p}}}\partial_{s}^{2}-\frac{\nu}{L_{\text{p}}^{3}}\right]\psi_{n}(s)+\sigma\partial_{t}W(t,s).
 \end{equation}
 Summanden i högerledet svarar mot en operator verkandes på moderna. Ansätt nu $\psi_{n}(s)$ att vara egenvektorer till operatorn, alltså att
 \begin{equation}
-    [\xi\partial_{s}^{2}-\gamma]\psi_{n}(s)=\lambda_{n}\psi_{n}(s),
+    \kbT\left[-L_{\text{p}}\partial_{s}^{4}+\frac{2\mu}{L_{\text{p}}}\partial_{s}^{2}-\frac{\nu}{L_{\text{p}}^{3}}\right]\psi_{n}(s)=\lambda_{n}\psi_{n}(s),
 \end{equation}
-där $\lambda_{n}$ svarar mot egenvektorernas egenvärden till operatorn vilket antas vara tidsoberoende. Lösningar till denna egenvärdesekvation ges av de trigonometriska funktionerna, dock eftersträvas enbart lösningar vilket samtidigt spänner upp en möjlig bas till strängarnas svängningar. Då strängarnas ändar inte är fixa förkastas \emph{sinus}-delen av lösningen och moderna fås som \cite{PhysRevE.60.4671} $\psi_{n}(s)=\cos({\frac{n\pi}{L}s})$. Insättning av denna i \eqref{egenvard} reducerar återigen ekvationen till en ODE 
+där $\lambda_{n}$ svarar mot egenvektorernas egenvärden till operatorn vilket antas vara tidsoberoende. Lösningar till denna egenvärdesekvation ges av de trigonometriska funktionerna, dock eftersträvas enbart lösningar vilket samtidigt spänner upp en möjlig bas till strängarnas svängningar. Då strängarnas ändar inte är fixa förkastas \emph{sinus}-delen av lösningen \todo[color=olive]{stämmer detta?}och moderna fås som \cite{PhysRevE.60.4671} $\psi_{n}(s)=\cos({\frac{n\pi}{L}s})$. Insättning av denna i \eqref{egenvard} reducerar ekvationen till en ODE enligt
 \begin{equation}
-    \sum_{n=1}^{\infty}[\partial_{t}a_{n}(t)+\lambda a_{n}(t)]\psi_{n}(s)=\sigma\partial_{t}W(t,s).
+    \sum_{n=1}^{\infty}\left[\gamma\partial_{t}a_{n}(t)+\lambda_{n} a_{n}(t)\right]\psi_{n}(s)=\sigma\partial_{t}W(t,s).
 \end{equation}
 Medelvärdesbildas ekvationen över tid fås högerledet som $\ev{\sigma\partial_{t}W(t,s)}=0$. Alltså fås det att
 \begin{equation}
-    \sum_{n=1}^{\infty}\ev{\partial_{t}a_{n}(t)+\lambda a_{n}(t)}\psi_{n}(s)=0.
+    \sum_{n=1}^{\infty}\ev{\gamma\partial_{t}a_{n}(t)+\lambda_{n}a_{n}(t)}\psi_{n}(s)=0.
 \end{equation}
-Då $\psi_{n}(s)$ spänner upp en bas för strängarnas avvikelser är denna icke-trivial, lösningarna till ekvationen fås därmed genom att lösa $\ev{\partial_{t}a_{n}(t)+\lambda a_{n}(t)}=0$. Lösningen till denna differentialekvation ger korrelationsfunktionen för modernas amplituder
+Då $\psi_{n}(s)$ spänner upp en bas för strängarnas avvikelser är denna icke-trivial, lösningarna till ekvationen fås genom att lösa $\ev{\partial_{t}a_{n}(t)+\lambda a_{n}(t)}=0$. Lösningen till denna differentialekvation ger korrelationsfunktionen för modernas amplituder
 \begin{equation}
-    \ev{a_{n}(t)a_{n}(0)}=\ee^{-\lambda_{n}t}.
+\label{modkorr2}
+    \ev{a_{n}(t)a_{n}(0)}=\ee^{-\frac{\lambda_{n}}{\gamma}t}.
 \end{equation}
-Det fås att korrelationen för svängningsmoderna avtar exponentiellt. Egenvärdena $\lambda_{n} [s^{-1}]$ svarar mot den karakteristiska tiden med vilken en mod skingras. Detta mått är inom fysiken definerat som \emph{relaxationstid}, därmed betecknas denna hädanefter som $\tau_{n}=\lambda_{n}^{-1}$. Genom att lösa ekvation \eqref{egenvard} för egenmoderna kan $\tau_{n}$ beräknas explicit
-\begin{equation}
-    \frac{1}{\tau_{n}}=\xi\left(\frac{n\pi}{L}\right)^{2}+\gamma.
+Det fås att korrelationen för svängningsmoderna avtar exponentiellt med en karakterisktisk tid $\frac{\gamma}{\lambda_{n}}$. För att simplifiera denna ekvationen omdefineras egenvärderna som $\lambda=\frac{\tau_{n}}{\gamma}$, där $\tau_{n}$ är modernas \emph{relaxationstid}. \eqref{modkorr2} fås nu som
+\begin{equation}\label{modkorr}
+\ev{a_{n}(t)a_{n}(0)}=\ee^{-\frac{t}{\tau_{n}}}.
 \end{equation}
-Relaxationstiden avtar proportionellt mot ordningen på moden  $\tau_{n}\propto\frac{1}{n^2}$. Eftersom den harmoniska potentialen med styrka $\gamma$ modellerar den begränsande kanalen så ses enligt denna modell att relaxationstiden för högre ordningens moder påverkas mindre av kanalen. 
+Genom att lösa ekvation \eqref{egenvard} för egenmoderna erhålls en ekvation ur vilket tiderna $\tau_{n}$ kan beräknas explicit
+\begin{equation}\label{relaxconf}
+    \frac{\gamma}{\tau_{n}\kbT}=\frac{2\mu}{L_{\text{p}}}\left(\frac{n\pi}{L}\right)^{2}+L_{\text{p}}\left(\frac{n\pi}{L}\right)^{4}+\frac{\nu}{L_{\text{p}}^3}.
+\end{equation}
+Relaxationstiden avtar proportionellt mot ordningen på moden  $\tau_{n}\propto\frac{1}{n^4}$. Eftersom den harmoniska potentialen med styrka $\nu$ \todo[color=olive]{stämmer detta samt stycket under fortfarande?}modellerar den begränsande kanalen så ses enligt denna modell att relaxationstiden för högre ordningens moder påverkas mindre av kanalen. 
 
-Samma analys kan göras för strängar vars svängningar inte begränsas av mikrokanalen. Då en sådan sträng inte upplever någon harmonisk potential sätts den modellerande konstanten $\gamma\equiv0$ i \eqref{mans}. Lösningsmetoden är analogt till fallet då $\gamma\neq0$ och relaxationstiderna fås att enbart bero på ordningen av moden 
-\begin{equation}
-    \frac{1}{\tau_{n}}=\xi\left(\frac{n\pi}{L}\right)^{2}.
+Samma analys kan göras för strängar vars svängningar inte begränsas av mikrokanalen. Då en sådan sträng inte upplever någon harmonisk potential sätts den modellerande konstanten $\nu\equiv0$ i \eqref{mans}. Lösningsmetoden är analogt till fallet då $\gamma\neq0$ och relaxationstiderna fås att enbart bero på ordningen av moden 
+\begin{equation}\label{relaxnonconf}
+    \frac{\gamma}{\tau_{n}\kbT}=\frac{2\mu}{L_{\text{p}}}\left(\frac{n\pi}{L}\right)^{2}+L_{\text{p}}\left(\frac{n\pi}{L}\right)^{4}.
 \end{equation}
 
 
+\subsection{Resultat -- }
+Enligt \eqref{basutv} kan avståndsvektorn $A(t,s)$, innehållandes strängens transversella fluktuationer, uttryckas i en bas av egenmoder. Tidigare erhölls det att en sådan bas spänns upp av egenvektorerna $\psi_{n}(s)=\cos({\frac{n\pi}{L}s})$ vars egenvärden fås genom diskret cosinustransform av $A(t,s)$. De tidsberoende egenvärdena korreleras och enligt \eqref{modkorr} beräknas modernas relaxationstid då denna är definerad som den takt med vilket korrelationen avtar. I figur \ref{fig:cosconf} ses relaxationstider $\tau$ plottade mot modens vågtal $k$ för strängar inneslutna i en mikrokanal. Figur \ref{fig:cosconf} visar motsvarande data fast för fria strängarna. I överensstämmande med \eqref{relaxconf} och \eqref{relaxnonconf} ses ett snabbt avtagande samband för båda typerna av strängar, alltså att moder med låga vågtal förblir representiva för strängens svängningar under längre tidsperioder.
 
-\subsubsection{Resultat -- }
+I figur \ref{fig:cosconf} ses bara relaxationstider för de första 6 moderna. Eftersom den tid vilket en mod förblir exiterad avtar snabbt med dess vågtal, resultat det mindre data att medelvärdera och korrelera. Detta samband kan studeras i figurerna då det syns att felmarginalerna för relaxationstiderna ökar kraftigt med vågtal.
 
- 
+
+
 
 \begin{figure}
-    \centering
-    \input{bilder/strangar/cosktauconf.tex}
-    \caption{}
-    \label{fig:cosconf}
+    \centerline{
+    \subfigure[][]{
+    \input{bilder/strangar/cosktauconf.tex}\label{fig:cosconf}
+    }
+    \subfigure[][]{
+    \input{bilder/strangar/cosktaunonconf.tex}\label{fig:cosnonconf}
+    }}
+    \caption{Dispersionrelation för de första cosinus-moderna. Vardera figur innehåller data från 2 strängar för fria samt instängda strängar. För moder med större vågtal erhölls inget användbart samband, därför plottas enbart de signifikanta moderna för vardera sträng. Felmariginalerna för $\tau$ är satta som 95\,\%-iga konfidensintervall.}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \input{bilder/strangar/cosktaunonconf.tex}
-    \caption{}
-    \label{fig:cosnonconf}
-\end{figure}
 
-\section{Egenmoder -- }
+\section{Egenmoder -- Kovariansmatris}
 
 
-Metoden för sönderläggning av strängens rörelse i egenmoder beskrivs i avsnitt \ref{sec:kovmatris} som en diagonalisering av kovariansmatrisen, där kovariansmatrisen $C$ i detta fallet byggs upp av avståndskomponenter till strängen. %Hädanefter betecknas därför det transversella avståndet till strängen relativt sitt jämviktsläge $A_s(t)$ där $s$ är en diskret båglängdsparameter längs med strängen.
-Diagonalisering av denna kovariansmatris med hjälp av spektralsatsen leder effektivt till ett basbyte från en bas bestående av det transversella avståndet i varje $s$ längs strängen, till en bas bestående av egenmoderna för strängen. %Egenvärdena till kovariansmatrisen ger ett mått på hur mycket av strängens rörelse som byggs upp av motsvarande egenmod. 
-Genom att projicera strängens rörelse på ett fåtal av de egenmoder med störst egenvärde förenklas analysen\cite{Shlens_PCA2014}; karakteristiska egenskaper för varje egenmod kan undersökas separat. Hädanefter betecknas därför det transversella avståndet till strängen relativt sitt jämviktsläge $A_s(t)$ där $s$ är en \emph{diskret} båglängdsparameter längs med strängen.
+I tidigare avsnitt undersöktes strängens rörelse genom att utveckla denna i en cosinustransform. En annan netod för sönderläggning av strängens rörelse i egenmoder beskrivs i avsnitt \ref{sec:kovmatris} som en diagonalisering av kovariansmatrisen, där kovariansmatrisen $C$ i detta fallet konstrueras av de transversella avstånden $A_s(t)$. Diagonalisering av denna kovariansmatris med hjälp av spektralsatsen leder effektivt till ett basbyte från en bas bestående av det transversella avståndet i varje punkt $s$ längs strängen, till en bas bestående av egenmoderna för strängen. Egenvärdena till kovariansmatrisen ger ett mått på hur mycket av strängens rörelse som byggs upp av motsvarande egenmod, framtida användning av storleken på moden avser storleken på egenvärdet. I avsnitt \ref{sec:kovmatris} påpekas även att den tidsmedelvärdesbildade variansen av varje mod svarar precis mot egenvärdena till kovariansmatrisen. Genom att projicera strängens rörelse på ett fåtal av de egenmoder med störst egenvärde förenklas analysen\cite{Shlens_PCA2014}; karakteristiska egenskaper för varje egenmod kan undersökas separat. Hädanefter betecknas därför det transversella avståndet till strängen relativt sitt jämviktsläge $A_s(t)$ där $s$ är en \emph{diskret} båglängdsparameter längs med strängen.
 
-Kovariansmatrisen bildad av $A_s(t)$ kan bildas enligt \eqref{eq:kovmatris} som 
+Kovariansmatrisen bildad av $A_s(t)$ fås enligt \eqref{eq:kovmatris} som 
 \begin{equation}
 \label{eq:C}
     C_{ij} = \COV{A_s(t)}{A_{s'}(t)}_t.
 \end{equation}
 Egenvektorerna till $C$, hädanefter egenmoderna, betecknas $\mathbf{B}_i$ och strängrörelsen kan representeras som
 \begin{equation}
-    A_s(t) = \sum_i^n \alpha_{si}(t)B_i,
+    A_s(t) = \sum_i^n \alpha_{si}(t)\mathbf{B_i},
 \end{equation}
 $\hat{\mathbf{A}}_s$ är en enhetsvektor längs komponent $s$ och 
 \begin{equation}
@@ -298,62 +337,73 @@ Projektionen av strängrörelsen på varje egenmod som funktion av tiden beskriv
     b_i(t) = \sum_s^n \alpha_{si}(t).
 \end{equation}
 
-Autokorrelationsfunktionen för varje komponent $b_i(t)$ innehåller information om strängrörelsens tidsutveckling, genom att endast betrakta de komponenter med ''tillräckligt'' stora egenvärden förenklas analysen och relaxationstider för de mest dominanta egenmoderna tas fram från 
+Autokorrelationsfunktionen för varje komponent $b_i(t)$ innehåller information om strängrörelsens tidsutveckling. Genom att endast betrakta de komponenter med ''tillräckligt'' stora egenvärden förenklas analysen och relaxationstider för de mest dominanta egenmoderna tas fram från 
 \begin{equation}
-    \ev{b_i(t)b_i(t+\Delta t)}.
+\label{eq:korrmoder}
+    \ev{b_i(t)b_i(t+\Delta t)}_t.
 \end{equation}
 Antalet egenvärden som är tillräckligt att studera beror på hur väl man vill beskriva rörelsen. Det finns flera modeller för att bestämma hur många egenvärden som behövs, men enligt \cite{Cangelosi2007} så förutspår dessa inte alltid entydiga svar. 
 
-\subsection{Resultat -- Signifikanta egenmoder}
 
-Egenvärdena till kovariansmatrisen bildad från de stokastiska processerna $A_s(t)$ visar en tydlig spridning, där $\lambda_\text{max}/\lambda_\text{min}\geq 10^{16}$ och är oberoende av strängtyp vilket ses i figur \ref{fig:kovegenvarde}. Den stora skillnaden i varians visar att strängrörelsen till en god approximation kan beskrivas i ett fåtal egenmoder snarare än separata avstånd i varje punkt längs strängen. 
+\subsection{Resultat -- Signifikanta egenmoder och avtagande dispersionsrelation}
+
+Egenvärdena, som är precis $\VAR{\mathbf{B}_i}$, till kovariansmatrisen bildad från de stokastiska processerna $A_s(t)$ visas i \figref{fig:kovegenvarde} och en tydlig variation i storlek ses. Den stora skillnaden i varians visar att strängrörelsen till en god approximation kan beskrivas i ett fåtal egenmoder snarare än separata avstånd i varje punkt längs strängen. Vidare visas i \figref{fig:egenmoder} tre typiska egenmoder för strängarna; dessa egenmoder hör till en fri sträng men ingen väsentlig skillnad för egenmoder ses mellan fria och instängda strängar. Egenmoder liknar till viss grad harmoniska svängningar \todo{Harmoniska svängningar eller cosinusvågor? Eller något annat} där den största avvikelsen ses vara vid strängens ändar.
 
 %Antalet egenvärde \sim polynomgrad
 
 
+För att försöka bestämma ett samband mellan vågtalen och relaxationstiderna, en dispersionrelation, anpassas en cosinusvåg till vardera egenmod för att bestämma modens vågtal. Felgränsen på vågtalet tas fram genom att plotta egenmoden mot andraderivatan av den samma i \figref{fig:osak_vagtal}, för en exakt cosinusvåg väntas en rak linje med lutning $-k^2$; ty $\pd_x^2\cos{kx}=-k^2\cos{kx}$. Genom att anpassa en trendlinje i minsta kvadratmening och mäta standardavvikelsen för anpassningen kan en felgräns uppskattas, vilket används för att bestämma ett 95\, \% konfidensintervall.
+
+
+\subsubsection{Avtagande dispersionsrelation}
+Vidare beräknas för varje separat egenmod en relaxationstid genom korrelationen \eqref{eq:korrmoder} vilket visas för en fri sträng i \figref{fig:korrelation}. Korrelationen ses avta exponentiellt i tiden vilket överensstämmer med \eqref{modkorr} och $\nicefrac{-1}{\tau_i}$ ges av lutningen för motsvarande egenmod. Lutningen ses vara störst för den största moden och sedan minska med modens storlek; vilket alltså svarar mot en ökad relaxationstid för stora egenmoder. 
+
+Slutligen plottas dispersionsrelation för de fyra strängarna i \figref{fig:dispersion}. Det tydligaste resultatet är att relaxationstiden minskar med ökat vågtal. Det finns dock en viss avvikelse från detta för moder med små vågtal. De instängda strängarna visas i \figref{fig:ktauconf} och relaxationstiden för deras egenmoder är i intervallet \unit[0.1--2]{s}. Motsvarande har de fria strängarna i \figref{fig:ktaunonconf} relaxationstider i intervallet \unit[0.1--10]{s}. Således spänner relaxationstiden för de fria strängarna över ett större intervall än för de begränsade strängarna. 
+\todo{fetstila B i figur}
 \begin{figure}
     \centering
     \input{bilder/strangar/kovegenv.tex}
-    \caption{Egenvärden till kovariansmatrisen från \eqref{eq:C} för fyra olika strängar. Det största egenvärdent ses vara åtminstone $10^{16}$ storlekar större än det minsta, vilket påvisar en signifikant skillnad i bidrag till rörelsen från vardera egenmod.}
+    \caption{De största egenvärdena till kovariansmatrisen från \eqref{eq:C} för de fyra strängarna som studerats. Det ses att $\VAR{B_i}$ varierar stort då $\VAR{B_1}/\VAR{B_{20}}\approx10^7$. Icke visade egenvärden avtar exponentiellt och dessa moder bidrar inte signifikant till strängens rörelse.}
     \label{fig:kovegenvarde}
+\end{figure}
+\todo{subplotta moder och dess fel? Åtminstone felen kanske onödigt att det tar upp så stor yta?}
+\begin{figure}
+    \centering
+    \input{bilder/strangar/moder.tex}
+    \caption{Typiska egenmoder för en sträng. Dessa egenmoder hör till en fri sträng men inga väsentliga skillnader för egenmodernas utseende fanns mellan fria och instängda strängar. Det ses att delar av egenmoderna liknar harmoniska svängningar; avvikelse från dessa är störst vid ändarna på strängen.}
+    \label{fig:egenmoder}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \input{bilder/strangar/osak_vagtal.tex}
+    \caption{Samband mellan $v_i(l)$ och $\frac{\pd^2v_i (l)}{\pd l^2}$ för att bestämma osäkerheten i anpassat vågtal. För en egenmod som är en exakt cosinusvåg väntas en rak linje med lutning $-k^2$; avvikelserna från en sådan linje antyder om hur mycket egenmoden avviker från en cosinusvåg.}
+    \label{fig:osak_vagtal}
 \end{figure}
 
 \begin{figure}
     \centering
     \input{bilder/strangar/korrfil3.tex}
-    \caption{\textcolor{red}{\Large Lägg till markörer vid varje data punkt så att alla ser mot vad anpassningarna har gjorts.}}
+    \caption{Korrelationen \eqref{fig:korrmoder} för de sex största egenmoderna, där egenmodernas storlek avtar med $i$. Ett exponentiellt samband ses mellan korrelationen och tiden. En linje anpassas i minsta-kvadrat mening och lutningen $a_i$ ger relaxationstiden enligt $\tau_i=\nicefrac{1}{\abs{a_i}}$. Relaxationstiderna för moderna ges i figuren.}
     \label{fig:korrelation}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \input{bilder/strangar/moder.tex}
-    \caption{\textcolor{red}{\Large Ändra så att det blir streckade linjer för olika moder (svart-vit-anpassa).}}
-    \label{fig:egenmoder}
-\end{figure}
 
-\begin{figure}
-    \centering
-    \input{bilder/strangar/modkorrektion.tex}
-    \caption{\textcolor{red}{\Large Ändra så att det blir streckade linjer för anpassnigarna.}
-}
-    \label{fig:modkorrektion}
-\end{figure}
+
 
 
 \begin{figure}\centerline{
 \subfigure[][]{
-\input{bilder/strangar/ktauconf.tex}
+\input{bilder/strangar/ktauconf.tex}\label{fig:ktauconf}
 }
 \subfigure[][]{
-\input{bilder/strangar/ktaunonconf.tex}
+\input{bilder/strangar/ktaunonconf.tex}\label{fig:ktaunonconf}
 }}
-\caption{Dispersionsrelation för strängarnas olika egenmoder. Bortsett från de moder med lägt $k$ så ser dispersionsrelationen ut att kunna vara exponeniell.
-Felmariginalerna för $\tau$ är satta som 99\,\%-iga konfidensintervall; för $k$ är de bara uppskattade genom att undersöka hur anpassningen försämras om man ändrar $k$.
-\\\textcolor{red}{\Large Till Robin: Vi måste ändra hur vi beräknar $\Delta{k}$. Som det är nu ger bättre anpassning större osäkerhet.}
-}
-\label{fig:ktau}
+\caption{Dispersionsrelation för strängarnas olika egenmoder. Bortsett från vissa moder med lågt $k$ så minskar relaxationstiden med ökande vågtal. Felmariginalerna för $\tau$ är satta som 95\,\%-iga konfidensintervall; för $k$ är de bara uppskattade genom att undersöka hur anpassningen försämras om man ändrar $k$.}
+\label{fig:dispersion}
 \end{figure}
+
 
 %Resultat som kan tas med
 
@@ -372,9 +422,28 @@ Nedan finns förslag på rubriker, ändra gärna och lägg till
 
 \subsection{Strängen verkar vibrera kring ett jämviktläge}
 
-\subsection{Skillnad mellan non-confined och confined}
+\subsection{Skillnad mellan fria och instängda strängar}
+Den tydligaste skillnaden mellan fria och instängda strängar är skillnaden i relaxationstiden för de olika egenmoderna vilket visades i \figref{fig:dispersion}. Att relaxationstiden för de fria strängarna spänner över ett större intervall anses rimligt, detta eftersom de är just fria; de begränsas inte av en kanal vilket torde göra att dess form är mer beständig i tiden.  
 
-\subsection{hur $L_{p}>>L_\text{sträng}$ påverkar resultaten}
+
+
+\subsection{hur $L_\text{p}>>L_\text{sträng}$ påverkar resultaten}
+
+\subsection{Egenmoder från kovariansmatrisen}
+Att variansen för egenmoderna framtagna från kovariansmatrisen sprider sig över ett extremt stort intervall ($\sim 10^7$ för de $20$ största av totalt $128$) är en tydlig indikation på att strängens rörelse till en god grad kan representeras av okorrelerade egenmoder, snarare än representeras av korrelerande avståndskomponenter. Däremot är antalet egenmoder med signifikant varians korrelerad med gradantalet på de till strängarna anpassade polynomen. Så en för stor vikt ska inte läggas på det specifika antalet. Även inom dessa $20$ största egenmoder så ska det noteras att huvudsakligen analyseras bara ett fåtal av dessa, exempelvis maximalt $7$\,st för beräkning av vågtal samt relaxationstid. Såldes anses inte valet av polynomgraden ha någon inverkan på de presenterade resultaten. 
+
+Att egenvektorerna från kovariansmatrisen uppvisar ett beteende likt vad som förväntas för harmonisk rörelse är fascinerande\todo{Är fascinerande. Är det för ''personligt''? Är noterbart kanske?}.  
+
+\subsection{Avtagande dispersionsrelation}
+Relaxationstiden för egenmoderna visades avta med ökat vågtal, mer specifikt skulle man kunna tänkas anpassa en trendlinje i logplottarna från \figref{fig:dispersion}. Dock ses en avvikelse från detta för vissa låga vågtal vilket gör det svårt att motivera en sådan anpassningen. Vidare hade mätdatan för fler egenmoder behövts för att motivera en anpassning. Problematiken med att undersöka fler moder är att framtagen korrelation \eqref{modkorr} för egenmoder i \figref{fig:korrelation} endast har få mätpunkter i det exponentiella området; relaxationstiden för egenmoder med högre vågtal är för liten. Detta eftersom upplösningen på kameran som filmat strängarna var 10 bilder per sekund, samtidigt ses relaxationstiden för egenmoderna med stort vågtal vara i storleksordningen \unit[0.1]{s}. För att undersöka egenmoder med högre vågtal behövs alltså strängarna studeras med en högre tidsupplösning vilket skulle möjliggöra fler mätpunkter i det exponentiella området.
+
+\subsection{Cosinustransform eller utveckling i egenmoder från kovmatris}
+%Varför avviker egenmoder från kovmatris från cosvågor. Kan tänkas bero på att strängarnas fluktationer inte är homogen, mer svängning vid de lösa ändarna. 
+Anledningen till att studera strängens rörelse både genom cosinustranform samt egenmoder framtagna från kovariansmatrisen var huvudsakligen av två skäl. Cosinustransformens fördel är att vågtalen för cosinusvågorna är exakt bestämda, till skillnad mot egenmoderna från kovariansmatrisen vars form ej nödvändigtvis behöver likna cosinusvågor vilket gör beräkning av vågtalet icke-trivialt. %skriva mer här
+
+Fördelen med att använda egenmoderna framtagna från kovariansmatrisen är att variansen av egenmoderna ger ett mått på hur mycket av rörelsen som representeras av just den egenmoden. Därför kan 
+
+
 
 
 %Bara en liten kodsnutt som behövs när man kompilerar lokalt

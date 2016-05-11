@@ -1,6 +1,6 @@
 \documentclass[11pt,a4paper, notitlepage,
- german, english, swedish,
- twoside,openright
+german, english, swedish,
+twoside,openright
 ]{report}
 \pdfoutput=1
 
@@ -8,6 +8,13 @@
 \usepackage{custom_header}
 \usepackage{multirow}
 \usepackage{adjustbox}
+
+% Chapter title settings
+\usepackage{titlesec}		
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\filcenter}
+  { {\fontsize{50pt}{1em}\vspace{-3cm}\selectfont \textnormal{\thechapter}} }{0.5ex}{}[]
+
 
 \graphicspath{ {bilder/} {bilder/strangar/} {bilder/partiklar/} {bilder/bilaga/} } %Gör så att man kan lägga alla bilder i en egen katalog
 
@@ -18,13 +25,15 @@
 %disable
 textsize=footnotesize
 ]{todonotes} %\todo{...}
-\setlength{\marginparwidth}{2.5cm} 
+
+%\setlength{\marginparwidth}{2.5cm} 
 
 %%För att själv bestämma marginalerna. 
 \usepackage[
-%            top    = 3cm,
-%            bottom = 3cm,
-%            left   = 3cm, right  = 3cm
+%           top    = 3cm,
+%           bottom = 3cm,
+%           left   = 3cm, right  = 3cm
+%           inner  = 4cm, outer  = 3cm
 ]{geometry}
 
 
@@ -54,9 +63,9 @@ textsize=footnotesize
 \newcommand{\COV}[2]{\text{cov}\!\left[#1,\;#2\right]}
 \newcommand{\CORR}[2]{\text{corr}\!\left[#1,\;#2\right]}
 
+%Omdefiniering av \int
 \let\oldint\int
 \renewcommand{\int}{\oldint\limits}
-
 
 
 
@@ -66,37 +75,55 @@ textsize=footnotesize
 %Inledande sidor
 \newcommand{\skola}{Chalmers tekniska högskola}
 \newcommand{\institution}{Institutionen för fysik}
-\newcommand{\titel}{Statistisk undersökning av brownsk rörelse hos partiklar och strängar i celler}
-\newcommand{\undertitel}{}
+%\newcommand{\titel}{Statistisk undersökning av brownsk rörelse hos partiklar och strängar i celler}
+\newcommand{\titel}{Brownsk rörelse i celler hos partiklar och filament }
+\newcommand{\undertitel}{En statistisk undersökning av partiklars och aktinfilaments rörelser i jästceller respektive mikrokanaler}
 
 
-\input{0cover.tex}
-\input{0titlepages.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%% Inledande sidor %%%%%%%%%%%%%%%%%%%%%%%%%
+\input{01cover.tex}
+\input{02titlepage.tex}
+\input{03imprint_page.tex}
+\input{04abstract.tex}
 
 
+%%%%%%%%%%%%%%%%%%%%%%% Innehållsförteckning %%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\renewcommand{\contentsname}{Innehållsförteckning}
+%\tableofcontents
+\makeatletter
+\if@openright
+    \@openrightfalse
+    \tableofcontents
+    \@openrighttrue
+\else
+    \tableofcontents
+\fi
+\makeatother
+
+
+\cleardoublepage
+\pagenumbering{arabic} %ställer om till vanlig sidnumrering
+\setcounter{page}{1} %återställer sidräknaren
 
 
 
 %%%%%%%%%%%%%%%%%%%%%% Här börjar huvudtexten %%%%%%%%%%%%%%%%%%%%%%
 
-%\part{Inledning}
 
-\input{1Inledning.tex}
+%\input{1Inledning.tex}
 
-\input{2cellbiologi.tex}
+%\input{2cellbiologi.tex}
 
-%\part{Huvuddel}
+% %\begin{comment}
 
-\input{3Stokastik.tex}
+%\input{3Stokastik.tex}
 
-\input{4Partikel.tex}
+%\input{4Partikel.tex}
 
 \input{5Strang.tex}
 
-\input{6Slutsats.tex}
-
-
-
+%\input{6Slutsats.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Källförteckning %%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -109,16 +136,15 @@ textsize=footnotesize
 \appendix
 
 
+%\input{A1ordlista}
 
-\input{A1ordlista}
+%\input{A2noggrannhet}
 
-\input{A2noggrannhet}
+%\input{A3CTRW.tex}
 
-\input{A3CTRW.tex}
+%\input{A4fBm.tex}
 
-
-\input{A4fBm.tex}
-
+%\input{A5WLC}
 
 
 \end{document}
