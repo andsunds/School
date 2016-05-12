@@ -1,11 +1,16 @@
 %PSD
 
-clc;clf;clear all
+clc;
+%clf;
+clear all
 load('filnamn.mat')
 data_energydepleted =load(filnamn{1});
 data_logphase=load(filnamn{2});
+namn=[data_energydepleted data_logphase];
 
-data=data_energydepleted;
+fil=2; %1=ed, 2=log
+
+data=namn(fil);
 C = separera(data);
 n=length(C);%antal partiklar
 
@@ -14,8 +19,6 @@ n_max=914;
 t = C{1}(1:n_max,1);
 PSDx=zeros(458,n);
 PSDy=zeros(458,n);
-
-fil=2; %1=ed, 2=log
 
 load('filnamn.mat')
 load(kompl,...
@@ -72,16 +75,14 @@ PSDy(:,i)=psdy;
 %axis([0 50 -210 -150])
 end
 
-PSDx=PSDx/n_max;
-PSDy=PSDy/n_max;
-
-PSD_sum=(sum(PSDx,2)+sum(PSDy,2))/2; %Totala PSD:n
+PSD_sum=(sum(PSDx,2)+sum(PSDy,2))/(2*n_max); %Totala PSD:n
 
 
-freq = (0:Fs/length(dx):Fs/2)/(2*pi); %Vinkelfrekvens läng x-axeln
+freq = (0:Fs/length(dx):Fs/2)*(2*pi); %Vinkelfrekvens läng x-axeln
 %freq = 0:(2*pi)/N:pi; %Vinkelfrekv, 0-pi
 
-figure(5)
+%figure(5)
+hold on
 plot(freq,10*log10(PSD_sum))
 grid on
 title('PSD för stegen')
@@ -89,15 +90,16 @@ xlabel('Frequency (rad/s)')
 ylabel('Power/Frequency (dB/(rad/s))')
 
 mean_PSD=mean(PSDx,2);
-std_PSDx=std(PSDx');
-std_PSDy=std(PSDy');
-std_PSD=sqrt(std_PSDx.^2+std_PSDy.^2); %Standardavvikelse
+std_PSDx=std(PSDx,0,2);
+std_PSDy=std(PSDy,0,2);
+std_PSD=sqrt(std_PSDx.^2+std_PSDy.^2)/sqrt(2*n_max); %Standardavvikelse, medelvärde
 
 %hold on
 %plot(freq,10*log10(PSDx),'r')
 %plot(freq,10*log10(PSDy),'m')
 %hold off
 
+%%
 %fBm
 
 T=1e-2; %Tid mellan sampling
@@ -106,8 +108,8 @@ WVS_ejsin=@(o,H)(T*o).^2.*abs(o.^(-(2*H+1)));
 
 o=freq;
 
-H=0.22; %Startvärde
-index_norm=12;
+%H=0.22; %Startvärde
+%index_norm=12;
 
 %for i=1:20 %För att iterera fram H, pga normeringen
 %norm_plot=((PSD_sum(index_norm)))/((WVS_fGn(freq(index_norm),H))); %För normering till data
@@ -132,55 +134,270 @@ freq_o_bra=freq(o_bra);
 
 %end
 
-H_ed=0.2336;
-H_log=0.2356;
-b_ed=2.1e1;
-b_log=0.9e1;
-b=b_ed;
-H=H_ed;
+
+H_part=[0.28 0.24];
+b_part=[4.6e0 1.5e0];
+
+b=b_part(fil);
+H=H_part(fil);
+
 hold on
-plot(o,10*log10(b*WVS_fGn(o,H))) %Lite godtycklig normering
-%plot(o,10*log10(WVS_ejsin_norm(o,H))); %PSD, frekv
+plot(o,10*log10(WVS_fGn(o,H)*b)) %Lite godtycklig normering
+%plot(o,10*log10(WVS_ejsin(o,H)*b)); %PSD, frekv
 hold off
 
 
 
 %Anpassat, cftool
 
-%ed
+%ed, utan peakar
 % General model:
-%      f(x) = b*(x).^(-2*a+1)
+%      f(x) = a*(sin(1e-2*x/2)).^2.*x^(-(2*b+1))
 % Coefficients (with 95% confidence bounds):
-%        a =      0.2336  (0.2226, 0.2446)
-%        b =    0.002068  (0.002002, 0.002135)
+%        a =       1.598  (1.231, 1.964)
+%        b =    0.003314  (-0.01871, 0.02533)
 % 
 % Goodness of fit:
-%   SSE: 5.053e-05
-%   R-square: 0.9192
-%   Adjusted R-square: 0.9189
-%   RMSE: 0.0004031
+%   SSE: 0.00025
+%   R-square: 0.7592
+%   Adjusted R-square: 0.7586
+%   RMSE: 0.0007955
 
-
-%log
+%%%ed, innan peakar
 % General model:
-%      f(x) = b*(x).^(-2*a+1)
+%      f(x) = a*(sin(1e-2*x/2)).^2.*x^(-(2*b+1))
 % Coefficients (with 95% confidence bounds):
-%        a =      0.2356  (0.2249, 0.2463)
-%        b =   0.0009274  (0.0008984, 0.0009565)
+%        a =       17.62  (15.67, 19.57)
+%        b =      0.2764  (0.264, 0.2889)
 % 
 % Goodness of fit:
-%   SSE: 9.555e-06
-%   R-square: 0.9214
-%   Adjusted R-square: 0.9212
-%   RMSE: 0.0001756
+%   SSE: 1.586e-05
+%   R-square: 0.861
+%   Adjusted R-square: 0.8603
+%   RMSE: 0.0002755
+
+
+
+%%%%%%%%%%
+
+%log, alla utan peakar
+% General model:
+%      f(x) = a*(sin(1e-2/2*x)).^2.*x^(-(2*b+1))
+% Coefficients (with 95% confidence bounds):
+%        a =      0.7618  (0.586, 0.9375)
+%        b =     0.00951  (-0.01261, 0.03162)
+% 
+% Goodness of fit:
+%   SSE: 5.281e-05
+%   R-square: 0.751
+%   Adjusted R-square: 0.7503
+%   RMSE: 0.0003638
+
+%%%log, fram till peakar
+% General model:
+%      f(x) = a*(sin(1e-2*x/2)).^2.*x.^(-2*b-1)
+% Coefficients (with 95% confidence bounds):
+%        a =       20.17  (18.26, 22.08)
+%        b =      0.3259  (0.3151, 0.3367)
+% 
+% Goodness of fit:
+%   SSE: 8.394e-06
+%   R-square: 0.7918
+%   Adjusted R-square: 0.7908
+%   RMSE: 0.000199
 
 %%
-clc
-plot_data=NaN(length(freq),4);
-plot_data(:,1)=freq;
-plot_data(:,2)=10*log10(PSD_sum);
-plot_data(:,3)=10*log10(WVS_fGn_norm(o,H));
-plot_data(:,4)=10*log10(std_PSD);
 
-save('~/PSD_steg_log.tsv', 'plot_data', '-ascii')
+alpha=1.96; % 95% konfidensintervall
+PSD_min=abs(PSD_sum-alpha*std_PSD);
+PSD_max=abs(PSD_sum+alpha*std_PSD);
+
+H_max=[H_part(1)+0.10 H_part(2)+0.13]; %Övre gräns för H, ed först, log sen
+H_min=[H_part(1)-0.10 H_part(2)-0.13];
+b_max=[1.5e1 7e0]; %Skalfaktor
+b_min=[11e-1 3e-1];
+
+
+
+hold on
+plot(o,10*log10(PSD_min))
+plot(o,10*log10(PSD_max))
+plot(o,10*log10(WVS_fGn(o,H_max(fil))*b_max(fil)))
+plot(o,10*log10(WVS_fGn(o,H_min(fil))*b_min(fil)))
+hold off
+
+%Anpassningar utan f=0, upp till f<147.1 rad/s
+
+%%%%ed
+%max
+% Coefficients (with 95% confidence bounds):
+%        a =       39.63  (34.7, 44.56)
+%        b =      0.3285  (0.3143, 0.3426)
+% 
+% Goodness of fit:
+%   SSE: 5.417e-05
+%   R-square: 0.704
+%   Adjusted R-square: 0.7026
+%   RMSE: 0.0005055
+
+%min
+% Coefficients (with 95% confidence bounds):
+%        a =       2.578  (2.189, 2.967)
+%        b =      0.1175  (0.101, 0.1339)
+% 
+% Goodness of fit:
+%   SSE: 6.109e-06
+%   R-square: 0.9338
+%   Adjusted R-square: 0.9335
+%   RMSE: 0.0001698
+
+%%%%%log
+%max
+% Coefficients (with 95% confidence bounds):
+%        a =       17.71  (15.35, 20.07)
+%        b =        0.33  (0.3148, 0.3452)
+% 
+% Goodness of fit:
+%   SSE: 1.218e-05
+%   R-square: 0.6782
+%   Adjusted R-square: 0.6767
+%   RMSE: 0.0002397
+
+%min
+% Coefficients (with 95% confidence bounds):
+%        a =       1.019  (0.8581, 1.179)
+%        b =      0.1066  (0.08941, 0.1238)
+% 
+% Goodness of fit:
+%   SSE: 1.226e-06
+%   R-square: 0.9326
+%   Adjusted R-square: 0.9322
+%   RMSE: 7.604e-05
+
+%H_log=0.2384+0.09-0.13
+%H_ed=0.2764+0.05-0.16
+
+%%
+
+o_log=log10(o);
+PSD_max_log=log10(PSD_max);
+PSD_min_log=log10(PSD_min);
+PSD_log=log10(PSD_sum);
+
+%ed
+%max
+% General model:
+%      f(x) = (-2*a+1)*x+b
+% Coefficients (with 95% confidence bounds):
+%        a =      0.3678  (0.3593, 0.3763)
+%        b =       -2.89  (-2.92, -2.86)
+% 
+% Goodness of fit:
+%   SSE: 0.5866
+%   R-square: 0.8156
+%   Adjusted R-square: 0.8148
+%   RMSE: 0.05235
+
+%med
+% General model:
+%      f(x) = (-2*a+1)*x+b
+% Coefficients (with 95% confidence bounds):
+%        a =      0.3365  (0.3302, 0.3428)
+%        b =      -3.161  (-3.183, -3.138)
+% 
+% Goodness of fit:
+%   SSE: 0.2995
+%   R-square: 0.9271
+%   Adjusted R-square: 0.9268
+%   RMSE: 0.03813
+
+
+
+%min
+% General model:
+%      f(x) = (-2*a+1)*x+b
+% Coefficients (with 95% confidence bounds):
+%        a =      0.2273  (0.2173, 0.2374)
+%        b =      -3.813  (-3.849, -3.778)
+% 
+% Goodness of fit:
+%   SSE: 0.7612
+%   R-square: 0.933
+%   Adjusted R-square: 0.9327
+%   RMSE: 0.06079
+
+%%%%%%
+%log
+%max
+% General model:
+%      f(x) = (-2*a+1)*x+b
+% Coefficients (with 95% confidence bounds):
+%        a =      0.3705  (0.3617, 0.3792)
+%        b =      -3.226  (-3.258, -3.195)
+% 
+% Goodness of fit:
+%   SSE: 0.5788
+%   R-square: 0.8052
+%   Adjusted R-square: 0.8043
+%   RMSE: 0.05301
+
+%med
+% General model:
+%      f(x) = (-2*a+1)*x+b
+% Coefficients (with 95% confidence bounds):
+%        a =      0.3363  (0.3299, 0.3428)
+%        b =       -3.51  (-3.533, -3.487)
+% 
+% Goodness of fit:
+%   SSE: 0.3154
+%   R-square: 0.9237
+%   Adjusted R-square: 0.9234
+%   RMSE: 0.03913
+
+
+%min
+% General model:
+%      f(x) = (-2*a+1)*x+b
+% Coefficients (with 95% confidence bounds):
+%        a =        0.22  (0.2087, 0.2313)
+%        b =      -4.204  (-4.244, -4.164)
+% 
+% Goodness of fit:
+%   SSE: 0.9743
+%   R-square: 0.9203
+%   Adjusted R-square: 0.9199
+%   RMSE: 0.0686
+
+b_max=[-2.89 -3.226]; %Skalfaktor
+b_min=[-3.813 -4.204];
+a_max=[0.3678 0.3705]; %Skalfaktor
+a_min=[0.2273 0.22];
+
+func=@(o,a,b)b*o.^(-2*a+1);
+
+
+
+
+%plot(o,10*log10(WVS_fGn(o,H_max(fil))*b_max(fil)))
+%plot(o,10*log10(WVS_fGn(o,H_min(fil))*b_min(fil)))
+
+
+figure(4)
+plot(o,PSD_sum)
+hold on
+plot(o,PSD_min)
+plot(o,PSD_max)
+plot(o,func(o,a_max(fil),b_max(fil)))
+hold off
+set(gca,'Xscale','log','Yscale','log')
+%%
+clc
+plot_data=NaN(length(freq),6);
+plot_data(:,1)=freq;
+plot_data(:,2)=(PSD_sum);
+plot_data(:,3)=(b*WVS_fGn(o,H));
+plot_data(:,4)=(std_PSD);
+plot_data(:,5)=
+
+save('~/PSD_steg_ed.tsv', 'plot_data', '-ascii')
 
