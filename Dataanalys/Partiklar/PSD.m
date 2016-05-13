@@ -7,7 +7,7 @@ load('filnamn.mat')
 % data_energydepleted =load(filnamn{1});
 % data_logphase=load(filnamn{2});
 
-fil=1; %1=ed, 2=log
+fil=2; %1=ed, 2=log
 
 data=load(filnamn{fil});
 C = separera(data);
@@ -192,24 +192,24 @@ PSD_max=abs(PSD_sum+alpha*std_PSD);
 H_max=[0.2535 0.2789]; %ejsin
 H_min=[0.1168 0.3657]; 
 
-b_max=[0.40 4.606]; %Skalfaktor
-b_min=[1.4 3.914];
+b_max=[0.40 0.5]; %Skalfaktor
+b_min=[1.4 0.6];
 
-H_maxsin=[0.3285 ];
-H_minsin=[0.1152 ];
+H_maxsin=[0.3285 0.3451];
+H_minsin=[0.1152 0.2663];
 
-b_maxsin=[0.24 ];
-b_minsin=[1.4 ];
+b_maxsin=[0.24 0.3];
+b_minsin=[1.4 0.7];
 
 
 
 hold on
-%plot(o,PSD_min,'r')
+plot(o,PSD_min,'r')
 plot(o,PSD_max,'b')
 plot(o,WVS_ejsin(o,H_max(fil)*b_max(fil)),'--b')
-%plot(o,WVS_ejsin(o,H_min(fil)*b_min(fil)),'--r')
+plot(o,WVS_ejsin(o,H_min(fil)*b_min(fil)),'--r')
 plot(o,WVS_fGn(o,H_maxsin(fil)*b_maxsin(fil)),'b')
-%plot(o,WVS_fGn(o,H_minsin(fil)*b_minsin(fil)),'r')
+plot(o,WVS_fGn(o,H_minsin(fil)*b_minsin(fil)),'r')
 
 
 hold off
@@ -240,6 +240,18 @@ hold off
 %        a =      0.6013  (0.4958, 0.7068)
 %        b =      0.1168  (0.1004, 0.1333)
 
+
+%%%%%log, sin
+%max
+% General model:
+%      f(x) = a*(sin(1e-2*x/2)).^2.*x.^(-2*b-1)
+% Coefficients (with 95% confidence bounds):
+%        a =       33.85  (30.25, 37.45)
+%        b =      0.3451  (0.3329, 0.3573)
+%min
+% Coefficients (with 95% confidence bounds):
+%        a =       6.984  (6.161, 7.807)
+%        b =      0.2663  (0.2531, 0.2796)
 
 %%%%%log, ejsin
 %max
