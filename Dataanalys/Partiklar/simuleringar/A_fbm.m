@@ -4,7 +4,7 @@ clc;clf; clearvars
 hold on
 N_steps=1000;
 N_trials=1000;
-H=0.4;
+H=0.2;
 
 %for brus=[0, 6];
 %brus=0;
