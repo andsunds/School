@@ -9,3 +9,9 @@ hand_in_AS.pdf
 *.toc
 *-eps-converted-to.pdf
 *.bak
+
+#Dumma tilde-filer
+*~
+
+#Övrigt
+hand_in/x-sect/
