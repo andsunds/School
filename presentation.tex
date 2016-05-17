@@ -1,0 +1,215 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+\pdfoutput=1
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[scaled]{helvet} %helvetica i sliden blir bra
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{comment}
+\usepackage[swedish]{babel}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{units}
+%\usepackage{siunitx} %SI-enheter
+\usepackage{comment}
+\usepackage{epstopdf}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage{wallpaper} %För bakgrundsbilder
+\usepackage{multimedia}
+\usepackage{media9}
+
+\usepackage{physics}
+
+\graphicspath{ 
+{src_figures/Avancez/}  %specialbilder som bara behövs för bakgrunden
+{presentation_figures/} %bilder som används i själva presentationen
+}
+
+
+
+\definecolor{CTHblue}{RGB}{00,00,102}   % Dessa är faktiskt officella Chalmersfärger som är beslutat att
+\definecolor{CTHgrey}{RGB}{204,204,204} % de skall användas till presentationer. Andra är inte tillåtna...
+\definecolor{CTHgreen}{RGB}{113,178,60} % citation needed []
+\definecolor{CTHblack}{RGB}{00,00,00}
+
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+% \setbeamercolor*{palette primary}{fg=CTHgrey,bg=CTHblue}
+% \setbeamercolor*{palette secondary}{fg=CTHblack,bg=CTHgrey}
+% \setbeamercolor*{palette tertiary}{fg=CTHgrey,bg=CTHblack}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+
+
+\newcommand{\RBox}[1]{%
+  \tikz\node[draw,rounded corners,align=center,] {#1};%
+}  
+
+% \usebackgroundtemplate{\vbox to \paperheight{\vspace*{2pt}\includegraphics[width=\paperwidth]{cth_fp.pdf}}}
+
+
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+
+\usetheme[titleflower=true]{chalmers} % titleflower = true or false
+\title[Kort titel]{Lång titel som kommer på förstasidan} % Första klammern är en "short title"
+\subtitle{} % optional
+\author{Andréas Sundström } % [short author (optional)]{many authors}
+\institute[Chalmers]{Chalmers tekniska högskla}
+%\titlepageextra{IPT 2015, Warsaw} % Optional extra info, appears before date on title page
+\footer{\insertshorttitle} % optional, manually sets footer (default is short author)
+%\footer{Something completely different} % but it can of course be anything.
+
+\titlepagelogofile{Avancez_black}
+\date{\vspace{-0.25cm}}
+
+
+
+
+\begin{document}
+
+\begin{frame}[plain]
+
+\linethickness{0.075mm}
+
+  \titlepage
+\end{frame}
+% }
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%Här börjar presentationen%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{Innehåll}
+
+\tableofcontents
+
+\end{frame}
+
+
+
+
+\section{Demoslides1 -- detta kommer med i innehållsförteckningen }
+\begin{frame}
+\frametitle{En titel till den här sliden}
+ \begin{columns}[c]
+\column{.4\textwidth} % Left column and width
+Text här.
+\begin{itemize}
+    \item Ibland vill man ha punkter.
+\end{itemize}
+\column{.6\textwidth} % Right column and width
+Den här sliden har två kolumner
+\begin{figure}
+%\includegraphics[width=1\textwidth]{}
+% \caption{}
+\end{figure}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Man kan ha flera frames i en section}
+ \begin{columns}[c]
+\column{.4\textwidth} % Left column and width
+Mer text.
+\begin{itemize}
+    \item Fler punkter
+\end{itemize}
+\column{.6\textwidth} % Right column and width
+Den här sliden har också två kolumner
+\begin{figure}
+%\includegraphics[width=1\textwidth]{}
+% \caption{}
+\end{figure}
+\end{columns}
+\end{frame}
+
+
+\section{Demoslide2 -- detta kommer också med i sidfoten}
+\begin{frame}
+\frametitle{Ibland vill man kanske bara ha en kolumn}
+Då hamnar texten över hela sidan istället. Särskit om man skriver på om massa onödigheter. Man ska helst undvika att ha med för mycket text på sin slide, för då hinner inte åskådaren läsa vad som står.
+
+Men man kan behöva en hel slide om man ska lägga in någon stor och jobbig ekvation
+\[
+\sum_{k=0}^\infty \frac{\cos^2(\pi^k)+\sin^2(\pi^k)}{\int_0^\infty t^k\mathrm{e}^t \dd{t} } 
+= \lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n. 
+\]
+
+\end{frame}
+
+\end{document}
