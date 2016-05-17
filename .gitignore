@@ -1,0 +1,8 @@
+#störig LaTeX output
+*.log
+*.nav
+*.snm
+*.toc
+*.out
+*.aux
+presentation.pdf
