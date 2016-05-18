@@ -4,66 +4,48 @@
 %\section{Bakgrund, syfte och begränsningar}
 
 %\paragraph{Bakgrund}
-Transport inuti celler är en av grundstenarna för cellers överlevnad. Exempel på en livsnödvändig intracellulär transport är hur ATP, molekylen som driver \emph{alla} biologiska processer, kan ta sig från mitokondrien till alla delar av cellen. Detta är ett fall av passiv transport, där molekylerna eller partiklarna förflyttas genom att slumpvis diffundera genom cellen. Det är därför viktigt att kunna beskriva transport inuti cellerna för att förstå cellens inre processer.
+Transport inuti celler är en av grundstenarna för cellers överlevnad. Ett exempel på en livsnödvändig intracellulär transport är hur ATP, molekylen som driver \emph{alla} energikrävande biologiska processer, kan ta sig från mitokondrien till resten av cellen. Detta är ett fall av passiv transport, där molekylerna eller partiklarna förflyttas genom att slumpvis diffundera. Det är därför viktigt att kunna beskriva transport inuti celler, för att förstå cellers inre processer.
 
-I cellens inre finns även trådliknande strukturer, uppbyggda av proteinfilament, som ger både stadga och möjliggör en aktiv transport inom cellen. Den aktiva transporten kompletterar den passiva genom att kunna transportera länge sträckor och styra vart transporten går. Eftersom den aktiva transporten går längs med dessa proteinfilament är det av motsvarande vikt att förstå deras dynamik som att förstå den passiva transporten. 
+I cellens inre finns trådliknande strukturer, uppbyggda av proteinfilament, som ger både stadga och möjliggör en aktiv transport inom cellen. Den aktiva transporten kompletterar den passiva genom att kunna transportera över länge sträckor och styra vart transporten går. Eftersom den aktiva transporten går längs med proteinfilament är det även viktigt att kunna förstå deras dynamik.
 
 
-Som en första approximation skulle partiklars rörelse i cytoplasman kunna beskrivas med klassisk brownsk rörelse. Studier av diffusion i celler \cite{Hofling&Franosch2013,Dix_Crowdingeffects2008,Gou_etal2014,Parry_etal2014} har dock visat på avvikelser från denna teori, där partiklarna diffunderar långsammare än förväntat inuti cellen. Ytterligare skillnad i partikelrörelser har tidigare observerats om cellen befinner sig i dvala eller i sitt normala metabola tillstånd \cite{Parry_etal2014,Midtveldt_etal2016}. En alltäckande teori för vad som kan förklara dessa observationer finns i dagsläget inte, och ämnet utgör därför ett aktuellt forskningsområde. Rörelsens stokastiska natur och cellens avancerade inre struktur är troligtvis varför det har varit svårt att finna en bra modell för rörelsen. 
+Som en första approximation skulle partiklars rörelse i cytoplasman kunna beskrivas med klassisk brownsk rörelse. Studier av diffusion i celler \cite{Hofling&Franosch2013,Dix_Crowdingeffects2008,Gou_etal2014,Parry_etal2014} har dock visat på avvikelser från denna teori. Partiklarna diffunderar långsammare än förväntat inuti cellen. Ytterligare skillnad i partikelrörelser har tidigare observerats beroende på om cellen befinner sig i dvala eller i sitt normala metabola tillstånd \cite{Parry_etal2014,Midtveldt_etal2016}. En alltäckande teori för vad som kan förklara dessa observationer finns i dagsläget inte; ämnet utgör därför ett aktuellt forskningsområde. Rörelsens stokastiska natur och cellens avancerade inre struktur är troligtvis en förklaring till att det har varit svårt att finna en bra modell för rörelsen. 
 
-På samma sätt är även strängdynamiken outforskad. Förståelsen här är, om något, till och med mer ofullständig än för partiklar\cite{Koster_etal2005,Koster_etal2007,Koster_etal2008}. Här finns inte heller en lika självklar utgångspunkt att börja modellera rörelserna. Istället för att utgå från en enkel modell får man här istället direkt fösöka beskriva de observationer som görs.
+På samma sätt är även strängdynamiken outforskad. Förståelsen här är till och med mer ofullständig än för partiklar\cite{Koster_etal2005,Koster_etal2007,Koster_etal2008}. Här finns heller inte en lika självklar utgångspunkt, varifrån man kan börja modellera rörelserna. Istället för att utgå från en enkel modell, får man här istället direkt försöka beskriva de observationer som görs.
 
-%Det finns idag olika teorier om vad som påverkar partiklars och filaments rörelse i cytoplasman. Vissa \cite{Gou_etal2014} försöker beskriva vad som sker i celler med aktiv transport medan andra \cite{Parry_etal2014} lägger mer fokus på den passiva transporten inom cellen, mycket beroende på vilken celltyp som studerats. Då jästceller endast har aktiv transport under celldelning, undersöks framför allt den passiva transporten i den här studien. Detta eftersom den tillgängliga datan var insamlad i log-fas under korta tidsperioder så att endast ett fåtal celler delade sig under datainsamlingen. 
-Det finns dock i nuläget ett flertal modeller för både partikel- och strängrörelser. Bland annat ''fractional Brownian motion'', fBm, 
+
+Det finns i nuläget några modeller för både partikel- och strängrörelser. Bland annat ''fractional Brownian motion'' \cite{Mandelbrot_fBm1968}, fBm,
 %(sv. )
-\cite{Mandelbrot_fBm1968} och ''Continous Time Random Walk'', CTRW, 
+och ''continuous time random ralk'' \cite{Hofling&Franosch2013}, CTRW, 
 %(sv. tidskontinuerlig slumpvandring) 
-\cite{Hofling&Franosch2013} för partikelrörelse samt ''Worm Like Chain'', WLC, 
+ för partikelrörelse; 
+samt ''worm-like chain'' \cite{Milstein2013}, WLC, 
 %(sv. masklik kedja) 
-\cite{Milstein2013} för strängrörelse. %Alla dessa modeller presenteras senare i den här rapporten.
+ för strängrörelse. %Alla dessa modeller presenteras senare i den här rapporten.
 %\paragraph{Syfte} 
-I den här studien har partikelrörelser inuti jästceller och strängdynamiken för aktinfilament undersökts med ett antal olika statistiska metoder. Observationerna från datan jämförs även med förutsägelser från bland annat modellerna.
+
+I den här studien har partikelrörelser inuti jästceller och strängdynamiken för aktinfilament undersökts med olika statistiska metoder. Observationerna från datan jämförs med förutsägelser från bland annat modellerna ovan för att avgöra deras förmåga att kunna beskriva rörelsen.
 
 Rapporten börjar med en översikt av den stokastiska teoribakgrund som används i de efterföljande kapitlen. 
-Här presenteras huvuddelen av den stokastiska och statisktska analys som behövs för studierna av partiklar och strängar. Därefter följer två kapitel där undersökningarna som gjorts i den här studien presenteras.
+Här presenteras huvuddelen av den stokastiska och statistiska analys som behövs för studierna av partiklar och strängar. Därefter följer två kapitel där undersökningarna som gjorts i den här studien presenteras.
 
-Partikarna undersöks bland annat med hjälp av deras ''mean squared displacement'', MSD, (sv. medel av den kvadrarade förflyttningen) och hur isotropt de rör sig.
-Undersökningarna av MSD:n börjar med att bekräfta att partikelrörelsen är subdiffusiv\cite{Hofling&Franosch2013}, alltså att partiklarna rör sig fundamentalt långsammare än i vanlig brownsk rörelse. Vidare erhålls också en tydlig skillnad mellan aktiva och passiva celler. 
+Partikarna undersöks bland annat med hjälp av deras ''mean squared displacement'', MSD, (sv. medel av den kvadrerade förflyttningen) och asfärisitet, den senare används för att bedöma isotropin i deras rörelse.
+Undersökningarna av MSD:n börjar med att bekräfta att partikelrörelsen är subdiffusiv\cite{Hofling&Franosch2013}. Alltså att partiklarna rör sig fundamentalt långsammare än i vanlig brownsk rörelse. Vidare erhålls också en tydlig skillnad mellan aktiva och passiva celler, vilket tyder på att cytoplasman förändras när celler går i dvala. 
 I isotropiundersökningarna erhålls en viss skillnad mellan partiklar i olika cellfaser. Det verkar heller inte finnas några märkbara anisotropier inuti cellerna som påverkar partikelrörelsen. 
 
-För strängarna studeras bland annat deras tangentkorrelation och uppdelning i egenmoder. 
-Tangentkorrelationen är ett mått på hur mycket och snabbt strängen ändrar from. Där erhålls ...
-För egenmoderna undersöks om strängarnas svängningsrörelser kan delas upp i oberoende moder. Detta kan ses som en analogi till svängningar på exempelvis en gitarrsträng, där det finns olika oberoende svängningsmoder med olika frekvens. Här erhålls ...
+För strängarna studeras huvudsakligen deras tangentkorrelation och en uppdelning av rörelsen i egenmoder. Tangentkorrelationen är ett mått på hur mycket och snabbt strängen ändrar form. Där erhålls att tangentkorrelationen för strängar begränsade av mikrokanaler blir mer beständig än för de som fluktuerar fritt. För egenmoderna undersöks två sätt att dela upp strängarnas svängningar i oberoende moder. Detta kan ses som en analogi till svängningar hos exempelvis en gitarrsträng; där finns det oberoende svängningsmoder med olika frekvenser. Här erhålls ett avtagande samband mellan relaxationstid och vågtal.
 
+Att avbilda små partiklar och filament innebär dock stora svårigheter. Detta leder till att den datan som studeras måste betraktas med försiktighet. För studien krävs alltså en viss mängd databehandling. Det mesta av databehandlingen har redan gjorts av de forskargrupper som tog fram datan~\cite{Midtveldt_etal2016,Koster_etal2005,Koster_etal2007,Koster_etal2008}. Detta utgörs främst av en brusuppskattning i partikeldatan och en mjuk anpassning till strängdatan.
+%Kommenterade bort denna mening sålänge för at t 
+%Men även i den här rapporten presenteras en liten del databehandling.
 
+Eftersom alla undersökningar i denna studie är statistiska, behövs ett stort statistiskt underlag för att kunna dra några säkra slutsatser. Så på grund av de stora svårigheterna att avbilda partiklar och strängar finns tyvärr inte så mycket data som man hade kunnat önska. Den här studien  kommer därför inte att kunna dra några definitiva slutsatser om vilka modeller som verkar styra respektive fenomen.
+Tyvärr leder den biologiska världens nyckfullhet till att exakta upprepningar inte är möjliga. Detta visar sig bland annat i att partiklarna som undersöks är olika stora och att strängarna är olika långa. Slutsatser måste därför dras med försiktighet.
 
+Speciellt för strängar kan inte några direkta biologiska slutsatser dras. Detta är på grund av att de var tvungna att tas ut ur cellerna för att kunna avbildas~\cite{Koster_etal2005,Koster_etal2007,Koster_etal2008}. Strängarna undersöktes alltså när de låg i en utspädd lösning av aktin inuti mikrokanaler. På grund av cellers komplexa inre struktur kan det vara svårt att dra några direkta slutsatser om strängdynamiken inuti dem från dessa undersökningar. 
 
-%\paragraph{Avgränsningar}
-Att avbilda små partiklar och filament innebär dock stora svårigheter vilket har försvårat analysen av deras egenskaper. I dagsläget finns heller ingen fullständig modell som beskriver partiklars och filaments rörelse \todo[color=lime]{Någon källa för strängarna}\cite{Hofling&Franosch2013,}.  
-Exempelvis kan variationer som uppstår vid betraktande av rörelser under olika tidsskalor komma att leda till svårigheter.
-Således är det mer rimligt att modellera rörelsen under antagandet att modellen i första hand beskriver rörelser under en viss tidsskala.
-
-
-\todo[inline]{Lägga till: vad gör vi och varför är just vårt arbete värdefullt. Tillägg: Eventuellt mer avgränsningar också}
-
-
-
-%\section{Inspiration från planeringsrapporten}
-
-%Fördjupade studier av partikelrörelse i cellen skulle till exempel kunna leda till mer effektiva läkemedel. Vet man hur transporten inom cellen sker underlättar det arbetet med att ta fram specialdesignad medicin.
-
-
-%\paragraph{Rapportens/Arbetets ändamål}
-%Ur en stokastisk modell kan sedan en makroskopisk, statistisk beskrivning uppnås och det är med denna statistiska beskrivning som modellen kan jämföras med data. 
-
-%\paragraph{Vad vi gjort}
-
-
-%Men för att över huvud taget kunna analysera datan behövdes osäkerheten i mätningarna uppskattas, vilket inte är helt problemfritt då till exempel brownsk rörelse i sig själv är en sorts brus. Brus brukar i vanliga fall hanteras genom att undersöka någon sorts medelvärde. I det här fallet kom datan från flera olika partiklar vilket gjorde att en direkt jämförelse av en undersökt parameter inte kunde göras; istället söktes först ett samband mellan storleken på partiklarna och den parameter man sökte.
-
-%I datan fanns utöver position även en partikels intensitet i mikroskopet. Intensiteten berodde med största sannolikhet på partikelns storlek; Dock var det exakta sambandet inte helt klart vilket ger ännu en svårighet i hur datan ska analyseras. För de små partiklarna tordes intensiteten bero på volymen medan den för de större partiklarna mer borde gå mot att bero av arean. Detta då intensiteten är proportionell mot antalet ljusemitterande ämnen på partikeln som kameran ''ser''. För stora partiklar kan en del av dessa lysande ämnen döljas av andra så att kameran bara ser ljuset från den sida den är riktad mot. 
-%Troligen går det dock att från intensiteterna kunna jämföra olika partiklar och på så sätt ändå kunna utnyttja den i jämförelser mellan olika partiklar. 
-
+Slutligen återstår även en begränsning i vilka tidsskalor som undersökts.
+Exempelvis kan skillnader uppstå på olika tidsskalor. Alltså att beteenden som observeras under mycket långa tider, upp till flera minuter, kanske är helt olika de som observerats under betydligt kortare tider, i storleksordningen sekunder. I den här studien studeras partikelrörelser som varar i $\unit[10]{s}$. För strängarna varierar datan mellan att vara i cirka $\unit[90{-}300]{s}$. Härav kommer slutsatserna som dras i den här rapporten bara att gälla i respektive tidsskala.
 
 %Bara en liten kodsnutt som behövs när man kompilerar lokalt
 %%% Local Variables: 

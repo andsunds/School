@@ -3,7 +3,7 @@
 
 I den här bilagan bevisas att skattningarna i avsnitt~\ref{sec:diskret_data} är väntevärdesriktiga och hur stor varians man får i respektive skattning.
 
-För att göra beräkningar av hur bra skattningarna är betraktas i båda fallen en uppsättning likafördelade oberoende stokastisk variabler $X_i$ med väntevärde $\mu$ standardavvikelse $\sigma$. Med dessa stokastiska variabler kan man bilda en stokastisk motsvarighet\footnotemark{} till \eqref{eq:mean} och \eqref{eq:standard_error}. Det är sedan dessa stokastiska motsvarigheter som används i beräkningarna nedan. 
+För att göra beräkningar av hur bra skattningarna är betraktas i båda fallen en uppsättning likafördelade oberoende stokastiska variabler $X_i$ med väntevärde $\mu$ och standardavvikelse $\sigma$. Med dessa stokastiska variabler kan man bilda en stokastisk motsvarighet\footnotemark{} till \eqref{eq:mean} och \eqref{eq:standard_error}. Det är sedan dessa stokastiska motsvarigheter som används i beräkningarna nedan. 
 
 \footnotetext{Här används stokastiska variabler som motsvarar skattningarna i avsnitt~\ref{sec:diskret_data}. Detta är för att kunna göra stokastiska beräkningar. Det är värt att betona skattningarna i \eqref{eq:mean} och \eqref{eq:standard_error} är skattningar med hjälp av redan tagna mätvärden $x_i$, som när de har \emph{fått värden} inte längre är stokastiska variabler. }
 
@@ -77,7 +77,7 @@ Till att börja med kan kvadraten av summan skrivas om till
 \end{equation}
 Hade de två faktorerna här varit statistiskt oberoende blir väntevärdet av produkten samma som produkten av väntevärdena\cite{Rice_matstat2006}. Så är tyvärr inte fallet eftersom $\bar{X}$ beror av alla $X_i$.
 
-För att kunna jobba vidare används approximationen att sätta $\bar{X}\approx \mu$, vilket ju sen tidigare visade sig fungera bra för stora $N$. Detta ger att de två faktorerna blir oberoende för $i\neq j$ eftersom $X_i$ var satta att vara en uppsättning oberoende stokastiska variabler. Nu kan summan skrivas om till
+För att kunna jobba vidare används approximationen $\bar{X}\approx \mu$, vilket ju sen tidigare visade sig fungera bra för stora $N$. Detta ger att de två faktorerna blir oberoende för $i\neq j$ eftersom $X_i$ var satta att vara en uppsättning oberoende stokastiska variabler. Nu kan summan skrivas om till
 \begin{equation}\label{eq:sum_of_moments}
 \ev{\left(\sum_{i=1}^N\left(X_i-\bar{X}\right)^2 \right)^2} 
 \approx

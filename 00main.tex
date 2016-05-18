@@ -22,7 +22,7 @@ twoside,openright
 \usepackage[margin=10 pt]{caption}
 %%För att lägga in 'att göra'-noteringar i texten
 \usepackage[
-%disable
+disable,
 textsize=footnotesize
 ]{todonotes} %\todo{...}
 
@@ -32,8 +32,7 @@ textsize=footnotesize
 \usepackage[
 %           top    = 3cm,
 %           bottom = 3cm,
-%           left   = 3cm, right  = 3cm
-%           inner  = 4cm, outer  = 3cm
+           inner  = 4cm, outer  = 3cm
 ]{geometry}
 
 
@@ -63,11 +62,17 @@ textsize=footnotesize
 \newcommand{\COV}[2]{\text{cov}\!\left[#1,\;#2\right]}
 \newcommand{\CORR}[2]{\text{corr}\!\left[#1,\;#2\right]}
 
+%eget kommando boltzmann
+\newcommand{\kbT}{\ensuremath k_{\text{B}}T}
+
 %Omdefiniering av \int
 \let\oldint\int
 \renewcommand{\int}{\oldint\limits}
 
 
+\DeclareMathAlphabet{\mathsfit}{\encodingdefault}{\sfdefault}{m}{sl}
+\renewcommand{\mathsf}[1]{\mathsfit{#1}}
+\renewcommand{\mathbf}[1]{\boldsymbol{#1}}
 
 
 \begin{document}
@@ -76,7 +81,7 @@ textsize=footnotesize
 \newcommand{\skola}{Chalmers tekniska högskola}
 \newcommand{\institution}{Institutionen för fysik}
 %\newcommand{\titel}{Statistisk undersökning av brownsk rörelse hos partiklar och strängar i celler}
-\newcommand{\titel}{Brownsk rörelse i celler hos partiklar och filament }
+\newcommand{\titel}{Brownsk rörelse i celler hos partiklar och filament}
 \newcommand{\undertitel}{En statistisk undersökning av partiklars och aktinfilaments rörelser i jästceller respektive mikrokanaler}
 
 
@@ -94,10 +99,14 @@ textsize=footnotesize
 \makeatletter
 \if@openright
     \@openrightfalse
+    \input{05acknowledgement.tex}
     \tableofcontents
+    \input{06ordlista.tex}
     \@openrighttrue
 \else
+    \input{05acknowledgement.tex}
     \tableofcontents
+    \input{06ordlista.tex}
 \fi
 \makeatother
 
@@ -110,20 +119,12 @@ textsize=footnotesize
 
 %%%%%%%%%%%%%%%%%%%%%% Här börjar huvudtexten %%%%%%%%%%%%%%%%%%%%%%
 
-
-%\input{1Inledning.tex}
-
-%\input{2cellbiologi.tex}
-
-% %\begin{comment}
-
-%\input{3Stokastik.tex}
-
-%\input{4Partikel.tex}
-
+\input{1Inledning.tex}
+\input{2cellbiologi.tex}
+\input{3Stokastik.tex}
+\input{4Partikel.tex}
 \input{5Strang.tex}
-
-%\input{6Slutsats.tex}
+\input{6Slutsats.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Källförteckning %%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -135,16 +136,17 @@ textsize=footnotesize
 
 \appendix
 
+\makeatletter
+\@openrightfalse
+\makeatother
 
-%\input{A1ordlista}
+\input{A2noggrannhet}
+\input{A3CTRW.tex}
+\input{A4fBm.tex}
+\input{A5WLC}
 
-%\input{A2noggrannhet}
 
-%\input{A3CTRW.tex}
 
-%\input{A4fBm.tex}
-
-%\input{A5WLC}
 
 
 \end{document}
