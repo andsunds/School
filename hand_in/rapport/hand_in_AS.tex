@@ -4,7 +4,7 @@
 
 \usepackage{custom_as}
 
-%\graphicspath{ {figurer/} }
+\graphicspath{ {figurer/} }
 
 %%Drar in tabell och figurtexter
 \usepackage[margin=10 pt]{caption}
@@ -59,12 +59,30 @@ Produktionen ska sedan kunna vara stor nog för att kunna injecera fem patienter
 
 
 \section{Isotopval}
-I National Nuclear Data Centers ''Nuclear Wallet Cards''\cite{NNDC_wallet} kan man specificera vilken typ av sönderfall och hur lång halveringstid man söker, så tar de fram de isotoper som matchar sökningen. Gör man en sökning efter \BP-sönderfallande isotoper med en halveringstid på $\unit[17\pm 1]{timmar}$ får man 12 möjliga kandidater. 
+I National Nuclear Data Centers ''Nuclear Wallet Cards''\cite{NNDC_wallet} kan man specificera vilken typ av sönderfall och hur lång halveringstid man söker, så tar de fram de isotoper som matchar sökningen. Gör man en sökning efter \BP-sönderfallande isotoper med en halveringstid på $\unit[17\pm 1]{timmar}$ får man 12 möjliga kandidater. Av dessa har en av dem ($^{242}_{95}\!\mathrm{Am}$) bara en smal sönderfallskanal via \BP-sönderfall (17,30\,\%), så det är effektivt 11 möjliga isotoper att välja på.
 
-Nästa steg i processen är att identifiera vilka isotoper som enkelt går att producera. Detta betyder de ska gå att producera genom protonbetråning på ett strålmål av naturligtförekommande isotoper. 
+Nästa steg i processen är att identifiera vilka isotoper som enkelt går att producera. Detta betyder de ska gå att producera genom protonbetråning på ett strålmål av naturligt förekommande isotoper\footnotemark{}. Av de 11~kandidaterna går det nu att sålla ut tre (3) med det här extrakravet. 
+\footnotetext{Jag använder här den lista som är given på PingPong~\cite{PingPong}.}
 
+De tre möjliga kandidaterna är: $^{55}_{27}\mathrm{Co}$, $^{76}_{35}\mathrm{Br}$ och $^{193}_{79}\!\mathrm{Au}$. Dessa kan nu slås upp i en nulkeidkarta~\cite{NNDC_chart}. Där kan man börja med att se att $^{193}_{79}\!\mathrm{Au}$ sönderfaller till $^{193}_{78}\mathrm{Pt}$, som också är radioaktiv med en halveringstid på 50~år. Detta är inte så bra. Man behöver visserligen en radioaktiv isotop för att kunna använda PET, men man vill ju heller inte att den ska lämna kvar rester som fortsätter att vara radioaktiva under en längre tid. Det visar sig även att $^{55}_{27}\mathrm{Co}$ har samma problem.
+
+\subsubsection*{Den utvalda isotopen}
+Då återstår bara $^{76}_{35}\mathrm{Br}$. Som tur är, så sönderfaller $^{76}_{35}\mathrm{Br}$ till $^{76}_{34}\mathrm{Se}$, som är stabil. Vidare är faktiskt $^{76}_{35}\mathrm{Br}$ en redan använd radioisotop för PET~\cite{Lapi_PET,Valette_etal1993,Lovqvist_etal1997,Ribeiro_etal1999}. Detta talar också för att det redan finns utvecklade metoder för att ge patienten isotopen medicinskt så att det går att upptäcka tumörer. 
+
+Valet i det här fallet föll alltså på:
+\[
+^{76}_{35}\mathrm{Br}\qcomma \text{med } \Thalv=\unit[16,2]{timmar}.
+\]
+Enligt \cite{PingPong} har $^{76}_{35}\mathrm{Br}$ en tröskelenergi på $E_\text{min}=\unit[5,8]{MeV}$, det är alltså görbart att producera isotopen med den givna cyklotronen.
 
 \section{Produktion}
+
+
+\begin{figure}\centering
+\input{figurer/Se_76_x-sect.tex}
+\caption{Simulerat~\cite{PingPong} protonstråletvärsnitt av $^{76}_{34}\mathrm{Se}$ för produktion av $^{76}_{35}\mathrm{Br}$.}
+\label{fig:x-sect}
+\end{figure}
 
 
 \section{Diskussion}
