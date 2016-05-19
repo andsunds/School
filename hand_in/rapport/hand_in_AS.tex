@@ -54,7 +54,7 @@ I den här rapporten beskrivs hur man kan gå tillväga, ur ett fysiklaiskt pers
 
 Den cyklotron som används kan ge protoner med maximal energi på $E_\text{max}=\unit[10]{MeV}$ och ström på $I=\unit[10]{\micro{A}}$. Utgående från denna cyklotron, behövs en isotop med halveringstid på ungefär $\Thalv=\unit[17]{timmar}$. Självklart måste även isotopen \BP-sönderfalla för att kunna vara akutell för PET.
 
-Produktionen ska sedan kunna vara stor nog för att kunna injecera fem patienter med ett antal av dessa kärnor motsvarande en strålningsintensitet på $\unit[2.1]{MBq}$. Detta ska dessutom kunna göras efter att isotoperna har extraherats ur strålmålet som tar $t_0=\unit[54]{timmar}$ från avslutad betrålning. Samtidigt ska protonenergin inte vara så hög att det inte bildas några exciterade kärnor med högre än \unit[200]{keV} excitationsenergi. 
+Produktionen ska sedan kunna vara stor nog för att kunna injecera fem patienter med ett antal av dessa kärnor motsvarande en strålningsintensitet på $A_\text{dos}=\unit[2.1]{MBq}$. Detta ska dessutom kunna göras efter att isotoperna har extraherats ur strålmålet som tar $t_0=\unit[54]{timmar}$ från avslutad betrålning. Samtidigt ska protonenergin inte vara så hög att det inte bildas några exciterade kärnor med högre än \unit[200]{keV} excitationsenergi. 
 
 
 
@@ -71,25 +71,72 @@ Då återstår bara $^{76}_{35}\mathrm{Br}$. Som tur är, så sönderfaller $^{7
 
 Valet i det här fallet föll alltså på:
 \[
-^{76}_{35}\mathrm{Br}\qcomma \text{med } \Thalv=\unit[16,2]{timmar}.
+^{76}_{35}\mathrm{Br}\qcomma 
+\text{med } \Thalv=\unit[16,2]{timmar} \Longleftrightarrow \lambda = \unit[1,19\times10^{-5}]{s^{-1}}.
 \]
 Enligt \cite{PingPong} har $^{76}_{35}\mathrm{Br}$ en tröskelenergi på $E_\text{min}=\unit[5,8]{MeV}$, det är alltså görbart att producera isotopen med den givna cyklotronen.
 
+
+
+
 \section{Produktion}
+När isotopen väl är val måste produktionen av den dimensioneras.
+
+\subsection{Mängd som behöver produceras}
+
+Eftersom preparaten behöver förberedas i $t_0=\unit[54]{timmar}$ efter att produktionen avslutas, måste man ta hänsyn till att radioisotopen sönderfaller under tiden. Dett sker enligt den välkända exponenitellt avtagande kurvan
+\begin{equation}
+N_\text{s}(t) = N_0\,\ee^{-\lambda t}, %= N_0\cdot 2^{-t/\Thalv}
+\end{equation}
+där $N_\text{s}$ är antalet kärnor som finns vid tiden $t$, $N_0$ antalet kärnor som kommer från produktionen och $\lambda$ är radioisotopens sönderfallskonstant. I det här fallet är $t_0\approx3\Thalv$, vilket innebär att bara ungefär en åttondel av de producerade kärnorna har överlevt när patienten får dem. 
+
+PET-skanner kräver att patienterna får en dos på $A_\text{dos}=\unit[2.1]{MBq}$ -- dosen ska ges till fem patienter samtidigt. Eftersom aktiviteten följer
+\begin{equation}
+A(t) = -\dv{N_\text{s}}{t} 
+= \lambda N_0\,\ee^{-\lambda t}
+\end{equation}
+bestämmer detta hur många kärnor som måste produceras. 
+
+Man måste helt enkelt komma upp i $\lambda N_0\,\ee^{-\lambda t_0} = 5A_\text{dos}$. Detta ger en ekvation för för hur många kärnor som måste produceras i cyklotronen:
+\begin{equation}
+N_0 = \frac{5}{\lambda}\,A_\text{dos}\ee^{\lambda t_0} 
+= \frac{5}{\ln{2}}\,\Thalv\,A_\text{dos}\cdot 2^{t_0/\Thalv}
+= \unit[8,90\times 10^{12}]{kärnor}.
+\end{equation}
+
+
+\subsection{Cyklotronen}
+När antalet radioaktiva kärnor som behöver produceras väl är bestämt måste själva produktionen dimensioneras. Antalet radioaktiva kärnor som finns efter tiden $t$ från starten av produktionen är
+\begin{equation}
+N_\text{p}(t) = \frac{R}{\lambda} \left( 1-\ee^{-\lambda t} \right),
+% = \frac{R}{\lambda} \left( 1-2^{-t/\Thalv} \right)
+\end{equation}
+där $R$ är produktionstakten definierad enligt
+\begin{equation}
+R=\sigma n I,
+\end{equation}
+där $\sigma$ är reaktionens tvärsnitt, $I$ är strålens intensitet (i protoner per sekund) och $n$ är strålmålstätheten (i strålmålskärnor per längdenhet). I det här fallet är intensiteten given i ampere. För att konvertera till protoner per sekund används $I=i/e$. 
+Det sammanlagda uttrycket blir alltså
+\begin{equation}
+N_\text{p}(t) = \frac{\sigma n i}{\lambda e} \left( 1-\ee^{-\lambda t} \right).
+\end{equation}
+
+\todo[inline]{Bla bla problem med andra isotoper som produceras vilket ger \G-strålning med för hög energi.}
 
 
 \begin{figure}\centering
 \input{figurer/Se_76_x-sect.tex}
-\caption{Simulerat~\cite{PingPong} protonstråletvärsnitt av $^{76}_{34}\mathrm{Se}$ för produktion av $^{76}_{35}\mathrm{Br}$.}
+\caption{Simulerat~\cite{PingPong} tvärsnitt för isotopproduktion med protonstråle med $^{76}_{34}\mathrm{Se}$ som strålmål. Det finns fyra möjliga raktionsprodukter utmarkerade, varav $^{76}_{35}\mathrm{Br}$ är den eftersökta isotopen. }
 \label{fig:x-sect}
 \end{figure}
 
 
-\section{Diskussion}
+
+\section{Sammanfattning}
 
 
 
-\newpage
+%\newpage
 \bibliographystyle{ieeetr}
 \bibliography{referenser}%kräver en fil som heter 'referenser.bib'          
 
