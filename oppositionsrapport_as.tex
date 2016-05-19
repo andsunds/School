@@ -1,0 +1,105 @@
+\documentclass[11pt,a4paper, english, swedish
+]{article}
+\pdfoutput=1
+
+\usepackage{custom_as}
+
+\graphicspath{ {figurer/} }
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+            top    = 3cm,
+            bottom = 3cm,
+            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+%\renewcommand{\thesection}{...}
+
+
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+\title{Oppositionsrapport för arbetet 
+\\''Ytplasmoniska egenskaper hos nanopartikelsystem'' }
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+
+
+\addtocounter{section}{-1}
+\section{Absolut första intryck}
+\small
+\emph{Det här avsnittet är baserat, och skrivet direkt, från mina intryck efer att ha skummat över rapporten vid frukostbordet -- blädrat igenom den och läst sammandraget.} Allt för stor vikt bör alltså inte läggas vid dessa kommentarer. En sådan här större rapport måste dock kunna väcka intresse för att man ska vilja läsa den, så det första intrycket har ändå viss betdelse för texten som helhet.
+
+Jag kan inte säga att jag helt är med på vad rapporten kommer att innehålla efter att ha läst sammdraget. Förmodligen kommer sammandraget att klarna efter att ha läst rapporten, men själva syftet med sammandraget är ju att förklara vad man ger sig in på när man öppnar rapporten.
+
+Min andra kommentar är att rapporten inehåller många bilder och få ekvationer (på egen rad). Figurerna här tar mycket plats och ser ibland ut att hamna lite konstigt i förhållande till texten; författarna kaske kan överväga att minska antalet bilder då måga av dem ser väldigt lika ut vid en först anblick. Angående antalet ekvationer så är det inga problem att det inte är så många, men eftersom sammandraget prater om ''simuleringar'' och ''Besselfunktionern multiplicerade med en trigonometrisk funktion'' förväntar man sig att det det kanske finns lite matematiska uttryck som förklarar detta. Oftast kan matematiska uttryck också göra texten mer lättläslig.
+
+\normalsize
+\section{}
+
+
+
+% \newpage
+% \bibliographystyle{ieeetr}
+% \bibliography{referenser}%kräver en fil som heter 'referenser.bib'          
+
+
+
+
+\end{document}
+
+
+
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer (två enkelfjongar): ''.
+
+
+%% Inkludera PDF-dokument
+\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+
+%% Figurer inkluderade som pdf-filer
+\begin{figure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer roterade 90 grader
+\begin{sidewaysfigure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{sidewaysfigure}
+
+
+%%Om man vill lägga till något i TOC
+\stepcounter{section} %Till exempel en 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
