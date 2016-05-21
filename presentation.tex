@@ -27,6 +27,10 @@
 \usepackage{physics}
 
 
+\usepackage{multimedia} %För att kunna visa film
+%Kräver okular som pdfvisare i unix
+
+
 \graphicspath{ 
 {src_figures/Avancez/}  %specialbilder som bara behövs för bakgrunden
 {figures/} %bilder som används i själva presentationen
@@ -134,8 +138,6 @@
 \titlepagelogofile{Avancez_black}
 \date{\vspace{-0.25cm}}
 
-\usepackage{multimedia}
-
 
 \begin{document}
 
@@ -199,7 +201,9 @@ Diffusion, passiv transport
 \frametitle{Film av partiklar i jästceller}
 
 \centering
-\movie[width=7.35cm, height=4.08cm, poster=last]{}{filmer/partiklar_ed.avi}
+\movie[width=\textwidth, height=0.5551\textwidth, poster
+]{}{filmer/partiklar_ed.avi}
+
 
 \end{frame}
 
@@ -287,6 +291,11 @@ Cytoplasman blir mer fast i dvala?
 
 \begin{frame}
 \frametitle{Film av strängarna}
+
+\centering
+\movie[width=.9\textwidth, height=0.6492\textwidth, poster
+]{}{filmer/filament4.avi}
+
 
 \end{frame}
 
