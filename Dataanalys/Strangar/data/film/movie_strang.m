@@ -39,7 +39,7 @@ h=plot(x,y, 'b', 'linewidth', 2);
 axis([0,2.5, .4,2.2]*1e-5)
 axis equal
 
-v=VideoWriter('filamen4.avi');
+v=VideoWriter('filament4.avi');
 v.FrameRate = 10;
 open(v)
 
