@@ -2,7 +2,7 @@
 %	PACKAGES AND THEMES
 %----------------------------------------------------------------------------------------
 \pdfoutput=1
-\documentclass{beamer}
+\documentclass[swedish]{beamer}
 
 \usepackage[utf8]{inputenc}
 \usepackage[scaled]{helvet} %helvetica i sliden blir bra
@@ -26,10 +26,13 @@
 
 \usepackage{physics}
 
+
 \graphicspath{ 
 {src_figures/Avancez/}  %specialbilder som bara behövs för bakgrunden
 {figures/} %bilder som används i själva presentationen
 }
+
+\newcommand\impl{\stackrel{\mathclap{\normalfont\mbox{?}}}{\Longleftrightarrow}}
 
 
 
@@ -102,7 +105,7 @@
 %\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
 }
 
-
+\usepackage{custom_as}
 
 \newcommand{\RBox}[1]{%
   \tikz\node[draw,rounded corners,align=center,] {#1};%
@@ -120,10 +123,10 @@
 
 
 \usetheme[titleflower=true]{chalmers} % titleflower = true or false
-\title[Kort titel]{Lång titel som kommer på förstasidan} % Första klammern är en "short title"
+\title[Brownsk rörelse i celler]{Brownsk rörelse i celler hos partiklar och strängar} % Första klammern är en "short title"
 \subtitle{} % optional
-\author{Andréas Sundström } % [short author (optional)]{many authors}
-\institute[Chalmers]{Chalmers tekniska högskla}
+\author{Andréas Sundström \and Emelie Ekenstedt \and Robin Karlsson \and Oliver Sundell} % [short author (optional)]{many authors}
+\institute[Chalmers]{Chalmers tekniska högskola, \\Institutionen för fysik, \\Avdelningen för biofysik}
 %\titlepageextra{IPT 2015, Warsaw} % Optional extra info, appears before date on title page
 \footer{\insertshorttitle} % optional, manually sets footer (default is short author)
 %\footer{Something completely different} % but it can of course be anything.
@@ -131,7 +134,7 @@
 \titlepagelogofile{Avancez_black}
 \date{\vspace{-0.25cm}}
 
-
+\usepackage{multimedia}
 
 
 \begin{document}
@@ -162,54 +165,241 @@
 
 
 
-
-\section{Demoslides1 -- detta kommer med i innehållsförteckningen }
+\section{Cellbiologi}%detta kommer med i innehållsförteckningen 
 \begin{frame}
-\frametitle{En titel till den här sliden}
+\frametitle{Cellbiologi}
  \begin{columns}[c]
 \column{.4\textwidth} % Left column and width
-Text här.
-\begin{itemize}
-    \item Ibland vill man ha punkter.
-\end{itemize}
-\column{.6\textwidth} % Right column and width
-Den här sliden har två kolumner
-\begin{figure}
-%\includegraphics[width=1\textwidth]{}
-% \caption{}
-\end{figure}
-\end{columns}
-\end{frame}
 
-\begin{frame}
-\frametitle{Man kan ha flera frames i en section}
- \begin{columns}[c]
-\column{.4\textwidth} % Left column and width
-Mer text.
-\begin{itemize}
-    \item Fler punkter
-\end{itemize}
+
+Cytoplasman
+\vspace{8mm}
+
+Aktinfilament
+\vspace{8mm}
+
+Diffusion, passiv transport
+
 \column{.6\textwidth} % Right column and width
-Den här sliden har också två kolumner
-\begin{figure}
-%\includegraphics[width=1\textwidth]{}
-% \caption{}
+
+\begin{figure} %Filament kring kärnan
+\includegraphics[width=1\textwidth]{figures/FluorescentCells.png}
 \end{figure}
+%https://commons.wikimedia.org/wiki/File:FluorescentCells.jpg
+
 \end{columns}
 \end{frame}
 
 
-\section{Demoslide2 -- detta kommer också med i sidfoten}
-\begin{frame}
-\frametitle{Ibland vill man kanske bara ha en kolumn}
-Då hamnar texten över hela sidan istället. Särskit om man skriver på om massa onödigheter. Man ska helst undvika att ha med för mycket text på sin slide, för då hinner inte åskådaren läsa vad som står.
 
-Men man kan behöva en hel slide om man ska lägga in någon stor och jobbig ekvation
+%%%%%%%%%%%%%%%
+\section{Partikelrörelse}
+
+\begin{frame}
+\frametitle{Film av partiklar i jästceller}
+
+\centering
+\movie[width=7.35cm, height=4.08cm, poster=last]{}{filmer/partiklar_ed.avi}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Partikelmodeller och MSD}
+\begin{columns}[c]
+\column{.5\textwidth} % Left column and width
+
+Partikelmodeller:
+\begin{itemize}[label={$\bullet$}]
+    \item Brownsk rörelse
+    \item CTRW -- continuous time random walk
+    \item fBm -- fractional Brownian motion
+\end{itemize}
+%\\[1cm]
+MSD:
+%\vspace{-5mm}
 \[
-\sum_{k=0}^\infty \frac{\cos^2(\pi^k)+\sin^2(\pi^k)}{\int_0^\infty t^k\mathrm{e}^t \dd{t} } 
-= \lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n. 
+\ev{( x(t+\Delta{t})-x(t) )^2}
+\]%\vspace{-5mm}
+\[
+\ev{( x(t)-x(0) )^2}
 \]
 
+\column{.5\textwidth} % Right column and width
+
+\begin{figure} %MSD för dvala
+\resizebox{1\textwidth}{!}{
+\input{figures/MSD_beamer_ed.tex}}
+\end{figure}
+
+\end{columns}
 \end{frame}
 
+\begin{frame}
+\frametitle{Frekvensanalys -- PSD}
+\begin{columns}
+\column{.4\textwidth}
+
+
+
+PSD för stegen i rörelsen
+\vspace{1cm}
+
+Avvikelse från fBm
+
+
+\column{.6\textwidth}
+\begin{figure} %MSD dvala och logfas
+\resizebox{1\textwidth}{!}{
+\input{figures/PSD_beamer_ed.tex}}
+\end{figure}
+
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Skillnad mellan celler i log-fas och dvala}
+\begin{columns}
+\column{.4\textwidth}
+
+
+Snabbare diffusion i log-fas celler
+\vspace{1cm}
+
+Cytoplasman blir mer fast i dvala?
+
+
+
+
+\column{.6\textwidth}
+\begin{figure} %MSD dvala och logfas
+\resizebox{1\textwidth}{!}{
+\input{figures/MSD_beamer_skillnad.tex}}
+\end{figure}
+
+\end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%
+\section{Filamentrörelse}
+
+\begin{frame}
+\frametitle{Film av strängarna}
+
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{WLC -- Worm-like chain}
+ \begin{columns}[c]
+\column{.3\textwidth} % Left column and width
+%\hspace{-5mm}
+
+ Modell för filament
+\\[8mm]
+ Tangentkorrelation
+\\[8mm]
+ Mikrokanal
+
+\column{.7\textwidth} % Right column and width
+
+\begin{figure}
+\input{figures/tangentkorr_pres.tex}
+\end{figure}
+
+\end{columns}
+    
+\end{frame}
+
+
+\begin{frame}
+\frametitle{WLC för mikrokanal}
+ \begin{columns}[c]
+\column{.3\textwidth} % Left column and width
+
+Styrande differentialekvation
+\vspace{8mm}
+
+Cosinusmoder
+\vspace{8mm}
+
+Samband $\tau(k)$
+
+
+\column{.7\textwidth} % Right column and width
+
+\begin{figure}
+\resizebox{!}{!}{\input{figures/cosktauconf_pres.tex}}
+% \caption{}
+\end{figure}
+
+%\begin{figure}
+%\resizebox{!}{3cm}{\input{figures/cosktauconf_pres.tex}}
+% \caption{}
+%\end{figure}
+
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Kovariansmatrisen -- Egenmoder}
+
+\begin{columns}[c]
+\column{.4\textwidth} % Left column and width
+Kovariansmatris
+\begin{itemize}[label={$\bullet$}]
+    \item Statistisk information
+    \item Egenvektorer
+\end{itemize}
+\vspace{1cm}
+
+$\cos (ks)$ $\impl$ Egenvektor
+\column{.7\textwidth} % Right column and width
+
+\begin{figure}
+\input{figures/moder_pres.tex}
+ %\caption{}
+\end{figure}
+
+\end{columns}
+    
+\end{frame}
+
+\section{Sammanfattning}
+\begin{frame}
+\frametitle{Sammanfattning}
+
+\begin{itemize}[label={$\bullet$}]
+    
+ \item{Det saknas en fullständig modell för partikelrörelse}
+\\[8mm]
+ \item{Diffusion sker långsammare i celler i dvala}
+\\[8mm]
+ \item{Strängrörelsen representeras väl av egenmoderna}
+\\[8mm]
+\item{Egenmoderna liknar de teoretiska cosinusmoderna}
+
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Till sist...}
+    \begin{center}
+    \huge Tack! 
+    \end{center}
+\end{frame}
+
+
 \end{document}
+
+
+
+
