@@ -127,7 +127,7 @@
 
 
 \usetheme[titleflower=true]{chalmers} % titleflower = true or false
-\title[Brownsk rörelse i celler]{Brownsk rörelse i celler hos partiklar och strängar} % Första klammern är en "short title"
+\title[Brownsk rörelse i celler]{Brownsk rörelse i celler\\ hos partiklar och strängar} % Första klammern är en "short title"
 \subtitle{} % optional
 \author{Andréas Sundström \and Emelie Ekenstedt \and Robin Karlsson \and Oliver Sundell} % [short author (optional)]{many authors}
 \institute[Chalmers]{Chalmers tekniska högskola, \\Institutionen för fysik, \\Avdelningen för biofysik}
@@ -161,9 +161,28 @@
 \begin{frame}
 \frametitle{Innehåll}
 
-\tableofcontents
+\begin{itemize}[label={$\bullet$}]
+    \item Cellbiologi:
+    \begin{itemize}[label={--}]
+        \item Vad som finns i cellen
+    \end{itemize}
+    \item Partikelrörelse:
+    \begin{itemize}[label={--}]
+        \item Partiklarna rör sig för långsamt. 
+        \item Tillgängliga förklaringsmodeller är inte heller perfekta. 
+        \item Klar skillnad mellan aktiva och passiva celler.
+    \end{itemize}
+    \item Filamentrörelse:
+    \begin{itemize}[label={--}]
+        \item En modell som används för polymerer
+        \item Två olika sätt att ta fram svängningsmoder
+    \end{itemize}
+\end{itemize}
+
+%\tableofcontents
 
 \end{frame}
+
 
 
 
@@ -219,15 +238,18 @@ Partikelmodeller:
     \item CTRW -- continuous time random walk
     \item fBm -- fractional Brownian motion
 \end{itemize}
-%\\[1cm]
-MSD:
-%\vspace{-5mm}
+\vspace{2mm}
+
+Mean squared displacement (MSD):
+\vspace{-2mm}
 \[
-\ev{( x(t+\Delta{t})-x(t) )^2}
-\]%\vspace{-5mm}
-\[
-\ev{( x(t)-x(0) )^2}
+\ev{\Big( x(t+\Delta{t})-x(t) \Big)^{\!\!2}}
 \]
+\[
+\ev{\Big( x(t)-x(0) \Big)^{\!\!2} }
+\]
+
+
 
 \column{.5\textwidth} % Right column and width
 
@@ -246,7 +268,7 @@ MSD:
 
 
 
-PSD för stegen i rörelsen
+PSD för stegen 
 \vspace{1cm}
 
 Avvikelse från fBm
@@ -268,7 +290,7 @@ Avvikelse från fBm
 \column{.4\textwidth}
 
 
-Snabbare diffusion i log-fas celler
+Snabbare diffusion i aktiva celler
 \vspace{1cm}
 
 Cytoplasman blir mer fast i dvala?
