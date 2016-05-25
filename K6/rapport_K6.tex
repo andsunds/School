@@ -25,6 +25,8 @@
 \newcommand{\Thalv}[2]{\ensuremath{}T_{\nicefrac{1}{2}}\left(^{#1}\text{#2}\right)}
 
 
+
+
 \begin{document}
 
 
@@ -44,6 +46,11 @@
 %\todolist
 
 \section{Inledning}
+I den här labben studeras neutronaktivering av silver. Detta bygger på att de två naturligt förekommande silverisotoperna $^{107}\text{Ag}$ och $^{109}\text{Ag}$ kan omvandlas till $^{108}\text{Ag}$ respektive $^{110}\text{Ag}$ genom neutroninfångning.
+
+Rapporten börjar med att studera effekten från olika neutronenergier. Detta görs genom att dels undersöka siverisotopernas tvärsnitt för termiska neutroner ($E\sim \unit[10]{meV}$), dels undersöka påverkan från olika mycke bromsning med hjälp av parafin. De termiska neutronera undersöks genom att klä in silvret i kadmium som har ett mycket stort tvärsnitt för termiska neutroner. 
+
+Därefter undersöks de två ny silverisotopernas halveringstider. 
 
 \section{Metod}
 Silvret först behöver först och främst neutronaktiveras, men då
@@ -57,7 +64,7 @@ bromsa neutronerna tillräckligt men inte heller för mycket.
 
 \begin{figure}\centering
 \resizebox{.5\textwidth}{!}{\input{fig_and_code/aktivering.pdf_t}}
-\caption{}
+\caption{Olika rymdvinklar för olika avstånd från källan. För att bara mäta effekten från olika mycket parafin måste man kompensera för att el lika stor platta på större avstånd tar upp en mindre rymdvinkel. Alltså att färre antal neutroner kommer att träffa plattan som är längre bort.}
 \label{fig:aktivering}
 \end{figure}
 
@@ -73,7 +80,7 @@ bromsa neutronerna tillräckligt men inte heller för mycket.
     & & \multicolumn{1}{c|}{Rådata} & \multicolumn{1}{c|}{Bakgrundskorrigerad} & \multicolumn{1}{c|}{Rymdvinkelkorrigerad} 
     \\\hline
     % Första raden av första delen
-    \multicolumn{1}{|l|}{\multirow{2}{*}{Utan kadmium}}
+    \multicolumn{1}{|l|}{\multirow{2}{*}{Med kadmium}}
     &Pos. 3 & 1\,798& 1\,784& 20,5\,$\times 10^3$
     \\ \cline{2-5}
     % Andra raden av första delen
@@ -81,7 +88,7 @@ bromsa neutronerna tillräckligt men inte heller för mycket.
     & Pos. 2 & \phantom{1\,}458& \phantom{1\,}444& \phantom{1}4,0\,$\times 10^3$
     \\\hline\hline
     % Första raden av sista delen
-    \multicolumn{1}{|l|}{\multirow{3}{*}{Med kadmium}} 
+    \multicolumn{1}{|l|}{\multirow{3}{*}{Utan kadmium}} 
     &Pos. 3 & 1\,506 & 1\,492 & 17,1\,$\times 10^3$
     \\ \cline{2-5}
     % Andra raden av sista delen
