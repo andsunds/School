@@ -4,14 +4,14 @@ Aktinfilament är polymerer som utgör en viktig byggsten i cellens cytoskelett 
 
 I det här kapitlet studeras olika dynamiska egenskaper för aktinfilament i en miljö utanför cellen. Studien omfattar både filament som tillåts fluktuera fritt och de som är instängda i en rektangulär kvasi-2D-mikrokanal -- en kanal med försumbart djup. Mikrokanalen är till för att simulera beteendet hos aktinfilament i cytoskelettet där det omges av andra filament och därmed har en begränsad möjlighet till rörelse. Vidare underlättar mikrokanalerna att hålla strängarna i mikroskopets fokalplan.
 
-Det här kapitlet börjar med en översikt över hur mikroskopidatan behandlas för att kunna användas i studien av strängarna. Därefter presenteras och undersöks en WLC-modellen för fria strängrörelser samt en modifikation av modellen som även beskriver inneslutna strängar. I brist på statistiskt underlag är visade det sig vara svårt att avfärda eller bekräfta denna modellen som en förklaring för aktinfilamentens rörelse. De tydligaste skillnaderna är den förhöjda styvheten, persistence length, för instängda strängar vilket inte anses vara i motsägelse med WLC-modellen.
+Det här kapitlet börjar med en översikt över hur mikroskopidatan behandlas för att kunna användas i studien av strängarna. Därefter presenteras och undersöks en WLC-modellen för fria strängrörelser samt en modifikation av modellen som även beskriver inneslutna strängar. I brist på statistiskt underlag visade det sig vara svårt att avfärda eller bekräfta denna modellen som en förklaring för aktinfilamentens rörelse. De tydligaste skillnaderna är den förhöjda styvheten, persistence length, för instängda strängar vilket inte anses vara i motsägelse med WLC-modellen.
 
-Till sist beskrivs en undersökning av strängarnas egenmoder vars relation mellan vågtal och relaxationstid studeras och presenteras. Dock ska det återigen noteras att mer statistiskt underlag behövs för att tydliga bekräfta detta samband. Egenmoderna för strängarna tas fram på två sätt, där speciellt egenmoder framtagna via diagonalisering av en kovariansmatris sticker ut. Dessa egenmoder visas ha egenskaper likt harmoniska svängningar, vilket utgör den andra studerade utvecklingen av rörelsen i egenmoder, och studien tyder på att en mer teoretiskt koppling mellan modell och kovariansmatrisen kan vara av intresse. 
+Till sist beskrivs en undersökning av strängarnas egenmoder vars relation mellan vågtal och relaxationstid studeras och presenteras. Dock ska det återigen noteras att mer statistiskt underlag behövs för att tydligare bekräfta detta samband. Egenmoderna för strängarna tas fram på två sätt, där speciellt egenmoder framtagna via diagonalisering av en kovariansmatris sticker ut. Dessa egenmoder visas ha egenskaper likt harmoniska svängningar, vilket utgör den andra studerade utvecklingen av rörelsen i egenmoder. Studien tyder även på att en mer teoretiskt koppling mellan modell och kovariansmatrisen kan vara av intresse. 
 
 \section{Undersökt data}
 Datan som analyseras för strängrörelse i vätska är den samma som Köster et~al.~\cite{Koster_etal2005,Koster_etal2007,Koster_etal2008} använde. Den består av filmer av aktinfilament som tillåts röra sig i en vätska. Dessa strängar hade en längd på kring 10--30\,\micro{m} och befann sig i olika breda mikrokanaler. 
 
-Två typer av strängar studeras: fria strängar i breda kanaler och inneslutna strängar i en kvasi-2D-mikrokanal. Upplösning på filmerna är 10 bilder per sekund. I båda fallen rörde sig strängarna till största del i två dimensioner då kanalernas djup var litet i förhållande till kanalernas och filamentens bredd.
+Två typer av strängar studeras: fria strängar i breda kanaler och inneslutna strängar i en kvasi-2D-mikrokanal. Upplösning på filmerna är 10 bilder per sekund. I båda fallen rörde sig strängarna till största del i två dimensioner då kanalernas djup var litet i förhållande till kanalernas och filamentens utbredning.
 
 
 \subsection{Polynomanpassning för strängarna} \label{sec:polynomanpassning}
@@ -188,7 +188,7 @@ Då kovariansen beror på differensen mellan variablerna $\Delta t=t-t'$ samt $\
 
 \section{Tangentkorrelation}
 
-Korrelationen mellan två tangentvektorer beräknade från den minimalistiska WLC-modellen fås genom att studera \eqref{böj} medelvärdsbildad över tid. Man får då \cite{Landau1958}
+Korrelationen mellan två tangentvektorer beräknade från den minimalistiska WLC-modellen fås genom att studera \eqref{böj} medelvärdesbildad över tid. Man får då \cite{Landau1958}
 \begin{equation} \label{eq:tangentkorr_exp}
 \ev{\mathbf{t}(s)\mathbf{t}(s+\Delta s)}=\ee^{-\frac{\abs{\Delta s}}{2L_\text{p}}},
 \end{equation}
@@ -220,7 +220,7 @@ Detta kan tänkas förklaras med att en sträng i en mikrokanal kolliderar med d
 \begin{figure}
     \centering
     \input{bilder/strangar/tangentkorr.tex}
-    \caption{Tangentkorrelation för en fri sträng och för en instängd sträng med en längd på $\unit[35]{\micro m}$ respektive $\unit[22]{\micro m}$ visas. För den fria strängen anpassas ett exponentialsamband med en persistence length på omkring $L_\text{p} = \unit[50]{\micro m}$. För den instängda strängen avtar korrelationen för att sedan plana ut mot en beständig korrelation längs strängen, därmed plottas ingen exponentialanpassning till denna. Ifall en sådan görs för att beräkna dess styvhet erhålls en persistent length omkring $\unit[300]{\micro m}$. Notera att det finns mindre statistik för den instängda strängen på grund av skillnaden i strängarnas längd.}
+    \caption{Tangentkorrelation för en fri sträng och för en instängd sträng med en längd på $\unit[35]{\micro m}$ respektive $\unit[22]{\micro m}$ visas. För den fria strängen anpassas ett exponentialsamband med en persistence length på omkring $L_\text{p} = \unit[50]{\micro m}$. För den instängda strängen avtar korrelationen för att sedan plana ut mot en beständig korrelation längs strängen. Därmed plottas ingen exponentialanpassning till denna. Ifall en sådan görs för att beräkna dess styvhet erhålls en persistent length omkring $\unit[300]{\micro m}$. Notera att det finns mindre statistik för den instängda strängen på grund av skillnaden i strängarnas längd.}
     \label{fig:tangentkorr}
 \end{figure}
 
@@ -318,7 +318,7 @@ Samma analys kan göras för strängar vars svängningar inte begränsas av mikr
 
 \subsection{Egenmoder från kovariansmatrisen}
 
-I tidigare avsnitt undersöktes strängens rörelse genom att utveckla denna i en cosinusbas. En annan metod för uppdelning av strängens rörelse i egenmoder beskrivs i avsnitt~\ref{sec:kovmatris} som en diagonalisering av kovariansmatrisen $\mathsf{C}$. I det här fallet konstrueras den av de transversella avstånden $A_s(t)$, där $s$ är en \emph{diskret} båglängdsparameter. Diagonalisering av kovariansmatrisen leder effektivt till ett basbyte från en bas bestående av det transversella avståndet i varje punkt $s$ längs strängen, till en bas bestående av egenmoderna för strängen. 
+I föregående avsnitt undersöktes strängens rörelse genom att utveckla denna i en cosinusbas. En annan metod för uppdelning av strängens rörelse i egenmoder beskrivs i avsnitt~\ref{sec:kovmatris} som en diagonalisering av kovariansmatrisen $\mathsf{C}$. I det här fallet konstrueras den av de transversella avstånden $A_s(t)$, där $s$ är en \emph{diskret} båglängdsparameter. Diagonalisering av kovariansmatrisen leder effektivt till ett basbyte från en bas bestående av det transversella avståndet i varje punkt $s$ längs strängen, till en bas bestående av egenmoderna för strängen. 
 
 Egenvärdena till kovariansmatrisen ger ett mått på hur mycket av strängens rörelse som byggs upp av motsvarande egenmod. Framtida användning av storleken på moden avser därför storleken på egenvärdet. I avsnitt~\ref{sec:kovmatris} påpekas även att den tidsmedelvärdesbildade variansen av varje mod svarar precis mot egenvärdena till kovariansmatrisen. Genom att projicera strängens rörelse på ett fåtal av de egenmoder med störst egenvärde förenklas analysen\cite{Shlens_PCA2014}; karakteristiska egenskaper för varje egenmod kan då undersökas separat. 
 
@@ -408,12 +408,12 @@ I det här avsnittet har två olika metoder att dela upp strängrörelsen i egen
     \subfigure[][]{
     \input{bilder/strangar/cosktaunonconf.tex}\label{fig:cosnonconf}
     }}
-    \caption{Samband mellan vågtal och relaxationstid för de första cosinusmoderna. Vardera figur innehåller data från 2 strängar för fria samt instängda strängar. För moder med större vågtal erhölls inget användbart samband, därför plottas enbart de signifikanta moderna för vardera sträng. Felmariginalerna för $\tau$ är satta som 95\,\%-iga konfidensintervall. Standardavvikelsen för $\tau$ fås som standardavvikelsen vid anpassningen av exponentialfunktionen.}
+    \caption{Samband mellan vågtal och relaxationstid för de första cosinusmoderna. Vardera figur innehåller data från 2 strängar. För moder med större vågtal erhölls inget användbart samband, därför plottas enbart de signifikanta moderna för vardera sträng. Felmariginalerna för $\tau$ är satta som 95\,\%-iga konfidensintervall. Standardavvikelsen för $\tau$ fås som standardavvikelsen vid anpassningen av exponentialfunktionen.}
     \label{fig:cosmoder}
 \end{figure}
 
 Enligt \eqref{basutv} kan avståndsvektorn $A(t,s)$, innehållandes strängens transversella 
-fluktuationer, uttryckas i en bas av egenmoder. Tidigare erhölls det att en sådan bas spänns upp av egenvektorerna $\psi_{n}(s)=\cos({\frac{n\pi}{L}s})$ vars fourierkoefficienter fås genom diskret cosinustransform av $A(t,s)$. Korrelationen för de tidsberoende koefficienterna beräknas enligt \eqref{modkorr} och modernas relaxationstid erhålls. I figur \ref{fig:cosmoder} (a) ses relaxationstider $\tau$ plottade mot modens vågtal $k$ för strängar inneslutna i en mikrokanal. Figur \ref{fig:cosmoder} (b) visar motsvarande data fast för de fria strängarna. Överensstämmande med \eqref{relaxconf} så ses ett snabbt avtagande samband för båda typerna av strängar, alltså att moder med små vågtal förblir representativa för strängens svängningar under längre tidsperioder.
+fluktuationer, uttryckas i en bas av egenmoder. Tidigare erhölls det att en sådan bas spänns upp av egenvektorerna $\psi_{n}(s)=\cos({\frac{n\pi}{L}s})$ vars fourierkoefficienter fås genom diskret cosinustransform av $A(t,s)$. Korrelationen för de tidsberoende koefficienterna beräknas enligt \eqref{modkorr} och modernas relaxationstid erhålls. I Figur \ref{fig:cosmoder} (a) ses relaxationstider $\tau$ plottade mot modens vågtal $k$ för strängar inneslutna i en mikrokanal. Figur \ref{fig:cosmoder} (b) visar motsvarande data fast för de fria strängarna. Överensstämmande med \eqref{relaxconf} så ses ett snabbt avtagande samband för båda typerna av strängar, alltså att moder med små vågtal förblir representativa för strängens svängningar under längre tidsperioder.
 
 
 
@@ -557,7 +557,7 @@ Jämför man detta med analysen i avsnitt~\ref{sec:costransform} och samtidigt b
 En möjlig tanke är att det skulle kunna gå att  koppla de uppmätta koefficienterna och egenfunktionerna till en styrande differentialekvation. Detta skulle dock kräva en mycket djupare teoretisk analys av kovariansmatrisen. %och dess koppling till en eventuell differentialekvation. 
 Det är dock något som faller utanför denna studies räckvidd.
 Vi har i dagsläget inte funnit några publicerade resultat som kan ge en klar teoretisk bild om det över huvud taget går att koppla kovariansmatrisens egenvektorer till en eventuell styrande differentialekvation. Likheterna som nämndes ovan skulle dock kunna tyda på att det är möjligt.
-En sådan här koppling, om den finns, skulle kunna tillämpas som en statistiskt verktyg för att vidare undersöka strängrörelser.
+En sådan här koppling, om den finns, skulle kunna tillämpas som ett statistiskt verktyg för att vidare undersöka strängrörelser.
 
 Avslutningsvis bör vi påminna om att detta bara är spekulationer. Det verkar finnas vissa likheter, men utöver det så finns inga solida teoretiska grunder. Dock vill vi ändå mena att det vore intressant att vidare försöka studera kovariansmatrisens teoretiska egenskaper. Då särskilt om huruvida man kan göra en övergång från ändligtdimensionella vektorrum till ett funktionsrum i syfte att studera dess egenvektorer. 
 

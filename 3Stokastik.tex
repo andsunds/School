@@ -152,9 +152,9 @@ Inom bland annat signalbehandling kan det vara intressant att veta vilka frekven
 För stokastiska processer kan liknande metoder användas, men tyvärr är i allmänhet stokastiska processer inte fouriertransformerbara. Istället används den så kallade spektrala effekttätheten, även kallad PSD (en. power spectral density), en nära släkting till fouriertransformen.
 
 %\paragraph{Energi- och effektinnehåll i en stokastisk process}
-Energin i en process $Y(t)$ kan betraktas som integralen
+Energin i en process, $Y(t)$, kan betraktas som integralen
 \begin{equation}\label{eq:energy}
-E_Y(T) = \int_{-T}^{T} \abs{Y(t)}^2\id{t},
+E_Y(T) = \int_{-T}^{T} \big|Y(t)\big|^2 \id{t},
 \end{equation}
 där $T$ svarar mot den tid som energin mäts över. Anledningen till att stokastiska processer i allmänhet inte är fouriertransformerbar är att denna integral divergerar när $T\to\infty$. Alltså att $Y$ är divergent i $\mathcal{L}^2$-mening. 
 
@@ -305,14 +305,14 @@ Antaganden om fluktuationens väntevärde och korrelation men med en okänd sann
 
 
 \subsection{Brownsk rörelse}\label{sec:brown}
-Ett illustrerande exempel på en SDE är brownsk rörelse. Här utgår man från Newtons andra lag för att ställa upp en Langevinekvation för partikelns hastighet. Man antar att varje kollision med de omgivande molekylerna ger en stokastiskt bidrag till partikelns rörelsemängd, vilket ger en stokastisk kraftterm i Newtons andra lag.
+Ett illustrerande exempel på en SDE är brownsk rörelse. Då utgår man från Newtons andra lag för att ställa upp en Langevinekvation för partikelns hastighet. Man antar att varje kollision med de omgivande molekylerna ger ett stokastiskt bidrag till partikelns rörelsemängd, vilket ger en stokastisk kraftterm i Newtons andra lag.
 
 Hastigheten för en partikel som utför ren brownsk rörelse styrs av
 Langevinekvationen~\cite{Mazo_Brownian2002} 
 \begin{equation} \label{eq:Brownian_SDE}
     M\pd_tv=-\zeta v + F(t),
 \end{equation}
-där $M$ är partikelmassan, $\zeta$ en friktionskonstant och $F(t)$ den stokastiskt fluktuerande kraften. Kraften utgör här det stokastiska bidraget antas uppfylla egenskaperna för vitt brus enligt \eqref{eq:white_noise}, men med en extra faktor $\sigma$ multiplicerad med korrelationen.
+där $M$ är partikelmassan, $\zeta$ en friktionskonstant och $F(t)$ den stokastiskt fluktuerande kraften. Kraften utgör här det stokastiska bidraget och antas uppfylla egenskaperna för vitt brus enligt \eqref{eq:white_noise}, men med en extra faktor $\sigma$ multiplicerad med korrelationen.
 %Den fysikaliska tolkningen av denna stokastiska kraft är att partikeln får små impulser från omgivande vätskepartiklar vilka kolliderar slumpmässigt med partikeln.  
 
 

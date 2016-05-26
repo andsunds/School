@@ -25,9 +25,9 @@ Data för ett hundratal partiklar från olika jästceller ingick i mätserien, b
 \section{Modeller för partikelrörelse i vätskor}
 
 Till en första approximation skulle partikelrörelser i cytoplasman kunna beskrivas med klassisk brownsk rörelse. Detta är en enkel modell med en tydlig fysikalisk tolkning -- att många mindre molekyler krockar med partiklarna så att partiklarna börjar vandra runt. Den här modellen har dock en teoretisk svaghet i att den förutsätter att systemet är i termisk jämvikt~\cite{Einstein1905,Hofling&Franosch2013}, något som inte är fallet inuti levande celler. Vidare behöver cytoplasman inte nödvändigtvis gå att beskriva som en klassisk vätska\footnotemark{}~\cite{Midtveldt_etal2016}, som också krävs i Einsteins härledning~\cite{Einstein1905}.
-\footnotetext{En klassisk vätska är en vätska som uppfyller Stokes lag för viskös friktion. }
+\footnotetext{En klassisk vätska är en vätska som uppfyller Stokes lag för viskös friktion -- alltså att friktionskraften är linjärt beroende av hastigheten genom fluiden.}
 
-Alltså finns redan vissa teoretiska invändningar mot att använda klassisk brownsk rörelse för att beskriva partikelrörelser med vanlig brownsk rörelse, men det slutgiltiga provet finns i experiment. 
+Alltså finns det redan vissa teoretiska invändningar mot att använda klassisk brownsk rörelse för att beskriva partikelrörelser, men det slutgiltiga provet finns i experiment. 
 Bland annat \cite{Parry_etal2014} och \cite{Midtveldt_etal2016} har visat att diffusionen av partiklar i celler är fundamentalt långsammare än förväntat från klassisk brownsk rörelse. 
 
 För att visa detta används MSD, ett mått som mäter hur långt en partikel i medel förflyttar sig under en given tid. Som visades i avsnitt~\ref{sec:brown} är MSD:n för brownsk rörelse proportionell mot förlupen tid. Speciellt kan \eqref{eq:MSD_brown} skrivas om till
@@ -61,9 +61,9 @@ där $\bar{x}$ har satts till 0. Vidare kan också MSD beräknas; med $\Delta{t}
 
 
 \subsection{Continuous Time Random Walk (CTRW)}
-En möjlig förklaringsmodell för anomal transport i celler utgörs av CTRW (Continuous-Time Random Walk)~\cite{Hofling&Franosch2013}. Här beskrivs rörelsemönstret av att partiklarna under majoriteten av tiden sitter bundna till olika nätliknande strukturer för att sedan plötsligt ta sig vidare till en ny position efter en viss tid. Partiklarnas steglängder samt väntetider mellan steg är stokastiska variabler. För härledning av partikelns egenskaper givet en CTRW modell, se bilaga~\ref{app:CTRW}. 
+En möjlig förklaringsmodell för anomal transport i celler utgörs av CTRW (Continuous Time Random Walk)~\cite{Hofling&Franosch2013}. Här beskrivs rörelsemönstret av att partiklarna under majoriteten av tiden sitter bundna till olika nätliknande strukturer för att sedan plötsligt ta sig vidare till en ny position efter en viss tid. Partiklarnas steglängder samt väntetider mellan steg är stokastiska variabler. För härledning av partikelns egenskaper givet en CTRW-modell, se bilaga~\ref{app:CTRW}. 
 
-Den stora skillnaden mellan en CTRW modell och enkel slumpvandring är att väntevärdet av tiden mellan två steg kan vara odefinierad för en CTRW modell. I dessa fall används ofta \cite{Hofling&Franosch2013} fördelningsfunktionen som för stora $t$ asymptotiskt går mot
+Den stora skillnaden mellan en CTRW-modell och enkel slumpvandring är att väntevärdet av tiden mellan två steg kan vara odefinierad för en CTRW-modell. I dessa fall används ofta \cite{Hofling&Franosch2013} fördelningsfunktionen som för stora $t$ asymptotiskt går mot
 \begin{equation}
 \psi(t) \sim \frac{1}{t^{\alpha+1}}\qcomma 0<\alpha<1,
 \end{equation}
@@ -75,7 +75,7 @@ Givet att väntevärdet av steglängden är noll så blir MSD för CTRW vid stor
 \end{equation}
 Eftersom $0<\alpha<1$ utför CTRW subdiffusion, som är vad som observerats. Denna anomala transport uppstår eftersom väntevärdet av tiden mellan steg är odefinierad, vilket medför att centrala gränsvärdessatsen ej uppfylls. Summan av de stokastiska variablerna går således ej mot att bli normalfördelad, något som är grundläggande för teorin kring brownsk rörelse.
 
-CTRW är en icke-stationär process vilket medför att MSD:n i \eqref{eq:CTRW_MSD} beräknas från startpositionen $x(0)=0$. En beräkning av MSD mellan två andra tidpunkter skulle medföra ett explicit tidsberoende, det vill säga inte enbart bero på tidsskillnaden mellan tidpunkterna.
+CTRW är en icke-stationär process \cite{Hofling&Franosch2013} vilket medför att MSD:n i \eqref{eq:CTRW_MSD} beräknas från startpositionen $x(0)=0$. En beräkning av MSD mellan två andra tidpunkter skulle medföra ett explicit tidsberoende, det vill säga inte enbart bero på tidsskillnaden mellan tidpunkterna.
 
 %\todo[color=lime]{kanske något om att subdiffusion uppstår då man medelvärderar över många partiklar}
 
@@ -162,7 +162,7 @@ Ett av de enklaste sambanden att ansätta är ett potenssamband:
 \end{equation}
 Ett sådant samband svarar mot en trendlinje i en dubbellogplott, där $\beta$ blir linjens lutning. I efterföljande undersökningar kan sedan denna trendlinje användas för att vikta termer från olika partiklar i medelvärden. % så att intensitetsvariationerna korrigeras.
 
-\subsubsection{Undersökning av mätbrus}
+\subsection{Undersökning av mätbrus}
 En viktig aspekt i alla fysikaliska mätningar är hur mycket brus datan innehåller. Så även i den här studien. Dock kan det verka motsägelsefullt att försöka uppskatta hur mycket brus man har i data som består av slumpvandrande partiklar -- också det ett sorts ''brus''. Det går dock att göra några försök. 
 
 Mätbruset kan uppskattas genom att ansätta en uppmätt position på formen
@@ -275,11 +275,11 @@ En annan skillnad som kan uppstå när man beräknar MSD med \eqref{eq:MSD_S} re
 \subsection{Resultat -- ingen märkbar skillnad mellan olika MSD-mått}
 
 
-För att undersöka om partikelrörelsen utgör en stationär process beräknas de olika MSD måtten för partiklarna enligt \eqref{eq:MSD_S} och \eqref{eq:MSD_s}. Ett potenssamband har anpassats till resultaten i de båda beräkningarna och visas i \figref{fig:MSD}. 
+För att undersöka om partikelrörelsen utgör en stationär process beräknas de olika MSD-måtten för partiklarna enligt \eqref{eq:MSD_S} och \eqref{eq:MSD_s}. Ett potenssamband har anpassats till resultaten i de båda beräkningarna och visas i \figref{fig:MSD}. 
 
 Ingen väsentlig skillnad i exponenten kan uttydas från anpassningen mellan de två MSD-typerna. Detta tyder på att processen är stationär. Partikelrörelserna torde därför inom detta område kunna beskrivas bättre av den stationära fBm snarare än den icke-stationära CTRW.
 
-Jämförs exponenterna i potensanpassningen mellan cellerna i dvala och log-fas, (a) respektive (b) i \figref{fig:MSD}, finns en viss skillnad. Exponenten för cellerna i dvala är $0,60$ mot log-fas-cellernas $0,80$. Med osäkerhetsgränser som i \figref{fig:MSD_error} syns att dessa värden på exponenterna själva får en osäkerhet på ungeför $\pm 0,05$. Även om \figref{fig:MSD_error} bara visar detta för partiklar från celler i dvala så gäller samma osäkerhet i exponenten för celler i log-fas.
+Jämförs exponenterna i potensanpassningen mellan cellerna i dvala och log-fas, (a) respektive (b) i \figref{fig:MSD}, finns en viss skillnad. Exponenten för cellerna i dvala är $0,60$ mot log-fas-cellernas $0,80$. Med osäkerhetsgränser som i \figref{fig:MSD_error} syns att dessa värden på exponenterna själva får en osäkerhet på ungefär $\pm 0,05$. Även om \figref{fig:MSD_error} bara visar detta för partiklar från celler i dvala så gäller samma osäkerhet i exponenten för celler i log-fas.
 
 Även med felgränserna för exponenterna syns dock att båda processerna ändå är exempel på subdiffusion. Alltså att partiklarnas MSD beror av tiden som ett potenssamband med exponent mindre än $1$. Subdiffusion är en avvikelse från klassisk brownsk rörelse, där exponenten enligt \eqref{eq:MSD_brown} ska vara $1$. 
 
@@ -574,12 +574,12 @@ Som förklaring framhåller \cite{Parry_etal2014} istället att cytoplasman blir
 Exakt vad som sker i jästcellerna framgår inte från resultaten presenterade i denna rapport. En möjlig förklaring kan vara att jästceller precis som bakterier kan förändra cytoplasman till att bli mer solid\cite{Midtveldt_etal2016}. Denna hypotes diskuteras vidare tillsammans med Ornstein-Uhlenbeck-modellen. 
 
 
-\subsubsection{Likhet mellan de olika måtten på MSD antyder om att fBm är en bättre modell}
+\subsubsection{Likhet mellan de olika måtten på MSD antyder att fBm är en bättre modell}
 
 Som antyds i \eqref{eq:fBm_MSD} beror variansen för fBm endast på tidsdifferensen och dess MSD saknar därmed explicit tidsberoende. Detta ger överensstämmande resultat mellan MSD-måtten $s$ och $S$ i \eqref{eq:MSD_s} respektive \eqref{eq:MSD_S}. 
 CTRW saknar denna egenskap för variansen då processen inte har stationära steg och rörelsens MSD skulle därför skilja sig åt om den beräknades med de olika måtten.
 
-Då de undersökta partikelrörelserna visar upp överensstämmande resultat mellan $S$ och $s$, se \figref{fig:MSD}, tyder detta på att de utför en rörelse med stationära steg. Baserat på denna observation utgör fBm en bättre modell för partikelrörelsen än CTRW.
+Då de undersökta partikelrörelserna visar upp överensstämmande resultat mellan $S$ och $s$, se \figref{fig:MSD}, tyder detta på att partiklarna utför en rörelse med stationära steg. Baserat på denna observation utgör fBm en bättre modell för partikelrörelsen än CTRW.
 
 
 
@@ -598,7 +598,7 @@ Från \figref{fig:storleksberoende}, framför allt (c) och (d), kan man dock se 
 
 \footnotetext{I efterhand har det framkommit i diskussioner med Daniel Midtvedt (som både har varit medförfattare till \cite{Midtveldt_etal2016} och handledare i det här kandidatarbetet) att metoden som användes i \cite{Midtveldt_etal2016} för att uppskatta brusnivån bygger på att de bara undersöker rörelserna i vart annat steg. Detta verkar vara orsaken till att de får en faktor $2$ större brus. }
 
-Avslutningsvis bör också metoden som användes i den här rapporten kommenteras. Troligen är brusnivån på cirka \unit[5]{nm} lite i lägsta laget. Detta är på grund av antagandet att alla partiklar har samma $\sigma_\text{brus}$. Eftersom partikellokaliseringen bygger på att anpassa en intensitetsfördelning till de ljusa pixlarna, så går det att göra en noggrannare lokalisering för partiklar med högre intensitet. Detta betyder att osäkerheten i partikelpositionerna, $\sigma_\text{brus}$, bör minska med större intensitet. Den framtagna brusnivån här, på \unit[5]{nm}, skulle alltså eventuellt bara gälla för de större partiklara, och öka för de lägre intensiteterna.
+Avslutningsvis bör också metoden som användes i den här rapporten kommenteras. Troligen är brusnivån på cirka \unit[5]{nm} lite i lägsta laget. Detta är på grund av antagandet att alla partiklar har samma $\sigma_\text{brus}$. Eftersom partikellokaliseringen bygger på att anpassa en intensitetsfördelning till de ljusa pixlarna, så går det att göra en noggrannare lokalisering för partiklar med högre intensitet. Detta betyder att osäkerheten i partikelpositionerna, $\sigma_\text{brus}$, bör minska med större intensitet. Den framtagna brusnivån här, på \unit[5]{nm}, skulle alltså eventuellt bara gälla för de större partiklarna, och öka för de lägre intensiteterna.
 
 
 
@@ -615,7 +615,7 @@ En annan anmärkningsvärd sak är att de olika asymmetrimåtten skiljer sig åt
 Förhållandet mellan standardavvikelsen för bruset och steglängden $\nicefrac{\sigma_\text{brus}}{\sigma_\text{steg}}$ varierade i den undersökta datan på grund av olika rörlighet för olika partiklar. Större partiklar tenderade att förflytta sig kortare sträckor än de små partiklarna. Från beräkningarna av medelstegen i \figref{fig:storleksberoende}~(c) och (d) visade det sig också att medel\-stegens standardavvikelse var omkring $\unit[10\pm 5]{nm}$. Vilket, med $\sigma_\text{brus}=\unit[5]{nm}$ från avsnitt~\ref{sec:resultat-storleksberoende}, skulle svara mot att $\nicefrac{\sigma_\text{brus}}{\sigma_\text{steg}}$ varierar mellan 0,3--1. Detta är mycket mindre än $\nicefrac{\sigma_\text{brus}}{\sigma_\text{steg}}=6$, som krävdes i \figref{fig:asymmetri}.
 Det verkar alltså högst osannolikt att isotropin för partiklar i celler i dvala skulle kunnat ha uppstått från så brusig data som användes i avsnitt~\ref{sec:resultat-isotropi}. 
 
-En annan anledning att brusig data inte kan förklara avvikelsen för celler i dvala i \figref{fig:asymmetri}, är att partiklarna från celler i log-fasen inte påverkades trots att brusnivån borde vara samma i båda fallen. Man skulle kunna argumentera för att $\nicefrac{\sigma_\text{brus}}{\sigma_\text{steg}}$ ändå kan skilja sig mellan de olika cellfaserna för att $\sigma_\text{steg}$ skulle kunna variera. \figref{fig:storleksberoende}~(c) och (d) visar dock tydligt hur steglängderna mer eller mindre är samma mellan cellfaserna.
+En annan anledning till att brusig data inte kan förklara avvikelsen för celler i dvala i \figref{fig:asymmetri}, är att partiklarna från celler i log-fasen inte påverkades trots att brusnivån borde vara samma i båda fallen. Man skulle kunna argumentera för att $\nicefrac{\sigma_\text{brus}}{\sigma_\text{steg}}$ ändå kan skilja sig mellan de olika cellfaserna för att $\sigma_\text{steg}$ skulle kunna variera. \figref{fig:storleksberoende}~(c) och (d) visar dock tydligt hur steglängderna mer eller mindre är samma mellan cellfaserna.
 
 Hypotesen, att mätbrus skulle kunna förklara avvikelserna från brownsk rörelse, kan alltså förkastas. Även om värdena för asfäriteten i \tabref{tab:asph._values} och dess fördelnig i \figref{fig:asymmetri} ser ut att kunna stämma. 
 

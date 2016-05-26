@@ -52,7 +52,7 @@ där $\ev{B_H(t)}=\ev{B_H(t+\Delta{t})}=0$ enligt \eqref{eq:fBm_mean}. För att 
     \ev{B_H(t)^2} + \ev{B_H(t+\Delta{t})^2} - \ev{(B_H(t)-B_H(t+\Delta{t}))^2}
     }{2}.
 \end{equation}
-Med \eqref{eq:fBm_var} och \eqref{eq:fBm_stat_step} fås tillslut kovariansen
+Med \eqref{eq:fBm_var} och \eqref{eq:fBm_stat_step} fås till slut kovariansen
 \begin{equation} \label{eq:fBm_cov}
     \COV{B_H(t)}{B_H(t+\Delta{t})} = \frac{1}{2}\left(\abs{t}^{2H}+\abs{t+\Delta t}^{2H}-\abs{\Delta{t}}^{2H}\right).
 \end{equation}
@@ -150,9 +150,12 @@ kan gammafaktorn i \eqref{eq:fGn_PSD_halvklar} skrivas om till
 
 För en icke-normerad fBm fås en extra faktor $V_H$, se \eqref{eq:fBm_onorm_var}, i PSD:n för dess steg fGn: $\hat{\delta}$ enligt
 \begin{equation} \label{eq:fGn_PSD}
+\begin{aligned}
 \mathcal{S}_{\hat{\delta}}(\omega) 
-= V_H 4\Gamma{(2H+1)}\sin(H\pi) \left( \sin(\frac{\omega T}{2}) \right)^2 \abs{\omega}^{-(2H+1)} 
-= 4 \left( \sin(\frac{\omega T}{2}) \right) ^2\abs{\omega}^{-(2H+1)}.
+&= V_H 4\Gamma{(2H+1)}\sin(H\pi) \left( \sin(\frac{\omega T}{2}) \right)^2 \abs{\omega}^{-(2H+1)} 
+\\
+&= 4 \left( \sin(\frac{\omega T}{2}) \right) ^2\abs{\omega}^{-(2H+1)}.
+\end{aligned}
 \end{equation}
 För $\nicefrac{\omega T}{2} \ll 1$ kan den kvadrerade sinusfaktorn taylorutvecklas så att
 \begin{equation}
