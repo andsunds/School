@@ -9,7 +9,7 @@
   \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
   \selectfont}%
 \fi\endgroup%
-\begin{picture}(5064,2457)(-11,-2278)
+\begin{picture}(5064,3492)(-11,-3313)
 \put(2206, 29){\makebox(0,0)[lb]{\smash{{\SetFigFont{17}{20.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}1}%
 }}}}
 \put(3556, 29){\makebox(0,0)[lb]{\smash{{\SetFigFont{17}{20.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}2}%
@@ -17,5 +17,11 @@
 \put(4906, 29){\makebox(0,0)[lb]{\smash{{\SetFigFont{17}{20.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}3}%
 }}}}
 \put(316,-16){\makebox(0,0)[lb]{\smash{{\SetFigFont{17}{20.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}Neutronk\"a{}lla}%
+}}}}
+\put(1531,-2536){\makebox(0,0)[lb]{\smash{{\SetFigFont{17}{20.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$r_1$}%
+}}}}
+\put(1531,-2851){\makebox(0,0)[lb]{\smash{{\SetFigFont{17}{20.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$r_2$}%
+}}}}
+\put(1531,-3166){\makebox(0,0)[lb]{\smash{{\SetFigFont{17}{20.4}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$r_3$}%
 }}}}
 \end{picture}%

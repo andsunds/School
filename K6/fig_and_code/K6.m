@@ -30,9 +30,13 @@ plot(t,A, '-o'), hold on
 
 
 I2=(15:26);
-C2=[ones(size(I2.')), -t(I2)]\log(A(I2));
+%C2=[ones(size(I2.')), -t(I2)]\log(A(I2));
+
+[C2, std_2]=lscov([ones(size(I2.')), -t(I2)], log(A(I2)));
+
 
 T_halv_110= log(2)/C2(2)*60
+std_T_halv_110=std_2(2)/C2(2)*T_halv_110
 
 
 
@@ -40,9 +44,12 @@ I0=1:8;
 plot(t(I0), A(I0)-exp(C2(1)-C2(2)*t(I0)), 'o-')
 
 I1=(1:7);
-C1=[ones(size(I1.')), -t(I1)]\log((A(I1)-exp(C2(1)-C2(2)*t(I1))));
+%C1=[ones(size(I1.')), -t(I1)]\log((A(I1)-exp(C2(1)-C2(2)*t(I1))));
+[C1, std_1]=lscov([ones(size(I1.')), -t(I1)],log((A(I1)-exp(C2(1)-C2(2)*t(I1)))));
+
 
 T_halv_108= log(2)/C1(2)*60
+std_T_halv_108= std_1(2)/C1(2)*T_halv_108
 
 %plottar anpassnigar
 x=linspace(0,14);
@@ -53,6 +60,11 @@ plot(x, exp(C1(1)-C1(2)*x)+exp(C2(1)-C2(2)*x))
 axis([0,14, 1e1, 1e4])
 
 set(gca,'fontsize', 20, 'yscale', 'log', 'xscale', 'lin')
+
+
+%osäkerhet
+sum((A(I2) - exp(C2(1)-C2(2)*t(I2))).^2)/sqrt(length(I2-2))
+
 
 %% Spara plotdata
 koef=[C1.', C2.'];
