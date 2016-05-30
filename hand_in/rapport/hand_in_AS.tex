@@ -165,7 +165,11 @@ Här har \eqref{eq:N_0} utnyttjas för att ersätta $N_0$ ovan. För att omvandl
 \rho = \frac{n M}{N_\text{A}} = \unit[7,2]{mg/cm^2}.
 \end{equation}
 
-
+Detta gäller dock bara om strålmålet som används är isotoprenat, alltså bara innehåller $^{76}_{34}\mathrm{Se}$. (Är det inte isotoprenat behöver man dessutom titta på vilka andra reaktikoner som kan ske i produktionen, utöver de i \figref{fig:x-sect}.) Naturligt förekommande selen innehåller dock bara ca 9,4\,\% $^{76}_{34}\mathrm{Se}$ \cite{wiki_selenium}. Detta gör att strålmålet behöver ha en täthet på
+\begin{equation}
+\rho_\text{Nat.} = \frac{\unit[7,2]{mg/cm^2}}{0,094} = \unit[77]{mg/cm^2}
+\end{equation}
+om det består av natuligt selen.
 
 
 \section{Sammanfattning}
@@ -173,7 +177,7 @@ Tillvägagångssättet för att dimensionera produktion av radioisotoper för en
 
 Först måste en lämplig isotop väljas. Här kommer först kravet på att det ska vara en isotop som \BP-sönderfaller för att PET överhuvudtaget ska fungera. Sedan ska även isotopen uppfylla kravet på halveringstid som ställs av sjukhuset/beställaren. Till sista måste det även gå att producera isotopen. Det visade sig att det fanns tre möjliga kandidater som uppfyller alla kraven ovan. Därifrån valdes $^{76}_{34}\mathrm{Br}$ ut för att den dels sönderfaller till en stabil kärna, dels redan används i PET~\cite{Lapi_PET,Valette_etal1993,Lovqvist_etal1997,Ribeiro_etal1999}. För att producera $^{76}_{34}\mathrm{Br}$ används $^{76}_{34}\mathrm{Se}$ som strålmål.
 
-Därefter måste själva produktionen dimensioneras. Där måste man ta hänsyn till att det tar en viss tid att extrahera de relevanta isotoperna, så att man måste producera mer än vad som behövs vid själva PET-tillfället. Sedan behöver körningen i cyklotronen dimensioneras. Det som där behöver väljas är protonenergi och strålmålstjocklek. Proton energin väljs till 6\,MeV för att inte producera några \G-fotoner med mer än 200\,keV från dotterkärnan. Detta ger ett reaktionstvärsnitt på 33\,mb. Med detta i hand väljs produktionstiden till 54\,timmar, vilket slutligen ger att strålmålet behöver vara $\unit[7,2]{mg/cm^2}$ för att förse sjukhuset med tillräckligt stor stråldos. 
+Därefter måste själva produktionen dimensioneras. Där måste man ta hänsyn till att det tar en viss tid att extrahera de relevanta isotoperna, så att man måste producera mer än vad som behövs vid själva PET-tillfället. Sedan behöver körningen i cyklotronen dimensioneras. Det som där behöver väljas är protonenergi och strålmålstjocklek. Proton energin väljs till 6\,MeV för att inte producera några \G-fotoner med mer än 200\,keV från dotterkärnan. Detta ger ett reaktionstvärsnitt på 33\,mb. Med detta i hand väljs produktionstiden till 54\,timmar, vilket slutligen ger att strålmålet behöver vara $\unit[7,2]{mg/cm^2}$ rent $^{76}_{34}\mathrm{Se}$ för att förse sjukhuset med tillräckligt stor stråldos. 
 
 Notera dock att detta är en undre skattning och förutsätter bland annat att extraktionen av den önskade dotterkärnan kan göras till 100\,\%. I verkligheten föreslås ett något tjockare prov för att säkerställa att tillräckligt många kärnor av den önskade isotopen kan extraheras. 
 
@@ -181,7 +185,7 @@ Notera dock att detta är en undre skattning och förutsätter bland annat att e
 
 
 
-%\newpage
+\newpage
 \bibliographystyle{ieeetr}
 \bibliography{referenser}%kräver en fil som heter 'referenser.bib'          
 
