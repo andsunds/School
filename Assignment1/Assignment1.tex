@@ -50,7 +50,23 @@ Assignment 1}
 %\todolist
 
 \section{Same temperature in equlibrium}
+We have a closed system with two subsystems, $A$ and $B$, at
+equlibrium with each other. Nw we want to prove that the temperatures
+of the two subsystems are equal, with the fact that entropy and energy
+are extensive properties. 
 
+Since the two subsystems are at equlibrium we know that the entropy of
+the total system is maximized, therefore $S_A+S_B=S$ is constant. And
+by energy conservation $E_A+E_B=E$ is also constant. 
+
+We are now ready to write down the temperature of the subsystems:
+\begin{equation}
+\frac{1}{T_A}=\qty(\pdv{S_A}{E_A})_{N,V} 
+=\bigg(\pdv{S_A}{E_B}\overbrace{\pdv{E_B}{E_A}}^{=-1}\bigg)_{N,V} 
+=-\bigg(\pdv{S_B}{E_B}\overbrace{\pdv{S_A}{S_B}}^{=-1}\bigg)_{N,V} 
+=+\qty(\pdv{S_B}{E_B})_{N,V} = \frac{1}{T_B}.
+\end{equation}
+\qed
 
 \section{A PDE for the entropy}
 We are given to show that the entropy of a system can be described as
