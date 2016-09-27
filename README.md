@@ -2,4 +2,4 @@
 
 Here I keep my assignments and stuff.
 
-© Andréas Sundström
+All .tex files are © Andréas Sundström
