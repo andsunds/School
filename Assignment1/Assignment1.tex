@@ -173,7 +173,50 @@ Z=\frac{V^N}{N!h^{3N}}
 \qed
 
 \subsection*{Some relations derived from the partitionfunction}
+We're also told to show that
+\begin{equation}
+PV=NT=\frac{1}{3}E \quad\text{in general;}
+\quad\text{and } PV^{\frac{4}{3}}=\text{const.}
+\quad\text{for an adiabatic process.}
+\end{equation}
 
+We begin by calculating the energy in the ssytem via the formula
+\begin{equation}\label{eq:3_E}
+\begin{aligned}
+E&=-\qty(\pdv{\ln(Z)}{\beta})_{N,V}=T^2\qty(\pdv{\ln(Z)}{T})_{N,V}\\
+&=T^2\qty(\pdv{T})_{N,V}\qty[-\ln(N!)+N\ln(8\pi V (hc)^{-3})+3N\ln(T)].
+&=3NT
+\end{aligned}
+\end{equation}
+The $P$ can be given by differentiating the Helmholtz free energy
+$F=-T\ln(Z)$ with respect to $V$.
+thus giving us
+\begin{equation}\label{eq:3_PV}
+\begin{aligned}
+PV&=-V\qty(\pdv{F}{V})_{T}\\
+&=V\qty(\pdv{V})_{T}
+\qty[T\qty(-\ln(N)+N\ln(8\pi\qty(\frac{T}{hc})^3) + N\ln(V))]\\
+&=NT.
+\end{aligned}
+\end{equation}
+This concludes the proof of the first equations.
+
+For the adiabatic process we know that entropy is constant. Once again,
+we make use of th Helmholtz free energy, but this time we need to use
+the relationship $F=E-TS$ as well. The constant entropy is then
+\begin{equation}
+\begin{aligned}
+S&=\frac{E-F}{T}=\begin{Bmatrix*}[l]
+E=3NT\\F=-T\ln(Z)
+\end{Bmatrix*}\\
+&=\underbrace{3N-\ln(N!) +N\ln(8\pi(hc)^{-3})+N}_\text{All constants}
+\ln(VT^3).
+\end{aligned}
+\end{equation}
+In other words, $VT^3=\text{const.}$, and with \eqref{eq:3_PV} we get
+$V^4P^3/N=\text{const.}$, which is equivalent to what we set out to
+prove. 
+\qed
 
 
 \section{A quantum rotor}
