@@ -220,8 +220,35 @@ prove.
 
 
 \section{A quantum rotor}
+For a quantum rotor we have the Hamiltonian
+\begin{equation}
+H = -\frac{\hbar^2}{2I} \dv[2]{\theta},
+\end{equation}
+where $\theta\in[0,2\pi)$ is an angular variable. The fact that
+$\theta$ is an angular variable gives us a periodig boundry condition
+on all wavefunctions:
+\begin{equation}
+\psi(\theta+m2\pi)=\psi(\theta)\qcomma \forall m\in\Z.
+\end{equation}
 
-\subsection{The eigenstatesand eigenvalues to the Hamiltonian}
+
+\subsection{The eigenstates and eigenvalues to the Hamiltonian}
+To find the eigenstate, we just use the equation
+$H\phi_n(\theta)=E_n\phi_n(\theta)$. With the peiodic boundry
+condition, it's easy to se that
+\begin{equation}
+\phi_n(\theta)= A\ee^{\ii n\theta}+B\ee^{-\ii n\theta}
+\end{equation}
+with the eigenvalue
+\begin{equation}
+E_n=\frac{\hbar^2n^2}{2I}
+\end{equation}
+is a solution to the eigenvalue problem. By applying orthonormality
+for all eigenstates, especially $n=0$, we see that one possible choise
+of basis/set of eigenfunctions is
+\begin{equation}
+\phi_n(\theta)=\frac{1}{\sqrt{2\pi}}\ee^{\ii n\theta}\qcomma n\in\Z.
+\end{equation}
 
 
 \subsection{The density matrix}
