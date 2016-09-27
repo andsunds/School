@@ -57,74 +57,65 @@ We are given to show that the entropy of a system can be described as
 \begin{equation}
 S \stackrel{?}{=} N\qty(\pdv{S}{N})_{V,E} 
 + V\qty(\pdv{S}{V})_{N,E}
-+ E\qty(\pdv{S}{E})_{V,N} =: \sigma,
++ E\qty(\pdv{S}{E})_{V,N},
 \end{equation}
-where $\sigma$ has been defined as the middle expression. Note here
-that since $S=S(N, V, E)$ so must also $\sigma=\sigma(N, V, E)$. And
-since $S$, $N$, $V$ and $E$ are all \emph{extensive} properties, the
-partial derivatives of $S$ must all be \emph{intensive}; this
-makes $\sigma$ \emph{extensive} as well. 
+using the fact that $S$, $N$, $V$ and $E$ are all additive or
+extensive properties of a system. This means that if we scale the
+system by any amount $\alpha>0$, these properties will scale with the
+same amount:
+\begin{align}
+&N\longmapsto\alpha N\qcomma V\longmapsto \alpha V 
+\qcomma E\longmapsto \alpha E\qcomma S\longmapsto \alpha S\\
+\label{eq:scale_S}
+\Longrightarrow\quad& S(\alpha N, \alpha V, \alpha E) = \alpha S(N, V, E).
+\end{align}
 
-Armed with this knowlege we can now start to investigate
-$\sigma$. We begin by differentiating $\sigma$ to see what appears:
-\begin{equation}\label{eq:d_sigma}
-\begin{aligned}
-\qty(\pdv{\sigma}{N})_{V,E} 
-=& \qty(\pdv{S}{N})_{V,E} + N\qty(\pdv[2]{S}{N})_{V,E}\\ 
-&+ V \qty(\pdv{N}\qty[\qty(\pdv{S}{V})_{N,E}])_{V,E}
-+ E \qty(\pdv{N}\qty[\qty(\pdv{S}{E})_{N,V}])_{V,E}.
-\end{aligned}
-\end{equation}
-Like for $S$ the partial derivatives of $\sigma$ is also
-intensive. This means that if we were to scale the system by an
-arbitrary amount $\alpha$, \eqref{eq:d_sigma} will become\footnotemark{}
+
+
+Since this is true for any $\alpha$ we can choose $\alpha=1+\epsilon$,
+where $|\epsilon|\ll1$\footnotemark{}. The LHS of \eqref{eq:scale_S}
+can now be expanded in it's Taylor series
 \begin{equation}
 \begin{aligned}
-\qty(\pdv{\sigma}{N})_{V,E} 
-=& \qty(\pdv{S}{N})_{V,E} + \alpha N\qty(\pdv[2]{S}{N})_{V,E}\\ 
-&+ \alpha V \qty(\pdv{N}\qty[\qty(\pdv{S}{V})_{N,E}])_{V,E}
-+ \alpha E \qty(\pdv{N}\qty[\qty(\pdv{S}{E})_{N,V}])_{V,E}.
+S\Big((1+\epsilon) N, (1+\epsilon) V, (1+\epsilon) E\Big) =& 
+S(N, V, E)\\
+&+ \epsilon N\qty(\pdv{S}{N})_{\!V,E}\!
++ \epsilon V\qty(\pdv{S}{V})_{\!N,E}\!
++ \epsilon E\qty(\pdv{S}{E})_{\!V,N}\!
++ \order{\epsilon^2},
 \end{aligned}
 \end{equation}
-Since this is true for all $\alpha>0$, we must conclude that
+meanwhile the RHS is just $(1+\epsilon)S(N, V, E)$.
+\footnotetext{More precicely, choose $\epsilon$ sufficiently small so
+  that we're within the radius of conversion of the Taylor series of
+  $S$. }
+All of this is true for all $\epsilon$, especially in the limit
+$\epsilon\to0$, where the $\order{\epsilon^2}$ terms can be
+disregarded. We thus get the equation
 \begin{equation}
-\qty(\pdv{\sigma}{N})_{V,E} 
-= \qty(\pdv{S}{N})_{V,E}.
+\begin{aligned}
+S(N, V, E) + \epsilon S(N, V, E) =&
+S(N, V, E)\\
+&+\epsilon
+\left(N\qty(\pdv{S}{N})_{\!V,E}\!
++ V\qty(\pdv{S}{V})_{\!N,E}\!
++ E\qty(\pdv{S}{E})_{\!V,N}\right).
+\end{aligned}
 \end{equation}
-\footnotetext{More or less the definition of an extensive property is
-  that if the whole system is scaled by $\alpha$, the extensive
-  properties will be scaled by the same amount, e.g. 
-  $E\mapsto E^*=\alpha E$. Where as in intensive property will be
-  unaffected, e.g. $T\mapsto T^*=T$. }
-The same argument can be applied to the two other derivative to get
+Here we can cancel out the $S$ terms and then the $\epsilon$'s, which
+ends up giving us
 \begin{equation}
-\qty(\pdv{\sigma}{V})_{N,E} = \qty(\pdv{S}{V})_{N,E}
-\qcomma
-\qty(\pdv{\sigma}{E})_{V,N} = \qty(\pdv{S}{E})_{V,N}.
-\end{equation}
-In other words all of the partial derivatives of $S$ and $\sigma$ are
-equal. By the uniqueness of derivatives, we now have
-\begin{equation}
-S=\sigma+S_0,
-\end{equation}
-for some possible constant $S_0$. 
-
-The value of $S_0$ can be found by studying the limit 
-$(N, V, E)\to0$. We obviously have
-$\sigma(N, V, E)\to 0$ as $(N, V, E)\to0$,
-and the entropy $S$ must also tend to~0 as $(N, V, E)\to0$. Therefore
-it's clear that $S_0=0$, meaning that
-\begin{equation}
-S=\sigma
-= N\qty(\pdv{S}{N})_{V,E} 
-+ V\qty(\pdv{S}{V})_{N,E}
-+ E\qty(\pdv{S}{E})_{V,N}.
+S(N, V, E) =
+N\qty(\pdv{S}{N})_{\!V,E}\!
++ V\qty(\pdv{S}{V})_{\!N,E}\!
++ E\qty(\pdv{S}{E})_{\!V,N}.
 \end{equation}
 \qed
 
 
-
 \section{Partition function of a relativistic gas}
+
+
 
 \subsection*{Some relations derived from the partitionfunction}
 
