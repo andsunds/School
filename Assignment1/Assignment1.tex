@@ -130,8 +130,47 @@ N\qty(\pdv{S}{N})_{\!V,E}\!
 
 
 \section{Partition function of a relativistic gas}
+Given a relativistic gas, with energy-mumentum relation
+$\epsilon=c\abs{p}$, where $c$ is the speed of light in vacuum, we
+want to find the partition function of this gas. 
 
-
+The partition function is given by
+\begin{equation}
+\begin{aligned}
+Z&=\sum_i\ee^{\nicefrac{-\epsilon_i}{T}}
+=\sum_i\exp\bigg(\!-\frac{c}{T}
+\hspace{-5pt}\sum_{\stackrel{\text{\tiny all}}{\text{\tiny particles}}}\hspace{-5pt}
+|\vb{p}_i|\bigg)\\
+&\to \int\frac{\dd[3N]{q}\dd[3N]{p}}{N!h^{3N}}
+\exp(-\frac{c}{T}\sum_{i=1}^N \abs{\vb{p}_i}).%\\
+%&=\frac{1}{N!h^{3N}} \int\dd[3N]{q} 
+%\int\dd[3N]{p} \prod_{i=1}^N \exp(-\frac{c}{T}\abs{\vb{p}_i}).
+\end{aligned}
+\end{equation}
+Here we easily see that the integrand is independent of $q$, making
+the $q$ integral evaluate to $V^N$. Then we can also note that the
+integrand is just a product where each factor, belonging to a separate
+partice, is independent of each others. This allows us to split up the
+$p$ integral into $N$ identical integrals.
+\begin{equation}
+\begin{aligned}
+Z&=\frac{V^N}{N!h^{3N}}
+\qty(\int\!\dd[3]{p} \ee^{\nicefrac{c|\vb{p}|}{T}})^N\\
+&=\frac{V^N}{N!h^{3N}}
+\qty(\int_0^{2\pi}\!\dd{\phi}\int_0^\pi\!\dd{\theta}\sin\theta
+\int_0^\infty p^2\dd{p}\ee^{\nicefrac{cp}{T}})^{\!\!N}.
+\end{aligned}
+\end{equation}
+The $\phi$ and $\theta$ integral yiels the usual $4\pi$ and the $p$
+integral can easily be solved by substituting $\xi=\nicefrac{cp}{T}$,
+giving
+\begin{equation}
+Z=\frac{V^N}{N!h^{3N}}
+\Bigg(4\pi \qty(\frac{T}{c})^3
+\underbrace{\int_0^\infty \xi^2\ee^{-\xi}\id\xi}_{=2!}\Bigg)^{\!N}
+=\frac{1}{N!} \qty[8\pi V \qty(\frac{T}{hc})^3]^N.
+\end{equation}
+\qed
 
 \subsection*{Some relations derived from the partitionfunction}
 
