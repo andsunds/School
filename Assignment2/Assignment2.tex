@@ -113,7 +113,7 @@ For any given state $\ket{\alpha}$ and observables (Hermitian
 operators) $A$ and $B$, the generalized uncertainty relation states that
 \begin{equation} \label{eq:uncertainty}
 \ev{(\Delta{A})^2}{\alpha}\ev{(\Delta{B})^2}{\alpha} 
-\ge \frac{1}{4} \abs{\ev**{\comm{A}{B}}{\alpha}}^2.
+\ge \frac{1}{4} \abs{\ev{\comm{A}{B}}{\big.\alpha}}^2.
 \end{equation}
 We shall here show that, if the state $\ket{\alpha}$ satisfies
 \begin{equation}
@@ -151,7 +151,7 @@ get an equality in \eqref{eq:uncertainty}. This is however precisely
 the case here, since $\lambda\in\ii\R$. We therefore have
 \begin{equation} 
 \ev{(\Delta{A})^2}{\alpha}\ev{(\Delta{B})^2}{\alpha} 
-= \frac{1}{4} \abs{\ev**{\comm{A}{B}}{\alpha}}^2
+= \frac{1}{4} \abs{\ev**{\comm{A}{B}}{\big.\alpha}}^2
 \end{equation}
 in this situation.\qed
 
@@ -196,7 +196,7 @@ Sakurai~\&~Napolitano, \textit{Modern Quantum Mechanics}, 2$^\text{nd}$
 ed., eqn. (1.7.17). This now gives us
 \begin{equation}
 \begin{aligned}
-\bra{x'}\Delta{p}\ket{\alpha} =& \bra{x'}\big(p-\ev{p}\big)\ket{\alpha}\\
+\mel{x'}{\Delta{p}}{\alpha} =& \mel**{x'}{\big(p-\ev{p}\big)}{\alpha}\\
 =& \left[-\ii\hbar \pdv{x'} - \ev{p}\right] \phi_\alpha(x')\\
 =& \left(
    -\ii\hbar\left[ \frac{\ii\ev{p}}{\hbar} - \frac{2x'}{4d}\right] 
@@ -410,7 +410,7 @@ which gives
 \comm{A}{B^{m+1}} &= \comm{A}{B^{m}B} \\
 &\hspace{-3pt}\stackrel{\eqref{eq:comm_A_BC}}{=} \comm{A}{B^{m}}B + B^m\comm{A}{B}\\
 &\hspace{-14pt}\stackrel{\stackrel{\text{\tiny induction}}{\text{\tiny assumption}}}{=}
-\left[\sum_{i=0}^{m-1} B^{i-1}\comm{A}{B}B^{m-1-i}\right]B + B^m\comm{A}{B}\\
+\left(\sum_{i=0}^{m-1} B^{i-1}\comm{A}{B}B^{m-1-i}\right) B + B^m\comm{A}{B}\\
 &=\sum_{i=0}^{m-1} B^{i-1}\comm{A}{B}B^{m-i} + B^m\comm{A}{B}&=\sum_{i=0}^{m} B^{i-1}\comm{A}{B}B^{m-i}.
 \end{aligned}
 \end{equation}
