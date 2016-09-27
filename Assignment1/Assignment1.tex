@@ -59,7 +59,69 @@ S \stackrel{?}{=} N\qty(\pdv{S}{N})_{V,E}
 + V\qty(\pdv{S}{V})_{N,E}
 + E\qty(\pdv{S}{E})_{V,N} =: \sigma,
 \end{equation}
-where $\sigma$ has been defined as the middle expression.
+where $\sigma$ has been defined as the middle expression. Note here
+that since $S=S(N, V, E)$ so must also $\sigma=\sigma(N, V, E)$. And
+since $S$, $N$, $V$ and $E$ are all \emph{extensive} properties, the
+partial derivatives of $S$ must all be \emph{intensive}; this
+makes $\sigma$ \emph{extensive} as well. 
+
+Armed with this knowlege we can now start to investigate
+$\sigma$. We begin by differentiating $\sigma$ to see what appears:
+\begin{equation}\label{eq:d_sigma}
+\begin{aligned}
+\qty(\pdv{\sigma}{N})_{V,E} 
+=& \qty(\pdv{S}{N})_{V,E} + N\qty(\pdv[2]{S}{N})_{V,E}\\ 
+&+ V \qty(\pdv{N}\qty[\qty(\pdv{S}{V})_{N,E}])_{V,E}
++ E \qty(\pdv{N}\qty[\qty(\pdv{S}{E})_{N,V}])_{V,E}.
+\end{aligned}
+\end{equation}
+Like for $S$ the partial derivatives of $\sigma$ is also
+intensive. This means that if we were to scale the system by an
+arbitrary amount $\alpha$, \eqref{eq:d_sigma} will become\footnotemark{}
+\begin{equation}
+\begin{aligned}
+\qty(\pdv{\sigma}{N})_{V,E} 
+=& \qty(\pdv{S}{N})_{V,E} + \alpha N\qty(\pdv[2]{S}{N})_{V,E}\\ 
+&+ \alpha V \qty(\pdv{N}\qty[\qty(\pdv{S}{V})_{N,E}])_{V,E}
++ \alpha E \qty(\pdv{N}\qty[\qty(\pdv{S}{E})_{N,V}])_{V,E}.
+\end{aligned}
+\end{equation}
+Since this is true for all $\alpha>0$, we must conclude that
+\begin{equation}
+\qty(\pdv{\sigma}{N})_{V,E} 
+= \qty(\pdv{S}{N})_{V,E}.
+\end{equation}
+\footnotetext{More or less the definition of an extensive property is
+  that if the whole system is scaled by $\alpha$, the extensive
+  properties will be scaled by the same amount, e.g. 
+  $E\mapsto E^*=\alpha E$. Where as in intensive property will be
+  unaffected, e.g. $T\mapsto T^*=T$. }
+The same argument can be applied to the two other derivative to get
+\begin{equation}
+\qty(\pdv{\sigma}{V})_{N,E} = \qty(\pdv{S}{V})_{N,E}
+\qcomma
+\qty(\pdv{\sigma}{E})_{V,N} = \qty(\pdv{S}{E})_{V,N}.
+\end{equation}
+In other words all of the partial derivatives of $S$ and $\sigma$ are
+equal. By the uniqueness of derivatives, we now have
+\begin{equation}
+S=\sigma+S_0,
+\end{equation}
+for some possible constant $S_0$. 
+
+The value of $S_0$ can be found by studying the limit 
+$(N, V, E)\to0$. We obviously have
+$\sigma(N, V, E)\to 0$ as $(N, V, E)\to0$,
+and the entropy $S$ must also tend to~0 as $(N, V, E)\to0$. Therefore
+it's clear that $S_0=0$, meaning that
+\begin{equation}
+S=\sigma
+= N\qty(\pdv{S}{N})_{V,E} 
++ V\qty(\pdv{S}{V})_{N,E}
++ E\qty(\pdv{S}{E})_{V,N}.
+\end{equation}
+\qed
+
 
 
 \section{Partition function of a relativistic gas}
