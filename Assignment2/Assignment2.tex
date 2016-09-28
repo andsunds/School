@@ -362,7 +362,7 @@ problem~\ref{sec:p_power}. With \eqref{eq:p_power} we get
 = \ii\hbar \cdot \frac{\ii a}{\hbar} = -a \exp(\frac{\ii p_xa}{\hbar}).
 \end{equation}
 
-\subsection{Inverstigating the effects of the expoential of $p_x$}
+\subsection{Inverstigating the effects of the expoential of $p_x$}\label{sec:3c}
 To prove that
 \begin{equation}
 \exp(\frac{\ii p_xa}{\hbar})\ket{x'}
@@ -378,12 +378,18 @@ x\exp(\frac{\ii p_xa}{\hbar})\ket{x'}
 \end{equation}
 From here we make use of the result in \eqref{eq:comm_exp} and the
 fact that $x\ket{x'}=x'\ket{x'}$. This gives us
-\begin{equation}
+\begin{equation}\label{eq:3_exp_p}
 x\exp(\frac{\ii p_xa}{\hbar})\ket{x'} 
 = \overbrace{(x'-a)}^\text{eigenvalue}
-  \underbrace{\exp(\frac{\ii p_xa}{\hbar})\ket{x'}}_\text{eigenstate}.
+  \underbrace{\exp(\frac{\ii p_xa}{\hbar})\ket{x'}}_\text{eigenstate of $x$}
+= (x'-a)\ket{x'-a}.
 \end{equation}
-
+The last step follows directly from the definition of the position
+eisgenket $\ket{x'-a}$. From here it's easy to see that
+\begin{equation}
+\exp(\frac{\ii p_xa}{\hbar})\ket{x'} = \ket{x'-a},
+\end{equation}
+i.e. the operator here is a translation in position.
 
 \section{More comutators of $x$ and $p_x$}
 
@@ -495,26 +501,167 @@ classical mechanics.
 
 \section{Some useful relations and a little more}
 
-\subsection{Two formulas}
+\subsection{Two formulas for  the connection between position
+  and momentum representations}
 
-\subsubsection{}
-\begin{equation}
-\bra{p'}x\ket{\alpha} = \ii\hbar \pdv{p'} \braket{p'}{\alpha}
+The notation used here will be: $\braket{x'}{\alpha}=:\phi_\alpha(x')$ and
+$\braket{p'}{\alpha}=:\tilde\phi_\alpha(p')$, i.e. ``hat-ed'' wave
+functions are in the momentum representation. 
+
+\subsubsection{}\label{sec:5ai}
+We're taked to evaluate the position operator in the momentum
+representation, and show that 
+\begin{equation}\label{eq:5_pxa}
+\bra{p'}x\ket{\alpha} = \ii\hbar \pdv{p'} \braket{p'}{\alpha} 
+= \ii\hbar \pdv{p'} \tilde\phi_\alpha(p').
 \end{equation}
 
-\subsubsection{}
-\begin{equation}
-\bra{\beta}x\ket{\alpha} = \int \rd{p'} \phi^*_\beta(p')\ii\hbar \pdv{p'} \phi_\alpha(p')
+
+To begin with we remind ourselves about an equation from
+Sakurai~\&~Napolitano, \textit{Modern Quantum Mechanics},
+2$^\text{nd}$ ed., eqn. (1.7.32)
+\begin{equation}\label{eq:5_xp}
+\braket{x'}{p'} = \frac{1}{\sqrt{2\pi\hbar}} \exp(\frac{\ii p'x'}{\hbar}),
 \end{equation}
+which gives us the transfer function from the position to the momentum
+representation of a wave function.
+
+To evluate the LHS of \eqref{eq:5_pxa}, we begin by instering the
+identity operator in front of the $p'$ bra:
+\begin{equation}
+\bra{p'}x\ket{\alpha} = \int\dd{x'}\mel{p'}{x}{x'}\braket{x'}{\alpha}
+= \int\dd{x'} x'\braket{p'}{x'}\phi_\alpha(x').
+\end{equation}
+And by \eqref{eq:5_xp}, we get
+\begin{equation}
+\bra{p'}x\ket{\alpha} = \frac{1}{\sqrt{2\pi\hbar}} 
+  \int\dd{x'} x'\exp(\frac{-\ii p'x'}{\hbar}) \phi_\alpha(x').
+\end{equation}
+The minus sign in the exponential is due to the fact that we're having
+$\braket{p'}{x'}$ instead of $\braket{x'}{p'}$, as was the case in
+\eqref{eq:5_xp}. 
+
+We now note that we would get a result, similar to the integrand, if
+we take
+\begin{equation}
+\pdv{p'}\qty[\exp(\frac{-\ii p'x'}{\hbar}) \phi_\alpha(x')]
+=\frac{x'}{\ii\hbar}\exp(\frac{-\ii p'x'}{\hbar}) \phi_\alpha(x').
+\end{equation}
+We can therefore\footnotemark{} write
+\begin{equation}
+\begin{aligned}
+\bra{p'}x\ket{\alpha} &= \ii\hbar \pdv{p'}\qty[
+ \frac{1}{\sqrt{2\pi\hbar}} 
+  \int\dd{x'} \exp(\frac{-\ii p'x'}{\hbar}) \phi_\alpha(x')]\\
+&= \ii\hbar \pdv{p'}\qty[
+   \int\dd{x'}\braket{p'}{x'}\braket{x'}{\alpha}] 
+= \ii\hbar\pdv{p'}\braket{p'}{\alpha}
+= \ii\hbar\pdv{p'}\tilde\phi_\alpha(p').
+\end{aligned}
+\end{equation}
+\qed
+\footnotetext{There are some issues regarding wherther it's allowed to
+switch the order of integration and differentiation. But since this is
+physics all functions are assume to be ``well behaved'' enough for
+this tho be allowed. }
+
+It should also be noted though, that this relation could have been
+derived much easier with the help of Fourier analysis. The basis
+change from position to momentum, and vice versa, is just a Fourier
+transformation of the wave function. Therefore mutiplying by $x'$ in
+the $x'$ basis, corresponds to differentiation in the $p'$ basis up to
+some constant factor, according to the laws of Fourier Analysis. 
+
+\subsubsection{}
+Here, we're looking at a way to evaluate the inner product
+$\mel{\beta}{x}{\alpha}$, and prove that it can be expressed as
+\begin{equation}
+\bra{\beta}x\ket{\alpha} 
+= \int \rd{p'} \tilde\phi^*_\beta(p')\ii\hbar \pdv{p'} \tilde\phi_\alpha(p').
+\end{equation}
+Again with the same notation as before.
+
+This equation follows pretty striaght forward from the result
+before. Just insert the identity in front of $\bra{\beta}$:
+\begin{equation}
+\bra{\beta}x\ket{\alpha} 
+= \int\dd{p'} \braket{\beta}{p'}\mel{p'}{x}{\alpha}
+\stackrel{\eqref{eq:5_pxa}}{=} \int\dd{p'} 
+\tilde\phi_\beta^*(p') \, \ii\hbar \pdv{p}\tilde\phi_\alpha(p').
+\end{equation}
+\qed
 
 
+\subsection{A physical interpretation of an exponential of $x$ (alt. 1)}
+What is the physical interpretation of 
+\begin{equation}
+\exp(\frac{\ii x\Xi'}{\hbar}),
+\end{equation}
+for some momentum value $\Xi'$ an the position operator $x$? Call this
+operator $\hat\Xi$. 
 
-\subsection{A physical interpretation of an exponential of $x$}
+
+By analogy to the fact that the momentum operator is a generator of
+translation via \eqref{eq:3_exp_p}, it's not too far of to assume that
+this quantity would correspond to some translation of momentum. 
+There are probably many different ways to show this but here's two.
+
+\subsubsection{Show that $\hat\Xi\ket{p'}$ is an eigenstate of the
+  momentum operator $p$}
+Let's follow the procedure of problem~\ref{sec:3c} and see where we're
+taken. 
+Begin by applying $p\hat\Xi$ to a momentum eigenket:
+\begin{equation}
+p\hat\Xi\ket{p'}=p\exp(\frac{\ii x\Xi'}{\hbar})\ket{p'} 
+= \qty(\comm{p}{\exp(\frac{\ii x\Xi'}{\hbar})}+\exp(\frac{\ii x\Xi'}{\hbar})p)
+\ket{p'}.
+\end{equation}
+By using \eqref{eq:x_power} and $p\ket{p'}=p'\ket{p'}$, we get
+\begin{equation}
+p\hat\Xi\ket{p'} = 
+\qty( -\ii\hbar \frac{\ii\Xi'}{\hbar} \hat{\Xi} + \hat\Xi p')\ket{p'} 
+= \qty(\Xi'+p')\ket{p'}.
+\end{equation}
+Therefore $\hat\Xi\ket{p'}$ is an eigenstate of the momentumoperator
+and the state is actually $\ket{p'+\Xi'}$, showing that $\hat\Xi$
+is indeed a translation of momentum --- although with opposite sign of
+what the translator of position had. 
+\qed
 
 
+\subsubsection{Studying how $\hat\Xi$ affects the wave function of an
+  abritrary state}
+This solution makes use of the results from problem~\ref{sec:5ai},
+that is \eqref{eq:5_pxa}, and the generalized version
+\begin{equation}\label{eq:5_pxa_gen}
+\mel**{p'}{x^n}{\alpha} 
+= (\ii\hbar)^n \frac{\pd^n}{\pd p'^n} \hat{\phi}_\alpha(p').
+\end{equation}
+This relations is easily shown in the same way as in
+problem~\ref{sec:5ai}, but with repeated differentiation of the
+integrand. 
 
+Now we have
+\begin{equation}
+\mel**{p'}{\hat\Xi}{\alpha} 
+= \sum_{k=0}^\infty \frac{1}{k!} \qty(\frac{\ii\Xi'}{\hbar})^k\mel**{p'}{x^k}{\alpha},
+\end{equation}
+which with \eqref{eq:5_pxa_gen} becomes
+\begin{equation}
+\mel**{p'}{\hat\Xi}{\alpha} 
+= \sum_{k=0}^\infty \frac{1}{k!} \qty(-\Xi')^k
+       \frac{\pd^k \tilde\phi_\alpha(p')}{\pd p'^k}
+= \tilde\phi_\alpha\qty(p'-\Xi').
+\end{equation}
+The last step was just identifying the Taylor expansion of
+$\tilde\phi_\alpha$ around $p'$. 
 
-
+Once againg we see here that indeed, $\hat\Xi$ corresponds to the translation
+\begin{equation}
+p'\stackrel{\hat\Xi}{\longmapsto} p'' = p' +\Xi'.
+\end{equation}
+It has translated the wave function by $+\Xi'$.
+\qed
 
 \end{document}
 
