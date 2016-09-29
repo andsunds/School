@@ -90,7 +90,7 @@ a -\rho r_0\,\ee^{\ii(\theta + \phi_0)}
 -\rho r_0\,\ee^{-\ii(\theta+\phi_0)} + \rho^2b 
 = a - \rho r_0 2\cos(\theta+\phi_0) + \rho^2b \ge 0.
 \end{equation}
-By choosing $\rho=\nicefrac{r_0}{b}$ and moving part of the LSH to
+By choosing $\rho=\nicefrac{r_0}{b}$ and moving parts of the LSH to
 the RHS, we get
 \begin{equation}
 a \ge  \frac{r_0^2}{b} 2\cos(\theta+\phi_0) - \frac{r_0^2}{b^2}b 
@@ -112,7 +112,7 @@ inequality:
 For any given state $\ket{\alpha}$ and observables (Hermitian
 operators) $A$ and $B$, the generalized uncertainty relation states that
 \begin{equation} \label{eq:uncertainty}
-\ev{(\Delta{A})^2}{\alpha}\ev{(\Delta{B})^2}{\alpha} 
+\ev**{(\Delta{A})^2}{\alpha}\ev{(\Delta{B})^2}{\alpha} 
 \ge \frac{1}{4} \abs{\ev{\comm{A}{B}}{\big.\alpha}}^2.
 \end{equation}
 We shall here show that, if the state $\ket{\alpha}$ satisfies
@@ -127,11 +127,11 @@ shifted by a constant number. Therefore we can write the RHS of
 \eqref{eq:uncertainty} as
 \begin{equation}
 \begin{aligned}
-\frac{1}{4} \abs{\ev**{\comm{\Delta{A}}{\Delta{B}}}{\alpha}}^2 
+\frac{1}{4} \abs{\ev**{\comm{\Delta{A}}{\Delta{B}}}{\Big.\alpha}}^2 
 =& \frac{1}{4} 
-  \abs{\ev**{\Delta{A}\Delta{B} -\Delta{B}\Delta{A}}{\alpha}}^2 \\
+  \abs{\ev**{\Delta{A}\Delta{B} -\Delta{B}\Delta{A}}{\Big.\alpha}}^2 \\
 =& \frac{1}{4} \abs{
-    \ev**{\lambda^*\Delta{B}\Delta{B} - \lambda\Delta{B}\Delta{B}}{\alpha}
+    \ev**{\lambda^*\Delta{B}\Delta{B} - \lambda\Delta{B}\Delta{B}}{\Big.\alpha}
    }^2\\
 =& \frac{1}{4} \Big| \underbrace{\big(\lambda^*-\lambda\big)}_{-2\Im(\lambda)}
 \ev**{(\Delta{B})^2}{\alpha} \Big|^2.
@@ -141,8 +141,8 @@ We can now turn our attension to the LHS of
 \eqref{eq:uncertainty}. There it's just a matter of rewiting the first
 factor
 \begin{equation}
-\ev{(\Delta{A})^2}{\alpha} 
-= \ev{\lambda^*\Delta{B}\;\lambda\Delta{B}}{\alpha} 
+\ev**{(\Delta{A})^2}{\alpha} 
+= \ev{\lambda^*\Delta{B}\;\lambda\Delta{B}}{\Big.\alpha} 
 = \abs{\lambda}^2 \ev{\Delta{B}}{\alpha}.
 \end{equation}
 
@@ -150,7 +150,7 @@ It is now clear that if $(\Im(\lambda))^2=\abs{\lambda}^2$, we would
 get an equality in \eqref{eq:uncertainty}. This is however precisely
 the case here, since $\lambda\in\ii\R$. We therefore have
 \begin{equation} 
-\ev{(\Delta{A})^2}{\alpha}\ev{(\Delta{B})^2}{\alpha} 
+\ev**{(\Delta{A})^2}{\alpha}\ev**{(\Delta{B})^2}{\alpha} 
 = \frac{1}{4} \abs{\ev**{\comm{A}{B}}{\big.\alpha}}^2
 \end{equation}
 in this situation.\qed
@@ -158,7 +158,7 @@ in this situation.\qed
 \subsection{Uncertainty in a Gaußian wave packet}
 We are given the (position) wave function of a 1D Gaußian wave packet
 \begin{equation}
-\psi_\alpha(x'') = \braket{x''}{\alpha} 
+\phi_\alpha(x'') = \braket{x''}{\alpha} 
 = C'' \exp[\frac{\ii\ev{p}x''}{\hbar}-\frac{\big(x''-\ev{x}\!\big)^2}{4d^2}]
 \end{equation}
 with some normaization constant $C''$. For simplicity we can easily
@@ -175,11 +175,12 @@ changing the normailzation constant by a constant complex phase. This
 shift in the position coordinates gives us $\ev{x}=0$.
 
 We now want to show that $\Delta{p}\ket{\alpha}$ only differs to
-$\Delta{x}\ket{\alpha}$ by some imaginary factor. To do this we stude
+$\Delta{x}\ket{\alpha}$ by some imaginary factor. To do this we study
 the effect of the two operators on the wave function (in the position
 basis). 
 
-Clearly the the effects of $\Delta{x}=x-\ev{x}=x$ is given by
+Clearly the the effects of $\Delta{x}=x-\ev{x}=x$ (in this new,
+shifted, position basis) is given by
 \begin{equation}
 \bra{x'}\Delta{x}\ket{\alpha} = \bra{x'}x\ket{\alpha} = x'\phi_\alpha{x'}
 \end{equation}
@@ -308,7 +309,8 @@ where maximum is obtained when $\abs{\alpha}=\abs{\beta}=2^{-1/2}$.
 From \eqref{eq:constraint} it's easy to see that $\abs{\xi}\le1$ and
 $\abs{\eta}\le1$. The fact that $\abs{\xi}\le1$ shows us that to
 maximize \eqref{eq:unc_prod}, we should choose $\xi=0$ and
-$\abs{\eta}=1$. This can be realized by choosing
+$\abs{\eta}=1$, i.e. $\alpha\beta^*$ completly imaginary. This can be
+realized by choosing 
 \begin{equation}
 \alpha=\frac{1}{\sqrt{2}}\quad\text{and}\quad\beta=\frac{\pm\ii}{\sqrt{2}},
 \end{equation}
@@ -353,6 +355,8 @@ It's pretty straight forward to evaluate the Poisson bracket here:
 = \pdv{x}{x}\pdv{F(p_x)}{p} - \pdv{x}{p}\pdv{F(p_x)}{x} 
 = \pdv{F(p_x)}{p}.
 \end{equation}
+Where the second term in the middle expression is 0 because $x$ and
+$p$ are independent of each other.
 
 \subsection{Commuting $x$ and an exponential of $p_x$}
 This is clearly just a special case of the rule in
@@ -361,6 +365,7 @@ problem~\ref{sec:p_power}. With \eqref{eq:p_power} we get
 \comm{x}{\exp(\frac{\ii p_xa}{\hbar})} 
 = \ii\hbar \cdot \frac{\ii a}{\hbar} = -a \exp(\frac{\ii p_xa}{\hbar}).
 \end{equation}
+For prof of this rule, see problem~\ref{sec:4a}.
 
 \subsection{Inverstigating the effects of the expoential of $p_x$}\label{sec:3c}
 To prove that
@@ -393,18 +398,18 @@ i.e. the operator here is a translation in position.
 
 \section{More comutators of $x$ and $p_x$}
 
-\subsection{Commutators of $x$ and power series in $p_x$ and vice versa}
+\subsection{Commutators of $x$ and power series in $p_x$ and vice versa}\label{sec:4a}
 Before we set out to prove the two commutator relations, it will be
 helpfull to derive an intermediary result first. We're going to prove
 the formula
 \begin{equation} \label{eq:comm_power}
 \comm{A}{B^n} = \sum_{i=0}^{n-1} B^{i}\comm{A}{B}B^{n-1-i}.
 \end{equation}
-This formula is most readily derived with a proof by induction. 
+This formula is readily derived with a proof by induction. 
 
 To start off with, we can clearly see that \eqref{eq:comm_power} holds
 in the base case of $n=1$. Then assume that it also holds for all
-interger up to some value $m$. Does it then also hold for $m+1$?
+intergers up to some value $m$. Does it then also hold for $m+1$?
 To show that it does, use the elementary commutator
 indentity
 \begin{equation} \label{eq:comm_A_BC}
@@ -423,8 +428,9 @@ which gives
 The last expression is just \eqref{eq:comm_power} with $n=m+1$. This
 concludes the proof by induction. \qed
 
-In our case we will only be interested in cases where $\comm{A}{B}=\lambda$,
-where $\lambda$ is some regular number. Then \eqref{eq:comm_power} becomes
+In our case though, we will only be interested in cases where
+$\comm{A}{B}=\lambda$, where $\lambda$ is some regular number. Then
+\eqref{eq:comm_power} becomes 
 \begin{equation} \label{eq:comm_power_c}
 \comm{A}{B^n} = \sum_{i=0}^{n-1} \lambda B^{n-1} = n\lambda B^{n-1}.
 \end{equation}
@@ -474,7 +480,7 @@ Here we're tasked to show that
 \end{equation}
 For any power series $F$ in terms of it's arguments.
 
-This is proof is completly similar to the one for a power series in
+This proof is completly similar to the one for a power series in
 $\mathbf{p}$. Just interchange $x$ and $p_x$ in the proof; the only
 change that will happen is that $\comm{p_x}{x}=-\ii\hbar$, giving rise
 to the minus sign in \eqref{eq:x_power}.
@@ -494,7 +500,7 @@ version of $\comm{x^2}{p_x^2}$:
 \end{equation}
 The results are similar, but due to the fact that $x$ and $p_x$
 doesn't commute in the quantum mechanica case, it's not possible to
-collect the two terms in the anticummutator to one, as is the case in
+collect the two terms in the anticommutator to one, as is the case in
 classical mechanics.
 
 
@@ -505,17 +511,16 @@ classical mechanics.
   and momentum representations}
 
 The notation used here will be: $\braket{x'}{\alpha}=:\phi_\alpha(x')$ and
-$\braket{p'}{\alpha}=:\tilde\phi_\alpha(p')$, i.e. ``hat-ed'' wave
-functions are in the momentum representation. 
+$\braket{p'}{\alpha}=:\tilde\phi_\alpha(p')$, i.e.  wave functions
+with tildes are in the momentum representation.  
 
 \subsubsection{}\label{sec:5ai}
-We're taked to evaluate the position operator in the momentum
-representation, and show that 
+We're tasked to evaluate the position operator's effects on a wave
+function in the momentum representation:
 \begin{equation}\label{eq:5_pxa}
 \bra{p'}x\ket{\alpha} = \ii\hbar \pdv{p'} \braket{p'}{\alpha} 
 = \ii\hbar \pdv{p'} \tilde\phi_\alpha(p').
 \end{equation}
-
 
 To begin with we remind ourselves about an equation from
 Sakurai~\&~Napolitano, \textit{Modern Quantum Mechanics},
@@ -563,7 +568,7 @@ We can therefore\footnotemark{} write
 \footnotetext{There are some issues regarding wherther it's allowed to
 switch the order of integration and differentiation. But since this is
 physics all functions are assume to be ``well behaved'' enough for
-this tho be allowed. }
+this to be allowed. }
 
 It should also be noted though, that this relation could have been
 derived much easier with the help of Fourier analysis. The basis
@@ -581,7 +586,7 @@ $\mel{\beta}{x}{\alpha}$, and prove that it can be expressed as
 \end{equation}
 Again with the same notation as before.
 
-This equation follows pretty striaght forward from the result
+This equation follows pretty straight forward from the result
 before. Just insert the identity in front of $\bra{\beta}$:
 \begin{equation}
 \bra{\beta}x\ket{\alpha} 
@@ -597,8 +602,8 @@ What is the physical interpretation of
 \begin{equation}
 \exp(\frac{\ii x\Xi'}{\hbar}),
 \end{equation}
-for some momentum value $\Xi'$ an the position operator $x$? Call this
-operator $\hat\Xi$. 
+for some momentum value $\Xi'$ an the position operator $x$? 
+For simplicity call this operator $\hat\Xi$. 
 
 
 By analogy to the fact that the momentum operator is a generator of
@@ -655,12 +660,8 @@ which with \eqref{eq:5_pxa_gen} becomes
 \end{equation}
 The last step was just identifying the Taylor expansion of
 $\tilde\phi_\alpha$ around $p'$. 
-
-Once againg we see here that indeed, $\hat\Xi$ corresponds to the translation
-\begin{equation}
-p'\stackrel{\hat\Xi}{\longmapsto} p'' = p' +\Xi'.
-\end{equation}
-It has translated the wave function by $+\Xi'$.
+Once againg we see here that indeed, $\hat\Xi$ corresponds to a
+translation of the \emph{wave function} by $+\Xi'$.
 \qed
 
 \end{document}
