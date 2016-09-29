@@ -21,7 +21,7 @@
 %%För att ändra hur rubrikerna ska formateras
 \renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 
-\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection}\roman{subsubsection})}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
 
 % \newcommand{\cbox}[2][cyan]
 % {\mathchoice
@@ -32,6 +32,7 @@
 % }
 % \newcommand{\grande}{\cbox{\phantom{\frac{1}{xx}}}}
 
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 \begin{document}
 
@@ -51,7 +52,7 @@ Assignment 1}
 
 \section{Same temperature in equlibrium}
 We have a closed system with two subsystems, $A$ and $B$, at
-equlibrium with each other. Nw we want to prove that the temperatures
+equlibrium with each other. Now we want to prove that the temperatures
 of the two subsystems are equal, with the fact that entropy and energy
 are extensive properties. 
 
@@ -180,7 +181,7 @@ PV=NT=\frac{1}{3}E \quad\text{in general;}
 \quad\text{for an adiabatic process.}
 \end{equation}
 
-We begin by calculating the energy in the ssytem via the formula
+We begin by calculating the energy in the sytem via the formula
 \begin{equation}\label{eq:3_E}
 \begin{aligned}
 E&=-\qty(\pdv{\ln(Z)}{\beta})_{N,V}=T^2\qty(\pdv{\ln(Z)}{T})_{N,V}\\
@@ -188,7 +189,7 @@ E&=-\qty(\pdv{\ln(Z)}{\beta})_{N,V}=T^2\qty(\pdv{\ln(Z)}{T})_{N,V}\\
 &=3NT
 \end{aligned}
 \end{equation}
-The $P$ can be given by differentiating the Helmholtz free energy
+The preassure can be given by differentiating the Helmholtz free energy
 $F=-T\ln(Z)$ with respect to $V$.
 thus giving us
 \begin{equation}\label{eq:3_PV}
@@ -214,7 +215,7 @@ E=3NT\\F=-T\ln(Z)
 \end{aligned}
 \end{equation}
 In other words, $VT^3=\text{const.}$, and with \eqref{eq:3_PV} we get
-$V^4P^3/N=\text{const.}$, which is equivalent to what we set out to
+$V^4P^3=\text{const.}$, which is equivalent to what we set out to
 prove. 
 \qed
 
@@ -244,7 +245,7 @@ with the eigenvalue
 E_n=\frac{\hbar^2n^2}{2I}
 \end{equation}
 is a solution to the eigenvalue problem. By applying orthonormality
-for all eigenstates, especially $n=0$, we see that one possible choise
+for all eigenstates, we see that one possible choise
 of basis/set of eigenfunctions is
 \begin{equation}
 \phi_n(\theta)=\frac{1}{\sqrt{2\pi}}\ee^{\ii n\theta}\qcomma n\in\Z.
@@ -280,7 +281,7 @@ where $\epsilon=\nicefrac{\hbar^2}{(2IT)}$, and
 \begin{equation}
 Z=\sum_{k=-\infty}^\infty\ee^{-\epsilon k^2}.
 \end{equation}
-This last sum is clearly convergent, but lacks a colsed
+This last sum is clearly convergent, but lacks a closed
 expression. All this leavs us with
 \begin{equation}
 \rho(\theta, \theta')
@@ -289,7 +290,9 @@ expression. All this leavs us with
 = \frac{1}{2\pi Z} 
 \sum_{k=-\infty}^\infty \exp(-\ii k\Delta\theta -\epsilon k^2),
 \end{equation}
-where $\Delta\theta=\theta'-\theta$.
+for an arbitrary temperature, where $\Delta\theta=\theta'-\theta$. It
+is however posible to get the behaiviour in the limits of high and low
+temperature. 
 
 \subsubsection{High tempereature limit}
 In the high tempererature limit $\epsilon\propto\nicefrac{1}{T}$
@@ -299,18 +302,22 @@ here that we'll get an integral expression in both $Z$ and $\rho$.
 
 Let's begin with the partition function
 \begin{equation}
-Z\to \int\frac{\dd{q}}{h^1}\int_{-\infty}^\infty\ee^{-\epsilon k^2} \dd{k} 
+Z\to \int_0^{2\pi}\frac{\dd{q}}{h^1}\int_{-\infty}^\infty\ee^{-\epsilon k^2} \dd{k} 
 = \frac{2\pi}{h}\sqrt{\frac{\pi}{\epsilon}}.
 \end{equation}
-The integral itself is just a standard integral with a well known
-value. The same is almost true for the next integral
-\todo{Is the really correct?}
-\begin{equation}
-\rho(\Delta\theta) \to \frac{1}{Z}
-\int\frac{\dd{q}}{h^1}\int_{-\infty}^\infty\ee^{\ii k\Delta\theta}\ee^{-\epsilon k^2} \dd{k} 
-= \frac{h}{2\pi}\sqrt{\frac{\epsilon}{\pi}}\cdot
+For the $q$ integral it's over all of the $\theta$ space, that is from
+$0$ to $2\pi$. 
+The $k$ integral is just a standard integral with a well known
+value. 
+
+And now, on to the whole expression for the density matrix
+\begin{equation}\label{eq:4_hi_temp}
+\rho(\Delta\theta) \to \frac{1}{2\pi Z}
+\int_0^{2\pi}\frac{\dd{q}}{h^1}
+\int_{-\infty}^\infty\ee^{\ii k\Delta\theta}\ee^{-\epsilon k^2} \dd{k} 
+= \frac{1}{2\pi}\frac{h}{2\pi}\sqrt{\frac{\epsilon}{\pi}}\cdot
 \frac{2\pi}{h}\sqrt{\frac{\pi}{\epsilon}}\ee^{-\nicefrac{(\Delta\theta)^2}{4\epsilon}}
-= \ee^{-\nicefrac{(\Delta\theta)^2}{4\epsilon}}.
+= \frac{1}{2\pi}\ee^{-\nicefrac{(\Delta\theta)^2}{4\epsilon}}.
 \end{equation}
 Here the fact that the integral is the Fourier transform of
 $\ee^{-\epsilon k^2}$ was used to evaluate the it. This is also
@@ -318,25 +325,51 @@ a well known transfrom which can be looked up in some work of
 reference, e.g. Råde\,\&\,Westergren, \textit{Mathematics Handbook for
 Science and Engineering}, ed. 5:12, section 13.2.
 
+Pleas do also note, that the $q$ integral is not an integral over
+any of our two angle variables $\theta$ or $\theta'$, eaven though
+it's over the domain of $\theta$. Therefore $q$ was used as the
+integration variable instead. 
+
+
+
 \subsubsection{Low temperature limit}
 In the low tempereature limit $\epsilon\propto\nicefrac{1}{T}$ becomes
-very lare, and causes more or less all terms to vanish in the sums. To
+very large, and causes more or less all terms to vanish in the sums. To
 keep things interesting though, let's keep the terms up to
 $k=\pm1$. This gives us
 \begin{equation}
 Z\approx 1+2\ee^{-\epsilon}
 \end{equation}
 and
-\begin{equation}
+\begin{equation}\label{eq:4_low_temp}
 \begin{aligned}
-\rho(\Delta\theta)&\approx 
+\rho(\Delta\theta)&\approx \frac{1}{2\pi}
 \frac{1+\ee^{-\epsilon}\Big(\ee^{-\ii\Delta\theta}+\ee^{+\ii\Delta\theta}\Big)}{1+2\ee^{-\epsilon}}
-\approx
+\approx\frac{1}{2\pi}
 \qty(1-2\ee^{-\epsilon})\qty(1+2\ee^{-\epsilon}\cos(\Delta\theta))\\
-&\approx 1 + 2\ee^{-\epsilon}\Big(\cos(\Delta\theta)-1\Big).
+&\approx \frac{1}{2\pi}\qty(1 + 2\ee^{-\epsilon}\big(\cos(\Delta\theta)-1\big)).
 \end{aligned}
 \end{equation}
-Here all $\order{\ee^{-2\epsilon}}$ have been discarded.
+Here all $\order{\ee^{-2\epsilon}}$ have been discarded. If we were to
+discard eaven the $\order{\ee^{-\epsilon}}$ terms, we would get a
+constant behaviour with respect to $\Delta\theta$.
+
+
+\subsection*{Comment regarding the normalization of $\rho(\Delta\theta)$}
+We should always stop and ask oursevles whether or not the final
+answer is reasonable or feasible. One such question is wheter the total
+probability of the system is still~1, in the given solutions for the
+low and high temperature limits. At a first glance it might look like
+it's not; however with some closer investigation we can see that the
+total probability is indeed~1 for both the limits.
+
+To show this, we begin by remembering that the total probability of the
+system beeing in some state, is given by the \emph{trace} of the
+density matrix. Which in our case would be to integrate over all
+$\theta$'s with $\theta'=\theta$, or $\Delta\theta=0$. From this it's
+clear that the $\rho$'s from both \eqref{eq:4_hi_temp} and
+\eqref{eq:4_low_temp} gives us a trace of~$1$. So there is no
+violation of total nomalization of $\rho$. 
 
 
 \end{document}
