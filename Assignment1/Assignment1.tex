@@ -252,12 +252,91 @@ of basis/set of eigenfunctions is
 
 
 \subsection{The density matrix}
+To find the density matrix, $\rho$, we use the following expression
+\begin{equation}
+\rho = \sum_k p_k \op{\phi_k},
+\end{equation}
+where $\ket{\phi_k}$ is some basis which diagonalizes $\rho$, and
+$p_k$ is the probability to find the state in the state of
+$\ket{\phi_k}$. Thankfully the system considered here is in
+equlibrium, which gives us $\comm{H}{\rho}=0$. This is why
+$\ket{\phi_n}$, which was eigenstates to $H$, is used here as well. 
 
+But we're asked to find the density matrix in the
+$\theta$ representation, which is
+\begin{equation}
+\rho(\theta, \theta') = \mel{\theta'}{\rho}{\theta}
+= \sum_k p_k \ip{\theta'}{\phi_k}\ip{\phi_k}{\theta}
+= \sum_k p_k \phi_k^*(\theta')\phi_k(\theta)
+= \sum_k p_k \frac{\ee^{-\ii k (\theta'-\theta)}}{2\pi}.
+\end{equation}
+Now, we just have to find
+\begin{equation}
+p_k = \frac{\ee^{\nicefrac{-E_k}{T}}}{Z} 
+=\frac{\ee^{-\frac{\hbar^2}{2IT}k^2}}{Z} 
+=\frac{\ee^{-\epsilon k^2}}{Z}, 
+\end{equation}
+where $\epsilon=\nicefrac{\hbar^2}{(2IT)}$, and
+\begin{equation}
+Z=\sum_{k=-\infty}^\infty\ee^{-\epsilon k^2}.
+\end{equation}
+This last sum is clearly convergent, but lacks a colsed
+expression. All this leavs us with
+\begin{equation}
+\rho(\theta, \theta')
+= \frac{1}{2\pi Z} 
+\sum_{k=-\infty}^\infty \exp(-\ii k(\theta'-\theta) -\epsilon k^2)
+= \frac{1}{2\pi Z} 
+\sum_{k=-\infty}^\infty \exp(-\ii k\Delta\theta -\epsilon k^2),
+\end{equation}
+where $\Delta\theta=\theta'-\theta$.
 
+\subsubsection{High tempereature limit}
+In the high tempererature limit $\epsilon\propto\nicefrac{1}{T}$
+becomes very small, and the difference between each term in the sum
+becomes small as well, justifying a transition to an integral. Note
+here that we'll get an integral expression in both $Z$ and $\rho$.
 
+Let's begin with the partition function
+\begin{equation}
+Z\to \int\frac{\dd{q}}{h^1}\int_{-\infty}^\infty\ee^{-\epsilon k^2} \dd{k} 
+= \frac{2\pi}{h}\sqrt{\frac{\pi}{\epsilon}}.
+\end{equation}
+The integral itself is just a standard integral with a well known
+value. The same is almost true for the next integral
+\todo{Is the really correct?}
+\begin{equation}
+\rho(\Delta\theta) \to \frac{1}{Z}
+\int\frac{\dd{q}}{h^1}\int_{-\infty}^\infty\ee^{\ii k\Delta\theta}\ee^{-\epsilon k^2} \dd{k} 
+= \frac{h}{2\pi}\sqrt{\frac{\epsilon}{\pi}}\cdot
+\frac{2\pi}{h}\sqrt{\frac{\pi}{\epsilon}}\ee^{-\nicefrac{(\Delta\theta)^2}{4\epsilon}}
+= \ee^{-\nicefrac{(\Delta\theta)^2}{4\epsilon}}.
+\end{equation}
+Here the fact that the integral is the Fourier transform of
+$\ee^{-\epsilon k^2}$ was used to evaluate the it. This is also
+a well known transfrom which can be looked up in some work of
+reference, e.g. Råde\,\&\,Westergren, \textit{Mathematics Handbook for
+Science and Engineering}, ed. 5:12, section 13.2.
 
-
-
+\subsubsection{Low temperature limit}
+In the low tempereature limit $\epsilon\propto\nicefrac{1}{T}$ becomes
+very lare, and causes more or less all terms to vanish in the sums. To
+keep things interesting though, let's keep the terms up to
+$k=\pm1$. This gives us
+\begin{equation}
+Z\approx 1+2\ee^{-\epsilon}
+\end{equation}
+and
+\begin{equation}
+\begin{aligned}
+\rho(\Delta\theta)&\approx 
+\frac{1+\ee^{-\epsilon}\Big(\ee^{-\ii\Delta\theta}+\ee^{+\ii\Delta\theta}\Big)}{1+2\ee^{-\epsilon}}
+\approx
+\qty(1-2\ee^{-\epsilon})\qty(1+2\ee^{-\epsilon}\cos(\Delta\theta))\\
+&\approx 1 + 2\ee^{-\epsilon}\Big(\cos(\Delta\theta)-1\Big).
+\end{aligned}
+\end{equation}
+Here all $\order{\ee^{-2\epsilon}}$ have been discarded.
 
 
 \end{document}
