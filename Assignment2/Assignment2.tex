@@ -18,16 +18,9 @@
 %            left   = 3cm, right  = 3cm
 ]{geometry}
 
-%%För att ändra hur rubrikerna ska formateras
 
-% \newcommand{\cbox}[2][cyan]
-% {\mathchoice
-% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\displaystyle#2$}}
-% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\textstyle#2$}}
-% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptstyle#2$}}
-% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptscriptstyle#2$}}
-% }
-% \newcommand{\grande}{\cbox{\phantom{\frac{1}{xx}}}}
+\swapcommands{\Pi}{\varPi}
+
 
 
 \begin{document}
@@ -49,8 +42,119 @@ Assignment 2}
 \section{Dimensional analysis from Lin\,\&\,Segel}
 \setcounter{subsection}{4}
 \subsection{Ship propeller}
+A ship popeller's thurst $T$ depends on it's radius $a$, the number of
+revolutions per minute $n$, the velocity $V$, the acceleration of
+gravity $g$, the water's density $\rho$ and kinematic viscosity $\nu$.
+We're tasked to use formal dimensinal analysis to show that
+\begin{equation}
+\frac{T}{\rho a^2 V^2} = 
+\varphi\qty(\frac{an}{V}, \frac{aV}{\nu}, \frac{ag}{V^2}).
+\end{equation}
+
+To begin with, we list all the parameters' dimensions:
+\begin{equation}
+\begin{aligned}
+[T]=[LMT^{-2}]\qcomma [a]=[L]&\qcomma [n]=[T^{-1}]\qcomma [V]=[LT^{-1}]\\
+[g]=[LT^{-2}]\qcomma [\nu]=&[L^2T^{-1}]\qcomma  [\rho]=[ML^{-3}].
+\end{aligned}
+\end{equation}
+With the dimensions of all the parameters listed we can begin
+creating dimension less parameters
+\begin{equation}
+\Pi_i = a^{A_i}n^{B_i} V^{C_i} g^{D_i} \nu^{E_i}\rho^{F_i} T^{G_i} \qcomma
+[\Pi_i] = [1].
+\end{equation}
+This is no more than a linear system of equations, one equation for
+each fundamental dimension,
+\begin{equation}\label{eq:1_dim_matrix}
+\begin{pmatrix}
+0&0&0&0&0&1&1\\
+1&0&1&1&2&-3&1\\
+0&-1&-1&-2&-1&0&-2
+\end{pmatrix}
+\begin{pmatrix}
+A_i\\B_i\\C_i\\D_i\\E_i\\F_i\\G_i
+\end{pmatrix}
+=\begin{pmatrix}
+0\\0\\0
+\end{pmatrix}.
+\end{equation}
+Here the rows represents the dimensions of mass, length and time respectivley.
+We have three equations and seven unknowns, so we have four free
+parameters. 
+
+Since we were given a set relation to prove it's easy to confirm that
+the relation satisfies \eqref{eq:1_dim_matrix}, but if we were to find
+a relationship on our own we would now need to choose which of the
+parameters to be free. A good choice would be to let $G_i=\Gamma_i$ be free and
+only have the value $1$ once and the rest of the time be $0$. The
+other free parameters can be chosen more freely; in lack of a beter
+choice, pick $A_i=\alpha_i$, $B_i=\beta_i$ and $C_i=\gamma_i$ to be
+the free parameters. 
+This gives us the equations
+\begin{equation}
+\begin{cases}
+F_i=-\Gamma_i\\
+D_i+2E_i-3F_i=-\alpha_i-\gamma_i-\Gamma_i\\
+2D_i+E_i=-\beta_i-\gamma_i-2\Gamma_i,
+\end{cases}
+\Longleftrightarrow
+\begin{cases}
+F_i=-\Gamma_i\\
+D_i+2E_i=-\alpha_i-\gamma_i-4\Gamma_i\\
+2D_i+E_i=-\beta_i-\gamma_i-2\Gamma_i.
+\end{cases}
+\end{equation}
+
+From here it's just a matter of choosing values for the free
+parameters. One such choice would be $\Gamma_i=(1, 0, 0, 0)$, 
+$\alpha_i=(-2, 1, 1, 1)$, $\beta_i=(0, 1, 0, 0)$ and
+$\gamma_i=(-2, -1, 1, -2)$, giving us $D_i=(0, 0, 0, 1)$, 
+$E_i=(0, 0, -1, 0)$ and $F_i=-\Gamma_i$.
+The set of Buckingham $\Pi$
+parameters now becomes
+\begin{equation}
+\Pi_1=\frac{T}{\rho a^2V^2}\qcomma \Pi_2=\frac{an}{V}\qcomma
+\Pi_3=\frac{aV}{\nu}\qcomma \Pi_4=\frac{ag}{V^2}.
+\end{equation}
+\qed
 
 \subsection{Diffusion and Brownian motion}
+Here we're supposed to find that
+\begin{equation}
+D\propto\frac{k\mathcal{T}}{a\mu},
+\end{equation}
+where $D$ is the diffusion constant, $k$ is the Boltzmann constant,
+$\mathcal{T}$ is the temperature, $a$ the radius of the paricles, and $\mu$ the
+viscosity. The dimensions are
+\begin{equation}
+[D]=[L^2T^{-1}]\qcomma [k]=[ML^2T^{-2}\Theta^{-1}]\qcomma 
+[\mathcal{T}]=[\Theta]\qcomma 
+[a]=[L]\qcomma [\mu]=[ML^{-1}T^{-1}].
+\end{equation}
+
+Instead of doing the formal approach, as above, it's some times easier
+to go ahead and eliminate one dimension after the other without
+having to first set up all the equations. For instance we must have the
+combination $k\mathcal{T}$ to eliminate the temperature dimension; then mass can
+be eliminated by dividing with $\mu$. By now, only the time and length
+dimensions are left, and the only parameters left are $D$ and $a$. 
+
+To eliminate time, we see that
+\begin{equation}
+\qty[\frac{k\mathcal{T}}{\mu}] = \qty[L^3T^{-1}],
+\end{equation}
+which means that dividing by $D$ would eliminate the time
+dimension. And finally we need to divinde by $a$ to get rid of the
+length dimension, leaving us with the only Buckingham $\Pi$ parameter
+\begin{equation}
+\Pi=\frac{k\mathcal{T}}{Da\mu} = ``\varphi(1)\text{''}.
+\end{equation}
+Or in other words
+\begin{equation}
+D=\text{const.}\times\frac{k\mathcal{T}}{a\mu}.
+\end{equation}
+\qed
 
 
 
