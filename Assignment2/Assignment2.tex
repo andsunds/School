@@ -41,6 +41,7 @@ Assignment 2}
 
 \section{Dimensional analysis from Lin\,\&\,Segel}
 \setcounter{subsection}{4}
+\renewcommand{\thesubsection}{L\&S 6.2: \arabic{subsection}}
 \subsection{Ship propeller}
 A ship popeller's thurst $T$ depends on it's radius $a$, the number of
 revolutions per minute $n$, the velocity $V$, the acceleration of
@@ -160,12 +161,68 @@ D=\text{const.}\times\frac{k\mathcal{T}}{a\mu}.
 
 \section{Scaling from Lin\,\&\,Segel}
 \setcounter{subsection}{1}
-
+\renewcommand{\thesubsection}{L\&S 6.3: \arabic{subsection}}
 \subsection{Scaling of an exponential function}
+Here we're looking at the scale of the function
+\begin{equation}
+u^*(x^*)=A\ee^{-ax^*}\qcomma x\in I=[b, \infty)
+\end{equation}
+satisfying some first order ODE. The scaled quantities are $u=u^*/U$
+and $x=x^*/L$. 
+
+By following procedures to ensure that the scaled quantities shoud be
+$\mathcal{O}_M(1)$, we get
+\begin{equation}
+U=\max_I\abs{u^*}=A\ee^{-ab},
+\end{equation}
+and 
+\begin{equation}
+\frac{U}{L}=\max_I\abs{\dv{u^*}{x^*}}=aA\ee^{-ab} \Longrightarrow
+L=\frac{1}{a}.
+\end{equation}
+
+We see that the lengthscale $L$ is independent of $b$. This is because
+the lengthscale should reflect the change in $x^*$ needed to change
+$u^*$ by aome significant amount. And since the function is
+exponential, $u^*$ will change by a factor of $\ee^{-1}$ for every
+step of $\nicefrac{1}{a}$ that $x^*$ takes, regardless of where $x^*$
+had it's origin. 
 
 \subsection{Scaling with multiple independent variables}
+Here we have some first order PDE with two indepedent variables $x^*$
+and $y^*$, and one dependent variable $u^*$. The PDE governs the
+behaviour in some domain $\mathcal{D}$. The scaled terms are
+$u=u^*/U$, $x=x^*/L_x$ and $y=y^*/L_y$.
+
+The scaling should stil be so that the scaled quantities are
+$\mathcal{O}_M(1)$. Wherefore we still get
+\begin{equation}
+U=\max_\mathcal{D}\abs{u^*},
+\end{equation}
+and
+\begin{equation}
+\frac{U}{L_x}=\max_\mathcal{D}\abs{\pdv{u^*}{x^*}}\qcomma
+\frac{U}{L_y}=\max_\mathcal{D}\abs{\pdv{u^*}{y^*}}.
+\end{equation}
+
 
 \subsection{Scaling with multiple dependent variables}
+This is basically the same as above, but with two dependent variables
+$u^*$ and $v^*$. With the same condition thet the scaled parameters
+should be $\mathcal{O}_M(1)$, we get
+\begin{equation}
+U=\max_\mathcal{D}\abs{u^*} \qcomma
+V=\max_\mathcal{D}\abs{v^*},
+\end{equation}
+and 
+\begin{equation}
+L_x=\max\qty{
+U\qty(\max_\mathcal{D}\abs{\pdv{u^*}{x^*}})^{-1},\;
+V\qty(\max_\mathcal{D}\abs{\pdv{v^*}{x^*}})^{-1}
+}
+\end{equation}
+and $L_y$ is analogous to $L_x$.
+
 
 
 
