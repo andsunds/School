@@ -1,0 +1,140 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+
+
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+
+% \newcommand{\cbox}[2][cyan]
+% {\mathchoice
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\displaystyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\textstyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptstyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptscriptstyle#2$}}
+% }
+% \newcommand{\grande}{\cbox{\phantom{\frac{1}{xx}}}}
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+% \begin{titlepage}
+\title{Asymptotic Analasys and Pertubation Theory -- AMATH\,732 \\
+Assignment 2}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+%Om man vill ha en lista med vilka todo:s som finns.
+%\todolist
+
+\section{Dimensional analysis from Lin\,\&\,Segel}
+\setcounter{subsection}{4}
+\subsection{Ship propeller}
+
+\subsection{Diffusion and Brownian motion}
+
+
+
+\section{Scaling from Lin\,\&\,Segel}
+\setcounter{subsection}{1}
+
+\subsection{Scaling of an exponential function}
+
+\subsection{Scaling with multiple independent variables}
+
+\subsection{Scaling with multiple dependent variables}
+
+
+
+
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+\section{The Pythagorean theorem from dimensinal analysis}
+
+
+\section{The projectile problem with air resitance}
+
+
+\section{A piano wire}
+
+
+\section{Orbital stability }
+
+
+\section{Some asymtotic sequences and expansions}
+
+
+\section{The exponential integral}
+
+
+\section{More of the exponential integral}
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer (två enkelfjongar): ''.
+
+
+%% Inkludera PDF-dokument
+\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+
+%% Figurer inkluderade som pdf-filer
+\begin{figure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer roterade 90 grader
+\begin{sidewaysfigure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{sidewaysfigure}
+
+
+%%Om man vill lägga till något i TOC
+\stepcounter{section} %Till exempel en 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
