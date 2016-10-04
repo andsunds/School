@@ -209,7 +209,7 @@ and
 \subsection{Scaling with multiple dependent variables}
 This is basically the same as above, but with two dependent variables
 $u^*$ and $v^*$. With the same condition thet the scaled parameters
-should be $\mathcal{O}_M(1)$, we get
+should be at most $\mathcal{O}_M(1)$, we get
 \begin{equation}
 U=\max_\mathcal{D}\abs{u^*} \qcomma
 V=\max_\mathcal{D}\abs{v^*},
@@ -224,16 +224,141 @@ V\qty(\max_\mathcal{D}\abs{\pdv{v^*}{x^*}})^{-1}
 and $L_y$ is analogous to $L_x$.
 
 
-
-
-
 \renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 \renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
 
 \section{The Pythagorean theorem from dimensinal analysis}
 
 
+
+
 \section{The projectile problem with air resitance}
+Once again we take a look at the projectile problem, but this time
+it's with air recistance and constant gravity. The prblem now becomes
+\begin{equation}\label{eq:4_gov_eqn}
+\frac{\dd^2{x^*}}{\dd{t^*}^2} + \frac{k}{m}\frac{\dd{x^*}}{\dd{t^*}} + g = 0
+\qcomma x^*(0)=0\qcomma \eval{\dv{x^*}{t^*}}_{t^*=0}=v.
+\end{equation}
+
+\subsection{Scaling}
+With $v$ suficiently small, the change in the maximum height won't be
+too great from if there would be no drag. Hence the scale for $x$
+should be $x=x^*/U$, with 
+\begin{equation}\label{eq:4_xscale}
+U=v^2/g\approx2\max(x)
+\end{equation}
+for small $v$'s. 
+The time scale won't change much from the reduced problem either for
+$v$ small enough. There are however an other argument for this. 
+
+Consider the recipie for choosing the timescale:
+\begin{equation}\label{eq:4_t_scale}
+T=\min_{i\in\{1, 2\}}\qty{\qty[
+U\times\qty(\max\abs{\frac{\dd^i x^*}{\dd{t^*}^i}})^{-1}
+]^{\nicefrac{1}{i}}}
+\end{equation}
+and since $v=\max\abs{\dv{x^*}{t^*}}$ is small, \eqref{eq:4_t_scale}
+tells us that we should choose the time scale based on the second
+derivative. Therefore
+\begin{equation}\label{eq:4_tscale}
+T=\qty[\frac{v^2}{g}\times(g)^{-1}]^{\nicefrac{1}{2}} = \frac{v}{g}.
+\end{equation}
+
+\subsection{Non-dimensionalize}
+We non-dimensionalize the problem by taking $x=x^*/U$ and $t=t^*/T$,
+with $U$ and $T$ from \eqref{eq:4_xscale} and \eqref{eq:4_tscale}
+respectively. Now the governing equation becomes
+\begin{equation}
+\frac{v^2}{g}\qty(\frac{v}{g})^{-2}\dv[2]{x}{t} 
++ \frac{k}{m} \frac{v^2}{g}\qty(\frac{v}{g})^{-1}\dv{x}{t}
++ g = 0,
+\end{equation}
+which when simplified gives us the analouge of \eqref{eq:4_gov_eqn}:
+\begin{equation}
+\dv[2]{x}{t} + \beta\dv{x}{t} + 1 = 0\qcomma
+x(0)=0\qcomma \dot{x}(0)=1.
+\end{equation}
+Here $\beta=\frac{kv}{mg}$ is the maximum quitent between the
+dragforce and the gravitational force on the projectile. Since we're
+studying slow projectiles we know that $\beta$ is small, meaning that
+gravity will always be the dominating force on the object. 
+
+\subsection{Approximate solution and time to reach maximum height}
+\subsubsection{Approximate solution}
+To find an approximate solution with pertubation methods, expand
+\begin{equation}
+x(t, \beta) = x_0(t) + x_1(t)\beta + x_2(t)\beta^2 + \ldots.
+\end{equation}
+Substitution into the ODE and collection of powers of $\beta$ yiels
+\begin{equation}
+\ddot{x}_0+g + \beta\qty(\ddot{x}_1+\dot{x}_0) +
+\beta^2\qty(\ddot{x}_2 + \dot{x}_1) + \ldots = 0.
+\end{equation}
+And the initial conditions are $x_i(0)=0$ for all $i$, and
+$\dot{x}_i=0$ for $i\neq0$ and $\dot{x}_0=1$. Now we can solve for
+each coefficient of $\beta^i$:
+\vspace{-1mm}
+\begin{enumerate}[label=$\order{\beta^{\arabic*}}$: , start=0, leftmargin=2cm]
+\item $\displaystyle \ddot{x}_0=-g_{\phantom{0}} \quad\Longrightarrow\quad
+x_0(t) = t - \frac{t^2}{2}$.
+\item $\displaystyle \ddot{x}_1=-\dot{x}_0 \quad\Longrightarrow\quad
+x_1(t) = \frac{t^3}{6} - \frac{t^2}{2}$.
+\item $\displaystyle \ddot{x}_2=-\dot{x}_1 \quad\Longrightarrow\quad
+x_2(t) = \frac{t^3}{6} - \frac{t^4}{24}$.
+\end{enumerate}
+Together we get\footnotemark{}
+\begin{equation}\label{eq:4_xapprox}
+x(t, \beta) = t - \frac{t^2}{2} + \beta\qty(\frac{t^3}{6}-\frac{t^2}{2})
+ + \beta^2\qty(\frac{t^3}{6}-\frac{t^4}{24}) + \order{\beta^3}.
+\end{equation}
+\qed
+\footnotetext{The error is bounded by $\order{\beta^3}$ due to the
+  fact that all coefficients for the $\beta$'s are all polynomials in
+  $t$ and $t$ is bounden during the period of interest. }
+
+\subsubsection{Approximate time to reach maximum height}
+To find an approximation of th time it takes for the projectile to
+reach it's maximum height, $\tau$, we just differentiate $x$ from
+\eqref{eq:4_xapprox} with respect to $t$ set that to $0$:
+\begin{equation}
+\begin{aligned}
+1-\tau + \beta\qty(-\tau+\frac{\tau^2}{2}) 
++ \beta^2\qty(\frac{\tau^2}{2}-\frac{\tau^3}{6}) &= 0\\
+\Longrightarrow\quad
+1 - (1+\beta)\tau + \frac{\beta}{2}\qty(\beta -1)\tau^2 
+- \frac{\beta^2}{6}\tau^3 &= 0
+\end{aligned}
+\end{equation}
+To solve this equation, we use pertubation methods. 
+
+Expand,
+\begin{equation}
+\tau(\beta) = \tau_0 + \tau_1\beta + \tau_2\beta^2 +\ldots,
+\end{equation}
+and insert into the polynomial. 
+\begin{equation}
+\begin{aligned}
+0=&1 - (1+\beta)\qty(\tau_0+\tau_1\beta + \tau_2\beta^2+\ldots)\\
+&+ \frac{\beta}{2}\qty(\beta -1)\qty(\tau_0^2+2\tau_0\tau_1\beta+\ldots)
++\frac{\beta^2}{6}\qty(\tau_0^3+\ldots) + \ldots.
+\end{aligned}
+\end{equation}
+Collecting like powers of $\beta$
+yields
+\begin{enumerate}[label=$\order{\beta^{\arabic*}}$: , start=0, leftmargin=2cm]
+\item $\displaystyle 1-\tau_0 = 0 \quad\Longrightarrow\quad
+\tau_0=1$.
+\item $\displaystyle -\tau_0-\tau_1+\frac{\tau_0}{2} = 0 \quad\Longrightarrow\quad
+\tau_1= -\frac{\tau_0}{2} = -\frac{1}{2}$.
+\item $\displaystyle -\tau_1-\tau_2+\frac{\tau_0^2}{2}-\tau_0\tau_1 +\frac{\tau_0^3}{6}= 0 \quad\Longrightarrow\quad
+\tau_2=-\tau_1+\frac{\tau_0^2}{2}-\tau_0\tau_1 +\frac{\tau_0^3}{6} = \frac{5}{3}$.
+\end{enumerate}
+Therefore the time at which the projectile reaches it's maximum height
+is 
+\begin{equation}
+\tau(\beta) = 1 - \frac{1}{2}\beta + \frac{5}{3}\beta^2 + \order{\beta^3}.
+\end{equation}
+\qed
 
 
 \section{A piano wire}
