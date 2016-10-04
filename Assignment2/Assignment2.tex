@@ -362,6 +362,210 @@ is
 
 
 \section{A piano wire}
+\newcommand{\yn}{\ensuremath{}y^{(n)}}
+
+An ideal (no bending stiffness) piano wire is governed by the equation
+\begin{equation}
+\rho A \pdv[2]{y}{{t^*}} - T\pdv[2]{y}{{x^*}} = 0 \qcomma 0\le x^*\le L,
+\end{equation}
+together with the boundry conditions $y(0)=y(L)=0$. Here $\rho A$ is
+the mass density per unit length and $T$ is the tension in the
+string. This PDE has solutions of the form
+\begin{equation}
+\yn=\ee^{-\ii\omega_n^*t^*}\sin(n\pi\frac{x^*}{L}).
+\end{equation}
+Since we're dealing with a linear PDE with constant coefficients, the
+solution is determined ut to a constant factor. We can therefore view
+$y$ as already beeing dimension less; meaning that $\yn$ would
+represent the qutient of the displacement at $x^*$ and $t^*$ to the
+maximum displacement of the wire. 
+
+\subsection{The dispersion relation}
+To find the value of $\omega_n$, we just plug the solution into the
+governing equation. Realising that differentiating two times with
+respect to either $t^*$ or $x^*$ yelds the same function aging but with
+some factors, we get
+\begin{equation}
+\rho A \qty(-\ii\omega_n^*)^2 + T \qty(\frac{n\pi}{L})^2=0
+\end{equation}
+which gives us
+\begin{equation}\label{eq:5_omega_n}
+\omega_n^* = \sqrt{\frac{T}{\rho A}} \frac{n\pi}{L} 
+= n\pi\,\frac{1}{L}\sqrt{\frac{T}{\rho A}}.
+\end{equation}
+We also see that $\omega_n^*$ is linear in $n$.
+\qed 
+
+\subsection{Introducing bending stiffness}
+By introducing bending stiffnes the governing PDE now becomes
+\begin{equation}
+\rho A \pdv[2]{y^*}{{t^*}} - T\pdv[2]{y^*}{{x^*}} +EAk^2\pdv[4]{y^*}{{x^*}}
+= 0 \qcomma 0\le x^*\le L,
+\end{equation}
+where $E$ is the Young's modulus and $k$ is the radius of gyration. 
+
+For ease of continuing to solve this nwe problem we
+non-dimensionalize. There are a natural choice of scales here. The
+only intrinsic length scale in the problem is the length of the wire
+$L$, and the natural timescale comes from the expression of $\omega_n^*$
+in \eqref{eq:5_omega_n}, $\tau=L\sqrt{\rho A/T}$. Therefore the new
+variables become $x=x^*/L$ and $t=t^*/\tau$, giving us the PDE:
+\begin{equation}
+\rho A {\qty(L\sqrt{\frac{\rho A}{T}})^{-2}} \pdv[2]{y}{t} 
+- T {\Big(L\Big)^{-2}} \pdv[2]{y^*}{{x^*}} 
++ EAk^2 \Big(L\Big)^{-4} \pdv[4]{y^*}{{x^*}}
+= 0 \qcomma 0\le x\le1,
+\end{equation}
+which reduces to the non-dimensionalized form
+\begin{equation}
+\pdv[2]{y}{t} - \pdv[2]{y}{x} + 
+\underbrace{\frac{EAk^2}{TL^2}}_{=:\epsilon}\pdv[4]{y}{x} = 0
+\qcomma 0\le x\le1.
+\end{equation}
+\qed
+
+\subsection{Finding an (approximate) solution}
+Here we're supposed to find an approximate solution to the piano wire
+problem, using pertubation methods. 
+
+\subsubsection{The naïve approach}
+To begin with, let's just expand
+\begin{equation}
+y(x, t, \epsilon) = y_0(x, t) + 
+y_1(x, t)\epsilon + y_2(x, t)\epsilon^2 + \ldots,
+\end{equation}
+and substitute into the governing equation and collect like powes of
+epsilon, will give
+\begin{equation}\label{eq:5_naive}
+\qty(\pdv[2]{y_0}{t} - \pdv[2]{y_0}{x})
++\epsilon\qty(\pdv[2]{y_1}{t} - \pdv[2]{y_1}{x} + \pdv[4]{y_0}{x})
++\epsilon^2\qty(\pdv[2]{y_2}{t} - \pdv[2]{y_2}{x} + \pdv[4]{y_1}{x}) 
++\ldots = 0.
+\end{equation}
+We now see that the $\order{1}$ problem gives the reduced solution
+\begin{equation}
+\yn_0=\ee^{-\ii\omega_nt}\sin(n\pi x) \qcomma \omega_n=n\pi.
+\end{equation}
+However the $\order{\epsilon}$ problem now becomes a DE with a
+resonant forcing term:
+\begin{equation}
+\pdv[2]{y_1}{t} - \pdv[2]{y_1}{x} 
+=-\qty(n\pi)^4\ee^{-\ii\omega_nt}\sin(n\pi x).
+\end{equation}
+This is not good, it' will lead to some increasing amplitude in
+time. To deal with this, we need to introduce som straining of a
+coordinate. 
+
+\subsubsection{Straining a coordinate}
+%\renewcommand{\yn}{\ensuremath{}{y'}^{(n)}}
+\newcommand{\sn}{\ensuremath\sigma^{(n)}}
+Since the perturbed problem containd an extra derivative with respect
+to $x$, it' might be tempting to choose to strain the $x$
+coordinate. This can however not be done because of the boundry
+conditions. 
+
+We therefore strain the time coordinate. To do this we first of all
+note that only secod derivatives with respect to time is present. We
+therefore use
+\begin{equation}
+t'=\sqrt{\sigma(\epsilon)}t \qcomma 
+\sigma(\epsilon) = \sigma_0 + \sigma_1\epsilon + \sigma_2\epsilon^2+\ldots,
+\end{equation}
+which gives
+\begin{equation}
+\pdv[2]{y}{t} = \pdv[2]{y}{t'}{t}\pdv{t'}{t} 
+= \pdv[2]{y}{{t'}}\qty(\pdv{t'}{t})^2 
+= \sigma(\epsilon)\pdv[2]{t}{{t'}}.
+\end{equation}
+We also note that $\sigma(0)=\sigma_0=1$, to give the reduced problem
+for $\epsilon=0$.
+
+If we now expand both $y$ and $\sigma$ and substitue them into the
+governing equation, we get the anlalouge of \eqref{eq:5_naive}: 
+\begin{equation}
+\begin{aligned}
+\qty(\sigma_0\pdv[2]{y_0}{t} - \pdv[2]{y_0}{x})
++\epsilon\qty(\sigma_0\pdv[2]{y_1}{t} - \pdv[2]{y_1}{x} 
++ \pdv[4]{y_0}{x} + \sigma_1\pdv[2]{y_0}{t})&\\
++\epsilon^2\qty(\sigma_0\pdv[2]{y_2}{t} 
+- \pdv[2]{y_2}{x} + \pdv[4]{y_1}{x} 
++ \sigma_2\pdv[2]{y_0}{t} + \sigma_1\pdv[2]{y_1}{t}) 
++\ldots &= 0.
+\end{aligned}
+\end{equation}
+With $\sigma_0=1$, the $\order{1}$ problem still gives the reduced
+solution
+\begin{equation}
+\yn_0=\ee^{-\ii\omega_n't'}\sin(n\pi x) \qcomma \omega_n'=n\pi,
+\end{equation}
+as expected. But now we can get rid of the resonant forcing term in
+the $\order{\epsilon}$ problem by choosing $\sigma_1$ properly:
+\begin{equation}
+\pdv[2]{\yn_1}{t} - \pdv[2]{\yn_1}{x} 
+=\qty(-(n\pi)^4 -\sigma_1(n\pi)^2(-1))\ee^{-\ii\omega_n't'}\sin(n\pi x).
+\end{equation}
+By choosing $\sn_1=(n\pi)^2$, we get back to the same homogeneous as
+the reduced problem. But this time it's for $\yn_1$, giving
+\begin{equation}
+\yn_1=\ee^{-\ii\omega_n't'}\sin(n\pi x) \qcomma \omega_n'=n\pi.
+\end{equation}
+
+So far so good, but when we get to the $\order{\epsilon^2}$ problem
+something strange happens. The equation is 
+\begin{equation}
+\begin{aligned}
+\pdv[2]{\yn_2}{t} - \pdv[2]{\yn_2}{x} 
+&=-\pdv[4]{\yn_1}{x}-\sn_1\pdv[2]{\yn_1}{t}-\sn_2\pdv[2]{\yn_0}{t} \\
+&=\Big(\underbrace{-(n\pi)^4 +\sn_1(n\pi)^2}_{=0} + \sn_2(n\pi)^2\Big)
+\ee^{-\ii\omega_n't'}\sin(n\pi x),
+\end{aligned}
+\end{equation}
+so to get rid of the resonant forcing term we have to set
+$\sn_2=0$. And again the homogeneous PDE is the same as the reduced
+problem, giving
+\begin{equation}
+\yn_2=\ee^{-\ii\omega_n't'}\sin(n\pi x) \qcomma \omega_n'=n\pi.
+\end{equation}
+This general theme, of subsequent $\sn_i$ beeing set to $0$ and
+reducing the problem to the same homogenous PDE as the reduced problem
+for all $\yn_i$'s, recurs troughout the rest of the powers of
+$\epsilon$. 
+
+With this information, we can now express the exact solution
+\begin{equation}
+C\yn(x, t) = \sum_{i=0}^\infty\yn_i(x, t)\epsilon^i
+=\frac{1}{1-\epsilon}\ee^{-\ii\omega_n't'}\sin(n\pi x) \qcomma \omega_n'=n\pi.
+\end{equation}
+And since we're dealing with a linear PDE with constant coefficients,
+we're allowed to choose the constant factor infront of our solution as
+we wish. We therefore coose $C$ so that the extra, $\epsilon$
+dependent, factor above disapears. All we have to do now is to go back
+to the unstrained time via 
+\begin{equation}
+t'=\sqrt{\sn(\epsilon)}t \qcomma \sn(\epsilon) = 1 + \epsilon(n\pi)^2.
+\end{equation}
+And we finally get
+\begin{equation}\label{eq:5_solution}
+\begin{aligned}
+\yn(x, t) &= \ee^{-\ii\sqrt{1+\epsilon(n\pi)^2}\omega_n't}\sin(n\pi x) \\
+&= \ee^{-\ii\omega_nt}\sin(n\pi x) 
+\qcomma \omega_n=n\pi\sqrt{1+\epsilon(n\pi)^2},
+\end{aligned}
+\end{equation}
+which shows that the harmonics are no longer perfect octaves.
+\qed
+
+\subsubsection*{Note on the exact solution}
+The solution ablove is exact, this can be validated by substituting it
+into the PDE. However in this case it would've been much easier to
+find the exact solution using a dispersion relation approach. 
+
+Assume that the perturbed solution has the same form\footnotemark{} as
+the unperturbed, and substitue that into the PDE. This gives
+\begin{equation}
+-\omega_n^2 + (n\pi)^2 + \epsilon(n\pi)^4=0,
+\end{equation}
+which yields exactly the same solution as \eqref{eq:5_solution}.
 
 
 \section{Orbital stability }
