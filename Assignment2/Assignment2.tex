@@ -21,7 +21,8 @@
 
 \swapcommands{\Pi}{\varPi}
 
-
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\oh}{\ensuremath\mathpzc{o}}
 
 \begin{document}
 
@@ -669,6 +670,38 @@ problem. }
 
 
 \section{Some asymptotic sequences and expansions}
+An asymptotic sequence (AS), as $x\to x_0$, is a sequence of functions
+$\{\varphi_n\}$ which satisfies
+\begin{equation}
+\varphi_{n+1}(x) = \oh(\varphi_{n}(x), \text{ as } x\to0
+\quad\Longleftrightarrow\quad
+\frac{\varphi_{n+1}(x)}{\varphi_{n}(x)}\to0 , \text{ as } x\to0,
+\end{equation}
+for all $n$.
+\subsection{Four sequences}
+\newcommand{\as}{\qcomma\text{as }}
+Here we're going to determine whether the following sequences are
+asymptotic as $x$ tends to $0$ or $\infty$.
+
+\begin{enumerate}[label=(\roman*)]
+\item $\displaystyle \phi_n(x)=(1+x^2)^{-n} \quad\Longrightarrow\quad
+\frac{\phi_{n+1}(x)}{\phi_{n}(x)}=(1+x^2)^{-1}\to0\as x\to\infty$
+\item $\displaystyle f_n(x)=\ee^{(6-n)x} \quad\Longrightarrow\quad
+\frac{f_{n+1}(x)}{f_{n}(x)}=\ee^{-x}\to0\as x\to\infty$
+\item $\displaystyle \psi_n(x)=\tanh^n(\nicefrac{1}{x}) \quad\Longrightarrow\quad
+\frac{\psi_{n+1}(x)}{\psi_{n}(x)}=\tanh(\nicefrac{1}{x})\to0\as
+x\to\infty$
+\item $\displaystyle q_n(x)=\frac{\sin(nx+\frac{\pi}{n})}{x^n} \quad\Longrightarrow\quad
+\frac{q_{n+1}(x)}{q_{n}(x)}=
+x\underbrace{\frac{\sin((n+1)x+\frac{\pi}{n+1})}
+{\sin(nx+\frac{\pi}{n})}}_{\to
+\sin(\frac{\pi}{n+1})/\sin(\frac{\pi}{n})\as x\to0 }
+\to0\as x\to0$
+\end{enumerate}
+
+\subsection{Asymptoic expansion using the first three AS's above}
+
+
 
 
 \section{The exponential integral}
