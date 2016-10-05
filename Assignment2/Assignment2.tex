@@ -566,12 +566,109 @@ the unperturbed, and substitue that into the PDE. This gives
 -\omega_n^2 + (n\pi)^2 + \epsilon(n\pi)^4=0,
 \end{equation}
 which yields exactly the same solution as \eqref{eq:5_solution}.
-
+\footnotetext{It's reasonable to assume this since we can see that
+  four differentiations with respect to $x$ only gives rise to a
+  constant times the assumed function. }
 
 \section{Orbital stability }
+The equations governing an object in orbit is
+\begin{align}
+\label{eq:6_force_balance}
+\dv[2]{r}{t} - r\omega^2 &= -\frac{GM}{r^2}
+\\ \label{eq:6_ang_momentum}
+\dv{t}\qty[r^2\omega] &= 0,
+\end{align}
+where $G$ is the universal gravitational constant, $M$ is the mass of
+the central object, $r$ is the satellite's distence from the center,
+and $\omega=\dot\theta$ is the angular frequency of the satellite. 
+
+\subsection{Circular orbit}\label{sec:6a}
+It's easy to show that circular orbits are allowed by the sets of
+equations above. With $r=a$ and $\omega=\omega_0$, where both $a$ and
+$\omega_0$ are constants, \eqref{eq:6_force_balance} becomes
+\begin{equation}
+a\omega_0^2=\frac{GM}{a^2},
+\end{equation}
+and \eqref{eq:6_ang_momentum} becomes $0=0$. The governing sets of
+equations are thus satisfied. And a relationship between $a$ and
+$\omega_0$ can be established:
+\begin{equation}\label{eq:6_GM}
+a^3 \omega_0^2 = GM = \text{const.},
+\end{equation}
+which is Kepler's third law.
+\qed
+
+\subsection{A small radial pertubation}
+This time the pertubation is not in the governing equations, as
+before, but in the initial conditions\footnotemark{}:
+\begin{equation}
+\begin{cases}
+r(0)=a\qcomma \dot{r}(0) = \epsilon v\\
+\omega(0)=\omega_0.
+\end{cases}
+\end{equation}
+From here, it's just the regular expanding in powers of epsilon and
+substituting into the governing equations.
+\footnotetext{Although non-dimensionalizing is often a very powerful
+  tool, this problem is so simple we don't need to non-dimensionalize 
+  to solve it. }
+
+We begin with the expansion:
+\begin{equation}
+\begin{aligned}
+r(t, \epsilon) &= a + r_1(t)\epsilon +\ldots,\\
+\omega(t, \epsilon) &= \omega_0 + \omega_1(t)\epsilon + \ldots,
+\end{aligned}
+\end{equation}
+where the first terms is given by the reduced problem in \ref{sec:6a},
+and are both \emph{constants}.
+When we substitute into the governing equations we get
+\begin{equation}\label{eq:6_ODE}
+\begin{cases}\displaystyle
+(\ddot{r}_1\epsilon) 
+- (a+r_1\epsilon)\qty(\omega_0^2+2\omega_0\omega_1\epsilon)
++\order{\epsilon^2}
+%=-\frac{GM}{a^2(1+\frac{r_1\epsilon}{a}+\ldots)^2} 
+= -\frac{a^3\omega_0^2}{a^2}\qty(1-2\frac{r_1}{a}\epsilon)
++\order{\epsilon^2},\\
+0=2\dot{r}\omega + r\dot{\omega} =
+2\qty(\dot{r}_1\epsilon)(\omega_0)
++ (a)(\dot{\omega}_1\epsilon)+\order{\epsilon^2}.
+\end{cases}
+\end{equation}
+Here, we have manipulated the RHS of the first equation by using
+\eqref{eq:6_GM} and Taylor expansion. 
+
+We start attacking these equations by evaluating the
+$\order{\epsilon}$ problen of (\ref{eq:6_ODE}\,b):
+\begin{equation}
+a\dot{\omega}_1=-2\omega_0\dot{r}_1 \quad\Longrightarrow\quad
+a\omega_1 = -2r_1 + C,
+\end{equation}
+where $C$ is just some integration constant. This substituted into 
+(\ref{eq:6_ODE}\,a) yields for the $\order{\epsilon}$
+problem\footnotemark{} 
+\begin{equation}
+\begin{aligned}
+&\ddot{r}_1 - 2a\omega_0\,\omega_1 - r_1\omega_0^2 = +2\omega_0^2r_1\\
+\Longleftrightarrow\quad&
+0=\ddot{r}_1 + 4\omega_0^2\,r_1 +C' - 3r_1\omega_0^2 = \ddot{r}_1 +
+\omega_0^2\,r_1 +C'
+\end{aligned}
+\end{equation}
+We therefore get that, with the initial conditions, the first order
+approximation is
+\begin{equation}
+r_1(t) = \frac{v}{\omega_0}\sin(\omega_0t),
+\end{equation}
+making the orbit stable.
+\qed
+\footnotetext{The $\order{1}$ problem is trivial since the first terms
+in both of the expansions are predetermined to satisfy the reduced
+problem. }
 
 
-\section{Some asymtotic sequences and expansions}
+\section{Some asymptotic sequences and expansions}
 
 
 \section{The exponential integral}
