@@ -24,6 +24,8 @@
 \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 \newcommand{\oh}{\ensuremath\mathpzc{o}}
 
+\newcommand{\Ei}{\ensuremath\mathrm{Ei}}
+
 \begin{document}
 
 %%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
@@ -56,8 +58,10 @@ We're tasked to use formal dimensinal analysis to show that
 To begin with, we list all the parameters' dimensions:
 \begin{equation}
 \begin{aligned}
-[T]=[LMT^{-2}]\qcomma [a]=[L]&\qcomma [n]=[T^{-1}]\qcomma [V]=[LT^{-1}]\\
-[g]=[LT^{-2}]\qcomma [\nu]=&[L^2T^{-1}]\qcomma  [\rho]=[ML^{-3}].
+[T]=[\mathcal{LMT}^{-2}]\qcomma [a]=[\mathcal{L}]
+&\qcomma [n]=[\mathcal{T}^{-1}]\qcomma [V]=[\mathcal{LT}^{-1}]\\
+[g]=[\mathcal{LT}^{-2}]\qcomma [\nu]=&[\mathcal{L}^2\mathcal{T}^{-1}]
+\qcomma  [\rho]=[\mathcal{ML}^{-3}].
 \end{aligned}
 \end{equation}
 With the dimensions of all the parameters listed we can begin
@@ -124,37 +128,37 @@ parameters now becomes
 \subsection{Diffusion and Brownian motion}
 Here we're supposed to find that
 \begin{equation}
-D\propto\frac{k\mathcal{T}}{a\mu},
+D\propto\frac{kT}{a\mu},
 \end{equation}
 where $D$ is the diffusion constant, $k$ is the Boltzmann constant,
-$\mathcal{T}$ is the temperature, $a$ the radius of the paricles, and $\mu$ the
+$T$ is the temperature, $a$ the radius of the paricles, and $\mu$ the
 viscosity. The dimensions are
 \begin{equation}
-[D]=[L^2T^{-1}]\qcomma [k]=[ML^2T^{-2}\Theta^{-1}]\qcomma 
-[\mathcal{T}]=[\Theta]\qcomma 
-[a]=[L]\qcomma [\mu]=[ML^{-1}T^{-1}].
+[D]=[\mathcal{L}^2\mathcal{T}^{-1}]\qcomma [k]=[\mathcal{ML}^2\mathcal{T}^{-2}\Theta^{-1}]\qcomma 
+[T]=[\Theta]\qcomma 
+[a]=[\mathcal{L}]\qcomma [\mu]=[\mathcal{ML}^{-1}\mathcal{T}^{-1}].
 \end{equation}
 
 Instead of doing the formal approach, as above, it's some times easier
 to go ahead and eliminate one dimension after the other without
 having to first set up all the equations. For instance we must have the
-combination $k\mathcal{T}$ to eliminate the temperature dimension; then mass can
+combination $kT$ to eliminate the temperature dimension; then mass can
 be eliminated by dividing with $\mu$. By now, only the time and length
 dimensions are left, and the only parameters left are $D$ and $a$. 
 
 To eliminate time, we see that
 \begin{equation}
-\qty[\frac{k\mathcal{T}}{\mu}] = \qty[L^3T^{-1}],
+\qty[\frac{kT}{\mu}] = \qty[\mathcal{L}^3\mathcal{T}^{-1}],
 \end{equation}
 which means that dividing by $D$ would eliminate the time
 dimension. And finally we need to divinde by $a$ to get rid of the
 length dimension, leaving us with the only Buckingham $\Pi$ parameter
 \begin{equation}
-\Pi=\frac{k\mathcal{T}}{Da\mu} = ``\varphi(1)\text{''}.
+\Pi=\frac{kT}{Da\mu} = ``\varphi(1)\text{''}.
 \end{equation}
 Or in other words
 \begin{equation}
-D=\text{const.}\times\frac{k\mathcal{T}}{a\mu}.
+D=\text{const.}\times\frac{kT}{a\mu}.
 \end{equation}
 \qed
 
@@ -670,6 +674,7 @@ problem. }
 
 
 \section{Some asymptotic sequences and expansions}
+\newcommand{\as}{\qcomma\text{as }}
 An asymptotic sequence (AS), as $x\to x_0$, is a sequence of functions
 $\{\varphi_n\}$ which satisfies
 \begin{equation}
@@ -678,8 +683,23 @@ $\{\varphi_n\}$ which satisfies
 \frac{\varphi_{n+1}(x)}{\varphi_{n}(x)}\to0 , \text{ as } x\to0,
 \end{equation}
 for all $n$.
+
+An asymptotic expansion
+\begin{equation}
+f\sim\sum_{n=1}^N a_n\varphi_n\as x\to x_0,
+\end{equation}
+must satisfy
+\begin{align}
+&f(x)-\sum_{n=1}^Na_n\varphi_n(x)=\order{\varphi_{N+1}(x)}\as x\to x_0
+\\ \label{eq:7_AE_coef}
+\stackrel{\text{If }\exists\text{ expansion}}{\Longrightarrow}\quad
+& a_{n+1} = \lim_{x\to x_0} 
+\frac{f(x)-\sum_{i=1}^{n}a_i\varphi_i(x)}{\varphi_{n+1}(x)}.
+\end{align}
+
+
+
 \subsection{Four sequences}
-\newcommand{\as}{\qcomma\text{as }}
 Here we're going to determine whether the following sequences are
 asymptotic as $x$ tends to $0$ or $\infty$.
 
@@ -698,13 +718,103 @@ x\underbrace{\frac{\sin((n+1)x+\frac{\pi}{n+1})}
 \sin(\frac{\pi}{n+1})/\sin(\frac{\pi}{n})\as x\to0 }
 \to0\as x\to0$
 \end{enumerate}
+In all of the cases $n\in\Z^+=\{1, 2, 3, \ldots\}$.
+\qed
 
 \subsection{Asymptoic expansion using the first three AS's above}
+Here we're going to use \eqref{eq:7_AE_coef} to find the first three
+non-zero coefficients in the asymptotic expansion of $h(x)=1/x$ in
+terms of the three sequences above which are asymptotic as
+$x\to\infty$. 
+
+\subsubsection{No expansion}
+In this case there exis no expansion because $1/x$ cannot be bounded
+by $1/(1+x^2)$ as $x\to\infty$, or in other words
+$x^{-1}\neq\order*{(1+x^2)^{-1}}$ as $x\to\infty$.
+
+\subsubsection{No expansion}
+Here it's clear that the first six terms must be 0 because
+$f_j(x)\not\to0$ as $x\to\infty$ for $j\le6$. After that, we get the
+same problem as before, i.e. $x^{-1}\neq\order*{\ee^{(6-j)x}}$ as
+$x\to\infty$ for $j\ge7$. 
+
+\subsubsection{An expansion}
+\newcommand{\limu}{\ensuremath\lim_{u\to0^+\hspace{-3pt}}\hspace{+2pt}}
+
+Here we'll find that there does indeed exsits an asymptotic expansion
+of $h=1/x$ in therms of $\psi_n=\tanh^n(1/x)$. 
+
+But before we begin we need to do some house keeping first. First of
+all, the Taylor expansion of the hyperbolic tan around $0$ is
+\begin{equation} \label{eq:tanh}
+\tanh{t} = t - \frac{t^3}{3} + \frac{2x^5}{15} + \order{x^7},
+\end{equation}
+which can be found in, for example, Råde\,\&\,Westergren,
+\textit{Mathematics Handbook for Science and Engineering}, ed. 5:12,
+section 8.6.
+Next is the fact that we'll be studying the limit as $x\to\infty$ for
+functions of $1/x$, where by it's more convenient to do a variable
+substitution
+\begin{equation}
+u=\frac{1}{x} \qcomma \lim_{x\to\infty} \longmapsto \limu\qcomma
+\tilde{h}(u)=h(x)\qcomma\tilde\psi_n(u)=\psi_n(x).
+\end{equation}
+
+Now we just have to use \eqref{eq:7_AE_coef} with our variable
+substitution to find the coefficients of the asymptotic expansion.
+\begin{enumerate}
+\item $\displaystyle a_1=\limu\frac{u}{\tanh(u)}
+\stackrel{\eqref{eq:tanh}}{=}\limu \frac{u}{u+\order{u^3}} = 1.
+$
+\item $\displaystyle a_2=\limu\frac{u-\tanh(u)}{\tanh^2(u)}
+\stackrel{\eqref{eq:tanh}}{=}\limu 
+\frac{u-\qty(u-\frac{u^3}{3} + \order{u^5})}{\qty(u+\order{u^3})^2} 
+=\limu 
+\frac{\frac{1}{3}u^3 + \order{u^5}}{u^2\qty(1+\order{u^2})^2}= 0.
+$
+\item $\displaystyle a_3=\limu\frac{u-\tanh(u)}{\tanh^3(u)}
+\stackrel{\eqref{eq:tanh}}{=}\limu 
+\frac{u-\qty(u-\frac{u^3}{3} + \order{u^5})}{\qty(u+\order{u^3})^3} 
+=\limu 
+\frac{\frac{1}{3}u^3 + \order{u^5}}{u^3\qty(1+\order{u^2})^3}= \frac{1}{3}.
+$
+\item $\displaystyle a_4=
+\overbrace{\ldots}^{\text{same procedure as for }a_2}= 0.
+$
+\item $\displaystyle a_5=\limu\frac{u-\tanh(u)-\frac{1}{3}\tanh^3(u)}{\tanh^5(u)}
+\\\phantom{a_5}\stackrel{\eqref{eq:tanh}}{=}\limu 
+\frac{u-\qty(u - \frac{u^3}{3} + \frac{2u^5}{15})
+        -\frac{1}{3}\qty(u^3 - 3u^2\cdot\frac{u^3}{3}) +\order{u^7}}
+     {\qty(u+\order{u^3})^5} 
+\\\phantom{a_5}
+=\limu 
+\frac{\qty(-\frac{2}{15}+\frac{1}{3})u^5 + \order{u^7}}
+     {u^5\qty(1+\order{u^2})^5}
+= \qty(-\frac{2}{15}+\frac{1}{3}) = \frac{1}{5}.
+$
+\end{enumerate}
+We can now conclude that the first three non-zero terms in tha
+asymptotic expansion of $h(x)=1/x$, in terms of
+$\psi_n(x)=\tanh[3](1/x)$, is given by
+\begin{equation}
+\frac{1}{x} \sim \tanh(\frac{1}{x}) 
++ \frac{1}{3}\tanh[3](\frac{1}{x})
++ \frac{1}{5}\tanh[5](\frac{1}{x}) \as x\to\infty.
+\end{equation}
+\qed
+
 
 
 
 
 \section{The exponential integral}
+
+
+\begin{equation}
+\Ei \sim \frac{\ee^{-x}}{x}
+\qty(1-\frac{1}{x}+\frac{2!}{x^2}-\frac{3!}{x^3}+\ldots+(-1)^n\frac{n!}{x^n}+\ldots)
+\as x\to\infty
+\end{equation}
 
 
 \section{More of the exponential integral}
