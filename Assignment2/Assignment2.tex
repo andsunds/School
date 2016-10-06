@@ -4,6 +4,7 @@
 
 \usepackage{../custom_as}
 
+\graphicspath{ {plots/} }
 
 
 %%Drar in tabell och figurtexter
@@ -232,9 +233,51 @@ and $L_y$ is analogous to $L_x$.
 \renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 \renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
 
-\section{The Pythagorean theorem from dimensinal analysis}
+\section{The Pythagorean theorem from dimensional analysis}
+One way to prove the Pythagorean theorem is to use dimensional
+analysis. 
 
+\begin{figure}\centering
+\resizebox{.5\textwidth}{!}{
+\input{plots/right_triangle.pdf_t}}
+\caption{A right triangle with a perpendicular droped from the
+  hypotenuse to tha right angled vertex. The important thing to note
+  here is that the two smaller triangles are both similar to the
+  original one. }
+\label{fig:triangle}
+\end{figure}
 
+Since any right triangle is determined by two independent
+parameters, any properties of a right triangle can be expressed in
+terms of the two independent parameters. For instance the total area
+of the triangle in \figref{fig:triangle} can be given by
+\begin{equation}
+A_\text{tot}=:A_c=\tilde{f}(c, \theta).
+\end{equation}
+Here's where the dimensional analysis comes in. Since
+$[A_c]=[\mathcal{L}^2]$, $[c]=[\mathcal{L}]$ and $[\theta]=[1]$, we
+can write
+\begin{equation}
+\frac{A_c}{c^2}=f(\theta)
+\quad\Longleftrightarrow\quad
+A_c=c^2\,f(\theta)
+\end{equation}
+for some unknown function $f$. 
+
+Now to the main twist. By dropping a perpendicular from the hypotenuse
+to the right angled vertex, we get wo new triangles which are both
+similar to the original triangle. Therefore
+\begin{equation}
+A_a=a^2f(\theta) \qcomma\text{and}\quad A_b=b^2f(\theta),
+\end{equation}
+for the exact same function $f$ and angle $\theta$. But since the
+total area of the triangle is the sum of the areas of the smaller
+one's, $A_c=A_a+A_b$, we must have
+\begin{equation}
+c^2f(\theta)=a^2f(\theta)+b^2f(\theta) \quad\Longleftrightarrow\quad 
+c^2=a^2+b^2.
+\end{equation}
+\qed
 
 
 \section{The projectile problem with air resitance}
