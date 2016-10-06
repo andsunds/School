@@ -677,7 +677,7 @@ problem. }
 \newcommand{\as}{\qcomma\text{as }}
 An asymptotic sequence (AS), as $x\to x_0$, is a sequence of functions
 $\{\varphi_n\}$ which satisfies
-\begin{equation}
+\begin{equation}\label{eq:AS}
 \varphi_{n+1}(x) = \oh(\varphi_{n}(x), \text{ as } x\to0
 \quad\Longleftrightarrow\quad
 \frac{\varphi_{n+1}(x)}{\varphi_{n}(x)}\to0 , \text{ as } x\to0,
@@ -779,7 +779,7 @@ $
 \frac{\frac{1}{3}u^3 + \order{u^5}}{u^3\qty(1+\order{u^2})^3}= \frac{1}{3}.
 $
 \item $\displaystyle a_4=
-\overbrace{\ldots}^{\text{same procedure as for }a_2}= 0.
+\Big\{\text{same procedure as for }a_2\Big\}= 0.
 $
 \item $\displaystyle a_5=\limu\frac{u-\tanh(u)-\frac{1}{3}\tanh^3(u)}{\tanh^5(u)}
 \\\phantom{a_5}\stackrel{\eqref{eq:tanh}}{=}\limu 
@@ -808,17 +808,74 @@ $\psi_n(x)=\tanh[3](1/x)$, is given by
 
 
 \section{The exponential integral}
-
-
+To show that the exponential integral
 \begin{equation}
+\Ei(x)=\int_x^\infty \frac{\ee^{-t}}{t}\id{t}
+\end{equation}
+has the asymptotic expansion
+\begin{equation}\label{eq:8_Ei_AE}
 \Ei \sim \frac{\ee^{-x}}{x}
 \qty(1-\frac{1}{x}+\frac{2!}{x^2}-\frac{3!}{x^3}+\ldots+(-1)^n\frac{n!}{x^n}+\ldots)
-\as x\to\infty
+\as x\to\infty,
 \end{equation}
+we need to
+\begin{enumerate}[label=(\roman*)]
+\item show that $\{\phi_n(x)\}:=\qty{\ee^{-x}n!/x^{n+1}}$, $n\in\Z^+$, is an
+asymptotic sequence as $x\to\infty$, and
+\item show that $\Ei(x)-S_n(x)=\oh(\phi_n(x))$ as $x\to\infty$, with
+$S_n(x)=\sum_{i=1}^n\phi_n(x)$. 
+\end{enumerate}
+
+\setcounter{subsubsection}{0}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection}\roman{subsubsection})}
+\subsubsection{}%Asymptotic sequence?}
+By using the defnintion of an asymptotic sequence in \eqref{eq:AS},
+it's easy to see that $\{\phi_n(x)\}:=\qty{\ee^{-x}n!/x^{n+1}}$,
+$n\in\Z^+$, is an AS since
+\begin{equation}
+\frac{\phi_{n+1}(x)}{\phi_n(x)}=(n+1)\frac{x^n}{x^{n+1}}\to0\as x\to\infty.
+\end{equation}
+\qed
+
+\subsubsection{}
+To evaluate $\Ei(x)-S_n(x)$, we begin by expanding $\Ei$ by means of
+multiple intergrations by parts:
+\begin{equation}
+\Ei = \overbrace{\frac{\ee^{-x}}{x}
+\qty(1-\frac{1}{x}+\frac{2!}{x^2}-\frac{3!}{x^3}+\ldots+(-1)^n\frac{n!}{x^n})
+}^{S_n(x)}
++(-1)^{n+1} (n+1)! \int_x^\infty\frac{\ee^{-t}}{t^{n+2}}\id{t}.
+\end{equation}
+Then we need to show that
+\begin{equation}
+\frac{\Ei(x)-S_n(x)}{\phi_n(x)}\to0\as x\to\infty
+\end{equation}
+for any $n$. The absolute value of the RHS is
+\begin{equation}
+\begin{aligned}
+\abs{\frac{(-1)^{n+1}(n+1)!\oldint_x^\infty\frac{\ee^{-t}}{t^{n+2}}\id{t}}
+{\ee^{-x}n!x^{-n-1}}} &=
+(n+1)\ee^{x}x^{n+1}\int_x^\infty\frac{\ee^{-t}}{t^{n+2}}\id{t}\\
+&\le (n+1)\ee^{x}x^{n+1}\int_x^\infty\frac{\ee^{-t}}{x^{n+2}}\id{t}\\
+&=(n+1)\ee^{x}x^{n+1}\frac{\ee^{-x}}{x^{n+2}} 
+= \frac{n+1}{x}\to0\as x\to\infty.
+\end{aligned}
+\end{equation}
+By now we can conclude that \eqref{eq:8_Ei_AE} is correct.\qed
+
+It should however be noted that tha partial sums $S_n$ diverges for
+any fixed $x$. This means that caution is required when using
+\eqref{eq:8_Ei_AE} to approximate $\Ei(x)$, to many terms will give a
+very bad approximation especially if $x$ isn't very large. We see that
+the next term in $S_n(x)$ would differ from the last by a factor of
+$-(n+1)/x$, meaning that it's not realy a good idea to use any $n>x$
+in an approximation. Therefore it would \emph{not} be a good idea to
+use this asymptotic expansion to appoximate $\Ei(2.0)$.
+
 
 
 \section{More of the exponential integral}
-
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
 
 
 
