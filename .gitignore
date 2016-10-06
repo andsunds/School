@@ -12,6 +12,8 @@ Assignment?.pdf
 *.nav 
 *.snm
 
+*.eps
+*~
 
 Nayfeh_intro_to_pert.pdf
 course_notes_AMATH732_2016.pdf
