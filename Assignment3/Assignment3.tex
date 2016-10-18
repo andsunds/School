@@ -1,0 +1,177 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+% \begin{titlepage}
+\title{Asymptotic Analasys and Pertubation Theory -- AMATH\,732 \\
+Assignment 3}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+%Om man vill ha en lista med vilka todo:s som finns.
+%\todolist
+
+\section{An ODE}
+We have the differential equation
+\begin{equation}\label{eq:1_ODE}
+x^4y''-y=0
+\quad\Longleftrightarrow\quad
+y''-\frac{1}{x^4}y = 0.
+\end{equation}
+
+\subsection{Classifysing the suspect points 
+  and trying the method of Frobenius} 
+
+\subsubsection{Classifying the points $x=0, \infty$}
+To classify the point $x=0$, we first see that $\nicefrac{1}{x^4}$
+isn't analytic there and so is $x^2\cdot\nicefrac{1}{x^4}$. Thus the
+point $x=0$ is an \emph{irregular singular point}.
+
+To classify the point $x=\infty$, we nee to change variables to
+\begin{equation}
+t=\frac{1}{x}\qcomma \tilde{y}(t)=y(x),
+\end{equation}
+and classify the new DE at $t=0$.
+The second derivative (w.r.t. $x$) becomes
+\begin{equation}
+\dv[2]{y}{x}=\dv{t}{x}
+\dv{t}\qty[\dv{t}{x}\dv{\tilde{y}}{t}]=t^4\tilde{y}''+2t^3\tilde{y}',
+\end{equation}
+where $\tilde{y}'=\nicefrac{\rd\tilde{y}}{\rd{t}}$. With this we can
+write (\ref{eq:1_ODE}\,a) as
+\begin{equation}
+0=\frac{1}{t^4}\qty(t^4\tilde{y}''+2t^3\tilde{y}') - \tilde{y} '
+= \tilde{y}'' +\frac{2}{t}\tilde{y}' - \tilde{y}.
+\end{equation}
+From here we see that $t=0$ is not an ordinary point since we have the
+$\nicefrac{2}{t}$ coefficient, but it is however a \emph{regular singular
+point} since $t\cdot\nicefrac{2}{t}=2$ isn't singular at $t=0$
+
+
+\subsubsection{Trying the method of Frobenius}
+The method of Frobenius is a method for finding series solutions around
+regular singular points, which utilizes the fact that there is 
+at least one solution of the form $(x-x_0)^{\alpha}A(x)$ in a
+neighbourhood of the regular singular point $x_0$ and where $A(x)$ is
+analytic near $x_0$. When searching for a solution with Frobenius'
+method we assume that
+\begin{equation}
+y(x)=\sum_{k=0}^\infty a_k (x-x_0)^{\alpha+k}.
+\end{equation}
+The second derivative of $y$ then becomes
+\begin{equation}
+y(x)=\sum_{k=0}^\infty a_k (\alpha+k)(\alpha+k-1) (x-x_0)^{\alpha+k-2}.
+\end{equation}
+
+In our case we going to look at $x_0=0$. Thus the DE becomes
+\begin{equation}
+0=x^4y''-y=
+\sum_{k=0}^\infty a_k (\alpha+k)(\alpha+k-1) x^{\alpha+k+2}
+-\sum_{k=0}^\infty a_k x^{\alpha+k}.
+\end{equation}
+Collecting like powers of $x$ yields
+\begin{equation}
+\begin{cases}
+a_0=0\\
+a_1=0\\
+a_0(\alpha)(\alpha-1)-a_2=0\\
+\vdots\\
+a_n(\alpha+n)(\alpha+n-1)-a_{n+2}=0
+\end{cases}
+\end{equation}
+which reduces to $a_n=0$ for all $n$.
+\todo{Why dosen't it work?}
+
+
+\subsection{The method of Carlini-Liouville-Green}
+
+
+
+\subsection{Finding the actual solutions}
+
+
+
+
+
+
+
+\section{The Airy equation}
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer (två enkelfjongar): ''.
+
+
+%% Inkludera PDF-dokument
+\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+
+%% Figurer inkluderade som pdf-filer
+\begin{figure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer roterade 90 grader
+\begin{sidewaysfigure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{sidewaysfigure}
+
+
+%%Om man vill lägga till något i TOC
+\stepcounter{section} %Till exempel en 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
