@@ -21,7 +21,7 @@
 %            left   = 3cm, right  = 3cm
 ]{geometry}
 
-
+\newcommand{\as}{\qcomma\text{as }}
 
 \begin{document}
 
@@ -74,7 +74,7 @@ write (\ref{eq:1_ODE}\,a) as
 From here we see that $t=0$ is not an ordinary point since we have the
 $\nicefrac{2}{t}$ coefficient, but it is however a \emph{regular singular
 point} since $t\cdot\nicefrac{2}{t}=2$ isn't singular at $t=0$
-
+\qed
 
 \subsubsection{Trying the method of Frobenius}
 The method of Frobenius is a method for finding series solutions around
@@ -112,7 +112,109 @@ which reduces to $a_n=0$ for all $n$.
 
 
 \subsection{The method of Carlini-Liouville-Green}
+In the method of Carlini-Liouville-Green we let
+\begin{equation}
+y=\ee^{S(x)},
+\end{equation}
+and then we find the leading asymptotic behaviour of $S(x)$ as
+$x\to x_0$. 
 
+To use this method we calculate the second derivative
+\begin{equation}
+y''=\dv[2]{x}\qty[\ee^{s(x)}]
+=\qty[\Big(S'(x)\Big)^2 + S''(x)]\ee^{S(x)}.
+\end{equation}
+This makes it possible to rewrite (\ref{eq:1_ODE}\,b) as
+\begin{equation}\label{eq:1_DE_S}
+\qty[S'' + (S')^2 -\frac{1}{x^4}]\ee^{S(x)}=0
+\quad\Longrightarrow\quad
+S'' + (S')^2 -\frac{1}{x^4}=0. 
+\end{equation}
+
+The next setp is to assume that $S''\ll(S')^2$ as $x\to0$, which gives
+us the asymptotic behaviour as $x\to0$:
+\begin{equation}\label{eq:1_S0'}
+\Big(S'(x)\Big)^2\sim \frac{1}{x^4}
+\quad\Longrightarrow\quad
+S'(x)= \frac{-\xi}{x^2} + C'(x)\qcomma\text{where }
+|C'(x)|\ll\frac{1}{x^2} \;\text{ as }\; x\to0,
+\end{equation}
+and $\xi=\pm1$ is the parameter which keeps track of the two linearly
+independent solutions. This gives the first term in the asymptotic
+expansion of $S(x)$ as $x\to0$: 
+\begin{equation}\label{eq:1_S0}
+%S(x)\sim \frac{\xi}{x}
+%\quad\Longrightarrow\quad
+S(x)=\frac{\xi}{x} + C(x).
+\end{equation}
+We can also see that
+\begin{equation}
+\abs{S''(x)}\sim\frac{2}{x^3}\ll\Big(S'(x)\Big)^2\sim\frac{1}{x^4}
+\end{equation}
+as $x\to0$.
+
+To find the secod term in the expansion just substitute
+(\ref{eq:1_S0}) into (\ref{eq:1_DE_S}\,b):
+\begin{equation}
+\frac{2\xi}{x^3}+C''
++(C')^2-2\frac{\xi}{x^2}C' + \qty(\frac{-\xi}{x^2})^2
+-\frac{1}{x^4}=0.
+\end{equation}
+To simplify this we note that $\xi^2\equiv1$, which removes the two
+terms of $x^{-4}$. We're left with
+\begin{equation}
+C''+(C')^2-\frac{2\xi}{x^2}C' + \frac{2\xi}{x^3} = 0.
+\end{equation}
+From here we use the fact, from \eqref{eq:1_S0'}, that
+$|C'(x)|\ll\nicefrac{1}{x^2}$ as $x\to0$ which implies that
+\begin{equation}
+\Big(C'(x)\Big)^2\ll\abs{\frac{2\xi}{x^2}C'}.
+\end{equation}
+We also assume that
+\begin{equation}\label{eq:1_C''}
+\abs{C''(x)}\ll\abs{\frac{1}{x^3}}\as x\to0.
+\end{equation}
+The dominant balance, as $x\to0$, for the equation then becomes
+\begin{equation}
+\frac{2\xi}{x^2}C'(x) \sim \frac{2\xi}{x^3}
+\quad\Longrightarrow\quad
+C'(x)\sim\frac{1}{x}.
+\end{equation}
+This gives 
+\begin{equation}
+C(x)=\ln|x|+D(x),
+\end{equation}
+where $|D'(x)|\ll|\nicefrac{1}{x}|$ as $x\to0$. We can also confirm the
+asumption in \eqref{eq:1_C''} by seeing that
+\begin{equation}
+C''(x)\sim -\frac{1}{x^2}\as x\to0.
+\end{equation}
+
+Once again we substitute the new solution into the DE for $C$. With
+some simplification we get
+\begin{equation}
+D''+(D')^2+\frac{2}{x}D' - \frac{2\xi}{x^2}D'=0.
+\end{equation}
+But now the mashinery grinds to a halt. We know that 
+\begin{equation}
+\Big(D'(x)\Big)^2\ll\abs{\frac{D'(x)}{x}}
+\end{equation}
+and by assumption $|D''(x)|$ is negigable compared to the rest of the
+terms. Therefore we get the dominant balance
+\begin{equation}
+\frac{2\xi}{x^2}D'(x) \,"{\sim}"\, 0\as x\to0,
+\end{equation}
+which yields
+\begin{equation}
+D(x)=d,
+\end{equation}
+constant.
+
+The final result for the asymptotic expansion of $S$ is then
+\begin{equation}
+S(x)\sim \frac{\xi}{x}+\ln|x|+d = \pm\frac{1}{x}+\ln|x|+d\as x\to0.
+\end{equation}
+These are the only non-vanishing terms of $S(x)$ as $x\to0$.\qed
 
 
 \subsection{Finding the actual solutions}
