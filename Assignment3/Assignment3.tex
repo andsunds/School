@@ -57,7 +57,7 @@ y''-\frac{1}{x^4}y = 0.
 
 \subsubsection{Classifying the points $x=0, \infty$}
 To classify the point $x=0$, we first see that $\nicefrac{1}{x^4}$
-isn't analytic there and so is $x^2\cdot\nicefrac{1}{x^4}$. Thus the
+isn't analytic there and so also for $x^2\cdot\nicefrac{1}{x^4}$. Thus the
 point $x=0$ is an \emph{irregular singular point}.
 
 To classify the point $x=\infty$, we nee to change variables to
@@ -112,8 +112,16 @@ a_0(\alpha)(\alpha-1)-a_2=0\\
 a_n(\alpha+n)(\alpha+n-1)-a_{n+2}=0
 \end{cases}
 \end{equation}
-which reduces to $a_n=0$ for all $n$.
-\todo{Why dosen't it work?}
+which reduces to $a_n=0$ for all $n$. In other words, we could not
+find any solution around $x=0$.
+
+This was not too unexpected since the point $x=0$ is an irregular
+singular point and Frobenius' method is a method for finding solutions
+around regular singular points. 
+
+Another way of seeing this is that the factor $x^4$ in front of $y''$
+makes it imposible to get any non-trivial solutions for $a_0$ and
+$a_1$. From there everything colapses to only zeros.
 
 
 \subsection{The method of Carlini-Liouville-Green}
@@ -228,15 +236,102 @@ The final result for the asymptotic expansion of $S$ is then
 \begin{equation}
 S(x)\sim \frac{\xi}{x}+\ln|x|+d = \pm\frac{1}{x}+\ln|x|+d\as x\to0.
 \end{equation}
-These are the only non-vanishing terms of $S(x)$ as $x\to0$.\qed
+These are the only non-vanishing terms of $S(x)$ as $x\to0$. Or for
+$y$:
+\begin{equation}
+y_\pm(x)\sim c\abs{x}\ee^{\nicefrac{\pm1}{x}},
+\end{equation}
+where $c$ is a constant. \qed
 
 
 \subsection{Finding the actual solutions}
+\newcommand{\eexix}{\ensuremath{\ee^{\nicefrac{\xi}{x}}}}
+\newcommand{\sgn}[1]{\ensuremath{\mathrm{sgn}\qty(#1)}}
+To try and find the rest of the solutions we atempt to write
+\begin{equation}
+y_\xi(x)=w(x)\abs{x}\eexix =w(x)\abs{x}\ee^{\nicefrac{\pm1}{x}}. 
+\end{equation}
+The constant $c$ has been left out since a linear ODE will only define
+any solution up to a candtant factor.
 
-\todo{Still have to do this!}
+\subsubsection{Finding the DE for $w$}
+Nex we need to differentiate this to then be able to substitute into
+the DE
+\begin{equation}
+\begin{aligned}
+y'(x)&=w'(x)\abs{x}\eexix
++w(x)\qty[\sgn{x}-\frac{\xi\abs{x}}{x^2}]\eexix\\
+&= w'(x)\abs{x}\eexix
++w(x)\qty(1-\frac{\xi}{x})\sgn{x}\eexix,
+\end{aligned}
+\end{equation}
+where $\sgn{x}=\pm1$ is the sign of $x$ (not to be confused with
+$\xi=\pm1$ which is independent).
 
+Next up is the second derivative
+\begin{equation}
+\begin{aligned}
+y''(x)=&w''(x)\abs{x}\eexix
++2w'(x)\qty(1-\frac{\xi}{x})\sgn{x}\eexix
+\\
+&+w(x)\qty[
+\frac{\xi}{x^2}\sgn{x}+\qty(1-\frac{\xi}{x})2\delta(x)
++\qty(1-\frac{\xi}{x})\sgn{x}\frac{-\xi}{x^2}
+]\eexix\\
+=&\sgn{x}\eexix\Bigg\{w''(x)x
++2w'(x)\qty(1-\frac{\xi}{x})
++w(x)\qty[
+\qty(1-\frac{\xi}{x})2\delta(x)\sgn{x}
+-\frac{1}{x^3}
+]\Bigg\}
+\end{aligned}
+\end{equation}
+where $\delta(x)$ is the Dirac delta distribution. We have also used
+the identity $|x|=\sgn{x}x$. To further simplify this we will only
+look at $x\neq0$, which makes $\delta(x)=0$. Thus 
+\begin{equation}
+y''(x)=\sgn{x}\eexix\qty[
+w''(x)x +2w'(x)\qty(1-\frac{\xi}{x})
+-\frac{1}{x^3}w(x) ].
+\end{equation}
 
+With this (\ref{eq:1_ODE}\,a) becomes (for $x\neq0)$
+\begin{equation}
+\begin{aligned}
+0=x^4y''-y=&\sgn{x}\eexix\qty[
+w''(x)x^5 +2w'(x)x^3\qty(x-\xi) -xw(x)] - w(x)\sgn{x}x\eexix\\ 
+=&\sgn{x}\eexix x^3\qty[
+w''(x)x^2 +2w'(x)\qty(x-\xi)],
+\end{aligned}
+\end{equation}
+which is equvalent to
+\begin{equation}
+w''(x) +2w'(x)\frac{x-\xi}{x^2}=0.
+\end{equation}
+This has to be solved in terms of an asymptotic expansion of $w(x)$
+as $x\to0$.
 
+\subsubsection{Finding the asymptotic expansion}
+In the same token as before, we assume that $w''(x)=\oh(x^{-1}w'(x))$
+as $x\to0$. This gives the dominant banalce 
+\begin{equation}
+-\frac{2\xi}{x^2}w'(x)\,"{\sim}"\,0,
+\end{equation}
+which yields
+\begin{equation}
+w(x)=c\qcomma \text{constant.}
+\end{equation}
+Or in other words the expansion we found before is exact(!):
+\begin{equation}\label{eq:1_exact}
+y_\pm(x) \mathbf{=} c\abs{x}\ee^{\nicefrac{\pm1}{x}}.
+\end{equation}
+\qed
+
+\paragraph{Note:}
+This result could have been obtained much easier by just substituing
+in \eqref{eq:1_exact} into the DE an see that everything works out
+to~0. But to keep with the theme of the problem, I decided to go the
+long way around. 
 
 
 \section{The Airy equation}
