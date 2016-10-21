@@ -63,7 +63,7 @@ In this problem we want to show that
 \subsubsection{Isothermal compressibility}
 We begin by maniplulating the supposed expression for the isothermal
 compressibility
-\begin{equation}\label{eq:1_want_this}
+\begin{equation}\label{eq:1_want_this_T}
 k_T=\frac{1}{nT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
 = \frac{V}{NT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
 = \frac{1}{P}\frac{f_{1/2}(z)f_{5/2}(z)}{[f_{3/2}(z)]^2},
@@ -153,12 +153,183 @@ This gives
 ]
 =\frac{1}{P}\frac{f_{5/2}(z)f_{1/2}(z)}{[f_{3/2}(z)]^2},
 \end{equation}
-which is exactly what we had in \eqref{eq:1_want_this}. 
+which is exactly what we had in \eqref{eq:1_want_this_T}.
 \qed
 
 
 \subsubsection{Adiabatic compressibility}
+As before, we begin with rewriting the RHS of the supposed expression
+for the adiabatic compressibility
+\begin{equation}\label{eq:1_want_this_S}
+k_S=\frac{3}{5nT}\frac{f_{3/2}(z)}{f_{5/2}(z)}
+=\frac{3}{5P}\frac{f_{5/2}(z)}{f_{3/2}(z)}\frac{f_{3/2}(z)}{f_{5/2}(z)}
+=\frac{3}{5P},
+\end{equation}
+where we once again used \eqref{eq:1_PVNT} to rewite $nT$. Next we
+need to remind ourselves about some more important relations:
+\begin{equation}\label{eq:dE}
+\rd{E}=T\rd{S}-P\rd{V}+\mu\rd{N}
+\end{equation}
+and
+\begin{equation}\label{eq:1_Omega}
+PV=-\Omega=\frac{2}{3}E.
+\end{equation}
+Of these relations only the last equality (relating $\Omega$ to $E$)
+is spesific for Fermi gases, the rest are general thermodynaic
+identities. 
 
+From now we can focus more on the compressibility
+\begin{equation}
+\kappa_S=-\frac{1}{V}\qty(\pdv{V}{P})_S
+=-\frac{1}{V\qty(\pdv{P}{V})_S}
+\end{equation}
+From the last expression we note that \eqref{eq:1_Omega} allows us to
+write
+\begin{equation}
+\qty(\pdv{P}{V})_S=\frac{2}{3}\qty(\pdv{(\nicefrac{E}{V})}{V})_S
+=\frac{2}{3V}\qty(\pdv{E}{V})_S-\frac{2E}{3}\frac{1}{V^2}.
+\end{equation}
+Now by invoking \eqref{eq:dE} we see that
+\begin{equation}
+\qty(\pdv{E}{V})_S=-P,
+\end{equation}
+we have also assumed $N$ to be constant which is resonable. And by
+using \eqref{eq:1_Omega} once more to rewite $E=2PV/3$ we get
+\begin{equation}
+\qty(\pdv{P}{V})_S=-\frac{2P}{3V}-\frac{PV}{V^2}=-\frac{5P}{3V}.
+\end{equation}
+This means that we now have
+\begin{equation}
+\kappa_S=-\frac{1}{V\qty(\pdv{P}{V})_S}=\frac{3}{5P},
+\end{equation}
+which is exactly what we were looking for in
+\eqref{eq:1_want_this_S}.\footnotemark{}
+\qed
+
+\footnotetext{This was a very neat way to derive $\kappa_S$. One could
+  wonder if this approach is applicable to $\kappa_T$ as well. But
+  unfortunatly the analogous approach yields an expression wich
+  contains $(\pdv*{\mu}{V})_T$, which is not redily evaluated.} 
+
+
+\subsubsection{Low temperature limit}
+Here we're going to show that 
+\begin{equation}\label{eq:1_lowT_T}
+\kappa_T = \frac{1}{nT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
+\approx \frac{3}{2n\epsilon_F}
+\qty[1-\frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]
+\end{equation}
+and
+\begin{equation}\label{eq:1_lowT_S}
+\kappa_T = \frac{3}{5nT}\frac{f_{3/2}(z)}{f_{5/2}(z)}
+\approx \frac{3}{2n\epsilon_F}
+\qty[1-\frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]
+\end{equation}
+in the low temperature limit. 
+
+To be in the limit of low temperature means that
+\begin{equation}
+T\ll\epsilon_F\approx\mu 
+\quad\Longrightarrow\quad
+z=\ee^{\mu/T}\approx \ee^{\epsilon_F/T}\gg1.
+\end{equation}
+We therefore need to expand $f_\nu(z)$ using the Sommerfeld expansion
+\begin{equation}\label{eq:1_Sommerfeld}
+\begin{aligned}
+f_\nu(z)=&\frac{\ln^\nu(z)}{\Gamma(\nu+1)}\qty[
+1+\nu(\nu-1)\frac{\pi^2}{6}\frac{1}{\ln^2(z)}+\ldots]\\
+=&\frac{1}{\Gamma(\nu+1)}\qty(\frac{\mu}{T})^\nu\qty[
+1+\nu(\nu-1)\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2+\ldots].\\
+\approx&\frac{1}{\Gamma(\nu+1)}\qty(\frac{\epsilon_F}{T})^\nu\qty[
+1+\nu(\nu-1)\frac{\pi^2}{6}\qty(\frac{T}{\epsilon_F})^2+\ldots].
+\end{aligned}
+\end{equation}
+This expansion can be found in for instance Pathria\,\&\,Beale,
+\textit{Statistical Mechanics}, ed. 3.
+
+
+Now we have to start working:
+\begin{equation}\label{eq:1_1/2}
+f_{1/2}(z)\approx\frac{1}{\Gamma(\nicefrac{3}{2})}\qty(\frac{\epsilon_F}{T})^{1/2}
+\qty[
+1-\frac{1}{4}\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2]
+=\frac{2}{\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{1/2}
+\qty[
+1-\frac{\pi^2}{24}\qty(\frac{T}{\mu})^2],
+\end{equation}
+\begin{equation}\label{eq:1_3/2}
+f_{3/2}(z)\approx\frac{1}{\Gamma(\nicefrac{5}{2})}\qty(\frac{\epsilon_F}{T})^{3/2}
+\qty[
+1+\frac{3}{4}\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2]
+=\frac{4}{3\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{3/2}
+\qty[1+\frac{\pi^2}{8}\qty(\frac{T}{\mu})^2],
+\end{equation}
+and 
+\begin{equation}\label{eq:1_5/2}
+f_{5/2}(z)\approx\frac{1}{\Gamma(\nicefrac{7}{2})}\qty(\frac{\epsilon_F}{T})^{5/2}
+\qty[
+1+\frac{15}{4}\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2]
+=\frac{8}{15\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{5/2}
+\qty[1+\frac{5\pi^2}{8}\qty(\frac{T}{\mu})^2].
+\end{equation}
+Then we just Taylor expand the quotients in \eqref{eq:1_lowT_T} and
+\eqref{eq:1_lowT_S}, which is possible since $T\ll\mu$. 
+
+For isothermal compressibility this looks like
+\begin{equation}
+\begin{aligned}
+\kappa_T\approx& \frac{1}{nT} 
+\frac{2}{\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{1/2}
+\qty(\frac{4}{3\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{3/2})^{-1}
+\qty[
+1-\frac{\pi^2}{24}\qty(\frac{T}{\epsilon_F})^2]
+\qty[
+1+\frac{\pi^2}{8}\qty(\frac{T}{\epsilon_F})^2]^{-1}\\
+\approx&
+ \frac{1}{nT}\frac{3T}{2\epsilon_F}
+\qty[
+1-\frac{\pi^2}{24}\qty(\frac{T}{\epsilon_F})^2]
+\qty[
+1-\frac{\pi^2}{8}\qty(\frac{T}{\epsilon_F})^2]\\
+\approx&
+\frac{3}{2n\epsilon_F}
+\qty[
+1-\qty(\frac{\pi^2}{24}+\frac{\pi^2}{8})\qty(\frac{T}{\epsilon_F})^2]
+=\frac{3}{2n\epsilon_F}
+\qty[
+1-\frac{\pi^2}{6}\qty(\frac{T}{\epsilon_F})^2].
+\end{aligned}
+\end{equation}
+This is a bit odd, we should have gotten $-\pi^2/12$ in the brackets,
+but I can not see any way to make this not be $-\pi^2/6$. So I guess
+that there is a typo in the problem set. 
+
+Then for adiabatic compressibility we get
+\begin{equation}
+\begin{aligned}
+\kappa_S\approx& \frac{3}{5nT} 
+\frac{4}{3\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{3/2}
+\qty(\frac{8}{15\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{5/2})^{-1}
+\qty[
+1+\frac{\pi^2}{8}\qty(\frac{T}{\epsilon_F})^2]
+\qty[
+1+\frac{5\pi^2}{8}\qty(\frac{T}{\epsilon_F})^2]^{-1}\\
+\approx&
+ \frac{3}{5nT}\frac{5T}{2\epsilon_F}
+\qty[
+1+\frac{\pi^2}{8}\qty(\frac{T}{\epsilon_F})^2]
+\qty[
+1-\frac{5\pi^2}{8}\qty(\frac{T}{\epsilon_F})^2]\\
+\approx&
+\frac{3}{2n\epsilon_F}
+\qty[
+1+\qty(\frac{\pi^2}{8}-\frac{5\pi^2}{8})\qty(\frac{T}{\epsilon_F})^2]
+=\frac{3}{2n\epsilon_F}
+\qty[
+1-\frac{\pi^2}{4}\qty(\frac{T}{\epsilon_F})^2].
+\end{aligned}
+\end{equation}
+\todo{Hmm, sumting's wong... Off by $1/12$ both times.}
 
 \subsection{Relationship between isobaric and isochoric heatcapacity}
 
