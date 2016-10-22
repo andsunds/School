@@ -360,7 +360,8 @@ temperature limit.
 
 
 
-\section{Cemical potential and internal particle energy of an ideal Fermi gas}
+\section{Cemical potential and particle energy of an ideal
+  Fermi gas at low temperatures}
 \renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
 \subsection{Chemical potential}
 To calculate an approximation to $\mu$ at low temperatures
@@ -376,11 +377,11 @@ n=\frac{g_s}{\lambda^3}f_{3/2}(z)
 \end{equation}
 or in other words
 \begin{equation}
-\xi\approx\qty(\frac{3\sqrt{\pi}\lambda^3}{4g_s})^{2/3}
-\qty[1+\frac{\pi^2}{8}\xi^{-2}
-+\frac{7\pi^4}{640}\xi^{-4} ]^{-2/3},
+\zeta\approx\qty(\frac{3\sqrt{\pi}\lambda^3}{4g_s})^{2/3}
+\qty[1+\frac{\pi^2}{8}\zeta^{-2}
++\frac{7\pi^4}{640}\zeta^{-4} ]^{-2/3},
 \end{equation}
-where $\xi=\ln(z)=\mu/T$.
+where $\zeta=\ln(z)=\mu/T$.
 We're going to deal with these two factors separetly.
 First off is the easy bit. The first factor is
 \begin{equation}
@@ -394,40 +395,40 @@ Then there's the othe factor which has to be Taylor expanded to the
 second order in $\ln^{-2}(z)\ll1$. To do this we enlist some help in
 form of \emph{Mathematica}\footnotemark{}, which yields
 \begin{equation}
-\qty[1 + \frac{\pi^2}{8}\xi^{-2}
- + \frac{7\pi^4}{640}\xi^{-4}]^{-2/3} 
-=\qty[1 - \frac{\pi^2}{12}\xi^{-2}
- + \frac{\pi^4}{720}\xi^{-4} + \order{\xi^{-6}}].
+\qty[1 + \frac{\pi^2}{8}\zeta^{-2}
+ + \frac{7\pi^4}{640}\zeta^{-4}]^{-2/3} 
+=\qty[1 - \frac{\pi^2}{12}\zeta^{-2}
+ + \frac{\pi^4}{720}\zeta^{-4} + \order{\zeta^{-6}}].
 \end{equation}
-We now have every thing we need to start approximating $\xi$.
+We now have every thing we need to start approximating $\zeta$.
 Unfortunately what we have is something in the line of a fifth degree
-polynolial in $\xi$ to solve: 
+polynolial in $\zeta$ to solve: 
 \begin{equation}\label{eq:2_fixed-point}
-\xi\approx \tau^{-1}\qty[1 - \frac{\pi^2}{12}\xi^{-2}
- + \frac{\pi^4}{720}\xi^{-4}].
+\zeta\approx \tau^{-1}\qty[1 - \frac{\pi^2}{12}\zeta^{-2}
+ + \frac{\pi^4}{720}\zeta^{-4}].
 \end{equation}
 This can not and should not be solved
 analytically. Instead we're going to use a method similar to
 fixed-point iteration, but for analytical expressions.
-\footnotetext{Lord and Saviour in our times of despair and need!}
+\footnotetext{Lord and Saviour in our times of need and despair!}
 
-The first iteration is just the zeroth powe approximation:
+The first iteration is just the zeroth power approximation:
 \begin{equation}
-\xi_0=\tau^{-1}.
+\zeta_0=\tau^{-1}.
 \end{equation}
-Next iteration is usesing the fixed-point function
-\eqref{eq:2_fixed-point} on $\xi_0$ to get
+Next iteration is using the fixed-point function
+\eqref{eq:2_fixed-point} on $\zeta_0$ to get
 \begin{equation}
-\xi_1=\tau^{-1}\qty[1 - \frac{\pi^2}{12}\xi_0^{-2}
- + \frac{\pi^4}{720}\xi_0^{-4} ]
+\zeta_1=\tau^{-1}\qty[1 - \frac{\pi^2}{12}\zeta_0^{-2}
+ + \frac{\pi^4}{720}\zeta_0^{-4} ]
 =\tau^{-1}\qty[1 - \frac{\pi^2}{12}\tau^{2}
  + \frac{\pi^4}{720}\tau^{4} ].
 \end{equation}
 One more iteration:
 \begin{equation}
 \begin{aligned}
-\xi_2=&\tau^{-1}\qty[1 - \frac{\pi^2}{12}\xi_1^{-2}
- + \frac{\pi^4}{720}\xi_1^{-4} ]\\
+\zeta_2=&\tau^{-1}\qty[1 - \frac{\pi^2}{12}\zeta_1^{-2}
+ + \frac{\pi^4}{720}\zeta_1^{-4} ]\\
 =& \tau^{-1}\qty[1 
  - \frac{\pi^2}{12}\tau^{2}
 \qty(1 - \frac{\pi^2}{12}\tau^{2}
@@ -438,25 +439,62 @@ One more iteration:
 ].
 \end{aligned}
 \end{equation}
-We once again tur to \emph{Mathematica} and get
+We once again turn our faith to \emph{Mathematica} and get
 \begin{equation}
-\xi_2=\tau^{-1}\qty[1 - \frac{\pi^2}{12}\tau^{2}
+\zeta_2=\tau^{-1}\qty[1 - \frac{\pi^2}{12}\tau^{2}
  - \frac{\pi^4}{80}\tau^{4} + \order{\tau^6}].
 \end{equation}
 From here it's no use in continuing. Since our fixed-point function
-only had terms up to $\order{\xi^{-4}}$, we can not get any higher
+only had terms up to $\order{\zeta^{-4}}$, we can not get any higher
 orders than $\tau^4$.
 
 We can therefore conclude that
 \begin{equation}\label{eq:2_mu}
-\mu=T\ln(z)\approx T\xi_2= \epsilon_F \qty[1
+\mu=T\ln(z)\approx T\zeta_2= \epsilon_F \qty[1
 -\frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2
 -\frac{\pi^4}{80}\qty(\frac{T}{\epsilon_F})^4].
 \end{equation}
 \qed
 
-\subsection{Mean internal particle energy}
+\subsection{Mean particle energy}
+To calculate an approximation to the mean particle energy $E/N$, we
+once again have to use the Sommerfeld expansion
+\eqref{eq:1_Sommerfeld}. Then we use the relation
+\begin{equation}
+\frac{E}{N}=-\frac{3\Omega}{2N}=\frac{3T}{2}\frac{f_{5/2}(z)}{f_{3/2}(z)}.
+\end{equation}
+Fortunately we've already calculated $\ln(z)=\zeta\approx\zeta_2$, so all
+that left do here is to expand the Fermi functions and then
+Taylor expand the quotient.
 
+Let's begin:
+\begin{equation}
+%\begin{aligned}
+\frac{f_{5/2}(z)}{f_{3/2}(z)}\approx
+\overbrace{\frac{8\zeta_2^{5/2}}{15\sqrt{\pi}}
+\qty(\frac{4\zeta_2^{3/2}}{3\sqrt{\pi}})^{-1}}^{\nicefrac{2\zeta_2}{5}}
+\qty[1+\frac{5\pi^2}{8}\zeta_2^{-2}
+-\frac{7\pi^4}{384}\zeta_2^{-4} ]
+\times \qty[1+\frac{\pi^2}{8}\zeta_2^{-2} 
++\frac{7\pi^4}{640}\zeta_2^{-4} ]^{-1}
+%\end{aligned}
+\end{equation}
+There's no need to even pretend to want deal with this by hand.
+Just go directly to \emph{Mathematica}, which yields
+\begin{equation}
+\frac{f_{5/2}(z)}{f_{3/2}(z)}\approx \frac{2}{5\tau}
+\qty[1+\frac{5\pi^2}{12}\tau^2-\frac{\pi^4}{16}\tau^4].
+\end{equation}
+For reference tha comman in use were \texttt{Series}.
+
+Now we have
+\begin{equation}
+\frac{E}{N}\approx\frac{3T}{2}\frac{2}{5\tau}
+\qty[1+\frac{5\pi^2}{12}\tau^2-\frac{\pi^4}{16}\tau^4]
+=\frac{3}{5\epsilon_F}\qty[1
++\frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2
+-\frac{\pi^4}{16}\qty(\frac{T}{\epsilon_F})^4].
+\end{equation}
 
 
 \section{Speed of sound in an idela Bose gas}
