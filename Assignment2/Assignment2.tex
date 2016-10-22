@@ -53,7 +53,7 @@ Assignment 2}
 \section{Compressibility and heatcapacity of ideal Fermi gases}
 \subsection{Isothermal and adiabatic compressibility}
 In this problem we want to show that
-\begin{equation}
+\begin{equation}\label{eq:1_kappa}
 \kappa_T = k_T:=\frac{1}{nT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
 \quad\text{ and }\quad
 \kappa_S = k_S:=\frac{3}{5nT}\frac{f_{3/2}(z)}{f_{5/2}(z)}.
@@ -213,131 +213,160 @@ which is exactly what we were looking for in
 
 
 \subsubsection{Low temperature limit}
-Here we're going to show that 
-\begin{equation}\label{eq:1_lowT_T}
-\kappa_T = \frac{1}{nT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
-\approx \frac{3}{2n\epsilon_F}
-\qty[1-\frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]
-\end{equation}
-and
-\begin{equation}\label{eq:1_lowT_S}
-\kappa_T = \frac{3}{5nT}\frac{f_{3/2}(z)}{f_{5/2}(z)}
-\approx \frac{3}{2n\epsilon_F}
-\qty[1-\frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]
-\end{equation}
-in the low temperature limit. 
+% Here we're going to show that 
+% \begin{equation}\label{eq:1_lowT_T}
+% \kappa_T = \frac{1}{nT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
+% \approx \frac{3}{2n\epsilon_F}
+% \qty[1-\frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]
+% \end{equation}
+% and
+% \begin{equation}\label{eq:1_lowT_S}
+% \kappa_T = \frac{3}{5nT}\frac{f_{3/2}(z)}{f_{5/2}(z)}
+% \approx \frac{3}{2n\epsilon_F}
+% \qty[1-\frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]
+% \end{equation}
+% in the low temperature limit. 
 
+Here we're going to find the low temperature limit expressions for
+$\kappa_T$ and $\kappa_S$.
 To be in the limit of low temperature means that
 \begin{equation}
 T\ll\epsilon_F\approx\mu 
 \quad\Longrightarrow\quad
 z=\ee^{\mu/T}\approx \ee^{\epsilon_F/T}\gg1.
 \end{equation}
-We therefore need to expand $f_\nu(z)$ using the Sommerfeld expansion
+We therefore need to expand $f_\nu(z)$ using the Sommerfeld
+expansion\footnotemark{} 
 \begin{equation}\label{eq:1_Sommerfeld}
 \begin{aligned}
 f_\nu(z)=&\frac{\ln^\nu(z)}{\Gamma(\nu+1)}\qty[
-1+\nu(\nu-1)\frac{\pi^2}{6}\frac{1}{\ln^2(z)}+\ldots]\\
-=&\frac{1}{\Gamma(\nu+1)}\qty(\frac{\mu}{T})^\nu\qty[
-1+\nu(\nu-1)\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2+\ldots].\\
-\approx&\frac{1}{\Gamma(\nu+1)}\qty(\frac{\epsilon_F}{T})^\nu\qty[
-1+\nu(\nu-1)\frac{\pi^2}{6}\qty(\frac{T}{\epsilon_F})^2+\ldots].
+1+\nu(\nu{-}1)\frac{\pi^2}{6}\frac{1}{\ln^2(z)}
++\nu(\nu{-}1)(\nu{-}2)(\nu{-}3)\frac{7\pi^4}{360}\frac{1}{\ln^4(z)}
++\ldots]\\
+=&\frac{\qty(\nicefrac{\mu}{T})^\nu}{\Gamma(\nu+1)}\qty[
+1+\nu(\nu{-}1)\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2
++\nu(\nu{-}1)(\nu{-}2)(\nu{-}3)\frac{7\pi^4}{360}\qty(\frac{T}{\mu})^4
++\ldots]
 \end{aligned}
 \end{equation}
 This expansion can be found in for instance Pathria\,\&\,Beale,
 \textit{Statistical Mechanics}, ed. 3.
 
+\footnotetext{I'm including the $\ln^{-4}(z)$ term since it will be
+  used in the next problem. Here however, we're only interested in the
+  expansion up to $\ln^{-2}(z)$.}
 
 Now we have to start working:
 \begin{equation}\label{eq:1_1/2}
-f_{1/2}(z)\approx\frac{1}{\Gamma(\nicefrac{3}{2})}\qty(\frac{\epsilon_F}{T})^{1/2}
+f_{1/2}(z)\approx\frac{1}{\Gamma(\nicefrac{3}{2})}\qty(\frac{\mu}{T})^{1/2}
 \qty[
 1-\frac{1}{4}\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2]
-=\frac{2}{\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{1/2}
+=\frac{2}{\sqrt{\pi}}\qty(\frac{\mu}{T})^{1/2}
 \qty[
 1-\frac{\pi^2}{24}\qty(\frac{T}{\mu})^2],
 \end{equation}
 \begin{equation}\label{eq:1_3/2}
-f_{3/2}(z)\approx\frac{1}{\Gamma(\nicefrac{5}{2})}\qty(\frac{\epsilon_F}{T})^{3/2}
+f_{3/2}(z)\approx\frac{1}{\Gamma(\nicefrac{5}{2})}\qty(\frac{\mu}{T})^{3/2}
 \qty[
 1+\frac{3}{4}\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2]
-=\frac{4}{3\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{3/2}
+=\frac{4}{3\sqrt{\pi}}\qty(\frac{\mu}{T})^{3/2}
 \qty[1+\frac{\pi^2}{8}\qty(\frac{T}{\mu})^2],
 \end{equation}
 and 
 \begin{equation}\label{eq:1_5/2}
-f_{5/2}(z)\approx\frac{1}{\Gamma(\nicefrac{7}{2})}\qty(\frac{\epsilon_F}{T})^{5/2}
+f_{5/2}(z)\approx\frac{1}{\Gamma(\nicefrac{7}{2})}\qty(\frac{\mu}{T})^{5/2}
 \qty[
 1+\frac{15}{4}\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2]
-=\frac{8}{15\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{5/2}
+=\frac{8}{15\sqrt{\pi}}\qty(\frac{\mu}{T})^{5/2}
 \qty[1+\frac{5\pi^2}{8}\qty(\frac{T}{\mu})^2].
 \end{equation}
-Then we just Taylor expand the quotients in \eqref{eq:1_lowT_T} and
-\eqref{eq:1_lowT_S}, which is possible since $T\ll\mu$. 
+After this we also need to recognize that $\mu$ is dependent of
+$T$, and $\mu$ is also only comeing in as $T/\mu$. It's therefor a
+good idea to use \eqref{eq:2_mu} to expand
+\begin{equation}\label{eq:2_T/mu}
+\frac{T}{\mu}\approx T \frac{1}{\epsilon_F}\qty[ 1
+-\frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]^{-1}
+\approx\tau\qty[1
++\frac{\pi^2}{12}\tau^2]
+\end{equation}
+where $\tau=T/\epsilon_F$. We only needed to expand to
+$\order{\tau^2}$ since we're only going that far in the rest of the
+expansions. 
 
+Then we Taylor expand the quotients in \eqref{eq:1_kappa},
+%{eq:1_lowT_T} and \eqref{eq:1_lowT_S}, 
+which is possible since $T\ll\mu$. 
 For isothermal compressibility this looks like
 \begin{equation}
 \begin{aligned}
 \kappa_T\approx& \frac{1}{nT} 
-\frac{2}{\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{1/2}
-\qty(\frac{4}{3\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{3/2})^{-1}
+\frac{2}{\sqrt{\pi}}\qty(\frac{\mu}{T})^{1/2}
+\qty(\frac{4}{3\sqrt{\pi}}\qty(\frac{\mu}{T})^{3/2})^{-1}
 \qty[
-1-\frac{\pi^2}{24}\qty(\frac{T}{\epsilon_F})^2]
+1-\frac{\pi^2}{24}\qty(\frac{T}{\mu})^2]
 \qty[
-1+\frac{\pi^2}{8}\qty(\frac{T}{\epsilon_F})^2]^{-1}\\
+1+\frac{\pi^2}{8}\qty(\frac{T}{\mu})^2]^{-1}\\
 \approx&
- \frac{1}{nT}\frac{3T}{2\epsilon_F}
+ \frac{3}{2nT}\frac{T}{\mu}
 \qty[
-1-\frac{\pi^2}{24}\qty(\frac{T}{\epsilon_F})^2]
+1-\frac{\pi^2}{24}\qty(\frac{T}{\mu})^2]
 \qty[
-1-\frac{\pi^2}{8}\qty(\frac{T}{\epsilon_F})^2]\\
-\approx&
-\frac{3}{2n\epsilon_F}
-\qty[
-1-\qty(\frac{\pi^2}{24}+\frac{\pi^2}{8})\qty(\frac{T}{\epsilon_F})^2]
-=\frac{3}{2n\epsilon_F}
-\qty[
-1-\frac{\pi^2}{6}\qty(\frac{T}{\epsilon_F})^2].
+1-\frac{\pi^2}{8}\qty(\frac{T}{\mu})^2]\\
 \end{aligned}
 \end{equation}
-This is a bit odd, we should have gotten $-\pi^2/12$ in the brackets,
-but I can not see any way to make this not be $-\pi^2/6$. So I guess
-that there is a typo in the problem set. 
+From here we use \eqref{eq:2_T/mu}. But note that only the leading
+factor $T/\mu$ needs to be expanded, since we're only interesed in
+expanding to $\order{\tau^2}$ in each bracket. Thus
+\begin{equation}
+\begin{aligned}
+\kappa_T\approx& \frac{3}{2nT}
+\tau\qty[1 +\frac{\pi^2}{12}\tau^2]
+\qty[1 -\frac{\pi^2}{24}\tau^2]
+\qty[1 -\frac{\pi^2}{8}\tau^2]\\
+\approx& \frac{3}{2nT}
+\frac{T}{\epsilon_F}\qty[1 +
+\qty(\frac{\pi^2}{12}-\frac{\pi^2}{24}-\frac{\pi^2}{8})
+\tau^2] 
+&=\frac{3}{2n\epsilon_F}
+\qty[1 - \frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]
+\end{aligned}
+\end{equation}
 
-Then for adiabatic compressibility we get
+The adiabatic compressibility is calculated in an analogous way:
 \begin{equation}
 \begin{aligned}
 \kappa_S\approx& \frac{3}{5nT} 
-\frac{4}{3\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{3/2}
-\qty(\frac{8}{15\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{5/2})^{-1}
+\frac{4}{3\sqrt{\pi}}\qty(\frac{\mu}{T})^{3/2}
+\qty(\frac{8}{15\sqrt{\pi}}\qty(\frac{\mu}{T})^{5/2})^{-1}
 \qty[
-1+\frac{\pi^2}{8}\qty(\frac{T}{\epsilon_F})^2]
+1+\frac{\pi^2}{8}\qty(\frac{T}{\mu})^2]
 \qty[
-1+\frac{5\pi^2}{8}\qty(\frac{T}{\epsilon_F})^2]^{-1}\\
+1+\frac{5\pi^2}{8}\qty(\frac{T}{\mu})^2]^{-1}\\
 \approx&
- \frac{3}{5nT}\frac{5T}{2\epsilon_F}
-\qty[
-1+\frac{\pi^2}{8}\qty(\frac{T}{\epsilon_F})^2]
-\qty[
-1-\frac{5\pi^2}{8}\qty(\frac{T}{\epsilon_F})^2]\\
-\approx&
-\frac{3}{2n\epsilon_F}
-\qty[
-1+\qty(\frac{\pi^2}{8}-\frac{5\pi^2}{8})\qty(\frac{T}{\epsilon_F})^2]
-=\frac{3}{2n\epsilon_F}
-\qty[
-1-\frac{\pi^2}{4}\qty(\frac{T}{\epsilon_F})^2].
+ \frac{3}{5nT}\frac{5}{2}\tau\qty[1 +\frac{\pi^2}{12}\tau^2]
+\qty[1+\frac{\pi^2}{8}\tau^2]
+\qty[1-\frac{5\pi^2}{8}\tau^2]\\
+\approx&\frac{3}{2n\epsilon_F}
+\qty[1 - \frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2].
 \end{aligned}
 \end{equation}
-\todo{Hmm, sumting's wong... Off by $1/12$ both times.}
+And that's the two expressions for the compressibilities in the low
+temperature limit.
+\qed
 
 \subsection{Relationship between isobaric and isochoric heatcapacity}
 
 
 
 
-\section{Cemical potential of an ideal Fermi gas}
+\section{Cemical potential and internal particle energy of an ideal Fermi gas}
 
+
+\begin{equation}\label{eq:2_mu}
+\mu\approx \epsilon_F \qty[1
+-\frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2
+-\frac{\pi^4}{80}\qty(\frac{T}{\epsilon_F})^4]
+\end{equation}
 
 
 \section{Speed of sound in an idela Bose gas}
