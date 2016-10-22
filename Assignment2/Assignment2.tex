@@ -107,15 +107,16 @@ To do this we remind ourselves that
 \begin{equation}
 PV=-\Omega=\frac{g_sVT}{\lambda^3}f_{5/2}(z)
 \end{equation}
-for Fermi gases. In other words we now have
+for Fermi gases. It's also a good idea to remind oursevles that
+$\lambda$ only depends on $T$ and other constants, so in this case
+$\lambda$ can be regardes as a constant. We now have
 \begin{equation}
 \qty(\pdv{P}{\mu})_T 
 =\qty(\pdv{\mu} \frac{g_sT}{\lambda^3}f_{5/2}(z))_T 
 =\frac{g_sT}{\lambda^3} \,\frac{1}{T}f_{3/2}(z) 
-=\frac{g_s}{\lambda^3} f_{3/2}(z),
+=\frac{g_s}{\lambda^3} f_{3/2}(z).
 \end{equation}
-since $T$ is constant. 
-The last piec needed is the fact that
+The last piece needed is the fact that
 \begin{equation}
 n=\frac{N}{V}=-\frac{1}{V}\qty(\pdv{\Omega}{\mu})_T
 =\frac{g_s}{\lambda^3} f_{3/2}(z)=\qty(\pdv{P}{\mu})_T.
@@ -360,17 +361,106 @@ temperature limit.
 
 
 \section{Cemical potential and internal particle energy of an ideal Fermi gas}
-
-
-\begin{equation}\label{eq:2_mu}
-\mu\approx \epsilon_F \qty[1
--\frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2
--\frac{\pi^4}{80}\qty(\frac{T}{\epsilon_F})^4]
+\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+\subsection{Chemical potential}
+To calculate an approximation to $\mu$ at low temperatures
+$\ln(z)=\mu/T\gg1$, we use the Sommerfeld expansion in
+\eqref{eq:1_Sommerfeld}. 
+Then to get an equation for $\ln(z)$ we can use
+\begin{equation}
+n=\frac{g_s}{\lambda^3}f_{3/2}(z)
+\approx\frac{g_s}{\lambda^3}
+\frac{4}{3\sqrt{\pi}}\ln^{3/2}(z)
+\qty[1+\frac{\pi^2}{8}\ln^{-2}(z) 
++\frac{7\pi^4}{640}\ln^{-4}(z) ]
 \end{equation}
+or in other words
+\begin{equation}
+\xi\approx\qty(\frac{3\sqrt{\pi}\lambda^3}{4g_s})^{2/3}
+\qty[1+\frac{\pi^2}{8}\xi^{-2}
++\frac{7\pi^4}{640}\xi^{-4} ]^{-2/3},
+\end{equation}
+where $\xi=\ln(z)=\mu/T$.
+We're going to deal with these two factors separetly.
+First off is the easy bit. The first factor is
+\begin{equation}
+\qty(\frac{3\sqrt{\pi}\lambda^3}{4g_s})^{2/3}
+=\lambda^2\qty(\frac{3\sqrt{\pi}}{4g_s})^{2/3}
+=\frac{1}{T}\frac{\hbar^2}{2m}4\pi\qty(\frac{3\sqrt{\pi}}{4g_s})^{2/3}
+=\frac{1}{T}\frac{\hbar^2}{2m}\qty(\frac{6\pi^2}{g_s})^{2/3}
+=\frac{\epsilon_F}{T}=\frac{1}{\tau}.
+\end{equation}
+Then there's the othe factor which has to be Taylor expanded to the
+second order in $\ln^{-2}(z)\ll1$. To do this we enlist some help in
+form of \emph{Mathematica}\footnotemark{}, which yields
+\begin{equation}
+\qty[1 + \frac{\pi^2}{8}\xi^{-2}
+ + \frac{7\pi^4}{640}\xi^{-4}]^{-2/3} 
+=\qty[1 - \frac{\pi^2}{12}\xi^{-2}
+ + \frac{\pi^4}{720}\xi^{-4} + \order{\xi^{-6}}].
+\end{equation}
+We now have every thing we need to start approximating $\xi$.
+Unfortunately what we have is something in the line of a fifth degree
+polynolial in $\xi$ to solve: 
+\begin{equation}\label{eq:2_fixed-point}
+\xi\approx \tau^{-1}\qty[1 - \frac{\pi^2}{12}\xi^{-2}
+ + \frac{\pi^4}{720}\xi^{-4}].
+\end{equation}
+This can not and should not be solved
+analytically. Instead we're going to use a method similar to
+fixed-point iteration, but for analytical expressions.
+\footnotetext{Lord and Saviour in our times of despair and need!}
+
+The first iteration is just the zeroth powe approximation:
+\begin{equation}
+\xi_0=\tau^{-1}.
+\end{equation}
+Next iteration is usesing the fixed-point function
+\eqref{eq:2_fixed-point} on $\xi_0$ to get
+\begin{equation}
+\xi_1=\tau^{-1}\qty[1 - \frac{\pi^2}{12}\xi_0^{-2}
+ + \frac{\pi^4}{720}\xi_0^{-4} ]
+=\tau^{-1}\qty[1 - \frac{\pi^2}{12}\tau^{2}
+ + \frac{\pi^4}{720}\tau^{4} ].
+\end{equation}
+One more iteration:
+\begin{equation}
+\begin{aligned}
+\xi_2=&\tau^{-1}\qty[1 - \frac{\pi^2}{12}\xi_1^{-2}
+ + \frac{\pi^4}{720}\xi_1^{-4} ]\\
+=& \tau^{-1}\qty[1 
+ - \frac{\pi^2}{12}\tau^{2}
+\qty(1 - \frac{\pi^2}{12}\tau^{2}
+ + \frac{\pi^4}{720}\tau^{4})^{-2}
+ + \frac{\pi^4}{720}\tau^{4} 
+\qty(1 - \frac{\pi^2}{12}\tau^{2}
+ + \frac{\pi^4}{720}\tau^{4})^{-4}
+].
+\end{aligned}
+\end{equation}
+We once again tur to \emph{Mathematica} and get
+\begin{equation}
+\xi_2=\tau^{-1}\qty[1 - \frac{\pi^2}{12}\tau^{2}
+ - \frac{\pi^4}{80}\tau^{4} + \order{\tau^6}].
+\end{equation}
+From here it's no use in continuing. Since our fixed-point function
+only had terms up to $\order{\xi^{-4}}$, we can not get any higher
+orders than $\tau^4$.
+
+We can therefore conclude that
+\begin{equation}\label{eq:2_mu}
+\mu=T\ln(z)\approx T\xi_2= \epsilon_F \qty[1
+-\frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2
+-\frac{\pi^4}{80}\qty(\frac{T}{\epsilon_F})^4].
+\end{equation}
+\qed
+
+\subsection{Mean internal particle energy}
+
 
 
 \section{Speed of sound in an idela Bose gas}
-
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 
 
 \section{Regarding ideal Bose gases }
