@@ -284,7 +284,7 @@ f_{5/2}(z)\approx\frac{1}{\Gamma(\nicefrac{7}{2})}\qty(\frac{\mu}{T})^{5/2}
 After this we also need to recognize that $\mu$ is dependent of
 $T$, and $\mu$ is also only comeing in as $T/\mu$. It's therefor a
 good idea to use \eqref{eq:2_mu} to expand
-\begin{equation}\label{eq:2_T/mu}
+\begin{equation}\label{eq:1_T/mu}
 \frac{T}{\mu}\approx T \frac{1}{\epsilon_F}\qty[ 1
 -\frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]^{-1}
 \approx\tau\qty[1
@@ -315,7 +315,7 @@ For isothermal compressibility this looks like
 1-\frac{\pi^2}{8}\qty(\frac{T}{\mu})^2]\\
 \end{aligned}
 \end{equation}
-From here we use \eqref{eq:2_T/mu}. But note that only the leading
+From here we use \eqref{eq:1_T/mu}. But note that only the leading
 factor $T/\mu$ needs to be expanded, since we're only interesed in
 expanding to $\order{\tau^2}$ in each bracket. Thus
 \begin{equation}
@@ -357,10 +357,103 @@ temperature limit.
 
 \subsection{Relationship between isobaric and isochoric heatcapacity}
 
+\subsubsection{General thermodynamic relationship between $C_P$ and $C_V$}
+In general we have
+\begin{equation}
+C_V=T\qty(\pdv{S}{T})_V\qcomma\text{and}\quad
+C_P=T\qty(\pdv{S}{T})_P.
+\end{equation}
+
+To evaluate these in a bit more detail we begin by studying
+$\rd{S}$. By the State postulate any property of the system can be
+described by two independent variables (assuming no particle exchange
+with the environment). We can therefore write
+\begin{equation}
+\rd{S}=\qty(\pdv{S}{T})_V\rd{T} + \qty(\pdv{S}{V})_T\rd{V}.
+\end{equation}
+But we are also free to rewite $\rd{V}$ in terms of $\rd{T}$ and
+$\rd{P}$:
+\begin{equation}
+\rd{V}=\qty(\pdv{V}{T})_P\rd{T} + \qty(\pdv{V}{P})_T\rd{P}.
+\end{equation}
+With this $\rd{S}$ becomes
+\begin{equation}
+\begin{aligned}
+\rd{S} =& \qty(\pdv{S}{T})_V\rd{T} + \qty(\pdv{S}{V})_T
+\qty[\qty(\pdv{V}{T})_P\rd{T} + \qty(\pdv{V}{P})_T\rd{P}]\\
+=&\qty[\qty(\pdv{S}{T})_V+\qty(\pdv{S}{V})_T\qty(\pdv{V}{T})_P]\rd{T}
++ \qty(\pdv{V}{P})_T\rd{P}.
+\end{aligned}
+\end{equation}
+Now we can write 
+\begin{equation}
+C_P=T\qty(\pdv{S}{T})_P
+=T\qty[\qty(\pdv{S}{T})_V+\qty(\pdv{S}{V})_T\qty(\pdv{V}{T})_P]
+=C_V+T\qty(\pdv{S}{V})_T\qty(\pdv{V}{T})_P.
+\end{equation}
+
+To continue from here we need to use some Maxwell relations. There are
+two of interest to us in the moment:
+\begin{equation}
+\qty(\pdv{S}{V})_T=-\pdv[2]{F}{T}{V}=\qty(\pdv{P}{T})_V
+\end{equation}
+and
+\begin{equation}
+-\qty(\pdv{S}{P})_T=\pdv[2]{\varPhi}{T}{P}=\qty(\pdv{V}{T})_P,
+\end{equation}
+where $F$ and $\varPhi$ are the Helmholzt and Gibbs free energy
+respectively. 
+
+With these Maxwell relations we can write
+\begin{equation}
+C_P-C_V=T\qty(\pdv{P}{T})_V\qty(\pdv{V}{T})_P
+=TV\kappa_T\qty(\pdv{P}{T})_V^2.
+\end{equation}
+The last equality comes from
+\begin{equation}
+V\kappa_T\qty(\pdv{P}{T})_V=-\qty(\pdv{V}{P})_T\qty(\pdv{S}{V})_T
+=-\qty(\pdv{S}{P})_T=\qty(\pdv{V}{T})_P.
+\end{equation}
+
+\subsubsection{In the specific cast of Fermi gases}
+Here we want to study 
+\begin{equation}\label{eq:1bi_1}
+\frac{C_P-C_V}{C_V} 
+= \frac{TV\kappa_T\qty(\pdv{P}{T})_V^2}{\qty(\pdv{E}{T})_V}
+= \frac{TV\kappa_T\qty(\pdv{P}{E})_V^2\qty(\pdv{E}{T})_V^2}{\qty(\pdv{E}{T})_V}
+= TV\kappa_TC_V\qty(\pdv{P}{E})_V^2.
+\end{equation}
+Here we used the fact that $C_V=(\pdv*{E}{T})_V$. To continue we
+note that \eqref{eq:1_Omega} implies that
+\begin{equation}
+\qty(\pdv{E}{P})_V=\frac{3}{2}V.
+\end{equation}
+No we can write \eqref{eq:1bi_1} as
+\begin{equation}
+\frac{C_P-C_V}{C_V} 
+= TV\kappa_TC_V\frac{4}{9V^2}
+=\frac{4C_VT}{9V}\frac{1}{nT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
+=\frac{4C_V}{9N}\frac{f_{1/2}(z)}{f_{3/2}(z)}.
+\end{equation}
+Here we used (\ref{eq:1_kappa}\,a) to rewrite $\kappa_T$.
+
+To get a first order approximation of the value of this in the low
+temperature limit we will use \eqref{eq:1_1/2}, \eqref{eq:1_3/2} and
+\eqref{eq:CV_Fermi}. To a first order approximation 
+\begin{equation}
+\frac{C_P-C_V}{C_V} =\frac{4C_V}{9N}\frac{f_{1/2}(z)}{f_{3/2}(z)} 
+\approx \frac{4}{9} \frac{\pi^2}{2}\frac{T}{\epsilon_F}
+\frac{2}{\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{1/2}
+\qty(\frac{4}{3\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{3/2})^{-1}
+=\frac{\pi^2}{3}\qty(\frac{T}{\epsilon_F})^2.
+\end{equation}
+\qed
 
 
 
-\section{Cemical potential and particle energy of an ideal
+
+
+\section{Cemical potential and particle energy of1 an ideal
   Fermi gas at low temperatures}
 \renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
 \subsection{Chemical potential}
@@ -491,10 +584,19 @@ Now we have
 \begin{equation}
 \frac{E}{N}\approx\frac{3T}{2}\frac{2}{5\tau}
 \qty[1+\frac{5\pi^2}{12}\tau^2-\frac{\pi^4}{16}\tau^4]
-=\frac{3}{5\epsilon_F}\qty[1
+=\frac{3\epsilon_F}{5}\qty[1
 +\frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2
 -\frac{\pi^4}{16}\qty(\frac{T}{\epsilon_F})^4].
 \end{equation}
+This can be used to get an expression for the heatcapacity of the
+system
+\begin{equation}\label{eq:CV_Fermi}
+\frac{C_V}{N}=\frac{1}{N}\qty(\pdv{E}{T})_V
+=\;\frac{\pi^2}{2}\frac{T}{\epsilon_F}
+ - \frac{3\pi^2}{20}\qty(\frac{T}{\epsilon_F})^3.
+\end{equation}
+\qed
+
 
 
 \section{Speed of sound in an idela Bose gas}
