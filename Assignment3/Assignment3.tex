@@ -143,6 +143,231 @@ with $x=1$.
 
 
 \section{Coherent states}
+A coherent state of the 1D harmonic oscillator is an eigenstate of the
+anihilation operator:
+\begin{equation}
+a\ket{\lambda}=\lambda\ket{\lambda}\qcomma
+\lambda\in\C.
+\end{equation}
+
+\subsection{A normalized coherent state}
+Here we're going to prove that
+\begin{equation}\label{eq:2_coherent}
+\ket\lambda=\ee^{-|\lambda|^2/2}\ee^{\lambda a^\dagger}\ket0
+\end{equation}
+is a normalized coherent state.
+It will be helpful to express $\ket\lambda$ as it's power series
+\begin{equation}\label{eq:2_lambda_power}
+\ket\lambda = \ee^{-|\lambda|^2/2}\sum_{k}
+\frac{\lambda^k}{k!} (a^\dagger)^k \ket{0}
+= \ee^{-|\lambda|^2/2}\sum_{k}
+\frac{\lambda^k}{k!}\sqrt{k!}\ket{k}.
+\end{equation}
+Here we used the property of the creation operator that
+\begin{equation}
+a^\dagger\ket{n-1}=\sqrt{n}\ket{n}.
+\end{equation}
+
+\subsubsection{Normalized}
+To prove that $\ket\lambda$ is normalized we just use
+\eqref{eq:2_lambda_power} to express
+\begin{equation}
+\ip{\lambda} = \ee^{-|\lambda|^2}\sum_{m, n}
+\bra{m}\frac{(\lambda^\dagger)^m}{\sqrt{m!}}
+\frac{\lambda^n}{\sqrt{n!}}\ket{n}.
+\end{equation}
+From here we use $\ip{m}{n}=\delta_{m, n}$ and get
+\begin{equation}
+\ip{\lambda} = \ee^{-|\lambda|^2}
+\sum_n\frac{(\lambda^\dagger\lambda)^n}{n!}
+=\ee^{-|\lambda|^2}\ee^{+|\lambda|^2}=1.
+\end{equation}
+\qed
+
+\subsubsection{Eigenket}
+We apply $a$ to $\ket\lambda$:
+\begin{equation}\label{eq:2_eigenket}
+\begin{aligned}
+a\ket\lambda =& \ee^{-|\lambda|^2/2}\sum_{k=0}^\infty
+\frac{\lambda^k}{\sqrt{k!}} a \ket{k}
+= \ee^{-|\lambda|^2/2}\sum_{k=0}^\infty
+\lambda\frac{\lambda^{k}}{\sqrt{k!}}\sqrt{k} \ket{k-1}\\
+=& \ee^{-|\lambda|^2/2}\sum_{k=1}^\infty
+\lambda\frac{\lambda^{k-1}}{\sqrt{(k-1)!}} \ket{k-1}\\
+&\hspace{-24pt}\stackrel{\{n=k-1\}}{=} \lambda \ee^{-|\lambda|^2/2}\sum_{n=0}^\infty
+\lambda\frac{\lambda^{n}}{\sqrt{n!}} \ket{n}
+&=\lambda\ket{\lambda}.
+\end{aligned}
+\end{equation}
+\qed
+
+\subsection{Uncertainty relation}
+Here we're going to prove the minimum uncertainty relation
+\begin{equation}\label{eq:2_unc}
+\ev**{(\Delta{x})^2}{\lambda}\ev**{(\Delta{p})^2}{\lambda}
+=\frac{\hbar^2}{4}.
+\end{equation}
+To do this we use the relations
+\begin{equation}\label{eq:2_xp}
+x=\sqrt{\frac{\hbar}{2m_e\omega}}\qty(a+a^\dagger)\qcomma
+p=\ii\sqrt{\frac{m_e\hbar\omega}{2}}\qty(-a+a^\dagger),
+\end{equation}
+which follows directly from the definitions of $a$ and $a^\dagger$.
+
+Now all we have to do is evaluate the four different expectation
+values. We begin with
+\begin{equation}
+\ev{x}{\lambda}=\ee^{-|\lambda|^2}
+\sum_{m=0}^\infty\sum_{n=0}^\infty\sqrt{\frac{\hbar}{2m_e\omega}}
+\bra{m}\frac{(\lambda^\dagger)^m\lambda^{n}}{\sqrt{m!n!}}\qty(a+a^\dagger)
+\ket{n}
+\end{equation}
+We evaluate the terms:
+\begin{equation}
+\mel{m}{a+a^\dagger}{n}=\mel{m}{\sqrt{n}}{n-1}+\mel{m}{\sqrt{n+1}}{n+1}
+=\sqrt{n}\delta_{m, n-1}+\sqrt{n+1}\delta_{m, n+1}.
+\end{equation}
+This gives
+\begin{equation}
+\begin{aligned}
+\ev{x}{\lambda}=&\ee^{-|\lambda|^2}
+\sqrt{\frac{\hbar}{2m_e\omega}}\sum_{n=0}^\infty
+\qty[
+\lambda\frac{|\lambda|^{n-1}}{\sqrt{(n-1)!n!}}\sqrt{n} 
++\lambda^\dagger\frac{|\lambda|^{n}}{\sqrt{(n+1)!n!}}\sqrt{n+1} 
+]\\
+=&\ee^{-|\lambda|^2}\sqrt{\frac{\hbar}{2m_e\omega}}
+\qty[
+\sum_{n=1}^\infty\lambda\frac{|\lambda|^{n-1}}{(n-1)!}
++\sum_{n=0}^\infty\lambda^\dagger\frac{|\lambda|^{n}}{n!}
+]\\
+=&\ee^{-|\lambda|^2}\sqrt{\frac{\hbar}{2m_e\omega}}
+\qty[\lambda\ee^{|\lambda|^2}
++\lambda^\dagger\ee^{|\lambda|^2}]
+=2\Re[\lambda]\sqrt{\frac{\hbar}{2m_e\omega}}.
+\end{aligned}
+\end{equation}
+The expectation value of $p$ follows in a completly analogous way: 
+\begin{equation}
+\ev{p}{\lambda}=\ii\sqrt{\frac{m_e\hbar\omega}{2}}\qty(\lambda^\dagger-\lambda)
+=2\Im[\lambda]\sqrt{\frac{m_e\hbar\omega}{2}}.
+\end{equation}
+
+For $\ev{x^2}$ and $\ev{p^2}$ we just use \eqref{eq:2_xp} to get
+\begin{equation}
+x^2=\frac{\hbar}{2m_e\omega}
+\qty(a^2+(a^\dagger)^2+aa^\dagger+a^{\dagger}a)\qcomma
+p^2=\frac{m_e\hbar\omega}{2}
+\qty(-a^2+-(a^\dagger)^\dagger + aa^\dagger + a^{\dagger}a),
+\end{equation}
+and
+\begin{equation}
+\begin{aligned}
+\mel**{m}{\pm{}a^2\pm(a^\dagger)^2+aa^\dagger+a^{\dagger}a}{n}=&
+\pm\sqrt{n(n-1)}\delta_{m, n-2} \pm\sqrt{(n+1)(n+2)}\delta_{m, n+2}\\
+&+(2n+1)\delta_{m, n}. 
+\end{aligned}
+\end{equation}
+With this we get, after some calculations,
+\begin{equation}
+\ev{x^2}{\lambda}=\ldots=
+\frac{\hbar}{2m_e\omega}\qty(2\Re[\lambda^2] + 2|\lambda|^2 + 1)
+\end{equation}
+and
+\begin{equation}
+\ev{p^2}{\lambda}=\ldots=
+\frac{m_e\hbar\omega}{2}\qty(1+2|\lambda|^2 - 2\Re[\lambda^2]).
+\end{equation}
+
+Now we just have to evaluate the uncertainty product
+\begin{equation}
+\begin{aligned}
+\qty(\ev{x^2}{\lambda}-\ev{x}{\lambda}^2)
+\qty(\ev{p^2}{\lambda}-\ev{p}{\lambda}^2)
+=&\frac{\hbar^2}{4}
+\qty(2\Re[\lambda^2] + 2|\lambda|^2 + 1 - 2\Re[\lambda])\\
+&\times\qty(1+2|\lambda|^2 - 2\Re[\lambda^2]-2\Im[\lambda]).
+\end{aligned}
+\end{equation}
+To be frank, at this point I don't eaven want to try to do this by
+hand. So we turn to \emph{Mathematica}, which actually says that
+\begin{equation}
+\qty(2\Re[\lambda^2] + 2|\lambda|^2 + 1 - 2\Re[\lambda])
+\times\qty(1+2|\lambda|^2 - 2\Re[\lambda^2]-2\Im[\lambda])
+=1\qcomma\forall\lambda\in\C.
+\end{equation}
+We do therefore have the minimum uncertainty relation
+\eqref{eq:2_unc}. 
+\qed
+
+\subsection{Poisson distributed energy}
+A poisson distribution is given by
+\begin{equation}
+\mathcal{P}_\Lambda^{(\text{poisson})}(k)=\frac{\Lambda^k\ee^{-\Lambda}}{k!}
+\end{equation}
+for some parameter $\Lambda$. The expaectation value of a poisson
+distribution is given by $\Lambda$ and the value with highest
+probability to occur is $\lfloor\Lambda\rfloor$ ($\Lambda$ rounded
+down to the nearest integer).
+
+By writing
+\begin{equation}
+\ket{\lambda}=\sum_n f(n)\ket{n}
+\end{equation}
+and using \eqref{eq:2_lambda_power}, we see that
+\begin{equation}
+\abs{f(n)}^2=\frac{\qty(|\lambda|^2)^n\ee^{-|\lambda|^2}}{n!}
+=\mathcal{P}_\lambda(n).
+\end{equation}
+This is clearly the same distribution as above with
+$\Lambda=|\lambda|^2$. Therefore the expectation value of the state's
+energy is
+\begin{equation}
+\ev{E}{\lambda}="E_{|\lambda|^2}"=\hbar\omega|\lambda|^2+\frac{1}{2}
+\end{equation}
+and the most probable enegry is
+\begin{equation}
+\hbar\omega\left\lfloor|\lambda|^2\right\rfloor+\frac{1}{2}.
+\end{equation}
+\qed
+
+\subsection{Translating the ground state}
+We want to show that an in space translated ground state,
+\begin{equation}
+\exp[-\ii\frac{p\ell}{\hbar}]\ket{0}=\ee^{\eta(-a+a^\dagger)}\ket{0}
+\end{equation}
+where $\eta=\sqrt{m_E\ell^2\omega/(2\hbar)}$, $p$ is the momentum
+operator and $\ell$ is a finite displacement, is a coherent state. All
+we have to do is to prove that this is an eigenstate of $a$.
+
+To do this we will use the relation \eqref{eq:1_want_this} to write
+\begin{equation}
+\ee^{-\eta a + \eta a^\dagger}=\ee^{-\eta a}\ee^{\eta a^\dagger}
+\ee^{-\frac{\eta^2}{2}\comm{-a}{a^\dagger}}.
+\end{equation}
+We can do this since $\comm{a}{a^\dagger}=1$ obviuosly commutes with
+both $a$ and $a^\dagger$. This makes it posible to write the
+translated ground state as
+\begin{equation}
+\exp[-\ii\frac{p\ell}{\hbar}]\ket{0}
+=\ee^{-\eta a}\qty(\ee^{\eta^2/2}\ee^{\eta a^\dagger}\ket{0}),
+\end{equation}
+where the expression in the parenthesis is of the same form as in
+\eqref{eq:2_coherent} appart from the sign of $\eta^2/2$, but the sign
+only affects the normalization, not the fact that it's an eigenstate
+of $a$. Furthermore, $a$ commutes with $\ee^{-\eta a}$, so 
+\begin{equation}
+\begin{aligned}
+a\exp[-\ii\frac{p\ell}{\hbar}]\ket{0}&=
+\ee^{-\eta a}a\qty(\ee^{\eta^2/2}\ee^{\eta a^\dagger}\ket{0})\\
+&\hspace{-2pt}\stackrel{\eqref{eq:2_eigenket}}{=}
+\ee^{-\eta a}\eta\qty(\ee^{\eta^2/2}\ee^{\eta a^\dagger}\ket{0})
+=\eta\exp[-\ii\frac{p\ell}{\hbar}]\ket{0}.
+\end{aligned}
+\end{equation}
+Or in other words, the translated ground state is an eigenstate of the
+anihilations operator $a$, which means that it's also a coherent
+state. 
 
 
 
@@ -151,10 +376,225 @@ with $x=1$.
 
 
 
-\section{The Feynman pathintegral and electromagnetic potentials}
+\section{The Feynman path integral and EM potentials}
+Here we're going to show the equivalence of the Feynman pathintegral
+to the Schrödinger equation in the presence of electromagnetic
+potentials. We're also going to show that the mid-point prescrition is
+required. 
+
+First off is some definitions of the variables used here.
+The Laplacian
+\begin{equation}
+\mathcal{L}=\frac{1}{2}m v^2 - q\varphi(x, t) + qvA(x, t),
+\end{equation}
+which will be exponentiated an integrated. We will restrict oursevles
+to the 1D case, so no vector notetion needed. Then there's
+\begin{equation}
+\epsilon=\Delta{t}\to0
+\end{equation}
+and
+\begin{equation}
+\eta=\Delta{x}=x''-x'
+\quad\Longrightarrow\quad
+v=\frac{\eta}{\epsilon}.
+\end{equation}
+And lastly we will be using the parameter $\alpha\in[0, 1]$ in
+\begin{equation}
+x'_\alpha=x'+\alpha\eta=\alpha x'' + (1-\alpha)x'
+\end{equation}
+to determine where the potentials shall be evaluated.
+
+Next a few word on where we're heading. Since we want to show the
+equivalence between the shrödinger equatoin and the Feynman
+pathintegral, we will need to look at the derivative
+\begin{equation}
+\pdv{\psi(x'', t')}{t'} = \frac{\psi(x'', t'+\epsilon)-\psi(x'', t')}{\epsilon}.
+\end{equation}
+this means that we will need to expand the integrand in the pathintegral
+\begin{equation}
+\begin{aligned}
+\psi(x'', t'+\epsilon)=&\frac{1}{w(\epsilon)}\int_{-\infty}^{\infty}\!\rd{x'}
+\exp[\frac{\ii}{\hbar}\epsilon
+\mathcal{L}\qty(\frac{\eta}{\epsilon}, x'_\alpha, t')]\psi(x', t')\\
+=&\frac{1}{w(\epsilon)}\int_{-\infty}^{\infty}\!\rd{x'}
+\exp[\frac{\ii}{\hbar}\frac{m}{2}\frac{\eta^2}{\epsilon}]
+\exp[-\frac{\ii}{\hbar}\epsilon q\varphi(x'_\alpha)]
+\exp[\frac{\ii}{\hbar} q\eta A(x'_\alpha)]
+\psi(x', t')
+\end{aligned}
+\end{equation}
+in power series in $\epsilon$. I've also for brevity not written out
+the explicit time dependence of $\varphi$ and $A$. It turns out that
+the best way to do this expansion is to leav the first exponential
+intact and then expand the rest of the fractors in the integrand in
+terms of both $\epsilon$ and $\eta$.
+
+The expansions are simple to do, so I'll just list them below:
+\begin{enumerate}[label=(\Roman*)]
+\item $\displaystyle
+\psi(x', t')=\sum_{j}  \frac{(-\eta)^j}{j!}\eval{\pdv[j]{\psi}{{x'}}}_{x'', t'}
+$
+\item $\displaystyle
+\exp[-\frac{\ii}{\hbar}\epsilon q\varphi(x'_\alpha)]
+=\sum_k \frac{1}{k!} 
+\qty[-\frac{\ii q\epsilon}{\hbar} \varphi(x'_\alpha)]^k
+=\sum_k \frac{1}{k!} 
+\qty[-\frac{\ii q\epsilon}{\hbar} 
+\sum_l \frac{[(\alpha-1)\eta]^l}{l!}\eval{\pdv[l]{\varphi}{{x'}}}_{x''}
+]^k
+$
+\item $\displaystyle
+\exp[\frac{\ii}{\hbar} q\eta A(x'_\alpha)]=\ldots
+=\sum_m \frac{1}{m!} 
+\qty[-\frac{\ii q\eta}{\hbar} 
+\sum_n \frac{[(\alpha-1)\eta]^n}{n!}\eval{\pdv[n]{A}{{x'}}}_{x''}
+]^m
+$
+\end{enumerate}
+The only detail that need som clarification is that all of the $x'$
+derivatives are evaluated at $x''$, which is independent of the
+integrationvariable. This also means the last two Taylor expansions
+should contain the expression $(x'_\alpha-x'')^a$, but that can be
+rewritten as $[(\alpha-1)\eta]^a$.
+
+After this we now see that the pathintegral can be done over $\eta$
+instead of $x'$.
+The integral will furthermore be constituted of sums of integrals of
+the form 
+\begin{equation}\label{eq:4_int_form}
+\int_{-\infty}^{\infty}\!\rd{\eta}\,\eta^d
+\exp[\frac{\ii}{\hbar}\frac{m}{2}\frac{\eta^2}{\epsilon}]
+=\begin{cases}
+\sqrt{\frac{2\pi\ii\epsilon}{m}},&d=0\\
+0,&d=1\\
+\frac{\sqrt{\pi}}{2}\qty(\frac{2\ii\hbar\epsilon}{m})^{2/3},&d=2.
+\end{cases}
+\end{equation}
+It's worth noting that the integral in reality doesnt converge for
+since ther's an $\ii$ in the exponetial, but we disregrad that
+caveat and soldier on. It's also not woth worrying about larger $d$'s
+since $\epsilon$ is infinitesimal. 
+
+The weight function is
+\begin{equation}
+\frac{1}{w(\epsilon)}=\sqrt{\frac{m}{2\pi\ii\epsilon}}.
+\end{equation}
+And since we will only expand the pathintegral to $\order{\epsilon}$,
+we can list the cases which will contribute to the zeroth and first
+order terms:
+\begin{enumerate}[label=(\roman*)]
+\item $(j, k, l, m, n)=(0, 0, 0, 0, 0)$ giving an $\order{1}$ term and a
+$d=0$ integral. 
+\item $(j, k, l, m, n)=(0, 1, 0, 0, 0)$ giving an $\order{\epsilon}$ term
+and a $d=0$ integral. 
+\item $(j, k, l, m, n)=(2, 0, 0, 0, 0)$ giving an $\order{\epsilon}$ term
+and a $d=2$ integral.
+\item $(j, k, l, m, n)=(1, 0, 0, 1, 0)$ giving an $\order{\epsilon}$ term
+and a $d=2$ integral.
+\item $(j, k, l, m, n)=(0, 0, 0, 1, 1)$ giving an $\order{\epsilon}$ term
+and a $d=2$ integral.
+\item $(j, k, l, m, n)=(0, 0, 0, 2, 0)$ giving an $\order{\epsilon}$ term
+and a $d=2$ integral. 
+\end{enumerate}
+All of these integrals will just be of the form in
+\eqref{eq:4_int_form} with a prefactor determined by $1/w(x)$ and the
+factors from the relavant term in the expansion. The details of each
+of the six integrations from the cases above is of little
+interest. All of the calculations are very similar, so I will write
+out the details of the first integral. Then I'll just list the rest of
+the results below:
+\begin{enumerate}[label=(\roman*)]
+\item $\displaystyle
+\sqrt{\frac{m}{2\pi\ii\epsilon}} \int_{-\infty}^{\infty}\!\rd{\eta}
+\exp[\frac{\ii}{\hbar}\frac{m}{2}\frac{\eta^2}{\epsilon}]
+\psi(x'', t')
+=\sqrt{\frac{m}{2\pi\ii\epsilon}}\psi(x'', t')
+\sqrt{\frac{2\pi\ii\epsilon}{m}}
+=\psi(x'', t')
+$
+\item $\displaystyle
+\epsilon\frac{q}{\ii\hbar}\varphi(x'')\psi(x'', t')
+$
+\item $\displaystyle
+\epsilon\frac{\ii\hbar}{2m}\pdv[2]{\psi(x'', t')}{{x''}}
+$
+\item $\displaystyle
+\epsilon\frac{q}{m}A(x'')\pdv{\psi(x'', t')}{x''}
+$
+\item $\displaystyle
+\epsilon(1-\alpha)\frac{q}{m}\pdv{A(x'')}{x''}\psi(x'', t')
+$
+\item $\displaystyle
+\epsilon\frac{q^2}{\ii\hbar2m}A^2(x'')\psi(x'', t')
+$
+\end{enumerate}
+Note especially that (v) has a factor $(1-\alpha)$, originating from
+expansion (III) and the fact that $m=1$ and $n=1$.
 
 
-
+Now we just construct the pathintegral fron these terms:
+\begin{equation}
+\begin{aligned}
+\psi(x'', t'+\epsilon)
+=&\frac{1}{w(\epsilon)}\int_{-\infty}^{\infty}\!\rd{x'}
+\exp[\frac{\ii}{\hbar}\frac{m}{2}\frac{\eta^2}{\epsilon}]
+\exp[-\frac{\ii}{\hbar}\epsilon q\varphi(x'_\alpha)]
+\exp[\frac{\ii}{\hbar} q\eta A(x'_\alpha)]
+\psi(x', t')\\
+=& \psi(x'', t') + \epsilon \Bigg\{
+\frac{q}{\ii\hbar}\varphi(x'')\psi(x'', t')
++\frac{\ii\hbar}{2m}\pdv[2]{\psi(x'', t')}{{x''}}
++\frac{q}{m}A(x'')\pdv{\psi(x'', t')}{x''}\\
+&\phantom{\psi(x'', t') + \epsilon\{ }
++(1-\alpha)\frac{q}{m}\pdv{A(x'')}{x''}\psi(x'', t')
++\frac{q^2}{\ii\hbar2m}A^2(x'')\psi(x'', t')
+\Bigg\}.
+\end{aligned}
+\end{equation}
+This can be rewritten to%\todo{there's a sign error some
+%  where. Probably in the $x'\to\eta$ integration}
+\begin{equation}
+\begin{aligned}
+=\ii\hbar\frac{\psi(x'', t'+\epsilon)-\psi(x'', t')}{\epsilon}
+=&  \Bigg\{
+q\varphi(x'')
++\frac{(\ii\hbar)^2}{2m}\pdv[2]{{x''}}
++\frac{q\ii\hbar}{m}A(x'')\pdv{x''}\\
+&\phantom{(}
++(1-\alpha)\frac{q\ii\hbar}{m}\pdv{A(x'')}{x''}
++\frac{q^2}{2m}A^2(x'')
+\Bigg\}\psi(x'', t')
+\end{aligned}
+\end{equation}
+or in other words
+\begin{equation}
+\begin{aligned}
+\ii\hbar\pdv{\psi}{{t'}}
+=&  \Bigg\{\frac{1}{2m}\Bigg[
+(\ii\hbar)^2\pdv[2]{{x''}}
++2q\ii\hbar A(x'')\pdv{x''}\\
+&\phantom{(2m)}
++2(1-\alpha)q\ii\hbar\pdv{A(x'')}{x''}
++q^2A^2(x'')\Bigg]
++q\varphi(x'')\Bigg\}\psi(x'', t')
+\end{aligned}
+\end{equation}
+We want this to be equivalent to 
+\begin{equation}
+\begin{aligned}
+\ii\hbar\pdv{\psi}{{t'}}
+=H\psi
+=&\qty{\frac{1}{2m}\qty[p^2 - qpA-qAp+q^2A^2] + q\varphi}\psi\\
+=&\qty{\frac{1}{2m}\qty[(-\ii\hbar)^2\pdv[2]{{x''}} 
+- q(-\ii\hbar) \pdv{x''}[A\,\cdot]
+-qA(-\ii\hbar)\pdv{x''}+q^2A^2] + q\varphi}\psi\\
+=&\qty{\frac{1}{2m}\qty[(\ii\hbar)^2\pdv[2]{{x''}} 
++ \ii\hbar q\qty(\pdv{A}{x''}+A\pdv{x''})
++\ii\hbar qA\pdv{x''}+q^2A^2] + q\varphi}\psi.
+\end{aligned}
+\end{equation}
+And this will be achived only by setting $\alpha=1/2$.
+\qed
 
 \section{Hollow cylindrical shell}
 
@@ -170,7 +610,7 @@ with $x=1$.
 
 \section{Particle in a uniform magnetic field}
 
-
+\newpage
 \appendix
 
 
