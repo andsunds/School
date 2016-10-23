@@ -50,7 +50,96 @@ Assignment 3}
 %\todolist
 
 \section{A special case of the Baker-Campbell-Hausdorf theorem}
+Here we want to show that
+\begin{equation}\label{eq:1_want_this}
+\ee^{A+B} = \ee^A\ee^B\ee^{-\frac{1}{2}\comm{A}{B}}
+\end{equation}
+for two operators $A$ and $B$ wich both commute with $\comm{A}{B}$,
+but not necessarily with each other.
 
+We begin by studying
+\begin{equation}
+\comm{B}{\ee^{x A}}=\sum_{n=0}^\infty \frac{x^n}{n!}\comm{B}{A^n},
+\end{equation}
+where $x$ is just a number (\emph{not} the operator). To expand this
+sum we can use the formula derived in the last problem
+set\footnotemark{}:
+\begin{equation}
+\comm{B}{A^{m}} =\sum_{i=0}^{m-1} A^{i}\comm{B}{A}A^{m-1-i}.
+\end{equation}
+In this case we aslo know that $A$ commutes with $\comm{B}{A}$, which
+means that we can write
+\begin{equation}\label{eq:1_comm}
+\comm{B}{\ee^{x A}}=\sum_{n=0}^\infty \frac{x^n}{n!}
+\sum_{k=0}^{n-1}A^{n-1}\comm{B}{A}
+=\sum_{n=0}^\infty \frac{x^n}{n!}
+nA^{n-1}\comm{B}{A}
+=x\ee^{xA}\comm{B}{A}.
+\end{equation}
+Here the case $n=0$ should be regraded as the whole term beeing equal
+to $0$, since $k$ starts above the summation limit.
+\footnotetext{I have attached a copy of the relavent derivation in Appendix~\ref{sec:comm}}
+
+Nex up we study the function
+\begin{equation}\label{eq:1_G_def}
+G(x)=\ee^{xA}\ee^{xB}
+=\sum_{i=0}^\infty\frac{x^iA^i}{i!}\sum_{j=0}^\infty\frac{x^jB^j}{j!}.
+\end{equation}
+It's derivative is
+\begin{equation}
+\begin{aligned}
+\dv{G}{x}=&
+\sum_{i=1}^\infty\frac{x^{i-1}A^i}{(i-1)!}\sum_{j=0}^\infty\frac{x^jB^j}{j!}
++\sum_{i=0}^\infty\frac{x^iA^i}{i!}\sum_{j=1}^\infty\frac{x^{j-1}B^j}{(j-1)!}\\
+=&A\ee^{xA}\ee^{xB} + \ee^{xA}B\ee^{xB}.
+\end{aligned}
+\end{equation}
+Now we use the relation \eqref{eq:1_comm} to rewrite
+\begin{equation}
+\ee^{xA}B = B\ee^{xA}-\comm{B}{\ee^{xA}}
+=B\ee^{xA}-x\ee^{xA}\comm{B}{A}.
+\end{equation}
+All in all we get
+\vspace{-4mm}
+\begin{equation}
+\dv{G}{x}=A\ee^{xA}\ee^{xB}+\qty(B\ee^{xA}-x\ee^{xA}\comm{B}{A})\ee^{xB}
+=\Big(A+B+x\comm{A}{B}\Big)\overbrace{\ee^{xA}\ee^{xB}}^{=G(x)},
+\end{equation}
+which is a differential equation for $G$ and it results in
+\begin{equation}
+G(x)=\exp[x(A+B)+\frac{1}{2}x^2\comm{A}{B}].
+\end{equation}
+But with \eqref{eq:1_G_def} we have
+\begin{equation}\label{eq:1_almost}
+\ee^{xA}\ee^{xB}=\exp[x(A+B)+\frac{1}{2}x^2\comm{A}{B}]
+=\ee^{x(A+B)}\ee^{\frac{1}{2}x^2\comm{A}{B}}.
+\end{equation}
+The last step is possible since $\comm{A}{B}$ commutes with both $A$
+and $B$. By choosing $x=1$ we're almost where we want to be. 
+
+All that's left is to move $\ee^{\frac{1}{2}x^2\comm{A}{B}}$ to the
+other side. To do this we note that for any operator $\Xi$
+\begin{equation}
+\ee^{\Xi}\ee^{-\Xi}=\sum_{i\ge0}\sum_{j\ge0}(-1)^j\frac{\Xi^{i+j}}{i!j!}
+=\sum_i\sum_{j=2n}\frac{\Xi^{i+2n}}{i!(2n)!}
+-\sum_i\sum_{j=2n+1}\frac{\Xi^{i+2n+1}}{i!(2n+1)!}.
+\end{equation}
+Now since $i$ is still free to run over all values in both sums, we
+will get two sums where they almost cancel each other out. The
+exception is thet the second double sum can't produce any $\Xi^0$
+term. Therefore
+\begin{equation}
+\ee^{\Xi}\ee^{-\Xi}=1,
+\end{equation}
+in the sence of $\Xi^0$ beeing the identity operator. 
+
+With this result its now safe to ``multiply'' both sides of
+\eqref{eq:1_almost} by $\ee^{-\frac{1}{2}x^2\comm{A}{B}}$, and we get
+\begin{equation}
+\ee^{A}\ee^{B}\ee^{-\frac{1}{2}\comm{A}{B}} = \ee^{A+B},
+\end{equation}
+with $x=1$.
+\qed
 
 
 \section{Coherent states}
@@ -82,8 +171,40 @@ Assignment 3}
 \section{Particle in a uniform magnetic field}
 
 
+\appendix
 
 
+\section{Excerpt from my last hand-in}\label{sec:comm}
+\textit{All of the following appendix is copied from my last hand-in.}
+
+Before we set out to prove the two commutator relations, it will be
+helpfull to derive an intermediary result first. We're going to prove
+the formula
+\begin{equation} \label{eq:comm_power}
+\comm{A}{B^n} = \sum_{i=0}^{n-1} B^{i}\comm{A}{B}B^{n-1-i}.
+\end{equation}
+This formula is readily derived with a proof by induction. 
+
+To start off with, we can clearly see that \eqref{eq:comm_power} holds
+in the base case of $n=1$. Then assume that it also holds for all
+intergers up to some value $m$. Does it then also hold for $m+1$?
+To show that it does, use the elementary commutator
+indentity
+\begin{equation} \label{eq:comm_A_BC}
+\comm{A}{BC} = \comm{A}{B}C+B\comm{A}{C},
+\end{equation}
+which gives
+\begin{equation}
+\begin{aligned}
+\comm{A}{B^{m+1}} &= \comm{A}{B^{m}B} \\
+&\hspace{-3pt}\stackrel{\eqref{eq:comm_A_BC}}{=} \comm{A}{B^{m}}B + B^m\comm{A}{B}\\
+&\hspace{-14pt}\stackrel{\stackrel{\text{\tiny induction}}{\text{\tiny assumption}}}{=}
+\left(\sum_{i=0}^{m} B^{i}\comm{A}{B}B^{m-1-i}\right) B + B^m\comm{A}{B}\\
+&=\sum_{i=0}^{m-1} B^{i}\comm{A}{B}B^{m-i} + B^m\comm{A}{B}&=\sum_{i=0}^{m} B^{i}\comm{A}{B}B^{m-i}.
+\end{aligned}
+\end{equation}
+The last expression is just \eqref{eq:comm_power} with $n=m+1$. This
+concludes the proof by induction. \qed
 
 
 
