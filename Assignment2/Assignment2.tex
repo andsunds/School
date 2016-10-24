@@ -713,6 +713,116 @@ v_s^2=\qty(\pdv{P}{\rho})_S
 \qed
 
 \section{Regarding ideal Bose gases }
+\newcommand{\V}{\ensuremath{\mathcal{V}}}
+\newcommand{\Sd}{\ensuremath{\mathcal{S}_d}}
+\newcommand{\D}[1]{\ensuremath{\frac{d}{#1}}}
+\newcommand{\nD}[1]{\ensuremath{\nicefrac{d}{#1}}}
+Here we are concerned about bosons in $d$ dimensions. They are
+confined to a box of (hyper) volume $\V=L^d$ their enegry momentum
+relation is $\epsilon_{\vb{k}}=\hbar^2\vb{k}^2/(2m)$.
+
+\subsection{Grand potential and particle density}
+The grand potential is given by
+\begin{equation}
+\Omega=T\ln(Z)=g_sT\sum_{\vb{k}}
+\ln(1-\ee^{-\frac{\epsilon_{\vb{k}}-\mu}{T}})
+\to g_sT
+\iint\frac{\rd^dq\rd^dk}{(2\pi)^d}\ln(1-\ee^{-\frac{\epsilon_{\vb{k}}-\mu}{T}}).
+\end{equation}
+The $q$ integral just gives us the volume $\V$ of the box. The $k$
+integral must however be modified. Since $\epsilon_{\vb{k}}$ only
+depends on $k=|\vb{k}|$, we can go to a spherical coordinate
+system. By doing so we get
+\vspace{-4mm}\begin{equation}
+\int\rd^dk\,f(k)
+=\overbrace{\text{``Area of sphere in $d$ dimensions''}}^{=:\Sd}
+\times\int_0^\infty k^{d-1}\rd{k}f(k).
+\end{equation}
+Then we need to convert to an integral over $\epsilon$ instead. Since 
+\begin{equation}
+\epsilon=\frac{\hbar^2k^2}{2m} 
+\quad\Longrightarrow\quad
+k=\sqrt{\frac{2m}{\hbar^2}} \,\epsilon^{1/2},
+\end{equation}
+which means that
+\begin{equation}
+k^{d-1}\rd{k}=\qty(\frac{2m}{\hbar^2})^{\frac{d-1}{2}}\epsilon^{\frac{d-1}{2}}
+\times\frac{1}{2}\sqrt{\frac{2m}{\hbar^2}}
+\,\epsilon^{-1/2}\rd\epsilon
+=\frac{1}{2}\qty(\frac{2m}{\hbar^2})^{\D{2}}
+\epsilon^{\D{2}-1}\rd\epsilon
+%=:(2\pi)^d\V g(\epsilon)\rd\epsilon.
+\end{equation}
+
+Now we can continue to calculate the grand potential
+\begin{equation}
+\begin{aligned}
+\Omega =& \frac{g_sT\V\Sd}{(2\pi)^d}
+\times\frac{1}{2}\qty(\frac{2m}{\hbar^2})^{\D{2}}
+\int_0^\infty\!\rd\epsilon\, 
+\epsilon^{\D{2}-1} \ln(1-z\ee^{-\frac{\epsilon}{T}})\\
+=&\frac{g_sT\V\Sd}{2(2\pi)^d}
+\qty(\frac{2m}{\hbar^2})^{\D{2}} \qty{
+\qty[\frac{\epsilon^{\D{2}}}{d/2}
+\ln(1-z\ee^{-\frac{\epsilon}{T}})]_{\epsilon=0}^\infty
+-\frac{2}{d}\int_0^\infty\!\rd\epsilon\, 
+\epsilon^{\D{2}}\frac{\frac{z}{T}\ee^{-\frac{\epsilon}{T}}}
+{1-z\ee^{-\frac{\epsilon}{T}}}.
+}\\
+\end{aligned}
+\end{equation}
+Here the integrated part goes to $0$ in the limits, so all we're left
+with is the second integral. To handle that integral we set
+$x=\epsilon/T$ which gives
+\begin{equation}\label{eq:4_Omega_0}
+\begin{aligned}
+\Omega =&\qty(-\frac{2}{d})\frac{g_sT\V\Sd}{2(2\pi)^d}
+\qty(\frac{2m}{\hbar^2})^{\D{2}} \qty{
+\frac{T^{\D{2}+1}}{T}\int_0^\infty
+\frac{\rd{x}\, x^{\D{2}}}{z^{-1}\ee^{x}-1}
+}\\
+=&\qty(-\frac{2}{d})\frac{g_sT^{\D{2}+1}\V\Sd}{2(2\pi)^d}
+\qty(\frac{2m}{\hbar^2})^{\D{2}} \Gamma\qty(\nD{2}+1)g_{\D{2}+1}(z).
+\end{aligned}
+\end{equation}
+The last step was just using the definition of $g_\nu(z)$. We can also
+make use of the thermal wavelength $\lambda=h/\sqrt{2\pi mT}$ to
+rewrite \eqref{eq:4_Omega_0} as
+\begin{equation}\label{eq:4_Omega}
+\Omega =-\frac{g_sTL^d\Sd}{d\,\lambda^d \pi^\D{2}}
+\Gamma\qty(\nD{2}+1)g_{\D{2}+1}(z).
+\end{equation}
+Here I've also substituted $L^d=\V$.
+
+To calculate the number of (excited) particles we use the relation
+\begin{equation}
+N_\ee=-\qty(\pdv{\Omega}{\mu})_{T,\V}
+=\frac{g_sT\V\Sd}{d\,\lambda^d \pi^\D{2}}
+\Gamma\qty(\nD{2}+1)\qty(\pdv{\mu}g_{\D{2}+1}(z))_{T,\V}.
+\end{equation}
+This last differentiation is fairly simple to perform:
+\begin{equation}
+\pdv{g_{\nu}(z)}{\mu}=
+\pdv{g_{\nu}(z)}{z}\pdv{z}{\mu}=
+\pdv{g_{\nu}(z)}{z}\frac{1}{T}z
+=\frac{1}{T}g_{\nu-1}(z).
+\end{equation}
+In other words
+\begin{equation}
+n_\ee=\frac{N_\ee}{\V}
+=\frac{g_s\V\Sd}{d\,\lambda^d \pi^\D{2}}
+\Gamma\qty(\nD{2}+1)g_{\D{2}}(z).
+\end{equation}
+This does not take the particles in the ground state into account
+since $\Omega$ doesn't take them into account. For temperatures lower
+than the critical temperature we would also need to take the condesed
+particles, $N_0$, in to account if we want to study the full number of
+particles: $N=N_\ee+N_0$.
+
+
+
+
+
 
 
 
