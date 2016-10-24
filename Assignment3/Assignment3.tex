@@ -4,7 +4,7 @@
 
 \usepackage{../custom_as}
 
-
+\graphicspath{ {figures/} }
 
 %%Drar in tabell och figurtexter
 \usepackage[margin=10 pt]{caption}
@@ -23,14 +23,10 @@
 
 \renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
 
-% \newcommand{\cbox}[2][cyan]
-% {\mathchoice
-% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\displaystyle#2$}}
-% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\textstyle#2$}}
-% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptstyle#2$}}
-% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptscriptstyle#2$}}
-% }
-% \newcommand{\grande}{\cbox{\phantom{\frac{1}{xx}}}}
+
+
+\swapcommands{\varPhi}{\Phi}
+
 
 
 \begin{document}
@@ -597,7 +593,238 @@ And this will be achived only by setting $\alpha=1/2$.
 \qed
 
 \section{Hollow cylindrical shell}
+\newcommand{\E}{\ensuremath{\mathcal{E}}}
 
+\begin{figure}\centering
+\resizebox{.3\textwidth}{!}{\input{figures/cylinder.pdf_t}}
+\caption{The dimensions of the cylindrical shell wherein the electron
+  is confined together with the cylindrical coordinates. The
+  wavefunction vanishes on the perifery of the shell.}
+\label{fig:cylinder}
+\end{figure}
+
+An electron is confined in a hollow cylindrical shell as in
+\figref{fig:cylinder}. The boundry conditions on the wave function is
+\begin{equation}
+\begin{cases}
+\psi(\rho_a, \phi, z)=\psi(\rho_b, \phi, z)=0\\
+\psi(\rho, \phi, 0)=\psi(\rho, \phi, L)=0\\
+\psi(\rho_a, \phi+k2\pi, z)=\psi(\rho, \phi, z)\qcomma k\in\Z.
+\end{cases}
+\end{equation}
+
+\subsection{Free particle (no magnetic field)}
+For a free electron, under influence of no potential, we have the
+Hamiltonian 
+\begin{equation}
+H=\frac{1}{2m_e}\vb{p}\vdot\vb{p} \,\dot{=}-\frac{\hbar^2}{2m_e}\laplacian
+=-\frac{\hbar^2}{2m_e}\qty[
+\frac{1}{\rho}\pdv{\rho}\qty(\rho\pdv{\rho})
++\frac{1}{\rho^2}\pdv[2]{\phi} + \pdv[2]{z}],
+\end{equation}
+where we have written the Laplacian in cylindrical coordinates.
+The time independent Schrödinger equation now becomes
+\begin{equation}\label{eq:5a_SE}
+\qty[
+\frac{1}{\rho}\pdv{\rho}\qty(\rho\pdv{\rho})
++\frac{1}{\rho^2}\pdv[2]{\phi} + \pdv[2]{z}
++\E]\psi(\rho, \phi, z)=0,
+\end{equation}
+where $\E=2m_eE/\hbar^2$.
+
+To tackle this problem we implement the technique of variable
+separtion. Write
+\begin{equation}
+\psi(\rho, \phi, z)=R(\rho)\Phi(\phi)Z(z).
+\end{equation}
+Now we get
+\begin{equation}
+\frac{1}{\rho}\pdv{\rho}\qty(\rho\pdv{R}{\rho})\Phi Z
++\frac{1}{\rho^2}\pdv[2]{\Phi}{\phi}RZ + 
+\pdv[2]{Z}{z}R\Phi
++\E R\Phi Z=0,
+\end{equation}
+which leads us to
+\begin{equation}
+-\frac{1}{Z}\pdv[2]{Z}{z}
+=\frac{1}{\rho R}\pdv{\rho}\qty(\rho\pdv{R}{\rho})
++\frac{1}{\rho^2\Phi}\pdv[2]{\Phi}{\phi}
++\E = \zeta^2
+\end{equation}
+Now the LHS only depends on $z$ while the RHS only depends on $\rho$
+and $\phi$, meaning that they must both be constant; call that
+constant $\zeta^2$. 
+
+The differential equation for $Z$ now becomes
+\begin{equation}
+\pdv[2]{Z}{z}=-\zeta^2Z\qcomma
+Z(0)=Z(L)=0.
+\end{equation}
+With the boundry conditions we get
+\begin{equation}
+Z(z)=A\sin(\zeta_l z)\qcomma 
+\zeta_l=\frac{l\pi}{L}\qcomma l\in\Z.
+\end{equation}
+
+Next we can get the differential equation for $\Phi$ by writing
+\begin{equation}
+-\frac{1}{\Phi}\pdv[2]{\Phi}{\phi} 
+= \rho^2\qty[\frac{1}{\rho R}\pdv{\rho}
+\qty(\rho\pdv{R}{\rho})+\E-\zeta_l^2]
+=m^2.
+\end{equation}
+Same as before, LHS only depends on $\phi$ and RHS only depends on
+$\rho$, meaning that both sides are constant; call that constant
+$m^2$. This gives
+\begin{equation}
+\pdv[2]{\Phi}{\phi} =-m^2\Phi\qcomma
+\Phi(\phi+k2\pi)=\Phi(\phi),\;k\in\Z.
+\end{equation}
+With the boundry conditions we get
+\begin{equation}
+\Phi(\phi)=B\cos(m\phi+\phi_0)\qcomma
+m\in\Z.
+\end{equation}
+We can furthermore argue that $\phi_0$ only depends on the choice of
+where to put the $x$~axis; thus we are free to set $\phi_0=0$ without
+changing any physics.
+
+And finaly we get to the equation for $R$. By now what we have is
+\begin{equation}
+m^2=\rho^2\qty[\frac{1}{\rho R}\pdv{\rho}
+\qty(\rho\pdv{R}{\rho})+\E-\zeta_l^2]
+=\frac{1}{R}\qty[\rho^2\pdv[2]{R}{\rho}
++\rho\pdv{R}{\rho}+\rho^2\qty(\E-\zeta_l^2)R],
+\end{equation}
+which in turn gives us
+\begin{equation}
+\rho^2\pdv[2]{R}{\rho}
++\rho\pdv{R}{\rho}+\qty[\rho^2\qty(\E-\zeta_l^2)-m^2]R=0.
+\end{equation}
+This is the equation for the Bessel functions of the first kind, which
+has the solution
+\begin{equation}
+R(\rho)=CJ_m(\mathcal{K}\rho)+DN_m(\mathcal{K}\rho)
+\end{equation}
+where
+\begin{equation}\label{eq:5a_kappa}
+\mathcal{K}=%\mathcal{K}_l=
+\sqrt{\E-\zeta_l^2}=\sqrt{\frac{2m_eE}{\hbar^2}-\qty(\frac{l\pi}{L})^2}.
+\end{equation}
+Now it's time to invoke the boundry conditions:
+\begin{equation}\label{eq:5a_R_boundry}
+\begin{cases}
+CJ_m(\mathcal{K}\rho_a)+DN_m(\mathcal{K}\rho_a)=0\\
+CJ_m(\mathcal{K}\rho_b)+DN_m(\mathcal{K}\rho_b)=0
+\end{cases}
+\quad\Longleftrightarrow\quad
+\begin{cases}
+CJ_m(\mathcal{K}\rho_a)=-DN_m(\mathcal{K}\rho_a)\\
+CJ_m(\mathcal{K}\rho_b)=-DN_m(\mathcal{K}\rho_b)
+\end{cases}
+\end{equation}
+Now divide both sides with each other and we get
+\begin{equation}
+\frac{J_m(\mathcal{K}\rho_a)}{J_m(\mathcal{K}\rho_b)}=
+\frac{N_m(\mathcal{K}\rho_a)}{N_m(\mathcal{K}\rho_b)}.
+\end{equation}
+This is an equation for $\mathcal{K}$
+\begin{equation}\label{eq:5a_K}
+J_m(\mathcal{K}\rho_a)N_m(\mathcal{K}\rho_b)-J_m(\mathcal{K}\rho_b)N_m(\mathcal{K}\rho_a)=0
+\end{equation}
+which has infinatly many solutions. Call those solutions
+$\mathcal{K}_{m,n}$. We also need to find constants. This can be done
+by adding the two equaitons in \eqref{eq:5a_R_boundry}:
+\begin{equation}
+C\qty[J_m(\mathcal{K}_{m,n}\rho_a)+J_m(\mathcal{K}_{m,n}\rho_b)]
+=-D\qty[N_m(\mathcal{K}_{m,n}\rho_a)+N_m(\mathcal{K}_{m,n}\rho_b)],
+\end{equation}
+which results in an equation for $C/D$. But the only physics in the
+two constants are in this ratio; so we can set $D=1$. And thus
+\begin{equation}\label{eq:5a_C}
+C=
+\frac{J_m(\mathcal{K}_{m,n}\rho_a)+J_m(\mathcal{K}_{m,n}\rho_b)}
+{N_m(\mathcal{K}_{m,n}\rho_a)+N_m(\mathcal{K}_{m,n}\rho_b)}
+=:\mathcal{C}_{m,n}.
+\end{equation}
+
+
+By now we have an expression for the energy eigenstates:
+\begin{equation}
+\psi_{l,m,n}(\rho, \phi, z)=
+\mathcal{N}_{l,m,n}\sin(\frac{l\pi}{L}z)\cos(m\phi)
+\Big[\mathcal{C}_{m,n}J_m\qty(\mathcal{K}_{m,n}\rho)+
+N_m\qty(\mathcal{K}_{m,n}\rho) \Big],
+\end{equation}
+where $l, m\in\Z$, $\mathcal{N}_{l,m,n}$ is a normaization factor, 
+$\mathcal{C}_{m,n}$ is given by \eqref{eq:5a_C}, and
+$\mathcal{K}_{m,n}$ is the $n$'th root of \eqref{eq:5a_K}. 
+The energy of this state is given by \eqref{eq:5a_kappa} to be
+\begin{equation}
+E_{l,m,n}=\frac{\hbar^2}{2m_e}\qty[\mathcal{K}_{m,n}^2 + \qty(\frac{l\pi}{L})^2].
+\end{equation}
+
+
+
+
+\subsection{Electron under influence of a magnetic potential}
+We will now allow for a uniform magnetic field inside the inner radius of
+the shell: $\vb{B}=B\hat{z}$ for $0\le\rho<\rho_a$ and $\vb{B}=\vb{0}$
+for $\rho\ge\rho_a$. The Hamiltonian is 
+\begin{equation}
+H=\frac{1}{2m_e}\qty[\vb{p}\vdot\vb{p}
+-q\vb{p}\vdot\vb{A}-q\vb{A}\vdot\vb{p}+q^2\vb{A}\vdot\vb{A}] 
++ q\varphi.
+\end{equation}
+Since we're only concerned about a static magnetic field, we can
+disregrad $\varphi$.
+
+It's a good idea to calculate $\vb{A}$ before we continue. By the
+fact that $\curl{\vb{A}}=\vb{B}$ and
+$\div\vb{A}=0$ (in the Coulomb gauge), we conclude that
+\begin{equation}
+2\pi\rho' A_\phi(\rho')=\oint\limits_{\rho=\rho'}\!\vb{A}\vdot\rd{\vb{r}}
+=\iint\limits_{\rho\le\rho'}(\curl\vb{A})\vdot\rd\vb{S}
+=\iint\limits_{\rho\le\rho'}\vb{B}\vdot\rd\vb{S}
+=\varPhi_B\stackrel{\rho'\ge\rho_a}{=}\pi\rho_a^2B.
+\end{equation}
+Furthermore, by cylindrical symmetry $\vb{A}$ must be
+\begin{equation}
+\vb{A}=A_\phi(\rho)\hat\phi=\frac{\varPhi_B}{2\pi\rho}
+\stackrel{\rho\ge\rho_a}{=}\frac{\rho_a^2B}{2\rho}.
+\end{equation}
+With this we can write
+\begin{equation}
+\vb{p}\vdot\vb{A}=p_\phi A_\phi 
+= -\ii\hbar\frac{1}{\rho}\pdv{\phi}\Big[A_\phi\cdot\Big]
+=-\ii\hbar\frac{\Phi_B}{2\pi\rho^2}\pdv{\phi}
+\end{equation}
+and
+\begin{equation}
+\vb{A}\vdot\vb{p}= A_\phi p_\phi
+=-\ii\hbar\frac{\Phi_B}{2\pi\rho^2}\pdv{\phi}.
+\end{equation}
+
+Finaly we can write the Hamiltonian as
+\begin{equation}
+\begin{aligned}
+H=&\frac{1}{2m_e}\qty{-\hbar^2\qty[
+\frac{1}{\rho}\pdv{\rho}\qty(\rho\pdv{\rho})
++\frac{1}{\rho^2}\pdv[2]{\phi} + \pdv[2]{z}]
++\ii\hbar q\frac{\Phi_B}{\pi\rho^2}\pdv{\phi}
++\frac{q^2\Phi_B^2}{4\pi^2\rho^2} }.
+\end{aligned}
+\end{equation}
+And the Schrödinger equation becomes
+\begin{equation}
+\qty{\hbar^2 \qty[
+\frac{1}{\rho}\pdv{\rho}\qty(\rho\pdv{\rho})
++\frac{1}{\rho^2}\pdv[2]{\phi} + \pdv[2]{z}]
+-\ii\hbar q\frac{\Phi_B}{\pi\rho^2}\pdv{\phi}
+-\frac{q^2\Phi_B^2}{4\pi^2\rho^2} +2m_eE}\psi=0.
+\end{equation}
+
+\subsection{Flux quantaization}
 
 
 
