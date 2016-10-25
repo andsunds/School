@@ -3,7 +3,7 @@
 \pdfoutput=1
 
 \usepackage{../custom_as}
-
+\graphicspath{{figures/}}
 \swapcommands{\Omega}{\varOmega}
 
 %%Drar in tabell och figurtexter
@@ -717,6 +717,8 @@ v_s^2=\qty(\pdv{P}{\rho})_S
 \newcommand{\Sd}{\ensuremath{\mathcal{S}_d}}
 \newcommand{\D}[1]{\ensuremath{\frac{d}{#1}}}
 \newcommand{\nD}[1]{\ensuremath{\nicefrac{d}{#1}}}
+\newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
+
 Here we are concerned about bosons in $d$ dimensions. They are
 confined to a box of (hyper) volume $\V=L^d$ their enegry momentum
 relation is $\epsilon_{\vb{k}}=\hbar^2\vb{k}^2/(2m)$.
@@ -735,9 +737,16 @@ depends on $k=|\vb{k}|$, we can go to a spherical coordinate
 system. By doing so we get
 \vspace{-4mm}\begin{equation}
 \int\rd^dk\,f(k)
-=\overbrace{\text{``Area of sphere in $d$ dimensions''}}^{=:\Sd}
+=\overbrace{\text{``Area of unit sphere in $d$ dimensions''}}^{=:\Sd}
 \times\int_0^\infty k^{d-1}\rd{k}f(k).
 \end{equation}
+The factor of the area of the unit shpere in $d$ dimensions comes from
+the integration over the corresponding ``sperical'' angles. This area
+does have a closed expression
+\begin{equation}\label{eq:4_Sd}
+\Sd=\frac{2\pi^{\frac{d}{2}}}{\Gamma(\nicefrac{d}{2})}.
+\end{equation}
+
 Then we need to convert to an integral over $\epsilon$ instead. Since 
 \begin{equation}
 \epsilon=\frac{\hbar^2k^2}{2m} 
@@ -745,15 +754,13 @@ Then we need to convert to an integral over $\epsilon$ instead. Since
 k=\sqrt{\frac{2m}{\hbar^2}} \,\epsilon^{1/2},
 \end{equation}
 which means that
-\begin{equation}
+\begin{equation}\label{eq:5_k->eps}
 k^{d-1}\rd{k}=\qty(\frac{2m}{\hbar^2})^{\frac{d-1}{2}}\epsilon^{\frac{d-1}{2}}
 \times\frac{1}{2}\sqrt{\frac{2m}{\hbar^2}}
 \,\epsilon^{-1/2}\rd\epsilon
 =\frac{1}{2}\qty(\frac{2m}{\hbar^2})^{\D{2}}
 \epsilon^{\D{2}-1}\rd\epsilon
-%=:(2\pi)^d\V g(\epsilon)\rd\epsilon.
 \end{equation}
-
 Now we can continue to calculate the grand potential
 \begin{equation}
 \begin{aligned}
@@ -787,18 +794,24 @@ $x=\epsilon/T$ which gives
 \end{equation}
 The last step was just using the definition of $g_\nu(z)$. We can also
 make use of the thermal wavelength $\lambda=h/\sqrt{2\pi mT}$ to
-rewrite \eqref{eq:4_Omega_0} as
+rewrite \eqref{eq:4_Omega_0} as 
 \begin{equation}\label{eq:4_Omega}
-\Omega =-\frac{g_sTL^d\Sd}{d\,\lambda^d \pi^\D{2}}
-\Gamma\qty(\nD{2}+1)g_{\D{2}+1}(z).
+\begin{aligned}
+\Omega &=-\frac{g_sT\V\Sd}{d\,\lambda^d \pi^\D{2}}
+\Gamma\qty(\nD{2}+1)g_{\D{2}+1}(z)\\
+&\hspace{-4pt}\stackrel{\eqref{eq:4_Sd}}{=}
+\frac{2g_sTL^d}{d\,\lambda^d}
+\frac{\Gamma(\nD{2}+1)}{\Gamma(\nD{2})}g_{\D{2}+1}(z)\\
+&=\frac{g_sTL^d}{\,\lambda^d}g_{\D{2}+1}(z)
+\end{aligned}
 \end{equation}
 Here I've also substituted $L^d=\V$.
 
 To calculate the number of (excited) particles we use the relation
 \begin{equation}
 N_\ee=-\qty(\pdv{\Omega}{\mu})_{T,\V}
-=\frac{g_sT\V\Sd}{d\,\lambda^d \pi^\D{2}}
-\Gamma\qty(\nD{2}+1)\qty(\pdv{\mu}g_{\D{2}+1}(z))_{T,\V}.
+=\frac{g_sT\V}{\lambda^d}
+\qty(\pdv{\mu}g_{\D{2}+1}(z))_{T,\V}.
 \end{equation}
 This last differentiation is fairly simple to perform:
 \begin{equation}
@@ -808,25 +821,215 @@ This last differentiation is fairly simple to perform:
 =\frac{1}{T}g_{\nu-1}(z).
 \end{equation}
 In other words
-\begin{equation}
+\begin{equation}\label{eq:4_ne}
 n_\ee=\frac{N_\ee}{\V}
-=\frac{g_s\V\Sd}{d\,\lambda^d \pi^\D{2}}
-\Gamma\qty(\nD{2}+1)g_{\D{2}}(z).
+=\frac{g_s}{\lambda^d}g_{\D{2}}(z).
 \end{equation}
 This does not take the particles in the ground state into account
 since $\Omega$ doesn't take them into account. For temperatures lower
 than the critical temperature we would also need to take the condesed
 particles, $N_0$, in to account if we want to study the full number of
-particles: $N=N_\ee+N_0$.
+particles: $N=N_\ee+N_0$. For temperatures above the critical
+temperatures we can however neglect the particles in the ground
+state, so $n_\ee=n=N/\V$ for $T>\Tc$.
+\qed
+
+\subsection{Energy of the system}
+The energy of the system is given by
+\begin{equation}
+E=\sum_{\vb{k}} g_s \epsilon_{\vb{k}}\ev*{n_{\vb{k}}^\text{B.E.}}
+\to \V\int\frac{\rd^dk}{(2\pi)^d}
+\epsilon\ev*{n_{\vb{k}}^\text{B.E.}}
+=\V\int_0^\infty\rd\epsilon\, g(\epsilon)
+\epsilon\ev*{n_{\vb{k}}^\text{B.E.}},
+\end{equation}
+where $g(\epsilon)$ is the density of states\footnotemark{}. The density
+of states can easily be derived with the help of \eqref{eq:5_k->eps}:
+\begin{equation}
+g(\epsilon)\id\epsilon=\frac{\rd^dk}{(2\pi)^d}
+=\frac{\Sd k^{d-1}\id{k}}{(2\pi)^d}
+=\frac{\Sd}{2(2\pi)^d}\qty(\frac{2m}{\hbar^2})^{\D{2}}
+\epsilon^{\D{2}-1}\id\epsilon.
+\end{equation}
+With this we now have
+\begin{equation}
+\begin{aligned}
+E=&\V\frac{\Sd}{2(2\pi)^d}\qty(\frac{2m}{\hbar^2})^{\D{2}}
+\int_0^\infty\rd\epsilon\, \epsilon^{\D{2}-1}
+\epsilon\,\frac{1}{\ee^{\frac{\epsilon-\mu}{T}}-1}\\
+=&\frac{\V\Sd}{2(2\pi)^d}\qty(\frac{2m}{\hbar^2})^{\D{2}}
+\int_0^\infty
+\frac{\rd\epsilon\,\epsilon^{\D{2}-1}}{\ee^{\frac{\epsilon-\mu}{T}}-1}
+\end{aligned}
+\end{equation}
+which after a substitution $x=\epsilon/T$ will be the exact same
+expression as in the first line of \eqref{eq:4_Omega_0}, appart from a
+factor $-2/d$. 
+\footnotetext{For the energy, we do not need to wory about the
+  particles in the ground state since they have 0 energy
+  anyway. \label{ftn:E}} 
+
+We can therefore conclude that
+\begin{equation}\label{eq:4_E_Omega_PV}
+E=-\frac{d}{2}\Omega=\frac{d}{2}P\V,
+\end{equation}
+where we used the general themodynamic identity $\Omega=-P\V$.
+
+\qed
 
 
+\subsection{Critical temperature}
+
+For bosons $\mu<0$ or else the partition function dosen't
+converge. This fact together with the expression in \eqref{eq:4_ne}
+for the (excited) particle density gives a temperature, below which
+the number of particles in the ground state can not be neglcted. This
+is te critical temperature. 
+
+To find the critical temperature we study the limit $\mu\to0^-$ which
+means that $z\to1$. This gives us an equation for $T_c$:
+\begin{equation}
+\frac{N}{\V}= \Tc^{\D{2}}
+\frac{g_s}{\Lambda^d} g_{\D{2}}(1),
+\end{equation}
+where $\Lambda=T^{1/2}\lambda=h/\sqrt{2\pi m}$. Now we just use the
+definition of $g_\nu(z)$ to get
+\begin{equation}
+\frac{N}{\V}= \Tc^{\D{2}}
+\frac{g_s}{\Lambda^d} 
+\frac{1}{\Gamma(\nD{2})}
+\int_0^\infty\frac{\rd{x}\, x^{\D{2}-1}}{\ee^{x}-1}.
+\end{equation}
+From here on, it's just a matter of recognizing the integralexpressino
+of the Rieman $\zeta$ function:
+\begin{equation}\label{eq:4_zeta}
+\zeta(\nu)=\frac{1}{\Gamma(\nu)}\int_0^\infty
+\frac{\rd{x}\,x^{\nu-1}}{\ee^{x}-1}
+=g_\nu(1).
+\end{equation}
+The critical temperature is therefore given by
+\begin{equation}
+\Tc=\qty[\frac{N}{\V}
+\frac{\Lambda^d}{g_s\zeta(\nD{2})}
+]^{\frac{2}{d}}
+=\frac{h^2}{2\pi m L^2} \qty[
+\frac{N}{g_s}\,\frac{1}
+{\zeta(\nD{2})}
+]^{\frac{2}{d}},
+\end{equation}
+where we used $\Lambda=h/\sqrt{2\pi m}$, $\V=L^d$ 
+to get to the last expression. \qed
+
+It's interesting that we have the $\zeta$ function in the expression
+for $\Tc$. Because, as we all know, the $\zeta(\nu)$ diverges for
+$s=1$. That means that Bose-Einstein condensation would be impossible
+in $d=2$ dimensions, or rather the condensation temperature would be
+$0$ so B.E. condensation would be unachievable.
+
+We have the same phenomenon for $d=1$, with no B.E. condensation. This
+is however not so obvious from the Rieman $\zeta$ function. But
+looking at the integral representation in \eqref{eq:4_zeta}, we see
+that the integral dose not converge for $d=1$ either. 
+
+From here on, we will therefore only regard $d\ge3$.
+
+Other than that there's not that much more to say about the $d$
+dependence of $\Tc$. By plotting this expression in for example
+Mathematica, I can't see anything else to comment on. 
 
 
+\subsection{Heatcapacity for $T<\Tc$}
+\newcommand{\Kd}{\ensuremath{\mathcal{K}_d}}
+As said before, the energy of the system is given by
+\eqref{eq:4_Omega} and \eqref{eq:4_E_Omega_PV} to be
+\begin{equation}
+E=\frac{d}{2}\frac{g_sT\V}{\lambda^d}g_{\D{2}+1}(z)
+=T^{\D{2}+1}\frac{d g_s\V}{2\Lambda^d}g_{\D{2}+1}(z)
+\end{equation}
+regardless of whether $T$ is above or below $\Tc$ (see
+footnote~\ref{ftn:E}). Therefore the heatcapacity for $T<\Tc$ is given by
+\begin{equation}\label{eq:4b_Cv}
+C_\V=\qty(\pdv{E(z=0)}{T})_\V
+=T^{\D{2}}\frac{d}{2}\qty(\D{2}+1)\frac{g_s\V}{\Lambda^d}\zeta(\nD{2}+1)
+\qcomma T<\Tc.
+\end{equation}
+\qed
 
 
+\subsection{Overall behaviour of $C_\V$}
+\begin{figure}\centering
+\resizebox{.5\textwidth}{!}{\input{figures/Cv.pdf_t}}
+\caption{A sketch of the heatcapacity of a bose gas in $d$
+  dimensions. There is a cusp at $T=\Tc$ where $C_\V$ reaches it's
+  maximum value. }
+\label{fig:Cv}
+\end{figure}
 
+To get the rest of the behaviour of the heatcapacity we need to
+differentiate $E$ again, but now $z$ is no longer constanly 1. This
+complicates the matter some what. And since we're olny interested in
+the overall behaviour, not an exact expression, we can settle for just
+studying the expansion for small  $z$.
 
+The energy is 
+\begin{equation}\label{eq:4e_E}
+E=\frac{d}{2}\frac{g_sT\V}{\lambda^d}g_{\D{2}+1}(z)
+=\frac{d}{2}TN\frac{g_{\D{2}+1}(z)}{g_{\D{2}}(z)}.
+\end{equation}
+For small values of $z$, corresponding to high
+$T$, we have
+\begin{equation}
+g_\nu(z)=z+\frac{z^2}{2^\nu}+\frac{z^3}{3^\nu}+\ldots
+\end{equation}
+Which makes the Energy become
+\begin{equation}
+E\approx 
+\frac{d}{2}NT\frac{z}{z}
+= \frac{d}{2}NT
+\end{equation}
+And thus te heat capacity in the high temperature limit is
+\begin{equation}\label{eq:4_Cv_infty}
+C_\V(T\to\infty)=\frac{d}{2}N.
+\end{equation}
 
+For $T<\Tc$ we have \eqref{eq:4b_Cv}, which tells us that 
+$C_\V\propto T^\D{2}$. We also get a maximum value at $T=\Tc$ of
+\begin{equation}
+\begin{aligned}\label{eq:4_Cv_max}
+C_\V(T=\Tc)=&
+T_c^{\D{2}}\frac{d}{2}\qty(\D{2}+1)\frac{g_s\V}{\Lambda^d}\zeta(\nD{2}+1)\\
+=&\qty[\frac{N}{\V}\frac{\Lambda^d}{g_s\zeta(\nD{2})}]
+\frac{d}{2}\qty(\D{2}+1)\frac{g_s\V}{\Lambda^d}\zeta(\nD{2}+1)\\
+=&N\frac{d}{2}\qty(\D{2}+1)
+\frac{\zeta(\nD{2}+1)}{\zeta(\nD{2})}>C_\V(T\to\infty).
+\\
+\end{aligned}
+\end{equation}
+
+Lastly ther sre some issues regarding continuity of $C_\V$, but
+unfortunately I don't have much more time, so I leav that bit
+out. It's not very complicated though. Just differentiate
+\eqref{eq:4e_E} and note that the end result can be written as a
+differnce between ratios of $g_\nu(z)$'s, and then take the limit
+$z\to1$. 
+
+Anyway the sketch of the heatcapacity is in \figref{fig:Cv}.
+
+\subsection{Maximum of $C_\V(T)/C_\V(t\to\infty)$}
+The maximum value of $C_\V$ is given by \eqref{eq:4_Cv_max} and the
+high temperature limit value is given by
+\eqref{eq:4_Cv_infty}. Whereby the maximum ratio is
+\begin{equation}
+\max\qty{\frac{C_\V(T)}{C_\V(t\to\infty)}}=
+\qty(\D{2}+1)\frac{\zeta(\nD{2}+1)}{\zeta(\nD{2})}.
+\end{equation}
+In the specific case of $d=3$ we get 
+\begin{equation}
+\eval{\max\qty{\frac{C_\V(T)}{C_\V(t\to\infty)}}}_{d=3}=
+\frac{5}{2}\frac{\zeta(\nicefrac{5}{2})}{\zeta(\nicefrac{3}{2})}
+\approx 1.28.
+\end{equation}
+\qed
 
 
 \end{document}
