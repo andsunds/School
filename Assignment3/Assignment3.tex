@@ -661,9 +661,9 @@ The differential equation for $Z$ now becomes
 Z(0)=Z(L)=0.
 \end{equation}
 With the boundry conditions we get
-\begin{equation}
+\begin{equation}\label{eq:5a_Z}
 Z(z)=A\sin(\zeta_l z)\qcomma 
-\zeta_l=\frac{l\pi}{L}\qcomma l\in\Z.
+\zeta_l=\frac{l\pi}{L}\qcomma l\in\Z^+.
 \end{equation}
 
 Next we can get the differential equation for $\Phi$ by writing
@@ -697,7 +697,7 @@ m^2=\rho^2\qty[\frac{1}{\rho R}\pdv{\rho}
 +\rho\pdv{R}{\rho}+\rho^2\qty(\E-\zeta_l^2)R],
 \end{equation}
 which in turn gives us
-\begin{equation}
+\begin{equation}\label{eq:5a_Bessel}
 \rho^2\pdv[2]{R}{\rho}
 +\rho\pdv{R}{\rho}+\qty[\rho^2\qty(\E-\zeta_l^2)-m^2]R=0.
 \end{equation}
@@ -752,22 +752,24 @@ C=
 By now we have an expression for the energy eigenstates:
 \begin{equation}
 \psi_{l,m,n}(\rho, \phi, z)=
-\mathcal{N}_{l,m,n}\sin(\frac{l\pi}{L}z)\cos(m\phi)
+\mathcal{N}_{l,m,n}\cos(m\phi)\sin(\frac{l\pi}{L}z)
 \Big[\mathcal{C}_{m,n}J_m\qty(\mathcal{K}_{m,n}\rho)+
 N_m\qty(\mathcal{K}_{m,n}\rho) \Big],
 \end{equation}
-where $l, m\in\Z$, $\mathcal{N}_{l,m,n}$ is a normaization factor, 
-$\mathcal{C}_{m,n}$ is given by \eqref{eq:5a_C}, and
-$\mathcal{K}_{m,n}$ is the $n$'th root of \eqref{eq:5a_K}. 
-The energy of this state is given by \eqref{eq:5a_kappa} to be
+where $l\in\Z^+=\{1, 2, 3,\ldots\}$, $m\in\Z$, $\mathcal{N}_{l,m,n}$
+is a normaization factor,  $\mathcal{C}_{m,n}$ is given by
+\eqref{eq:5a_C}, and $\mathcal{K}_{m,n}$ is the $n$'th root of
+\eqref{eq:5a_K}. The energy of this state is given by
+\eqref{eq:5a_kappa} to be
 \begin{equation}
-E_{l,m,n}=\frac{\hbar^2}{2m_e}\qty[\mathcal{K}_{m,n}^2 + \qty(\frac{l\pi}{L})^2].
+E_{l,m,n}=\frac{\hbar^2}{2m_e}\qty[(\mathcal{K}_{m,n})^2 + \qty(\frac{l\pi}{L})^2].
 \end{equation}
 
 
 
 
 \subsection{Electron under influence of a magnetic potential}
+\newcommand{\q}{\ensuremath{\mathcal{Q}_B}}
 We will now allow for a uniform magnetic field inside the inner radius of
 the shell: $\vb{B}=B\hat{z}$ for $0\le\rho<\rho_a$ and $\vb{B}=\vb{0}$
 for $\rho\ge\rho_a$. The Hamiltonian is 
@@ -795,36 +797,172 @@ Furthermore, by cylindrical symmetry $\vb{A}$ must be
 \end{equation}
 With this we can write
 \begin{equation}
-\vb{p}\vdot\vb{A}=p_\phi A_\phi 
-= -\ii\hbar\frac{1}{\rho}\pdv{\phi}\Big[A_\phi\cdot\Big]
-=-\ii\hbar\frac{\Phi_B}{2\pi\rho^2}\pdv{\phi}
+q\vb{A}\vdot\vb{p}= qA_\phi p_\phi
+=-\ii\hbar\frac{q\varPhi_B}{2\pi\rho^2}\pdv{\phi}
+=-\ii\hbar^2\frac{\q}{\rho^2}\pdv{\phi},
 \end{equation}
-and
+with $\q=q\varPhi_B/(2\pi\hbar)$, and
 \begin{equation}
-\vb{A}\vdot\vb{p}= A_\phi p_\phi
-=-\ii\hbar\frac{\Phi_B}{2\pi\rho^2}\pdv{\phi}.
+q\vb{p}\vdot\vb{A}=qp_\phi A_\phi 
+= -\ii\hbar\frac{1}{\rho}\pdv{\phi}\Big[A_\phi\cdot\Big]
+=-\ii\hbar^2\frac{\q}{\rho^2}\pdv{\phi},
 \end{equation}
+since $A_\phi$ is idependent of $\phi$.
+Note that both of these expressions are the same.
+
 
 Finaly we can write the Hamiltonian as
 \begin{equation}
 \begin{aligned}
-H=&\frac{1}{2m_e}\qty{-\hbar^2\qty[
+H=&\frac{-\hbar^2}{2m_e}\qty{\qty[
 \frac{1}{\rho}\pdv{\rho}\qty(\rho\pdv{\rho})
 +\frac{1}{\rho^2}\pdv[2]{\phi} + \pdv[2]{z}]
-+\ii\hbar q\frac{\Phi_B}{\pi\rho^2}\pdv{\phi}
-+\frac{q^2\Phi_B^2}{4\pi^2\rho^2} }.
+-2\ii\frac{\q}{\rho^2}\pdv{\phi}
+-\frac{\q^2}{\rho^2} }.
 \end{aligned}
 \end{equation}
 And the Schrödinger equation becomes
 \begin{equation}
-\qty{\hbar^2 \qty[
+\qty{ \qty[
 \frac{1}{\rho}\pdv{\rho}\qty(\rho\pdv{\rho})
 +\frac{1}{\rho^2}\pdv[2]{\phi} + \pdv[2]{z}]
--\ii\hbar q\frac{\Phi_B}{\pi\rho^2}\pdv{\phi}
--\frac{q^2\Phi_B^2}{4\pi^2\rho^2} +2m_eE}\psi=0.
+-2\ii \frac{\q\varPhi_B}{\pi\rho^2}\pdv{\phi}
+-\frac{\q^2}{\rho^2} +\E}\psi=0,
+\end{equation}
+where $\E=2m_eE/\hbar$ as before.
+
+Then we just apply the same technique of separation of variables. We
+do not however need to redo everything. Just add the new terms into
+the already derived differential equations for $Z$, $\Phi$ and $R$.
+
+For instance there is no
+change to the differential equation for $Z$, so we still have the same
+solution \eqref{eq:5a_Z} there. This is expected since the we still
+have the same symetry in the $z$ direction.
+
+For $\Phi$ (not to be confued with $\varPhi_B$) we get a new term in
+the differential equation. And we get
+\begin{equation}
+\pdv[2]{\Phi}{\phi} - 2\ii\q \pdv{\Phi}{\phi} + m^2\Phi =  0,
+\end{equation}
+which is a homogeneous second order differential equation with
+constatnt coefficients. Therefore the solution is given by
+\begin{equation}
+\Phi(\phi)=\tilde{a}\exp[\ii\qty(\q+\sqrt{\q^2+m^2})\phi]
++\tilde{b}\exp[\ii\qty(\q-\sqrt{\q^2+m^2})\phi],
+\end{equation}
+where $\tilde{a}$ and $\tilde{b}$ are some constants.
+The condition that $\Phi(\phi+k2\pi)=\Phi(\phi)$ for $k\in\Z$ implies
+that
+\begin{equation}\label{eq:5_mk}
+\q\pm\sqrt{\q^2+m^2}=k
+\quad\Longrightarrow\quad
+\sqrt{\q^2+m^2_k}=\pm(k-\q)
+\end{equation}
+or if you want $\q^2+m^2_k=(k-\q)^2$. The sign of the sqareroot
+dosen't matter physically, so we can take it to be $+$.
+
+Lastly we can actually simplify the expression somewhat
+\begin{equation}
+\begin{aligned}
+\Phi(\phi)=&\ee^{\ii\q\phi}\qty{
+\tilde{a}\exp[\ii\phi\sqrt{\q^2+m_k^2}]
++\tilde{b}\exp[-\ii\phi\sqrt{\q^2+m_k^2}]}\\
+=&\ee^{\ii\q\phi}\qty{
+\hat{a}\cos\Big((k-\q)\phi\Big)
++\hat{b}\sin\Big((k-\q)\phi\Big)}\\
+=&a'\ee^{\ii\q\phi}
+\cos\Big((k-\q)\phi+\phi_0\Big),
+\end{aligned}
+\end{equation}
+where $\hat{a}$, $\hat{b}$ and $a'$ are some constants. As before
+$\phi_0$ only depends on where we put our $x$ axis, so we can choose
+$\phi_0=0$. This time our choice actualy affects the function through
+the complex exponential. But the change is only a constant complex
+phase which can be swalloed by the constant $a'\to a$. And now it's
+really clear that the sign of the sqareroot in \eqref{eq:5_mk} didn't
+matter. 
+
+And for the radial part of the wavefunction we get
+\begin{equation}
+m^2_k=\rho^2\qty[\frac{1}{\rho R}\pdv{\rho}
+\qty(\rho\pdv{R}{\rho})+\E-\zeta_l^2+\frac{\q^2}{\rho^2}],
+\end{equation}
+which amounts to
+\vspace{-4mm}\begin{equation}
+\rho^2\pdv[2]{R}{\rho}
++\rho\pdv{R}{\rho}+\bigg[\rho^2\qty(\E-\zeta_l^2)
+-\overbrace{\qty(m_k^2+\q^2)}^{(k-\q)^2}\bigg]R=0.
+\end{equation}
+Which is exactly \eqref{eq:5a_Bessel} but with
+$m^2\to(k-\q)^2$. Therefore everything said about $R$ in the
+previous part holds here as well, but with $m^2\to(k-\q)^2$.
+We therefore have
+\begin{equation}
+R(\rho)=\mathcal{C}'_{k, n}
+J_{(k-\q)}(\mathcal{K}'_{k,n}\rho)
++N_{(k-\q)}(\mathcal{K}'_{k,n}\rho),
+\end{equation}
+where $\mathcal{K}'_{k,n}$ is the $n$th root of the equaion
+\begin{equation}\label{eq:5b_K}
+J_{(k-\q)}(\mathcal{K}'_{k,n}\rho_a)N_{(k-\q)}(\mathcal{K}'_{k,n}\rho_b)
+-J_{(k-\q)}(\mathcal{K}'_{k,n}\rho_b)N_{(k-\q)}(\mathcal{K}'_{k,n}\rho_a)=0
+\end{equation}
+and
+\begin{equation}\label{eq:5b_C}
+\mathcal{C}'_{k,n}=
+\frac{J_{(k-\q)}(\mathcal{K}'_{k,n}\rho_a)+J_{(k-\q)}(\mathcal{K}'_{k,n}\rho_b)}
+{N_{(k-\q)}(\mathcal{K}'_{k,n}\rho_a)+N_{(k-\q)}(\mathcal{K}'_{k,n}\rho_b)}.
 \end{equation}
 
+
+And the full wave function is
+\begin{equation}
+\begin{aligned}
+\psi_{l,k,n}(\rho, \phi, z)=&
+\mathcal{N}'_{l,k,n}\ee^{\ii\q\phi}\cos\Big((k-\q)\phi\Big)
+\sin(\frac{l\pi}{L}z)\\
+&\times
+\Big[\mathcal{C}'_{k,n}J_{(k-\q)}\qty(\mathcal{K}'_{k,n}\rho)+
+N_{(k-\q)}\qty(\mathcal{K}'_{k,n}\rho) \Big],
+\end{aligned}
+\end{equation}
+where $l\in\Z^+=\{1, 2, 3,\ldots\}$, $k\in\Z$ is a normaization factor, 
+$\mathcal{C}'_{k,n}$ is given by \eqref{eq:5b_C}, 
+$\mathcal{K}'_{k,n}$ is the $n$'th root of \eqref{eq:5b_K},
+and 
+\begin{equation}
+\q=\frac{q\varPhi_B}{2\pi\hbar}
+=\frac{q \rho_a^2 B}{2\hbar}.
+\end{equation}
+The energy of this state is given by \eqref{eq:5a_kappa} to be
+\begin{equation}
+E'_{l,k,n}=\frac{\hbar^2}{2m_e}\qty[(\mathcal{K}'_{k,n})^2 + \qty(\frac{l\pi}{L})^2].
+\end{equation}
+\qed
+
+
 \subsection{Flux quantaization}
+The minimum energy for the case with no magnetic flux is
+\begin{equation}
+\min\qty{E_{l,m,n}}=E_{1,0,1}
+=\qty[(\mathcal{K}_{0,1})^2 + \qty(\frac{\pi}{L})^2].
+\end{equation}
+The enegry for the case with magnetic flux is similarly minimized with
+$l=1$ and $n=1$ but $k$ should be choosen so as to minimize
+$|k-\q|$. So if we want the two ground state enegries to be equal,
+then
+\begin{equation}
+\min\qty{\abs{k-\q}}
+=\min\qty{\abs{k-\frac{q\varPhi_B}{2\pi\hbar}}}=0.
+\end{equation}
+This can only be acieved if $\q=q\varPhi_B/(2\pi\hbar)=N$ is an
+iteger. In other words
+\begin{equation}
+\pi\rho_a^2B=\varPhi_B=\frac{2\pi\hbar N}{q}\qcomma N\in\Z.
+\end{equation}
+\qed
+
 
 
 
