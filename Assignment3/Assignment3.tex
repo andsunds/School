@@ -370,7 +370,107 @@ state.
 
 \section{Harmonic oscillator and the Feynman path integral}
 
+\subsection{The action of a classic harmonic oscillator}
+The classical action, for an event hapening in the interval $t_0$ to
+$t$, is generaly given by 
+\begin{equation}
+S=\int_{t_0}^{t}\rd\tau\mathcal{L}(\dot{x}, x, \tau).
+\end{equation}
+Now since we're studying the harmonical oscillator we have the action
+\begin{equation}
+S=\frac{m}{2}\int_{t_0}^{t}\rd\tau
+\qty[\dot{x}^2(\tau)-\omega^2x^2(\tau)]. 
+\end{equation}
+A trick for solving this action is to integrate the $\dot{x}$ term by
+parts
+\begin{equation}
+\int_{t_0}^{t}\rd\tau\dot{x}^2
+=\Big[x\dot{x}\Big]_{t_0}^t-\int_{t_0}^{t}\rd\tau\ddot{x}x.
+\end{equation}
+But $\ddot{x}=-\omega^2x$ for an harmonic oscillator (follwos from the
+Euler-Lagrange equation). Thus
+\begin{equation}\label{eq:3_S1}
+S=\frac{m}{2} \qty{\Big[x\dot{x}\Big]_{t_0}^t
++\int_{t_0}^{t}\rd\tau \omega^2x^2
+-\omega^2\int_{t_0}^{t}\rd\tau x^2}
+=\frac{m}{2} \Big[x\dot{x}\Big]_{t_0}^t.
+\end{equation}
 
+So far we haven't used any explicit expression for $x$, but now we
+need to use the fact that a simple harmonic oscillator has
+\begin{equation}\label{eq:3_x}
+x(\tau) = A\cos(\omega(\tau-t_0)\Big.) 
++B\sin(\omega(\tau-t_0)\Big.). 
+\end{equation}
+In the next part we want to compare our results here to the propagator
+of the quantum mechanickal harmonical oscillator. That propagator is
+from $x'$ to $x''$. We therefore choose the boundry conditions on our
+oscillator to be
+\begin{equation}
+x(t_0)=x'\qcomma\text{and }\quad x(t)=x'',
+\end{equation}
+which results in
+\begin{equation}\label{eq:3_AB}
+A=x'\qcomma\text{and }\quad
+B=\frac{x''-x'\cos(\omega(t-t_0))}{\sin(\omega(t-t_0))}.
+\end{equation}
+
+With this and \eqref{eq:3_S1} the action for the harmonic oscillator
+now becomes
+\begin{equation}
+\begin{aligned}
+S=&\frac{m}{2}\Big(\overbrace{x(t)}^{x''}\dot{x}(t)
+-\overbrace{x(t_0)}^{x'}\dot{x}(t_0)\Big)\\
+=&\frac{m}{2}\Big(x''\qty[-A\sin(\omega(t-t_0))+B\cos(\omega(t-t_0))]
+-x'\qty[B]\Big).
+\end{aligned}
+\end{equation}
+The last term is only $B$ due to the definition of $x$ in
+\eqref{eq:3_x}. By invoking \eqref{eq:3_AB} and setting
+$\Delta{t}=t-t_0$, we get 
+\begin{equation}
+\begin{aligned}
+S=\frac{m}{2\sin(\omega\Delta{t})}
+\Big\{ &x''\qty[-x'\sin^2(\omega\Delta{t})
++\Big(x''-x'\cos(\omega\Delta{t})\Big)\cos(\omega\Delta{t})]
+\\ &
+-x'\Big(x''-x'\cos(\omega\Delta{t})\Big)\Big\}.
+\end{aligned}
+\end{equation}
+This simplifies to
+\begin{equation}
+S=\frac{m}{2\sin(\omega(t-t_0)\big.)}
+\qty[\qty({x'}^2+{x''}^2)\cos(\omega(t-t_0)\Big.)-2x'x''].
+\end{equation}
+Just to recap this is the action for a harmonic oscillator that
+started in position $x'$ at time $t_0$ and ende up at $x''$ at time
+$t$. 
+\qed
+
+\subsection{Comparison to the Propagator in Sakurai}
+In equation (2.6.18) in Sakurai\,\&\,Napolitano, \textit{Modern
+  Quantum Mechanics}, 2nd ed., we get the expression for this
+propagator of a harmonic oscillator:
+\begin{equation}
+\begin{aligned}
+K(x'',\, t;\; x',\,t_0)=&
+\sqrt{\frac{m\omega}{2\pi\ii\hbar\sin(\omega(t-t_0)\big.)}}\\
+&\times \exp[\frac{\ii}{\hbar}\frac{m\omega}{2\sin(\omega(t-t_0)\big.)}
+\qty{\qty({x'}^2+{x''}^2)\cos(\omega(t-t_0)\Big.)-2x'x''}].
+\end{aligned}
+\end{equation}
+
+The similaritiy of the expression in the exponential to the classical
+action is striking. This is however not too unecpected since the
+pathintegral both resembels an integral of the propagator as well as
+of the exponential of $\ii/\hbar$ times the action. 
+
+The propagator also has a factor infront of the exponential. That is
+just a consequence of the normailzation
+\begin{equation}
+\lim_{t\to t_0} K(x'',\, t;\; x',\, t_0)
+=\delta^3\qty(\vb{x}''-\vb{x}')
+\end{equation}
 
 
 \section{The Feynman path integral and EM potentials}
