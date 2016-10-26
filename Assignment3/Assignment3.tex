@@ -327,6 +327,7 @@ and the most probable energy is
 \begin{equation}
 \hbar\omega\left\lfloor|\lambda|^2\right\rfloor+\frac{1}{2}.
 \end{equation}
+Note how the two energies are almost the same, but not quite. 
 \qed
 
 \subsection{Translating the ground state}
@@ -521,7 +522,7 @@ this means that we will need to expand the integrand in the path-integral
 \psi(x', t')
 \end{aligned}
 \end{equation}
-in power series in $\epsilon$. I've also for brevity not written out
+in power series in $\epsilon$. I've also, for brevity, not written out
 the explicit time dependence of $\varphi$ and $A$. It turns out that
 the best way to do this expansion is to leave the first exponential
 intact and then expand the rest of the factors in the integrand in
@@ -671,10 +672,17 @@ or in other words
 =&  \Bigg\{\frac{1}{2m}\Bigg[
 (\ii\hbar)^2\pdv[2]{{x''}}
 +2q\ii\hbar A(x'')\pdv{x''}\\
-&\phantom{(2m)}
+&\phantom{(2m))}
 +2(1-\alpha)q\ii\hbar\pdv{A(x'')}{x''}
 +q^2A^2(x'')\Bigg]
-+q\varphi(x'')\Bigg\}\psi(x'', t')
++q\varphi(x'')\Bigg\}\psi(x'', t')\\
+=&  \Bigg\{\frac{1}{2m}\Bigg[
+(\ii\hbar)^2\pdv[2]{{x''}}
++q\ii\hbar\qty( 2A(x'')\pdv{x''}
++2(1-\alpha)\pdv{A(x'')}{x''})\\
+&\phantom{(2m)(}
++q^2A^2(x'')\Bigg]
++q\varphi(x'')\Bigg\}\psi(x'', t')\\
 \end{aligned}
 \end{equation}
 We want this to be equivalent to 
@@ -688,7 +696,10 @@ We want this to be equivalent to
 -qA(-\ii\hbar)\pdv{x''}+q^2A^2] + q\varphi}\psi\\
 =&\qty{\frac{1}{2m}\qty[(\ii\hbar)^2\pdv[2]{{x''}} 
 + \ii\hbar q\qty(\pdv{A}{x''}+A\pdv{x''})
-+\ii\hbar qA\pdv{x''}+q^2A^2] + q\varphi}\psi.
++\ii\hbar qA\pdv{x''}+q^2A^2] + q\varphi}\psi\\
+=&\qty{\frac{1}{2m}\qty[(\ii\hbar)^2\pdv[2]{{x''}} 
++ \ii\hbar q\qty(\pdv{A}{x''}+2A\pdv{x''})
++q^2A^2] + q\varphi}\psi.
 \end{aligned}
 \end{equation}
 And this will be achieved only by setting $\alpha=1/2$.
@@ -1096,9 +1107,8 @@ H=\frac{1}{2m}\qty[\vb{p}^2-q\vb{p}\vdot\vb{A}-q\vb{A}\vdot\vb{p}+q^2\vb{A}^2]
 I this particular case with $\vb{A}$ as in \eqref{eq:6_A} the middle
 term in the brackets is
 \begin{equation}
--2q\vb{A}\vdot\vb{p}=-q\rho B p_\phi
+-2q\vb{A}\vdot\vb{p}=-q\rho B p_\phi.
 \end{equation}
-
 
 This can be compared to the term one would get for the coupling
 of orbital angular momentum, or rather orbital magnetic moment,
@@ -1120,11 +1130,20 @@ which is exactly the term in \eqref{eq:6_Ap} when accounting for the
 prefactor in the expression for the Hamiltonian.
 
 Now there is also the $q^2\vb{A}^2$ term which gives a $\rho^2B$
-dependence in $H$. This is a term that would make the state tend
-towards the $z$-axis. \todo{Physical significance of this?}
+dependence in $H$. But there is no real significance to this term
+since $\vb{B}$ is uniform throughout the whole range of $(x, y)$. The
+symmetry of the problem doesn't have any preferd $z$-axis. So
+$q^2\vb{A}^2$ can be whatever we want depending of where we chose to
+put the $(x, y)$ origin. 
+
+The $\rho$ dependence in the middle term is i a similar way
+arbitrary. However for this component we can view the $\rho$
+dependence as an effect of the shown coupling between the magnetic
+field and the angular momentum.
 
 
 \section{Particle in a uniform magnetic field}
+\subsection{Commutation relation}
 Once again we have a uniform magnetic field $\vb{B}=B\hat{z}$, and
 once again 
 \begin{equation}\label{eq:7_A}
@@ -1147,7 +1166,7 @@ With \eqref{eq:7_A} and the canonical commutation relations we now get
 =+\ii\hbar qB.
 \end{equation}
 
-\section{Analogy with the harmonic oscillator}
+\subsection{Analogy with the harmonic oscillator}
 With this prescription for dealing with magnetic fields we get the
 Hamiltonian 
 \begin{equation}\label{eq:7_H}
