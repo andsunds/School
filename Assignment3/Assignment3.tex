@@ -26,6 +26,7 @@
 
 
 \swapcommands{\varPhi}{\Phi}
+\swapcommands{\varPi}{\Pi}
 
 
 
@@ -784,7 +785,7 @@ disregrad $\varphi$.
 It's a good idea to calculate $\vb{A}$ before we continue. By the
 fact that $\curl{\vb{A}}=\vb{B}$ and
 $\div\vb{A}=0$ (in the Coulomb gauge), we conclude that
-\begin{equation}
+\begin{equation}\label{eq:5b_Aphi}
 2\pi\rho' A_\phi(\rho')=\oint\limits_{\rho=\rho'}\!\vb{A}\vdot\rd{\vb{r}}
 =\iint\limits_{\rho\le\rho'}(\curl\vb{A})\vdot\rd\vb{S}
 =\iint\limits_{\rho\le\rho'}\vb{B}\vdot\rd\vb{S}
@@ -968,12 +969,167 @@ iteger. In other words
 
 
 \section{Spinless particle in a uniform magnetic field}
+We have a static magnetic field $\vb{B}=B\hat{z}$. Then by
+the same argument as in \eqref{eq:5b_Aphi} we have
+\begin{equation}\label{eq:6_A}
+\vb{A}=\frac{1}{2}\rho B\hat{\phi}.
+\end{equation}
+
+We also know that $\vb{P}$ and $\vb{A}$ commute, in the Coulomb
+gauge. To see this we use the vector identity
+\begin{equation}
+\div[\vb{A}\psi]=(\div\vb{A})\psi + \vb{A}\vdot[\grad\psi],
+\end{equation}
+but in the Coulomb gauge $\div\vb{A}=0$. Therefore $\vb{P}$ and
+$\vb{A}$ commute. 
+
+With the prescrition
+\begin{equation}
+\vb{p}\to \vb{p}-q\vb{A}
+\end{equation}
+the new Hamiltonian becomes
+\begin{equation}
+H=\frac{1}{2m}\qty[\vb{p}^2-q\vb{p}\vdot\vb{A}-q\vb{A}\vdot\vb{p}+q^2\vb{A}^2]
+=\frac{1}{2m}\qty[\vb{p}^2-2q\vb{A}\vdot\vb{p}+q^2\vb{A}^2]
+\end{equation}
+I this particular case with $\vb{A}$ as in \eqref{eq:6_A} the middle
+term in the brackets is
+\begin{equation}
+-2q\vb{A}\vdot\vb{p}=-q\rho B p_\phi
+\end{equation}
 
 
+This can be compared to the term one would get for the coupling
+of orbital angular momentum, or rather orbital magnetic moment,
+to an external magnetic field. This coupling is given by
+\begin{equation}\label{eq:6_Ap}
+-\vb{\mu}\vdot\vb{B}=-\frac{q}{2m}\vb{L}\vdot\vb{B}
+=-\frac{q}{2m}(\vb{r}\cross\vb{p})\vdot\vb{B}.
+\end{equation}
+Now since $\vb{B}$ is only in the $\hat{z}$ direction, we
+only need to wory about the $z$ component of
+$\vb{r}\cross\vb{p}$. With $\vb{r}=\rho\hat\rho+z\hat{z}$ and
+$\vb{p}=p_\rho\hat\rho + p_\phi\hat\phi+p_z\hat{z}$ we would get
+\begin{equation}
+-\vb{\mu}\vdot\vb{B}
+=-\frac{q}{2m}(\rho p_\phi \hat\rho\cross\hat\phi)\vdot B\hat{z}
+=-\frac{q}{2m}\rho B p_\phi,
+\end{equation}
+which is exactly the term in \eqref{eq:6_Ap} when accounting for the
+prefactor in the expression for the Hamiltonian.
 
+Now there is also the $q^2\vb{A}^2$ term which gives a $\rho^2B$
+dependens in $H$. This is a term that would make the state tend
+towards the $z$-axis. \todo{Physical significance of this?}
 
 
 \section{Particle in a uniform magnetic field}
+Once again we have a uniform magnetic field $\vb{B}=B\hat{z}$, and
+once again 
+\begin{equation}\label{eq:7_A}
+\vb{A}=\frac{1}{2}\rho B\hat{\phi}
+=\frac{1}{2}B\Big[-\rho\sin(\phi)\hat{x}+\rho\cos(\phi)\hat{y}\Big]
+=\frac{1}{2}B\Big[-y\hat{x}+x\hat{y}\Big].
+\end{equation}
+With $\Pi_i=p_i-qA_i$, we get the commutation relation
+\begin{equation}
+\comm{\Pi_x}{\Pi_y}=\comm{p_x-qA_x}{p_y-qA_y}
+=\comm{p_x}{p_y}-\comm{qA_x}{p_y}-\comm{p_X}{qA_y}+\comm{qA_x}{qA_y}.
+\end{equation}
+With \eqref{eq:7_A} and the canonical commutation relations we now get
+\begin{equation}\label{eq:7_comm}
+\comm{\Pi_x}{\Pi_y}
+=\overbrace{\comm{p_x}{p_y}}^{0}
+-\frac{qB}{2}\overbrace{\comm{-y}{p_y}}^{-\ii\hbar}
+-\frac{qB}{2}\overbrace{\comm{p_x}{x}}^{-\ii\hbar}
++\frac{q^2B^2}{4}\overbrace{\comm{-y}{x}}^{0}
+=+\ii\hbar qB.
+\end{equation}
+
+\section{Analogy with the harmonic oscillator}
+With this presciption for dealing with magnetic fields we get the
+Hamiltonian 
+\begin{equation}\label{eq:7_H}
+H=\frac{1}{2m}\vb{\Pi}^2=\frac{1}{2m}\qty[\Pi_x^2+\Pi_y^2+\Pi_z^2]. 
+\end{equation}
+
+This can be compared to the Hamiltonian of a simple (1D) harmonic
+oscillator 
+\begin{equation}\label{eq:7_H_osc}
+H_\text{osc.}=\frac{1}{2m}\qty[p^2+(m\omega x)^2].
+\end{equation}
+The energy eigenvalues comes from the number operator, defined in
+terms of the anihilation and creation operators
+\begin{equation}
+a=A\Big[(m\omega x) +\ii p\Big]\qcomma
+a^\dagger=A\Big[(m\omega x) -\ii p\Big].
+%\frac{1}{\sqrt{2\hbar m\omega}}
+\end{equation}
+The prefactor is determined by the commutation
+relation $\comm{a}{a^\dagger}=1$ which gives an equation for the prefactor:
+\begin{equation}
+1={A}^2\comm{(m\omega x){+}\ii p\Big.}{\;(m\omega x){-}\ii p}
+={A}^2
+\Big(-\ii\comm{(m\omega x)}{p} +\ii\comm{p}{(m\omega x)}\Big)
+=-2\ii{A}^2\comm{(m\omega x)}{p},
+\end{equation}
+assuming $A$ is real. Next up is number operator
+\begin{equation}
+N=a^\dagger a = A^2\qty{p^2+(m\omega x)^2 
+-\ii\comm{(m\omega x)}{p}}
+=A^22m\,H_\text{osc.}-\frac{1}{2}.
+\end{equation}
+Its a well known fact that the eigen values of $N$ are 
+$n\in\N={0, 1, 2,\ldots}$. Therefore the eigenenergies are
+\begin{equation}
+E_n^{(\text{osc.})}=\frac{n+\nicefrac{1}{2}}{2mA^2}.
+\end{equation}
+
+As you've probably noted, I've been dooing all this with the operators
+$(m\omega x)$ and $p$. This is to illustrate the similarities between
+\eqref{eq:7_H} and \eqref{eq:7_H_osc}. We have the exact same
+situation between $\Pi_x$ and $\Pi_y$ as between $(m\omega x)$ and
+$p$. This makes it possible to create a ``pseudo harmonic oscillator
+Hamiltonian'' out of the $\Pi_x^2+\Pi_y^2$ part of \eqref{eq:7_H}. But
+this time the energies  are given by
+\begin{equation}
+E_n^{x,y}=\frac{n+\nicefrac{1}{2}}{2m\abs{\mathcal{A}^2}},
+\end{equation}
+where $\mathcal{A}$ is given by
+\begin{equation}
+1=-2\ii\mathcal{A}^2\comm{\Pi_x}{\Pi_y}
+\stackrel{\eqref{eq:7_comm}}{=}2\mathcal{A}^2\hbar qB.
+\end{equation}
+We have to have $\abs{\mathcal{A}^2}$ in the energy because of the
+symmetry\footnotemark{} between $\Pi_x$ and $\Pi_y$, and we want
+energies to be positive. In other words
+\begin{equation}
+E_n^{x,y}=\qty(\frac{\hbar\abs{qB}}{m})\qty(n+\frac{1}{2}).
+\end{equation}
+For the remaining part of \eqref{eq:7_H}, the $\Pi_z^2$ term, that's
+unaffected by the magnetic field and will just give planewave
+solutions with energy
+\begin{equation}
+E^{(z)}_k=\frac{\hbar^2k^2}{2m}.
+\end{equation}
+
+\footnotetext{We should realy have the same absolute value in the case
+of the harmonic oscillator, but we choose the order of $(m\omega x)$
+and $p$, so that $A^2$ would be positive.}
+
+\subsubsection*{A few remarks}
+A very important bit of the fact that the numberoperator has
+non-negative integer (real) eigenvalues is that $A^2$ is real. So just
+because we had two Hamiltoninans consisting of sum of squares of two
+operators which had a commutation relation, dosent men that we can get
+a harmonic oscillator solution. It's crucial that
+$\comm{\Pi_x}{\Pi_y}$ is imaginary. 
+
+Another thing to point out is that $\Pi_z$ commutes with both $\Pi_x$
+and $\Pi_y$, which explains why we dont have to take $\Pi_z$ into
+account when getting the pseudo harmonic oscillator solution. 
+
+
 
 \newpage
 \appendix
