@@ -50,7 +50,7 @@ Assignment 2}
 %Om man vill ha en lista med vilka todo:s som finns.
 %\todolist
 
-\section{Compressibility and heatcapacity of ideal Fermi gases}
+\section{Compressibility and heat capacity of ideal Fermi gases}
 \subsection{Isothermal and adiabatic compressibility}
 In this problem we want to show that
 \begin{equation}\label{eq:1_kappa}
@@ -61,7 +61,7 @@ In this problem we want to show that
 
 
 \subsubsection{Isothermal compressibility}
-We begin by maniplulating the supposed expression for the isothermal
+We begin by manipulating the supposed expression for the isothermal
 compressibility
 \begin{equation}\label{eq:1_want_this_T}
 k_T=\frac{1}{nT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
@@ -89,7 +89,7 @@ derivative. Now, since $T$ is constant we get
 )_T].
 \end{equation}
 
-Now we have to evauate the derivative of the special functions. To
+Now we have to evaluate the derivative of the special functions. To
 begin with we note that
 \begin{equation}
 \qty(\pdv{f_\nu(z)}{\mu})_T=\qty(\pdv{z}{\mu})_T\pdv{f_\nu(z)}{z}
@@ -107,9 +107,9 @@ To do this we remind ourselves that
 \begin{equation}
 PV=-\Omega=\frac{g_sVT}{\lambda^3}f_{5/2}(z)
 \end{equation}
-for Fermi gases. It's also a good idea to remind oursevles that
+for Fermi gases. It's also a good idea to remind ourselves that
 $\lambda$ only depends on $T$ and other constants, so in this case
-$\lambda$ can be regardes as a constant. We now have
+$\lambda$ can be regarded as a constant. We now have
 \begin{equation}
 \qty(\pdv{P}{\mu})_T 
 =\qty(\pdv{\mu} \frac{g_sT}{\lambda^3}f_{5/2}(z))_T 
@@ -141,7 +141,7 @@ Finally we can continue from \eqref{eq:1_k_T_2} to get
 ].
 \end{aligned}
 \end{equation}
-From here we once agian use \eqref{eq:1_PVNT} to get
+From here we once again use \eqref{eq:1_PVNT} to get
 \begin{equation}
 \frac{1}{P}=\frac{1}{nT}\frac{f_{3/2}(z)}{f_{5/2}(z)}.
 \end{equation}
@@ -166,7 +166,7 @@ k_S=\frac{3}{5nT}\frac{f_{3/2}(z)}{f_{5/2}(z)}
 =\frac{3}{5P}\frac{f_{5/2}(z)}{f_{3/2}(z)}\frac{f_{3/2}(z)}{f_{5/2}(z)}
 =\frac{3}{5P},
 \end{equation}
-where we once again used \eqref{eq:1_PVNT} to rewite $nT$. Next we
+where we once again used \eqref{eq:1_PVNT} to rewrite $nT$. Next we
 need to remind ourselves about some more important relations:
 \begin{equation}\label{eq:dE}
 \rd{E}=T\rd{S}-P\rd{V}+\mu\rd{N}
@@ -176,7 +176,7 @@ and
 PV=-\Omega=\frac{2}{3}E.
 \end{equation}
 Of these relations only the last equality (relating $\Omega$ to $E$)
-is spesific for Fermi gases, the rest are general thermodynaic
+is specific for Fermi gases, the rest are general thermodynamic
 identities. 
 
 From now we can focus more on the compressibility
@@ -194,8 +194,8 @@ Now by invoking \eqref{eq:dE} we see that
 \begin{equation}
 \qty(\pdv{E}{V})_S=-P,
 \end{equation}
-we have also assumed $N$ to be constant which is resonable. And by
-using \eqref{eq:1_Omega} once more to rewite $E=2PV/3$ we get
+we have also assumed $N$ to be constant which is reasonable. And by
+using \eqref{eq:1_Omega} once more to rewrite $E=2PV/3$ we get
 \begin{equation}
 \qty(\pdv{P}{V})_S=-\frac{2P}{3V}-\frac{PV}{V^2}=-\frac{5P}{3V}.
 \end{equation}
@@ -209,8 +209,8 @@ which is exactly what we were looking for in
 
 \footnotetext{This was a very neat way to derive $\kappa_S$. One could
   wonder if this approach is applicable to $\kappa_T$ as well. But
-  unfortunatly the analogous approach yields an expression wich
-  contains $(\pdv*{\mu}{V})_T$, which is not redily evaluated.} 
+  unfortunately the analogous approach yields an expression which
+  contains $(\pdv*{\mu}{V})_T$, which is not readily evaluated.} 
 
 
 \subsubsection{Low temperature limit}
@@ -282,7 +282,7 @@ f_{5/2}(z)\approx\frac{1}{\Gamma(\nicefrac{7}{2})}\qty(\frac{\mu}{T})^{5/2}
 \qty[1+\frac{5\pi^2}{8}\qty(\frac{T}{\mu})^2].
 \end{equation}
 After this we also need to recognize that $\mu$ is dependent of
-$T$, and $\mu$ is also only comeing in as $T/\mu$. It's therefor a
+$T$, and $\mu$ is also only coming in as $T/\mu$. It's therefor a
 good idea to use \eqref{eq:2_mu} to expand
 \begin{equation}\label{eq:1_T/mu}
 \frac{T}{\mu}\approx T \frac{1}{\epsilon_F}\qty[ 1
@@ -316,7 +316,7 @@ For isothermal compressibility this looks like
 \end{aligned}
 \end{equation}
 From here we use \eqref{eq:1_T/mu}. But note that only the leading
-factor $T/\mu$ needs to be expanded, since we're only interesed in
+factor $T/\mu$ needs to be expanded, since we're only interested in
 expanding to $\order{\tau^2}$ in each bracket. Thus
 \begin{equation}
 \begin{aligned}
@@ -355,7 +355,7 @@ And that's the two expressions for the compressibilities in the low
 temperature limit.
 \qed
 
-\subsection{Relationship between isobaric and isochoric heatcapacity}
+\subsection{Relationship between isobaric and isochoric heat capacity}
 
 \subsubsection{General thermodynamic relationship between $C_P$ and $C_V$}
 In general we have
@@ -371,7 +371,7 @@ with the environment). We can therefore write
 \begin{equation}
 \rd{S}=\qty(\pdv{S}{T})_V\rd{T} + \qty(\pdv{S}{V})_T\rd{V}.
 \end{equation}
-But we are also free to rewite $\rd{V}$ in terms of $\rd{T}$ and
+But we are also free to rewrite $\rd{V}$ in terms of $\rd{T}$ and
 $\rd{P}$:
 \begin{equation}
 \rd{V}=\qty(\pdv{V}{T})_P\rd{T} + \qty(\pdv{V}{P})_T\rd{P}.
@@ -401,7 +401,7 @@ and
 \begin{equation}
 -\qty(\pdv{S}{P})_T=\pdv[2]{\varPhi}{T}{P}=\qty(\pdv{V}{T})_P,
 \end{equation}
-where $F$ and $\varPhi$ are the Helmholzt and Gibbs free energy
+where $F$ and $\varPhi$ are the Helmholtz and Gibbs free energy
 respectively. 
 
 With these Maxwell relations we can write
@@ -453,7 +453,7 @@ temperature limit we will use \eqref{eq:1_1/2}, \eqref{eq:1_3/2} and
 
 
 
-\section{Cemical potential and particle energy of an ideal
+\section{Chemical potential and particle energy of an ideal
   Fermi gas at low temperatures}
 \renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
 \subsection{Chemical potential}
@@ -475,7 +475,7 @@ or in other words
 +\frac{7\pi^4}{640}\zeta^{-4} ]^{-2/3},
 \end{equation}
 where $\zeta=\ln(z)=\mu/T$.
-We're going to deal with these two factors separetly.
+We're going to deal with these two factors separately.
 First off is the easy bit. The first factor is
 \begin{equation}
 \qty(\frac{3\sqrt{\pi}\lambda^3}{4g_s})^{2/3}
@@ -484,7 +484,7 @@ First off is the easy bit. The first factor is
 =\frac{1}{T}\frac{\hbar^2}{2m}\qty(\frac{6\pi^2}{g_s})^{2/3}
 =\frac{\epsilon_F}{T}=\frac{1}{\tau}.
 \end{equation}
-Then there's the othe factor which has to be Taylor expanded to the
+Then there's the other factor which has to be Taylor expanded to the
 second order in $\ln^{-2}(z)\ll1$. To do this we enlist some help in
 form of \emph{Mathematica}\footnotemark{}, which yields
 \begin{equation}
@@ -495,15 +495,15 @@ form of \emph{Mathematica}\footnotemark{}, which yields
 \end{equation}
 We now have every thing we need to start approximating $\zeta$.
 Unfortunately what we have is something in the line of a fifth degree
-polynolial in $\zeta$ to solve: 
+polynomial in $\zeta$ to solve: 
 \begin{equation}\label{eq:2_fixed-point}
 \zeta\approx \tau^{-1}\qty[1 - \frac{\pi^2}{12}\zeta^{-2}
  + \frac{\pi^4}{720}\zeta^{-4}].
 \end{equation}
 This can not and should not be solved
 analytically. Instead we're going to use a method similar to
-fixed-point iteration, but for analytical expressions.
-\footnotetext{Lord and Saviour in our times of need and despair!}
+fixed-point iteration, but for analytic expressions.
+\footnotetext{Lord and Savior in our times of need and despair!}
 
 The first iteration is just the zeroth power approximation:
 \begin{equation}
@@ -578,7 +578,7 @@ Just go directly to \emph{Mathematica}, which yields
 \frac{f_{5/2}(z)}{f_{3/2}(z)}\approx \frac{2}{5\tau}
 \qty[1+\frac{5\pi^2}{12}\tau^2-\frac{\pi^4}{16}\tau^4].
 \end{equation}
-For reference tha comman in use were \texttt{Series}.
+For reference the command in use were \texttt{Series}.
 
 Now we have
 \begin{equation}
@@ -588,7 +588,7 @@ Now we have
 +\frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2
 -\frac{\pi^4}{16}\qty(\frac{T}{\epsilon_F})^4].
 \end{equation}
-This can be used to get an expression for the heatcapacity of the
+This can be used to get an expression for the heat capacity of the
 system
 \begin{equation}\label{eq:CV_Fermi}
 \frac{C_V}{N}=\frac{1}{N}\qty(\pdv{E}{T})_V
@@ -599,13 +599,13 @@ system
 
 
 \renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
-\section{Speed of sound in an idela Bose gas}
+\section{Speed of sound in an ideal Bose gas}
 The speed of sound is given by
 \begin{equation}
 v_s:=\sqrt{\qty(\pdv{P}{\rho})_S}
 \end{equation}
 where $\rho=mn=mN/V$ is the mass density of the gas (assuming a gas of
-identical particles). Here we will also asume that the temperature is
+identical particles). Here we will also assume that the temperature is
 above the critical temperature for Bose-Einstein condensation, but not
 necessarily in the high temperature limit.
 
@@ -720,7 +720,7 @@ v_s^2=\qty(\pdv{P}{\rho})_S
 \newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
 
 Here we are concerned about bosons in $d$ dimensions. They are
-confined to a box of (hyper) volume $\V=L^d$ their enegry momentum
+confined to a box of (hyper) volume $\V=L^d$ their energy momentum
 relation is $\epsilon_{\vb{k}}=\hbar^2\vb{k}^2/(2m)$.
 
 \subsection{Grand potential and particle density}
@@ -740,8 +740,8 @@ system. By doing so we get
 =\overbrace{\text{``Area of unit sphere in $d$ dimensions''}}^{=:\Sd}
 \times\int_0^\infty k^{d-1}\rd{k}f(k).
 \end{equation}
-The factor of the area of the unit shpere in $d$ dimensions comes from
-the integration over the corresponding ``sperical'' angles. This area
+The factor of the area of the unit sphere in $d$ dimensions comes from
+the integration over the corresponding ``spherical'' angles. This area
 does have a closed expression
 \begin{equation}\label{eq:4_Sd}
 \Sd=\frac{2\pi^{\frac{d}{2}}}{\Gamma(\nicefrac{d}{2})}.
@@ -827,7 +827,7 @@ n_\ee=\frac{N_\ee}{\V}
 \end{equation}
 This does not take the particles in the ground state into account
 since $\Omega$ doesn't take them into account. For temperatures lower
-than the critical temperature we would also need to take the condesed
+than the critical temperature we would also need to take the condensed
 particles, $N_0$, in to account if we want to study the full number of
 particles: $N=N_\ee+N_0$. For temperatures above the critical
 temperatures we can however neglect the particles in the ground
@@ -863,9 +863,9 @@ E=&\V\frac{\Sd}{2(2\pi)^d}\qty(\frac{2m}{\hbar^2})^{\D{2}}
 \end{aligned}
 \end{equation}
 which after a substitution $x=\epsilon/T$ will be the exact same
-expression as in the first line of \eqref{eq:4_Omega_0}, appart from a
+expression as in the first line of \eqref{eq:4_Omega_0}, apart from a
 factor $-2/d$. 
-\footnotetext{For the energy, we do not need to wory about the
+\footnotetext{For the energy, we do not need to worry about the
   particles in the ground state since they have 0 energy
   anyway. \label{ftn:E}} 
 
@@ -873,18 +873,18 @@ We can therefore conclude that
 \begin{equation}\label{eq:4_E_Omega_PV}
 E=-\frac{d}{2}\Omega=\frac{d}{2}P\V,
 \end{equation}
-where we used the general themodynamic identity $\Omega=-P\V$.
+where we used the general thermodynamic identity $\Omega=-P\V$.
 
 \qed
 
 
 \subsection{Critical temperature}
 
-For bosons $\mu<0$ or else the partition function dosen't
+For bosons $\mu<0$ or else the partition function doesn't
 converge. This fact together with the expression in \eqref{eq:4_ne}
 for the (excited) particle density gives a temperature, below which
-the number of particles in the ground state can not be neglcted. This
-is te critical temperature. 
+the number of particles in the ground state can not be neglected. This
+is the critical temperature. 
 
 To find the critical temperature we study the limit $\mu\to0^-$ which
 means that $z\to1$. This gives us an equation for $T_c$:
@@ -900,7 +900,7 @@ definition of $g_\nu(z)$ to get
 \frac{1}{\Gamma(\nD{2})}
 \int_0^\infty\frac{\rd{x}\, x^{\D{2}-1}}{\ee^{x}-1}.
 \end{equation}
-From here on, it's just a matter of recognizing the integralexpressino
+From here on, it's just a matter of recognizing the integral expression
 of the Rieman $\zeta$ function:
 \begin{equation}\label{eq:4_zeta}
 \zeta(\nu)=\frac{1}{\Gamma(\nu)}\int_0^\infty
@@ -938,16 +938,16 @@ dependence of $\Tc$. By plotting this expression in for example
 Mathematica, I can't see anything else to comment on. 
 
 
-\subsection{Heatcapacity for $T<\Tc$}
+\subsection{Heat capacity for $T<\Tc$}
 \newcommand{\Kd}{\ensuremath{\mathcal{K}_d}}
 As said before, the energy of the system is given by
 \eqref{eq:4_Omega} and \eqref{eq:4_E_Omega_PV} to be
-\begin{equation}
+\begin{equation}\label{eq:4d_E}
 E=\frac{d}{2}\frac{g_sT\V}{\lambda^d}g_{\D{2}+1}(z)
 =T^{\D{2}+1}\frac{d g_s\V}{2\Lambda^d}g_{\D{2}+1}(z)
 \end{equation}
 regardless of whether $T$ is above or below $\Tc$ (see
-footnote~\ref{ftn:E}). Therefore the heatcapacity for $T<\Tc$ is given by
+footnote~\ref{ftn:E}). Therefore the heat capacity for $T<\Tc$ is given by
 \begin{equation}\label{eq:4b_Cv}
 C_\V=\qty(\pdv{E(z=0)}{T})_\V
 =T^{\D{2}}\frac{d}{2}\qty(\D{2}+1)\frac{g_s\V}{\Lambda^d}\zeta(\nD{2}+1)
@@ -956,19 +956,19 @@ C_\V=\qty(\pdv{E(z=0)}{T})_\V
 \qed
 
 
-\subsection{Overall behaviour of $C_\V$}
+\subsection{Overall behavior of $C_\V$}
 \begin{figure}\centering
 \resizebox{.5\textwidth}{!}{\input{figures/Cv.pdf_t}}
-\caption{A sketch of the heatcapacity of a bose gas in $d$
+\caption{A sketch of the heat capacity of a Bose gas in $d$
   dimensions. There is a cusp at $T=\Tc$ where $C_\V$ reaches it's
   maximum value. }
 \label{fig:Cv}
 \end{figure}
 
-To get the rest of the behaviour of the heatcapacity we need to
-differentiate $E$ again, but now $z$ is no longer constanly 1. This
-complicates the matter some what. And since we're olny interested in
-the overall behaviour, not an exact expression, we can settle for just
+To get the rest of the behavior of the heat capacity we need to
+differentiate $E$ again, but now $z$ is no longer constantly 1. This
+complicates the matter some what. And since we're only interested in
+the overall behavior, not an exact expression, we can settle for just
 studying the expansion for small  $z$.
 
 The energy is 
@@ -981,16 +981,58 @@ $T$, we have
 \begin{equation}
 g_\nu(z)=z+\frac{z^2}{2^\nu}+\frac{z^3}{3^\nu}+\ldots
 \end{equation}
-Which makes the Energy become
+which gives the energy
 \begin{equation}
-E\approx 
-\frac{d}{2}NT\frac{z}{z}
-= \frac{d}{2}NT
+E\approx \frac{d}{2}NT
+\qty(1+\frac{z}{2^{\D{2}+1}})\qty(1+\frac{z}{2^{\D{2}}})^{-1}
+\approx\frac{d}{2}NT \qty(1-\frac{z}{2^{\D{2}+1}}).
 \end{equation}
-And thus te heat capacity in the high temperature limit is
-\begin{equation}\label{eq:4_Cv_infty}
-C_\V(T\to\infty)=\frac{d}{2}N.
+The heat capacity now becomes
+\begin{equation}
+C_\V=\qty(\pdv{E}{T})_\V\approx
+\frac{d}{2}N \qty(1-\frac{z}{2^{\D{2}+1}})
++\frac{d}{2}NT \frac{1}{2^{\D{2}+1}}\qty(\pdv{z}{T})_\V.
 \end{equation}
+
+Now, one would think that the last derivative is easy since
+$z=\ee^{\mu/T}$ but since we're above the critical temperature, $\mu$
+is obviously dependent on $T$. And the derivative must be
+\begin{equation}
+\qty(\pdv{z}{T})_\V
+=\qty(\pdv{z}{T})_{\V,\mu}\qty(\pdv{T}{T})_\V
++\qty(\pdv{z}{\mu})_{\V,T}\qty(\pdv{\mu}{T})_{\V}
+=-\frac{\mu z}{T^2} + \frac{z}{T}\qty(\pdv{\mu}{T})_{\V}.
+\end{equation}
+What we can do however is to assume that we're at a high enough
+temperature so that the second term here becomes negligible compared
+to the first:
+\begin{equation}
+\abs{\qty(\pdv{\mu}{T})_{\V}}\ll\abs{\frac{\mu}{T}}.
+\end{equation}
+In other words $\mu$ is assumed to have reached a constant value at
+high enough $T$.
+
+Back to the heat capacity. With these assumptions we now have
+\begin{equation}
+\begin{aligned}
+C_\V\approx&
+\frac{d}{2}N\qty[ \qty(1-\frac{z}{2^{\D{2}+1}})
++\frac{1}{2^{\D{2}+1}}\qty(-\frac{\mu}{T}z)]\\
+=& \frac{d}{2}N\qty{1+\frac{z}{2^{\D{2}+1}}\qty[-1-\ln(z)]}.
+\end{aligned}
+\end{equation}
+We should also remember that $z\ll1$ meaning that $[-\ln(z)]\gg1$,
+i.e. the $1$ become negligible compared to $\ln(z)$ and we get
+\begin{equation}
+C_\V\approx
+\frac{d}{2}N\qty{1-\frac{z\ln(z)}{2^{\D{2}+1}}}.
+\end{equation}
+This has the limiting value
+\begin{equation}
+C_\V(T\to\infty)=\frac{d}{2}N,
+\end{equation}
+and it's reached from \emph{above}, since $z\ln(z)<0$.
+
 
 For $T<\Tc$ we have \eqref{eq:4b_Cv}, which tells us that 
 $C_\V\propto T^\D{2}$. We also get a maximum value at $T=\Tc$ of
@@ -1006,14 +1048,14 @@ T_c^{\D{2}}\frac{d}{2}\qty(\D{2}+1)\frac{g_s\V}{\Lambda^d}\zeta(\nD{2}+1)\\
 \end{aligned}
 \end{equation}
 
-Lastly ther sre some issues regarding continuity of $C_\V$, but
-unfortunately I don't have much more time, so I leav that bit
+Lastly there are some issues regarding continuity of $C_\V$, but
+unfortunately I don't have much more time, so I leave that bit
 out. It's not very complicated though. Just differentiate
 \eqref{eq:4e_E} and note that the end result can be written as a
-differnce between ratios of $g_\nu(z)$'s, and then take the limit
+difference between ratios of $g_\nu(z)$'s, and then take the limit
 $z\to1$. 
 
-Anyway the sketch of the heatcapacity is in \figref{fig:Cv}.
+Anyway the sketch of the heat capacity is in \figref{fig:Cv}.
 
 \subsection{Maximum of $C_\V(T)/C_\V(t\to\infty)$}
 The maximum value of $C_\V$ is given by \eqref{eq:4_Cv_max} and the
@@ -1075,3 +1117,5 @@ In the specific case of $d=3$ we get
 \stepcounter{section} %Till exempel en 'section'
 \addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
 
+
+%  LocalWords:  compressibility compressibilities isothermal
