@@ -55,7 +55,7 @@ y(0)=1,\quad y'(0)=0
 where $0<\epsilon\ll1$ and $0\le x<\infty$. We want to find the RPT
 solution. 
 
-As ususal we begin by assuming
+As usual we begin by assuming
 \begin{equation}
 y(x, \epsilon)=y_0(x) + \epsilon y_1(x) + \epsilon^2 y_2(x)+\ldots,
 \end{equation}
@@ -80,7 +80,7 @@ The next order problem thus becomes
 y_1''+y_1=xy_0=x\cos(x)
 \end{equation}
 with initial conditions $y_1(0)=0$ and $y_1'(0)=0$. Here we have the
-homogeneuos solution
+homogeneous solution
 \begin{equation}
 y_1^{(\text{h})}(x)=A_1\cos(x)+B_1\sin(x),
 \end{equation}
@@ -88,7 +88,7 @@ and the particular solution should have the form
 \begin{equation}
 y_1^{(\text{p})}(x)=\qty(a_1x+a_1'x^2)\cos(x)+\qty(b_1x+b_1'x^2)\sin(x).
 \end{equation}
-Alternatievly you could use \textit{Mathematica} (which I did), or
+Alternatively you could use \textit{Mathematica} (which I did), or
 some other computer program, to find that the particular solution is 
 \begin{equation}
 y_1^{(\text{p})}(x)=\frac{1}{8}\qty[
@@ -117,7 +117,7 @@ $\order{\epsilon}$ solution, $y_1$, grows and blows up as
 $x\to\infty$, whereas $y_0$ is bounded. This means that the RPT
 solution is \emph{not} uniformly ordered. The exact solution to
 \eqref{eq:1_IVP} will however not be bounded, since for
-$x>\epsilon^{-1}$ we get exponential behaviour. The problem of
+$x>\epsilon^{-1}$ we get exponential behavior. The problem of
 non-uniformity is however that the approximation that a truncated
 expansion does not hold for $x\gg\epsilon^{-1}$. 
 
@@ -136,12 +136,12 @@ with $0<\epsilon\ll1$.
 
 
 \subsection{Introducing new time scales}
-We begin by introducin two new, slow, time scales $\tau_1=\epsilon x$
+We begin by introducing two new, slow, time scales $\tau_1=\epsilon x$
 and $\tau_2=\epsilon^2 x$. We now have
 \begin{equation}
 x(t)=f(t, \tau_1, \tau_2, \epsilon),
 \end{equation}
-where we treat $t$, $\tau_1$ and $\tau_2$ as independen variabels. 
+where we treat $t$, $\tau_1$ and $\tau_2$ as independent variables. 
 As such the total derivative must change:
 \begin{equation}
 \dv{t}=\pdv{t}{t}\pdv{t}+\pdv{\tau_1}{t}\pdv{\tau_1}
@@ -178,7 +178,7 @@ Thus the original DE now becomes
 +2\epsilon\qty(f_t + \epsilon f_{\tau_1})
 +f+\order{\epsilon^3}=0.
 \end{equation}
-And the inital conditions are
+And the initial conditions are
 \begin{equation}\label{eq:2_init}
 f(0, 0, 0, \epsilon)=1
 \end{equation}
@@ -218,12 +218,12 @@ f_0=A_0(\tau_1, \tau_2)\cos(t)+B_0(\tau_1, \tau_2)\sin(t),
 \end{equation}
 but here $A_0$ and $B_0$ now depends on $\tau_1$ and $\tau_2$.
 
-With the inital conditions we get:
+With the initial conditions we get:
 \begin{equation}\label{eq:2b_init_A}
 \eqref{eq:2_init}\quad\Longrightarrow\quad
 A_0(0, 0)=1.
 \end{equation}
-But with \eqref{eq:2_init_d0} we run into trubble, since
+But with \eqref{eq:2_init_d0} we run into trouble, since
 with the expansion \eqref{eq:2_init_d0} becomes
 \begin{equation}\label{eq:2_init_d}
 \qty[f_{0\,t}+\epsilon\Big(f_{0\;\tau_1}+f_{1\;t} \Big)
@@ -263,7 +263,7 @@ A_{0\;\tau_1}+A_0=0\\
 B_{0\;\tau_1}+B_0=0,
 \end{cases}
 \end{equation}
-which of couse have the solutions
+which of course have the solutions
 \begin{equation}
 A_0(\tau_1, \tau_2)=\tilde{A}_0(\tau_2)\ee^{-\tau_1}
 \end{equation}
@@ -271,7 +271,7 @@ and
 \begin{equation}
 B_0(\tau_1, \tau_2)=\tilde{B}_0(\tau_2)\ee^{-\tau_1}.
 \end{equation}
-The inital conditions for $\tilde{A}_0$ and $\tilde{B}_0$ are
+The initial conditions for $\tilde{A}_0$ and $\tilde{B}_0$ are
 \begin{equation}\label{eq:2_init_tildeA}
 \eqref{eq:2b_init_A}\quad\Longrightarrow\quad
 \tilde{A}_0(0)=1,
@@ -314,7 +314,7 @@ f_{2\;t,t}+f_2 + 2f_{1\;t,\tau_1} +2f_{1\;t}
 +f_{0\;\tau_1,\tau_1}+2f_{0\;t,\tau_2}+2f_{0\;\tau_1}
 =0.
 \end{equation}
-This equation has a recemblance to \eqref{eq:2c_f1_0}, only with
+This equation has a resemblance to \eqref{eq:2c_f1_0}, only with
 $f_i\to f_{i+1}$ and some new terms with $f_0$'s. We also know that
 $f_1$ has the same form as $f_0$, c.f. \eqref{eq:2_f0} and
 \eqref{eq:2_f1}. This means that we can eliminate the secular terms
@@ -334,7 +334,7 @@ f_{2\;t,t}+f_2 =& %2f_{1\;t,\tau_1} +2f_{1\;t}
 \qty[\tilde{A}_{0}(\tau_2)\cos(t)+\tilde{B}_0(\tau_2)\sin(t)].
 \end{aligned}
 \end{equation}
-Elimiating the secular terms means that the coefficients before
+Eliminating the secular terms means that the coefficients before
 $\cos(t)$ and $\sin(t)$ must be 0. That is
 \begin{equation}
 \begin{cases}
@@ -363,7 +363,7 @@ also have
 \end{equation}
 And the initial condition \eqref{eq:2_init_tildeA} gives $b=1$.
 
-Finaly the full expression for $f_0$ is
+Finally the full expression for $f_0$ is
 \begin{equation}
 \begin{aligned}
 f_0(t, \tau_1, \tau_2)=&A_0(\tau_1, \tau_2)\cos(t)+B_0(\tau_1, \tau_2)\sin(t)\\
@@ -440,7 +440,7 @@ This DE will have a particular solution of the form
 \begin{equation}
 x_1^\text{(p)}(t)=a_1\cos(3t)+b_1t\sin(t)
 \end{equation}
-and a homogeneuos solution of the form
+and a homogeneous solution of the form
 \begin{equation}
 x_1^\text{(h)}(t)=A_1\cos(t)+B_1\sin(t).
 \end{equation}
@@ -456,7 +456,7 @@ x(t,\epsilon)=\cos(t)+
 +\mathcal{O}_\text{F}\qty(\epsilon^2).
 \end{equation}
 
-\subsection{Change of variabels}
+\subsection{Change of variables}
 Next up in Pritulo's technique is to set
 \begin{equation}
 t(z)=z+\epsilon t_1(z)+\ldots
@@ -535,7 +535,7 @@ y_1(t)=\frac{\alpha^2}{2}
 \end{equation}
 
 \footnotetext{By now, I feel like we've done enough particular and
-  homogeneuos solutions to theses trigonometric DE's to just let Mathematica
+  homogeneous solutions to theses trigonometric DE's to just let Mathematica
   deal with them all the way. }
 
 Lastly the $\order{\epsilon^2}$ problem becomes
@@ -574,12 +574,12 @@ Here we begin by introducing $\tau=\omega(\epsilon)t$, where
 \omega(\epsilon)=1+\epsilon\omega_1+\epsilon^2\omega_2+\ldots,
 \end{equation}
 and $\ty(\tau)=y(t)$.
-With this change of variabels we also get
+With this change of variables we also get
 $y_{tt}=\omega^2\ty_{\tau\tau}$, and the DE becomes
 \begin{equation}
 \omega^2\ty_{\tau\tau} +\ty = \epsilon\ty^2.
 \end{equation}
-By expanding $\ty$ in powes of $\epsilon$ and using
+By expanding $\ty$ in powers of $\epsilon$ and using
 \eqref{eq:4b_omega}, we get
 \begin{equation}
 \begin{aligned}
@@ -623,7 +623,7 @@ the previous part. Therefore
 \qty[1-\frac{2}{3}\cos(\tau)-\frac{1}{3}\cos(2\tau)].
 \end{equation}
 
-Now the $\order{\epsilon^2}$ probelm looks like
+Now the $\order{\epsilon^2}$ problem looks like
 \begin{equation}
 \begin{aligned}
 \ty_2''+\ty_2=&2\ty_0\ty_1-\cancel{\omega_1\ty_1''}-\qty(2\omega_2+\cancel{\omega_1^2})\ty_0''\\
@@ -644,7 +644,7 @@ And with \textit{Mathematica} we get
 \end{equation}
 
 To summarize we have
-\begin{equation}
+\begin{equation}\label{eq:4b_y}
 \begin{aligned}
 \ty(\tau, \epsilon)=&\alpha\cos(\tau)+\epsilon\frac{\alpha^2}{2}
 \qty[1-\frac{2}{3}\cos(\tau)-\frac{1}{3}\cos(2\tau)]\\
@@ -676,7 +676,7 @@ constant. We can therefor choose $t_1=0$, simplifying the rest of the
 calculations. 
 
 We now get
-\begin{equation}
+\begin{equation}\label{eq:4c_y}
 \begin{aligned}
 \hy(z, \epsilon)=&\alpha\qty(\cos(z)-\sin(z)(\cancel{\epsilon t_1}+\epsilon^2t_2)+\order*{\epsilon^3})\\
 &+\epsilon\frac{\alpha^2}{2}
@@ -702,23 +702,159 @@ z=t\qty(1+\epsilon^2\frac{5\alpha^2}{12})^{-1}\!+\order{\epsilon^3}
 \end{aligned}
 \end{equation}
 This is (up to $\order{\epsilon^3}$) exactly the same as
-\eqref{eq:4b_t}., which is good because we shouldn't get wildly
-different solutions depending on technique.
-
-
+\eqref{eq:4b_t}, which is good because we shouldn't get wildly
+different solutions depending on technique. And the solution
+$y(t,\epsilon)$ is given by \eqref{eq:4c_y} with the singular term
+canceled and with $t$ as above, which again is exactly the same as 
+\eqref{eq:4b_y}, up to $\mathcal{O}_F(\epsilon^3)$.
 
 
 
 \section{Non-linear pendulum, with Pritulo's technique}
-
+\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+Here we're going to find a solution to the non-linear pendulum
 \begin{equation}
 \theta''+\sin\theta =0;\qquad
-\theta(0)=a,\quad \theta'(0)=0
+\theta(0)=a,\quad \theta'(0)=0,
+\end{equation}
+using Pritulo's technique.
+
+\subsection{RPT}
+\newcommand{\TT}{\ensuremath{\tilde{\theta}}}
+As before we have to begin by finding the RPT
+solution. Non-dimensionalize by setting $\TT=\theta/a$ giving the DE
+\begin{equation}
+0=\theta''+\frac{\sin(a\TT)}{a} 
+=\theta''+\qty(\TT-\frac{a^2\TT^3}{6}+\frac{a^4\TT^5}{120}+\ldots),
+\end{equation}
+with $\TT(0)=1$ and $\TT'(0)=0$.
+Next we expand $\TT(a^2)=\TT_0+a^2\TT_1+a^4\TT_2+\ldots$, giving
+\begin{equation}
+\begin{aligned}
+&\TT_0''+\TT_0+a^2\qty(\TT_1''+\TT_1)+a^4\qty(\TT_2''+\TT_2)+\ldots\\
+=&\frac{a^2}{6}\qty(\TT_0^3+3a^2\TT_0^2\TT_1+\ldots) 
+- \frac{a^4}{120}\qty(\TT_0^5+\ldots).
+\end{aligned}
 \end{equation}
 
+The $\order{1}$ problem:
+\begin{equation}
+\TT_0''+\TT_0=0;\qquad
+\TT_0(0)=1,\quad {\TT_0'}(0)=0,
+\end{equation}
+which has the solution
+\begin{equation}\label{eq:5_TT0}
+\TT_0(t)=\cos(t).
+\end{equation}
 
-\section{Linear dsipersive wave}
+Then the $\order{a^2}$ problem:
+\begin{equation}
+\TT_1''+\TT_1=\frac{1}{6}\TT_0^3
+=\frac{1}{8}\qty(\cos(t) +\frac{1}{3}\cos(3t)).
+\end{equation}
+Once again \textit{Mathematica} gives
+\begin{equation}\label{eq:5_TT1}
+\TT_1(t)=\frac{1}{192}\Big[\cos(t) - \cos(3t) + 12t\sin(t)\Big],
+\end{equation}
+where we have used the initial condition $\TT_1(0)=0$ and
+$\TT'_1(0)=0$. 
 
+And the  $\order{a^4}$ problem:
+\begin{equation}\label{eq:5_TT2_DE}
+\TT_2''+\TT_2=\frac{1}{2}\TT_0^2\TT_1-\frac{1}{120}\TT_0^5;
+\qquad \TT_2(0)=0\qcomma \TT_2'(0)=0.
+\end{equation}
+Using \eqref{eq:5_TT0} and \eqref{eq:5_TT1} to plug in
+\eqref{eq:5_TT2_DE} into \textit{Mathematica}, I get
+\begin{equation}
+\TT_2(t)=\frac{1}{61440}
+\qty[
+17\cos(t)-20\cos(3t)+3\cos(5t)-120t^2\cos(t)-60t\sin(3t)
+].
+\end{equation}
+
+To sum up we have
+\begin{equation}\label{eq:5_TT}
+\begin{aligned}
+\TT(t)=&\phantom{+}\cos(t)\\
+&+\frac{a^2}{192}\Big[\cos(t) - \cos(3t) + 12t\sin(t)\Big]\\
+&+\frac{a^4}{61440}
+\qty[
+17\cos(t)-20\cos(3t)+3\cos(5t)-120t^2\cos(t)-60t\sin(3t)
+]\\ &+ \mathcal{O}_\text{F}(a^6).
+\end{aligned}
+\end{equation}
+
+\subsection{Change of variables}
+\newcommand{\HT}{\ensuremath{\hat{\theta}}}
+Next in Pritulo's method, we set
+\begin{equation}
+t(z)=z+a^2t_1(z)+a^4t_2(z)+\ldots\qcomma
+\HT(z)=\TT(t),
+\end{equation}
+and Taylor expand \eqref{eq:5_TT} around $z$. This is more algebra
+than I could possibly could keep straight and not loose something on
+the way. So instead I'm going to fall back on the lifesaver of this
+assignment \textit{Mathematica}. Using the function \texttt{Series}, I
+get:
+\begin{equation}\label{eq:5_HT}
+\begin{aligned}
+\HT(z)=&\phantom{+}\cos(z)\\
+&+\frac{a^2}{192}\Big\{\cos(z)-\cos(3z) + [12z-192t_1]\sin(z)\Big\}\\
+&+\frac{a^4}{61440}
+\bigg\{
+17\cos(z)-20\cos(3z)+3\cos(5z)\\
+&\hspace{50pt}
++\qty[-120t^2-30720t_1^2+3840t_1z]\cos(z)\\
+&\hspace{50pt}
++\qty[3520t_1-61440t_2]\sin(z)
++\qty[-60z+960t_1]\sin(3z)
+\bigg\}
+ &+ \mathcal{O}_\text{F}(a^6).
+\end{aligned}
+\end{equation}
+This results in an over-determined system of equations
+\begin{equation}
+\begin{cases}
+12z-192t_1=0\\
+120z^2+30720t_1^2-3840t_1z=0\\
+60z-960t_1=0\\
+3520t_1-61440t_2=0
+\end{cases}
+\Longrightarrow
+\begin{cases}
+t_1=\frac{1}{16}z\\
+t_1=\frac{1}{16}z\\
+t_1=\frac{1}{16}z\\
+t_2=\frac{3520}{61440}t_1%=\frac{11}{3720}z
+\end{cases}.
+\end{equation}
+As we can see the different equations for $t_1$ were equivalent and we
+only got
+\begin{equation}
+t_1=\frac{1}{16}z\qcomma
+t_2=\frac{11}{3720}z
+\end{equation}
+
+To conclude we have
+\begin{equation}
+\begin{aligned}
+\HT(z)=&\phantom{+}\cos(z)
++\frac{a^2}{192}\Big\{\cos(z)-\cos(3z) \Big\}\\
+&+\frac{a^4}{61440}
+\bigg\{
+17\cos(z)-20\cos(3z)+3\cos(5z)
+\bigg\}
+ + \mathcal{O}_\text{F}(a^6),
+\end{aligned}
+\end{equation}
+where $\TT(t)=\HT(z)$ and
+\begin{equation}
+t=\qty(1+\frac{a^2}{16}+\frac{11a^4}{3720})z+\order{a^6}.
+\end{equation}
+
+\section{Linear dispersive wave}
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 
 \begin{equation}
 \eta_t + c_0\eta_{x}+\beta\eta_{xxx}=0
