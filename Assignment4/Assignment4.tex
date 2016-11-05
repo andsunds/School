@@ -1,0 +1,117 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\oh}{\ensuremath\mathpzc{o}}
+
+\newcommand{\as}{\qcomma\text{as }}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+% \begin{titlepage}
+\title{Asymptotic Analasys and Pertubation Theory -- AMATH\,732 \\
+Assignment 4}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+%Om man vill ha en lista med vilka todo:s som finns.
+%\todolist
+
+\section{An IVP}
+
+\begin{equation}
+y''+(1+\epsilon x)y=0;\qquad
+y(0)=1,\quad y'(0)=0
+\end{equation}
+
+\section{Underdamped linear damped oscillator}
+
+\begin{equation}
+\ddot{x}+2\epsilon\dot{x}+x=0;\qquad
+x(0)=0,\quad \dot{x}(0)=0
+\end{equation}
+
+
+\subsection{Introducing new time scales}
+
+\subsection{Leading order problem}
+
+\subsection{First solvability condition}
+
+\subsection{Second solvability condition}
+
+
+
+\section{Free Duffing oscillator}
+
+\begin{equation}
+x''+x=\epsilon {x}^3+;\qquad
+x(0)=0,\quad {x'}(0)=0
+\end{equation}
+
+\section{Another oscillator}
+
+\begin{equation}
+y''+y=\epsilon y^2;\qquad
+y(0)=1,\quad y'(0)=0
+\end{equation}
+
+\subsection{RPT}
+
+\subsection{The Poincaré-Lindstedt method}
+
+\subsection{Pritulo's method}
+
+
+
+\section{Non-linear pendulum, with Pritulo's technique}
+
+\begin{equation}
+\theta''+\sin\theta =0;\qquad
+\theta(0)=a,\quad \theta'(0)=0
+\end{equation}
+
+
+\section{Linear dsipersive wave}
+
+
+\begin{equation}
+\eta_t + c_0\eta_{x}+\beta\eta_{xxx}=0
+\end{equation}
+
+\begin{equation}
+\eta(x, 0)=\eta_0(x)=A(\epsilon x)\cos(kx)
+\end{equation}
+
+
+\end{document}
+
+
+
