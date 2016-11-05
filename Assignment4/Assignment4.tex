@@ -3,6 +3,8 @@
 \pdfoutput=1
 
 \usepackage{../custom_as}
+\usepackage[makeroom]{cancel}
+
 
 \renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 
@@ -346,7 +348,7 @@ From this we get
 \begin{equation}
 \tilde{A}_{0}'=2\tilde{B}_{0}''
 \end{equation}
-which when substitued into the second equation gives
+which when substituted into the second equation gives
 \begin{equation}
 \tilde{B}_0+4\tilde{B}_0''=0.
 \end{equation}
@@ -374,9 +376,10 @@ f_0(t, \tau_1, \tau_2)=&A_0(\tau_1, \tau_2)\cos(t)+B_0(\tau_1, \tau_2)\sin(t)\\
 \end{equation}
 Or, in only terms of $t$:
 \begin{equation}
-x(t)=\ee^{-\epsilon t}\cos(\qty(1-\epsilon^2/2)t).
+x_0(t)=\ee^{-\epsilon t}\cos(\qty(1-\epsilon^2/2)t).
 \end{equation}
-This can be compared to the exact solution
+This can be compared to the exact solution (found using
+\textit{Mathematica's} \texttt{DSolve}) 
 \begin{equation}
 \begin{aligned}
 x_\text{exact}(t)=&
@@ -384,7 +387,7 @@ x_\text{exact}(t)=&
 \sqrt{1-\epsilon^2}\cos(t\sqrt{1-\epsilon^2})
 +\epsilon\sin(t\sqrt{1-\epsilon^2})
 ]\\ \approx&
-\ee^{-\epsilon t}}\qty[
+\ee^{-\epsilon t}\qty[
 \cos(t\qty(1-\epsilon^2/2))
 ].
 \end{aligned}
@@ -395,24 +398,314 @@ $\sqrt{1-\epsilon^2}$.
 
 
 \section{Free Duffing oscillator}
+\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
 
+In this problem we're going to study
 \begin{equation}
-x''+x=\epsilon {x}^3+;\qquad
-x(0)=0,\quad {x'}(0)=0
+x''+x=\epsilon {x}^3;\qquad
+x(0)=1,\quad {x'}(0)=0,
+\end{equation}
+using Pritulo's technique.
+
+\subsection{RPT}
+The first step in Pritulo's method is to find the (disordered)
+RPT. This is done in the usual way by expanding 
+$x(t, \epsilon)=x_0(t)+\epsilon x_1(t)+\ldots$ and
+substituting into the DE:
+\begin{equation}
+\begin{aligned}
+x_0''+x_0 + \epsilon\qty(x_1''+x_1)
++\ldots
+=&\epsilon\qty(x_0+\epsilon x_1+ \ldots)^3\\
+=&\epsilon\qty(x_0^3+ \ldots).
+\end{aligned}
 \end{equation}
 
-\section{Another oscillator}
+The $\order{1}$ problem is 
+\begin{equation}
+x_0''+x_0=0;\qquad
+x_0(0)=1,\quad {x_0'}(0)=0,
+\end{equation}
+which has the solution
+\begin{equation}
+x_0(t)=\cos(t).
+\end{equation}
 
+Then the $\order{\epsilon}$ problem becomes
+\begin{equation}
+x_1''+x_1=x_0^3=\cos^3(t)=\frac{1}{4}
+\Big[3\cos(t)+\cos(3t)\Big].
+\end{equation}
+This DE will have a particular solution of the form
+\begin{equation}
+x_1^\text{(p)}(t)=a_1\cos(3t)+b_1t\sin(t)
+\end{equation}
+and a homogeneuos solution of the form
+\begin{equation}
+x_1^\text{(h)}(t)=A_1\cos(t)+B_1\sin(t).
+\end{equation}
+By using \textit{Mathematica} we get
+\begin{equation}
+x_1(t)=\frac{1}{32}\Big[\cos(t)-\cos(3t) \Big] + \frac{3}{8}t\sin(t).
+\end{equation}
+
+The expression for $x$ is now
+\begin{equation}\label{eq:3i_x}
+x(t,\epsilon)=\cos(t)+
+\frac{\epsilon}{32}\Big[\cos(t)-\cos(3t)+ 12t\sin(t) \Big]
++\mathcal{O}_\text{F}\qty(\epsilon^2).
+\end{equation}
+
+\subsection{Change of variabels}
+Next up in Pritulo's technique is to set
+\begin{equation}
+t(z)=z+\epsilon t_1(z)+\ldots
+\end{equation}
+and setting
+\begin{equation}
+\tilde{x}(z)=x(t).
+\end{equation}
+Then we Taylor expand (assumed to work) \eqref{eq:3i_x} around $z$:
+\begin{equation}
+\begin{aligned}
+\tilde{x}(z,\epsilon)=&\qty{\cos(z)-\sin(z)\,\epsilon t_1
++\order*{\epsilon^2}}\\
+&+\frac{\epsilon}{32}\Big[\cos(z)-\cos(3z)+ 12t\sin(z)
++\order*{\epsilon} \Big]
++\mathcal{O}_\text{F}\qty(\epsilon^2)\\
+=&\cos(z)
++\frac{\epsilon}{32}\Big[\cos(z)-\cos(3z)+ (12t-32t_1)\sin(z)
+\Big]
++\mathcal{O}_\text{F}\qty(\epsilon^2).
+\end{aligned}
+\end{equation}
+Now to eliminate the singularity as $t\to\infty$, we much choose
+\begin{equation}
+t_1(z)=\frac{3}{8}z.
+\end{equation}
+Giving
+\begin{equation}
+\tilde{x}(z,\epsilon)=\cos(z)
++\frac{\epsilon}{32}\Big[\cos(z)-\cos(3z)\Big]
++\mathcal{O}_\text{F}\qty(\epsilon^2).
+\end{equation}
+
+
+
+\section{Another oscillator}
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+Here we are going to study
 \begin{equation}
 y''+y=\epsilon y^2;\qquad
-y(0)=1,\quad y'(0)=0
+y(0)=\alpha,\quad y'(0)=0.
 \end{equation}
 
 \subsection{RPT}
+First off is the RPT, and as usual 
+$y(t,\epsilon)=y_0(t)+\epsilon y_1(t)+\epsilon^2y_2(t)+\ldots$, and
+the DE becomes
+\begin{equation}
+\begin{aligned}
+y_0''+y_0+\epsilon\qty(y_1''+y_1)+\epsilon^2\qty(y_2''+y_2)
++\ldots=&\epsilon\qty(y_0+\epsilon y_1+\ldots)^2\\
+=&\epsilon\qty(y_0^2+2\epsilon y_0y_1+\ldots).
+\end{aligned}
+\end{equation}
+
+The $\order{1}$ problem is 
+\begin{equation}
+y_0''+y_0=0;\qquad
+y_0(0)=\alpha,\quad {y_0'}(0)=0,
+\end{equation}
+which has the solution
+\begin{equation}
+y_0(t)=\alpha\cos(t).
+\end{equation}
+
+Next the $\order{\epsilon}$ problem becomes
+\begin{equation}
+y_1''+y_1=y_0^2=\alpha^2\cos^2(t)=
+\frac{\alpha^2}{2}\Big[1+\cos(2t)\Big],
+\end{equation}
+which doesn't have any secular terms. With
+\textit{Mathematica}\footnotemark{} we get 
+\begin{equation}
+y_1(t)=\frac{\alpha^2}{2}
+\qty[1-\frac{2}{3}\cos(t)-\frac{1}{3}\cos(2t)].
+\end{equation}
+
+\footnotetext{By now, I feel like we've done enough particular and
+  homogeneuos solutions to theses trigonometric DE's to just let Mathematica
+  deal with them all the way. }
+
+Lastly the $\order{\epsilon^2}$ problem becomes
+\begin{equation}
+\begin{aligned}
+y_2''+y_2=&2y_0y_1=\alpha^3\cos(t)\qty[1-\frac{2}{3}\cos(t)-\frac{1}{3}\cos(2t)]
+\\=&\frac{\alpha^3}{6}\qty[-2+5\cos(t)-2\cos(2t)-\cos(3t)].
+\end{aligned}
+\end{equation}
+And with \textit{Mathematica} we get
+\begin{equation}
+y_2(t)=\frac{\alpha^3}{144}
+\qty[-48+29\cos(t)+16\cos(2t)+3\cos(3t)+60t\sin(t)\Big.].
+\end{equation}
+
+Together we get
+\begin{equation}\label{eq:4_RPT}
+\begin{aligned}
+y(t, \epsilon)=&\alpha\cos(t)+\epsilon\frac{\alpha^2}{2}
+\qty[1-\frac{2}{3}\cos(t)-\frac{1}{3}\cos(2t)]\\
+&+\epsilon^2\frac{\alpha^3}{144}
+\qty[-48+29\cos(t)+16\cos(2t)+3\cos(3t)+60t\sin(t)\Big.]
++\mathcal{O}_\text{F}\qty(\epsilon^3).
+\end{aligned}
+\end{equation}
+We also note that the solution is not uniformly ordered since we have
+the $t\sin(t)$ term in $y_2$, meaning that after
+$t=\order{\epsilon^{-1}}$, $\epsilon^2y_2$ would be in the same order
+of magnitude as $\epsilon y_1$.
+
 
 \subsection{The Poincaré-Lindstedt method}
+\newcommand{\ty}{\ensuremath{\tilde{y}}}
+Here we begin by introducing $\tau=\omega(\epsilon)t$, where
+\begin{equation}\label{eq:4b_omega}
+\omega(\epsilon)=1+\epsilon\omega_1+\epsilon^2\omega_2+\ldots,
+\end{equation}
+and $\ty(\tau)=y(t)$.
+With this change of variabels we also get
+$y_{tt}=\omega^2\ty_{\tau\tau}$, and the DE becomes
+\begin{equation}
+\omega^2\ty_{\tau\tau} +\ty = \epsilon\ty^2.
+\end{equation}
+By expanding $\ty$ in powes of $\epsilon$ and using
+\eqref{eq:4b_omega}, we get
+\begin{equation}
+\begin{aligned}
+\qty(1+\epsilon\omega_1+\epsilon^2\omega_2+\ldots)^2
+\qty(\ty_0''+\epsilon\ty_1''+\epsilon^2\ty_2''+\ldots)&\\
++
+\qty(\ty_0+\epsilon\ty_1+\epsilon^2\ty_2+\ldots)
+&=\epsilon\qty(\ty_0+\epsilon\ty_1+\ldots)^2
+\end{aligned}
+\end{equation}
+which after collection like powers of $\epsilon$ is
+\begin{equation}
+\begin{aligned}
+&\ty_0''+\ty_0+\epsilon\qty[\ty_1''+\ty_1+2\omega_1\ty_0'']
++\epsilon^2\qty[\ty_2''+\ty_2+2\omega_1\ty_1''+\qty(2\omega_2+\omega_1^2)\ty_0'']
++\ldots\\
+=&\epsilon\qty(\ty_0^2+2\epsilon\ty_0\ty_1+\ldots).
+\end{aligned}
+\end{equation}
+
+Now to the $\order{1}$ problem:
+\begin{equation}
+\ty_0''+\ty_0=0;\qquad
+\ty_0(0)=\alpha,\quad {\ty_0'}(0)=0,
+\end{equation}
+which has the solution
+\begin{equation}
+\ty_0(\tau)=\alpha\cos(\tau).
+\end{equation}
+And then the $\order{\epsilon}$ problem:
+\begin{equation}
+\ty_1''+\ty_1=-2\omega_1\ty_0''+\ty_0^2
+=+2\alpha\omega_1\cos(\tau)
++\frac{\alpha^2}{2}\Big[1+\cos(2\tau)\Big].
+\end{equation}
+Here we need to choose $\omega_1\equiv0$ to not get a secular
+term. Then the DE for $\ty_1$ become identical to the DE for $y_1$ in
+the previous part. Therefore
+\begin{equation}
+\ty_1(\tau)=\frac{\alpha^2}{2}
+\qty[1-\frac{2}{3}\cos(\tau)-\frac{1}{3}\cos(2\tau)].
+\end{equation}
+
+Now the $\order{\epsilon^2}$ probelm looks like
+\begin{equation}
+\begin{aligned}
+\ty_2''+\ty_2=&2\ty_0\ty_1-\cancel{\omega_1\ty_1''}-\qty(2\omega_2+\cancel{\omega_1^2})\ty_0''\\
+=&\alpha^3\cos(\tau)\qty[1-\frac{2}{3}\cos(\tau)-\frac{1}{3}\cos(2\tau)]+2\omega_2\cos(\tau)
+\\=&\frac{\alpha^3}{6}\qty[-2+5\cos(\tau)-2\cos(2\tau)-\cos(3\tau)]+2\omega_2\cos(\tau).
+\end{aligned}
+\end{equation}
+To remove the secular term we need
+\begin{equation}
+\frac{5\alpha^3}{6}+2\omega_2=0
+\quad\Longrightarrow\quad
+\omega_2=-\frac{5\alpha^3}{12}.
+\end{equation}
+And with \textit{Mathematica} we get
+\begin{equation}
+\ty_2(\tau)=\frac{\alpha^3}{144}
+\qty[-48+29\cos(\tau)+16\cos(2\tau)+3\cos(3\tau)\Big.].
+\end{equation}
+
+To summarize we have
+\begin{equation}
+\begin{aligned}
+\ty(\tau, \epsilon)=&\alpha\cos(\tau)+\epsilon\frac{\alpha^2}{2}
+\qty[1-\frac{2}{3}\cos(\tau)-\frac{1}{3}\cos(2\tau)]\\
+&+\epsilon^2\frac{\alpha^3}{144}
+\qty[-48+29\cos(\tau)+16\cos(2\tau)+3\cos(3\tau)\Big.]
++\mathcal{O}_\text{F}\qty(\epsilon^3),
+\end{aligned}
+\end{equation}
+with
+\begin{equation}\label{eq:4b_t}
+\tau=\omega(\epsilon)t=\qty(1-\epsilon^2\frac{5\alpha^3}{12}+\order{\epsilon^3})t.
+\end{equation}
+
+
 
 \subsection{Pritulo's method}
+\newcommand{\hy}{\ensuremath{\hat{y}}}
+To use Pritulo's method we need the RPT solution, which we have in
+\eqref{eq:4_RPT}. Then we expand
+\begin{equation}
+t(z)=z+\epsilon t_1(z)+\epsilon^2t_2(z)+\ldots,
+\end{equation}
+and set $\hy(z)=y(t)$. Then we Taylor \eqref{eq:4_RPT} expand around
+$z$.  
+
+Before we continue we can note that the $\order{\epsilon}$ term in
+\eqref{eq:4_RPT} doesn't have any singularity, whereby $t_1(z)$ must be
+constant. We can therefor choose $t_1=0$, simplifying the rest of the
+calculations. 
+
+We now get
+\begin{equation}
+\begin{aligned}
+\hy(z, \epsilon)=&\alpha\qty(\cos(z)-\sin(z)(\cancel{\epsilon t_1}+\epsilon^2t_2)+\order*{\epsilon^3})\\
+&+\epsilon\frac{\alpha^2}{2}
+\qty[1-\frac{2}{3}\cos(z)-\frac{1}{3}\cos(2z) + \order*{\epsilon^2}]\\
+&+\epsilon^2\frac{\alpha^3}{144}
+\qty[-48+29\cos(z)+16\cos(2z)+3\cos(3z)+60z\sin(z)+ \order*{\epsilon^2}]\\
+&+\mathcal{O}_\text{F}\qty(\epsilon^3).
+\end{aligned}
+\end{equation}
+To eliminate the (only) singular term we must set
+\begin{equation}
+-\alpha t_2+\frac{60\alpha^3}{144}z=0
+\quad\Longrightarrow\quad
+t_2=\frac{5\alpha^2}{12}.
+\end{equation}
+In other words 
+\begin{equation}
+\begin{aligned}
+&t(z)=\qty(1+\epsilon^2\frac{5\alpha^2}{12})z+\order{\epsilon^3}\\
+\quad\Longrightarrow\quad&
+z=t\qty(1+\epsilon^2\frac{5\alpha^2}{12})^{-1}\!+\order{\epsilon^3}
+=t\qty(1-\epsilon^2\frac{5\alpha^2}{12})+\order{\epsilon^3}
+\end{aligned}
+\end{equation}
+This is (up to $\order{\epsilon^3}$) exactly the same as
+\eqref{eq:4b_t}., which is good because we shouldn't get wildly
+different solutions depending on technique.
+
+
 
 
 
