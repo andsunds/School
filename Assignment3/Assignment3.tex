@@ -1,0 +1,69 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+\graphicspath{{figures/}}
+\swapcommands{\Omega}{\varOmega}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+% \newcommand{\cbox}[2][cyan]
+% {\mathchoice
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\displaystyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\textstyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptstyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptscriptstyle#2$}}
+% }
+% \newcommand{\grande}{\cbox{\phantom{\frac{1}{xx}}}}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+% \begin{titlepage}
+\title{Statistical Physics -- PHYS\,704 \\
+Assignment 3}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+%Om man vill ha en lista med vilka todo:s som finns.
+%\todolist
+
+\section{Cusp in $C_V$ for a Bose gas}
+
+
+
+\section{Bose condensation in one dimension}
+
+
+\section{Some discontinuities}
+
+
+\section{Field operators and the Schrödinger equation}
+
+
+
+
+\end{document}
+
