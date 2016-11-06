@@ -903,7 +903,7 @@ A(\chi,\tau)\sin(kx-\omega{t})
 \qty[+\omega-c_0k+\beta k^3]=0.
 \end{equation}
 Now, $k$ was given trough the initial condition, thus
-\begin{equation}
+\begin{equation}\label{eq:6_omega}
 \omega(k)=k\qty(c_0-\beta k^2),
 \end{equation}
 because \eqref{eq:6_O1} should hold for any $x$ and $t$. This gives us
@@ -922,17 +922,25 @@ or in other words
 A_\tau+\qty(c_0 -3\beta k^2)A_\chi=0.
 \end{equation}
 The group speed of this wave-packet is
-\begin{equation}
+\begin{equation}\label{eq:6_wk}
 w_k=\abs{\pdv{\chi}{\tau}}=\abs{\pdv{A}{\tau}\pdv{\chi}{A}}
 =\abs{\frac{A_\tau}{A_\chi}}
 =c_0 -3\beta k^2=c-2\beta k^2.
 \end{equation}
 
-\paragraph{Note: }
+\paragraph{Note 1: }
 In the problem set the group speed is given as $w_k=c-3\beta k^2$
 (without a ``0'' on the $c$), I can however not find a way to justify
 that. I therefore guess that's just a typo. We still however see that
 the phase and group speeds are \emph{not} the same.
+
+\paragraph{Note 2: }
+The group speed in \eqref{eq:6_wk} can also be obtained through a
+more conventional way by using \eqref{eq:6_omega} and
+$w_k=\abs{\pdv{\omega}{k}}=c_0 -3\beta k^2=c-2\beta k^2$. I just
+thought that in the presented solution above, it's clearer that the
+group speed really is the speed of the wave-packet. 
+
 
 \end{document}
 
