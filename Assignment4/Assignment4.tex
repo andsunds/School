@@ -855,15 +855,84 @@ t=\qty(1+\frac{a^2}{16}+\frac{11a^4}{3720})z+\order{a^6}.
 
 \section{Linear dispersive wave}
 \renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
-
+We're looking for solutions to 
+\begin{equation}\label{eq:6_DE_eta}
+\eta_t + c_0\eta_{x}+\beta\eta_{xxx}=0.
+\end{equation}
+To do so we introduce new length and time scales: $\chi=\epsilon x$ and
+$\tau=\epsilon t$. These new variables are regarded as independent
+apart from $x$ and $t$. 
+With these multiple scales we get
 \begin{equation}
-\eta_t + c_0\eta_{x}+\beta\eta_{xxx}=0
+\dv{t}=\pdv{t}+\epsilon\pdv{\tau}\qcomma\quad
+\dv{x}=\pdv{x}+\epsilon\pdv{\chi}.
 \end{equation}
 
+
+Now \eqref{eq:6_DE_eta} becomes
+\begin{equation}\label{eq:6_DE_H}
+H_t+\epsilon H_\tau +c_0\qty[H_x+\epsilon H_\chi]
++\beta\qty[H_{xxx} + 3\epsilon H_{xx\chi}] +\order{\epsilon^2}=0.
+\end{equation}
+The initial state is
 \begin{equation}
-\eta(x, 0)=\eta_0(x)=A(\epsilon x)\cos(kx)
+H(x,\chi, 0, 0)=\eta(x, 0)=\eta_0(x)=A(\chi, 0)\cos(kx),
+\end{equation}
+which suggests that we look for solutions of the form
+\begin{equation}
+\eta(x, t)=H(x,\chi, t,\tau)=A(\chi, \tau)\,\cos(kx-\omega t).
+\end{equation}
+By substituting this into \eqref{eq:6_DE_H} we get
+\begin{equation}
+\begin{aligned}
+&A(\chi,\tau)\,\Big[-\sin(kx-\omega{t})\,(-\omega)\Big]
++\epsilon A_\tau(\chi,\tau)\,\cos(kx-\omega{t})\\
++&c_0A(\chi,\tau)\,\Big[-\sin(kx-\omega{t})\,k\Big]
++\epsilon c_0 A_\chi(\chi,\tau)\,\cos(kx-\omega{t})\\
++&\beta A(\chi,\tau)\,\qty[+\sin(kx-\omega{t})\,k^3]
++3\epsilon\beta A_\chi(\chi,\tau)\,
+\Big[-\cos(kx-\omega{t})\,k^2\Big]
++\order{\epsilon^2}=0
+\end{aligned}
+\end{equation}
+to first order.
+
+First is the $\order{1}$ problem
+\begin{equation}\label{eq:6_O1}
+A(\chi,\tau)\sin(kx-\omega{t})
+\qty[+\omega-c_0k+\beta k^3]=0.
+\end{equation}
+Now, $k$ was given trough the initial condition, thus
+\begin{equation}
+\omega(k)=k\qty(c_0-\beta k^2),
+\end{equation}
+because \eqref{eq:6_O1} should hold for any $x$ and $t$. This gives us
+the phase speed of the fast oscillations in the wave-packet:
+\begin{equation}
+c=\frac{\omega}{k}=c_0-\beta k^2.
 \end{equation}
 
+Then the $\order{\epsilon}$ problem:
+\begin{equation}
+\cos(kx-\omega t)
+\qty[A_\tau+c_0 A_\chi-3\beta k^2A_\chi]=0
+\end{equation}
+or in other words
+\begin{equation}
+A_\tau+\qty(c_0 -3\beta k^2)A_\chi=0.
+\end{equation}
+The group speed of this wave-packet is
+\begin{equation}
+w_k=\abs{\pdv{\chi}{\tau}}=\abs{\pdv{A}{\tau}\pdv{\chi}{A}}
+=\abs{\frac{A_\tau}{A_\chi}}
+=c_0 -3\beta k^2=c-2\beta k^2.
+\end{equation}
+
+\paragraph{Note: }
+In the problem set the group speed is given as $w_k=c-3\beta k^2$
+(without a ``0'' on the $c$), I can however not find a way to justify
+that. I therefore guess that's just a typo. We still however see that
+the phase and group speeds are \emph{not} the same.
 
 \end{document}
 
