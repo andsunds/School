@@ -7,6 +7,7 @@
 ]{cancel}
 \graphicspath{{figures/}}
 \swapcommands{\Omega}{\varOmega}
+\swapcommands{\Lambda}{\varLambda}
 
 %%Drar in tabell och figurtexter
 \usepackage[margin=10 pt]{caption}
@@ -320,7 +321,7 @@ And we get
 }.
 \end{equation}
 Now let $T\to0$, then the first part of the integrand must become
-\begin{equation}
+\begin{equation}\label{eq:2_lim1}
 \sqrt{\frac{T}{x}}
 \frac{x+\frac{nu(k)}{T}}{\sqrt{x^2+x\frac{2nu(k)}{T}}}
 \to \sqrt{\frac{T}{x}}
@@ -363,8 +364,15 @@ u(k)=\int\rd{r}\, u(r)\ee^{-\ii kr}
 \qcomma \text{as }\; k\to0 \;\Leftrightarrow\; x\to0.
 \end{equation}
 So since $u_0$ is finite, \eqref{eq:2_Ne_div} must atleast diverge in
-the limit $x\to 0$. This contradicts the notion that there excists a
-$\Tc\ge0$ for a weakly interacting bosonic gas in one dimension. 
+the limit $x\to 0$\footnotemark{}. This contradicts the notion that
+there excists a $\Tc\ge0$ for a weakly interacting bosonic gas in one
+dimension. 
+
+\footnotetext{We didn't need to be as drastic as to go all the way to
+  $T\to0$ to see this divergens. Because in the limit $x\to0$, we
+  would still get the result \eqref{eq:2_lim1} for a finite
+  $T$. But \eqref{eq:2_lim1} is more mathematically stringent the way
+  presented here, because of the $x^{-1}$ present. }
 
 \subsection*{No interactions}
 If we were to turn off the interactions, $nu(k)\to0$. Furthermore at
@@ -385,6 +393,34 @@ infinite $\Ne$.
 
 \section{Some discontinuities}
 \renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\newcommand{\ideal}[1]{#1^\text{{(ideal)}}}
+\newcommand{\vc}{v_{\text{c}}}
+
+To first order in $a$ we have the partition function
+\begin{equation}
+\ln(Z)=\ln(\ideal{Z})-\frac{1}{T}\frac{2\pi a\hbar^2}{m}\frac{N^2}{V}
+\qty(2-\frac{n_0^2}{N^2}).
+\end{equation}
+For brevity we can let $A=2\pi a\hbar^2/m$, as a constant. For
+temperature above the critical, we have $n_0\lll N$, so we get
+\begin{equation}
+\ln(Z)=\ln(\ideal{Z})-2A\frac{N^2}{TV}\qcomma
+\text{for}\;T>\Tc.
+\end{equation}
+For below the critical temperature we have instead $n_0/N=1-v/\vc$
+\begin{equation}
+ln(Z)=\ln(\ideal{Z})
+-A\frac{N^2}{TV}\qty(1+2\frac{v}{\vc}-\frac{v^2}{\vc^2})\qcomma
+\text{for}\;T<\Tc.
+\end{equation}
+
+
+\subsection{Heat capacity and bulk modulus}
+
+
+
+\subsection{More discontinuities}
+
 
 
 
