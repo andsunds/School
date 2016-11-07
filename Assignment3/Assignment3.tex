@@ -25,11 +25,18 @@
 
 \renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
 
-
-
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
+
+
+\usepackage{tikz}
+
 \begin{document}
+
+\tikzstyle{every picture}+=[remember picture]
+\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
+
+
 
 %%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
 
@@ -382,6 +389,279 @@ infinite $\Ne$.
 
 
 \section{Field operators and the Schrödinger equation}
+\newcommand{\scomm}[2]{\left\langle#1,\;#2\right\rangle}
+\newcommand{\Scomm}[2]{\langle#1,\;#2\rangle}
+\newcommand{\commute}[1]{\overbrace{#1}^{\text{commute}}}
+For a system of interacting particles we have
+\begin{equation}\label{eq:4_want_this}
+\begin{aligned}
+H=&-\frac{\hbar^2}{2m}\int\rd^3r\,
+\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})\\
+&+\frac{1}{2}\iint\rd^3\!r\,\rd^3\!r'\,
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r}),
+\end{aligned}
+\end{equation}
+where the field operators satisfy the commutation relations
+\begin{equation}\label{eq:4_comm}
+\begin{aligned}
+\scomm{\psi(\vb{r})}{\psi^\dagger(\vb{r}')}
+&=\delta(\vb{r}-\vb{r}')\\
+\scomm{\psi(\vb{r})}{\psi(\vb{r}')\Big.}=
+\scomm{(\psi^\dagger(\vb{r})}{\psi^\dagger(\vb{r}')}&=0
+\end{aligned}
+\end{equation}
+where ``$\scomm{\cdots}{\cdots}$'' corresponds to a (regular)
+commutator for bosons and an anti-commutator for fermions. The second
+relation means that we can commute creation and annihilation operator
+with each other, but in the case of fermions we also pick up a change
+of sign. 
+
+
+\subsection{Commutation with the Hamiltonian}
+Here we want to show that 
+\begin{equation}
+\comm{\psi(\vb{r}_j)}{H}
+=\qty(-\frac{\hbar^2}{2m}\laplacian_j
++\int\rd^3\!r\,
+\psi^\dagger(\vb{r})
+u(\vb{r}-\vb{r}_j)\psi(\vb{r})
+)\psi(\vb{r}_j),
+\end{equation}
+for bosons as well as fermions.
+This we will do in steps.
+
+\subsubsection{The first term}
+We begin with the first integral of $H$. First of all we have
+\begin{equation}
+\comm{\psi(\vb{r}_j)}{\int\rd^3r\,
+\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})}=
+\int\rd^3r\,
+\comm{\psi(\vb{r}_j)}
+{\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})}
+\end{equation}
+since $\vb{r}_j$ can be regarded as a constant with respect to the
+integration. Then we continue and commute $\psi(\vb{r})$ and
+$\psi(\vb{r}_j)$ in the second term of the expanded commutator:
+\begin{equation}
+\begin{aligned}
+\comm{\psi(\vb{r}_j)}
+{\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})}
+=&\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+-\psi^\dagger(\vb{r})\laplacian
+\commute{\psi(\vb{r})\psi(\vb{r}_j)}\\
+=&\begin{cases}
+\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+-\psi^\dagger(\vb{r})\laplacian\psi(\vb{r}_j)\psi(\vb{r})
+\qcomma&\text{bosons}\\
+\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
++\psi^\dagger(\vb{r})\laplacian\psi(\vb{r}_j)\psi(\vb{r}),
+&\text{fermions}.
+\end{cases}
+\end{aligned}
+\end{equation}
+Now in both cases $\laplacian$ and $\psi(\vb{r}_j)$ commutes since the
+Laplacian operates on $\vb{r}$. We thus have
+\begin{equation}
+\begin{aligned}
+\comm{\psi(\vb{r}_j)}
+{\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})}
+=&\begin{cases}
+\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+-\psi^\dagger(\vb{r})\psi(\vb{r}_j)\laplacian\psi(\vb{r})
+\qcomma&\text{bosons}\\
+\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
++\psi^\dagger(\vb{r})\psi(\vb{r}_j)\laplacian\psi(\vb{r}),
+&\text{fermions}.
+\end{cases}\\
+=&\scomm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})}
+\laplacian\psi(\vb{r})%\\=&
+\quad=\quad
+\delta(\vb{r}-\vb{r}_j)\laplacian\psi(\vb{r}).
+\end{aligned}
+\end{equation}
+We now have
+\begin{equation}\label{eq:4_comm_i}
+\comm{\psi(\vb{r}_j)}{\int\rd^3r\,
+\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})}=
+\int\rd^3r\,\delta(\vb{r}-\vb{r}_j)\laplacian\psi(\vb{r})
+=\laplacian_j\psi(\vb{r}_j),
+\end{equation}
+which agrees with the first term in \eqref{eq:4_want_this}.
+
+\subsubsection{The second term}
+Next we tackle
+\begin{equation}
+\begin{aligned}
+&\comm{\psi(\vb{r}_j)}{\iint\rd^3\!r\,\rd^3\!r'\,
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}=\\
+=\iint\rd^3\!r\,\rd^3\!r'&
+\comm{\psi(\vb{r}_j)}{
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}.
+\end{aligned}
+\end{equation}
+Just as before, we want to commute $\psi(\vb{r}_j)$ back to the
+creation operators, in the second term. The only difference now is
+that we have to commute $\psi(\vb{r}_j)$ past both $\psi(\vb{r})$ and
+$\psi(\vb{r}')$. So for \emph{both} bosons and fermions there will be no
+change of sign in the end. We get
+\begin{equation}
+\begin{aligned}
+-\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')
+\commute{\psi(\vb{r})\psi(\vb{r}_j)}
+=&\mp\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')
+\commute{\psi(\vb{r}')\psi(\vb{r}_j)}
+\psi(\vb{r})\\
+=&-\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}_j)\psi(\vb{r}')\psi(\vb{r}).
+\end{aligned}
+\end{equation}
+And once again $\psi(\vb{r}_j)$ and $u(\vb{r}-\vb{r}')$ commute since
+$\vb{r}_j$ is independent. So we are left with
+\begin{equation}
+\comm{\psi(\vb{r}_j)}{
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}
+=\comm{\psi(\vb{r}_j)}
+{\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')}
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r}).
+\end{equation}
+
+We concentrate our effort on the commutator that's still left:
+\begin{equation}
+\begin{aligned}
+\comm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')}
+=&\hspace{-20pt}\overbrace{
+\comm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})}
+}^{\acomm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})}-2\psi^\dagger(\vb{r})\psi(\vb{r}_j)}
+\hspace{-20pt}\psi^\dagger(\vb{r}')
++\psi^\dagger(\vb{r})
+\hspace{-20pt}\overbrace{
+\comm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r}')}
+}^{2\psi(\vb{r}_j)\psi^\dagger(\vb{r}')-\acomm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r}')}}
+\\%\hspace{-22pt}.
+=&
+\begin{cases}
+\comm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})}\psi^\dagger(\vb{r}')
++\psi^\dagger(\vb{r})\comm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r}')}
+,&\text{bosons}\\
+\acomm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})}\psi^\dagger(\vb{r}')
+-\psi^\dagger(\vb{r})\acomm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r}')}
+,\;&\text{fermions}
+\end{cases}\\
+=&
+\begin{cases}
+\delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
++\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
+,&\text{bosons}\\
+\delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
+-\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
+,\;&\text{fermions}.
+\end{cases}
+\end{aligned}
+\end{equation}
+In the case of bosons we already had what we needed after using the
+commutator identity in the first step. For fermions however we needed
+to convert the commutators to anti-commutators; this turned out to
+result in almost the same expression in the end as for bosons.
+
+From here on it will be simpler to deal with the two cases separately.
+
+\paragraph{Bosons:} 
+\begin{equation}
+\begin{aligned}
+&\iint\rd^3\!r\,\rd^3\!r'\,
+\comm{\psi(\vb{r}_j)}{
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
+=&\iint\rd^3\!r\,\rd^3\!r'\,
+\qty(
+\delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
++\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
+)
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})\\
+=&\int\rd^3\!r'\,
+\psi^\dagger(\vb{r}')u(\vb{r}_j-\vb{r}')\psi(\vb{r}')\psi(\vb{r}_j)
++\int\rd^3\!r\,
+\psi^\dagger(\vb{r})u(\vb{r}-\vb{r}_j)
+\commute{\psi(\vb{r}_j)\psi(\vb{r})}
+\end{aligned}
+\end{equation}
+Now we don't need to wory about commutations any longer.
+Furthermore the interaction $u$ between particles must clearly be
+independent of the direction of the interaction,
+i.e. $u(\vb{r}_j-\vb{r}')=u(\vb{r}'-\vb{r}_j)$. This results in the
+two integrals being equal, only the name of the integration variable
+differs. 
+
+Therefore
+\begin{equation}\label{eq:4_comm_ii_bose}
+\begin{aligned}
+&\iint\rd^3\!r\,\rd^3\!r'\,
+\comm{\psi(\vb{r}_j)}{
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
+=&2\int\rd^3\!r\,
+\psi^\dagger(\vb{r})u(\vb{r}_j-\vb{r})\psi(\vb{r})\psi(\vb{r}_j)
+\end{aligned}
+\end{equation}
+for bosons.
+
+\paragraph{Fermions:}
+\begin{equation}
+\begin{aligned}
+&\iint\rd^3\!r\,\rd^3\!r'\,
+\comm{\psi(\vb{r}_j)}{
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
+=&\iint\rd^3\!r\,\rd^3\!r'\,
+\qty(
+\delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
+-\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
+)
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})\\
+=&\int\rd^3\!r'\,
+\psi^\dagger(\vb{r}')u(\vb{r}_j-\vb{r}')\psi(\vb{r}')\psi(\vb{r}_j)
+-\iint\rd^3\!r\,
+\psi^\dagger(\vb{r})u(\vb{r}-\vb{r}_j)
+\commute{\psi(\vb{r}_j)\psi(\vb{r})}.
+\end{aligned}
+\end{equation}
+Now, however, the commutation results in a change of sign. This change
+of sign fortunately cancels the minus before the integral, and as
+before we get
+\begin{equation}\label{eq:4_comm_ii_ferm}
+\begin{aligned}
+&\iint\rd^3\!r\,\rd^3\!r'\,
+\comm{\psi(\vb{r}_j)}{
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
+=&2\int\rd^3\!r\,
+\psi^\dagger(\vb{r})u(\vb{r}_j-\vb{r})\psi(\vb{r})\psi(\vb{r}_j)
+\end{aligned}
+\end{equation}
+for fermions as well.
+
+\subsubsection{Final result}
+To get the full commutator we use \eqref{eq:4_comm_i},
+\eqref{eq:4_comm_ii_bose} and \eqref{eq:4_comm_ii_ferm} to get the desired
+result:
+\begin{equation}
+\comm{\psi(\vb{r}_j)}{H}
+=\qty(-\frac{\hbar^2}{2m}\laplacian_j
++\int\rd^3\!r\,
+\psi^\dagger(\vb{r})
+u(\vb{r}-\vb{r}_j)\psi(\vb{r})
+)\psi(\vb{r}_j),
+\end{equation}
+which is valid for both bosons and fermions.
+\qed
+
+\subsection{Equivalence with the Schrödinger equation}
 
 
 
