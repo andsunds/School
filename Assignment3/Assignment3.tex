@@ -617,10 +617,13 @@ The discontinuity is thus given by
 =6A\Tc\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2.
 \end{equation}
 %\todo{¿Need to show cont. in ideal case?}
-Since in the ideal case this quantity is continous\footnotemark{}.
+Since in the ideal case this quantity is continuous\footnotemark{}.
 
-\footnotetext{This can be seen with the help of the identity
-  \eqref{eq:3b_Cv_identity}, since $C_V$ is continous at $T=\Tc.$}
+\footnotetext{This can be seen through the fact that in the ideal case
+there is no contribution to $P$ from condensed particles. So pressure
+change when $T$ passes $\Tc$ is smooth, since the number of condensed
+particles also changes smoothly. Therefore this quantity is continuous
+in the ideal case. }
 
 \subsubsection{}
 To differentiate $\mu$ we need to find it first:
@@ -680,7 +683,7 @@ The discontinuity is now given by
 =A\frac{3}{2}
 \Tc^{-1/2}\,\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
 \end{equation}
-Since, with the same argument as before, this quantity is continous.
+Since, with the same argument as before, this quantity is continuous.
 %\todo{¿Need to show cont. in ideal case?}
 
 \subsubsection{Comparison to the discontinuity in the heat capacity}
@@ -1088,7 +1091,7 @@ or more specifically $\psi_{i-1}U_i$. To do this we will use
 =\delta(\vb{r}-\vb{r}').
 \end{equation}
 We are also not restricted by the fact that we have $i-1$ and $i$. It
-we can just as well analyse
+we can just as well analyze
 \begin{equation}
 \begin{aligned}
 \psi_{j}U_i=&\int\rd^3\!r\,
@@ -1147,31 +1150,44 @@ Now all we have to do is to apply \eqref{eq:4b_all_to_left} to
 \eqref{eq:4b_start}, using $T_i=-\hbar^2\laplacian_i/(2m)$, we get
 \begin{equation}\label{eq:4b_almost}
 \mel**{0}{\psi_1\cdots\psi_{N}H}{\Psi_{NE}}=
-\mel**{0}{\qty[H
-+\sum_{i=1}^N\qty(-\frac{\hbar^2}{2m}\laplacian_i
+\frac{1}{\sqrt{N!}}\mel**{0}{
+\qty[H+\sum_{i=1}^N\qty(-\frac{\hbar^2}{2m}\laplacian_i
 +U_i+\sum_{j<i}u_{j,\,i})
 ]\psi_1\cdots\psi_{N}}{\Psi_{NE}}.
 \end{equation}
-The first part here is easy to handel:
+The first part here is easy to handle:
 \begin{equation}
 \bra{0} H
 \overbrace{\psi_1\psi_2\cdots\psi_{N}\ket{\Psi_{NE}}}^{=\ket{0}}
 =\mel{0}{H}{0}=0.
 \end{equation}
-
 Then we can see that all that separates \eqref{eq:4b_almost} from
-\eqref{eq:4b_SE} is the sum over $U_i$. That sum just corresponds to
-the sum of interactions between each particle and it's environment
-
-
-
-
-
-
-
+\eqref{eq:4b_SE} is the sum over $U_i$. But again
+\begin{equation}
+\bra{0} U_i
+\overbrace{\psi_1\psi_2\cdots\psi_{N}\ket{\Psi_{NE}}}^{=\ket{0}}
+=\mel{0}{U_i}{0}=0
+\end{equation}
+corresponds to the interaction between vacuum and it self. 
+And we are left with
+\begin{equation}%\label{eq:}
+\begin{aligned}
+&\frac{1}{\sqrt{N!}}\mel**{0}{\psi_1\cdots\psi_{N}H}{\Psi_{NE}}\\
+=&\frac{1}{\sqrt{N!}}\mel**{0}{
+\sum_{i=1}^N\qty(-\frac{\hbar^2}{2m}\laplacian_i
++\sum_{j<i}u_{j,\,i})
+\psi(\vb{r}_1)\cdots\psi(\vb{r}_{N})}{\Psi_{NE}}.\\
+\stackrel{\eqref{eq:4b_start}}{=}&
+\frac{E}{\sqrt{N!}}
+\mel{0}{\psi(\vb{r}_1)\psi(\vb{r}_2)\cdots\psi(\vb{r}_N)}{\Psi_{NE}},
+\end{aligned}
+\end{equation}
+which would correspond to the Schrödinger equation in
+\eqref{eq:4b_SE}.
+\qed
 
 
 \end{document}
 
 
-%  LocalWords:  Pathria
+%  LocalWords:  Pathria  idealities bosonic Bogoliubov Beale
