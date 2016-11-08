@@ -1157,18 +1157,18 @@ Now all we have to do is to apply \eqref{eq:4b_all_to_left} to
 \end{equation}
 The first part here is easy to handle:
 \begin{equation}
-\bra{0} H
-\overbrace{\psi_1\psi_2\cdots\psi_{N}\ket{\Psi_{NE}}}^{=\ket{0}}
-=\mel{0}{H}{0}=0.
+\overbrace{\bra{0} H}^{0}\;
+\psi_1\psi_2\cdots\psi_{N}\ket{\Psi_{NE}}
+=0.
 \end{equation}
 Then we can see that all that separates \eqref{eq:4b_almost} from
 \eqref{eq:4b_SE} is the sum over $U_i$. But again
 \begin{equation}
-\bra{0} U_i
-\overbrace{\psi_1\psi_2\cdots\psi_{N}\ket{\Psi_{NE}}}^{=\ket{0}}
-=\mel{0}{U_i}{0}=0
+\bra{0} U_i=\int\rd^3r\,
+\overbrace{\bra{0}\psi^\dagger(\vb{r})}^{=(\psi(\vb{r})\ket{0})^\dagger=0}
+u(\vb{r}-\vb{r}_i)\psi(\vb{r})   = 0
 \end{equation}
-corresponds to the interaction between vacuum and it self. 
+corresponds to the interaction in the vacuum state. 
 And we are left with
 \begin{equation}%\label{eq:}
 \begin{aligned}
@@ -1182,7 +1182,7 @@ And we are left with
 \mel{0}{\psi(\vb{r}_1)\psi(\vb{r}_2)\cdots\psi(\vb{r}_N)}{\Psi_{NE}},
 \end{aligned}
 \end{equation}
-which would correspond to the Schrödinger equation in
+which corresponds to the Schrödinger equation in
 \eqref{eq:4b_SE}.
 \qed
 
