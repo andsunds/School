@@ -54,8 +54,8 @@ Assignment 3}
 
 \section{Cusp in $C_V$ for a Bose gas}
 \renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
-Here we are goint to find the discontinuity in the derivative of $C_V$
-for a bose gas. To do that we will need the energy:
+Here we are going to find the discontinuity in the derivative of $C_V$
+for a Bose gas. To do that we will need the energy:
 \begin{equation}\label{eq:1_E}
 \begin{cases}
 E=\frac{3}{2}NT\frac{g_{5/2}(z)}{g_{3/2}(z)}, \quad& T>\Tc\\
@@ -103,7 +103,7 @@ other words
 
 
 \subsection{Above critical temperature}
-Now we have to use the first eqation of \eqref{eq:1_E}, giving
+Now we have to use the first equation of \eqref{eq:1_E}, giving
 \begin{equation}
 \begin{aligned}
 C_V=&\frac{3}{2}N\qty{\frac{g_{5/2}(z)}{g_{3/2}(z)}
@@ -132,7 +132,7 @@ C_V=&\frac{3}{2}N\qty{\frac{g_{5/2}(z)}{g_{3/2}(z)}
 \end{aligned}
 \end{equation}
 Which upon differentiation and using the same rules when
-differentialting the Bose functions as before becomes
+differentiating the Bose functions as before becomes
 \begin{equation}
 \begin{aligned}
 \qty(\pdv{C_V}{T})_{\!V}
@@ -248,7 +248,7 @@ The last result is due to the fact that
 \begin{equation}
 \ip{m}{n}=0\qcomma m\neq n
 \end{equation}
-for eigenstates to the numberoperator and that $\xi^\dagger$ and $\xi$
+for eigenstates to the number-operator and that $\xi^\dagger$ and $\xi$
 changes that state. 
 We now end up getting
 \begin{equation}\label{eq:2_N_sum}
@@ -268,7 +268,7 @@ To continue from here we will use another result from class
 \cosh(2\theta_k)=\frac{\epsilon_k+nu(k)}
 {\sqrt{\epsilon_k\qty[\epsilon_k+2nu(k)]}}.
 \end{equation}
-Then we also know that the quasiparticles are to be treated as an
+Then we also know that the quasi-particles are to be treated as an
 ideal Bose gas whereby
 \begin{equation}
 \ev{\xi^\dagger_k\xi_k
@@ -300,12 +300,12 @@ We can now see that for large $\epsilon$ the integrand becomes approximately
 \qty(0+\frac{1}{2})-1}
 \propto\frac{1}{\sqrt{\epsilon}}
 \end{equation}
-which diverges upoun integration to $\infty$, for any $T>0$. This suggests that
+which diverges upon integration to $\infty$, for any $T>0$. This suggests that
 \emph{if} there is a critical temperature, then it should be
 $\Tc=0$. Even if $\Tc>0$, we would still expect $\Ne$ to be either~0
 or at least finite when $T\to0$.
 
-To further analyse this integral we set
+To further analyze this integral we set
 \begin{equation}
 x=\frac{\epsilon}{T}
 \quad\Longrightarrow\quad
@@ -356,20 +356,20 @@ We now have
 -\cancelto{0}{\sqrt{\frac{T}{x}}} \phantom{00}\Bigg\}
 =\pm\infty
 \end{equation}
-This is divergent because $1/x$ is divergent both when the interation
+This is divergent because $1/x$ is divergent both when the integration
 limits are~0 or $\infty$, and 
 \begin{equation}
 u(k)=\int\rd{r}\, u(r)\ee^{-\ii kr}
 \to\int\rd{r}\, u(r) = u_0 
 \qcomma \text{as }\; k\to0 \;\Leftrightarrow\; x\to0.
 \end{equation}
-So since $u_0$ is finite, \eqref{eq:2_Ne_div} must atleast diverge in
+So since $u_0$ is finite, \eqref{eq:2_Ne_div} must at least diverge in
 the limit $x\to 0$\footnotemark{}. This contradicts the notion that
-there excists a $\Tc\ge0$ for a weakly interacting bosonic gas in one
+there exists a $\Tc\ge0$ for a weakly interacting bosonic gas in one
 dimension. 
 
 \footnotetext{We didn't need to be as drastic as to go all the way to
-  $T\to0$ to see this divergens. Because in the limit $x\to0$, we
+  $T\to0$ to see this divergence. Because in the limit $x\to0$, we
   would still get the result \eqref{eq:2_lim1} for a finite
   $T$. But \eqref{eq:2_lim1} is more mathematically stringent the way
   presented here, because of the $x^{-1}$ present. }
@@ -423,7 +423,7 @@ v=\frac{V}{N}\qcomma\text{and}\quad
 \end{equation}
 where $\Lambda=h/\sqrt(2\pi m)$.
 
-From the partition function we can get the Helmholz free energy
+From the partition function we can get the Helmholtz free energy
 \begin{equation}
 F=-T\ln(Z)=
 \begin{cases}
@@ -438,7 +438,7 @@ F=-T\ln(Z)=
 \subsection{Heat capacity and bulk modulus}
 
 \subsubsection{Heat capacity}
-To get the discontinuitiy in the heat capacity we use
+To get the discontinuity in the heat capacity we use
 \begin{equation}
 C_V=T\qty(\pdv{S}{T})_v
 \end{equation}
@@ -511,7 +511,7 @@ C_V=\ideal{C_V}
 \end{equation}
 for $T>\Tc$.
 
-Next we already know that in the ideal case $C_V$ is continous at
+Next we already know that in the ideal case $C_V$ is continuous at
 $\Tc$, which means that
 \begin{equation}
 \begin{aligned}
@@ -619,7 +619,7 @@ The discontinuity is thus given by
 \todo{¿Need to show cont. in ideal case?}
 
 \subsubsection{}
-To differntiate $\mu$ we need to find it first:
+To differentiate $\mu$ we need to find it first:
 \begin{equation}
 \mu=\frac{F}{N}+Pv.
 \end{equation}
@@ -662,7 +662,7 @@ For $T>\Tc$ we instead get
 +\ideal{P}v+A\frac{2}{v}
 =\ideal{\mu}+A\frac{4}{v}.
 \end{equation}
-And again, there's no $T$-dependence in the non-ideal term, wherby 
+And again, there's no $T$-dependence in the non-ideal term, whereby 
 \begin{equation}
 \qty(\pdv[2]{\mu}{T})_v
 =\qty(\pdv[2]{\ideal{\mu}}{T})_v
@@ -698,8 +698,8 @@ V\Tc\qty[6A\Tc\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2]
 -\frac{3}{2}\Tc^{1/2}].
 \end{aligned}
 \end{equation}
-This is exctly the same as the non-ideal term in
-(\ref{eq:3a_Cv_Tc-},\,a), and as we remember: only the non-idel term
+This is exactly the same as the non-ideal term in
+(\ref{eq:3a_Cv_Tc-},\,a), and as we remember: only the non-ideal term
 contributed to the discontinuity. Therefore the identity
 \eqref{eq:3b_Cv_identity} holds, even in the discontinuity.
 \qed
@@ -909,7 +909,7 @@ u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})\\
 \commute{\psi(\vb{r}_j)\psi(\vb{r})}
 \end{aligned}
 \end{equation}
-Now we don't need to wory about commutations any longer.
+Now we don't need to worry about commutations any longer.
 Furthermore the interaction $u$ between particles must clearly be
 independent of the direction of the interaction,
 i.e. $u(\vb{r}_j-\vb{r}')=u(\vb{r}'-\vb{r}_j)$. This results in the
@@ -986,3 +986,5 @@ which is valid for both bosons and fermions.
 
 \end{document}
 
+
+%  LocalWords:  Pathria
