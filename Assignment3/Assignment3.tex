@@ -7,7 +7,7 @@
 ]{cancel}
 \graphicspath{{figures/}}
 \swapcommands{\Omega}{\varOmega}
-\swapcommands{\Lambda}{\varLambda}
+%\swapcommands{\Lambda}{\varLambda}
 
 %%Drar in tabell och figurtexter
 \usepackage[margin=10 pt]{caption}
@@ -395,8 +395,10 @@ infinite $\Ne$.
 \renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 \newcommand{\ideal}[1]{#1^\text{{(ideal)}}}
 \newcommand{\vc}{v_{\text{c}}}
+\newcommand{\lc}{\lambda_{\text{c}}}
 
-To first order in $a$ we have the partition function
+To first order in $a$ we have the canonical (\emph{not} the grand
+canonical) partition function 
 \begin{equation}
 \ln(Z)=\ln(\ideal{Z})-\frac{1}{T}\frac{2\pi a\hbar^2}{m}\frac{N^2}{V}
 \qty(2-\frac{n_0^2}{N^2}).
@@ -409,18 +411,298 @@ temperature above the critical, we have $n_0\lll N$, so we get
 \end{equation}
 For below the critical temperature we have instead $n_0/N=1-v/\vc$
 \begin{equation}
-ln(Z)=\ln(\ideal{Z})
+\ln(Z)=\ln(\ideal{Z})
 -A\frac{N^2}{TV}\qty(1+2\frac{v}{\vc}-\frac{v^2}{\vc^2})\qcomma
 \text{for}\;T<\Tc.
+\end{equation}
+Where
+\begin{equation}\label{eq:3_v_vc}
+v=\frac{V}{N}\qcomma\text{and}\quad
+\vc=\frac{\lambda^3}{\zeta(\nicefrac{3}{2})}
+=T^{-3/2}\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})},
+\end{equation}
+where $\Lambda=h/\sqrt(2\pi m)$.
+
+From the partition function we can get the Helmholz free energy
+\begin{equation}
+F=-T\ln(Z)=
+\begin{cases}
+\ideal{F}+2A\frac{N^2}{V}\qcomma &\text{for}\;T>\Tc,\\
+\ideal{F}
++AN\qty(\frac{1}{v}+\frac{2}{\vc}-\frac{v}{\vc^2})
+\qcomma&\text{for}\;T<\Tc.
+\end{cases}
 \end{equation}
 
 
 \subsection{Heat capacity and bulk modulus}
 
+\subsubsection{Heat capacity}
+To get the discontinuitiy in the heat capacity we use
+\begin{equation}
+C_V=T\qty(\pdv{S}{T})_v
+\end{equation}
+and 
+\begin{equation}
+S=-\qty(\pdv{F}{T})_v
+\end{equation}
 
+Let's begin with the case $T<\Tc$:
+\begin{equation}
+\begin{aligned}
+S=&\ideal{S}-AN\qty[\pdv{T}\qty(\frac{1}{v}+\frac{2}{\vc}-\frac{v}{\vc^2})_v]\\
+=&\ideal{S}-AN\qty[2\frac{3}{2}T^{1/2}-v3T^2\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}]
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3},
+\end{aligned}
+\end{equation}
+where we used \eqref{eq:3_v_vc} to differentiate $\vc$.
+
+Next is
+\begin{equation}
+\begin{aligned}
+C_V=&T\qty(\pdv{S}{T})_v=\ideal{C_V}-TAN
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[\pdv{T}\qty(3T^{1/2}-v3T^2\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3})_v]\\
+=&\ideal{C_V}-TAN
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[\frac{3}{2}T^{-1/2}-v6T\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}].\\
+% =&\ideal{C_V}-AN
+% \frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+% \qty[\frac{3}{2}T^{1/2}-v6T^2\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}]\\
+\end{aligned}
+\end{equation}
+To get the value as $T\to\Tc$, we use
+\begin{equation}
+\Tc=\Lambda^2\qty[\frac{1}{v\zeta(\nicefrac{3}{2})}]^{2/3}
+\end{equation}
+and get
+\begin{equation}\label{eq:3a_Cv_Tc-}
+\begin{aligned}
+C_V=&\ideal{C_V}(\Tc)-AN
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[\frac{3}{2}\Tc^{1/2}-v6\Tc^2\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}]\\
+=&\ideal{C_V}(\Tc)-AN
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[\frac{3}{2}\Lambda\qty(\frac{1}{v\zeta(\nicefrac{3}{2})})^{1/3}
+-v6\Lambda^4\qty(\frac{1}{v\zeta(\nicefrac{3}{2})})^{4/3}
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}]\\
+=&\ideal{C_V}(\Tc)-AN
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[\frac{3}{2}-6]
+\Lambda\qty(\frac{1}{v\zeta(\nicefrac{3}{2})})^{1/3}.\\
+\end{aligned}
+\end{equation}
+Now we use $\lc=[v\zeta(\nicefrac{3}{2})]^{1/3}$ to get
+\begin{equation}
+\begin{aligned}
+C_V(T\to\Tc-)=&\ideal{C_V}(\Tc)+\frac{9}{2}AN
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^2}\frac{1}{\lc}.\\
+\end{aligned}
+\end{equation}
+
+For $T>\Tc$ all we have is
+\begin{equation}
+S=\ideal{S}-\qty(\pdv{T} 2A\frac{N^2}{V})_v
+=\ideal{S},
+\end{equation}
+wherefore 
+\begin{equation}
+C_V=\ideal{C_V}
+\end{equation}
+for $T>\Tc$.
+
+Next we already know that in the ideal case $C_V$ is continous at
+$\Tc$, which means that
+\begin{equation}
+\begin{aligned}
+C_V(T\to\Tc-)-C_V(T\to\Tc+)
+=&\frac{9}{2}AN\frac{\zeta(\nicefrac{3}{2})}{\Lambda^2}\frac{1}{\lc}\\
+=&N\frac{9}{2\lc}\frac{2\pi a \hbar^2}{m}
+\frac{\zeta(\nicefrac{3}{2})}{h^2/(2\pi m)}
+=N\frac{9a}{2\lc}\zeta(\nicefrac{3}{2}).
+\end{aligned}
+\end{equation}
+\qed
+
+\subsubsection{Bulk modulus}
+For the bulk modulus
+\begin{equation}
+K=-V\pdv{P}{V}=-v\pdv{P}{v},
+\end{equation}
+we will use
+\begin{equation}
+P=-\qty(\pdv{F}{V})_T
+=-\frac{1}{N}\qty(\pdv{F}{v})_T.
+\end{equation}
+
+So for $T<\Tc$ we get
+\begin{equation}\label{eq:3_P<Tc}
+P(T<\Tc)=\ideal{P}-A\pdv{v}\qty(\frac{1}{v}+\frac{2}{\vc}-\frac{v}{\vc^2})_T
+=\ideal{P}+A\qty(\frac{1}{v^2}+\frac{1}{\vc^2}),
+\end{equation}
+which gives
+\begin{equation}
+\begin{aligned}
+K=&\ideal{K}-vA\pdv{v}\qty(\frac{1}{v^2}+\frac{1}{\vc^2})\\
+=&\ideal{K}-vA\qty(\frac{-2}{v^3})\\
+=&\ideal{K}+\frac{2\pi a\hbar^2}{m}\frac{2}{v^2}
+\to \ideal{K}+\frac{4\pi a\hbar^2}{m\vc^2}
+\qcomma\text{as}\; T\to\Tc^-.
+\end{aligned}
+\end{equation}
+
+But in the case of $T>\Tc$ we get
+\begin{equation}\label{eq:3_P>Tc}
+P(T>\Tc)=\ideal{P}-\pdv{v}\qty(A\frac{2}{v})_T
+=\ideal{P}+A\frac{2}{v^2}.
+\end{equation}
+From here it's clear that we are going to get double the effect from
+non-idealities for $T>\Tc$. This is because we have a factor~2 on the non-ideal
+term this time, and the non-ideal term has the same $v$-dependence as
+for $T<\Tc$.
+
+We therefore have
+\begin{equation}
+\begin{aligned}
+K(T\to\Tc-)-K(T\to\Tc+)
+=&\cancel{\ideal{K}(\Tc)}+\frac{4\pi a\hbar^2}{m\vc^2}
+-\qty(\cancel{\ideal{K}(\Tc)}+2\frac{4\pi a\hbar^2}{m\vc^2})\\
+=&-\frac{4\pi a\hbar^2}{m\vc^2}.
+\end{aligned}
+\end{equation}
+\qed
 
 \subsection{More discontinuities}
+Here we're going to examine the discontinuities in the quantities
+\begin{equation}
+\qty(\pdv[2]{P}{T})_v \qcomma\text{and}\quad
+\qty(\pdv[2]{\mu}{T})_v.
+\end{equation}
 
+\subsubsection{}
+Since we already have the expressions for $P$ in \eqref{eq:3_P<Tc} and
+\eqref{eq:3_P>Tc}, we can just start differentiating.
+
+For $T<\Tc$, we remember that
+$\vc=T^{-3/2}\,\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})}$, and we use
+\eqref{eq:3_P<Tc} to get
+\begin{equation}
+\begin{aligned}
+\qty(\pdv{P}{T})_v=&\qty(\pdv{\ideal{P}}{T})_v
++A\pdv{T}\qty(\frac{1}{v^2}+\frac{1}{\vc^2})_v\\
+=&\qty(\pdv{\ideal{P}}{T})_v
++A\pdv{T}\qty[\frac{1}{v^2}+T^3\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2]_v\\
+=&\qty(\pdv{\ideal{P}}{T})_v
++3AT^2\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2.
+\end{aligned}
+\end{equation}
+We then end up getting
+\begin{equation}
+\qty(\pdv[2]{P}{T})_v=\qty(\pdv[2]{\ideal{P}}{T})_v
++6AT\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2
+\qcomma T<\Tc.
+\end{equation}
+
+For $T>\Tc$ we can see from \eqref{eq:3_P>Tc} that there is no
+$\vc$-dependence in the non-ideal term. Therefore we get
+\begin{equation}
+\qty(\pdv[2]{P}{T})_v=\qty(\pdv[2]{\ideal{P}}{T})_v
+\qcomma T>\Tc.
+\end{equation}
+
+The discontinuity is thus given by
+\begin{equation}\label{eq:3_discont._P}
+\eval{\qty(\pdv[2]{P}{T})_v}_{\Tc^-}
+-\eval{\qty(\pdv[2]{P}{T})_v}_{\Tc^+}
+=6A\Tc\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2.
+\end{equation}
+\todo{¿Need to show cont. in ideal case?}
+
+\subsubsection{}
+To differntiate $\mu$ we need to find it first:
+\begin{equation}
+\mu=\frac{F}{N}+Pv.
+\end{equation}
+
+In the case of $T<\Tc$ we have
+\begin{equation}
+\begin{aligned}
+\mu(T<\Tc)=&\frac{\ideal{F}}{N}
++A\qty(\frac{1}{v}+\frac{2}{\vc}-\frac{v}{\vc^2})
++\ideal{P}v+A\qty(\frac{1}{v}+\frac{v}{\vc^2})\\
+=&\ideal{\mu}
++2A\qty(\frac{1}{v}+\frac{1}{\vc}).
+\end{aligned}
+\end{equation}
+Again, we use
+$\vc=T^{-3/2}\,\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})}$
+to get
+\begin{equation}
+\begin{aligned}
+\qty(\pdv{\mu}{T})_v=&\qty(\pdv{\ideal{\mu}}{T})_v
++2A\pdv{T}\qty(\frac{1}{v}+
+T^{3/2}\,\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3})_v\\
+=&\qty(\pdv{\ideal{\mu}}{T})_v
++2A\frac{3}{2}
+T^{1/2}\,\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3},
+\end{aligned}
+\end{equation}
+and
+\begin{equation}
+\qty(\pdv[2]{\mu}{T})_v
+=\qty(\pdv[2]{\ideal{\mu}}{T})_v
++A\frac{3}{2}
+T^{-1/2}\,\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qcomma T<\Tc.
+\end{equation}
+
+For $T>\Tc$ we instead get
+\begin{equation}
+\mu(T>\Tc)=\frac{\ideal{F}}{N}+2A\frac{1}{v}
++\ideal{P}v+A\frac{2}{v}
+=\ideal{\mu}+A\frac{4}{v}.
+\end{equation}
+And again, there's no $T$-dependence in the non-ideal term, wherby 
+\begin{equation}
+\qty(\pdv[2]{\mu}{T})_v
+=\qty(\pdv[2]{\ideal{\mu}}{T})_v
+\qcomma T>\Tc.
+\end{equation}
+
+The discontinuity is now given by
+\begin{equation}\label{eq:3_discont._mu}
+\eval{\qty(\pdv[2]{\mu}{T})_v}_{\Tc^-}
+-\eval{\qty(\pdv[2]{\mu}{T})_v}_{\Tc^+}
+=A\frac{3}{2}
+\Tc^{-1/2}\,\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\end{equation}
+\todo{¿Need to show cont. in ideal case?}
+
+\subsubsection{Comparison to the discontinuity in the heat capacity}
+We have the thermodynamic identity
+\begin{equation}\label{eq:3b_Cv_identity}
+C_V=VT\qty(\pdv[2]{P}{T})_v-NT\qty(\pdv[2]{\mu}{T})_v.
+\end{equation}
+With \eqref{eq:3_discont._P} and \eqref{eq:3_discont._mu} we have on
+the RHS
+\begin{equation}
+\begin{aligned}
+V\Tc\qty[6A\Tc\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2]
+-N\Tc\qty[A\frac{3}{2}
+\Tc^{-1/2}\,\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}]
+=&A\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[V6\Tc^2\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+-N\frac{3}{2}\Tc^{1/2}]\\
+=&AN\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[v6\Tc^2\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+-\frac{3}{2}\Tc^{1/2}].
+\end{aligned}
+\end{equation}
+This is exctly the same as the non-ideal term in
+(\ref{eq:3a_Cv_Tc-},\,a), and as we remember: only the non-idel term
+contributed to the discontinuity. Therefore the identity
+\eqref{eq:3b_Cv_identity} holds, even in the discontinuity.
+\qed
 
 
 
