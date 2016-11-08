@@ -30,12 +30,12 @@
 
 
 
-\usepackage{tikz}
+%\usepackage{tikz}
 
 \begin{document}
 
-\tikzstyle{every picture}+=[remember picture]
-\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
+%\tikzstyle{every picture}+=[remember picture]
+%\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
 
 
 
@@ -616,7 +616,11 @@ The discontinuity is thus given by
 -\eval{\qty(\pdv[2]{P}{T})_v}_{\Tc^+}
 =6A\Tc\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2.
 \end{equation}
-\todo{¿Need to show cont. in ideal case?}
+%\todo{¿Need to show cont. in ideal case?}
+Since in the ideal case this quantity is continous\footnotemark{}.
+
+\footnotetext{This can be seen with the help of the identity
+  \eqref{eq:3b_Cv_identity}, since $C_V$ is continous at $T=\Tc.$}
 
 \subsubsection{}
 To differentiate $\mu$ we need to find it first:
@@ -676,15 +680,16 @@ The discontinuity is now given by
 =A\frac{3}{2}
 \Tc^{-1/2}\,\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
 \end{equation}
-\todo{¿Need to show cont. in ideal case?}
+Since, with the same argument as before, this quantity is continous.
+%\todo{¿Need to show cont. in ideal case?}
 
 \subsubsection{Comparison to the discontinuity in the heat capacity}
 We have the thermodynamic identity
 \begin{equation}\label{eq:3b_Cv_identity}
 C_V=VT\qty(\pdv[2]{P}{T})_v-NT\qty(\pdv[2]{\mu}{T})_v.
 \end{equation}
-With \eqref{eq:3_discont._P} and \eqref{eq:3_discont._mu} we have on
-the RHS
+With \eqref{eq:3_discont._P} and \eqref{eq:3_discont._mu}, the
+discontinuity on the RHS is
 \begin{equation}
 \begin{aligned}
 V\Tc\qty[6A\Tc\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2]
@@ -724,16 +729,30 @@ where the field operators satisfy the commutation relations
 \begin{equation}\label{eq:4_comm}
 \begin{aligned}
 \scomm{\psi(\vb{r})}{\psi^\dagger(\vb{r}')}
+%:=\psi(\vb{r})\psi^\dagger(\vb{r}')-\Theta\psi^\dagger(\vb{r}')\psi^\dagger(\vb{r})
 &=\delta(\vb{r}-\vb{r}')\\
 \scomm{\psi(\vb{r})}{\psi(\vb{r}')\Big.}=
 \scomm{(\psi^\dagger(\vb{r})}{\psi^\dagger(\vb{r}')}&=0
 \end{aligned}
 \end{equation}
-where ``$\scomm{\cdots}{\cdots}$'' corresponds to a (regular)
-commutator for bosons and an anti-commutator for fermions. The second
+where $\scomm{A}{B}=AB-\Theta BA$ corresponds to a (regular)
+commutator for bosons and an anti-commutator for fermions; that is
+\begin{equation}
+\Theta=
+\begin{cases}
++1\qcomma&\text{for bosons,}\\
+-1\qcomma&\text{for fermions.}
+\end{cases}
+\end{equation}
+The second
 relation means that we can commute creation and annihilation operator
-with each other, but in the case of fermions we also pick up a change
-of sign. 
+with each other like so:
+\begin{equation}
+\psi(\vb{r})\psi(\vb{r}')=\Theta\psi(\vb{r}')\psi(\vb{r}),
+\end{equation}
+and analogous for $\psi^\dagger$. In other words we pick up a factor
+of $\Theta$ when commuting annihilation (creation) operators with
+each other.
 
 
 \subsection{Commutation with the Hamiltonian}
@@ -768,30 +787,34 @@ $\psi(\vb{r}_j)$ in the second term of the expanded commutator:
 =&\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
 -\psi^\dagger(\vb{r})\laplacian
 \commute{\psi(\vb{r})\psi(\vb{r}_j)}\\
-=&\begin{cases}
-\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
--\psi^\dagger(\vb{r})\laplacian\psi(\vb{r}_j)\psi(\vb{r})
-\qcomma&\text{bosons}\\
-\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
-+\psi^\dagger(\vb{r})\laplacian\psi(\vb{r}_j)\psi(\vb{r}),
-&\text{fermions}.
-\end{cases}
+=&\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+ -\Theta\psi^\dagger(\vb{r})\laplacian\psi(\vb{r}_j)\psi(\vb{r})
+% =&\begin{cases}
+% \psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+% -\psi^\dagger(\vb{r})\laplacian\psi(\vb{r}_j)\psi(\vb{r})
+% \qcomma&\text{bosons}\\
+% \psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+% +\psi^\dagger(\vb{r})\laplacian\psi(\vb{r}_j)\psi(\vb{r}),
+% &\text{fermions}.
+% \end{cases}
 \end{aligned}
 \end{equation}
 Now in both cases $\laplacian$ and $\psi(\vb{r}_j)$ commutes since the
-Laplacian operates on $\vb{r}$. We thus have
+Laplacian operates on $\vb{r}$, and \emph{not} on $\vb{r}_j$. We thus have
 \begin{equation}
 \begin{aligned}
 \comm{\psi(\vb{r}_j)}
 {\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})}
-=&\begin{cases}
-\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
--\psi^\dagger(\vb{r})\psi(\vb{r}_j)\laplacian\psi(\vb{r})
-\qcomma&\text{bosons}\\
-\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
-+\psi^\dagger(\vb{r})\psi(\vb{r}_j)\laplacian\psi(\vb{r}),
-&\text{fermions}.
-\end{cases}\\
+=&\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+-\Theta\psi^\dagger(\vb{r})\psi(\vb{r}_j)\laplacian\psi(\vb{r})\\
+% =&\begin{cases}
+% \psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+% -\psi^\dagger(\vb{r})\psi(\vb{r}_j)\laplacian\psi(\vb{r})
+% \qcomma&\text{bosons}\\
+% \psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+% +\psi^\dagger(\vb{r})\psi(\vb{r}_j)\laplacian\psi(\vb{r}),
+% &\text{fermions}.
+% \end{cases}\\
 =&\scomm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})}
 \laplacian\psi(\vb{r})%\\=&
 \quad=\quad
@@ -830,16 +853,17 @@ change of sign in the end. We get
 -\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
 u(\vb{r}-\vb{r}')\psi(\vb{r}')
 \commute{\psi(\vb{r})\psi(\vb{r}_j)}
-=&\mp\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+=&-\Theta\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
 u(\vb{r}-\vb{r}')
 \commute{\psi(\vb{r}')\psi(\vb{r}_j)}
 \psi(\vb{r})\\
-=&-\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+=&-\cancelto{1}{\Theta^2}\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
 u(\vb{r}-\vb{r}')\psi(\vb{r}_j)\psi(\vb{r}')\psi(\vb{r}).
 \end{aligned}
 \end{equation}
 And once again $\psi(\vb{r}_j)$ and $u(\vb{r}-\vb{r}')$ commute since
-$\vb{r}_j$ is independent. So we are left with
+$\vb{r}_j$ is independent of both $\vb{r}$ and $\vb{r}'$. So we are
+left with 
 \begin{equation}
 \comm{\psi(\vb{r}_j)}{
 \psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
@@ -878,8 +902,11 @@ We concentrate our effort on the commutator that's still left:
 ,&\text{bosons}\\
 \delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
 -\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
-,\;&\text{fermions}.
-\end{cases}
+,\;&\text{fermions}
+\end{cases}\\
+=&
+\delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
++\Theta\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r}).
 \end{aligned}
 \end{equation}
 In the case of bosons we already had what we needed after using the
@@ -887,9 +914,9 @@ commutator identity in the first step. For fermions however we needed
 to convert the commutators to anti-commutators; this turned out to
 result in almost the same expression in the end as for bosons.
 
-From here on it will be simpler to deal with the two cases separately.
+%From here on it will be simpler to deal with the two cases separately.
 
-\paragraph{Bosons:} 
+%\paragraph{Bosons:} 
 \begin{equation}
 \begin{aligned}
 &\iint\rd^3\!r\,\rd^3\!r'\,
@@ -899,25 +926,32 @@ u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
 =&\iint\rd^3\!r\,\rd^3\!r'\,
 \qty(
 \delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
-+\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
++\Theta\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
 )
 u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})\\
 =&\int\rd^3\!r'\,
 \psi^\dagger(\vb{r}')u(\vb{r}_j-\vb{r}')\psi(\vb{r}')\psi(\vb{r}_j)
-+\int\rd^3\!r\,
++\Theta\int\rd^3\!r\,
 \psi^\dagger(\vb{r})u(\vb{r}-\vb{r}_j)
-\commute{\psi(\vb{r}_j)\psi(\vb{r})}
+\commute{\psi(\vb{r}_j)\psi(\vb{r})}\\
+=&\int\rd^3\!r'\,
+\psi^\dagger(\vb{r}')u(\vb{r}_j-\vb{r}')\psi(\vb{r}')\psi(\vb{r}_j)
++\cancelto{1}{\Theta^2}\int\rd^3\!r\,
+\psi^\dagger(\vb{r})u(\vb{r}-\vb{r}_j)
+\psi(\vb{r})\psi(\vb{r}_j)\\
+% =&2\int\rd^3\!r'\,
+% \psi^\dagger(\vb{r}')u(\vb{r}_j-\vb{r}')\psi(\vb{r}')\psi(\vb{r}_j)
 \end{aligned}
 \end{equation}
-Now we don't need to worry about commutations any longer.
-Furthermore the interaction $u$ between particles must clearly be
+%Now we don't need to worry about commutations any longer.
+The interaction $u$ between particles must clearly be
 independent of the direction of the interaction,
 i.e. $u(\vb{r}_j-\vb{r}')=u(\vb{r}'-\vb{r}_j)$. This results in the
 two integrals being equal, only the name of the integration variable
 differs. 
 
 Therefore
-\begin{equation}\label{eq:4_comm_ii_bose}
+\begin{equation}\label{eq:4_comm_ii}
 \begin{aligned}
 &\iint\rd^3\!r\,\rd^3\!r'\,
 \comm{\psi(\vb{r}_j)}{
@@ -927,48 +961,49 @@ u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
 \psi^\dagger(\vb{r})u(\vb{r}_j-\vb{r})\psi(\vb{r})\psi(\vb{r}_j)
 \end{aligned}
 \end{equation}
-for bosons.
+for bosons as well as fermions.
 
-\paragraph{Fermions:}
-\begin{equation}
-\begin{aligned}
-&\iint\rd^3\!r\,\rd^3\!r'\,
-\comm{\psi(\vb{r}_j)}{
-\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
-u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
-=&\iint\rd^3\!r\,\rd^3\!r'\,
-\qty(
-\delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
--\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
-)
-u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})\\
-=&\int\rd^3\!r'\,
-\psi^\dagger(\vb{r}')u(\vb{r}_j-\vb{r}')\psi(\vb{r}')\psi(\vb{r}_j)
--\iint\rd^3\!r\,
-\psi^\dagger(\vb{r})u(\vb{r}-\vb{r}_j)
-\commute{\psi(\vb{r}_j)\psi(\vb{r})}.
-\end{aligned}
-\end{equation}
-Now, however, the commutation results in a change of sign. This change
-of sign fortunately cancels the minus before the integral, and as
-before we get
-\begin{equation}\label{eq:4_comm_ii_ferm}
-\begin{aligned}
-&\iint\rd^3\!r\,\rd^3\!r'\,
-\comm{\psi(\vb{r}_j)}{
-\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
-u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
-=&2\int\rd^3\!r\,
-\psi^\dagger(\vb{r})u(\vb{r}_j-\vb{r})\psi(\vb{r})\psi(\vb{r}_j)
-\end{aligned}
-\end{equation}
-for fermions as well.
+% \paragraph{Fermions:}
+% \begin{equation}
+% \begin{aligned}
+% &\iint\rd^3\!r\,\rd^3\!r'\,
+% \comm{\psi(\vb{r}_j)}{
+% \psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+% u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
+% =&\iint\rd^3\!r\,\rd^3\!r'\,
+% \qty(
+% \delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
+% -\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
+% )
+% u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})\\
+% =&\int\rd^3\!r'\,
+% \psi^\dagger(\vb{r}')u(\vb{r}_j-\vb{r}')\psi(\vb{r}')\psi(\vb{r}_j)
+% -\iint\rd^3\!r\,
+% \psi^\dagger(\vb{r})u(\vb{r}-\vb{r}_j)
+% \commute{\psi(\vb{r}_j)\psi(\vb{r})}.
+% \end{aligned}
+% \end{equation}
+% Now, however, the commutation results in a change of sign. This change
+% of sign fortunately cancels the minus before the integral, and as
+% before we get
+% \begin{equation}\label{eq:4_comm_ii_ferm}
+% \begin{aligned}
+% &\iint\rd^3\!r\,\rd^3\!r'\,
+% \comm{\psi(\vb{r}_j)}{
+% \psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+% u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
+% =&2\int\rd^3\!r\,
+% \psi^\dagger(\vb{r})u(\vb{r}_j-\vb{r})\psi(\vb{r})\psi(\vb{r}_j)
+% \end{aligned}
+% \end{equation}
+% for fermions as well.
 
 \subsubsection{Final result}
 To get the full commutator we use \eqref{eq:4_comm_i},
-\eqref{eq:4_comm_ii_bose} and \eqref{eq:4_comm_ii_ferm} to get the desired
+\eqref{eq:4_comm_ii} %and \eqref{eq:4_comm_ii_ferm} 
+to get the desired
 result:
-\begin{equation}
+\begin{equation}\label{eq:4a_comm}
 \comm{\psi(\vb{r}_j)}{H}
 =\qty(-\frac{\hbar^2}{2m}\laplacian_j
 +\int\rd^3\!r\,
@@ -979,7 +1014,159 @@ u(\vb{r}-\vb{r}_j)\psi(\vb{r})
 which is valid for both bosons and fermions.
 \qed
 
+
+
 \subsection{Equivalence with the Schrödinger equation}
+Here we want to show that the equation
+\begin{equation}\label{eq:4b_start}
+\frac{1}{\sqrt{N!}}
+\mel{0}{\psi(\vb{r}_1)\psi(\vb{r}_2)\cdots\psi(\vb{r}_N)H}{\Psi_{NE}}
+=\frac{E}{\sqrt{N!}}
+\mel{0}{\psi(\vb{r}_1)\psi(\vb{r}_2)\cdots\psi(\vb{r}_N)}{\Psi_{NE}}
+\end{equation}
+is equivalent to the Schrödinger equation:
+\begin{equation}\label{eq:4b_SE}
+\qty[\sum_{i=1}^N\qty(-\frac{\hbar^2}{2m}\laplacian_i 
++ \sum_{j<i}u_{ij})]\Psi_{NE}(\vb{r}_1,\,\vb{r}_2,\cdots\vb{r}_N)
+=E\Psi_{NE}(\vb{r}_1,\,\vb{r}_2,\cdots\vb{r}_N).
+\end{equation}
+We basically want to show that the two LHS's are equal. To do this we
+want to commute $H$ (and all other possible debris) in \eqref{eq:4b_start}
+all the way to the left.  
+
+For brevity let's begin by introducing some abbreviations:
+\begin{equation}
+\psi_n:=\psi(\vb{r}_n)
+\end{equation}
+and
+\begin{equation}
+\comm{\psi_n}{H}\stackrel{\eqref{eq:4a_comm}}{=}
+\Bigg(\overbrace{-\frac{\hbar^2}{2m}\laplacian_n}^{T_n}
++\underbrace{\int\rd^3\!r\,
+\psi^\dagger(\vb{r})
+u(\vb{r}-\vb{r}_n)\psi(\vb{r})}_{U_n}
+\Bigg)\psi_n=:(T_n+U_n)\psi_n
+=:\Xi_n\psi_n
+\end{equation}
+Please note that $T_m$ and $\psi_n$ commute for $m\neq n$, while $U_m$
+and $\psi_n$ does not commute for any $m$ and $n$, so neither does
+$\Xi_m$ and $\psi_n$
+
+
+\subsubsection{Commuting $H$ to the left}
+Let's begin by studying
+\begin{equation}
+\begin{aligned}
+\psi(\vb{r}_1)\cdots\psi(\vb{r}_N)H=&
+\,\psi_1\cdots\psi_{N-1}
+\Big(
+H\psi_N+\overbrace{\comm{\psi_N}{H}}^{\Xi_N\psi_N}
+\Big)\\
+=&\psi_1\cdots\psi_{N-2}
+\Big(
+H\psi_{N-1}\psi_N+\Xi_{N-1}\psi_{N-1}\psi_N + \psi_{N-1}\Xi_N\psi_N
+\Big)
+\end{aligned}
+\end{equation}
+If we were to follow trough with commuting $H$ to the left we would
+end up getting
+\begin{equation}\label{eq:4b_H_to_left}
+\psi_1\psi_2\cdots\psi_{N}H=
+H\psi_1\psi_2\cdots\psi_{N}
++\sum_{i=1}^N\psi_1\cdots\psi_{i-1}\Xi_i\psi_i\cdots\psi_N.
+\end{equation}
+(For the case $i=1$ the term in the sum is just
+$\Xi_1\psi_1\cdots\psi_N$, nothing in front of $\Xi_1$.)
+
+\subsubsection{Commuting $U_i$ to the left}
+We investigate the sum. Let's take a closer look at $\psi_{i-1}\Xi_i$,
+or more specifically $\psi_{i-1}U_i$. To do this we will use
+\eqref{eq:4_comm} in the form
+\begin{equation}
+\scomm{\psi(\vb{r})}{\psi^\dagger(\vb{r}')}
+=\psi(\vb{r})\psi^\dagger(\vb{r}')-\Theta\psi^\dagger(\vb{r}')\psi^\dagger(\vb{r})
+=\delta(\vb{r}-\vb{r}').
+\end{equation}
+We are also not restricted by the fact that we have $i-1$ and $i$. It
+we can just as well analyse
+\begin{equation}
+\begin{aligned}
+\psi_{j}U_i=&\int\rd^3\!r\,
+\psi(\vb{r}_{j})\psi^\dagger(\vb{r})
+u(\vb{r}-\vb{r}_i)\psi(\vb{r})\\
+=&\int\rd^3\!r\,
+\Big[\delta(\vb{r}-\vb{r}_{j}) 
++ \Theta\psi^\dagger(\vb{r})\psi(\vb{r}_{j})\Big]
+u(\vb{r}-\vb{r}_i)\psi(\vb{r})\\
+=&
+u(\vb{r}_{j}-\vb{r}_{i})\psi(\vb{r}_{j}) 
++ \int\rd^3\!r\,
+\Theta\psi^\dagger(\vb{r})\psi(\vb{r}_{j})
+u(\vb{r}-\vb{r}_i)\psi(\vb{r}).
+\end{aligned}
+\end{equation}
+For the second integral we already know that $u(\vb{r}-\vb{r}_i)$ and
+$\psi(\vb{r}_{j})$ commute, and then we pick up another factor
+$\Theta$ when commuting $\psi(\vb{r}_{j})$ past $\psi(\vb{r})$. We
+thus end up with
+\begin{equation}\label{eq:4b_U_comm}
+\begin{aligned}
+\psi_{j}U_i=&
+u(\vb{r}_{j}-\vb{r}_{i})\psi(\vb{r}_{j}) 
++ \cancelto{1}{\Theta^2}\int\rd^3\!r\,
+\psi^\dagger(\vb{r})u(\vb{r}-\vb{r}_i)\psi(\vb{r})
+\psi(\vb{r}_{j})\\
+=&\Big(u_{j,\,i}+U_i \Big)\psi_{j}.
+\end{aligned}
+\end{equation}
+Note that $u_{j,\,i}$ is just a number, so it commutes with any operator. 
+
+Now we are ready to study one full term in the sum from
+\eqref{eq:4b_H_to_left}. With the rule in \eqref{eq:4b_U_comm} applied
+subsequently to commute $U_i$ all the way to the right we get
+\begin{equation}
+\begin{aligned}
+\psi_1\cdots\psi_{i-1}\Xi_i\psi_i\cdots\psi_N
+=&\psi_1\cdots\psi_{i-1}(T_i+U_i)\psi_i\cdots\psi_N\\
+=&T_i\psi_1\cdots\psi_{N}
++U_i\psi_1\cdots\psi_{N}
++\sum_{j=1}^{i-1}u_{j,\,i}\;\psi_1\cdots\psi_{N}\\
+=&\Bigg(T_i+U_i+\sum_{j<i}u_{j,\,i}\Bigg)\psi_1\cdots\psi_{N}.
+\end{aligned}
+\end{equation}
+And \eqref{eq:4b_H_to_left} becomes
+\begin{equation}\label{eq:4b_all_to_left}
+\psi_1\psi_2\cdots\psi_{N}H=
+\qty[H
++\sum_{i=1}^N\Bigg(T_i+U_i+\sum_{j<i}u_{j,\,i}\Bigg)
+]\psi_1\psi_2\cdots\psi_{N}
+\end{equation}
+
+\subsubsection{Applying the results}
+Now all we have to do is to apply \eqref{eq:4b_all_to_left} to
+\eqref{eq:4b_start}, using $T_i=-\hbar^2\laplacian_i/(2m)$, we get
+\begin{equation}\label{eq:4b_almost}
+\mel**{0}{\psi_1\cdots\psi_{N}H}{\Psi_{NE}}=
+\mel**{0}{\qty[H
++\sum_{i=1}^N\qty(-\frac{\hbar^2}{2m}\laplacian_i
++U_i+\sum_{j<i}u_{j,\,i})
+]\psi_1\cdots\psi_{N}}{\Psi_{NE}}.
+\end{equation}
+The first part here is easy to handel:
+\begin{equation}
+\bra{0} H
+\overbrace{\psi_1\psi_2\cdots\psi_{N}\ket{\Psi_{NE}}}^{=\ket{0}}
+=\mel{0}{H}{0}=0.
+\end{equation}
+
+Then we can see that all that separates \eqref{eq:4b_almost} from
+\eqref{eq:4b_SE} is the sum over $U_i$. That sum just corresponds to
+the sum of interactions between each particle and it's environment
+
+
+
+
+
 
 
 
