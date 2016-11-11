@@ -3,7 +3,7 @@
 \pdfoutput=1
 
 \usepackage{../custom_as}
-
+\usepackage{cancel}
 \graphicspath{ {figures/} }
 
 %%Drar in tabell och figurtexter
@@ -27,6 +27,7 @@
 
 \swapcommands{\varPhi}{\Phi}
 \swapcommands{\varPi}{\Pi}
+\swapcommands{\varOmega}{\Omega}
 
 
 
@@ -47,10 +48,214 @@ Assignment 4}
 %\todolist
 
 \section{Time-dependent perturbation of harmonic oscillator}
+\newcommand{\I}{\text{I}}
+%\newcommand{\S}{\text{S}}
+We have a simple harmonic oscillator in it's groundstate
+\begin{equation}
+\ket{i;\,t}=\ket{0}\qcomma
+\text{for}\ t\le0.
+\end{equation}
+At $t=0$ a potential
+\begin{equation}
+V(t)=F_0x\cos\omega t
+\end{equation}
+is turned on. Now we want to appoximate $\ev{x}$ as a funtion of time.
+
+We begin by expressing the stateket in the interaction picture
+\begin{equation}
+\ket{i;\,t}_\I = \sum_n \ket{n}\!\!\mel*{n}{U_\I(t)}{i},
+=\sum_n c_n(t)\ket{n}
+\end{equation}
+where in our case $i=0$. 
+
+We now need to find $c_n(t)$, but we can only find an approximation, 
+$c_n=c_n^{(0)}+c_n^{(1)}+\ldots$, based on the Dyson series for
+$c_n$. This approximation begins with
+\begin{equation}
+c_n^{(0)}(t)=\delta_{n,i}
+\end{equation}
+and
+\begin{equation}
+\begin{aligned}
+c_n^{(1)}(t)=&-\frac{\ii}{\hbar}
+\int_0^t\!\rd{t'}\, \mel{n}{V_\I(t')}{i}\\
+=&-\frac{\ii}{\hbar}
+\int_0^t\!\rd{t'} \,\ee^{\ii\omega_{n,i}t'}\mel{n}{V(t')}{i},
+\end{aligned}
+\end{equation}
+where $\omega_{n,i}=(E_n-E_i)/\hbar$. See Sakurai \& Napolitano,
+\textit{Modern Quantum Mechanics}, ed.2, equation (5.7.17).
+
+In our case we have $i=0$ and we get
+\begin{equation}\label{eq:1_cn1_1}
+\begin{aligned}
+c_n^{(1)}(t)=&-\frac{\ii}{\hbar}
+\int_0^t\!\rd{t'} \,\ee^{\ii\omega_{n,0}t'}
+\mel{n}{F_0x\cos\omega t'}{0}\\
+=&-\frac{\ii F_0}{\hbar}
+\int_0^t\!\rd{t'} \,\ee^{\ii n\omega_{0}t'}
+\cos(\omega t')\mel{n}{x}{0}.
+\end{aligned}
+\end{equation}
+Using
+\begin{equation}\label{eq:1_mel_x}
+\mel{n}{x}{m}=sqrt{\frac{\hbar}{2m\omega_0}}
+\Big[ \sqrt{m+1}\delta_{n,\,n+1}+\sqrt{m}\delta_{n,\,n-1}
+\Big]
+\end{equation}
+we can write \eqref{eq:1_cn1_1} as
+\begin{equation}\label{eq:1_cn1_2}
+\begin{aligned}
+c_n^{(1)}(t)=&-\frac{\ii F_0}{\hbar}\sqrt{\frac{\hbar}{2m\omega_0}}
+\int_0^t\!\rd{t'} \,\ee^{\ii n\omega_{0}t'}
+\cos(\omega t')\Big[ 
+\sqrt{1}\delta_{n,\,1}+\cancel{\sqrt{0}\delta_{n,\,-1}}\Big]\\
+&=-\frac{\ii F_0 \delta_{n,\,1}}{\sqrt{2\hbar m\omega_0}}
+\int_0^t\!\rd{t'} \,\ee^{\ii n\omega_{0}t'}
+\frac{1}{2}\qty(\ee^{\ii \omega t'}+\ee^{-\ii \omega t'}).
+\end{aligned}
+\end{equation}
+We see no that the only non-zero coefficient here is $c_1^{(1)}$, so
+we continue by looking at
+\begin{equation}\label{eq:1_cn1_3}
+\begin{aligned}
+c_1^{(1)}(t)&=-\frac{\ii F_0 }{2\sqrt{2\hbar m\omega_0}}
+\int_0^t\!\rd{t'} \,
+\qty(\ee^{\ii(\omega+\omega_0)t'}+\ee^{-\ii(\omega-\omega_0)t'})\\
+&=-\frac{\ii F_0}{\sqrt{2\hbar m\omega_0}}\frac{1}{2}
+\qty[\frac{\ee^{\ii(\omega+\omega_0)t'}}{\ii(\omega+\omega_0)}
+-\frac{\ee^{-\ii(\omega-\omega_0)t'}}{\ii(\omega-\omega_0)}]_0^t\\
+&=-\frac{\ii F_0}{\sqrt{2\hbar m\omega_0}}\frac{1}{2}
+\Bigg\{\ee^{\ii(\omega+\omega_0)t/2}\frac{\ee^{\ii(\omega+\omega_0)t/2}
+-\ee^{-\ii(\omega+\omega_0)t/2}}{\ii(\omega+\omega_0)}
+\\ & \hspace{80pt}
+-\ee^{-\ii(\omega-\omega_0)t/2}\frac{\ee^{-\ii(\omega-\omega_0)t/2}
+-\ee^{+\ii(\omega-\omega_0)t/2}}{\ii(\omega-\omega_0)}
+\Bigg\}\\
+&=-\frac{\ii F_0}{\sqrt{2\hbar m\omega_0}}
+\qty{
+\exp[\ii\frac{\omega+\omega_0}{2}t]\frac{\sin(\frac{\omega+\omega_0}{2}t)}
+{\omega+\omega_0}
++\exp[-\ii\frac{\omega-\omega_0}{2}t]\frac{\sin(\frac{\omega-\omega_0}{2}t)}
+{\omega-\omega_0}
+}.
+\end{aligned}
+\end{equation}
+
+Next is the expectationvalue
+\begin{equation}\label{eq:1_ev_x}
+\ev{x}=\bra{i;\,t}x\ket{i;\,t}.
+\end{equation}
+To calculate this we need to go back to the Schrödinger picture:
+\begin{equation}
+\ket{i;\,t}=\ee^{-\ii H_0t/\hbar}\ket{i;\,t}_\I
+=\ee^{-\ii\omega_0t/2}\qty[
+(1+0)\ket{0} + \ee^{-\ii\omega_0t}\qty(0+c_1^{(1)})\ket{1}].
+\end{equation}
+Now \eqref{eq:1_ev_x} becomes
+\begin{equation}
+\begin{aligned}
+\ev{x}=&
+\qty[\bra{0} + \ee^{+\ii\omega_0t}(c_1^{(1)})^*\bra{1}]
+\cancel{\ee^{-+\ii\omega_0t/2}}
+\quad x \quad
+\cancel{\ee^{-\ii\omega_0t/2}}\qty[
+\ket{0} + \ee^{-\ii\omega_0t}c_1^{(1)}\ket{1}]\\
+=&\mel{0}{x}{0}+\abs{c_1^{(1)}}\mel{1}{x}{1}
++\ee^{+\ii\omega_0t}(c_1^{(1)})^*\mel{1}{x}{0}
++\ee^{-\ii\omega_0t}c_1^{(1)}\mel{0}{x}{1}.
+\end{aligned}
+\end{equation}
+With the help of \eqref{eq:1_mel_x} this simplifies to
+\begin{equation}
+\begin{aligned}
+\ev{x}=&\sqrt{\frac{\hbar}{2m\omega_0}}
+\qty[\ee^{+\ii\omega_0t}(c_1^{(1)})^*
++\ee^{-\ii\omega_0t}c_1^{(1)}]\\
+=&\sqrt{\frac{\hbar}{2m\omega_0}}
+\frac{ F_0}{\sqrt{2\hbar m\omega_0}}\\
+&\times\Bigg\{
+\ee^{+\ii\omega_0t}(+\ii)\qty[
+\exp(-\ii\frac{\omega{+}\omega_0}{2}t)\frac{\sin(\frac{\omega+\omega_0}{2}t)}
+{\omega+\omega_0}
++\exp(+\ii\frac{\omega{-}\omega_0}{2}t)\frac{\sin(\frac{\omega-\omega_0}{2}t)}
+{\omega-\omega_0}
+] \\ & \hspace{8.5pt}
++\ee^{-\ii\omega_0t}(-\ii)\qty[
+\exp(+\ii\frac{\omega{+}\omega_0}{2}t)\frac{\sin(\frac{\omega+\omega_0}{2}t)}
+{\omega+\omega_0}
++\exp(-\ii\frac{\omega{-}\omega_0}{2}t)\frac{\sin(\frac{\omega-\omega_0}{2}t)}
+{\omega-\omega_0}
+]
+\Bigg\}.
+\end{aligned}
+\end{equation}
+No we collect the coefficients of the sines:
+\begin{equation}
+\begin{aligned}
+\ev{x}=&\frac{\ii F_0}{2 m\omega_0}\Bigg\{
+\frac{\sin(\frac{\omega+\omega_0}{2}t)}
+{\omega+\omega_0}
+\qty[
+\ee^{+\ii\omega_0t}\exp(-\ii\frac{\omega+\omega_0}{2}t)-
+\ee^{-\ii\omega_0t}\exp(+\ii\frac{\omega+\omega_0}{2}t)
+] \\ & \hspace{25pt}
++\frac{\sin(\frac{\omega-\omega_0}{2}t)}
+{\omega-\omega_0}
+\qty[\ee^{+\ii\omega_0t}\exp(+\ii\frac{\omega-\omega_0}{2}t)
+-\ee^{-\ii\omega_0t}\exp(-\ii\frac{\omega-\omega_0}{2}t)
+]
+\Bigg\}\\
+=&\frac{F_0}{m\omega_0}\frac{-1}{2\ii}\Bigg\{
+\frac{\sin(\frac{\omega+\omega_0}{2}t)}
+{\omega+\omega_0}
+\qty[
+\exp(-\ii\frac{\omega-\omega_0}{2}t)-
+\exp(+\ii\frac{\omega-\omega_0}{2}t)
+] \\ & \hspace{35pt}
++\frac{\sin(\frac{\omega-\omega_0}{2}t)}
+{\omega-\omega_0}
+\qty[\exp(+\ii\frac{\omega+\omega_0}{2}t)
+-\exp(-\ii\frac{\omega+\omega_0}{2}t)
+]
+\Bigg\}\\
+=&\frac{F_0}{m\omega_0}
+\Bigg\{
+\frac{\sin(\frac{\omega+\omega_0}{2}t)}
+{\omega+\omega_0}
+\qty[ \sin(\frac{\omega-\omega_0}{2}t) ] 
+-\frac{\sin(\frac{\omega-\omega_0}{2}t)}
+{\omega-\omega_0}
+\qty[\sin(\frac{\omega+\omega_0}{2}t)
+] \Bigg\}.\\
+%=&\frac{F_0}{m\omega_0}
+%\sin(\frac{\omega+\omega_0}{2}t)
+%\sin(\frac{\omega-\omega_0}{2}t)
+%\frac{2\omega_0}{\omega_0^2-\omega^2}
+\end{aligned}
+\end{equation}
+By factoring out the common factors and writing the fractions in a
+common denominator, we end up with
+\begin{equation}
+\begin{aligned}
+\ev{x}=&\frac{F_0}{m\omega_0}
+\sin(\frac{\omega+\omega_0}{2}t)
+\sin(\frac{\omega-\omega_0}{2}t)
+\frac{-2\omega_0}{\omega^2-\omega_0^2}\\
+=&\frac{-2F_0}{m\qty(\omega^2-\omega_0^2)}
+\sin(\frac{\omega+\omega_0}{2}t)
+\sin(\frac{\omega-\omega_0}{2}t).
+\end{aligned}
+\end{equation}
+\qed
+
 
 
 \section{Photoelectric effect on harmonic oscillator atom}
-
+The differeintial cross section for ejection of a photoelectron is
+\begin{equation}
+\dv{\sigma}{\Omega}
+\end{equation}
 
 \section{Momentum wave-function for hydrogen-like atom}
 
