@@ -252,16 +252,388 @@ common denominator, we end up with
 
 
 \section{Photoelectric effect on harmonic oscillator atom}
+\newcommand{\kf}{k_{\text{f}}}
+\newcommand{\vkf}{\vb{k}_{\text{f}}}
+\newcommand{\vq}{\vb{q}}
 The differeintial cross section for ejection of a photoelectron is
 \begin{equation}
-\dv{\sigma}{\Omega}
+\dv{\sigma}{\Omega}=\frac{\alpha \kf L^3}{2\pi\hbar m_\ee\omega}
+\abs{\mel**{\vkf}{\ee^{\ii\frac{\omega}{c}\vu*{n}\vdot\vb*{r}}
+\vu*{\epsilon}\vdot\vb{p}}{i}}^2 
+\end{equation}
+according to Sakurai \& Napolitano,
+\textit{Modern Quantum Mechanics}, ed.2, equation (5.8.32). In our
+case we have an initial stat that is the ground state of a 3D
+isotropic harmonic oscillator. The wavefunction is
+\begin{equation}
+\psi_{000}(\vb{r})=\qty(\frac{m\omega_0}{2\pi\hbar})^{3/4}
+\ee^{-\frac{m\omega_0}{2\hbar}(x^2+y^2+z^2)}
+=\qty(\frac{\beta}{\pi})^{3/4}\ee^{-\frac{\beta}{2}r^2}.
 \end{equation}
 
+We begin by evaluating the matrixelement (call it $A$ for brevity)
+\begin{equation}
+\begin{aligned}
+A=&\mel**{\vkf}{\ee^{\ii\frac{\omega}{c}\vu*{n}\vdot\vb*{r}}
+\vu*{\epsilon}\vdot\vb{p}}{i}\\
+=&\int\!\rd^3r'\,
+\ip{\vkf}{\vb{r}'}
+\mel**{\vb{r}'}{\ee^{\ii\frac{\omega}{c}\vu*{n}\vdot\vb*{r}}
+\vu*{\epsilon}\vdot\vb{p}}{\psi_{000}}.
+\end{aligned}
+\end{equation}
+The box-normalized wave-function for the free electron is
+\begin{equation}
+\ip{\vb{r}'}{\vkf}=\frac{1}{L^{3/2}}\ee^{\ii\vkf\vdot\vb{r}'}.
+\end{equation}
+We therefor get
+\begin{equation}
+\begin{aligned}
+A=&\frac{1}{L^{3/2}}\int\!\rd^3r'\,
+\ee^{-\ii\vkf\vdot\vb{r}'}
+\ee^{\ii\frac{\omega}{c}\vu*{n}\vdot\vb*{r}'}
+\vu*{\epsilon}\vdot(-\ii\hbar\grad)\psi_{000}(\vb{r}')\\
+=&-\frac{\ii\hbar}{L^{3/2}} \qty(\frac{\beta}{\pi})^{3/4}
+\vu*{\epsilon}\vdot\int\!\rd^3r'\,
+\ee^{-\ii(\vkf-\frac{\omega}{c}\vu*{n})\vdot\vb{r}'}
+\grad\ee^{-\frac{\beta}{2}{r'}^2}.
+\end{aligned}
+\end{equation}
+We can integrate by part to get
+\begin{equation}
+\begin{aligned}
+A=&\frac{-\ii\hbar}{L^{3/2}} \qty(\frac{\beta}{\pi})^{3/4}
+\!\vu*{\epsilon}\vdot\qty{
+\cancel{\qty[\ee^{-\ii(\vkf-\frac{\omega}{c}\vu*{n})\vdot\vb{r}'}
+\ee^{-\frac{\beta}{2}r'}]_{x,y,z=-\infty}^\infty}
+\!\!-\int\!\rd^3r'\,
+\grad\qty(\ee^{-\ii(\vkf-\frac{\omega}{c}\vu*{n})\vdot\vb{r}'})
+\ee^{-\frac{\beta}{2}{r'}^2}}\\
+=&\frac{\ii\hbar}{L^{3/2}} \qty(\frac{\beta}{\pi})^{3/4}
+\vu*{\epsilon}\vdot\int\!\rd^3r'\,
+-\ii\qty(\vkf-\frac{\omega}{c}\vu*{n})
+\ee^{-\ii(\vkf-\frac{\omega}{c}\vu*{n})\vdot\vb{r}'}
+\ee^{-\frac{\beta}{2}{r'}^2}\\
+=&\frac{\hbar}{L^{3/2}} \qty(\frac{\beta}{\pi})^{3/4}
+\vu*{\epsilon}\vdot\vkf\int\!\rd^3r'\,
+\ee^{-\ii(\vkf-\frac{\omega}{c}\vu*{n})\vdot\vb{r}'}
+\ee^{-\frac{\beta}{2}{r'}^2}\\
+\end{aligned}
+\end{equation}
+
+Now call $(\vkf-\frac{\omega}{c}\vu*{n})=:\vq$, and call the remaining
+integral $I(\vq)$.
+To integrate this, we will use sphereical coordinate with the
+``z-axis'' in hte direction of $\vq$. Then we get
+\begin{equation}
+\begin{aligned}
+I(\vq):=&\int\!\rd^3r'\,
+\ee^{-\ii\vq\vdot\vb{r}'}
+\ee^{-\frac{\beta}{2}r'}\\
+=&\int_0^{2\pi}\!\rd\phi\int_0^\pi\!\rd\theta\,\sin\theta
+\int_0^\infty\!\rd{r}\,r^2\ee^{\ii q r\cos\theta}\ee^{-\frac{\beta}{2}r^2}.
+\end{aligned}
+\end{equation}
+We can begin by evaluating the $\theta$-integral by setting
+$x=\cos\theta$, giving $\rd{x}=-\sin\theta\id\theta$:
+\begin{equation}\label{eq:2_theta_int}
+\int_0^\pi\!\rd\theta\,\sin\theta\,\ee^{q r\cos\theta}
+=-\int_{+1}^{-1}\!\rd{x}\,\ee^{\ii q rx}
+=2\frac{\sin(q\,r)}{q\,r}.
+\end{equation}
+We now have
+\begin{equation}
+\begin{aligned}
+I(\vq)=&\frac{4\pi}{q} \int_0^\infty\!\rd{r}\,
+\overbrace{r\sin(q\,r)}^{\text{even}}
+\ee^{-\frac{\beta}{2}r^2}=\frac{2\pi}{q} \int_{-\infty}^\infty\!\rd{r}\,
+r\sin(q\,r)\ee^{-\frac{\beta}{2}r^2}\\
+=&\frac{2\pi}{q} \Im\qty{
+\int_{-\infty}^\infty\!\rd{r}\,
+r\ee^{\ii q\,r}\ee^{-\frac{\beta}{2}r^2}}\\
+=&\frac{2\pi}{q} \Im\qty{
+\int_{-\infty}^\infty\!\rd{r}\,
+r\exp[-\frac{\beta}{2}\qty(r-\ii\frac{q}{\beta})^2
+-\frac{q^2}{2\beta}] }\\
+=&\frac{2\pi}{q}\exp[-\frac{q^2}{2\beta}]
+\Im\qty{\int_{-\infty}^\infty\!\rd{r}\,
+\qty(r-\ii\frac{q}{\beta}+\ii\frac{q}{\beta})
+\exp[-\frac{\beta}{2}\qty(r-\ii\frac{q}{\beta})^2]}.
+\end{aligned}
+\end{equation}
+We can now set $\xi=r-\ii q/\beta$ to get
+\begin{equation}\label{eq:2_comlex_integral}
+\begin{aligned}
+I(\vq)=&\frac{2\pi}{q}\exp[-\frac{q^2}{2\beta}]
+\Im\qty{\int_{-\infty+\ii q/\beta}^{\infty+\ii q/\beta}\!\rd{\xi}\,
+\qty(\cancel{\xi}+\ii\frac{q}{\beta})
+\exp[-\frac{\beta}{2}\,\xi^2]},
+\end{aligned}
+\end{equation}
+and the $\xi$ multiplying the exponential is canceled due to the fact
+that we're integrating over an even interval and $\xi$ is odd while
+the exponential still is even. 
+
+
+The integration path is a line parallel to and offseted from the real
+axis. This offset turns out to not affect the value of the
+integral, see appendix~\ref{sec:offset}. So we end up getting a
+regular Gaussian integral:
+\begin{equation}
+\begin{aligned}
+I(\vq)=&\frac{2\pi}{q}\exp[-\frac{q^2}{2\beta}]
+\Im\qty{\ii\frac{q}{\beta}
+\int_{-\infty}^{\infty}\!\rd{\xi}\,
+\exp[-\frac{\beta}{2}\,\xi^2]}\\
+=&\frac{2\pi}{q}\exp[-\frac{q^2}{2\beta}]
+\Im\qty{\ii\frac{q}{\beta}
+\sqrt{\frac{\pi}{\beta/2}}}\\
+=&\qty(\frac{2\pi}{\beta})^{3/2}\exp[-\frac{q^2}{2\beta}].
+\end{aligned}
+\end{equation}
+
+Now we are ready to find the differential cross section
+\begin{equation}\label{eq:2_almost}
+\begin{aligned}
+\dv{\sigma}{\Omega}=&\frac{\alpha \kf L^3}{2\pi\hbar m_\ee\omega}
+\abs{A}^2=\frac{\alpha \kf L^3}{2\pi\hbar m_\ee\omega}
+\abs{\frac{\hbar}{L^{3/2}} \qty(\frac{\beta}{\pi})^{3/4}
+\vu*{\epsilon}\vdot\vkf\,
+\qty(\frac{2\pi}{\beta})^{3/2}\!\exp[-\frac{q^2}{2\beta}]}^2\\
+=&\frac{\alpha \kf L^3}{2\pi\hbar m_\ee\omega}
+\abs{\frac{\hbar}{L^{3/2}} 
+\vu*{\epsilon}\vdot\vkf\,
+\qty(\frac{4\pi}{\beta})^{3/4}\!\exp[-\frac{q^2}{2\beta}]}^2\\
+=&\frac{\alpha\kf}{2\pi m_\ee\omega}
+\hbar\qty(\frac{4\pi\hbar}{m_\ee\omega_0})^{3/2}
+\exp[-\frac{q^2\hbar}{m_\ee\omega_0}](\vu*{\epsilon}\vdot\vkf)^2.
+\end{aligned}
+\end{equation}
+From here, we use equation (5.8.37):
+\begin{equation}
+\begin{aligned}
+(\vu*{\epsilon}\vdot\vkf)^2=&\kf^2\sin^2\theta\,\cos^2\phi\\
+q^2=&\kf^2+\qty(\frac{\omega}{c})^2-2\kf\frac{\omega}{c}\cos\theta
+\end{aligned}
+\end{equation}
+from Sakurai \& Napolitano, \textit{Modern Quantum Mechanics}, ed. 2,
+to evaluate the expression in \eqref{eq:2_almost}. We get
+\begin{equation}
+\begin{aligned}
+\dv{\sigma}{\Omega}=&\frac{8\alpha\kf}{2\pi m_\ee\omega}
+\frac{\pi\hbar^2}{m_\ee\omega_0}
+\sqrt{\frac{\pi\hbar}{m_\ee\omega_0}}
+\exp[-\frac{\hbar}{m_\ee\omega_0}
+\qty(\kf^2+\qty(\frac{\omega}{c})^2-2\kf\frac{\omega}{c}\cos\theta)^2]\\
+&\times \kf^2\sin^2\theta\,\cos^2\phi\\
+=&\frac{4\alpha\kf^3\hbar^2}{m_\ee^2\omega\omega_0}
+\sqrt{\frac{\pi\hbar}{m_\ee\omega_0}}
+\exp[-\frac{\hbar}{m_\ee\omega_0}
+\qty(\kf^2+\qty(\frac{\omega}{c})^2)]\\
+&\times\sin^2\theta\,\cos^2\phi\;
+\exp[\frac{2\hbar\kf\omega}{m_\ee\omega_0}\cos\theta].
+\end{aligned}
+\end{equation}
+\qed
+
+
 \section{Momentum wave-function for hydrogen-like atom}
+\newcommand{\vp}{\vb{p}}
+\newcommand{\vk}{\vb{k}}
+\newcommand{\Za}{\frac{Z}{a_0}}
+To find the probability of finding the electron having a certain
+momentum, we need to find the momentum representation of the
+wave-function. The momentum wave-function is
+\begin{equation}\label{eq:3_start}
+\hat{\phi}(\vp)=\ip{\vp}{\phi}
+=\int\!\rd^3r'\, \ip{\vp}{\vb{r}'}\ip{\vb{r}'}{\phi},
+%=\int\!\rd^3r'\,
+%\frac{\ee^{-\ii(\vp\vdot\vb{r}')/\hbar}}{(2\pi\hbar)^{3/2}}
+%\phi(\vb{r}').
+\end{equation}
+where
+\begin{equation}
+\ip{\vp}{\vb{r}'}=\Big(\ip{\vb{r}'}{\vp}\Big)^*
+=\frac{\ee^{-\ii(\vp\vdot\vb{r}')/\hbar}}{(2\pi\hbar)^{3/2}}
+=\frac{\ee^{-\ii\vk\vdot\vb{r}'}}{(2\pi\hbar)^{3/2}}
+\end{equation}
+in three dimensions. Next is the position wave-function:
+\begin{equation}
+\phi(\vb{r}')=\ip{\vb{r}'}{\phi}=\qty(\Za)^{3/2}\ee^{-\Za r'}
+=\zeta^{3/2}\ee^{-\zeta r'}
+\end{equation}
+for the ground state of a hydrogen-like atom, where $\zeta=Z/a_0$.
+We can now write \eqref{eq:3_start} as
+\begin{equation}
+\hat{\phi}(\vp)=\qty(\frac{\zeta}{2\pi\hbar})^{3/2}
+\int\!\rd^3r'\,
+\ee^{-\ii\vk\vdot\vb{r}'}
+\ee^{-\zeta r'}.
+\end{equation}
+Call the remaining integral $I(\vk)$.
+
+To evaluate $I(\vk)$, we will use spherical coordinates with the
+``z-axis'' aligned along $\vk$. We now get
+\begin{equation}
+\begin{aligned}
+I(\vk):=&\int\!\rd^3r'\,\ee^{-\ii\vk\vdot\vb{r}'} \ee^{-\zeta r'}\\
+=&\int_0^{2\pi}\!\rd\phi\int_0^\pi\!\rd\theta\,\sin\theta
+\int_0^\infty\!\rd{r}\,r^2\ee^{-\ii kr\cos\theta}\ee^{-\zeta r}.
+\end{aligned}
+\end{equation}
+We can evaluate the $\theta$-integral in the same way as in
+\eqref{eq:2_theta_int}, to get
+\begin{equation}\label{eq:3_sloped_path}
+\begin{aligned}
+I(\vk)=&\frac{4\pi}{k}
+\int_0^\infty\!\rd{r}\,r\sin(kr)\ee^{-\zeta r}\\
+=&\frac{4\pi}{k}\Im\qty{
+\int_0^\infty\!\rd{r}\,r\ee^{\ii kr}\ee^{-\zeta r}
+} =\frac{4\pi}{k}\Im\qty{
+\int_0^\infty\!\rd{r}\,r\ee^{-(\zeta-\ii k) r}
+}.
+\end{aligned}
+\end{equation}
+Now, it turns out that although the factor in the exponential is
+complex, the integral can be evaluated as if the factor were real, see
+appendix~\ref{sec:sloped_path}. We thus get
+\begin{equation}
+\begin{aligned}
+I(\vk)=&\frac{4\pi}{k}
+\Im\qty{\frac{1}{(\zeta-\ii k)^2}}
+=\frac{4\pi}{k}
+\Im\qty{\frac{1}{\zeta^2-k^2 -2\ii\zeta k}}\\
+=&\frac{4\pi}{k}
+\Im\qty{\frac{\zeta^2-k^2 +2\ii\zeta k}
+{\qty(\zeta^2-k^2)^2 +4\zeta^2k^2}}\\
+=&\frac{4\pi}{k}
+\frac{2\zeta k}
+{\qty(\zeta^4-2\zeta^2k^2+k^4) +4\zeta^2k^2}
+=\frac{8\pi\zeta}{\qty(\zeta^2+k^2)^2}.
+\end{aligned}
+\end{equation}
+
+Thus the momentum wave-function now is
+\begin{equation}
+\hat{\phi}(\vp)=\qty(\frac{\zeta}{2\pi\hbar})^{3/2}
+\frac{8\pi\zeta}{\qty(\zeta^2+k^2)^2}
+=\frac{8\pi}{(2\pi\hbar)^{3/2}}\qty(\Za)^{5/2}
+\frac{1}{\qty(Z^2/a_0^2+k^2)^2},
+\end{equation}
+and the probability of finding the electron with momentum $\vp$ is
+\begin{equation}
+\abs{\hat{\phi}(\vp)}^2\rd^3\!p=
+\frac{64\pi^2}{(2\pi\hbar)^{3}}\qty(\Za)^{5}
+\frac{\rd^3\!p}{\qty(Z^2/a_0^2+k^2)^4},
+\end{equation}
+where $k=\abs{\vb{p}}/\hbar$.
+\qed
+
+\newpage
+\appendix
+\renewcommand{\thesubsection}{\Alph{section}.\arabic{subsection}}
+\section{Complex integrals}
+In this appendix I will present more details regarding the complec
+integral in problem 2 and 3. 
+
+\subsection{Offseted integration path}\label{sec:offset}
+Here we will show that the  imaginary offset in inte integral in
+\eqref{eq:2_comlex_integral} gives the same value as if there was no
+offset. To begin with we will only study the partial integral from
+$-R+\ii q$ to $R+\ii q$. Next we can use the fact that the
+integrand, $f(z)=a\ee^{-bz^2}$, is analytic for all fininte $z$, which
+allows us to deform the integration path into the shape in
+\figref{fig:int_path_2}.
+
+Now we want to show that, as $R\to\infty$, the contribution from the
+vertial integrations will disappear. The absolute value of the
+left vertical integrations is given as
+\begin{equation}
+\abs{\int_{q}^0\!\rd{y}\,a\ee^{-b(-R+\ii y)^2}}
+=\abs{\int_{0}^q\!\rd{y}\,a\ee^{-b(R^2+2\ii Ry - y^2)}}
+%\le\int_{0}^q\!\rd{y}\abs{a\ee^{-b(R^2+2\ii Ry - y^2)}}
+\le\abs{a}\ee^{-b(R^2-Q)}\to0\;\text{as}\;R\to\infty
+\end{equation}
+for some constant value $Q$ originating from the absolute integration
+of $\ee^{-b(-y^2)}$. The contribution from the right vertical integral
+follows similarly. 
+
+Also note that even if the depiction in \figref{fig:int_path_2}
+suggests that the offset is into the upper half-plane ($q>0$), the argumt
+above also holds for offsets into the lower half-plane ($q<0$).
+
+We can now conclude that, as $R\to\infty$, the offseted integral will
+only have contribution from the path along the real axis. Thus the
+integral in \eqref{eq:2_comlex_integral} will have the value as a
+regular Gaussian integral.
+
+\begin{figure}\centering
+\resizebox{.5\textwidth}{!}{\input{figures/integration_path_2.pdf_t}}
+\caption{Deformation of the integration path in
+  \eqref{eq:2_comlex_integral}. The contribution from the vertical
+  paths will disappear in the limit $R\to\infty$.}
+\label{fig:int_path_2}
+\end{figure}
 
 
+\subsection{Integration along an angled path} \label{sec:sloped_path}
+To evaluate the integral in \eqref{eq:3_sloped_path}, we first set
+$z=(\zeta-\ii k)r$, then $r\rd{r}=(\zeta-\ii k)^{-2}z\rd{z}$. Thus
+\begin{equation}
+\int_0^\infty\!\rd{r}\,r\ee^{-(\zeta-\ii k) r}
+=\frac{1}{(\zeta-\ii k)^{2}}
+\oldint_{\gamma}\!\rd{z}\, z\ee^{-z},
+\end{equation}
+where $\gamma$ is an angled path making an angle $\varTheta=\arg\{\zeta-\ii k\}$.
 
+\begin{figure}\centering
+\resizebox{.4\textwidth}{!}{\input{figures/closed_path.pdf_t}}
+\caption{A closed path tracing out a circle segment with the two
+  radii connecting the segment to the origin. Here
+  $\varGamma=\gamma_R\cup C_R\cup\gamma_R^{(\R)}$ denotes the full closed path.}
+\label{fig:closed_path}
+\end{figure}
 
+Call $f(z):=z\ee^{-z}$. We have
+\begin{equation}
+\oldint_{\gamma}f(z)\id{z}
+=\lim_{R\to\infty}\oldint_{\gamma_R}f(z)\id{z}
+=\lim_{R\to\infty}\qty[
+\oint_{\varGamma}f(z)\id{z}
+-\oldint_{C_R}f(z)\id{z}
+-\oldint_{\gamma_R^{(\R)}}f(z)\id{z}
+].
+\end{equation}
+
+Now by Cauchy's integral theorem
+\begin{equation}
+\oint_{\varGamma}f(z)\id{z}=0
+\end{equation}
+since $f$ is anallytic. Next
+\begin{equation}\label{eq:A2_CR}
+\abs{\oldint_{C_R}f(z)\id{z}}
+=\abs{\int_\varTheta^0R\ee^{\ii\theta}\exp[-R\ee^{\ii\theta}]
+\;\ii R\ee^{\ii\theta}\rd{\theta}}
+\le R^2\exp[-R\cos\Theta]\to0\;\text{as}\ R\to\infty.
+\end{equation}
+Therefore all that we are left with is
+\begin{equation}
+\oldint_{\gamma}f(z)\id{z}
+=\lim_{R\to\infty}-\!\oldint_{\gamma_R^{(\R)}}f(z)\id{z}
+=\int_0^\infty x\ee^{-x}\id{x}=1,
+\end{equation}
+and
+\begin{equation}
+\int_0^\infty\!\rd{r}\,r\ee^{-(\zeta-\ii k) r}
+=\frac{1}{(\zeta-\ii k)^{2}}
+\oldint_{\gamma}\!\rd{z}\, z\ee^{-z}
+=\frac{1}{(\zeta-\ii k)^{2}}
+\end{equation}
+
+\paragraph{Note: }
+This argument relies on the fact that $\zeta=Z/a_0>0$, so that the
+limit in \eqref{eq:A2_CR} actually is $0$. Otherwise, there is no
+other limitations, i.e. $k$ can be both positive and negative. 
 
 \end{document}
 
