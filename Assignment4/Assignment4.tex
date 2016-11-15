@@ -115,7 +115,7 @@ c_n^{(1)}(t)=&-\frac{\ii F_0}{\hbar}\sqrt{\frac{\hbar}{2m\omega_0}}
 \frac{1}{2}\qty(\ee^{\ii \omega t'}+\ee^{-\ii \omega t'}).
 \end{aligned}
 \end{equation}
-We see no that the only non-zero coefficient here is $c_1^{(1)}$, so
+We see now that the only non-zero coefficient here is $c_1^{(1)}$, so
 we continue by looking at
 \begin{equation}\label{eq:1_cn1_3}
 \begin{aligned}
@@ -236,7 +236,7 @@ No we collect the coefficients of the sines:
 \end{equation}
 By factoring out the common factors and writing the fractions in a
 common denominator, we end up with
-\begin{equation}
+\begin{equation}\label{eq:1_final}
 \begin{aligned}
 \ev{x}=&\frac{F_0}{m\omega_0}
 \sin(\frac{\omega+\omega_0}{2}t)
@@ -248,6 +248,24 @@ common denominator, we end up with
 \end{aligned}
 \end{equation}
 \qed
+
+\subsection*{Special case}
+In the special case of $\omega=\pm\omega_0$, we run in to trouble. The
+limit for $\ev{x}$ in \eqref{eq:1_final} does exists, but then we
+would get a factor of $t$ instead of a sine. The coefficient
+$c^{(1)}_1(t)$ therefore starts growing with time. A more direct way
+of finding this unboundedness of $c^{(1)}_1(t)$, is to look at the
+first integral in \eqref{eq:1_cn1_3}; with $\omega=\pm\omega_0$ one of
+the terms in the integrand will be constant. 
+
+This is not good, on account of the perturbation series expansion
+becoming disordered. I.e. the next order term will have a $t^2$
+growth, so for large $t$'s a truncated series will not be any good
+approximation.\footnotemark{} 
+\footnotetext{However the calculations are stil valid, and if we were
+  to only regard (a \emph{very} limited set of) cases where
+  $t\omega_0\ll1$, formula \eqref{eq:1_final} is still valid and could
+  be used even in the limit $\omega\to\pm\omega_0$. }
 
 
 
@@ -534,7 +552,7 @@ where $k=\abs{\vb{p}}/\hbar$.
 \renewcommand{\thesubsection}{\Alph{section}.\arabic{subsection}}
 \section{Complex integrals}
 In this appendix I will present more details regarding the complex
-integral in problem 2 and 3. 
+integrals in problem 2 and 3. 
 
 \subsection{Offseted integration path}\label{sec:offset}
 Here we will show that the  imaginary offset in the integral in
