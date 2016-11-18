@@ -1,0 +1,206 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+\pdfoutput=1
+\documentclass[swedish, english]{beamer}
+
+
+
+\usepackage[utf8]{inputenc}
+%\usepackage[scaled]{helvet} %helvetica i sliden blir bra
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{comment}
+\usepackage[swedish,english]{babel}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{units}
+\usepackage{comment}
+\usepackage{epstopdf}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage{wallpaper} %For background pictures
+\usepackage{multimedia}
+\usepackage{media9}
+
+\usepackage{physics}
+
+\usefonttheme[onlymath]{serif}
+
+\graphicspath{ 
+{presentation_figures/} %path to figures
+}
+
+
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+\usetheme{default}
+
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+\usecolortheme{beaver}
+
+}
+
+
+
+
+
+
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+
+
+\title[]{Project introduction, \\parametrically driven oscillators}
+\subtitle{} % optional
+\author{Leon Avery \and Andréas Sundström} % [short author (optional)]{many authors}
+\institute[UW]{University of Waterloo}
+\date{October 19, 2016}
+
+%\date{\vspace{-0.25cm}\today}
+
+
+
+
+\begin{document}
+
+\begin{frame}[plain]
+\linethickness{0.075mm}
+  \titlepage
+\end{frame}
+% }
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% \begin{frame} %A frame with table of contents
+% \frametitle{Contents}
+% \tableofcontents
+% \end{frame}
+
+
+
+% \begin{frame}
+% \frametitle{Sample frame}
+%  \begin{columns}[c]
+% \column{.7\textwidth} % Left column and width
+% \begin{figure}
+% \includegraphics[width=1\textwidth]{Circadian_Rhythm_with_label.jpg}
+%  %\caption{}
+% \end{figure}
+% \vspace{3mm}
+% \footnotesize \url{http://www.livescience.com/images/i/000/015/173/original/Circadian_Rhythm_with_label.jpg}
+% \column{.5\textwidth} % Right column and width
+% \vspace{8mm}
+% \begin{figure}
+% \includegraphics[width=1\textwidth]{ode_solutionfield.jpg}
+%  %\caption{}
+% \end{figure}
+% \vspace{5mm}
+% \footnotesize\url{http://minitorn.tlu.ee/~jaagup/uk/dynsys/ds2/limit/Poincare/Image502.gif}
+% \end{columns}
+% \end{frame}
+
+
+
+% \begin{frame}
+% \frametitle{Parametric forcing as a model for a child’s swing}
+
+% \begin{columns}[c]
+
+% \column{.4\textwidth} % Left column and width
+% \centerline{
+% \resizebox{.7\textwidth}{!}{
+% \input{presentation_figures/pendulum.pdf_t}}
+% }
+
+
+% \column{.7\textwidth} % Right column and width
+% \begin{itemize}
+% % \item Simple model:
+% % $l(t) = \bar{l}[1+\epsilon\cos(\omega t)]$.
+% \item Governing equation:
+% $l\phi'' + 2l'\phi' + l_0\omega_0^2\sin(\phi)=0$.\\
+% % Can be transformed to:
+% % $z''+\qty[\eta^2+\epsilon\qty(1-\eta^2)\cos(\tau)]z=0+\order{\epsilon^2}$,
+% % $\eta^2=(\omega_0/\omega)^2$.
+% % \item This is an example of a Mathieu equation.
+% \vspace{5mm}
+% \item Would be interesting to study:
+% $l(\phi)=l_0\Big[1+\cos(a\phi)\Big]$
+% \end{itemize}
+
+% \end{columns}
+% \end{frame}
+
+
+
+\begin{frame}
+\frametitle{Project outline}
+
+\begin{columns}[c]
+\column{.5\textwidth} % Left column and width
+\textbf{Swing}
+\begin{itemize}
+\item Explain physics
+\item Governing equation:
+$l\ddot\phi + 2\dot{l}\dot{\phi} + l_0\omega_0^2\sin(\phi)=0$.
+\item Would be interesting to study:
+$l(\phi)=l_0\Big[1+\cos(a\phi)\Big]$
+\item Form of solutions
+\end{itemize}
+
+\column{.5\textwidth} % Right column and width
+\textbf{Circadian Rythms}
+\begin{itemize}
+\item Explain the biology
+\item Entrainment
+\item Phase reduction technique
+\item Phase response curve
+\item Robustness
+\end{itemize}
+
+\end{columns}
+\end{frame}
+
+
+
+
+
+% \begin{frame}
+% \frametitle{Sample frame}
+%  \begin{columns}[c]
+% \column{.4\textwidth} % Left column and width
+% Text here.
+% \begin{itemize}
+%     \item Individual points.
+%     \item Feel free to remove this list.
+% \end{itemize}
+% \column{.6\textwidth} % Right column and width
+% This slide has two columns
+% \begin{figure}
+% %\includegraphics[width=1\textwidth]{}
+% % \caption{}
+% \end{figure}
+% \end{columns}
+% \end{frame}
+
+\end{document}
