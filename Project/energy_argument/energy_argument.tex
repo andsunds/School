@@ -1,0 +1,151 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../../custom_as}
+
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\oh}{\ensuremath\mathpzc{o}}
+
+\newcommand{\as}{\qcomma\text{as }}
+
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+% \begin{titlepage}
+\title{\vspace{-2.5cm}Energy argument}
+\author{Andréas Sundström}
+\date{\today,\;\; \texttt{v\,1.4}}
+
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+Thanks for reminding me about the energy the energy. I feel so
+stupid for not thinking about that before -- we're trying to find an
+increasing energy after all. 
+
+The EOM:
+\begin{equation}
+\mathtt{eom312}=r(\tau)\phi''(\tau)+2r'(\tau)\phi'(\tau) + \eta^2\sin\phi(\tau)=0,
+\end{equation}
+where $"\,'=\dv*{\tau}"$.
+
+The non-dimensionalized energy of the swing is
+\begin{equation}
+E=\frac{1}{2}\vb{v}^2 - \eta^2 r \cos\phi.
+\end{equation}
+The velocity, $\vb{v}$, in polar coordinates is
+\begin{equation}
+\vb{v} = x'\vu{x}+y'\vu{y} = r'\vu{r}+r\phi'\vu{\phi}.
+\end{equation}
+Therefore the energy is
+\begin{equation}
+E=\frac{1}{2}\qty[{r'}^2 + {r}^2{\phi'}^2] - \eta^2 r \cos\phi
+\end{equation}
+meaning that
+\begin{equation}\label{eq:dE/dtau1}
+\begin{aligned}
+\dv{E}{\tau}=& \qty[r'r'' + rr'{\phi'}^2+r^2\phi'\phi'']
++ \eta^2r\sin(\phi)\phi' - \eta^2r'\cos(\phi)
+\\
+=&r'r''+r\phi'\qty(r\phi'' + r'\phi' + \eta^2\sin\phi) 
+-\eta^2r'\cos\phi
+\\
+=&r'r''+r\phi'\qty(\mathtt{eom312}-r'\phi') -\eta^2r'\cos\phi
+\\
+=&r'r'' 
+- r'\underbrace{\qty(r{\phi'}^2 + \eta^2\cos\phi)
+}_{\ge0,\;\;\text{as long as } \phi\le\pi/2}.
+\end{aligned}
+\end{equation}
+To get the pumped energy we integrate this over one
+period\footnotemark{}. But
+\begin{equation}
+\int_0^T\!\rd\tau r' r''=\qty[\frac{1}{2}{r'}^2]_0^T\approx0,
+\end{equation}
+meaning that we are left with:
+\begin{equation}\label{eq:int_dE1}
+\Delta{E}=-\int_0^T\!\rd\tau\;
+r'\qty(r{\phi'}^2 + \eta^2\cos\phi).
+\end{equation}
+
+\footnotetext{This is a little iffy, since we're not dealing with
+  perfectly periodic behavior, but hopefully it's manageable. }
+
+\newpage\todo[inline]{New stuff below here. }
+
+\subsubsection*{Physical interpretation}
+This has a really nice physical interpretation. When raising yourself
+on the swing you have to do work against two forces:
+the centrifugal and the gravitational force. Then since there's no
+dissipating of energy, all the work done by the child must go into the
+motion of the swing. 
+The first term in \eqref{eq:int_dE1} corresponds to the centrifugal
+force and the second term to the gravitational force.\footnotemark{} 
+\footnotetext{
+The third term, $r'r''$, corresponds to the power needed
+to accelerate the mass along the line of the swing. (We are in a
+``swing-fixed'' frame of reference, which means that $r'r''$ is the
+only term for acceleration of the mass. Furthermore the rotating frame
+of reference is needed to talk about a \emph{centrifugal} force.) Then
+the same amount of energy is given back when the mass decelerates,
+resulting in no net contribution to the swing energy. 
+}
+
+
+Without even looking at the analysis resulting in \eqref{eq:int_dE1},
+one could derive that the best strategy to pump the swing is \emph{to move
+inwards when the swing is as low as possible, and outwards when the
+swing is as high as possible}. Because that would correspond to the
+child doing the most amount of work against the two forces, and then
+letting the forces do the least amount of work.
+
+
+This physical interpretation is the reason why it's possible for the
+swing to gain energy by only changing the length of the pendulum, and
+not having any external forces. 
+
+\subsubsection*{Small angle approximation}
+If we limit ourselves to the small angle approximation, then
+$\cos(\phi)\approx1$ and 
+\begin{equation}
+\int_0^T\!\rd\tau\;r'\cos\phi
+\approx\int_0^T\!\rd\tau\;r'=0.
+\end{equation}
+The pumped energy now reduces to
+\begin{equation}
+\Delta{E}=-\int_0^T\!\rd\tau\;
+r'r{\phi'}^2.
+\end{equation}
+With $r=(1+\epsilon\,\delta{r})$ and $r'=\epsilon\,\delta{r'}$, we get
+\begin{equation}\label{eq:int_dE2}
+\Delta{E}=-\int_0^T\!\rd\tau\;r'{\phi'}^2
++\order{\epsilon^2}.
+\end{equation}
+
+
+
+\end{document}
+
+
+
