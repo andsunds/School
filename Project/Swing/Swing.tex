@@ -1,8 +1,8 @@
-\documentclass[11pt,letter, swedish, english
+\documentclass[11pt,letter, swedish, english,%twocolumn
 ]{article}
 \pdfoutput=1
 
-\usepackage{../../custom_as}
+\usepackage[oldint]{../../custom_as}
 
 \graphicspath{ {figures/} }
 
@@ -39,7 +39,7 @@
 \pagestyle{fancy}
 %\fancyhf{}
 %\chead{\texttt{v.1.3}}
-\lhead{}
+\lhead{Incomplete swing report}
 \rhead{\today\quad\texttt{v.1.3}}
 %\rfoot{Page \thepage}
 
@@ -276,14 +276,15 @@ forcing; that was also the most effective forcing.
 
 
 \subsubsection{Using energy considerations}
-\todo[inline]{This section has to be cut down! But I'ts very nice to
-  have this to start off of when going into the next section on doing
-  this with the \emph{method of multiple scales}.}
+%\todo[inline]{This section has to be cut down! But I'ts very nice to
+%  have this to start off of when going into the next section on doing
+%  this with the \emph{method of multiple scales}.}
+\todo{cut down!}
 To get at feel for how the swing might behave we can begin by
 calcuating the gained energy over one swing cycle:
 \begin{equation}\label{eq:DE1}
-\DE=\int_0^T\dv{E}{t}\id{t}
-=-\int_0^T \dot{r}\qty(r\dot{\phi}^2 + \eta^2\cos\phi)\id{t}.
+\DE=\int_0^T\!\dv{E}{t}\id{t}
+=-\int_0^T\! \dot{r}\qty(r\dot{\phi}^2 + \eta^2\cos\phi)\id{t}.
 \end{equation}
 Here we used \eqref{eq:dE/dt1} and the fact that the integral of
 $\dot{r}\ddot{r}$ over one cycle is~$0$. 
@@ -318,7 +319,7 @@ integate. However, we can not integrate the last term, with a cosine
 within a cosine; so we utilize the restriction $a_0\ll1$ to expand
 $\cos(a_0\cos(t/2))\approx1-[a_0\cos(t/2)]^2/2$. We now end up with
 \begin{equation}
-\DE=+\epsilon\int_0^{4\pi}\sin(t+t_0)
+\DE=+\epsilon\int_0^{4\pi}\!\!\sin(t+t_0)
 \qty[\qty(-\frac{a_0}{2}\sin(t/2))^2
 +\frac{1}{4}\qty(1-\frac{1}{2}\qty[a_0\cos(t/2)]^2)
 ]\id{t}+\order{\epsilon^2}.
@@ -330,13 +331,13 @@ meaning that any constats inside the brackets will
 disappear. Eventually we get
 \begin{equation}
 \DE\approx
--\frac{3\epsilon a_0}{16}\int_0^{4\pi}\sin(t+t_0)\cos(t)\id{t}
+-\frac{3\epsilon a_0}{16}\int_0^{4\pi}\!\!\sin(t+t_0)\cos(t)\id{t}
 =-\frac{3\pi\epsilon a_0}{8}\sin(t_0).
 \end{equation}
 
 From here it is clear that the most optimal forcing occurs with
 $t_0=-\pi/2$, so that
-\begin{equation}
+\begin{equation}\label{eq:r}
 r(t)=1+\epsilon\cos(t+t_0)=1+\epsilon\sin(t).
 \end{equation}
 This is also in good agreement with the reasoning in
@@ -357,9 +358,9 @@ E(t)=E_0\exp[\ln(1+3\pi\epsilon)\frac{t}{4\pi}]
 \approx E_0\,\ee^{\frac{3}{4}\epsilon t}.
 \end{equation}
 The angle of the swing, with the amplitude going as
-$\sqrt{E}$, would be 
+$\sqrt{E}$, would therefore be 
 \begin{equation}\label{eq:phi_from_E}
-\phi(t)\approx a_0\ee^{\frac{3}{8}\epsilon t}\cos(t).
+\phi(t)\approx a_0\ee^{\frac{3}{8}\epsilon t}\cos(t/2).
 \end{equation}
 At least for $t\le\order{\epsilon}$ -- after that non-linearities in the
 original EOM would set in and disrupt the sync between $r(t)$ and
@@ -374,7 +375,7 @@ $\phi(t)$.
 % theoretical analysis very difficult.  
 
 
-\subsubsection{Time dependent forcing}
+%\subsubsection{Time dependent forcing}
 
 % One advantage of phase dependent forcing is that, then the forcing
 % will always be in sync with the swing -- which is crucial to pump the
@@ -395,12 +396,152 @@ $\phi(t)$.
 % Probably won't have anything new in terms of perturbation techniques
 % on the swing. What I've described above has already been done in the thesis.
 % }
-\vspace{11pt}
-\todo[inline]{
-A completely new turn!\\
-I will here use the method of multiple scales to rederive
+
+% \vspace{11pt}
+% \todo[inline]{
+% A completely new turn!\\
+% I will here use the method of multiple scales to rederive
+% \eqref{eq:phi_from_E}. 
+% }
+
+\subsubsection{Using the method of multiple scales}
+
+In this section we will use the method of multiple scales to
+rederive and improve the result from the previous section. In order to
+use this method, we introduce a new timescale $\tau=\epsilon{t}$ and
+the total derivatie becomes
+\begin{equation}
+\dv{t}=\pdv{t}+\epsilon\pdv{\tau}.
+\end{equation}
+With this the EOM becomes
+\begin{equation}\label{eq:eom_mms}
+\phi_{tt}+2\epsilon\phi_{t\tau}+\epsilon^2\phi_{\tau\tau}
++\frac{r_t}{r}(\phi_t+\epsilon\phi_\tau)+\frac{\eta^2}{r}\sin(\phi)=0,
+\end{equation}
+with the initial conditions 
+\begin{equation}\label{eq:inti_mms}
+\phi(0, 0)=a_0\ll1\qcomma
+\phi_t(0, 0)+\epsilon\phi_\tau(0, 0)=0.
+\end{equation} 
+Note that only $r_t$ was used, since $r$ still only has $t$
+dependence. 
+
+Expanding \eqref{eq:eom_mms} up to $\order{\epsilon^2}$, using
+\eqref{eq:r} and approximating $\sin(\phi)\approx\phi$, we get
+\begin{equation}
+\begin{aligned}
+\phi_{tt}+2\epsilon\phi_{t\tau}+\epsilon^2\phi_{\tau\tau}+\eta^2\phi
+=&\hspace{18pt}
+\epsilon\qty[-2\cos(t)(\phi_t+\epsilon\phi_\tau)+\eta^2\sin(t)\phi]\\
+&+\epsilon^2\qty[2\sin(t)\phi_t-2\eta^2\sin^2(t)\phi].
+\end{aligned}
+\end{equation}
+Then we expand 
+$\phi(t,\tau,\epsilon)=\phi_0(t,\tau)+
+\epsilon\phi_1(t,\tau)+\epsilon^2\phi_0(t,\tau)+\ldots$ and use
+$\eta=1/2$. This results in a series of DE's for each power of
+$\epsilon$. 
+
+The $\order{1}$ problem is just $\phi_{0,tt}+\phi_0/4=0$, which has the
+solution
+\begin{equation}
+\phi_0(t,\tau)=A_0(\tau)\cos(t/2)+B_0(\tau)\sin(t/2).
+\end{equation}
+With the inital conditions $A_0(0)=a_0$ and $B_0(0)=0$.
+
+Next the $\order{\epsilon}$ problem: 
+\begin{equation}
+\begin{aligned}
+\phi_{1, tt}+\frac{1}{4}\phi_1=&\Big[A_{0,\tau}\sin(t/2)-B_{0, \tau}\cos(t/2)\Big]\\
+&+\cos(t)\Big[A_0\sin(t/2)-B_0\cos(t/2)\Big]
++\frac{\sin(t)}{4}\Big[A_0\cos(t/2)+B_0\sin(t/2)\Big],
+\end{aligned}
+\end{equation}
+which after reducing the multiplication of te trigonometric functions
+reduces to
+\begin{equation}
+\begin{aligned}
+\phi_{1, tt}+\frac{1}{4}\phi_1=&\phantom{+}A_{0,\tau}\sin(t/2)
+-\frac{A_0}{8}\Big[3\sin(t/2)-5\sin(3t/2)\Big]\\
+&{-}B_{0, \tau}\cos(t/2)
+-\frac{B_0}{8}\Big[3\cos(t/2)+5\cos(3t/2)\Big].
+\end{aligned}
+\end{equation}
+We see here that to remove the secular terms, we must have
+\begin{equation}
+\begin{cases}
+A_0'-\frac{3}{8}A_0=0\qcomma&A_0(0)=a_0,\\
+B_0'+\frac{3}{8}B_0=0\qcomma&B_0(0)=0,
+\end{cases}
+\end{equation}
+which have the solutions $A_0(\tau)=a_0\ee^{\frac{3}{8}\tau}$ and
+$B_0\equiv0$. And the solution to the $\order{\epsilon}$ problem
+becomes
+\begin{equation}
+\phi_1(t, \tau)=A_1(\tau)\cos(t/2)+B_1(\tau)\sin(t/2)
+-\frac{5}{16}A_0(\tau)\sin(3t/2).
+\end{equation}
+Using \eqref{eq:inti_mms}, the initial conditions are $A_1(0)=0$ and
+$B_1(0)-15A_0(0)/32 + A_0'(0)=0$, which results in $B_1(0)=3a_0/32$.
+
+Continuing on in an analogous way, the $\order{\epsilon^2}$ problem
+will yield sekular temrs. The removal of which will result in a set of
+DE's for $A_1$ and $B_1$. The details of these, quite laborious,
+calculations are best suited for some kind of symbolic mathematical
+program -- e.g. Mathematica. The DE's for $A_1$ and $B_1$ are 
+\begin{equation}
+\begin{cases}
+128A_1'-48A_1=0\qcomma&A_1(0)=0\\
+128B_1'+48B_1=-107a_0\ee^{\frac{3}{8}\tau}\qcomma&B_1(0)=\frac{3a_0}{32},
+\end{cases}
+\end{equation}
+which have the solutions $A_1(\tau)\equiv0$ and
+\begin{equation}
+B_1(\tau)=\frac{a_0}{96}
+\qty(116\ee^{-\frac{3}{8}\tau}-107\ee^{\frac{3}{8}\tau}).
+\end{equation}
+
+\paragraph{Results}
+We now have a full solution up to $\order{\epsilon}$.
+% \begin{equation}
+% \phi(t)=a_0\ee^{\frac{3}{8}\tau}\cos(\frac{t}{2})
+% +\frac{a_0\epsilon}{96}\qty[
+% \qty(116\ee^{-\frac{3}{8}\tau}-107\ee^{\frac{3}{8}\tau})
+% \sin(\frac{t}{2})
+% -30\ee^{\frac{3}{8}\tau}\sin(\frac{3t}{2})]
+% +\mathcal{O}_\text{F}\qty(\epsilon^2).
+% \end{equation}
+% \begin{equation}
+% \begin{aligned}
+% \phi(t, \tau)=&a_0\ee^{\frac{3}{8}\tau}\cos(t/2)\\
+% &+\frac{a_0\epsilon}{96}\qty[
+% \qty(116\ee^{-\frac{3}{8}\tau}-107\ee^{\frac{3}{8}\tau})
+% \sin(t/2)
+% -30\ee^{\frac{3}{8}\tau}\sin(3t/2)]
+% +\mathcal{O}_\text{F}\qty(\epsilon^2).
+% \end{aligned}
+% \end{equation}
+Going back to only $t$, we get
+\begin{equation}
+\phi(t)=a_0\ee^{\frac{3}{8}\epsilon{t}}\cos(\frac{t}{2})
++\frac{\epsilon a_0}{96}\ee^{\frac{3}{8}\epsilon{t}}\qty[
+\qty(116\ee^{-\frac{3}{4}\epsilon{t}}-107)
+\sin(\frac{t}{2})
+-30\sin(\frac{3t}{2})]
+{+}\mathcal{O}_\text{F}\qty(\epsilon^2)
+% %\\=&
+% a_0\ee^{\frac{3}{8}\epsilon{t}}\qty{
+% \cos(\frac{t}{2})
+% +\frac{\epsilon}{96}\qty[
+% \qty(116\ee^{-\frac{3}{4}\epsilon{t}}-107)
+% \sin(\frac{t}{2})
+% -30\sin(\frac{3t}{2})]}
+% +\mathcal{O}_\text{F}\qty(\epsilon^2)
+% \end{aligned}
+\end{equation}
+We can now see that the first term is precisely what we had in
 \eqref{eq:phi_from_E}. 
-}
+
 
 
 \subsubsection{Comparison to numerical simulations}
@@ -411,6 +552,15 @@ simulations. And also discussing the break down of the previous
 calculations. Maybe I'll even derive an expression for when the
 approximations breaks down.
 }
+
+\begin{figure}\centering
+%\resizebox{.2\textwidth}{!}{
+\input{figures/swing_sim.tex}%}
+\caption{Simulated swing angle, showing simulated results for both the
+  original and the linearized EOM.
+}
+\label{fig:sim}
+\end{figure}
 
 
 
