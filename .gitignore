@@ -1,6 +1,7 @@
 # Det här en är en avsiktilgt synlig gitignore-fil som är tänkt som en mall till LaTeX-repositories.
 
 #Onödig LaTeX-output
+
 *.aux
 *.bbl
 *.blg
@@ -15,8 +16,9 @@ Assignment?.pdf
 *.eps
 *~
 
-Nayfeh_intro_to_pert.pdf
 course_notes_AMATH732_2016.pdf
-Swing_Thesis.pdf
+
 Swing.pdf
 energy_argument.pdf
+intro_presentation.nav
+Project/references/
