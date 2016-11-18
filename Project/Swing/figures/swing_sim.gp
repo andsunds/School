@@ -8,16 +8,35 @@
 # Förklaringsrutan, man kan behöva ställa in width för att den ska bli lagom bred
 set key samplen 1.5 box top left height .5
 #set grid #Sätter på rutnät
-#set logscale y
 
-set format y "$%g$"
-set ytics -0.8,0.4,0.8
-set ytics -1,1,1
 
 #set decimalsign ','#Bestämmer decimalseparator
 
 
 
+
+set terminal epslatex font ',12' color size 12cm,6cm
+set key width 0
+set output "swing_sim_energy.tex"
+set xlabel '$t$'
+set ylabel '$E(t)$'
+set logscale y
+set format y "$10^{%L}$"
+
+plot [0:600] [1e-3:1.2e-1] "swing_sim_optimal.tsv" using 1:3 with lines lt 1 lw 3 \
+lc rgb "black" title '$\phi(t)$',\
+"swing_sim_optimal_lin.tsv" using 1:3 with lines lt 5 lw 3 \
+lc rgb "blue" title '$\phi_\text{lin}(t)$',\
+((0.1**2/8)*exp(3*0.01*x/4)) with lines lt 2 lw 3\
+lc rgb "red" title '$E_0\exp(3\epsilon{t}/4)$'
+
+
+
+set format y "$%g$"
+set ytics -0.8,0.4,0.8
+set ytics -1,1,1
+
+unset logscale y
 
 #################### plottar ####################
 #energydepleted std
@@ -26,23 +45,22 @@ set key width -2
 set output "swing_sim.tex"
 set xlabel '$t$'
 set ylabel 'Original EOM'
-s=''
+
 set multiplot layout 1,2
 #### x-axel     y-axel
-plot [0:600] [-1:1] "swing_sim_optimal.tsv" using 1:2 with lines lt 1 \
-lc rgb "black" title s.'$\phi(t)$',\
+plot [0:600] [-1:1] "swing_sim_optimal.tsv" using 1:2 with lines lt 1 lw 2 \
+lc rgb "black" title '$\phi(t)$',\
 (0.1*exp(3*0.01*x/8)) with lines lt 2 lw 5\
-lc rgb "red" title s.'$\pm a_0\exp(3\epsilon{t}/8)$',\
+lc rgb "red" title '$\pm a_0\exp(3\epsilon{t}/8)$',\
 (-0.1*exp(3*0.01*x/8)) with lines lt 2 lw 5\
-lc rgb "red" notitle,\
+lc rgb "red" notitle
 
 set ylabel 'Linearized EOM'
-plot [0:600] [-1:1] "swing_sim_optimal_lin.tsv" using 1:2 with lines lt 1 \
-lc rgb "blue" title s.'$\phi_\text{lin}(t)$',\
+plot [0:600] [-1:1] "swing_sim_optimal_lin.tsv" using 1:2 with lines lt 1 lw 2 \
+lc rgb "blue" title '$\phi_\text{lin}(t)$',\
 (0.1*exp(3*0.01*x/8)) with lines lt 2 lw 5\
-lc rgb "red" title s.'$\pm a_0\exp(3\epsilon{t}/8)$',\
+lc rgb "red" title '$\pm a_0\exp(3\epsilon{t}/8)$',\
 (-0.1*exp(3*0.01*x/8)) with lines lt 2 lw 5\
-lc rgb "red" notitle,\
-
+lc rgb "red" notitle
 
 
