@@ -15,7 +15,7 @@ set key samplen 1.5 box top left height .5
 
 
 
-set terminal epslatex font ',12' color size 12cm,6cm
+set terminal epslatex font ',11' color size 12cm,6cm
 set key width 0
 set output "swing_sim_energy.tex"
 set xlabel '$t$'
@@ -35,13 +35,13 @@ lc rgb "red" title '$E_0\exp(3\epsilon{t}/4)$'
 set format y "$%g$"
 set ytics -0.8,0.4,0.8
 set ytics -1,1,1
+set key at 10,0.96 width -2.5 samplen 1
 
 unset logscale y
 
 #################### plottar ####################
 #energydepleted std
-set terminal epslatex font ',12' color size 15cm,6cm
-set key width -2
+set terminal epslatex font ',12' color size 16cm,6cm
 set output "swing_sim.tex"
 set xlabel '$t$'
 set ylabel 'Original EOM'
