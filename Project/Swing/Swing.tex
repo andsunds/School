@@ -39,7 +39,7 @@
 \pagestyle{fancy}
 %\fancyhf{}
 \lhead{Incomplete swing report}
-\rhead{\today\quad\texttt{v.1.5}}
+\rhead{\today\quad\texttt{v.1.5.1}}
 %\rfoot{Page \thepage}
 
 
@@ -83,7 +83,7 @@ After that, we will use energy considerations and also the
 \emph{method of multiple scales} to study the motion of the swing.
 
 \subsection{The equation of motion}
-One of the most interesting parameters will be the angle, $\phi$,
+One of the most interesting variables will be the angle, $\phi$,
 the swing makes against the vertical as in \figref{fig:pendulum}. 
 A simple and elegant way to find $\phi(t)$ is to use the Lagrangian
 formalism. We therefore need to find the Lagrangian $\mathcal{L}=T-V$,
@@ -91,7 +91,7 @@ where $T$ is the kinetic energy and $V$ is the potential energy of the
 swing. 
 
 To find the kinetic energy, we will need to know the velocity of the
-CM. Since we are looking for the angle, polar coordinates
+center of mass (CM). Since we are looking for the angle, polar coordinates
 are preferred. In polar coordinates the velocity is given by
 $\vb{v}=\dot{l}\vu{r}+l\dot{\phi}\vu{\phi}$. Thus the kinetic energy is
 \begin{equation}
@@ -242,7 +242,7 @@ found by Burns \cite{Burns_1970}
 As a simple model, we will use a time dependent forcing --
 i.e. $r=r(t)$. This has the disadvantage of being susceptible to
 falling out of sync with the swing. We will later show the importance
-of sync here. But in contrast to for instance phase dependent forcing,
+of sync here. But in contrast to, for instance, phase dependent forcing,
 time dependent forcing is much easier to analyze. 
 
 In this section we will first study the energy of the swing, and from
@@ -256,8 +256,8 @@ the approximate solutions to numerical ones.
 \subsubsection{Using energy considerations}
 \newcommand{\DE}{\Delta{E}}
 \todo{cut down!}
-To get at feel for how the swing might behave we can begin by
-calculating the gained energy over one swing cycle:
+To get a feel for how the swing might behave we can begin by
+calculating the energy gained over one swing cycle:
 \begin{equation}\label{eq:DE1}
 \DE=\int_0^T\!\dv{E}{t}\id{t}
 =-\int_0^T\! \dot{r}\qty(r\dot{\phi}^2 + \eta^2\cos\phi)\id{t}.
@@ -285,15 +285,18 @@ yields
 \end{equation}
 We can choose the initial conditions to be $\phi_0(0)=a_0$ and
 $\dot\phi_0(0)=0$. Next we restrict ourselves to $a_0\ll1$ so that we
-can linearize the sine, which results in
+can linearize the sine, which results in the reduced solution
 \begin{equation}
 \phi_0(t)=a_0\cos(\eta t)=a_0\cos(\frac{t}{2}).
 \end{equation}
 
 From here we substitute these results into \eqref{eq:DE1} and
-integrate. However, we can not integrate the last term, with a cosine
-within a cosine; so we utilize the restriction $a_0\ll1$ to expand
-$\cos(a_0\cos(t/2))\approx1-[a_0\cos(t/2)]^2/2$. We now end up with
+integrate over one free-running cycle. Since the time scale is set by
+the forcing frequency, the integration is from~$0$ to~$4\pi$. However,
+we can not integrate the last term, with a cosine within a cosine; so
+we utilize the restriction $a_0\ll1$ to expand
+$\cos(a_0\cos(t/2))\approx1-[a_0\cos(t/2)]^2/2$. 
+We now end up with 
 \begin{equation}
 \DE=+\epsilon\int_0^{4\pi}\!\!\sin(t+t_0)
 \qty[\qty(-\frac{a_0}{2}\sin(t/2))^2
@@ -418,8 +421,8 @@ Expanding \eqref{eq:eom_mms} up to $\order{\epsilon^2}$, using
 \end{equation}
 Then we expand 
 $\phi(t,\tau,\epsilon)=\phi_0(t,\tau)+
-\epsilon\phi_1(t,\tau)+\epsilon^2\phi_0(t,\tau)+\ldots$ and use
-$\eta=1/2$. This results in a series of DE's for each power of
+\epsilon\phi_1(t,\tau)+\epsilon^2\phi_2(t,\tau)+\ldots$ and use
+$\eta=1/2$. This results in a series of DEs for each power of
 $\epsilon$. 
 
 The $\order{1}$ problem is just $\phi_{0,tt}+\phi_0/4=0$, which has the
@@ -437,7 +440,7 @@ Next the $\order{\epsilon}$ problem:
 +\frac{\sin(t)}{4}\Big[A_0\cos(t/2)+B_0\sin(t/2)\Big],
 \end{aligned}
 \end{equation}
-which after reducing the multiplication of te trigonometric functions
+which after reducing the multiplication of the trigonometric functions
 reduces to
 \begin{equation}
 \begin{aligned}
@@ -450,8 +453,8 @@ reduces to
 We see here that to remove the secular terms, we must have
 \begin{equation}
 \begin{cases}
-A_0'-\frac{3}{8}A_0=0\qcomma&A_0(0)=a_0,\\
-B_0'+\frac{3}{8}B_0=0\qcomma&B_0(0)=0,
+A_{0,\,\tau}-\frac{3}{8}A_0=0\qcomma&A_0(0)=a_0,\\
+B_{0,\,\tau}+\frac{3}{8}B_0=0\qcomma&B_0(0)=0,
 \end{cases}
 \end{equation}
 which have the solutions $A_0(\tau)=a_0\ee^{\frac{3}{8}\tau}$ and
@@ -465,14 +468,15 @@ Using \eqref{eq:inti_mms}, the initial conditions are $A_1(0)=0$ and
 $B_1(0)-15A_0(0)/32 + A_0'(0)=0$, which results in $B_1(0)=3a_0/32$.
 
 Continuing on in an analogous way, the $\order{\epsilon^2}$ problem
-will yield secular terms. The removal of which will result in a set of
-DE's for $A_1$ and $B_1$. The details of these, quite laborious,
-calculations are best suited for some kind of symbolic mathematical
-program -- e.g. Mathematica. The DE's for $A_1$ and $B_1$ are 
+will yield secular terms. The removal of these will result in a set of
+DEs for $A_1$ and $B_1$. 
+%The details of these, quite laborious, calculations are best suited
+%for some kind of symbolic mathematical program -- e.g. Mathematica. 
+After some algebraic work, the DEs for $A_1$ and $B_1$ turn out to be
 \begin{equation}
 \begin{cases}
-128A_1'-48A_1=0\qcomma&A_1(0)=0\\
-128B_1'+48B_1=-107a_0\ee^{\frac{3}{8}\tau}\qcomma&B_1(0)=\frac{3a_0}{32},
+128A_{1,\,\tau}-48A_1=0\qcomma&A_1(0)=0\\
+128B_{1,\,\tau}+48B_1=-107a_0\ee^{\frac{3}{8}\tau}\qcomma&B_1(0)=\frac{3a_0}{32},
 \end{cases}
 \end{equation}
 which have the solutions $A_1(\tau)\equiv0$ and
@@ -564,7 +568,7 @@ We can now see that the first term is precisely what we had in
 The equation of motion can of course also be solved numerically. The
 numerical solutions are presented in \figref{fig:sim}; there we show
 both the solution to the original EOM, \eqref{eq:eom}, and the
-linearized version -- where $\sin(\phi)$ have been replaced by just
+linearized version -- where $\sin(\phi)$ has been replaced by just
 $\phi$. Then 
 \todo{We might cut this fig. everything important is in fig. 2}
 \figref{fig:sim_E} shows the energy of the solutions in
@@ -573,12 +577,13 @@ $\phi$. Then
 It is clear that the original EOM produces a solution which fits the
 calculations, based on the linearized EOM, up to some amplitude. After
 that amplitude the non-linear pendulum frequency shift, due to an
-amplitude dependent frequency, sets in an disrupts the sync between
-the swing and the forcing. The sync is vital to pump the swing with
-more energy, as can be seen in \eqref{eq:DE_t0}. Furthermore when the
-phase of the swing and the forcing is far enough apart the forcing
-will actually pump energy \emph{out} of the swing, which can bee seen
-in \figref{fig:sim_E} at $t\approx500$.
+amplitude dependent frequency, sets in and disrupts the
+synchronization between the swing and the forcing. The sync is vital
+to pump the swing with more energy, as can be seen in
+\eqref{eq:DE_t0}. Furthermore when the phase of the swing and the
+forcing is far enough apart the forcing will actually pump energy
+\emph{out} of the swing, which can bee seen in \figref{fig:sim_E} at
+$t\approx500$. 
 
 Meanwhile the linearized EOM yields a numerical solution that is
 strikingly similar to what was predicted. This was to be expected
@@ -621,5 +626,5 @@ Burns, J.A. (1970). More on Pumping a Swing. Am. J. Phys. \textit{38, 920-2}
 
 
 %  LocalWords:  parametrically EOM dimensionalize dimensionalized
-%  LocalWords:  dimenzionalizing Floquet linearities rederive DE's
+%  LocalWords:  dimenzionalizing Floquet linearities rederive DEs
 %  LocalWords:  Falk
