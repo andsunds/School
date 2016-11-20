@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}[2011/06/27]%Godtyckligt valt men inte för gammalt
-\ProvidesPackage{custom_as}[2016/09/25 Custom (Andréas)]
+\ProvidesPackage{custom_as}[2016/11/19 Custom (Andréas)]
 
 
 %%För att inkludera MATLABkod. 
@@ -135,7 +135,9 @@
 
 %%Omdefiniera bf och sf för att ge kursiva tecken i matteläge
 \DeclareMathAlphabet{\mathsfit}{\encodingdefault}{\sfdefault}{m}{sl}
+\let\mathsfrm\mathsf
 \renewcommand{\mathsf}[1]{\mathsfit{#1}}
+\let\mathbfrm\mathbf
 \renewcommand{\mathbf}[1]{\boldsymbol{#1}}
 
 
