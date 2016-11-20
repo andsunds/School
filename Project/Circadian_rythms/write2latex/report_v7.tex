@@ -1,0 +1,1126 @@
+% This file was converted to LaTeX by Writer2LaTeX ver. 1.0.2
+% see http://writer2latex.sourceforge.net for more info
+\documentclass[letterpaper]{article}
+\pdfoutput=1
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,textcomp}
+\usepackage{color}
+\usepackage{array}
+\usepackage{supertabular}
+\usepackage{hhline}
+\usepackage{hyperref}
+\hypersetup{pdftex, colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, urlcolor=blue, pdftitle=, pdfauthor=Leon Avery, pdfsubject=, pdfkeywords=}
+\usepackage[pdftex]{graphicx}
+% Outline numbering
+\setcounter{secnumdepth}{0}
+\makeatletter
+\newcommand\arraybslash{\let\\\@arraycr}
+\makeatother
+% Page layout (geometry)
+\setlength\voffset{-1in}
+\setlength\hoffset{-1in}
+\setlength\topmargin{0.5in}
+\setlength\oddsidemargin{0.5in}
+\setlength\textheight{9.666666in}
+\setlength\textwidth{7.5in}
+\setlength\footskip{12.0pt}
+\setlength\headheight{12pt}
+\setlength\headsep{0cm}
+% Footnote rule
+\setlength{\skip\footins}{0.0469in}
+\renewcommand\footnoterule{\vspace*{-0.0071in}\setlength\leftskip{0pt}\setlength\rightskip{0pt plus 1fil}\noindent\textcolor{black}{\rule{0.0\columnwidth}{0.0071in}}\vspace*{0.0398in}}
+% Pages styles
+\makeatletter
+\newcommand\ps@Standard{
+  \renewcommand\@oddhead{AMATH 732\hfill Swings and Biorhythms\hfill Leon Avery, Andreas Sundstrom}
+  \renewcommand\@evenhead{\@oddhead}
+  \renewcommand\@oddfoot{\hfill Page \thepage{} of ?}
+  \renewcommand\@evenfoot{\@oddfoot}
+  \renewcommand\thepage{\arabic{page}}
+}
+\makeatother
+\pagestyle{Standard}
+\setlength\tabcolsep{1mm}
+\renewcommand\arraystretch{1.3}
+\newcounter{EquationNumber}
+\renewcommand\theEquationNumber{\arabic{EquationNumber}}
+\newcounter{Figure}
+\renewcommand\theFigure{\arabic{Figure}}
+\title{}
+\author{Leon Avery}
+\date{2016-11-19}
+\begin{document}
+\clearpage\setcounter{page}{1}\pagestyle{Standard}
+{\color[rgb]{0.09019608,0.21176471,0.3647059}
+Swings and biorhythms\nobreakdash-parametrically forced oscillators}
+
+{\itshape\color[rgb]{0.30980393,0.5058824,0.7411765}
+Leon Avery, Andreas Sundström}
+
+\section{How to pump a swing}
+\section{Introduction to Floquet Theory}
+In the previous sections we showed that, in the linear approximation,
+a swing with periodically varying length has solutions whose
+amplitude increases or decreases exponentially in time. Although we
+didn’t show this, there are also solutions that show no steady change
+in amplitude with time. Which type of solutions one gets depends on
+the ratio of the frequency  $\omega $ of the length oscillation to
+the free-running frequency  ${\omega }_{0}$ of the unperturbed swing,
+and also on the magnitude  $\epsilon $ of the length oscillation. As
+a general rule, exponential growth occurs when the forcing entrains
+the oscillation of the swing in such a way that the motions that
+deliver energy occur at the most effective phase of each cycle. This
+is more likely to happen if the ratio  $\omega /{\omega }_{0}$ is an
+integer (as we showed, 2 is particularly effective), and when 
+$\epsilon $ is larger. 
+
+Floquet Theory is a general approach to understanding systems of
+linear ODEs with periodic parametric forcing. Specifically, it
+applies to systems of the form 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\centering  $\frac{dx}{\mathit{dt}}=A\left(t\right)x\left(t\right)$
+$x\left({t}_{0}\right)={x}_{0}$ &
+\raggedleft\arraybslash
+(\label{bkm:floquetsys}\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\ where the matrix  $A(t)$ is a  $T${}-periodic function of time:
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\centering  $A\left(t+\mathit{nT}\right)=A\left(t\right)$
+\ \ \ \ \ \ \ \ \  ${\forall}n{\in}Z$ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+Every solution of (1) is encompassed in its principal fundamental
+matrix solution  $U(t,{t}_{0})$, defined as the solution to the
+matrix IVP
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\centering 
+$\frac{dU\left(t,{t}_{0}\right)}{\mathit{dt}}=A\left(t\right)U\left(t,{t}_{0}\right)$
+$U\left({t}_{0},{t}_{0}\right)=I$ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+Here  $I$ is the  $n\times n$ identity matrix. Specifically, the
+solution of (1) is  $x\left(t\right)=U\left(t,{t}_{0}\right){x}_{0}$.
+
+
+
+\bigskip
+
+Define the monodromy matrix  $B=U({t}_{0}+T,{t}_{0})$. The monodromy
+matrix turns out to be independent of  ${t}_{0}$, so it can be
+computed as  $B=U(T,0)$. The eigenvalues of  $B$,  ${\rho }_{1},{\rho
+}_{2},{\dots},{\rho }_{n}$, are called the characteristic
+multipliers. The determinant of  $B$ (the product of the
+characteristic multipliers) is given by, 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+\mathit{det}\left(B\right)=\exp \left(\int
+_{0}^{T}{\mathit{tr}\left(A\left(s\right)\right)\mathit{ds}}\right)
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\ They multipliers determine the character (e.g. stable or
+exponentially growing) of solutions of (1). In particular,
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+U\left(t,{t}_{0}\right)=U\left(\left(t-{t}_{0}\right)\text{mod}T,{t}_{0}\right){B}^{\text{[230A?]}(t-{t}_{0})/T\text{[230B?]}}
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+The characteristic exponents  ${\mu }_{1},{\mu }_{2},{\dots},{\mu
+}_{n}$, defined by  ${e}^{{\mu }_{i}T}={\rho }_{i}$ determine the
+growth rate of solutions. In particular, if  $\Re (\mu ?_{i})<0$,
+solutions associated with it will decay exponentially; if  $\Re
+\left({\mu }_{i}\right)>0$, solutions associated with it will grow
+exponentially, and if  $\Re \left({\mu }_{i}\right)=0$, solutions
+associated with it will be stable. (Strictly speaking, the previous
+statements hold only if the geometric multiplicity of each eigenvalue
+of  $B$ equals its algebraic multiplicity. When this is not the case,
+polynomial factors can also arise.) There will be, associated with
+each characteristic exponent  $\mu $, a solution of the form 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\centering  $x\left(t\right)={e}^{\mathit{\mu t}}p(t)$, &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\ where  $p(t)$ is a  $T${}-periodic vector function of time. 
+
+A particularly interesting case arises when  $A(t)$ is a periodic
+perturbation of a constant matrix that itself has 
+${T}_{0}${}-periodic solutions, i.e.
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+A\left(t\right)={A}_{0}+\epsilon \widetilde{{A}}(t)
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+with  $\widetilde{{A}}(t)$  $T${}-periodic. For instance, the varying
+length swing is of this form, with
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+A\Box _{o}=\left(\begin{matrix}0&1\\-{\eta }^{2}&0\end{matrix}\right)
+\end{equation*}
+\begin{equation*}
+\widetilde{{A}}\left(\tau
+\right)=\left(\begin{matrix}0&0\\0&-2\frac{\acute{{r}}(\tau
+)}{r\left(\tau
+\right)}\end{matrix}\right)=\left(\begin{matrix}0&0\\0&-2{{\partial}}_{\tau
+}\log \text{[2061?]}(r\left(\tau \right))\end{matrix}\right)
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+ ${A}_{0}$ is traceless, and since  $r$ is periodic, the integral of 
+$\mathit{tr}(\widetilde{{A}})$ over one cycle is  $-2\log \left({\tau
+}_{0}+2\pi \right)+2\log \left({\tau }_{0}\right)=0$. Thus the
+monodromy matrix  $B$ for the swing has determinant 0. The character
+of the solutions can be determined from  $\mathit{tr}\left(B\right)$.
+If  $?{\rho }_{1}+{\rho }_{2}\vee
+?\left|\mathit{tr}\left(B\right)\right|<2$, the multipliers  ${\rho
+}_{1},{\rho }_{2}$ form a complex conjugate pair, each with absolute
+value 1, and solutions are stable. If, however,  $?{\rho }_{1}+{\rho
+}_{2}\vee ?\left|\mathit{tr}\left(B\right)\right|>2$, the multipliers
+are real and different, and since their product is 1, one must be
+greater than one. In this case, there is an exponentially growing
+solution. Finally, in the border case,  $\left|{\rho }_{1}+{\rho
+}_{2}\right|=\mathit{tr}\left(B\right)=2$, the multipliers are equal
+, either both 1 or both  $-1$. The values of  $\eta ,\epsilon $ for
+which that holds define the boundaries of the Floquet tongues, within
+which exponentially growing solutions occur. 
+
+\section[Circadian rhythms]{Circadian rhythms}
+Every human being, and indeed many or most living things, contains at
+least one internal clock (Ko and Takahashi, 2006; Partch et al.,
+2014; Rosato et al., 2006). Biological clocks with a period of
+approximately 24 hours are called \textit{circadian} clocks (meaning
+“about a day”). The consequences of an incorrectly working clock
+become obvious when one flies from Canada to Japan.
+
+The circadian clock is a chemical limit cycle oscillator. Ronald
+Konopka and Seymour Benzer (1971), working in the fruit fly
+\textit{Drosophila melanogaster} discovered a gene \textit{period}
+(\textit{per}), that affects the period of the fly’s circadian clock.
+We now know that \textit{per} is a central component of the clock.
+The clock works by negative feedback with delay. \textit{per}
+contains the information for making a protein, called PER. To make
+PER protein, the \textit{per} gene must be transcribed to produce a
+messenger RNA (mRNA), which is translated into PER protein in the
+cytoplasm (that part of the cell outside the nucleus). The PER
+protein then moves into the nucleus (where the genes are) and
+represses transcription of the \textit{per} gene. 
+
+\subsection{An ODE model of a circadian oscillator}
+A minimal circadian clock model has three ODEs describing the dynamics
+of PER mRNA, cytoplasmic PER protein, and nuclear PER protein (Pfeuty
+et al., 2011). This three ODE model, which we will use, is as
+follows,
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\centering  $\tau
+\frac{\mathit{dM}}{\mathit{dt}}={s}_{M}\frac{{K}_{I}^{n}}{{K}_{I}^{n}+{P}_{N}^{n}}-{d}_{M}\frac{M}{{K}_{M}+M}$
+$\tau
+\frac{d{P}_{C}}{\mathit{dt}}={s}_{P}M-{d}_{P}\frac{{P}_{C}}{{K}_{P}+{P}_{C}}-{k}_{1}{P}_{C}+{k}_{2}{P}_{N}$
+$\tau \frac{d{P}_{N}}{\mathit{dt}}={k}_{1}{P}_{C}-{k}_{2}{P}_{N}$ &
+\raggedleft\arraybslash
+(\label{bkm:Pfeutysystem}\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+Here  $M$ is concentration of \textit{per} mRNA, and  ${P}_{C}$ and 
+${P}_{N}$ the concentrations of PER protein in the cytoplasm and
+nucleus. The first equation describes the synthesis and degradation
+of the mRNA. Synthesis occurs at rate  ${s}_{M}$ in the absence of
+nuclear PER, but is inhibited by PER. Degradation follows standard
+Michaelis-Menten kinetics. In the second equation we see that
+cytoplasmic PER protein is made at a rate that depends on the mRNA
+concentration and is degraded. The final two terms of the second
+equation and both terms of the third describe exchange of PER protein
+between cytoplasm and nucleus. 
+
+With dark parameter values  $n=4$,  ${s}_{M}=2.2$,  ${K}_{I}=1.8$, 
+${d}_{M}=0.84$,  ${K}_{M}=0.5$,  ${s}_{P}=0.4$,  ${d}_{P}=1.6$, 
+${k}_{P}=0.13$,  ${k}_{1}=0.4$,  ${k}_{2}=0.45$,  $\tau =1$ the
+\ free-running period becomes  ${T}_{0}{\approx}24h$. This system is
+easily solved numerically (Figure 1). 
+
+\subsection{Entrainment: setting the clock}
+The clock is not useful unless it can be set. Real circadian clocks
+are quite inaccurate, with typical free-running periods of about 25.5
+h, so they need to be set daily. In practice, environmental light
+levels affect the parameters of the differential equations (9) in
+such a way as to establish a consistent relationship with the
+day/night cycle. This process is called entrainment. Our next goal is
+to understand how entrainment occurs. 
+
+\subsection{Dimensional reduction: phase}
+To analyze this system, we simplify it from three dimensions to one by
+focusing on the limit cycle  $C$. Our goal is to assign to every
+point  $(M,{P}_{C},{P}_{N})$ near  $C$ a phase  $\varphi
+{\in}R/{T}_{0}Z$ ( ${T}_{0}$ is the free-running period of the
+clock), and then to study the evolution of this scalar function of
+time. 
+
+Begin by writing the ODE system in generic form (10). (
+$x=(M,{P}_{C},{P}_{N})$ and \textbf{p} is the parameter vector 
+$(n,{S}_{M},{\dots},{k}_{1},{k}_{2})$. 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\centering  $\frac{dx}{\mathit{dt}}=F\left(x;p\right)$
+$x\left(0\right)={x}_{0}$ &
+\raggedleft\arraybslash
+(\label{bkm:IVP}\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+Now define  $x({x}_{0},t)$ as the solution to the autonomous system
+(10). We assign phase 0 to some arbitrary point in  $C$, then define 
+$\varphi $ at other locations by 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+\varphi \left(x\left({x}_{0},t\right)\right)=\varphi
+\left({x}_{0}\right)+t
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\label{bkm:phidef}\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+That is, phase always advances by one hour for every hour that passes.
+(Later, when we have external periodic forcing, we will scale 
+$\varphi $ so that its period is different from  ${T}_{0}$.) (11) is
+sufficient to define  $\varphi $ on  $C$ (up to the choice of zero).
+To define  $\varphi $ outside  $C$, we require  $\varphi (x)$ to be
+continuous and differentiable. The limit cycle is attractive. If you
+start anywhere in its basin of attraction, you will eventually
+approach the cycle arbitrarily closely. At that point  $\varphi (x)$
+must, by continuity, be close to the phase of the nearest point in 
+$C$.  $\varphi (x)$ is therefore approximately defined, and by
+extrapolation,  $\varphi $ is approximately defined at every point on
+the trajectory that led to  $x$. To first order,  $\varphi $ near 
+$C$ is defined by the gradient of  $\varphi $ on  $C$, as follows. 
+
+Choose a point  ${x}_{C}{\in}C$ with  $\varphi
+\left({x}_{C}\right)={\varphi }_{C}$, and call the gradient of 
+$\varphi $ there  ${\nabla}\varphi ({x}_{C})$. Let  $u$ be a unit
+vector, and  $\left|\epsilon \right|{\ll}1$. Define 
+${x}_{1}={x}_{C}+\epsilon u$. Then 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+\varphi \left({x}_{1}\right)=\varphi \left({x}_{C}+\epsilon
+u\right)=\varphi \left({x}_{C}\right)+\epsilon {u}^{T}{\nabla}\varphi
+\left({x}_{C}\right)+O({\epsilon }^{2})
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+Now, project both  ${x}_{C}$ and  ${x}_{1}$ forward in time by 
+$0<\delta {\ll}1$, to new points  ${x}_{\mathit{C\delta }}$ and 
+${x}_{1\delta }$. 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+{x}_{C}\rightarrow {{x}_{\mathit{C\delta }}=x}_{C}+\delta
+F\left({x}_{C}\right)+O\left({\delta }^{2}\right),
+\end{equation*}
+\begin{equation*}
+\varphi \left({x}_{\mathit{C\delta }}\right)={\varphi }_{C}+\delta 
+\end{equation*}
+~
+
+\begin{equation*}
+{x}_{1}\rightarrow {x}_{1\delta }={x}_{C}+\epsilon u+\delta
+\left(F\left({x}_{C}\right)+\epsilon
+J\left({x}_{C}\right)u+O\left({\epsilon }^{2}\right)\right),
+\end{equation*}
+\begin{equation*}
+\varphi \left({x}_{1\delta }\right)=\varphi
+\left({x}_{C}\right)+\delta +\epsilon {u}^{T}{\nabla}\varphi
+\left({x}_{C}\right)+O\left({\epsilon }^{2}\right)
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\label{bkm:xdelta}\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+We used that the flow at  ${x}_{1}$ is 
+$F\left({x}_{1}\right)=F\left({x}_{C}+\epsilon
+u\right)=F\left({x}_{C}\right)+\epsilon
+J\left({x}_{C}\right)u+O({\epsilon }^{2})$, where 
+$J\left({x}_{C}\right)={\nabla}F({x}_{C})$ is the Jacobian of the
+flow field at  ${x}_{C}$. Now, we’re in position to find the gradient
+at the new location, using
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+\varphi \left({x}_{1\delta }\right)-\varphi \left({x}_{\mathit{C\delta
+}}\right)={\left({x}_{1\delta }-{x}_{\mathit{C\delta
+}}\right)}^{T}{\nabla}\varphi \left({x}_{\mathit{C\delta
+}}\right)+O({\epsilon }^{2})
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+Plugging in (13) and equating terms of  $O(\epsilon )$ (details fell
+casualty to the page limit) gives
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+\epsilon {u}^{T}{\nabla}\varphi \left({x}_{C}\right)=\epsilon
+{u}^{T}\left(I+\delta
+J{\left({x}_{C}\right)}^{T}\right){\nabla}\varphi
+\left({x}_{\mathit{C\delta }}\right)
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\label{bkm:ueq}\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+ $I$ is the identity matrix. Now remember,\textbf{ } $u$ is an
+arbitrary unit vector. (15) must be true for all  $\epsilon u$. This
+is possible only if the vector  ${u}^{T}$ is multiplied by is the
+same on both sides. Since  $\delta {\ll}1$,  ${\left(I+\delta
+J{\left({x}_{C}\right)}^{T}\right)}^{-1}=\left(I-\delta
+J{\left({x}_{C}\right)}^{T}\right)+O({\delta }^{2})$. Thus, to 
+$O(\delta )$,
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\centering  ${\nabla}\varphi \left({x}_{C}\right)=\left(I+\delta
+J{\left({x}_{C}\right)}^{T}\right){\nabla}\varphi
+\left({x}_{\mathit{C\delta }}\right)$ $\left(I-\delta
+J{\left({x}_{C}\right)}^{T}\right){\nabla}\varphi
+\left({x}_{C}\right)={\nabla}\varphi \left({x}_{\mathit{C\delta
+}}\right)$ $\frac{\left({\nabla}\varphi \left({x}_{\mathit{C\delta
+}}\right)-{\nabla}\varphi \left({x}_{C}\right)\right)}{\delta
+}=-J{\left({x}_{C}\right)}^{T}{\nabla}\varphi \left({x}_{C}\right)$ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+The final line is a first-order approximation to 
+$\frac{d}{\mathit{dt}}{\nabla}\varphi (x(t))$. Thus, we end up at
+last with 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\centering  $\frac{d}{\mathit{dt}}{\nabla}\varphi
+\left(x\right)=-J{\left(x\right)}^{T}{\nabla}\varphi (x)$, &
+\raggedleft\arraybslash
+(\label{bkm:gradphiODE}\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+valid in  $C$. Other than complexity, there is no obvious obstacle to
+continuing this analysis to higher order, but we have not done so. 
+
+We now have a linear ODE in  ${\nabla}\varphi $. We need only an
+initial condition. 
+
+Remember that  $x(t)$ circulates around  $C$ at a rate that we have
+determined (analytically or numerically), so  $J(x)$ can just as well
+be written  $J(t)$. Thus (17) is a periodic nonautonomous linear
+system of ODEs in  ${\nabla}\varphi $. As described above, this
+system has a general solution that can be expressed as a power of its
+monodromy matrix times a periodic function of time. That is, its
+principal fundamental solution matrix  $U(t,0)$ can be written as 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+U\left(t,0\right)=U\left(t\text{mod
+}{T}_{0},0\right){B}^{\text{[230A?]}t/{T}_{0}\text{[230B?]}}
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+Vector  ${\nabla}\varphi
+\left(t\right)=U\left(t,0\right){\nabla}\varphi (0)$ is a solution to
+(17).  ${\nabla}\varphi $ must be a periodic function of time on 
+$C$. In particular, 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+{\nabla}\varphi \left({T}_{0}\right)=B{\nabla}\varphi
+\left(0\right)={\nabla}\varphi \left(0\right)
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+That is,  ${\nabla}\varphi \left(0\right)$ must be an eigenvector of
+the monodromy matrix with eigenvalue 1, i.e., 1 must be a
+characteristic multiplier. Indeed, there is a straightforward
+argument that it is (Ward). 
+
+\subsection{Phase response curves}
+Light does not directly affect  $x=(M,{P}_{C},{P}_{M})$—it affects the
+parameters of the differential equations (9). We now suppose that the
+parameter vector  $p$ varies with time,
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+p={p}_{0}+\mathit{\epsilon L}\left(t\right)\mathit{dp}
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+Effect vector  $\mathit{dp}$ is of order of magnitude 1 giving the
+direction of the parameter changes induced by light. Light function 
+$L(t)$ is normalized so as to be order of magnitude 1 and specifies
+how light varies over the course of a day—e.g. 12 h on, 12 h off. It
+is periodic with period  $T$. We scale the phase defined by (11) so
+that, instead of running from 0 to  ${T}_{0}$, it runs from 0 to 
+$T$. Now, let  ${\varphi }_{n}$ be the phase at dawn on day  $n$.
+Then, n constant darkness,
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+{\varphi }_{n+1}={\varphi }_{n}-\gamma 
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+ $\gamma $ is a measure of the difference between  ${T}_{0}$ and  $T$.
+For instance, with  $T=24,{T}_{0}=25$,  $\gamma =0.96$—the clock
+loses a little less than an hour a day in the darkness. Now, what
+happens if we turn on the lights, i.e. allow  $\epsilon {\neq}0$? The
+dawn-to-dawn effect on phase depends on the phase of the clock at
+dawn. It is given by the phase response curve (PRC),  $V(\varphi )$,
+defined by 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+{\varphi }_{n+1}={\varphi }_{n}-\gamma +V({\varphi }_{n})
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+PRC  $V(\varphi )$ intrinsically depends on  $\epsilon $,  $L(t)$, and
+ ${p}_{0}$ and  $\mathit{dp}$. This difference equation has a fixed
+point  ${\varphi }^{?}$ if  $V\left({\varphi }^{?}\right)=\gamma $.
+This fixed point is stable if  $-2<\frac{\mathit{dV}\left({\varphi
+}^{?}\right)}{\mathit{d\varphi }}<0$. Because of its importance to
+stability, Pfeuty et al (2011) give  $\frac{\mathit{dV}\left({\varphi
+}^{?}\right)}{\mathit{d\varphi }}$ a name:  $\chi $. Thus, we expect
+entrainment if two conditions are met: the PRC attains the value 
+$\gamma $ for some  $\varphi $, and  $-2<\chi <0$. 
+
+
+\bigskip
+
+We have everything we need to calculate the PRC. Phase changes as
+follows, 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+\frac{\mathit{d\varphi }}{\mathit{dt}}=1+\mathit{\epsilon
+L}\left(\varphi \right)Z\left(\varphi \right)+O({\epsilon }^{2})
+\end{equation*}
+\begin{equation*}
+Z\left(\varphi \right)={\left({\nabla}\varphi \left(\varphi
+\right)\right)}^{T}\left(\frac{{\partial}F(x\left(\varphi
+\right),{p}_{0})}{{\partial}p}\right)\mathit{dp}
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+ $Z(\varphi )$ (Figure 2B) is called the infinitesimal impulse phase
+response curve (IPRC) and gives the response of phase to an
+infinitesimal delta-function light stimulus at phase  $\varphi $. The
+PRC is calculating by convolving  $Z(\varphi )$ with  $L(t)$
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\centering  $V\left(\varphi \right)=\epsilon \int
+_{0}^{T}{L\left(u\right)Z\left(u\frac{T}{{T}_{0}}+\varphi
+\right)\mathit{du}}$ ${\approx}\epsilon \int
+_{0}^{T}{L\left(u\right)Z\left(u+\varphi \right)\mathit{du}}$
+$?\epsilon \int _{0}^{{\tau }_{D}}{L\left(u\right)Z(u+\varphi
+)\mathit{du}}$ &
+\raggedleft\arraybslash
+(\label{bkm:convolution}\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+The approximation in the second step is valid if  $\gamma {\ll}1$. The
+final version holds in the common situation in which light is only
+available during “daytime”, defined as the period from dawn ( $t=0$)
+until sunset  $(t={\tau }_{D}$), so that  $L\left(u\right)=0$ outside
+ $[0,{\tau }_{D}]$. 
+
+\subsection{Robustness}
+The PRC and the IPRC are products of evolutionary design. Both the
+effect of light on the parameter values,  $\mathit{dp}$, and the
+magnitude of that effect,  $\epsilon $, are the result of
+evolutionary pressures. A minimal criterion for a working clock is
+that it should be stably entrained by the light cycle, and the
+previous section described the mathematical requirements to
+accomplish that goal. But there’s more: In real life, the light curve
+ $L(u)$ is variable. It varies because of the season, the weather,
+and the behavior of the animal. A well-working circadian clock should
+not be excessively sensitive to such variations. Variations in the
+light curve are modeled as perturbations of  $L(u)$:
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+\mathit{\epsilon L}\left(u\right)={\epsilon
+}_{0}({L}_{0}\left(u\right)+\eta \widetilde{{L}}\left(u\right))
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+ ${L}_{0}$ and  $\widetilde{{L}}$ are normalized to order of magnitude
+1, and  $\eta $ is small compared to 1.  ${\varphi }^{?}$ and  $\chi
+$ are now functions of  $\eta $. Robustness requires that they not be
+excessively sensitive to  $\eta $. 
+
+Pfeuty et al (2011) develop two measures of robustness,
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\centering  $\Pi ={\left.{\left(\frac{d}{\mathit{d\eta }}{\varphi
+}^{?}\left(\eta \right)\right)}^{2}\right|}_{\eta =0}$ $\Sigma
+={\left.{\left(\frac{1}{\chi \left(\eta
+\right)}\frac{d}{\mathit{d\eta }}\chi \left(\eta
+\right)\right)}^{2}\right|}_{\eta =0}$ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+To estimate these, we begin with the PRC
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+V\left(\varphi \right)={V}_{0}\left(\varphi \right)+\eta
+\widetilde{{V}}(\varphi )
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\label{bkm:Vtilde}\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+ ${V}_{0}$ and  $\widetilde{{V}}$ are the convolutions of the IPRC 
+$Z$ with  ${\epsilon }_{0}{L}_{0}$ and  ${\epsilon
+}_{0}\widetilde{{L}}$ according to (24). Now,  $V\left({\varphi
+}^{?}\left(\eta \right)\right)=\gamma $ is constant. Thus, expanding
+(27) around  ${\varphi }^{?}(0)$, 
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+\eta \left(\widetilde{{V}}\left({\varphi
+}^{?}\left(0\right)\right)+{V}_{0}^{'}\left({\varphi
+}^{?}\left(0\right)\right)\frac{d{\varphi
+}^{?}\left(0\right)}{\mathit{d\eta }}\right)+O\left({\eta
+}^{2}\right)=0
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+Neglecting  $O({\eta }^{2})$ terms, we can solve for an estimate of
+robustness measure  $\Pi $,
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+\Pi ={\left(\frac{\widetilde{{V}}\left({\varphi
+}_{0}^{?}\right)}{{\widetilde{{V}}}^{'}\left({\varphi
+}_{0}^{?}\right)}\right)}^{2}
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+where  ${\varphi }_{0}^{?}{\equiv}{\varphi }^{?}(0)$. By similarly
+expanding  $\chi (0)$, we obtain an estimate of  $\Sigma $,
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{m{0.6705598in}m{5.92126in}m{0.6719598in}}
+~
+ &
+\begin{equation*}
+\Sigma ={\left(\frac{{\widetilde{{V}}}^{'}\left({\varphi
+}_{0}^{?}\right)}{{V}_{0}^{'}\left({\varphi
+}_{0}^{?}\right)}-\frac{\widetilde{{V}}\left({\varphi
+}_{0}^{?}\right){V}_{0}^{\text{[2033?]}}\left({\varphi
+}_{0}^{?}\right)}{{V}_{0}^{'}{\left({\varphi
+}_{0}^{?}\right)}^{2}}\right)}^{2}
+\end{equation*}
+ &
+\raggedleft\arraybslash
+(\stepcounter{EquationNumber}{\theEquationNumber})\\
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+Pfeuty et al (2011) show using these measures that some IPRCs give
+rise to more robust PRCs than others. In particular, the main
+characteristics of a robust IPRC are that it possess a “dead zone”
+that cover most of the day time (this makes the PRC insensitive to
+variations in the daytime light profile), and that it have sharply
+negative slope near the beginning and end of the night. 
+
+A great advantage of the PRC and IPRC as ways of characterizing
+circadian clocks is that they can be directly measured. Pfeuty et al
+(2011) cull a dozen IPRCs from the literature, and show that they are
+indeed robust. 
+
+\section{Figures}
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{|m{2.99626in}m{2.99696in}|}
+\hline
+\multicolumn{1}{|m{2.99626in}|}{A.
+
+\centering 
+\includegraphics[width=3.5in,height=3.2862in]{reportv7-img1.png} } &
+B.
+
+\centering\arraybslash 
+\includegraphics[width=3.5in,height=3.2764in]{reportv7-img2.png}
+\\\hline
+\multicolumn{2}{|m{6.07196in}|}{{\bfseries
+\label{bkm:Ref341089568}Figure \stepcounter{Figure}{\theFigure}:
+Numerical solution of the ODE model}
+
+A. Flow vector field corresponding to the system (9). Flow vectors are
+shown in red, the limit cycle  $C$ in blue. B. Numerical solution for
+48h starting from a randomly chosen point (black), showing
+convergence to  $C$. Colored dots are placed every two hours, with
+color changing from purple to red with the passage of time. }\\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+\begin{center}
+\tablehead{}
+\begin{supertabular}{|m{2.99626in}|m{2.99696in}|}
+\hline
+A.  ${\nabla}\varphi (\varphi )$
+
+ \includegraphics[width=3.5in,height=3.2193in]{reportv7-img3.png} 
+
+~
+ &
+B.  $Z(\varphi )$
+
+  [Warning: Image ignored] % Unhandled or unsupported graphics:
+%\includegraphics[width=3.5in,height=2.1in]{reportv7-img4}
+ \\\hline
+ &
+C.  $V(\varphi )$
+
+  [Warning: Image ignored] % Unhandled or unsupported graphics:
+%\includegraphics[width=3.5in,height=2.1346in]{reportv7-img5}
+ \\\hline
+\multicolumn{2}{|m{6.07196in}|}{{\bfseries
+\label{bkm:Ref341096105}Figure \stepcounter{Figure}{\theFigure}: 
+${\nabla}\varphi $ for the Pfeuty et al (2011) system.}
+
+A. In blue is the limit cycle. The red arrow shows the direction of
+progress around the cycle. The 24 black arrows show numerically
+computed phase gradients at each hour around the cycle. B. The
+corresponding IPRC, computed using  $\mathit{dp}$ being a change of 
+$-1$ in parameter  ${S}_{M}$. \ The gray bar corresponds to daytime 
+$t{\in}[0,12]$, based on the resulting PRC in part C. This panel
+approximately reproduces the left-hand panel of Pfeuty et al (2011),
+Figure 3A. C. The corresponding PRC with  $\epsilon =0.3$, 
+$L\left(t\right)=\left\{\begin{matrix}2\text{ if
+}0{\leq}t<12\\0\text{ if }12{\leq}t<24\end{matrix}\right\}$. With 
+$\gamma =0.96$, there is a stable fixed point  ${\varphi
+}^{?}=16.66,\chi =-0.799$. This figure approximately reproduces the
+left-hand panel of Pfeuty et al (2011), Figure 2A.}\\\hline
+\end{supertabular}
+\end{center}
+
+\bigskip
+
+
+\bigskip
+
+\begin{flushleft}
+\tablehead{}
+\begin{supertabular}{|m{3.49346in}|m{3.3490598in}|}
+\hline
+  [Warning: Image ignored] % Unhandled or unsupported graphics:
+%\includegraphics[width=3.5in,height=3.7972in]{reportv7-img6}
+  &
+{\bfseries Figure \stepcounter{Figure}{\theFigure}: Experimental IPRCs
+show robustness characteristics}
+
+This is a copy of Pfeuty et al (2011), Figure 5.
+
+A. Experimentally measured IPRCs collected from the literature. B.
+Estimated IPRCs from fitting the data in A. C. a-j: Estimated
+robustness measure  ${\Pi }^{1/2}$ computed for experimental IPRCs in
+B. m: range of  ${\Pi }^{1/2}$ for all coupling schemes for the
+computation al model. Horizontal line:  ${\Pi }^{1/2}$ for an IPRC
+that is linearly decreasing during daytime. \\\hline
+\end{supertabular}
+\end{flushleft}
+
+\bigskip
+
+
+\bigskip
+
+\section{Bibliography}
+Ko, C.H., and Takahashi, J.S. (2006). Molecular components of the
+mammalian circadian clock. Hum. Mol. Genet. R271-7.
+
+Konopka, R.J., and Benzer, S. (1971). Clock Mutants of Drosophila
+melanogaster. \textit{68}, 2112–2116.
+
+Partch, C.L., Green, C.B., Takahashi, J.S., Lowrey, P., Takahashi, J.,
+Kang, T.H., al., \ et, Kang, T.-H., al., \ et, Ko, C., et al. (2014).
+Molecular architecture of the mammalian circadian clock. Trends Cell
+Biol. \textit{24}, 90–99.
+
+Pfeuty, B., Thommen, Q., and Lefranc, M. (2011). Robust Entrainment of
+Circadian Oscillators Requires Specific Phase Response Curves.
+
+Rosato, E., Tauber, E., and Kyriacou, C.P. (2006). Molecular genetics
+of the fruit-fly circadian clock. Eur. J. Hum. Genet. \textit{14},
+729–738.
+
+Ward, M.J. Basic Floquet Theory
+(http://www.math.ubc.ca/\~{}ward/teaching/m605/every2\_floquet1.pdf).
+
+
+\bigskip
+\end{document}
