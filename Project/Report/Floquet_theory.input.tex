@@ -1,0 +1,122 @@
+
+
+
+\section{Introduction to Floquet Theory}
+In the previous sections we showed that, in the linear approximation, a
+swing with periodically varying length has solutions whose amplitude
+increases or decreases exponentially in time. Although we didn’t show
+this, there are also solutions that show no steady change in amplitude
+with time. Which type of solutions one gets depends on the ratio of
+the frequency $\omega$ of the length oscillation to the free-running
+frequency $\omega_0$ of the unperturbed swing, and also on the magnitude  of the
+length oscillation. As a general rule, exponential growth occurs when
+the forcing entrains the oscillation of the swing in such a way that
+the motions that deliver energy occur at the most effective phase of
+each cycle. This is more likely to happen if the ratio $\omega/\omega_0$ is an integer
+(as we showed, 2 is particularly effective), and when $\epsilon$ is larger.  
+
+Floquet Theory is a general approach to understanding systems of
+linear ODEs with periodic parametric forcing. Specifically, it applies
+to systems of the form 
+\begin{equation}\label{eq:floquetsys}%1
+\dv{\vb{x}}{t}=\vb{A}(t)\vb{x}(t)
+\qcomma \vb{x}(t_0)=:\vb{x}_0,
+\end{equation}
+where the matrix $\vb{A}(t)$ is a $T$-periodic function of time: 
+\begin{equation}\label{eq:2}
+\vb{A}(t+nT)=\vb{A}(t)\qcomma
+n\in\Z.
+\end{equation}
+Every solution of \eqref{eq:floquetsys} is encompassed in its principal
+fundamental matrix solution $\vb{U}(t,t_0)$, defined as the solution
+to the matrix IVP  
+\begin{equation}
+\dv{\vb{U}(t,t_0)}{t}=\vb{A}(t)\vb{U}(t,t_0)\qcomma
+\vb{U}(t_0,t_0)=\I
+\end{equation}
+Here  $\I$ is the  $n\times n$ identity matrix. Specifically, the
+solution of \eqref{eq:floquetsys} is  $\vb{x}\left(t\right)=\vb{U}\left(t,{t}_{0}\right){x}_{0}$.
+
+\bigskip
+\noindent
+Define the monodromy matrix $\vb{B}=\vb{U}({t}_{0}+T,{t}_{0})$. The monodromy
+matrix turns out to be independent of  ${t}_{0}$, so it can be
+computed as  $\vb{B}={U}(T,0)$. The eigenvalues of  $\vb{B}$,  $\rho_{1},\rho_{2},{\dots},\rho_{n}$, are called the characteristic
+multipliers. The determinant of  $\vb{B}$ (the product of the
+characteristic multipliers) is given by, 
+\begin{equation}
+\det(\vb{B})=\exp \left(
+\int_{0}^{T}{\tr[\vb{A}(s)]\id{s}}
+\right)
+\end{equation}
+The multipliers determine the character (e.g. stable or exponentially
+growing) of solutions of \eqref{eq:floquetsys}. In particular, 
+\begin{equation}
+\vb{U}(t,{t}_{0})=
+\vb{U}\Big((t-{t}_{0})\;\;\text{mod} T,\,{t}_{0}\Big)
+{\vb{B}}^{\lfloor(t-{t}_{0})/T\rfloor}
+\end{equation}
+
+The characteristic exponents  
+$\mu_{1},\mu_{2},{\ldots},\mu_{n}$, defined by  $\ee^{\mu_{i}T}=\rho_{i}$ determine the
+growth rate of solutions. In particular, if  $\Re(\mu_{i})<0$,
+solutions associated with it will decay exponentially; if
+$\Re(\mu_{i})>0$, solutions associated with it will grow
+exponentially, and if  $\Re(\mu_{i})=0$, solutions 
+associated with it will be stable. (Strictly speaking, the previous
+statements hold only if the geometric multiplicity of each eigenvalue
+of  $\vb{B}$ equals its algebraic multiplicity. When this is not the case,
+polynomial factors can also arise.) There will be, associated with
+each characteristic exponent  $\mu$, a solution of the form 
+\begin{equation}
+\vb{x}(t)=\ee^{\mathit{\mu t}}\vb{p}(t)
+\end{equation}
+where  $\vb{p}(t)$ is a  $T$-periodic vector function of time. 
+
+A particularly interesting case arises when  $\vb{A}(t)$ is a periodic
+perturbation of a constant matrix that itself has 
+${T}_{0}${}-periodic solutions, i.e.
+\begin{equation}
+\vb{A}(t)={\vb{A}}_{0}+\epsilon \widetilde{{\vb{A}}}(t)
+\end{equation}
+with  $\widetilde{{\vb{A}}}(t)$  $T${}-periodic. For instance, the varying
+length swing is of this form, with
+\begin{equation}
+\begin{aligned}
+\vb{A}_0&=
+\begin{pmatrix}0&1\\-{\eta }^{2}&0\end{pmatrix}
+\\
+\widetilde{{\vb{A}}}(\tau)&=
+\begin{pmatrix}0&0\\
+0&-2\frac{\dot{{r}}(\tau)}{r(\tau)}
+\end{pmatrix}
+=
+\begin{pmatrix}0&0\\
+0&-2\pd_{\tau}\log(r(\tau))
+\end{pmatrix}.
+\end{aligned}
+\end{equation}
+${\vb{A}}_{0}$ is traceless, and since  $r$ is periodic, the integral of 
+$\tr(\widetilde{{\vb{A}}})$ over one cycle is  
+$-2\log({\tau}_{0}+2\pi )+2\log({\tau }_{0})=0$. Thus the
+monodromy matrix  $\vb{B}$ for the swing has determinant 0. The character
+of the solutions can be determined from  $\tr(\vb{B})$.
+If  $\abs{\rho_{1}+\rho_{2}}=|\tr(\vb{B})|<2$, the multipliers  
+$\rho_{1},\rho_{2}$ form a complex conjugate pair, each with absolute
+value 1, and solutions are stable. If, however,
+$\abs{\rho_{1}+\rho_{2}}=|\tr(\vb{B})|>2$, the multipliers
+are real and different, and since their product is 1, one must be
+greater than one. In this case, there is an exponentially growing
+solution. Finally, in the border case,  $|\rho_{1}+\rho_{2}|=\tr(\vb{B})=2$, the multipliers are equal
+, either both 1 or both  $-1$. The values of  $\eta,\,\epsilon $ for
+which that holds define the boundaries of the Floquet tongues, within
+which exponentially growing solutions occur. 
+
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "Report_swing_circadian"
+%%% End: 

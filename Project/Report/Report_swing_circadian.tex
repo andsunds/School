@@ -1,0 +1,114 @@
+\documentclass[11pt,letter, english,%twocolumn
+]{article}
+\pdfoutput=1
+
+\usepackage[oldint]{custom_as}
+
+\graphicspath{ {figures/} }
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+            top    = 2cm,
+            bottom = 2cm,
+            left   = 2cm, right  = 2cm
+]{geometry}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\oh}{\ensuremath\mathpzc{o}}
+
+
+
+
+\newcommand{\T}{{\!\mathsfrm{T}}}
+\newcommand{\I}{{\mathbfrm{I}}}
+\newcommand{\PC}{P_{\text{C}}}
+\newcommand{\PN}{P_{\text{N}}}
+
+
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhf{}
+\lhead{AMATH\,732}
+\chead{Swings and Biorythms}
+\rhead{Avery, Sundstr{\"o}m}
+%\rfoot{Page \thepage}
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{\vspace{-1cm}Swings and Biorythms --- Parametrically forces oscillators}
+\author{Leon Avery \and Andréas Sundstr{\"o}m}
+\date{November 21, 2016}
+
+\maketitle
+
+\begin{abstract}
+\todo[inline]{Put something here!}
+\end{abstract}
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+\input{Swing.input.tex}
+
+\input{Floquet_theory.input.tex}
+
+\input{Circadian_rythms.input.tex}
+
+
+\section*{Bibliography}
+Tea, P.L. Jr. and Falk, H. (1968). \textit{Pumping on a Swing}. Am. J. Phys. 
+\textbf{36}, 1165-6
+
+\bigskip\noindent
+Strub, D.C. (2009). \textit{How do children swing?}  M.Eng. thesis, University
+of Bristol, Dept. of Eng. Math.%ematics
+
+\bigskip\noindent
+Burns, J.A. (1970). \textit{More on Pumping a Swing}. Am. J. Phys. \textbf{38}, 920-2
+
+\bigskip\noindent
+Ko, C.H., and Takahashi, J.S. (2006). \textit{Molecular components of the
+mammalian circadian clock}. Hum. Mol. Genet. R271-7.
+
+\bigskip\noindent
+Konopka, R.J., and Benzer, S. (1971). \textit{Clock Mutants of Drosophila
+melanogaster}. \textbf{68}, 2112–2116.
+
+\bigskip\noindent\todo{Is this right?}
+Partch, C.L., Green, C.B., Takahashi, J.S., Lowrey, P., Takahashi, J.,
+Kang, T.H., al., \ et, Kang, T.-H., al., \ et, Ko, C., et al. (2014).
+\textit{Molecular architecture of the mammalian circadian clock}. Trends Cell
+Biol. \textbf{24}, 90–99.
+
+\bigskip\noindent
+Pfeuty, B., Thommen, Q., and Lefranc, M. (2011). \textit{Robust Entrainment of
+Circadian Oscillators Requires Specific Phase Response Curves}.
+
+\bigskip\noindent
+Rosato, E., Tauber, E., and Kyriacou, C.P. (2006). \textit{Molecular genetics
+of the fruit-fly circadian clock}. Eur. J. Hum. Genet. \textbf{14},
+729–738.
+
+\bigskip\noindent
+Ward, M.J. \textit{Basic Floquet Theory}
+(http://www.math.ubc.ca/\~{}ward/teaching/m605/every2\_floquet1.pdf).
+
+
+\end{document}
+
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "Report_swing_circadian"
+%%% End: 
