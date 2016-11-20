@@ -33,25 +33,81 @@
 
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-%\fancyhf{}
 \lhead{AMATH\,732}
 \chead{Swings and Biorythms}
 \rhead{Avery, Sundstr{\"o}m}
-%\rfoot{Page \thepage}
 
+\usepackage{indentfirst}
 
 \begin{document}
 
 %%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
 
-\title{\vspace{-1cm}Swings and Biorythms --- Parametrically forces oscillators}
+\title{\vspace{-1cm}
+Swings and Biorythms --- Parametrically forced oscillators}
 \author{Leon Avery \and Andréas Sundstr{\"o}m}
 \date{November 21, 2016}
 
 \maketitle
 
-\begin{abstract}
-\todo[inline]{Put something here!}
+\begin{abstract}\noindent
+This report presents two different scenarios, which both can be
+modeled as parametrically forced oscillators: pupming a playgroud
+swing, and keeping the circadian rythm in sync with the
+environment. 
+Children's swings and biological clocks are very different, but they
+present a common problem. Each is a natural oscillator with an
+intrinsic free-running rhythm. And each is driven by a forcing
+function that works, not by directly pushing the oscillator itself,
+but by periodically modifying the parameters of the oscillator.
+The swing is modeled as a point-mass pendulum with a time
+dependent length. We investigate conditions needed to pump the
+swing. Under those conditions we show that the amplitude, to a first
+approximation, will increas exponentially.
+In the case of the biological clock, the forcing is external light,
+which modifies the rate of biochemical reactions such as the synthesis
+of messenger RNA. \todo{Maybe some results on biorythms}
+Mathematically, both of these problems are
+united by Floquet Theory: a general analysis of linear differential
+equations with periodic parametric forcing. Although Floquet Theory
+does not directly give solutions to the differential equations, it
+sharply constrains the form these solutions can take. In particular,
+it helps to place bounds on the frequencies that will effectively pump
+a swing, and it predicts the existence of periodic solutions to the
+phase gradient differential equation for the circadian clock.  
+
+% In the case of the circadian rythms, we study a model that allows for
+% light to affect the biological clock so that it will stay in phase
+% with the day/night cycle.
+% \todo[inline]{Something on the results of the biorythms.}
+
+% Children's swings and biological clocks are very different, but they
+% present a common problem. Each is a natural oscillator with an
+% intrinsic free-running rhythm. And each is driven by a forcing
+% function that works, not by directly pushing the oscillator itself,
+% but by periodically modifying the parameters of the oscillator. In the
+% case of the swing, the forcing is the up-and-down motion of the child,
+% which modifies the effective length of the swing. In the case of the
+% biological clock, the forcing is external light, which modifies the
+% rate of biochemical reactions such as the synthesis of messenger
+% RNA. Both oscillators have in part a common goal: to match the
+% frequency of the oscillation to that frequency of the forcing. For the
+% swing, this matching means that the child's motions occur at a
+% consistent point in the cycle --- for instance, the child consistently
+% moves upward when the swing is at its lowest point. This
+% synchronization of forcing and the swing cycle allows the child to
+% most effectively pump energy into the swing's motion. For the clock,
+% this matching (called entrainment) ensures a match between the state
+% of biochemical quantities (e.g. high PERIOD protein levels) and
+% specific points in the day/night cycle, (e.g. dawn), allowing the
+% organism to anticipate events. Mathematically, these problems are
+% united by Floquet Theory: a general analysis of linear differential
+% equations with periodic parametric forcing. Although Floquet Theory
+% does not directly give solutions to the differential equations, it
+% sharply constrains the form these solutions can take. In particular,
+% it helps to place bounds on the frequencies that will effectively pump
+% a swing, and it predicts the existence of periodic solutions to the
+% phase gradient differential equation for the circadian clock.  
 \end{abstract}
 
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
@@ -64,14 +120,7 @@
 
 
 \section*{Bibliography}
-Tea, P.L. Jr. and Falk, H. (1968). \textit{Pumping on a Swing}. Am. J. Phys. 
-\textbf{36}, 1165-6
-
-\bigskip\noindent
-Strub, D.C. (2009). \textit{How do children swing?}  M.Eng. thesis, University
-of Bristol, Dept. of Eng. Math.%ematics
-
-\bigskip\noindent
+\noindent
 Burns, J.A. (1970). \textit{More on Pumping a Swing}. Am. J. Phys. \textbf{38}, 920-2
 
 \bigskip\noindent
@@ -82,9 +131,8 @@ mammalian circadian clock}. Hum. Mol. Genet. R271-7.
 Konopka, R.J., and Benzer, S. (1971). \textit{Clock Mutants of Drosophila
 melanogaster}. \textbf{68}, 2112–2116.
 
-\bigskip\noindent\todo{Is this right?}
-Partch, C.L., Green, C.B., Takahashi, J.S., Lowrey, P., Takahashi, J.,
-Kang, T.H., al., \ et, Kang, T.-H., al., \ et, Ko, C., et al. (2014).
+\bigskip\noindent
+Partch, C.L., Green, C.B., Takahashi (2014).
 \textit{Molecular architecture of the mammalian circadian clock}. Trends Cell
 Biol. \textbf{24}, 90–99.
 
@@ -96,6 +144,14 @@ Circadian Oscillators Requires Specific Phase Response Curves}.
 Rosato, E., Tauber, E., and Kyriacou, C.P. (2006). \textit{Molecular genetics
 of the fruit-fly circadian clock}. Eur. J. Hum. Genet. \textbf{14},
 729–738.
+
+\bigskip\noindent
+Strub, D.C. (2009). \textit{How do children swing?}  M.Eng. thesis, University
+of Bristol, Dept. of Eng. Math.%ematics
+
+\bigskip\noindent
+Tea, P.L. Jr. and Falk, H. (1968). \textit{Pumping on a Swing}. Am. J. Phys. 
+\textbf{36}, 1165-6
 
 \bigskip\noindent
 Ward, M.J. \textit{Basic Floquet Theory}
