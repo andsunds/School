@@ -6,8 +6,9 @@
 \usepackage[%makeroom
 ]{cancel}
 \graphicspath{{figures/}}
+
+\swapcommands{\Delta}{\varDelta}
 \swapcommands{\Omega}{\varOmega}
-%\swapcommands{\Lambda}{\varLambda}
 
 %%Drar in tabell och figurtexter
 \usepackage[margin=10 pt]{caption}
@@ -29,6 +30,8 @@
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 \newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
+\newcommand{\eF}{\ensuremath{\epsilon_{\text{F}}}}
+\newcommand{\wD}{\ensuremath{\omega_{\text{D}}}}
 
 %\usepackage{tikz}
 
@@ -51,10 +54,341 @@ Assignment 4}
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
 \section{The internal energy and heat capacity of a superconductor}
+We will consider a superconductor at finite temperature $0<T<\Tc$. One
+very useful equation in such cases is the BCS equation
+\begin{equation}\label{eq:BCS}
+\Delta=\frac{V}{U}\sum_k \frac{\Delta}{2E_k}\Big(1-2n(E_k)\Big),
+\end{equation}
+where
+\begin{equation}
+E_k=\sqrt{\xi_k^2+\Delta^2}\qcomma \xi_k=\epsilon_k-\eF,
+\end{equation}
+and
+\begin{equation}
+n(E)=\frac{1}{\ee^{\frac{E}{T}}+1}
+\end{equation}
+is the Fermi-Dirac distribution.
+
+\subsection{The internal energy}
+For a superconductor, we have the Hamiltonian
+\begin{equation}
+H=\sum_{k, \sigma} E_k\gamma_{k \sigma}^\dagger\gamma_{k \sigma}
++\frac{V\Delta^2}{U}+\sum_k\qty(\xi_k-E_k).
+\end{equation}
+The internal energy is given as
+\begin{equation}\label{eq:1a_E0}
+E(T)=\ev{H}=
+\sum_{k, \sigma} E_k\,n(E_k)
++\frac{V\Delta^2}{U}+\sum_k\qty(\xi_k-E_k).
+\end{equation}
+The numberoperator for the quasiparticles in the first term is
+converted to a Fermi-Dirac distribution, since the quasi particles are
+an ideal Fermi-gas. 
+
+Now using the BCS equation, we can rewrite the middle
+term as
+\begin{equation}
+\Delta\frac{U\Delta}{V} \stackrel{\eqref{eq:BCS}}{=}
+\Delta\sum_k \frac{\Delta}{2E_k}\Big(1-2n(E_k)\Big)
+=\sum_k \frac{\Delta^2}{2E_k}\Big(1-2n(E_k)\Big).
+\end{equation}
+Now it's just a matter of collectin the terms in
+\eqref{eq:1a_E0}. First we recognize that the sum over different sipns
+is just going to give us a factor~2. And we end up with
+\begin{equation}
+\begin{aligned}
+E(T)&=\sum_k\qty[2E_k\,n(E_k)
++\frac{\Delta^2}{2E_k}\Big(1-2n(E_k)\Big)
++\xi_k-E_k ]\\
+&=\sum_k\qty[
+\xi_k-\qty(E_k-\frac{\Delta^2}{2E_k})\Big(1-2n(E_k)\Big) ].
+\end{aligned}
+\end{equation}
+\qed
+
+\subsection{The heat capacity at $T<\Tc$}
+To get the heat capacity, we diffentiate $E$ with respect to $T$:
+\begin{equation}\label{eq:1b_Cv0}
+\begin{aligned}
+C_V=\dv{E}{T}=\sum_k\Bigg[&
+\cancel{\dv{\xi_k}{T}}-\dv{E_k}{T}\Big(1-2n(E_k)\Big)
+-E_k\dv{T}\Big(1-2n(E_k)\Big)\\
+&+\dv{\Delta^2}{T}\frac{1}{2E_k}\Big(1-2n(E_k)\Big) 
++\Delta^2 \dv{T}\qty(\frac{1-2n(E_k)}{2E_k})
+\Bigg].
+\end{aligned}
+\end{equation}
+From here we will need 
+\begin{equation}\label{eq:1b_dEk/dT}
+\dv{E_k}{T}=\pdv{E_k}{(\Delta^2)}\pdv{\Delta^2}{T}
+=\frac{1}{2\sqrt{\xi_k^2+\Delta^2}}\pdv{\Delta^2}{T}
+=\frac{1}{2E_k}\pdv{\Delta^2}{T}.
+\end{equation}
+And
+\begin{equation}\label{eq:1b_dn/dT}
+\dv{n(E_k)}{T}=\pdv{n}{E_k}\dv{E_k}{T}+\pdv{n}{T}
+=-\frac{\frac{1}{T}\ee^{\nicefrac{E_k}{T}}}
+{\qty(\ee^{\nicefrac{E_k}{T}}+1)^2}\frac{1}{2E_k}\pdv{\Delta^2}{T}
+-\frac{-\frac{E_k}{T^2}\ee^{\nicefrac{E_k}{T}}}
+{\qty(\ee^{\nicefrac{E_k}{T}}+1)^2}.
+\end{equation}
+
+Next we take a closer look at the last term in \eqref{eq:1b_Cv0}. For
+$T<\Tc$ mening that $\Delta\neq0$, the BCS equation can be written as
+\begin{equation}\label{eq:1b_BCS}
+\frac{U}{V}=\sum_k\frac{1-2n(E_k)}{2E_k}.
+\end{equation}
+If we now diffentiate both sides we get
+\begin{equation}
+0=\dv{T}\sum_k\frac{1-2n(E_k)}{2E_k},
+\end{equation}
+since the LHS of \eqref{eq:1b_BCS} is a constant. In other words, the
+last term of \eqref{eq:1b_Cv0} disappears.
+
+Now th heat capacity becomes
+\begin{equation}
+C_V=\sum_k\Bigg[
+-\cancel{\dv{E_k}{T}\Big(1-2n(E_k)\Big)}
++E_k\dv{T}\Big(2n(E_k)\Big)
++\cancel{\dv{\Delta^2}{T}\frac{1}{2E_k}\Big(1-2n(E_k)\Big)}
+\Bigg].
+\end{equation}
+Here the first and last term cancel each other thanks to
+\eqref{eq:1b_dEk/dT}. With \eqref{eq:1b_dn/dT}, we end up with
+\begin{equation}
+\begin{aligned}
+C_V=&\sum_k2E_k\qty[
+-\frac{\frac{1}{T}\ee^{\nicefrac{E_k}{T}}}
+{\qty(\ee^{\nicefrac{E_k}{T}}+1)^2} \frac{1}{2E_k}\pdv{\Delta^2}{T}
+-\frac{-\frac{E_k}{T^2}\ee^{\nicefrac{E_k}{T}}}
+{\qty(\ee^{\nicefrac{E_k}{T}}+1)^2} ]\\
+=&\frac{1}{T}\sum_k\qty(\frac{2E_k^2}{T}-\pdv{\Delta^2}{T})
+\frac{\ee^{\nicefrac{E_k}{T}}}{\qty(\ee^{\nicefrac{E_k}{T}}+1)^2}.
+\end{aligned}
+\end{equation}
+Since we're in the low temperature limit 
+\begin{equation}
+\frac{E_k^2}{T}\gg\pdv{\Delta^2}{T},
+\end{equation}
+because we know that $\pdv*{\Delta}{T}$ is bounded. Next, the low
+temperature limit means that
+\begin{equation}
+\frac{\ee^{\nicefrac{E_k}{T}}}{\qty(\ee^{\nicefrac{E_k}{T}}+1)^2}
+\approx
+\frac{\ee^{\nicefrac{E_k}{T}}}{\qty(\ee^{\nicefrac{E_k}{T}})^2}
+=\ee^{-\nicefrac{E_k}{T}}
+=\exp(-\frac{\sqrt{\xi^2+\Delta^2}}{T}).
+\end{equation}
+The final step is to go from a sum to an integral, which we do with
+the prescription
+\begin{equation}\label{eq:1_sum_int}
+\frac{1}{V}\sum_k \to g(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi.
+\end{equation}
+This results in
+\begin{equation}
+\begin{aligned}
+C_V\to&\frac{2V}{T^2}g(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi\;
+(\xi^2+\Delta^2)\exp(-\frac{\sqrt{\xi^2+\Delta^2}}{T}).
+\end{aligned}
+\end{equation}
+To deal with this integral we will need to use Laplace's method.
+
+\subsubsection*{Laplace's method}
+Call $f(\xi)=\xi^2+\Delta^2$ and
+$\varphi(\xi)=\sqrt{\xi^2+\Delta^2}$. Then the integral in question is
+\begin{equation}
+I(\Delta)=\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi\;f(\xi)\exp(-\frac{\varphi(\xi)}{T}).
+\end{equation}
+Now, $T$ is small, which means that $\ee^{-\varphi(\xi)/T}\lll1$, and
+the, by far, biggest contribution to the total integral comes from the
+immidiate vicinity of the minimum of $\varphi$, $\xi_0$. Everything else is
+effectively killed off by the exponential. 
+We can therefore Taylor expand $\varphi(\xi)$ around $\xi_0$, and
+integrate that instead. 
+We also don't have to wory about the value of $f(\xi)$ at any other
+places than at $\xi_0$.
+
+In our case we have $\xi_0=0$. And for the taylor expansion we will
+need the second derivative of $\varphi$ at $\xi=0$:
+\begin{equation}
+\varphi'(\xi)=\frac{\xi}{\sqrt{\xi^2+\Delta^2}}
+\quad\Longrightarrow\quad
+\varphi''(\xi)=\frac{1}{\sqrt{\xi^2+\Delta^2}}
++\xi\dv{\xi}\qty[\frac{1}{\sqrt{\xi^2+\Delta^2}}].
+\end{equation}
+And the Taylor expansion becomes
+\begin{equation}
+\varphi(\xi)\approx \varphi(0)+\bcancel{\varphi'(0)\xi}
++\varphi''(0)\frac{\xi^2}{2}
+=\Delta+\frac{\xi^2}{2\Delta},
+\end{equation}
+assuming that $\Delta$ is real and positive.
+
+The integral can now be written as
+\begin{equation}
+I(\Delta)\approx\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi\;f(0)
+\exp(-\frac{\Delta}{T} - \frac{\xi^2}{2\Delta T})
+=f(0)\ee^{-\nicefrac{\Delta}{T}}\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi\;
+\exp(-\frac{\xi^2}{2\Delta T}).
+\end{equation}
+To evaluate the last step here, we note that the contribution from
+$\abs{\xi}>\hbar\wD$ is negligable, wherefore we can approximate with a
+Gassian integral:
+\begin{equation}
+I(\Delta)\approx \Delta^2\ee^{-\nicefrac{\Delta}{T}}
+\int_{-\infty}^{\infty}\!\rd\xi\;
+\exp(-\frac{\xi^2}{2\Delta T})
+=\Delta^2\ee^{-\nicefrac{\Delta}{T}}
+\sqrt{\pi2\Delta T}.
+\end{equation}
+
+\subsubsection*{Back to the heat capacity}
+The heat capacity is now \todo{Factor 2 off?}
+\begin{equation}\label{eq:1b_Cv}
+C_V=\frac{2V}{T^2}g(\eF)I(\Delta)
+=2\sqrt{2\pi}Vg(\eF)\frac{\Delta^{5/2}}{T^{3/2}}\ee^{-\nicefrac{\Delta}{T}}
+=\frac{2Vm^{3/2}\sqrt{\eF}}{\sqrt{\pi}\hbar^3}
+\frac{\Delta^{5/2}}{T^{3/2}}\ee^{-\nicefrac{\Delta}{T}}.
+\end{equation}
+\qed
+
+\subsection{Discontinuity in the heat capacity}
+
+Here we're going to find the discontinuity, at $T=\Tc$, in the heat
+capacity. To to that we first need to find the heat capacity for
+$T>\Tc$. 
+
+\subsubsection{Heat capacity above the critical temperature}
+For $T>\Tc$, we have $\Delta=0$, whereby
+\begin{equation}
+E(T>\Tc)=2\sum_k \xi_kn(\xi_k).
+\end{equation}
+But this is just the energy of an ideal Fermi gas (with spinn
+$1/2$). 
+
+From assignment~2 (see \eqref{eq:CV_Fermi} of
+appendix~\ref{sec:ass_2_Cv}), we know that the heat capacity in the
+low temperature limit is given by
+\begin{equation}
+C_V(\Tc<T\ll\eF)=\frac{\pi^2N}{2}\frac{T}{\eF}
+-\frac{3\pi^2N}{20}\qty(\frac{T}{\eF})^3+\order{T^4}
+\approx\frac{\pi^2N}{2}\frac{T}{\eF}.
+\end{equation}
+And in the high temperature limit we know that
+\begin{equation}
+C_V(T\gg\eF)=\frac{3N}{2},
+\end{equation}
+approaches the classical limt.
+
+The value of $C_V$ when aproaching $\Tc$ from above subsequently
+becomes
+\begin{equation}
+C_V(T\to\Tc^+)=\frac{\pi^2N}{2}\frac{\Tc}{\eF}
+%-\frac{3\pi^2N}{20}\qty(\frac{\Tc}{\eF})^3
+\end{equation}
+
+\subsubsection{Heat capacity below the critical temperature}
+We've already found $C_V$ for $T<\Tc$, but we still need to calculate
+the value as $T$ approaches $\Tc$ from below. Using \eqref{eq:1b_Cv},
+we have
+\begin{equation}
+C_V(T<\Tc)\propto
+\frac{\Delta^{5/2}}{T^{3/2}}\ee^{-\nicefrac{\Delta}{T}}
+\to 0 \quad
+\text{as}\; T\to\Tc^-
+\end{equation}
+because $\Delta\to0$ as $T\to\Tc$.\todo{Is this really right???}
+
+\subsubsection{Final result}
+The discontinuity in the heat capacity is thus
+\begin{equation}
+C_V(T\to\Tc^+)-C_V(T\to\Tc^-)=\frac{\pi^2N}{2}\frac{\Tc}{\eF},
+\end{equation}
+arising from the fact that $C_V(T\to\Tc^-)=0$.
+
+\subsection{Sketch of $C_V(T)$}
+
+
+
+
+
+
+
+
+
 
 
 
 \section{The Helmholtz free energy of a superconductor}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\appendix
+\setcounter{equation}{0}
+\renewcommand{\theequation}{A\arabic{equation}}
+
+\section{Exerpt from assigngment 2, problem 2 (ii)}
+\label{sec:ass_2_Cv}
+To calculate an approximation to the mean particle energy $E/N$, we
+once again have to use the Sommerfeld expansion. Then we use the relation
+\begin{equation}
+\frac{E}{N}=-\frac{3\Omega}{2N}=\frac{3T}{2}\frac{f_{5/2}(z)}{f_{3/2}(z)}.
+\end{equation}
+Fortunately we've already calculated $\ln(z)=\zeta\approx\zeta_2$, so all
+that left do here is to expand the Fermi functions and then
+Taylor expand the quotient.
+
+Let's begin:
+\begin{equation}
+%\begin{aligned}
+\frac{f_{5/2}(z)}{f_{3/2}(z)}\approx
+\overbrace{\frac{8\zeta_2^{5/2}}{15\sqrt{\pi}}
+\qty(\frac{4\zeta_2^{3/2}}{3\sqrt{\pi}})^{-1}}^{\nicefrac{2\zeta_2}{5}}
+\qty[1+\frac{5\pi^2}{8}\zeta_2^{-2}
+-\frac{7\pi^4}{384}\zeta_2^{-4} ]
+\times \qty[1+\frac{\pi^2}{8}\zeta_2^{-2} 
++\frac{7\pi^4}{640}\zeta_2^{-4} ]^{-1}
+%\end{aligned}
+\end{equation}
+There's no need to even pretend to want deal with this by hand.
+Just go directly to \emph{Mathematica}, which yields
+\begin{equation}
+\frac{f_{5/2}(z)}{f_{3/2}(z)}\approx \frac{2}{5\tau}
+\qty[1+\frac{5\pi^2}{12}\tau^2-\frac{\pi^4}{16}\tau^4].
+\end{equation}
+For reference, the command in use were \texttt{Series}.
+
+Now we have
+\begin{equation}
+\frac{E}{N}\approx\frac{3T}{2}\frac{2}{5\tau}
+\qty[1+\frac{5\pi^2}{12}\tau^2-\frac{\pi^4}{16}\tau^4]
+=\frac{3\epsilon_F}{5}\qty[1
++\frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2
+-\frac{\pi^4}{16}\qty(\frac{T}{\epsilon_F})^4].
+\end{equation}
+This can be used to get an expression for the heat capacity of the
+system
+\begin{equation}\label{eq:CV_Fermi}
+\frac{C_V}{N}=\frac{1}{N}\qty(\pdv{E}{T})_V
+=\;\frac{\pi^2}{2}\frac{T}{\epsilon_F}
+ - \frac{3\pi^2}{20}\qty(\frac{T}{\epsilon_F})^3.
+\end{equation}
 
 
 
