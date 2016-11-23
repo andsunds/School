@@ -269,13 +269,13 @@ $1/2$).
 From assignment~2 (see \eqref{eq:CV_Fermi} of
 appendix~\ref{sec:ass_2_Cv}), we know that the heat capacity in the
 low temperature limit is given by
-\begin{equation}
+\begin{equation}\label{eq:1c_Cv_Tc+}
 C_V(\Tc<T\ll\eF)=\frac{\pi^2N}{2}\frac{T}{\eF}
 -\frac{3\pi^2N}{20}\qty(\frac{T}{\eF})^3+\order{T^4}
 \approx\frac{\pi^2N}{2}\frac{T}{\eF}.
 \end{equation}
 And in the high temperature limit we know that
-\begin{equation}
+\begin{equation}\label{eq:1c_Cv_T_high}
 C_V(T\gg\eF)=\frac{3N}{2},
 \end{equation}
 approaches the classical limt.
@@ -291,7 +291,7 @@ C_V(T\to\Tc^+)=\frac{\pi^2N}{2}\frac{\Tc}{\eF}
 We've already found $C_V$ for $T<\Tc$, but we still need to calculate
 the value as $T$ approaches $\Tc$ from below. Using \eqref{eq:1b_Cv},
 we have
-\begin{equation}
+\begin{equation}\label{eq:1c_Cv->0}
 C_V(T<\Tc)\propto
 \frac{\Delta^{5/2}}{T^{3/2}}\ee^{-\nicefrac{\Delta}{T}}
 \to 0 \quad
@@ -307,10 +307,20 @@ C_V(T\to\Tc^+)-C_V(T\to\Tc^-)=\frac{\pi^2N}{2}\frac{\Tc}{\eF},
 arising from the fact that $C_V(T\to\Tc^-)=0$.
 
 \subsection{Sketch of $C_V(T)$}
+A skech of $C_V(T)$ is presented in \figref{fig:1_Cv}. To create the
+skech we used \eqref{eq:1b_Cv} to get the very low temperature
+behaviour; then we used \eqref{eq:1c_Cv->0} to get the behavoiur as
+$T\to\Tc^-$; then we used \eqref{eq:1c_Cv_Tc+} to get the linear
+behaviour right above $\Tc$; and lastly we used the classical limit
+\eqref{eq:1c_Cv_T_high} in the high temperature limit.
 
 
-
-
+\begin{figure}
+\centering
+\resizebox{.7\textwidth}{!}{\input{figures/C_V_sketch.pdf_t}}
+\caption{}
+\label{fig:1_Cv}
+\end{figure}
 
 
 
