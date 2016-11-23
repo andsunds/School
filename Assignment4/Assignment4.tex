@@ -3,7 +3,7 @@
 \pdfoutput=1
 
 \usepackage{../custom_as}
-\usepackage[%makeroom
+\usepackage[makeroom
 ]{cancel}
 \graphicspath{{figures/}}
 
@@ -64,7 +64,7 @@ where
 E_k=\sqrt{\xi_k^2+\Delta^2}\qcomma \xi_k=\epsilon_k-\eF,
 \end{equation}
 and
-\begin{equation}
+\begin{equation}\label{eq:nFD}
 n(E)=\frac{1}{\ee^{\frac{E}{T}}+1}
 \end{equation}
 is the Fermi-Dirac distribution.
@@ -330,17 +330,158 @@ behaviour right above $\Tc$; and lastly we used the classical limit
 
 
 \section{The Helmholtz free energy of a superconductor}
+\newcommand{\xD}{x_{\text{D}}}
+In this problem we are concerned about the Helmholtz free energy of a
+super conductor, which is given by
+\begin{equation}\label{eq:2_F}
+F=-T\ln{Z}=\frac{V\Delta^2}{U} + 
+\sum_k\qty[\xi_k-E_k-2T\ln(1+\ee^{-\frac{E_k}{T}})].
+\end{equation}
 
+\subsection{Taylor expansion}
+Here we want to expand $F$ in terms of $\Delta^2$; therefore introduce
+$\delta:=\Delta^2$. The Taylor expansion then becomes:
+\begin{equation}
+F=F_0+a(T)\Delta^2 + \frac{1}{2}b(t)\Delta^4+\order{\Delta^6}
+=F_0+a(T)\delta + \frac{1}{2}b(t)\delta^2+\order{\delta^3}.
+\end{equation}
+Now all we have to do is to fins the coefficients $F_0$, $a$ and $T$. 
+According to Taylor's theorem 
+\begin{equation}
+F_0=F(\delta=0)\qcomma
+a=\eval{\dv{F}{\delta}}_{\delta=0}\qcomma
+b=\eval{\dv[2]{F}{\delta}}_{\delta=0}.
+\end{equation}
 
+We begin with the constant term
+\begin{equation}
+F_0=-2T\sum_k\ln(1+\ee^{-\frac{\xi_k}{T}}),
+\end{equation}
+which is just the Helmholtz free energy for an ideal Fermi gas.
 
+\subsubsection{First coefficient}
+For $a$, we need to calculate
+\begin{equation}
+\dv{F}{\delta}=\frac{V}{U}
++\sum_k\qty[-\pdv{E_k}{\delta}
+-2T\qty(\frac{-\frac{1}{T}\ee^{-\nicefrac{E_k}{T}}\pdv{E_k}{\delta}}
+{1+\ee^{-\nicefrac{E_k}{T}}})]
+=\frac{V}{U}
++\sum_k\pdv{E_k}{\delta}\qty[-1
++2\frac{\ee^{-\nicefrac{E_k}{T}}}{1+\ee^{-\nicefrac{E_k}{T}}}].
+\end{equation}
+We see that we need
+\begin{equation}
+\pdv{E_k}{\delta}=\pdv{\delta}\qty[\sqrt{\xi^2+\delta}]
+=\frac{1}{2\sqrt{\xi^2+\delta}}=\frac{1}{2E_k}
+\end{equation}
+In other words
+\begin{equation}\label{eq:2a_a1}
+a=\eval{\dv{F}{\delta}}_{\delta=0}
+=\frac{V}{U}
++\sum_k\frac{1}{2\xi_k}\qty[-1
++\frac{2}{\ee^{\nicefrac{\xi_k}{T}}+1}].
+\end{equation}
+The next step is to convert this sum to an integral, using
+\eqref{eq:1_sum_int}. However, unfortunatly this integral dosen't can't be
+evaluated, bot it \emph{dose converge} around $\xi=0$.
 
+We still want to find the temperature dependence of $a$, so we Taylor
+expand \eqref{eq:2a_a1} around $T=\Tc$. For that we need the
+derivative of $n(\xi_k)$ with respect to $T$, where $n$ is the
+Fermi-Dirac distribution \eqref{eq:nFD}. We get
+\begin{equation}
+\pdv{n(\xi_k)}{T}=-\frac{-\frac{\xi_k}{T^2}\ee^{\nicefrac{\xi_k}{T}}}{\qty(\ee^{\nicefrac{\xi_k}{T}}+1)^2}
+=\frac{\xi_k}{T^2}\frac{\ee^{\nicefrac{\xi_k}{T}}}{\qty(\ee^{\nicefrac{\xi_k}{T}}+1)^2}.
+\end{equation}
+Whereby we can expand
+\begin{equation}
+n(\xi_k)=\frac{1}{\ee^{\nicefrac{\xi_k}{\Tc}}+1}
++\frac{\xi_k}{\Tc}\frac{\ee^{\nicefrac{\xi_k}{\Tc}}}
+{\qty(\ee^{\nicefrac{\xi_k}{\Tc}}+1)^2}
+\frac{(T-\Tc)}{\Tc} + \order{(T-\Tc)^2}.
+\end{equation}
+We also define the reduced temperature $t=(T-\Tc)/\Tc$.
 
+Now we get the integral
+\begin{equation}
+\begin{aligned}
+a-\frac{V}{U}=&
+Vg(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi\;
+\frac{1}{2\xi}\qty[-1
++\frac{2}{2\ee^{\nicefrac{\xi}{\Tc}}+1}
++\frac{\xi t}{\Tc}\frac{2\ee^{\nicefrac{\xi}{\Tc}}}
+{\qty(\ee^{\nicefrac{\xi}{\Tc}}+1)^2}]\\
+=&Vg(\eF)\int_{-\xD}^{\xD}\!\rd{x}\;
+\qty[\frac{1}{2x}\frac{1-\ee^x}{\ee^x+1}
++\frac{\cancel{x}t}{\bcancel{2}\cancel{x}}
+\frac{\bcancel{2}\ee^{x}}{\qty(\ee^{x}+1)^2}],
+\end{aligned}
+\end{equation}
+where $x=\xi/\Tc$ and $\xD=\hbar\wD/\Tc$. Now we need to compute the
+two terms.
 
+\paragraph{First term}
+Here we have
+\vspace{-11pt}\begin{equation}
+I_1=-\frac{1}{2}\int_{-\xD}^{\xD}\!\rd{x}\;
+\overbrace{\frac{1}{x}}^{\text{odd}}
+\overbrace{\frac{\ee^x-1}{\ee^x+1}}^{\text{odd}}
+=-\int_{0}^{\xD}\!\rd{x}\;
+\frac{1}{x}\frac{\ee^x-1}{\ee^x+1}
+\end{equation}
+This integral does not diverge around $x=0$. However, if we were to let
+$\xD\to\infty$, then the integral would diverge, since the integrand
+is asymptotically $1/x$ for large $x$. 
 
+But we also know that
+\begin{equation}\label{eq:2_xD}
+\xD=\frac{\hbar\wD}{\Tc}
+\approx\frac{\hbar\wD}{1.14\cdot\hbar\wD\exp(-\frac{1}{Ug(\eF)})}
+\approx\exp(\frac{1}{Ug(\eF)})\gg1.
+\end{equation}
+So the main contribution to the integral comes from the asymptyotic
+tail of the integral, which is just
+\begin{equation}
+\int\rd{x}\;\frac{1}{x}=\ln(x).
+\end{equation}
 
+In other words, we can approximate
+\begin{equation}
+I_1\approx -\ln(\xD)\stackrel{\eqref{eq:2_xD}}{\approx} 
+\frac{-1}{Ug(\eF)}.
+\end{equation}
 
+\paragraph{Second term}
+This integral,
+\begin{equation}
+I_2=t\int_{-\xD}^{\xD}\!\rd{x}\;
+\frac{\ee^{x}}{\qty(\ee^{x}+1)^2},
+\end{equation}
+can be computed easily by doing a swap of variables $u=\ee^x$, giving
+$\rd{u}=\ee^x\rd{x}$. This results in
+\begin{equation}
+I_2=t\int_{\ee^{-\xD}}^{\ee^{\xD}}\!\rd{u}\;
+\frac{1}{(u+1)^2}
+=t\qty[-\frac{1}{u+1}]_{\ee^{-\xD}}^{\ee^{\xD}}
+=t\qty(\frac{1}{\ee^{-\xD}+1}-\frac{1}{\ee^{\xD}+1}).
+\end{equation}
+Now we already know that $\xD\gg1$, so $\ee^{\xD}\ggg1$ and
+$\ee^{-\xD}\lll1$, meaning that we can approximate
+\begin{equation}
+I_2\approx t.
+\end{equation}
 
+\paragraph{Result}
+We now get
+\begin{equation}
+a=\frac{V}{U}+Vg(\eF)\Big(I_1+I_2\Big)
+\approx\cancel{\frac{V}{U}}+
+Vg(\eF)\qty(\cancel{\frac{-1}{Ug(\eF)}}+t)
+=Vg(\eF)t.
+\end{equation}
 
+\subsubsection{Second coefficient}
 
 
 
