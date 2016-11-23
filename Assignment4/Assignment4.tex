@@ -155,7 +155,7 @@ C_V=\sum_k\Bigg[
 \end{equation}
 Here the first and last term cancel each other thanks to
 \eqref{eq:1b_dEk/dT}. With \eqref{eq:1b_dn/dT}, we end up with
-\begin{equation}
+\begin{equation}\label{eq:1b_Cv_exact}
 \begin{aligned}
 C_V=&\sum_k2E_k\qty[
 -\frac{\frac{1}{T}\ee^{\nicefrac{E_k}{T}}}
@@ -166,12 +166,13 @@ C_V=&\sum_k2E_k\qty[
 \frac{\ee^{\nicefrac{E_k}{T}}}{\qty(\ee^{\nicefrac{E_k}{T}}+1)^2}.
 \end{aligned}
 \end{equation}
-Since we're in the low temperature limit 
-\begin{equation}
-\frac{E_k^2}{T}\gg\pdv{\Delta^2}{T},
-\end{equation}
-because we know that $\pdv*{\Delta}{T}$ is bounded. Next, the low
-temperature limit means that
+Since we're in the low temperature limit ($T\ll\Tc$), we can
+approximate $\pdv*{\Delta^2}{T}\approx0$, 
+%\begin{equation}
+%\frac{E_k^2}{T}\gg\pdv{\Delta^2}{T},
+%\end{equation}
+because ${\Delta}$ is almost constant at very low temperatures. Next,
+the low temperature limit means that
 \begin{equation}
 \frac{\ee^{\nicefrac{E_k}{T}}}{\qty(\ee^{\nicefrac{E_k}{T}}+1)^2}
 \approx
@@ -179,6 +180,7 @@ temperature limit means that
 =\ee^{-\nicefrac{E_k}{T}}
 =\exp(-\frac{\sqrt{\xi^2+\Delta^2}}{T}).
 \end{equation}
+
 The final step is to go from a sum to an integral, which we do with
 the prescription
 \begin{equation}\label{eq:1_sum_int}
@@ -243,13 +245,15 @@ I(\Delta)\approx \Delta^2\ee^{-\nicefrac{\Delta}{T}}
 \end{equation}
 
 \subsubsection*{Back to the heat capacity}
-The heat capacity is now \todo{Factor 2 off?}
+The heat capacity is now 
 \begin{equation}\label{eq:1b_Cv}
 C_V=\frac{2V}{T^2}g(\eF)I(\Delta)
 =2\sqrt{2\pi}Vg(\eF)\frac{\Delta^{5/2}}{T^{3/2}}\ee^{-\nicefrac{\Delta}{T}}
 =\frac{2Vm^{3/2}\sqrt{\eF}}{\sqrt{\pi}\hbar^3}
 \frac{\Delta^{5/2}}{T^{3/2}}\ee^{-\nicefrac{\Delta}{T}}.
 \end{equation}
+This is only valid in the very low temperature limit $T\ll\Tc$,
+though. 
 \qed
 
 \subsection{Discontinuity in the heat capacity}
@@ -289,8 +293,11 @@ C_V(T\to\Tc^+)=\frac{\pi^2N}{2}\frac{\Tc}{\eF}
 
 \subsubsection{Heat capacity below the critical temperature}
 We've already found $C_V$ for $T<\Tc$, but we still need to calculate
-the value as $T$ approaches $\Tc$ from below. Using \eqref{eq:1b_Cv},
-we have
+the value as $T$ approaches $\Tc$ from below. We can no longer use
+\eqref{eq:1b_Cv}, since we are in the vicinity of $\Tc$ now, we can
+no longer neglect the second term in \eqref{eq:1b_Cv_exact}.
+
+
 \begin{equation}\label{eq:1c_Cv->0}
 C_V(T<\Tc)\propto
 \frac{\Delta^{5/2}}{T^{3/2}}\ee^{-\nicefrac{\Delta}{T}}
@@ -300,6 +307,8 @@ C_V(T<\Tc)\propto
 because $\Delta\to0$ as $T\to\Tc$.\todo{Is this really right???}
 \todo[inline]{We have to take $\pdv{\Delta^2}{T}$ into accotnt when
   studying $T\to\Tc$.}
+
+
 
 \subsubsection{Final result}
 The discontinuity in the heat capacity is thus
@@ -315,7 +324,7 @@ behaviour; then we used \eqref{eq:1c_Cv->0} to get the behavoiur as
 $T\to\Tc^-$; then we used \eqref{eq:1c_Cv_Tc+} to get the linear
 behaviour right above $\Tc$; and lastly we used the classical limit
 \eqref{eq:1c_Cv_T_high} in the high temperature limit.
-
+\todo{REDO!!!}
 
 \begin{figure}
 \centering
@@ -323,6 +332,16 @@ behaviour right above $\Tc$; and lastly we used the classical limit
 \caption{}
 \label{fig:1_Cv}
 \end{figure}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -629,7 +648,7 @@ Using \eqref{eq:2a_Taylor_F} together with \eqref{eq:2_a} and
 \eqref{eq:2_b}, we get
 \begin{equation}\label{eq:2a_Taylor_F_final}
 F(\Delta)=F_0+Vg(\eF)t\Delta^2 
-+ 0.107\frac{Vg(\eF)}{\Tc^2}\Delta^4 + \order{\Delta^6}+\order{t^2}.
++ \frac{0.107}{2}\frac{Vg(\eF)}{\Tc^2}\Delta^4 + \order{\Delta^6}+\order{t^2}.
 \end{equation}
 \qed
 
@@ -644,12 +663,64 @@ easily minimize $F$, and we get
 \end{equation}
 which, in terms of $\Delta$ and with \eqref{eq:2_a} and
 \eqref{eq:2_b}, gives
-\begin{equation}
+\begin{equation}\label{eq:2_Delta(T)}
 \Delta(T)=\sqrt{-\frac{a(T)}{b(T)}}
-=\sqrt{\frac{t}{0.107/\Tc^2}}
-\approx 3.1\,\Tc\sqrt{t}.
+=\sqrt{\frac{-t}{0.107/\Tc^2}}
+\approx 3.06\,\Tc\sqrt{-t}\approx3.1\,\Tc\sqrt{-t}.
 \end{equation}
+Note that the minus sign is there because $t<0$ when $T<\Tc$.
 \qed
+
+\subsection{Heat capacity, again}
+Now we're going to calculate discontinuity of the heat capacity
+again. This time we will use
+\begin{equation}
+C_V=-T\qty(\pdv[2]{F}{T})_V.
+\end{equation}
+We see from \eqref{eq:2a_Taylor_F_final} that the first term $F_0$,
+which is just the ideal Fermi gas free energy, will not contribute to
+the discontinuity, we will therefore focus on the two thoer terms. 
+
+With \eqref{eq:2_Delta(T)}, we get
+\begin{equation}
+F(T)=F_0+Vg(\eF)\qty[
+\overbrace{(3.1\,\Tc\sqrt{-t})^2 t}^{=-(3.1\Tc)^2t^2} +
+\frac{0.107}{2\Tc^2}\,
+\overbrace{(3.1\,\Tc\sqrt{-t})^4}^{=+(3.1\Tc)^4t^2}
+]
+=F_0-Vg(\eF)\,8.83\,\Tc(T-T_c)^2,
+\end{equation}
+for $T<\Tc$.
+This results in
+\begin{equation}
+C_V=C_V^{\text{(ieal)}} - 2Vg(\eF)\Tc\,8.83\qcomma
+T<\Tc,
+\end{equation}
+or in other words
+\begin{equation}
+C_V(T\to\Tc^+)-C_V(T\to\Tc^-)=+17.7\,Vg(\eF)\Tc.
+\end{equation}
+
+
+\subsection{Sketch of the free energy}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
