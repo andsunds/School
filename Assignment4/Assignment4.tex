@@ -298,6 +298,8 @@ C_V(T<\Tc)\propto
 \text{as}\; T\to\Tc^-
 \end{equation}
 because $\Delta\to0$ as $T\to\Tc$.\todo{Is this really right???}
+\todo[inline]{We have to take $\pdv{\Delta^2}{T}$ into accotnt when
+  studying $T\to\Tc$.}
 
 \subsubsection{Final result}
 The discontinuity in the heat capacity is thus
@@ -341,13 +343,13 @@ F=-T\ln{Z}=\frac{V\Delta^2}{U} +
 \subsection{Taylor expansion}
 Here we want to expand $F$ in terms of $\Delta^2$; therefore introduce
 $\delta:=\Delta^2$. The Taylor expansion then becomes:
-\begin{equation}
+\begin{equation}\label{eq:2a_Taylor_F}
 F=F_0+a(T)\Delta^2 + \frac{1}{2}b(t)\Delta^4+\order{\Delta^6}
 =F_0+a(T)\delta + \frac{1}{2}b(t)\delta^2+\order{\delta^3}.
 \end{equation}
 Now all we have to do is to fins the coefficients $F_0$, $a$ and $T$. 
 According to Taylor's theorem 
-\begin{equation}
+\begin{equation}\label{eq2a:coeff}
 F_0=F(\delta=0)\qcomma
 a=\eval{\dv{F}{\delta}}_{\delta=0}\qcomma
 b=\eval{\dv[2]{F}{\delta}}_{\delta=0}.
@@ -361,7 +363,7 @@ which is just the Helmholtz free energy for an ideal Fermi gas.
 
 \subsubsection{First coefficient}
 For $a$, we need to calculate
-\begin{equation}
+\begin{equation}\label{eq:2a_dF/ddelta}
 \dv{F}{\delta}=\frac{V}{U}
 +\sum_k\qty[-\pdv{E_k}{\delta}
 -2T\qty(\frac{-\frac{1}{T}\ee^{-\nicefrac{E_k}{T}}\pdv{E_k}{\delta}}
@@ -371,7 +373,7 @@ For $a$, we need to calculate
 +2\frac{\ee^{-\nicefrac{E_k}{T}}}{1+\ee^{-\nicefrac{E_k}{T}}}].
 \end{equation}
 We see that we need
-\begin{equation}
+\begin{equation}\label{eq:2a_dEk/ddelta}
 \pdv{E_k}{\delta}=\pdv{\delta}\qty[\sqrt{\xi^2+\delta}]
 =\frac{1}{2\sqrt{\xi^2+\delta}}=\frac{1}{2E_k}
 \end{equation}
@@ -386,106 +388,268 @@ The next step is to convert this sum to an integral, using
 \eqref{eq:1_sum_int}. However, unfortunatly this integral dosen't can't be
 evaluated, bot it \emph{dose converge} around $\xi=0$.
 
-We still want to find the temperature dependence of $a$, so we Taylor
-expand \eqref{eq:2a_a1} around $T=\Tc$. For that we need the
-derivative of $n(\xi_k)$ with respect to $T$, where $n$ is the
-Fermi-Dirac distribution \eqref{eq:nFD}. We get
-\begin{equation}
-\pdv{n(\xi_k)}{T}=-\frac{-\frac{\xi_k}{T^2}\ee^{\nicefrac{\xi_k}{T}}}{\qty(\ee^{\nicefrac{\xi_k}{T}}+1)^2}
-=\frac{\xi_k}{T^2}\frac{\ee^{\nicefrac{\xi_k}{T}}}{\qty(\ee^{\nicefrac{\xi_k}{T}}+1)^2}.
-\end{equation}
-Whereby we can expand
-\begin{equation}
-n(\xi_k)=\frac{1}{\ee^{\nicefrac{\xi_k}{\Tc}}+1}
-+\frac{\xi_k}{\Tc}\frac{\ee^{\nicefrac{\xi_k}{\Tc}}}
-{\qty(\ee^{\nicefrac{\xi_k}{\Tc}}+1)^2}
-\frac{(T-\Tc)}{\Tc} + \order{(T-\Tc)^2}.
-\end{equation}
-We also define the reduced temperature $t=(T-\Tc)/\Tc$.
+% We still want to find the temperature dependence of $a$, so we Taylor
+% expand \eqref{eq:2a_a1} around $T=\Tc$. For that we need the
+% derivative of $n(\xi_k)$ with respect to $T$, where $n$ is the
+% Fermi-Dirac distribution \eqref{eq:nFD}. We get
+% \begin{equation}
+% \pdv{n(\xi_k)}{T}=-\frac{-\frac{\xi_k}{T^2}\ee^{\nicefrac{\xi_k}{T}}}{\qty(\ee^{\nicefrac{\xi_k}{T}}+1)^2}
+% =\frac{\xi_k}{T^2}\frac{\ee^{\nicefrac{\xi_k}{T}}}{\qty(\ee^{\nicefrac{\xi_k}{T}}+1)^2}.
+% \end{equation}
+% Whereby we can expand
+% \begin{equation}
+% n(\xi_k)=\frac{1}{\ee^{\nicefrac{\xi_k}{\Tc}}+1}
+% +\frac{\xi_k}{\Tc}\frac{\ee^{\nicefrac{\xi_k}{\Tc}}}
+% {\qty(\ee^{\nicefrac{\xi_k}{\Tc}}+1)^2}
+% \frac{(T-\Tc)}{\Tc} + \order{(T-\Tc)^2}.
+% \end{equation}
+% We also define the reduced temperature $t=(T-\Tc)/\Tc$.
 
 Now we get the integral
-\begin{equation}
-\begin{aligned}
+% \begin{equation}  %% With expansion around T=\Tc
+% \begin{aligned}
+% a-\frac{V}{U}=&
+% Vg(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi\;
+% \frac{1}{2\xi}\qty[-1
+% +\frac{2}{\ee^{\nicefrac{\xi}{\Tc}}+1}
+% +\frac{\xi t}{\Tc}\frac{2\ee^{\nicefrac{\xi}{\Tc}}}
+% {\qty(\ee^{\nicefrac{\xi}{\Tc}}+1)^2}]
+% \\
+% =&Vg(\eF)\int_{-\xD}^{\xD}\!\rd{x}\;
+% \qty[\frac{1}{2x}\frac{1-\ee^x}{\ee^x+1}
+% +\frac{\cancel{x}t}{\bcancel{2}\cancel{x}}
+% \frac{\bcancel{2}\ee^{x}}{\qty(\ee^{x}+1)^2}],
+% \end{aligned}
+% \end{equation}
+\begin{equation}  %% Without expansion around T=\Tc
+\begin{aligned}\label{eq:2a_a_int}
 a-\frac{V}{U}=&
 Vg(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi\;
 \frac{1}{2\xi}\qty[-1
-+\frac{2}{2\ee^{\nicefrac{\xi}{\Tc}}+1}
-+\frac{\xi t}{\Tc}\frac{2\ee^{\nicefrac{\xi}{\Tc}}}
-{\qty(\ee^{\nicefrac{\xi}{\Tc}}+1)^2}]\\
++\frac{2}{\ee^{\nicefrac{\xi}{T}}+1}]
+\\
 =&Vg(\eF)\int_{-\xD}^{\xD}\!\rd{x}\;
-\qty[\frac{1}{2x}\frac{1-\ee^x}{\ee^x+1}
-+\frac{\cancel{x}t}{\bcancel{2}\cancel{x}}
-\frac{\bcancel{2}\ee^{x}}{\qty(\ee^{x}+1)^2}],
+\frac{1}{2x}\frac{1-\ee^x}{\ee^x+1}
 \end{aligned}
 \end{equation}
-where $x=\xi/\Tc$ and $\xD=\hbar\wD/\Tc$. Now we need to compute the
+where $x=\xi/T$ and $\xD=\hbar\wD/T$. Now we need to compute the
 two terms.
+% where $x=\xi/\Tc$ and $\xD=\hbar\wD/\Tc$. Now we need to compute the
+% two terms.
 
-\paragraph{First term}
+%\paragraph{First term}
+\paragraph{The integral}
 Here we have
 \vspace{-11pt}\begin{equation}
 I_1=-\frac{1}{2}\int_{-\xD}^{\xD}\!\rd{x}\;
-\overbrace{\frac{1}{x}}^{\text{odd}}
-\overbrace{\frac{\ee^x-1}{\ee^x+1}}^{\text{odd}}
-=-\int_{0}^{\xD}\!\rd{x}\;
-\frac{1}{x}\frac{\ee^x-1}{\ee^x+1}
+\frac{1}{x}
+\frac{\ee^x-1}{\ee^x+1}
+%=-\int_{0}^{\xD}\!\rd{x}\;
+%\frac{1}{x}\frac{\ee^x-1}{\ee^x+1}
 \end{equation}
 This integral does not diverge around $x=0$. However, if we were to let
-$\xD\to\infty$, then the integral would diverge, since the integrand
-is asymptotically $1/x$ for large $x$. 
+$\xD\to\infty$, then the integral would diverge, since the integrand, $f_1(x)$,
+is asymptotically $f_1(x)\sim\pm1/x$ for $x\to\pm\infty$, or in other
+words $f_1(x)\sim1/\abs{x}$ as $\abs{x}\to\infty$. 
 
-But we also know that
+But we also know that, since $T<\Tc$,
 \begin{equation}\label{eq:2_xD}
-\xD=\frac{\hbar\wD}{\Tc}
+\xD=\frac{\hbar\wD}{T}>\frac{\hbar\wD}{\Tc}
 \approx\frac{\hbar\wD}{1.14\cdot\hbar\wD\exp(-\frac{1}{Ug(\eF)})}
 \approx\exp(\frac{1}{Ug(\eF)})\gg1.
 \end{equation}
-So the main contribution to the integral comes from the asymptyotic
-tail of the integral, which is just
+So the main contribution to the integral comes from the two
+asymptyotic tails of the integral, which is just
 \begin{equation}
 \int\rd{x}\;\frac{1}{x}=\ln(x).
 \end{equation}
-
+We get roughly the same contribution from both integration limits.
 In other words, we can approximate
-\begin{equation}
-I_1\approx -\ln(\xD)\stackrel{\eqref{eq:2_xD}}{\approx} 
-\frac{-1}{Ug(\eF)}.
+\begin{equation}\label{eq:2a_I1_0}
+I_1\approx -\frac{1}{2}\cdot2\ln(\xD)=-\ln(\frac{\hbar\wD}{T}).
 \end{equation}
 
-\paragraph{Second term}
-This integral,
+We are interested in solutions near $\Tc$. But we note that if we were
+to just set $T=\Tc$, then \eqref{eq:2_xD} would result in $a=0$
+because of the extra term $V/U$ in \eqref{eq:2a_a_int}. We therefore
+need to Taylor expand \eqref{eq:2a_I1_0} around $T=\Tc$:
 \begin{equation}
-I_2=t\int_{-\xD}^{\xD}\!\rd{x}\;
-\frac{\ee^{x}}{\qty(\ee^{x}+1)^2},
+I_1\approx-\ln(\frac{\hbar\wD}{T})
+=-\ln(\frac{\hbar\wD}{\Tc}) -
+\frac{\Tc}{\hbar\wD}\frac{\hbar\wD}{-\Tc^2} (T-\Tc)
++\order{(T-\Tc)^2}
 \end{equation}
-can be computed easily by doing a swap of variables $u=\ee^x$, giving
-$\rd{u}=\ee^x\rd{x}$. This results in
-\begin{equation}
-I_2=t\int_{\ee^{-\xD}}^{\ee^{\xD}}\!\rd{u}\;
-\frac{1}{(u+1)^2}
-=t\qty[-\frac{1}{u+1}]_{\ee^{-\xD}}^{\ee^{\xD}}
-=t\qty(\frac{1}{\ee^{-\xD}+1}-\frac{1}{\ee^{\xD}+1}).
-\end{equation}
-Now we already know that $\xD\gg1$, so $\ee^{\xD}\ggg1$ and
-$\ee^{-\xD}\lll1$, meaning that we can approximate
-\begin{equation}
-I_2\approx t.
-\end{equation}
+
+% \begin{equation}
+% I_1\approx -\ln(\xD)\stackrel{\eqref{eq:2_xD}}{\approx} 
+% \frac{-1}{Ug(\eF)}.
+% \end{equation}
+
+% \paragraph{Second term}
+% This integral,
+% \begin{equation}
+% I_2=t\int_{-\xD}^{\xD}\!\rd{x}\;
+% \frac{\ee^{x}}{\qty(\ee^{x}+1)^2},
+% \end{equation}
+% can be computed easily by doing a swap of variables $u=\ee^x$, giving
+% $\rd{u}=\ee^x\rd{x}$. This results in
+% \begin{equation}
+% I_2=t\int_{\ee^{-\xD}}^{\ee^{\xD}}\!\rd{u}\;
+% \frac{1}{(u+1)^2}
+% =t\qty[-\frac{1}{u+1}]_{\ee^{-\xD}}^{\ee^{\xD}}
+% =t\qty(\frac{1}{\ee^{-\xD}+1}-\frac{1}{\ee^{\xD}+1}).
+% \end{equation}
+% Now we already know that $\xD\gg1$, so $\ee^{\xD}\ggg1$ and
+% $\ee^{-\xD}\lll1$, meaning that we can approximate
+% \begin{equation}
+% I_2\approx t.
+% \end{equation}
 
 \paragraph{Result}
 We now get
-\begin{equation}
-a=\frac{V}{U}+Vg(\eF)\Big(I_1+I_2\Big)
+\begin{equation}\label{eq:2_a}
+a=\frac{V}{U}+Vg(\eF)I_1
 \approx\cancel{\frac{V}{U}}+
 Vg(\eF)\qty(\cancel{\frac{-1}{Ug(\eF)}}+t)
-=Vg(\eF)t.
+=Vg(\eF)t,
 \end{equation}
+where $t=(T-\Tc)/\Tc$ is the reduced temperature.
+% \begin{equation}
+% a=\frac{V}{U}+Vg(\eF)\Big(I_1+I_2\Big)
+% \approx\cancel{\frac{V}{U}}+
+% Vg(\eF)\qty(\cancel{\frac{-1}{Ug(\eF)}}+t)
+% =Vg(\eF)t.
+% \end{equation}
 
 \subsubsection{Second coefficient}
+By the definition in \eqref{eq2a:coeff}, we nee the second derivative
+of $F$ with respect to $T$. With \eqref{eq:2a_dF/ddelta}, we get
+\begin{equation}
+\begin{aligned}
+\pdv[2]{F}{\delta}=&\pdv{\delta}\sum_k\pdv{E_k}{\delta}
+\qty(-1 + \frac{2}{\ee^{\nicefrac{E_k}{T}}+1})\\
+=&\sum_k\qty[\pdv[2]{E_k}{\delta}
+\qty(-1 + \frac{2}{\ee^{\nicefrac{E_k}{T}}+1})
++\pdv{E_k}{\delta}\qty(
+-2\frac{\frac{1}{T}\ee^{\nicefrac{E_k}{T}}}{\qty(\ee^{\nicefrac{E_k}{T}}+1)^2}
+\pdv{E_k}{\delta})
+].
+\end{aligned}
+\end{equation}
+With \eqref{eq:2a_dEk/ddelta}, we have
+\begin{equation}
+\pdv[2]{E_k}{\delta}=-\frac{1}{2E_k^2}\pdv{E_k}{\delta}=-\frac{1}{4E_k^3}.
+\end{equation}
+Now
+\begin{equation}
+\begin{aligned}
+b=\eval{\pdv[2]{F}{\delta}}_{\delta=0}
+=&\sum_k\qty[
+\frac{1}{4\xi_k^3}
+\qty(+1 - \frac{2}{\ee^{\nicefrac{\xi_k}{T}}+1})
++\frac{-2}{(2\xi_k)^2}
+\frac{\frac{1}{T}\ee^{\nicefrac{\xi_k}{T}}}{\qty(\ee^{\nicefrac{\xi_k}{T}}+1)^2}
+].
+\end{aligned}
+\end{equation}
+Once again, we convert to an integral using the prescription
+\eqref{eq:1_sum_int}, and also setting $x=\xi/T$ and
+$\xD=\hbar\wD/T$. This results in 
+\begin{equation}
+\begin{aligned}
+b\to& Vg(\eF)\int_{-\xD}^{\xD}\!T\rd{x}\;
+ \frac{1}{4T^3x^3}\qty[
+\frac{\ee^{x}-1}{\ee^{x}+1}
+-\frac{2x\ee^{x}}{\qty(\ee^{x}+1)^2}
+]\\
+=&\frac{Vg(\eF)}{4T^2}\int_{-\xD}^{\xD}\!\rd{x}\;
+\frac{1}{x^3}
+\qty[
+\frac{\ee^{2x}-1-2x\ee^{x}}{\qty(\ee^{x}+1)^2}
+].\\
+\end{aligned}
+\end{equation}
+And once again, we need to take a closer look at the integral.
+
+\paragraph{The integral}
+In this case what we have is 
+\begin{equation}
+I_2=\int_{-\xD}^{\xD}\!\rd{x}\;
+\frac{1}{x^3}
+\qty[
+\frac{\ee^{2x}-1-2x\ee^{x}}{\qty(\ee^{x}+1)^2}
+],
+\end{equation}
+which looks worying, because this might be divergent when integrating
+past $x=0$. 
+We therefore study the numerator near $x=0$:
+\begin{equation}
+\begin{aligned}
+\ee^{2x}-1-2x\ee^{x}=&-1 + \qty(1+2x+\frac{1}{2}(2x)^2+\frac{1}{3!}(2x)^3)
+-2x\qty(1+x +\frac{1}{2}x^2) +\order{x^4}\\
+=&\cancel{-1}+\qty(\cancel{1}+\bcancel{2x}+\xcancel{2x^2}+\frac{4x^3}{3})
+-\qty(\bcancel{2x}+\xcancel{2x^2} +x^3) +\order{x^4}\\
+=&\frac{x^3}{3}+\order{x^4}.
+\end{aligned}
+\end{equation}
+This means that the integrand is actually well behaved around $x=0$.
+
+% \todo{This is not working!}
+% Next, we note that the integrand, $f(x)$ is asymptotic to $\pm1/x^3$ as
+% $x\to\pm\infty$, or in other words $f(x)\sim1/\abs{x}^3$ as
+% $\abs{x}\to\infty$. This means that  we once again will get most of
+% the contribution to the integral from the two asymptotic tails:
+% \begin{equation}
+% \xcancel{\int \frac{\rd{x}}{x^3}=-\frac{1}{2x^2}}
+% \end{equation}
+
+Unfortunately this integral cannot be computed analytically. We
+therefore utilize the fact that the integrand, $f(x)$ is asymptotic to
+$\pm1/x^3$ as $x\to\pm\infty$, or in other words $f(x)\sim1/\abs{x}^3$ as
+$\abs{x}\to\infty$. Which means that since $\xD\gg1$, we can
+approximate
+\begin{equation}
+I_2\approx\int_{-\infty}^{\infty}\!\rd{x}\;
+\frac{1}{x^3}
+\qty[\frac{\ee^{2x}-1-2x\ee^{x}}{\qty(\ee^{x}+1)^2}]
+\approx 0.426,
+\end{equation}
+where the last step was just a numerical integration.
+
+\paragraph{Result}
+We want $b(T)$ in a vicinity of $\Tc$, and this time we get to keep
+the constant term, which results in
+\begin{equation}\label{eq:2_b}
+b(T)=\frac{Vg(\eF)}{4T^2}I_2
+\approx 0.107\frac{Vg(\eF)}{\Tc^2}.
+\end{equation}
+
+\subsubsection{Final expression}
+Using \eqref{eq:2a_Taylor_F} together with \eqref{eq:2_a} and
+\eqref{eq:2_b}, we get
+\begin{equation}\label{eq:2a_Taylor_F_final}
+F(\Delta)=F_0+Vg(\eF)t\Delta^2 
++ 0.107\frac{Vg(\eF)}{\Tc^2}\Delta^4 + \order{\Delta^6}+\order{t^2}.
+\end{equation}
+\qed
 
 
-
-
+\subsection{Finding the equilibrium}
+To find the equlibrium value of $\delta=\Delta^2$, we need to minimize
+the free energy. With the Taylor expansion \eqref{eq:2a_Taylor_F}, we
+easily minimize $F$, and we get
+\begin{equation}
+\min_{\delta}\qty{a\delta+\frac{1}{2}b\delta^2}\quad\text{occurs at}\quad
+\delta(T)=-\frac{a(T)}{b(T)}
+\end{equation}
+which, in terms of $\Delta$ and with \eqref{eq:2_a} and
+\eqref{eq:2_b}, gives
+\begin{equation}
+\Delta(T)=\sqrt{-\frac{a(T)}{b(T)}}
+=\sqrt{\frac{t}{0.107/\Tc^2}}
+\approx 3.1\,\Tc\sqrt{t}.
+\end{equation}
+\qed
 
 
 
