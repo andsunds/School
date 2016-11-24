@@ -138,7 +138,7 @@ $T<\Tc$ meaning that $\Delta\neq0$, the BCS equation can be written as
 \begin{equation}\label{eq:1b_BCS}
 \frac{U}{V}=\sum_k\frac{1-2n(E_k)}{2E_k}.
 \end{equation}
-If we now diffentiate both sides we get
+If we now differentiate both sides we get
 \begin{equation}
 0=\dv{T}\sum_k\frac{1-2n(E_k)}{2E_k},
 \end{equation}
@@ -253,8 +253,6 @@ The heat capacity is now
 C_V=\frac{2V}{T^2}g(\eF)I(\Delta)
 =2\sqrt{2\pi}Vg(\eF)\frac{\Delta^{5/2}}{T^{3/2}}
 \ee^{-\nicefrac{\Delta}{T}}.
-%=\frac{2Vm^{3/2}\sqrt{\eF}}{\sqrt{\pi}\hbar^3}
-%\frac{\Delta^{5/2}}{T^{3/2}}\ee^{-\nicefrac{\Delta}{T}}.
 \end{equation}
 This is only valid in the very low temperature limit $T\ll\Tc$,
 though. 
@@ -273,7 +271,6 @@ first term, but that term is \emph{continuous} at $\Tc$ since
 $(E_k)=(\xi_x^2+\Delta^2)\to\xi_k^2$ continuously as
 $T\to\Tc$. Therefore the discontinuity can not arise from this term.
 
-%\subsubsection{Heat capacity below the critical temperature}
 \paragraph{The discontinuity term}
 The discontinuity therefore has its origin in the second term in
 \eqref{eq:1b_Cv_exact}, which only appears in superconductors. Let us
@@ -310,14 +307,14 @@ usual order by converting to an integral:
 \end{equation}
 Unfortunately, this integral can not be computed analytically, since
 $E_k=\sqrt{\xi_k^2+\Delta^2}$. But in the limit $T\to\Tc^-$, we get
-$E_k=\abs{\xi}_k$, which now becomes evaluatable in the limit
-$\hbar\wD\to\infty$. With the exponentials, that becomes a reasonable
+$E_k=\abs{\xi}_k$, which now becomes possible to evaluate in the limit
+$\hbar\wD\to\infty$. With the exponentials, that is a reasonable
 approximation. So we get
 \begin{equation}
 \widehat{C}_V(T\to\Tc^-) = +\frac{Vg(\eF)\Tc}{c}
 \underbrace{\int_{-\infty}^{\infty}\!\rd{x}\;
 \frac{\ee^{|x|}}{(\ee^{|x|}+1)^2}}_{1}
-= +\frac{Vg(\eF)\Tc}{c},\vspace{-8pt}
+= +\frac{Vg(\eF)\Tc}{c},
 \end{equation}
 where $x=\xi/\Tc$.
 
@@ -326,7 +323,8 @@ The discontinuity in the heat capacity is thus
 \begin{equation}
 C_V(T\to\Tc^-)-C_V(T\to\Tc^+)=\frac{Vg(\eF)\Tc}{c}>0
 \end{equation}
-arising only from the second term in \eqref{eq:1b_Cv_exact}.
+arising only from the second term in \eqref{eq:1b_Cv_exact}. And from
+the next problem we will find that $1/c\approx9.3$.
 
 \subsection{Sketch of $C_V(T)$}
 \figref{fig:1_Cv} show a sketch of $C_V$ as a function of $T$. Some
@@ -407,111 +405,125 @@ We see that we need
 \end{equation}
 In other words
 \begin{equation}\label{eq:2a_a1}
-a=\eval{\dv{F}{\delta}}_{\delta=0}
+\dv{F}{\delta}
 =\frac{V}{U}
-+\sum_k\frac{1}{2\xi_k}\qty[-1
-+\frac{2}{\ee^{\nicefrac{\xi_k}{T}}+1}].
++\sum_k\frac{1}{2E_k}\qty[-1
++\frac{2}{\ee^{\nicefrac{E_k}{T}}+1}]
+=\frac{V}{U}
+-\sum_k\frac{1-2n(E_k)}{2E_k}.
 \end{equation}
+Note that the second term very much reasembles the RHS in the BCS
+equation:
+\begin{equation}
+1=\frac{U}{V}\sum_k\frac{1-2n(E_k)}{2E_k}.
+\end{equation}
+If we were to use this equation right off, we would get $a=0$, but we
+still want to find some non-zero component of $a$. So we Taylor expand
+the last term in \eqref{eq:2a_a1} around $T=\Tc$.
+For that we need the
+derivative of $n(\xi_k)$ with respect to $T$, where $n$ is the
+Fermi-Dirac distribution \eqref{eq:nFD}. We get
+\begin{equation}
+\pdv{n(E)}{T}=-\frac{-\frac{E}{T^2}\ee^{\nicefrac{E}{T}}}{\qty(\ee^{\nicefrac{E}{T}}+1)^2}
+=\frac{E}{T^2}\frac{\ee^{\nicefrac{E}{T}}}{\qty(\ee^{\nicefrac{E}{T}}+1)^2}.
+\end{equation}
+Whereby we can expand
+\begin{equation}
+n(E)=n(E) %\frac{1}{\ee^{\nicefrac{E}{\Tc}}+1}
++\frac{E}{\Tc}\frac{\ee^{\nicefrac{E}{\Tc}}}
+{\qty(\ee^{\nicefrac{E}{\Tc}}+1)^2}
+\frac{(T-\Tc)}{\Tc} + \order{(T-\Tc)^2}.
+\end{equation}
+We also define the reduced temperature $t=(T-\Tc)/\Tc$.
+
+We are now ready to calculate $a$:
+\begin{equation}
+\begin{aligned}
+a(T)=\eval{\dv{F}{\delta}}_{\delta=0}
+=&\cancel{\frac{V}{U}}
+-\cancel{\sum_k\frac{1-2n(\xi_k,\;T=\Tc)}{2\xi_k}}l\\
+&+\sum_k\frac{t}{2\xi_k}\frac{\xi_k}{\Tc}
+\frac{2\ee^{\nicefrac{|\xi_k|}{\Tc}}}{\qty(\ee^{\nicefrac{|\xi_k|}{\Tc}}+1)^2},
+\end{aligned}
+\end{equation}
+where we also used $E_k\to|\xi_k|$ as $\Delta\to0$.
 The next step is to convert this sum to an integral, using
-\eqref{eq:1_sum_int}. However, unfortunately this integral doesn't can't be
-evaluated, bot it \emph{dose converge} around $\xi=0$.
-
-% We still want to find the temperature dependence of $a$, so we Taylor
-% expand \eqref{eq:2a_a1} around $T=\Tc$. For that we need the
-% derivative of $n(\xi_k)$ with respect to $T$, where $n$ is the
-% Fermi-Dirac distribution \eqref{eq:nFD}. We get
-% \begin{equation}
-% \pdv{n(\xi_k)}{T}=-\frac{-\frac{\xi_k}{T^2}\ee^{\nicefrac{\xi_k}{T}}}{\qty(\ee^{\nicefrac{\xi_k}{T}}+1)^2}
-% =\frac{\xi_k}{T^2}\frac{\ee^{\nicefrac{\xi_k}{T}}}{\qty(\ee^{\nicefrac{\xi_k}{T}}+1)^2}.
-% \end{equation}
-% Whereby we can expand
-% \begin{equation}
-% n(\xi_k)=\frac{1}{\ee^{\nicefrac{\xi_k}{\Tc}}+1}
-% +\frac{\xi_k}{\Tc}\frac{\ee^{\nicefrac{\xi_k}{\Tc}}}
-% {\qty(\ee^{\nicefrac{\xi_k}{\Tc}}+1)^2}
-% \frac{(T-\Tc)}{\Tc} + \order{(T-\Tc)^2}.
-% \end{equation}
-% We also define the reduced temperature $t=(T-\Tc)/\Tc$.
-
-Now we get the integral
-% \begin{equation}  %% With expansion around T=\Tc
-% \begin{aligned}
+\eqref{eq:1_sum_int}. 
+And we get
+% \begin{equation}  
+% \begin{aligned}\label{eq:2a_a_int}
 % a-\frac{V}{U}=&
 % Vg(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi\;
 % \frac{1}{2\xi}\qty[-1
-% +\frac{2}{\ee^{\nicefrac{\xi}{\Tc}}+1}
-% +\frac{\xi t}{\Tc}\frac{2\ee^{\nicefrac{\xi}{\Tc}}}
-% {\qty(\ee^{\nicefrac{\xi}{\Tc}}+1)^2}]
+% +\frac{2}{\ee^{\nicefrac{\xi}{T}}+1}]
 % \\
 % =&Vg(\eF)\int_{-\xD}^{\xD}\!\rd{x}\;
-% \qty[\frac{1}{2x}\frac{1-\ee^x}{\ee^x+1}
-% +\frac{\cancel{x}t}{\bcancel{2}\cancel{x}}
-% \frac{\bcancel{2}\ee^{x}}{\qty(\ee^{x}+1)^2}],
+% \frac{1}{2x}\frac{1-\ee^x}{\ee^x+1}
 % \end{aligned}
 % \end{equation}
-\begin{equation}  %% Without expansion around T=\Tc
-\begin{aligned}\label{eq:2a_a_int}
-a-\frac{V}{U}=&
-Vg(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi\;
-\frac{1}{2\xi}\qty[-1
-+\frac{2}{\ee^{\nicefrac{\xi}{T}}+1}]
-\\
-=&Vg(\eF)\int_{-\xD}^{\xD}\!\rd{x}\;
-\frac{1}{2x}\frac{1-\ee^x}{\ee^x+1}
+\begin{equation}
+\begin{aligned}
+a(T)=&Vg(\eF)\;t\int_{-\hbar\wD}^{\hbar\wD}\!\frac{\rd\xi}{\Tc}\;
+\frac{\ee^{\nicefrac{|\xi_k|}{\Tc}}}{\qty(\ee^{\nicefrac{|\xi_k|}{\Tc}}+1)^2}\\
+&=Vg(\eF)\;t\int_{-\xD}^{\xD}\!\rd{x}\;
+\frac{\ee^{|x|}}{\qty(\ee^{|x|}+1)^2}\\
 \end{aligned}
 \end{equation}
-where $x=\xi/T$ and $\xD=\hbar\wD/T$. Now we need to compute the
-two terms.
-% where $x=\xi/\Tc$ and $\xD=\hbar\wD/\Tc$. Now we need to compute the
-% two terms.
-
-%\paragraph{First term}
-\paragraph{The integral}
-Here we have
-\vspace{-11pt}\begin{equation}
-I_1=-\frac{1}{2}\int_{-\xD}^{\xD}\!\rd{x}\;
-\frac{1}{x}
-\frac{\ee^x-1}{\ee^x+1}
-%=-\int_{0}^{\xD}\!\rd{x}\;
-%\frac{1}{x}\frac{\ee^x-1}{\ee^x+1}
-\end{equation}
-This integral does not diverge around $x=0$. However, if we were to let
-$\xD\to\infty$, then the integral would diverge, since the integrand, $f_1(x)$,
-is asymptotically $f_1(x)\sim\pm1/x$ for $x\to\pm\infty$, or in other
-words $f_1(x)\sim1/\abs{x}$ as $\abs{x}\to\infty$. 
-
-But we also know that, since $T<\Tc$,
-\begin{equation}\label{eq:2_xD}
-\xD=\frac{\hbar\wD}{T}>\frac{\hbar\wD}{\Tc}
-\approx\frac{\hbar\wD}{1.14\cdot\hbar\wD\exp(-\frac{1}{Ug(\eF)})}
-\approx\exp(\frac{1}{Ug(\eF)})\gg1.
-\end{equation}
-So the main contribution to the integral comes from the two
-asymptotic tails of the integral, which is just
-\begin{equation}
-\int\rd{x}\;\frac{1}{x}=\ln(x).
-\end{equation}
-We get roughly the same contribution from both integration limits.
-In other words, we can approximate
-\begin{equation}\label{eq:2a_I1_0}
-I_1\approx -\frac{1}{2}\cdot2\ln(\xD)=-\ln(\frac{\hbar\wD}{T}).
+where $x=\xi/\Tc$ and $\xD=\hbar\wD/\Tc$. We do know that
+$\hbar\wD\gg\Tc$, so we can easily approximate the integral by taking
+the limit $\xD\to\infty$, which results in
+\begin{equation}\label{eq:2_a}
+\begin{aligned}
+a(T)\approx Vg(\eF)\;t\int_{-\infty}^{\infty}\!\rd{x}\;
+\frac{\ee^{|x|}}{\qty(\ee^{|x|}+1)^2}
+=Vg(\eF)\;t.
+\end{aligned}
 \end{equation}
 
-We are interested in solutions near $\Tc$. But we note that if we were
-to just set $T=\Tc$, then \eqref{eq:2_xD} would result in $a=0$
-because of the extra term $V/U$ in \eqref{eq:2a_a_int}. We therefore
-need to Taylor expand \eqref{eq:2a_I1_0} around $T=\Tc$:
-\begin{equation}
-I_1\approx-\ln(\frac{\hbar\wD}{T})
-=-\ln(\frac{\hbar\wD}{\Tc}) -
-\frac{\Tc}{\hbar\wD}\frac{\hbar\wD}{-\Tc^2} (T-\Tc)
-+\order{(T-\Tc)^2}
-\end{equation}
-
-% \begin{equation}
-% I_1\approx -\ln(\xD)\stackrel{\eqref{eq:2_xD}}{\approx} 
-% \frac{-1}{Ug(\eF)}.
+%\paragraph{First term}   %% Here begins black magic
+% \paragraph{The integral}
+% Here we have
+% \vspace{-11pt}\begin{equation}
+% I_1=-\frac{1}{2}\int_{-\xD}^{\xD}\!\rd{x}\;
+% \frac{1}{x}
+% \frac{\ee^x-1}{\ee^x+1}
+% %=-\int_{0}^{\xD}\!\rd{x}\;
+% %\frac{1}{x}\frac{\ee^x-1}{\ee^x+1}
 % \end{equation}
+% This integral does not diverge around $x=0$. However, if we were to let
+% $\xD\to\infty$, then the integral would diverge, since the integrand, $f_1(x)$,
+% is asymptotically $f_1(x)\sim\pm1/x$ for $x\to\pm\infty$, or in other
+% words $f_1(x)\sim1/\abs{x}$ as $\abs{x}\to\infty$. 
+
+% But we also know that, since $T<\Tc$,
+% \begin{equation}\label{eq:2_xD}
+% \xD=\frac{\hbar\wD}{T}>\frac{\hbar\wD}{\Tc}
+% \approx\frac{\hbar\wD}{1.14\cdot\hbar\wD\exp(-\frac{1}{Ug(\eF)})}
+% \approx\exp(\frac{1}{Ug(\eF)})\gg1.
+% \end{equation}
+% So the main contribution to the integral comes from the two
+% asymptotic tails of the integral, which is just
+% \begin{equation}
+% \int\rd{x}\;\frac{1}{x}=\ln(x).
+% \end{equation}
+% We get roughly the same contribution from both integration limits.
+% In other words, we can approximate
+% \begin{equation}\label{eq:2a_I1_0}
+% I_1\approx -\frac{1}{2}\cdot2\ln(\xD)=-\ln(\frac{\hbar\wD}{T}).
+% \end{equation}
+
+% We are interested in solutions near $\Tc$. But we note that if we were
+% to just set $T=\Tc$, then \eqref{eq:2_xD} would result in $a=0$
+% because of the extra term $V/U$ in \eqref{eq:2a_a_int}. We therefore
+% need to Taylor expand \eqref{eq:2a_I1_0} around $T=\Tc$:
+% \begin{equation}
+% I_1\approx-\ln(\frac{\hbar\wD}{T})
+% =-\ln(\frac{\hbar\wD}{\Tc}) -
+% \frac{\Tc}{\hbar\wD}\frac{\hbar\wD}{-\Tc^2} (T-\Tc)
+% +\order{(T-\Tc)^2}
+% \end{equation}
+
+
 
 % \paragraph{Second term}
 % This integral,
@@ -533,21 +545,16 @@ I_1\approx-\ln(\frac{\hbar\wD}{T})
 % I_2\approx t.
 % \end{equation}
 
-\paragraph{Result}
-We now get
-\begin{equation}\label{eq:2_a}
-a=\frac{V}{U}+Vg(\eF)I_1
-\approx\cancel{\frac{V}{U}}+
-Vg(\eF)\qty(\cancel{\frac{-1}{Ug(\eF)}}+t)
-=Vg(\eF)t,
-\end{equation}
-where $t=(T-\Tc)/\Tc$ is the reduced temperature.
-% \begin{equation}
-% a=\frac{V}{U}+Vg(\eF)\Big(I_1+I_2\Big)
+% \paragraph{Result}
+% We now get
+% \begin{equation}\label{eq:2_a}
+% a=\frac{V}{U}+Vg(\eF)I_1
 % \approx\cancel{\frac{V}{U}}+
 % Vg(\eF)\qty(\cancel{\frac{-1}{Ug(\eF)}}+t)
-% =Vg(\eF)t.
+% =Vg(\eF)t,
 % \end{equation}
+% where $t=(T-\Tc)/\Tc$ is the reduced temperature.
+
 
 \subsubsection{Second coefficient}
 By the definition in \eqref{eq2a:coeff}, we nee the second derivative
@@ -622,15 +629,6 @@ We therefore study the numerator near $x=0$:
 \end{equation}
 This means that the integrand is actually well behaved around $x=0$.
 
-% \todo{This is not working!}
-% Next, we note that the integrand, $f(x)$ is asymptotic to $\pm1/x^3$ as
-% $x\to\pm\infty$, or in other words $f(x)\sim1/\abs{x}^3$ as
-% $\abs{x}\to\infty$. This means that  we once again will get most of
-% the contribution to the integral from the two asymptotic tails:
-% \begin{equation}
-% \xcancel{\int \frac{\rd{x}}{x^3}=-\frac{1}{2x^2}}
-% \end{equation}
-
 Unfortunately this integral cannot be computed analytically. We
 therefore utilize the fact that the integrand, $f(x)$ is asymptotic to
 $\pm1/x^3$ as $x\to\pm\infty$, or in other words $f(x)\sim1/\abs{x}^3$ as
@@ -666,13 +664,12 @@ F(\Delta)=F_0+Vg(\eF)t\Delta^2
 \subsection{Finding the equilibrium}
 To find the equilibrium value of $\delta=\Delta^2$, we need to minimize
 the free energy. With the Taylor expansion \eqref{eq:2a_Taylor_F}, we
-easily minimize $F$, and we get
-\begin{equation}
-\min_{\delta}\qty{a\delta+\frac{1}{2}b\delta^2}\quad\text{occurs at}\quad
-\delta(T)=-\frac{a(T)}{b(T)}
+easily minimize $F$ by completeing the square
+\begin{equation}\label{eq:2b_F_compl_sq}
+F-F_0=\frac{b}{2}\qty[\qty(\delta+\frac{a}{b})^2-\frac{a^2}{b^2}].
 \end{equation}
-which, in terms of $\Delta$ and with \eqref{eq:2_a} and
-\eqref{eq:2_b}, gives
+So the minimum occurs at $\delta=-a/b$, which in terms of $\Delta$ and
+with \eqref{eq:2_a} and \eqref{eq:2_b}, gives
 \begin{equation}\label{eq:2_Delta(T)}
 \Delta(T)=\sqrt{-\frac{a(T)}{b(T)}}
 =\sqrt{\frac{-t}{c/\Tc^2}}
@@ -719,83 +716,120 @@ C_V(T\to\Tc^-)-C_V(T\to\Tc^+)=\frac{Vg(\eF)\Tc}{c}
 
 
 \subsection{Sketch of the free energy}
-\todo[inline]{Don't forget this one!}
+Here we are going to sketch how the Free energy behaves as a function
+of $\Delta$.
+Using \eqref{eq:2b_F_compl_sq} we see that $F$ more or has a
+parabola shape, as a function of $\delta=\Delta^2$. But depending on
+temperature, the vertex of the parabola is going to lie on either side
+of $\delta=0$. For $T<\Tc$ then $a<0$ means that the vertex is going
+to lie on the positive side, and for $T>\Tc$ then $a>0$ and the vertex
+is going to lie on the negative side. See \figref{fig:2_F}.
 
 
+We also know that the equilibrium value of $\Delta$ is the value that
+minimizes $F$. But don't let \figref{fig:2_F} deceive you,
+$\delta=\Delta^2\ge0$. So the only posible values for $F$ is on the
+right hand side of the graph. 
+We thus see that the equilibrium value of $\Delta$ for $T>\Tc$ is
+$\Delta=0$, and for $T<\Tc$ we have $\Delta>0$ according to the
+expression in \eqref{eq:2_Delta(T)}.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\newpage
-\appendix
-\setcounter{equation}{0}
-\renewcommand{\theequation}{A\arabic{equation}}
-
-\section{Exerpt from assigngment 2, problem 2 (ii)}
-\label{sec:ass_2_Cv}
-To calculate an approximation to the mean particle energy $E/N$, we
-once again have to use the Sommerfeld expansion. Then we use the relation
+Another point here is that it should be reasonable to expect much less
+fluctuation in $\Delta$ for $T>\Tc$ than for $T<\Tc$. This is because
+the at equlibirium value of $F$ 
 \begin{equation}
-\frac{E}{N}=-\frac{3\Omega}{2N}=\frac{3T}{2}\frac{f_{5/2}(z)}{f_{3/2}(z)}.
+\eval{\pdv{F}{\Delta}}_{\text{equilibrium}}\neq0\quad\text{at }\;T>\Tc.
 \end{equation}
-Fortunately we've already calculated $\ln(z)=\zeta\approx\zeta_2$, so all
-that left do here is to expand the Fermi functions and then
-Taylor expand the quotient.
+This means that even a small fluctuation in $\Delta$ would induce a
+change in $F$. Meanwhile
+\begin{equation}
+\eval{\pdv{F}{\Delta}}_{\text{equilibrium}}=0\quad\text{at }\;T\le\Tc,
+\end{equation}
+which means that a small fluctuation in $\Delta$ will not change
+$F$. Therefore it's reasonable to believe that the fluctuations in
+$\Delta$ is \emph{much} smaller for $T>\Tc$.
 
-Let's begin:
-\begin{equation}
-%\begin{aligned}
-\frac{f_{5/2}(z)}{f_{3/2}(z)}\approx
-\overbrace{\frac{8\zeta_2^{5/2}}{15\sqrt{\pi}}
-\qty(\frac{4\zeta_2^{3/2}}{3\sqrt{\pi}})^{-1}}^{\nicefrac{2\zeta_2}{5}}
-\qty[1+\frac{5\pi^2}{8}\zeta_2^{-2}
--\frac{7\pi^4}{384}\zeta_2^{-4} ]
-\times \qty[1+\frac{\pi^2}{8}\zeta_2^{-2} 
-+\frac{7\pi^4}{640}\zeta_2^{-4} ]^{-1}
-%\end{aligned}
-\end{equation}
-There's no need to even pretend to want deal with this by hand.
-Just go directly to \emph{Mathematica}, which yields
-\begin{equation}
-\frac{f_{5/2}(z)}{f_{3/2}(z)}\approx \frac{2}{5\tau}
-\qty[1+\frac{5\pi^2}{12}\tau^2-\frac{\pi^4}{16}\tau^4].
-\end{equation}
-For reference, the command in use were \texttt{Series}.
 
-Now we have
-\begin{equation}
-\frac{E}{N}\approx\frac{3T}{2}\frac{2}{5\tau}
-\qty[1+\frac{5\pi^2}{12}\tau^2-\frac{\pi^4}{16}\tau^4]
-=\frac{3\epsilon_F}{5}\qty[1
-+\frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2
--\frac{\pi^4}{16}\qty(\frac{T}{\epsilon_F})^4].
-\end{equation}
-This can be used to get an expression for the heat capacity of the
-system
-\begin{equation}\label{eq:CV_Fermi}
-\frac{C_V}{N}=\frac{1}{N}\qty(\pdv{E}{T})_V
-=\;\frac{\pi^2}{2}\frac{T}{\epsilon_F}
- - \frac{3\pi^2}{20}\qty(\frac{T}{\epsilon_F})^3.
-\end{equation}
+
+\begin{figure}
+\centering
+\resizebox{.7\textwidth}{!}{\input{figures/F_sketch.pdf_t}}
+\caption{}
+\label{fig:2_F}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \newpage
+% \appendix
+% \setcounter{equation}{0}
+% \renewcommand{\theequation}{A\arabic{equation}}
+
+% \section{Exerpt from assigngment 2, problem 2 (ii)}
+% %\label{sec:ass_2_Cv}
+% To calculate an approximation to the mean particle energy $E/N$, we
+% once again have to use the Sommerfeld expansion. Then we use the relation
+% \begin{equation}
+% \frac{E}{N}=-\frac{3\Omega}{2N}=\frac{3T}{2}\frac{f_{5/2}(z)}{f_{3/2}(z)}.
+% \end{equation}
+% Fortunately we've already calculated $\ln(z)=\zeta\approx\zeta_2$, so all
+% that left do here is to expand the Fermi functions and then
+% Taylor expand the quotient.
+
+% Let's begin:
+% \begin{equation}
+% %\begin{aligned}
+% \frac{f_{5/2}(z)}{f_{3/2}(z)}\approx
+% \overbrace{\frac{8\zeta_2^{5/2}}{15\sqrt{\pi}}
+% \qty(\frac{4\zeta_2^{3/2}}{3\sqrt{\pi}})^{-1}}^{\nicefrac{2\zeta_2}{5}}
+% \qty[1+\frac{5\pi^2}{8}\zeta_2^{-2}
+% -\frac{7\pi^4}{384}\zeta_2^{-4} ]
+% \times \qty[1+\frac{\pi^2}{8}\zeta_2^{-2} 
+% +\frac{7\pi^4}{640}\zeta_2^{-4} ]^{-1}
+% %\end{aligned}
+% \end{equation}
+% There's no need to even pretend to want deal with this by hand.
+% Just go directly to \emph{Mathematica}, which yields
+% \begin{equation}
+% \frac{f_{5/2}(z)}{f_{3/2}(z)}\approx \frac{2}{5\tau}
+% \qty[1+\frac{5\pi^2}{12}\tau^2-\frac{\pi^4}{16}\tau^4].
+% \end{equation}
+% For reference, the command in use were \texttt{Series}.
+
+% Now we have
+% \begin{equation}
+% \frac{E}{N}\approx\frac{3T}{2}\frac{2}{5\tau}
+% \qty[1+\frac{5\pi^2}{12}\tau^2-\frac{\pi^4}{16}\tau^4]
+% =\frac{3\epsilon_F}{5}\qty[1
+% +\frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2
+% -\frac{\pi^4}{16}\qty(\frac{T}{\epsilon_F})^4].
+% \end{equation}
+% This can be used to get an expression for the heat capacity of the
+% system
+% \begin{equation}\label{eq:CV_Fermi}
+% \frac{C_V}{N}=\frac{1}{N}\qty(\pdv{E}{T})_V
+% =\;\frac{\pi^2}{2}\frac{T}{\epsilon_F}
+%  - \frac{3\pi^2}{20}\qty(\frac{T}{\epsilon_F})^3.
+% \end{equation}
 
 
 
 \end{document}
 
 
-%  LocalWords:  Pathria  idealities bosonic Bogoliubov Beale
+%  LocalWords:  Pathria  idealities bosonic Bogoliubov Beale BCS
+%  LocalWords:  Laplace's
