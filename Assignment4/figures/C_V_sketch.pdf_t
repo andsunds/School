@@ -14,12 +14,10 @@
 }}}}
 \put(5626,-2086){\makebox(0,0)[lb]{\smash{{\SetFigFont{14}{16.8}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$T$}%
 }}}}
-\put(2206,-2131){\makebox(0,0)[lb]{\smash{{\SetFigFont{14}{16.8}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\Tc$}%
-}}}}
 \put(136,299){\makebox(0,0)[lb]{\smash{{\SetFigFont{14}{16.8}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\frac{3N}{2}$}%
 }}}}
-\put(2836,-916){\makebox(0,0)[lb]{\smash{{\SetFigFont{14}{16.8}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\propto T$}%
-}}}}
 \put(721,-691){\makebox(0,0)[lb]{\smash{{\SetFigFont{14}{16.8}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\propto T^{-\frac{3}{2}}\,\ee^{-\frac{\Delta}{T}}$}%
+}}}}
+\put(1756,-2131){\makebox(0,0)[lb]{\smash{{\SetFigFont{14}{16.8}{\familydefault}{\mddefault}{\updefault}{\color[rgb]{0,0,0}$\Tc$}%
 }}}}
 \end{picture}%

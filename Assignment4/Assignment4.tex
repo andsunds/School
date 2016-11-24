@@ -81,7 +81,7 @@ E(T)=\ev{H}=
 \sum_{k, \sigma} E_k\,n(E_k)
 +\frac{V\Delta^2}{U}+\sum_k\qty(\xi_k-E_k).
 \end{equation}
-The numberoperator for the quasiparticles in the first term is
+The number-operator for the quasi-particles in the first term is
 converted to a Fermi-Dirac distribution, since the quasi particles are
 an ideal Fermi-gas. 
 
@@ -92,8 +92,8 @@ term as
 \Delta\sum_k \frac{\Delta}{2E_k}\Big(1-2n(E_k)\Big)
 =\sum_k \frac{\Delta^2}{2E_k}\Big(1-2n(E_k)\Big).
 \end{equation}
-Now it's just a matter of collectin the terms in
-\eqref{eq:1a_E0}. First we recognize that the sum over different sipns
+Now it's just a matter of collecting the terms in
+\eqref{eq:1a_E0}. First we recognize that the sum over different spins
 is just going to give us a factor~2. And we end up with
 \begin{equation}
 \begin{aligned}
@@ -106,8 +106,8 @@ E(T)&=\sum_k\qty[2E_k\,n(E_k)
 \end{equation}
 \qed
 
-\subsection{The heat capacity at $T<\Tc$}
-To get the heat capacity, we diffentiate $E$ with respect to $T$:
+\subsection{The heat capacity at low temperatures}
+To get the heat capacity, we differentiate $E$ with respect to $T$:
 \begin{equation}\label{eq:1b_Cv0}
 \begin{aligned}
 C_V=\dv{E}{T}=\sum_k\Bigg[&
@@ -134,7 +134,7 @@ And
 \end{equation}
 
 Next we take a closer look at the last term in \eqref{eq:1b_Cv0}. For
-$T<\Tc$ mening that $\Delta\neq0$, the BCS equation can be written as
+$T<\Tc$ meaning that $\Delta\neq0$, the BCS equation can be written as
 \begin{equation}\label{eq:1b_BCS}
 \frac{U}{V}=\sum_k\frac{1-2n(E_k)}{2E_k}.
 \end{equation}
@@ -145,7 +145,7 @@ If we now diffentiate both sides we get
 since the LHS of \eqref{eq:1b_BCS} is a constant. In other words, the
 last term of \eqref{eq:1b_Cv0} disappears.
 
-Now th heat capacity becomes
+Now the heat capacity becomes
 \begin{equation}
 C_V=\sum_k\Bigg[
 -\cancel{\dv{E_k}{T}\Big(1-2n(E_k)\Big)}
@@ -166,13 +166,16 @@ C_V=&\sum_k2E_k\qty[
 \frac{\ee^{\nicefrac{E_k}{T}}}{\qty(\ee^{\nicefrac{E_k}{T}}+1)^2}.
 \end{aligned}
 \end{equation}
+Note that this expression is \emph{exact}, and thus holds for any $T$ (if
+$T>\Tc$, then the second term is~0).
+
 Since we're in the low temperature limit ($T\ll\Tc$), we can
 approximate $\pdv*{\Delta^2}{T}\approx0$, 
 %\begin{equation}
 %\frac{E_k^2}{T}\gg\pdv{\Delta^2}{T},
 %\end{equation}
 because ${\Delta}$ is almost constant at very low temperatures. Next,
-the low temperature limit means that
+the low temperature limit also means that
 \begin{equation}
 \frac{\ee^{\nicefrac{E_k}{T}}}{\qty(\ee^{\nicefrac{E_k}{T}}+1)^2}
 \approx
@@ -190,7 +193,7 @@ This results in
 \begin{equation}
 \begin{aligned}
 C_V\to&\frac{2V}{T^2}g(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi\;
-(\xi^2+\Delta^2)\exp(-\frac{\sqrt{\xi^2+\Delta^2}}{T}).
+\qty(\xi^2+\Delta^2)\exp(-\frac{\sqrt{\xi^2+\Delta^2}}{T}).
 \end{aligned}
 \end{equation}
 To deal with this integral we will need to use Laplace's method.
@@ -202,15 +205,15 @@ $\varphi(\xi)=\sqrt{\xi^2+\Delta^2}$. Then the integral in question is
 I(\Delta)=\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi\;f(\xi)\exp(-\frac{\varphi(\xi)}{T}).
 \end{equation}
 Now, $T$ is small, which means that $\ee^{-\varphi(\xi)/T}\lll1$, and
-the, by far, biggest contribution to the total integral comes from the
-immidiate vicinity of the minimum of $\varphi$, $\xi_0$. Everything else is
+the biggest contribution to the total integral comes from the
+immediate vicinity of the minimum of $\varphi$, $\xi_0$. Everything else is
 effectively killed off by the exponential. 
 We can therefore Taylor expand $\varphi(\xi)$ around $\xi_0$, and
 integrate that instead. 
-We also don't have to wory about the value of $f(\xi)$ at any other
+We also don't have to worry about the value of $f(\xi)$ at any other
 places than at $\xi_0$.
 
-In our case we have $\xi_0=0$. And for the taylor expansion we will
+In our case we have $\xi_0=0$. And for the Taylor expansion we will
 need the second derivative of $\varphi$ at $\xi=0$:
 \begin{equation}
 \varphi'(\xi)=\frac{\xi}{\sqrt{\xi^2+\Delta^2}}
@@ -234,8 +237,8 @@ I(\Delta)\approx\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi\;f(0)
 \exp(-\frac{\xi^2}{2\Delta T}).
 \end{equation}
 To evaluate the last step here, we note that the contribution from
-$\abs{\xi}>\hbar\wD$ is negligable, wherefore we can approximate with a
-Gassian integral:
+$\abs{\xi}>\hbar\wD$ is negligible, wherefore we can approximate with a
+Gaussian integral:
 \begin{equation}
 I(\Delta)\approx \Delta^2\ee^{-\nicefrac{\Delta}{T}}
 \int_{-\infty}^{\infty}\!\rd\xi\;
@@ -248,9 +251,10 @@ I(\Delta)\approx \Delta^2\ee^{-\nicefrac{\Delta}{T}}
 The heat capacity is now 
 \begin{equation}\label{eq:1b_Cv}
 C_V=\frac{2V}{T^2}g(\eF)I(\Delta)
-=2\sqrt{2\pi}Vg(\eF)\frac{\Delta^{5/2}}{T^{3/2}}\ee^{-\nicefrac{\Delta}{T}}
-=\frac{2Vm^{3/2}\sqrt{\eF}}{\sqrt{\pi}\hbar^3}
-\frac{\Delta^{5/2}}{T^{3/2}}\ee^{-\nicefrac{\Delta}{T}}.
+=2\sqrt{2\pi}Vg(\eF)\frac{\Delta^{5/2}}{T^{3/2}}
+\ee^{-\nicefrac{\Delta}{T}}.
+%=\frac{2Vm^{3/2}\sqrt{\eF}}{\sqrt{\pi}\hbar^3}
+%\frac{\Delta^{5/2}}{T^{3/2}}\ee^{-\nicefrac{\Delta}{T}}.
 \end{equation}
 This is only valid in the very low temperature limit $T\ll\Tc$,
 though. 
@@ -259,72 +263,77 @@ though.
 \subsection{Discontinuity in the heat capacity}
 
 Here we're going to find the discontinuity, at $T=\Tc$, in the heat
-capacity. To to that we first need to find the heat capacity for
-$T>\Tc$. 
+capacity. To that we begin by taking another look at
+\eqref{eq:1b_Cv_exact}. Since that is an exact expression we can, in
+principle, use it to calculate $C_v$ at any $T$. 
 
-\subsubsection{Heat capacity above the critical temperature}
-For $T>\Tc$, we have $\Delta=0$, whereby
+However, we're only interested in the \emph{discontinuity} of
+$C_v$. So our first observation is that for $T>T_c$, we only get the
+first term, but that term is \emph{continuous} at $\Tc$ since
+$(E_k)=(\xi_x^2+\Delta^2)\to\xi_k^2$ continuously as
+$T\to\Tc$. Therefore the discontinuity can not arise from this term.
+
+%\subsubsection{Heat capacity below the critical temperature}
+\paragraph{The discontinuity term}
+The discontinuity therefore has its origin in the second term in
+\eqref{eq:1b_Cv_exact}, which only appears in superconductors. Let us
+now calculate the discontinuity, call it $\widehat{C}_V$:
 \begin{equation}
-E(T>\Tc)=2\sum_k \xi_kn(\xi_k).
+\widehat{C}_V(T)=-\frac{1}{T}\sum_k
+\pdv{\Delta^2}{T}
+\frac{\ee^{\nicefrac{E_k}{T}}}{(\ee^{\nicefrac{E_k}{T}}+1)^2}.
 \end{equation}
-But this is just the energy of an ideal Fermi gas (with spinn
-$1/2$). 
 
-From assignment~2 (see \eqref{eq:CV_Fermi} of
-appendix~\ref{sec:ass_2_Cv}), we know that the heat capacity in the
-low temperature limit is given by
-\begin{equation}\label{eq:1c_Cv_Tc+}
-C_V(\Tc<T\ll\eF)=\frac{\pi^2N}{2}\frac{T}{\eF}
--\frac{3\pi^2N}{20}\qty(\frac{T}{\eF})^3+\order{T^4}
-\approx\frac{\pi^2N}{2}\frac{T}{\eF}.
-\end{equation}
-And in the high temperature limit we know that
-\begin{equation}\label{eq:1c_Cv_T_high}
-C_V(T\gg\eF)=\frac{3N}{2},
-\end{equation}
-approaches the classical limt.
-
-The value of $C_V$ when aproaching $\Tc$ from above subsequently
-becomes
+To calculate the derivative, we utilize the fact that we're close to
+$\Tc$. From the next problem we have
 \begin{equation}
-C_V(T\to\Tc^+)=\frac{\pi^2N}{2}\frac{\Tc}{\eF}
-%-\frac{3\pi^2N}{20}\qty(\frac{\Tc}{\eF})^3
+\Delta(T)\approx\Tc\sqrt{\frac{-t}{c}},
+\end{equation}
+where $t=(T-\Tc)/\Tc$ is the reduced temperature, and $c$ is some
+(positive) numerical constant\footnotemark{}. Thus
+\begin{equation}
+\pdv{\Delta^2}{T}=\pdv{T}\qty[\Tc^2\frac{-t}{c}]=-\Tc^2\frac{1}{c\Tc}.
+=-\Tc^2\frac{1}{c\Tc}=-\frac{\Tc}{c}.
 \end{equation}
 
-\subsubsection{Heat capacity below the critical temperature}
-We've already found $C_V$ for $T<\Tc$, but we still need to calculate
-the value as $T$ approaches $\Tc$ from below. We can no longer use
-\eqref{eq:1b_Cv}, since we are in the vicinity of $\Tc$ now, we can
-no longer neglect the second term in \eqref{eq:1b_Cv_exact}.
+\footnotetext{The placing of the constant will become clearer in the
+  next section. Also note that there is no circular argumentation here,
+  since the results of the next problem are fully independent of what
+  conclusions we may draw here.}
 
-
-\begin{equation}\label{eq:1c_Cv->0}
-C_V(T<\Tc)\propto
-\frac{\Delta^{5/2}}{T^{3/2}}\ee^{-\nicefrac{\Delta}{T}}
-\to 0 \quad
-\text{as}\; T\to\Tc^-
+Now we have everything needed to evaluate the sum, which we do in
+usual order by converting to an integral:
+\begin{equation}
+\widehat{C}_V(T) = +\frac{Vg(\eF)\Tc}{c}
+\int_{-\hbar\wD}^{\hbar\wD}\frac{\rd\xi}{T}
+\frac{\ee^{\nicefrac{E_k}{T}}}{(\ee^{\nicefrac{E_k}{T}}+1)^2}.
 \end{equation}
-because $\Delta\to0$ as $T\to\Tc$.\todo{Is this really right???}
-\todo[inline]{We have to take $\pdv{\Delta^2}{T}$ into accotnt when
-  studying $T\to\Tc$.}
+Unfortunately, this integral can not be computed analytically, since
+$E_k=\sqrt{\xi_k^2+\Delta^2}$. But in the limit $T\to\Tc^-$, we get
+$E_k=\abs{\xi}_k$, which now becomes evaluatable in the limit
+$\hbar\wD\to\infty$. With the exponentials, that becomes a reasonable
+approximation. So we get
+\begin{equation}
+\widehat{C}_V(T\to\Tc^-) = +\frac{Vg(\eF)\Tc}{c}
+\underbrace{\int_{-\infty}^{\infty}\!\rd{x}\;
+\frac{\ee^{|x|}}{(\ee^{|x|}+1)^2}}_{1}
+= +\frac{Vg(\eF)\Tc}{c},\vspace{-8pt}
+\end{equation}
+where $x=\xi/\Tc$.
 
-
-
-\subsubsection{Final result}
+\paragraph{Final result}
 The discontinuity in the heat capacity is thus
 \begin{equation}
-C_V(T\to\Tc^+)-C_V(T\to\Tc^-)=\frac{\pi^2N}{2}\frac{\Tc}{\eF},
+C_V(T\to\Tc^-)-C_V(T\to\Tc^+)=\frac{Vg(\eF)\Tc}{c}>0
 \end{equation}
-arising from the fact that $C_V(T\to\Tc^-)=0$.
+arising only from the second term in \eqref{eq:1b_Cv_exact}.
 
 \subsection{Sketch of $C_V(T)$}
-A skech of $C_V(T)$ is presented in \figref{fig:1_Cv}. To create the
-skech we used \eqref{eq:1b_Cv} to get the very low temperature
-behaviour; then we used \eqref{eq:1c_Cv->0} to get the behavoiur as
-$T\to\Tc^-$; then we used \eqref{eq:1c_Cv_Tc+} to get the linear
-behaviour right above $\Tc$; and lastly we used the classical limit
-\eqref{eq:1c_Cv_T_high} in the high temperature limit.
-\todo{REDO!!!}
+\figref{fig:1_Cv} show a sketch of $C_V$ as a function of $T$. Some
+notable points are: $C_v\to0$ as $T\to0$ thanks to the exponential
+suppression in \eqref{eq:1b_Cv}, and the discontinuity is such that
+$C_V$ makes a jump down when passing $\Tc$ from below.
+
 
 \begin{figure}
 \centering
@@ -404,7 +413,7 @@ a=\eval{\dv{F}{\delta}}_{\delta=0}
 +\frac{2}{\ee^{\nicefrac{\xi_k}{T}}+1}].
 \end{equation}
 The next step is to convert this sum to an integral, using
-\eqref{eq:1_sum_int}. However, unfortunatly this integral dosen't can't be
+\eqref{eq:1_sum_int}. However, unfortunately this integral doesn't can't be
 evaluated, bot it \emph{dose converge} around $\xi=0$.
 
 % We still want to find the temperature dependence of $a$, so we Taylor
@@ -478,7 +487,7 @@ But we also know that, since $T<\Tc$,
 \approx\exp(\frac{1}{Ug(\eF)})\gg1.
 \end{equation}
 So the main contribution to the integral comes from the two
-asymptyotic tails of the integral, which is just
+asymptotic tails of the integral, which is just
 \begin{equation}
 \int\rd{x}\;\frac{1}{x}=\ln(x).
 \end{equation}
@@ -599,7 +608,7 @@ I_2=\int_{-\xD}^{\xD}\!\rd{x}\;
 \frac{\ee^{2x}-1-2x\ee^{x}}{\qty(\ee^{x}+1)^2}
 ],
 \end{equation}
-which looks worying, because this might be divergent when integrating
+which looks worrying, because this might be divergent when integrating
 past $x=0$. 
 We therefore study the numerator near $x=0$:
 \begin{equation}
@@ -640,8 +649,9 @@ We want $b(T)$ in a vicinity of $\Tc$, and this time we get to keep
 the constant term, which results in
 \begin{equation}\label{eq:2_b}
 b(T)=\frac{Vg(\eF)}{4T^2}I_2
-\approx 0.107\frac{Vg(\eF)}{\Tc^2}.
+\approx c\frac{Vg(\eF)}{\Tc^2}\approx 0.107\frac{Vg(\eF)}{\Tc^2},
 \end{equation}
+where we have defined $c=I_2/4$.
 
 \subsubsection{Final expression}
 Using \eqref{eq:2a_Taylor_F} together with \eqref{eq:2_a} and
@@ -654,7 +664,7 @@ F(\Delta)=F_0+Vg(\eF)t\Delta^2
 
 
 \subsection{Finding the equilibrium}
-To find the equlibrium value of $\delta=\Delta^2$, we need to minimize
+To find the equilibrium value of $\delta=\Delta^2$, we need to minimize
 the free energy. With the Taylor expansion \eqref{eq:2a_Taylor_F}, we
 easily minimize $F$, and we get
 \begin{equation}
@@ -665,8 +675,8 @@ which, in terms of $\Delta$ and with \eqref{eq:2_a} and
 \eqref{eq:2_b}, gives
 \begin{equation}\label{eq:2_Delta(T)}
 \Delta(T)=\sqrt{-\frac{a(T)}{b(T)}}
-=\sqrt{\frac{-t}{0.107/\Tc^2}}
-\approx 3.06\,\Tc\sqrt{-t}\approx3.1\,\Tc\sqrt{-t}.
+=\sqrt{\frac{-t}{c/\Tc^2}}
+=\Tc\sqrt{\frac{-t}{c}}\approx3.1\,\Tc\sqrt{\frac{\Tc-T}{\Tc}}.
 \end{equation}
 Note that the minus sign is there because $t<0$ when $T<\Tc$.
 \qed
@@ -679,30 +689,37 @@ C_V=-T\qty(\pdv[2]{F}{T})_V.
 \end{equation}
 We see from \eqref{eq:2a_Taylor_F_final} that the first term $F_0$,
 which is just the ideal Fermi gas free energy, will not contribute to
-the discontinuity, we will therefore focus on the two thoer terms. 
+the discontinuity, we will therefore focus on the two other terms. 
 
 With \eqref{eq:2_Delta(T)}, we get
 \begin{equation}
-F(T)=F_0+Vg(\eF)\qty[
-\overbrace{(3.1\,\Tc\sqrt{-t})^2 t}^{=-(3.1\Tc)^2t^2} +
-\frac{0.107}{2\Tc^2}\,
-\overbrace{(3.1\,\Tc\sqrt{-t})^4}^{=+(3.1\Tc)^4t^2}
-]
-=F_0-Vg(\eF)\,8.83\,\Tc(T-T_c)^2,
+\begin{aligned}
+F(T)=&F_0+Vg(\eF)\Bigg[
+\qty(\Tc\sqrt{\frac{-t}{c}})^2 t+
+\frac{c}{2\Tc^2}\,
+\qty(\Tc\sqrt{\frac{-t}{c}})^4
+\Bigg]\\
+=&F_0+\frac{Vg(\eF)}{c}\Tc^2\Bigg[
+-t^2+\frac{1}{2}t^2 \Bigg]
+=F_0-\frac{Vg(\eF)}{2c}\,(T-\Tc)^2,
+\end{aligned}
 \end{equation}
 for $T<\Tc$.
 This results in
 \begin{equation}
-C_V=C_V^{\text{(ieal)}} - 2Vg(\eF)\Tc\,8.83\qcomma
+C_V=C_V^{\text{(ideal)}} - \Tc\frac{-Vg(\eF)}{2c}2
+\qcomma
 T<\Tc,
 \end{equation}
 or in other words
 \begin{equation}
-C_V(T\to\Tc^+)-C_V(T\to\Tc^-)=+17.7\,Vg(\eF)\Tc.
+C_V(T\to\Tc^-)-C_V(T\to\Tc^+)=\frac{Vg(\eF)\Tc}{c}
+\approx 9.3\,Vg(\eF)\Tc.
 \end{equation}
 
 
 \subsection{Sketch of the free energy}
+\todo[inline]{Don't forget this one!}
 
 
 
