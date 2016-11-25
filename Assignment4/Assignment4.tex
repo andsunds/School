@@ -417,13 +417,20 @@ In other words
 \end{equation}
 Note that the second term very much reasembles the RHS in the BCS
 equation:
-\begin{equation}
+\begin{equation}\label{eq:2a_BCS}
 1=\frac{U}{V}\sum_k\frac{1-2n(E_k)}{2E_k}.
 \end{equation}
-If we were to use this equation right off, we would get $a=0$, but we
-still want to find some non-zero component of $a$. So we Taylor expand
-the last term in \eqref{eq:2a_a1} around $T=\Tc$.
-For that we need the
+This equation is an implicit equation for the $T$ dependence of
+$\Delta$ -- i.e. for any $T<\Tc$, \eqref{eq:2a_BCS} will give the value
+of $\Delta$. But, for $a(T)$, we're interested in the limit $\Delta\to0$, and the
+only $T$, that would still satisfy \eqref{eq:2a_BCS}, would be
+$\Tc$. And we still want \eqref{eq:2a_BCS} to be valid so that we can
+cancel the $V/U$ term.
+
+On the other hand, we're interested in the value of $a$ slightly off
+from $\Tc$. So we must Taylor expand 
+the last term in \eqref{eq:2a_a1} around $T=\Tc$, to get the leading
+order behavior of $a(T)$. For that we need the
 derivative of $n(\xi_k)$ with respect to $T$, where $n$ is the
 Fermi-Dirac distribution \eqref{eq:nFD}. We get
 \begin{equation}
