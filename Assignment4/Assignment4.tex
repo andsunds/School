@@ -17,7 +17,7 @@
 
 %%För att själv bestämma marginalerna. 
 \usepackage[
-%            top    = 3cm,
+%            top    = 2.5cm,
 %            bottom = 3cm,
 %            left   = 3cm, right  = 3cm
 ]{geometry}
@@ -52,9 +52,9 @@ Assignment 4}
 \maketitle
 
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
-\paragraph{Collaboration: } This homework has been done in
-collaboration with Patrick Ryan. But this report is the product of my
-own. 
+\paragraph{Collaboration: } 
+This homework has been done in collaboration with Patrick Ryan. The
+written report is, however, my own writing. 
 
 \section{The internal energy and heat capacity of a superconductor}
 We will consider a superconductor at finite temperature $0<T<\Tc$. One
@@ -338,7 +338,7 @@ $C_V$ makes a jump down when passing $\Tc$ from below.
 
 \begin{figure}
 \centering
-\resizebox{.7\textwidth}{!}{\input{figures/C_V_sketch.pdf_t}}
+\resizebox{.8\textwidth}{!}{\input{figures/C_V_sketch.pdf_t}}
 \caption{}
 \label{fig:1_Cv}
 \end{figure}
@@ -691,7 +691,7 @@ Note that the minus sign is there because $t<0$ when $T<\Tc$.
 \subsection{Heat capacity, again}
 Now we're going to calculate discontinuity of the heat capacity
 again. This time we will use
-\begin{equation}
+\begin{equation}\label{eq:2c_Cv_F}
 C_V=-T\qty(\pdv[2]{F}{T})_V.
 \end{equation}
 We see from \eqref{eq:2a_Taylor_F_final} that the first term $F_0$,
@@ -701,29 +701,30 @@ the discontinuity, we will therefore focus on the two other terms.
 With \eqref{eq:2_Delta(T)}, we get
 \begin{equation}
 \begin{aligned}
-F(T)=&F_0+Vg(\eF)\Bigg[
+F(T)=&F_0+Vg(\eF)\qty[
 \qty(\Tc\sqrt{\frac{-t}{c}})^2 t+
 \frac{c}{2\Tc^2}\,
 \qty(\Tc\sqrt{\frac{-t}{c}})^4
-\Bigg]\\
-=&F_0+\frac{Vg(\eF)}{c}\Tc^2\Bigg[
--t^2+\frac{1}{2}t^2 \Bigg]
+]\\
+=&F_0+\frac{Vg(\eF)}{c}\Tc^2\qty[
+-t^2+\frac{1}{2}t^2 ]
 =F_0-\frac{Vg(\eF)}{2c}\,(T-\Tc)^2,
 \end{aligned}
 \end{equation}
 for $T<\Tc$.
 This results in
 \begin{equation}
-C_V=C_V^{\text{(ideal)}} - \Tc\frac{-Vg(\eF)}{2c}2
+C_V=C_V^{\text{(ideal)}} - T\frac{-Vg(\eF)}{2c}2
 \qcomma
-T<\Tc,
+T<\Tc.
 \end{equation}
-or in other words
+The extra minus sign come from the minus sign in \eqref{eq:2c_Cv_F}.
+This results in
 \begin{equation}
 C_V(T\to\Tc^-)-C_V(T\to\Tc^+)=\frac{Vg(\eF)\Tc}{c}
 \approx 9.3\,Vg(\eF)\Tc.
 \end{equation}
-
+\qed
 
 \subsection{Sketch of the free energy}
 Here we are going to sketch how the Free energy behaves as a function
@@ -763,7 +764,7 @@ $\Delta$ is \emph{much} smaller for $T>\Tc$.
 
 \begin{figure}
 \centering
-\resizebox{.7\textwidth}{!}{\input{figures/F_sketch.pdf_t}}
+\resizebox{.8\textwidth}{!}{\input{figures/F_sketch.pdf_t}}
 \caption{}
 \label{fig:2_F}
 \end{figure}
