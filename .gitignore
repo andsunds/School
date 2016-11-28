@@ -10,7 +10,7 @@
 *.toc
 Assignment?.pdf
 #Från Beamer
-*.nav 
+*.nav
 *.snm
 
 *.eps
@@ -21,7 +21,7 @@ course_notes_AMATH732_2016.pdf
 
 Swing.pdf
 energy_argument.pdf
-intro_presentation.nav
+
 pendulum.fig.bak
 Project/references/
 Circadian_rythms.pdf
