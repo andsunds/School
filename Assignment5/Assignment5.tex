@@ -72,7 +72,10 @@ and its imaginary part is
 \end{equation}
 
 \footnotetext{The ``normalization'' is:
-$\oldint_{-1}^1 P_n(x)P_m(x)\id{x}=\frac{2}{2n+1}\delta_{m,\,n}$.}
+$\oldint_{-1}^1 P_n(x)P_m(x)\id{x}=\frac{2}{2n+1}\delta_{m,\,n}$,
+see any mathematical handbook or collection of formulas,
+e.g. Råde~\&~Westergren, \textit{Mathematics Handbook for Science and
+  Engineering}, ed. 5:12.}
 
 Next up is the total scattering cross-section
 \begin{equation}
@@ -87,9 +90,88 @@ $4\pi/k$. In other words
 This is the optical theorem.
 \qed
 
+
+
 \section{Gaussian potential scattering}
+In this probelm we're concerned with the total scattering
+cross-section from a Gaussian potential:
+\begin{equation}\label{eq:2_V}
+V(\vb*{r})=A\ee^{-\mu r^2},
+\end{equation}
+where $\mu>0$ is some constant defining the length scale of the potential.
 
+We will use the Born approximation to calculate the scattering
+amplitude
+\begin{equation}
+f(\theta)\approx -\frac{2m}{\hbar^2q}
+\int_0^\infty r V(r) \sin(qr)\id{r},
+\end{equation}
+where $q=2k\sin(\theta/2)$. Here, we've also use the fact that the
+potential is spherically symmetric.
+Substituting \eqref{eq:2_V} into this, gives
+\begin{equation}
+f(\theta)\approx -\frac{2mA}{\hbar^2q}
+\int_0^\infty r \ee^{-\mu r^2} \sin(qr)\id{r}.
+\end{equation}
+This can either be solved by convering the sine to a complex
+exponential an taking the imaginary part of the integral, as we did in
+the last assignment. Or we could let \textit{Mathematica} handle this,
+which results in
+\begin{equation}
+f(\theta)\approx -\frac{2mA}{\hbar^2q}\,
+\frac{\ee^{-\frac{q^2}{4\mu}}\sqrt{\pi}q}{4\mu^{3/2}}
+=-\frac{\sqrt{\pi}mA}{2\hbar^2\mu^{3/2}}\,\exp(-\frac{k^2\sin^2(\theta/2)}{\mu}).
+\end{equation}
+Here, we used $q=2k\sin(\theta/2)$ in the last step.
 
+To then get the total scattering cross-section we have to integrate
+over the unit sphere:
+\begin{equation}
+\sigma=\int_0^{2\pi}\rd{\phi}
+\int_0^\pi\rd\theta\,\sin(\theta) \abs{f(\theta)}^2
+=\qty(\frac{\sqrt{\pi}mA}{2\hbar^2\mu^{3/2}})^2 2\pi 
+\int_0^\pi\rd\theta\,\sin(\theta)
+\exp(-\frac{2k^2}{\mu}\sin^2\qty(\frac{\theta}{2}))
+\end{equation}
+The last integral is easily evaluated with the change of variables
+\begin{equation}
+u=\sin^2\qty(\frac{\theta}{2})
+\quad\Longrightarrow\quad
+\rd{u}=
+2\sin(\frac{\theta}{2})\frac{1}{2}\cos(\frac{\theta}{2})\id\theta
+=\frac{1}{2}\sin(\theta)\id\theta.
+\end{equation}
+So we get
+\begin{equation}
+\begin{aligned}
+\sigma=&
+\frac{\pi^2mA}{2\hbar^4\mu^{3}}  
+\int_0^1 2\rd{u}\,\exp(-\frac{2k^2}{\mu}u)
+=\frac{\pi^2mA}{\hbar^4\mu^{3}} \frac{\mu}{2k^2}
+\qty[1-\exp(-\frac{2k^2}{\mu})]\\
+=&\frac{\pi^2mA}{2\hbar^4\mu^{2}k^2}
+\qty[1-\exp(-\frac{2k^2}{\mu})].
+\end{aligned}
+\end{equation}
+
+\subsection*{Validity of the Born approximation}
+To discuss the validity of the Born approximation we need a length
+scale and a ``depth'' scale of hte potential. Clearly the length scale
+is given by $a=\mu^{-1/2}$, and the energy scale is just $A$.
+
+In the case of low energy incoming particles, $\abs{k}\mu^{-1/2}\ll1$,
+we need  
+\begin{equation}
+\frac{ma^2}{\hbar^2}A=\frac{m}{\hbar^2\mu}A\ll1,
+\end{equation}
+for the Born approximation to be valid.
+
+And in the case of high energy incoming particles we need the incoming
+particle momentum to be high enought so that
+\begin{equation}
+\frac{mA}{\hbar^2k\sqrt{\mu}}\ll1,
+\end{equation}
+for the Born approximation to be valid.
 
 \section{H-Kr scattering}
 
