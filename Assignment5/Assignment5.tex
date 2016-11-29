@@ -174,6 +174,109 @@ particle momentum to be high enought so that
 for the Born approximation to be valid.
 
 \section{H-Kr scattering}
+\newcommand{\Er}{E_{\text{r}}}
+\newcommand{\BW}{\text{(BW)}}
+
+In this problem we will be using the Breit-Wigner formula
+\begin{equation}\label{eq:3_BW}
+\sigma_l=
+\frac{4\pi}{k^2} (2l+1) \frac{(\varGamma/2)^2}{(E-\Er)^2+(\varGamma/2)^2}
+\end{equation}
+for the cross-section of the $l$th partial wave, eqn. (6.7.9) in
+Sakurai\,\&\,Napolitano, \textit{Modern Quantum Mechanics},
+ed. 2. Here $\varGamma$ is the width of the peak at half the
+cross-section and can be calculated using
+\begin{equation}
+-\frac{2}{\varGamma} = \eval{\dv{\cot(\delta_l)}{E}}_{E=\Er},
+\end{equation}
+eqn. (6.7.8)  in Sakurai\,\&\,Napolitano, 
+\textit{Modern Quantum Mechanics}, ed. 2. This can be rewritten as
+\begin{equation}\label{eq:3_Gamma}
+\varGamma=2\sin^2(\delta_l) \qty(\dv{\delta_l}{E})^{-1}.
+\end{equation}
+
+
+\subsection{Comparison with more elaborate calculations}
+From the slides on the course web-site we get the values in
+\tabref{tab:3}, and we can just start to use and compare these values
+with the theory above.
+
+\begin{table}\centering
+\caption{Characteristics of the $l=4$ partial wave, from the slieds on
+H-Kr cross section on the couse web-page.}
+\label{tab:3}
+\begin{tabular}{|c|c|c|c|}\hline
+$\sigma_\text{peak}\;/[\unit{Å^2}]$  & $\Er\;/[\unit{meV}]$ &
+$\varGamma\;/[\unit{meV}]$  & $\dv{\delta_l}{E}\;/[\unit{rad/meV}]$ 
+\\ \hline
+480 & 0.48 & 0.058 & 31.4\\ \hline
+\end{tabular}
+\end{table}
+
+We can begin with the peak width. According to \eqref{eq:3_Gamma} the
+peak width should be
+\begin{equation}
+\varGamma^\BW=2\overbrace{\sin^2(\delta_l)}^{=1}
+\qty(\dv{\delta_l}{E})^{-1}
+=\unit[0.064]{meV},
+\end{equation}
+which is reasonably close (just over 10\,\% off) to the value in
+\tabref{tab:3}. Also, in both the slide and by B-W theory,
+$\delta_l=\pi/2$ at resonance; so that's why the sine is set to~$1$ here.
+
+Next up is the peak cross-section. We see that \eqref{eq:3_BW} reduces
+to
+\begin{equation}
+\sigma_l=\frac{4\pi}{k^2} (2l+1),
+\end{equation}
+at $E=\Er$. Next using $E=\hbar^2k^2/(2m)$, we can express the
+cross-section, at $E=\Er$, as
+\begin{equation}\label{eq:3_BW_Er}
+\sigma_l=\frac{2\pi\hbar^2}{m\Er} (2l+1).
+\end{equation}
+From here it's just plugging in the values from \tabref{tab:3} and
+using $l=4$, as was given in the slides. We get
+\begin{equation}
+\sigma_4^{\BW}=\unit[54.3]{Å^2}\times9\approx\unit[490]{Å^2},
+\end{equation}
+which again is close (around 2\,\% off) to the complete numerical
+calculations. 
+
+Over all the Breit-Wigner theroy performed quite well. The discrepancy
+in chiefly the width of the peak shouldn't bee too worrying. 
+
+For the
+peak width there are two main reasons that come to mind regarding the
+dircrepancy. The first reason is that this is a peak having a
+background of scattering from other values of $l$, so exactly where
+the half point of the peak isn't very well defined. The second thing
+is that \eqref{eq:3_Gamma} relies on the derivative, but the slope
+given in the slides are probably rounded off to near nearest
+$\unit[100]{deg/meV}$. 
+
+For the peak cross-section, most of the discrepancy probably aslo
+comes from rounding in the slide. And the background plays a role here
+as well. 
+
+\subsection{Using the B-W formula to determine $l$}
+\newcommand{\ER}{E_{\text{R}}}
+Given a scattering resonance of (spin-less non-relativistic) particles
+of mass $\mu$, at energy $\ER$, with peak cross-section $\sigma_{\max}$, we could
+easily figure out the $l$ number using \eqref{eq:3_BW_Er}. The angular
+momentum would therefore be given by
+\begin{equation}
+l\approx\frac{\sigma_{\max} \mu \ER}{4\pi\hbar^2} - \frac{1}{2}
+\qcomma\text{or}\quad
+l=\left\lfloor\frac{\sigma_{\max} \mu \ER}{4\pi\hbar^2}\right\rfloor.
+\end{equation}
+
+The fact that the particle is spin-less helps us not getting tangeled
+up in any coupeling between the sipn and the angular momentum or the
+scattering potential.
+
+
+
+
 
 
 \section{More scattering}
