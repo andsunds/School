@@ -48,8 +48,46 @@ Assignment 5}
 %\todolist
 
 \section{Optical theorem}
+The optical theorem relates the total cross-section to the imaginary
+part of the forward scattering amplitude. 
 
-\section{Gaussian potentail scattering}
+To prove this theorem we use the scattering aplitude representd using
+phase shift:
+\begin{equation}
+f(\theta)=\frac{1}{k}\sum_{l=0}^\infty
+(2l+1)\ee^{\ii\delta_l}\sin(\delta_l)\,P_l(\cos\theta).
+\end{equation}
+Now the forward scattering will be at $\theta=0$. Due to the way
+we ``normalize'' Legendre polynomials\footnotemark{}, we have $P_l(1)=1$
+for all $l$. So that the forward scatering amplitude is
+\begin{equation}
+f(0)=\frac{1}{k}\sum_{l=0}^\infty
+(2l+1)\ee^{\ii\delta_l}\sin(\delta_l),
+\end{equation}
+and its imaginary part is
+\begin{equation}\label{eq:1_Im(f0)}
+\Im[f(0)]=\frac{1}{k}\sum_{l=0}^\infty
+(2l+1)\Im[\ee^{\ii\delta_l}]\sin(\delta_l)
+=\frac{1}{k}\sum_{l=0}^\infty (2l+1)\sin^2(\delta_l).
+\end{equation}
+
+\footnotetext{The ``normalization'' is:
+$\oldint_{-1}^1 P_n(x)P_m(x)\id{x}=\frac{2}{2n+1}\delta_{m,\,n}$.}
+
+Next up is the total scattering cross-section
+\begin{equation}
+\sigma=\frac{4\pi}{k^2}\sum_{l=0}^\infty
+(2l+)\sin^2(\delta_l),
+\end{equation}
+which only differs from \eqref{eq:1_Im(f0)} by a factor of
+$4\pi/k$. In other words
+\begin{equation}
+\sigma=\frac{4\pi}{k}\Im[f(0)].
+\end{equation}
+This is the optical theorem.
+\qed
+
+\section{Gaussian potential scattering}
 
 
 
