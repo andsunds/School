@@ -309,13 +309,17 @@ Note that the value of $f$ gives the reltion between $k$ and $b$.
 \subsection{Total elastic cross-section at $f=0.2$}
 To calculate the total cross-section we will use the formalism of
 phase shifts, \eqref{eq:1_sigma}. 
-\todo{Is this valid?}And since we're at a relatively long
-wavelength (low energy) compared to the potetial range, we can
-approximate
+And since we're at a relatively long wavelength (low energy) compared
+to the potetial range, we can approximate
 \begin{equation}
 \sigma\approx\frac{4\pi}{k^2}\sum_{l=0}^1(2l+1)\sin^2(\delta_l).
 \end{equation}
-We just need to find the phase shifts $\delta_l$.
+We just need to find the phase shifts $\delta_l$. From the lecture
+notes we know that
+\begin{equation}\label{eq:4_u_approx}
+u_l(r)\approx \sin(kr-\frac{l\pi}{2} + \delta_l),
+\end{equation}
+for large $r$.
 
 The free particle wavelength, outside the reach of the potential, is 
 \begin{equation}
@@ -323,32 +327,37 @@ The free particle wavelength, outside the reach of the potential, is
 \approx 14 b.
 \end{equation}
 This could be measured from the plots as well, and 14 seems to agree
-well with the graphs.
+well with the graphs. We also see that the wavelength is indeed
+considerably larger than the lengthscale of the potential. 
 
-
-For the s-wave, this would mean that the ``third'' period should have
-started at $r/b=2\lambda\approx28$, but instead it starts at
-$x_0=r/b\approx26$. This tells us that the phse shift for the s-wave
-is 
+For the s-wave, using \eqref{eq:4_u_approx}, this would mean that the,
+for instance, ``third'' period should have started at
+$r=2\lambda\approx28b$ if $\delta_0=0$. Instead it starts at
+$x_0=r/b\approx26$, which tells us that the phse shift for the s-wave
+is  
 \begin{equation}
 \delta_0=k(2\lambda-x_0)\approx\frac{\sqrt{0.2}}{b}(28-26)b
-=0.894.
+=0.89.
 \end{equation}
 
 
 The same rutine applies for the p-wave. Since $f=0.2$ hasn't changed,
-the wavelength is still $\lambda\approx14b$. This time however the the
-phase shift is 
+the wavelength is still $\lambda\approx14b$. This time however the,
+for instance, ``fourth'' period should start at
+$r=(3+1/4)\lambda=45.5b$ due to the new $\pi/2$ in
+\eqref{eq:4_u_approx}. Instead it starts at $x_0=r/b\approx46$.
+The phase shift is therefore
 \begin{equation}
-\delta_1=k\cdot(-4b)= -1.79.
+\delta_1=k(3.25\lambda-x_0)=k\cdot(-0.5b)= -0.22.
 \end{equation}
-\todo{Why is this bigger?}
+
 
 So we end up getting
 \begin{equation}
 \sigma\approx\frac{4\pi b^2}{f}
 \qty(\sin^2(\delta_0)+3\sin^2(\delta_1))
-\approx 220 b^2.
+\approx\frac{4\pi b^2}{0.2}\qty(0.60+3\times0.05)
+\approx 47 b^2.
 \end{equation}
 
 
@@ -370,7 +379,21 @@ classical expectation. Such very large values are however not unheard
 of, and as $a\to\infty$ we create a new bound sate.
 
 \subsection{Higher angular momentum}
-\todo[inline]{\hspace{0.5\textwidth}\Huge???}
+We see that the contribution, in (a), to the cross-section was much
+smaller for the p-wave than the s-wave. This is due to the
+\emph{threshold behaviour}, where
+\begin{equation}
+\delta_l\sim k^{2l+1},
+\end{equation}
+see eqn. (6.6.3) in Sakurai\,\&\,Napolitano, \textit{Modern
+  Quantum Mechanics}, ed. 2. 
+
+So since $k$ is quite small, this effect will kill off the
+contribution from higher values of $l$. This is why we could neglect
+contributions from d-wave, and higher, to the total cross-section. The
+``exponential'' decay of $\delta_l$ will of course also outweigh the
+linear increase in the coefficient in front of the sine in
+\eqref{eq:1_sigma} 
 
 
 \subsection{Bound states}
@@ -404,3 +427,5 @@ f_\text{bound} = \frac{2mE_\text{bound}}{\hbar^2}
 
 
 
+
+%  LocalWords:  Sakurai Napolitano eqn
