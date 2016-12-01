@@ -51,7 +51,7 @@ Assignment 5}
 The optical theorem relates the total cross-section to the imaginary
 part of the forward scattering amplitude. 
 
-To prove this theorem we use the scattering aplitude represented using
+To prove this theorem we use the scattering amplitude represented using
 phase shift:
 \begin{equation}
 f(\theta)=\frac{1}{k}\sum_{l=0}^\infty
@@ -59,7 +59,7 @@ f(\theta)=\frac{1}{k}\sum_{l=0}^\infty
 \end{equation}
 Now the forward scattering will be at $\theta=0$. Due to the way
 we ``normalize'' Legendre polynomials\footnotemark{}, we have $P_l(1)=1$
-for all $l$. So that the forward scatering amplitude is
+for all $l$. So that the forward scattering amplitude is
 \begin{equation}
 f(0)=\frac{1}{k}\sum_{l=0}^\infty
 (2l+1)\ee^{\ii\delta_l}\sin(\delta_l),
@@ -93,7 +93,7 @@ This is the optical theorem.
 
 
 \section{Gaussian potential scattering}
-In this probelm we're concerned with the total scattering
+In this problem we're concerned with the total scattering
 cross-section from a Gaussian potential:
 \begin{equation}\label{eq:2_V}
 V(\vb*{r})=A\ee^{-\mu r^2},
@@ -113,7 +113,7 @@ Substituting \eqref{eq:2_V} into this, gives
 f(\theta)\approx -\frac{2mA}{\hbar^2q}
 \int_0^\infty r \ee^{-\mu r^2} \sin(qr)\id{r}.
 \end{equation}
-This can either be solved by convering the sine to a complex
+This can either be solved by converting the sine to a complex
 exponential an taking the imaginary part of the integral, as we did in
 the last assignment. Or we could let \textit{Mathematica} handle this,
 which results in
@@ -155,8 +155,9 @@ So we get
 \end{equation}
 
 \subsection*{Validity of the Born approximation}
+
 To discuss the validity of the Born approximation we need a length
-scale and a ``depth'' scale of hte potential. Clearly the length scale
+scale and a ``depth'' scale of the potential. Clearly the length scale
 is given by $a=\mu^{-1/2}$, and the energy scale is just $A$.
 
 In the case of low energy incoming particles, $\abs{k}\mu^{-1/2}\ll1$,
@@ -166,10 +167,10 @@ we need
 \end{equation}
 for the Born approximation to be valid. (Also note that the expression
 \eqref{eq:2_final} has a finite limit as $k\to0$. So there's in no
-singularity to wory about as $k\to0$ either.)
+singularity to worry about as $k\to0$ either.)
 
 And in the case of high energy incoming particles we need the incoming
-particle momentum to be high enought so that
+particle momentum to be high enough so that
 \begin{equation}
 \frac{mA}{\hbar^2k\sqrt{\mu}}\ll1,
 \end{equation}
@@ -211,8 +212,8 @@ From the slides on the course web-site we get the values in
 with the theory above.
 
 \begin{table}\centering
-\caption{Characteristics of the $l=4$ partial wave, from the slieds on
-H-Kr cross section on the couse web-page.}
+\caption{Characteristics of the $l=4$ partial wave, from the slides on
+H-Kr cross section on the course web-page.}
 \label{tab:3}
 \begin{tabular}{|c|c|c|c|}\hline
 $\sigma_\text{peak}\;/[\unit{Å^2}]$  & $\Er\;/[\unit{meV}]$ &
@@ -251,19 +252,19 @@ using $l=4$, as was given in the slides. We get
 which again is close (around 2\,\% off) to the complete numerical
 calculations. 
 
-Over all the Breit-Wigner theroy performed quite well. The discrepancy
+Over all the Breit-Wigner theory performed quite well. The discrepancy
 in chiefly the width of the peak shouldn't bee too worrying. 
 
 For the
 peak width there are two main reasons that come to mind regarding the
-dircrepancy. The first reason is that this is a peak having a
+discrepancy. The first reason is that this is a peak having a
 background of scattering from other values of $l$, so exactly where
 the half point of the peak isn't very well defined. The second thing
 is that \eqref{eq:3_Gamma} relies on the derivative, but the slope
 given in the slides are probably rounded off to near nearest
 $\unit[100]{deg/meV}$. 
 
-For the peak cross-section, most of the discrepancy probably aslo
+For the peak cross-section, most of the discrepancy probably also
 comes from rounding in the slide. And the background plays a role here
 as well. 
 
@@ -279,8 +280,8 @@ l\approx\frac{\sigma_{\max} \mu \ER}{4\pi\hbar^2} - \frac{1}{2}
 l=\left\lfloor\frac{\sigma_{\max} \mu \ER}{4\pi\hbar^2}\right\rfloor.
 \end{equation}
 
-The fact that the particle is spin-less helps us not getting tangeled
-up in any coupeling between the sipn and the angular momentum or the
+The fact that the particle is spin-less helps us not getting tangled
+up in any coupling between the spin and the angular momentum or the
 scattering potential.
 
 
@@ -289,13 +290,13 @@ scattering potential.
 
 
 \section{More scattering}
-We have ben given (scaled) graphs of the numerically calculated
+We have been given (scaled) graphs of the numerically calculated
 wavefunctions from scattering off of the potential
 \begin{equation}
 V(r)=-V_0\exp(-\frac{2r}{b}).
 \end{equation}
 All of the calculations have been made using the dimensionless
-strength of the potentail: $g=8.8$, where
+strength of the potential: $g=8.8$, where
 \begin{equation}
 g^2=\frac{V_0}{\hbar^2/(2mb^2)}
 =\frac{2V_0 mb^2}{\hbar^2}.
@@ -304,13 +305,13 @@ The dimensionless particles energy is analogously
 \begin{equation}
 f=\frac{2Emb^2}{\hbar^2}=k^2b^2.
 \end{equation}
-Note that the value of $f$ gives the reltion between $k$ and $b$.
+Note that the value of $f$ gives the relation between $k$ and $b$.
 
 \subsection{Total elastic cross-section at $f=0.2$}
 To calculate the total cross-section we will use the formalism of
 phase shifts, \eqref{eq:1_sigma}. 
 And since we're at a relatively long wavelength (low energy) compared
-to the potetial range, we can approximate
+to the potential range, we can approximate
 \begin{equation}
 \sigma\approx\frac{4\pi}{k^2}\sum_{l=0}^1(2l+1)\sin^2(\delta_l).
 \end{equation}
@@ -328,12 +329,12 @@ The free particle wavelength, outside the reach of the potential, is
 \end{equation}
 This could be measured from the plots as well, and 14 seems to agree
 well with the graphs. We also see that the wavelength is indeed
-considerably larger than the lengthscale of the potential. 
+considerably larger than the length scale of the potential. 
 
 For the s-wave, using \eqref{eq:4_u_approx}, this would mean that the,
 for instance, ``third'' period should have started at
 $r=2\lambda\approx28b$ if $\delta_0=0$. Instead it starts at
-$x_0=r/b\approx26$, which tells us that the phse shift for the s-wave
+$x_0=r/b\approx26$, which tells us that the phase shift for the s-wave
 is  
 \begin{equation}
 \delta_0=k(2\lambda-x_0)\approx\frac{\sqrt{0.2}}{b}(28-26)b
@@ -341,7 +342,7 @@ is
 \end{equation}
 
 
-The same rutine applies for the p-wave. Since $f=0.2$ hasn't changed,
+The same routine applies for the p-wave. Since $f=0.2$ hasn't changed,
 the wavelength is still $\lambda\approx14b$. This time however the,
 for instance, ``fourth'' period should start at
 $r=(3+1/4)\lambda=45.5b$ due to the new $\pi/2$ in
@@ -368,20 +369,20 @@ is just
 \sigma=4\pi a^2,
 \end{equation}
 where $a$ is the scattering length, i.e. where the
-wqvefunctionintersects the $r$-axis. 
+wavefunction intersects the $r$-axis. 
 
 In our case we have $a\approx 13b$, so the cross-section becomes
 \begin{equation}
 \sigma(f{=}0) \approx 2100b^2,
 \end{equation}
-which is realy huge compared to what we would've some kind of
+which is really huge compared to what we would've some kind of
 classical expectation. Such very large values are however not unheard
 of, and as $a\to\infty$ we create a new bound sate.
 
-\subsection{Higher angular momentum}
+\subsection{Higher angular momenta}
 We see that the contribution, in (a), to the cross-section was much
 smaller for the p-wave than the s-wave. This is due to the
-\emph{threshold behaviour}, where
+\emph{threshold behavior}, where
 \begin{equation}
 \delta_l\sim k^{2l+1},
 \end{equation}
@@ -397,8 +398,6 @@ linear increase in the coefficient in front of the sine in
 
 
 \subsection{Bound states}
-\todo[inline]{What has $l=0$ to do with the bound states. How do we
-  know if there are any $l\neq0$ bound states?}
 A new bound sate is creates for each time the scattering length
 $a\to\infty$, we get when setting the potential strength from~0 to
 $V_0$ (or 0 to $g=8.8$ in this case).This happens every time the
@@ -409,11 +408,12 @@ in this potential. We goth this number from the fact that the
 wavefunction has three turning-points (max. or min.), which each of
 them would correspond to a new bound state.
 
-\todo{I would like some more justification here.}
-The weakest bound state will have a binding energy of
+
+The newest bound state will have a binding energy of
 \begin{equation}
 E_\text{bound}=\frac{\hbar^2}{2ma^2}\approx\frac{\hbar^2}{2m\times (13b)^2},
 \end{equation}
+if $a\gg b$,
 according to eqn. (6.6.18) in Sakurai\,\&\,Napolitano, \textit{Modern
   Quantum Mechanics}, ed. 2.
 This binding energy corresponds to 
