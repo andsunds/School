@@ -1,0 +1,354 @@
+\documentclass[11pt,letter, swedish, english, twocolumn
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+\usepackage[makeroom
+]{cancel}
+\graphicspath{{figures/}}
+
+\swapcommands{\Delta}{\varDelta}
+\swapcommands{\Omega}{\varOmega}
+\swapcommands{\Phi}{\varPhi}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+            top    = 2cm,
+%            bottom = 3cm,
+            left   = 1.5cm, right  = 1.5cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+
+\newcommand{\ZZ}{\ensuremath{\mathcal{Z}}}
+\newcommand{\gs}{\ensuremath{{g_{\text{s}}}}}
+\newcommand{\Ne}{\ensuremath{{N_{\text{e}}}}}
+\newcommand{\Tc}{\ensuremath{{T_{\text{c}}}}}
+\newcommand{\lc}{\ensuremath{{\lambda_{\text{c}}}}}
+\newcommand{\vc}{\ensuremath{{v_{\text{c}}}}}
+\newcommand{\eF}{\ensuremath{{\epsilon_{\text{F}}}}}
+\newcommand{\wD}{\ensuremath{{\omega_{\text{D}}}}}
+
+
+%\usepackage{tikz}
+
+\begin{document}
+
+%\tikzstyle{every picture}+=[remember picture]
+%\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{Statistical Physics -- PHYS\,704 \\
+Course summary}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+\section{Some Thermodynamic relations}
+
+\begin{itemize}
+\item Energy: $E$, $\rd E = T\rd S - P\rd V + \mu\rd N$.
+Min. in equilibrium when $S$ and $V$ are const.
+\item Helmholtz free energy: $F=E-TS$, $\rd F = -S\rd T - P\rd V + \mu\rd N$.
+Min. in equil. when $T$ and $V$ are const.
+\item Enthalph: $W=E+PV$, $\rd W = T\rd S + V\rd P + \mu\rd N$.
+Min. in equil. when $S$ (adiabatic) and $P$ are const.
+\item Gibbs free energy: $\Phi=E+PV-TS$, $\rd\Phi = -S\rd T + V\rd P + \mu\rd N$.
+Min. in equil. when $T$ and $P$ are const.
+\item Grand potential: $\Omega=-PV$, $\rd\Omega = -S\rd T + P\rd V + N\rd\mu$.
+\end{itemize}
+
+Derivative relations
+\begin{equation}
+\begin{aligned}
+&+\qty(\pdv{T}{V})_S=-\qty(\pdv{P}{S})_T=+\pdv[2]{E}{S}{V}\\
+&+\qty(\pdv{T}{P})_S=+\qty(\pdv{V}{S})_P=+\pdv[2]{W}{S}{P}\\
+&+\qty(\pdv{S}{V})_T=+\qty(\pdv{P}{T})_V=-\pdv[2]{F}{T}{V}\\
+&-\qty(\pdv{S}{P})_T=+\qty(\pdv{V}{T})_P=+\pdv[2]{\Phi}{T}{P}\\
+\end{aligned}
+\end{equation}
+
+
+Temperature
+\begin{equation}
+\frac{1}{T}=\qty(\pdv{S}{E})_{V,N}
+\end{equation}
+
+Heat-capacity
+\begin{equation}
+\begin{aligned}
+C_V&=\qty(\dv{E}{T})_V=T\qty(\pdv{S}{T})_V=-T\qty(\pdv[2]{F}{T})_V\\
+C_P&=\qty(\dv{W}{T})_P=\qty(\pdv{E}{T})_P+P\qty(\pdv{V}{T})_P\\
+\end{aligned}
+\end{equation}
+
+Compressibility
+\begin{equation}
+\kappa_X=-\frac{1}{V}\qty(\pdv{V}{P})_X
+\end{equation}
+
+
+\subsection{Some def. in stat. mech.}
+Definition of entropy
+\begin{equation}
+S:=-\sum_{n,(N)} \rho_{n,(N)}\ln(\rho_{n,(N)}),
+\end{equation}
+where $\rho$ is the density function or distribution fuction.
+
+Canonical distribution ($N$ constant)
+\begin{equation}
+\rho_n = \frac{1}{Z}\ee^{-E_n/T}\qcomma
+Z=\sum_n\ee^{-E_n/T}.
+\end{equation}
+\begin{equation}
+F=-T\ln Z
+\end{equation}
+
+Grand canonical distribution 
+\begin{equation}
+\rho_{n, N} = \frac{1}{\ZZ}\ee^{-(E_n-\mu N)/T}\qcomma
+\ZZ=\sum_n\ee^{-(E_n-\mu N)/T}.
+\end{equation}
+\begin{equation}
+\Omega=-T\ln \ZZ
+\end{equation}
+
+% The energy 
+% \begin{equation}
+% E=T^2\qty(\pdv{\ln(\ZZ)}{T})_{N, V}
+% \end{equation}
+
+
+\section{Theory of ideal gases}
+Ideal gas means that there is no interaction between particles,
+$\epsilon=\hbar^2k^2/(2m)$. 
+In 3 dim.
+\begin{equation}
+\frac{1}{V}\sum_k\to\int\frac{\rd^3k}{(2\pi)^3}
+=\int\!\rd\epsilon\,g(\epsilon),
+\end{equation}
+\begin{equation}
+\frac{\rd^3k}{(2\pi)^3}=\rd\epsilon\,g(\epsilon)\qcomma
+g(\epsilon)=\frac{m^{3/2}}{\sqrt{2}\pi\hbar^3}\sqrt{\epsilon}.
+\end{equation}
+See assignment 3 for other dim.
+
+
+\subsection{Ideal Fermi gases}
+\begin{equation}
+n^{(\text{F.D.})}=\frac{1}{\ee^{(\epsilon-\mu)/T}+1}
+\end{equation}
+
+\begin{equation}
+-\Omega=PV=\frac{2}{3}E=\frac{V\gs T}{\lambda^3}f_{5/2}(z)
+\end{equation}
+\begin{equation}
+N=-\qty(\pdv{\Omega}{\mu})_{T,V}=\frac{V\gs}{\lambda^3}f_{3/2}(z)
+\end{equation}
+\begin{equation}
+\frac{PV}{NT}=\frac{f_{5/2}(z)}{f_{3/2}(z)}
+\end{equation}
+Thermal wavelength $\lambda=h/\sqrt{2\pi mT}=:\Lambda/\sqrt{T}$, $\Lambda$ is a constant.
+
+\paragraph{Fermi functions}
+\begin{equation}
+f_\nu(z)=\frac{1}{\Gamma(\nu)}\int_0^\infty \!\rd{x}
+\frac{x^{\nu-1}}{z^{-1}\ee^x + 1}
+\end{equation}
+Fugacity $z=\ee^{\mu/T}$.
+\begin{equation}
+z\pdv{f_\nu(z)}{z} = \pdv{f_\nu(z)}{(\ln z)}=f_{\nu-1}(z)
+\end{equation}
+
+\paragraph{Fermi energy}
+As $T\to0$, the ccamical potential will go to
+\begin{equation}
+\mu(T\to0)=:\eF=\frac{\hbar^2}{2m}\qty(\frac{6}{\gs}\pi^2n)^{2/3},
+\end{equation}
+where $\gs$ is the spin deganareacy, and $n=N/V$. 
+
+In a regular metal, $\eF\sim\unit[10^4]{K}$. For $T\ll\eF$
+\begin{equation}
+n^{(\text{F.D.})}(\epsilon)\approx
+\begin{cases}
+1\qcomma&\epsilon<\eF\\
+0\qcomma&\epsilon>\eF
+\end{cases}
+\end{equation}
+and $\int_0^\infty\!\rd\epsilon\,n^{(\text{F.D.})}(\epsilon)\ldots
+\to\int_0^\eF\!\rd\epsilon\ldots$
+
+The internal energy
+\begin{equation}
+E(T\ll\eF)=\frac{3}{5}N\eF
+\end{equation}
+
+
+\subsection{Ideal Bose gases}
+\begin{equation}
+n^{(\text{B.E.})}=\frac{1}{\ee^{(\epsilon-\mu)/T}-1}
+\end{equation}
+
+\begin{equation}
+-\Omega=PV=\frac{2}{3}E=\frac{V\gs T}{\lambda^3}g_{5/2}(z)
+\end{equation}
+\begin{equation}
+\Ne=-\qty(\pdv{\Omega}{\mu})_{T,V}=\frac{V\gs}{\lambda^3}g_{3/2}(z)
+\end{equation}
+\begin{equation}
+\frac{PV}{NT}=\frac{g_{5/2}(z)}{g_{3/2}(z)}
+\end{equation}
+Thermal wavelength $\lambda=h/\sqrt{2\pi mT}=:\Lambda/\sqrt{T}$, $\Lambda$ is a constant.
+
+\paragraph{Bose functions}
+\begin{equation}
+g_\nu(z)=\frac{1}{\Gamma(\nu)}\int_0^\infty \!\rd{x}
+\frac{x^{\nu-1}}{z^{-1}\ee^x - 1}
+\end{equation}
+For bosons $\mu\le0$, meaning that $z=\ee^{\mu/T}\le1$. 
+\begin{equation}
+z\pdv{g_\nu(z)}{z} = \pdv{g_\nu(z)}{(\ln z)}=g_{\nu-1}(z)
+\end{equation}
+
+At $z=1$, $g_\nu(z=1)=\zeta(\nu)$.
+
+\paragraph{Critical temperature}
+Critical teperature for ideal Bose gas (3 dim.)
+\begin{equation}
+\Tc=\frac{2\pi\hbar^2}{m}\qty(\frac{N}{V\gs\,\zeta(\nicefrac{3}{2})})^{3/2}
+\end{equation}
+Number of condensed particles
+\begin{equation}
+N_0=N\qty[1-\qty(\frac{T}{\Tc})^{3/2}]\qcomma
+T\le\Tc.
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+&\lambda=\frac{h}{\sqrt{2\pi mT}}\qcomma 
+\lc=\Big[v\zeta(\nicefrac{3}{2})\Big]^{1/3}\\
+&v=\frac{1}{n}=\frac{V}{N},\hspace{18pt}
+\vc=\frac{\lambda^3}{\zeta(\nicefrac{3}{2})}
+\end{aligned}
+\end{equation}
+
+
+\subsubsection{Photons}
+
+\subsubsection{Phonons}
+
+
+
+
+\section{Second quantaization}
+
+\subsection{Superfluidity}
+
+\subsection{BCS theory of superconductivity}
+The BCS (mean-field) equation:
+\begin{equation}
+\begin{aligned}
+\Delta &= \frac{U}{2V}\sum_k \frac{\Delta}{\sqrt{\xi_k^2+\Delta^2}}
+\qty[1-2n^{(\text{F.D.})}(E_k)]\\
+&= \frac{U}{2V}\sum_k \frac{\Delta}{\sqrt{\xi_k^2+\Delta^2}}
+\tanh(\frac{E_k}{2T}).
+\end{aligned}
+\end{equation}
+Here $E_k=\sqrt{\xi_k^2+\Delta^2}$, and $\xi_k=(\epsilon_k-\eF)$ varies
+from $-\eF$ to $\infty$.
+
+Sums transfroms according to
+\begin{equation}
+\frac{1}{V}\sum_k \to g(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi,
+\end{equation}
+where $\wD$ is the Debye frequency, and $\hbar\wD\ll\eF$ (typ. values
+$\hbar\wD\sim\unit[10^2]{K}$, while $\eF\sim\unit[10^4]{K}$). Only the
+states around $\epsilon=\eF$ ($\xi=0$) affects superconductivity. 
+
+
+
+\subsection{Ginsburg-Landau theory of superconductivity}
+
+
+
+
+\section{Second order phase transitions}
+
+\subsection{Ising model}
+
+\subsection{Landau theory of cont. phase transitions}
+
+
+\clearpage
+\appendix
+\section{Special functions}
+\subsection{Gamma function}
+\begin{equation}
+\Gamma(\nu)=\int_0^\infty x^{\nu-1}\ee^{-x}\id{x}
+\end{equation}
+\begin{equation}
+\Gamma(n)=(n-1)!\qcomma n\in\Z^+
+\end{equation}
+
+\begin{center}
+\begin{tabular}{|l||c|c|c|c|c|}\hline
+$x$ & $\nicefrac{1}{2}$ & $\nicefrac{3}{2}$ & $\nicefrac{5}{2}$
+& $\nicefrac{7}{2}$ & $\nicefrac{9}{2}$\\ \hline
+$\Gamma(x)$ & $\sqrt{\pi}$ & $\sqrt{\pi}/2$ & $3\sqrt{\pi}/4$
+& $15\sqrt{\pi}/8$ & $105\sqrt{\pi}/16$
+\\ \hline
+\end{tabular}
+\end{center}
+
+
+\subsection{Zeta function}
+The Riemann zeta function
+\begin{equation}
+\zeta(\nu)=\sum_{n=1}^\infty \frac{1}{n^\nu}
+=\int_0^\infty \frac{x^{\nu-1}}{\ee^x -1}\id{x}
+\end{equation}
+
+\begin{center}
+\begin{tabular}{|l||c|c|c|}\hline
+$x$ & $2$ & $4$ & $6$
+\\ \hline $\zeta(x)$ & 
+$\pi^2/6$ & $\pi^4/90$ & $\pi^6/945$ 
+\\ \hline\hline
+$x$ & $3/2$ & $5/2$ & $7/2$
+\\ \hline $\zeta(x)$ & 
+$2.61238$ & $1.34149$ & $1.12673$ 
+\\ \hline\hline
+$x$ & $3$ & $5$ & $7$
+\\ \hline$\zeta(x)$ & 
+$1.20206$ & $1.03693$ & $1.00835$ 
+\\ \hline
+\end{tabular}
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+%  LocalWords:  Pathria  idealities bosonic Bogoliubov Beale BCS
+%  LocalWords:  Laplace's
