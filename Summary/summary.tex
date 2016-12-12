@@ -32,6 +32,7 @@
 \newcommand{\lc}{\ensuremath{{\lambda_{\text{c}}}}}
 \newcommand{\vc}{\ensuremath{{v_{\text{c}}}}}
 \newcommand{\eF}{\ensuremath{{\epsilon_{\text{F}}}}}
+\newcommand{\cs}{\ensuremath{{c_{\text{s}}}}}
 \newcommand{\wD}{\ensuremath{{\omega_{\text{D}}}}}
 
 
@@ -245,15 +246,184 @@ T\le\Tc.
 
 
 \subsubsection{Photons}
+Photons are bosons with $\mu=0$.
+\begin{equation}
+n^{\text{(photons)}}=\frac{1}{\ee^{\hbar\omega/T}-1}.
+\end{equation}
+Number of photons in the interval $\omega$ to $\omega+\rd\omega$:
+\begin{equation}
+\rd N_\omega=\frac{V}{\pi^2c^3}\frac{\omega^2\id\omega}{\ee^{\hbar\omega/T}-1}.
+\end{equation}
+
+Energy in the same interval:
+\begin{equation}
+\rd E_\omega=\hbar\omega\id{N_\omega}=Vu_\omega\id\omega,
+\end{equation}
+where $u_\omega$ is the radiation energy density.
+Total radiation energy
+\begin{equation}
+E=\int_0^\infty\!\rd E_\omega = \frac{4\sigma}{c}VT^4,
+\end{equation}
+where $\sigma=\pi^2/(60\hbar^3c^2)$
+
 
 \subsubsection{Phonons}
+Chain of $N$ particles connected with springs, mean distance
+$a$. Hamiltonian 
+\begin{equation}
+H=\sum_{s=0}^{N-1}\qty[\frac{p_s^2}{2m}+\frac{\kappa}{2}\qty(q_{s+1}-q_s)^2]
+\end{equation}
+Also periodoc boundary conditions: $q_{s+N}=q_s$ and $p_{s+N}=p_s$.
+
+Fourier transform (momentum space)
+\begin{equation}
+H=\sum_{k=0}^{N-1}\qty[\frac{1}{2m}p_{-k}p_{k}+\frac{m\omega_k^2}{2}q_{-k}q_{k}].
+\end{equation}
+This is a Hamiltoninan for $N$ harmonic oscillators:
+\begin{equation}
+H=\sum_{k=0}^{N-1}\hbar\omega_k\qty(\hat{n}_k+\frac{1}{2}).
+\end{equation}
+
+The frequency
+\begin{equation}
+\begin{aligned}
+\omega_k=&\sqrt{\frac{2\kappa}{m}(1-\cos(ka))}\\
+\stackrel{ka\ll1}{\approx}&|ka|\sqrt{\frac{\kappa}{m}}.
+\end{aligned}
+\end{equation}
+Speed of sound
+\begin{equation}
+\cs=\sqrt{\frac{\kappa a^2}{m}}.
+\end{equation}
+
+For $|ka|\ll1$, 
+\begin{equation}
+C_V=\frac{2\pi^2}{5\hbar^3\cs^3} VT^3.
+\end{equation}
+
+
 
 
 
 
 \section{Second quantaization}
+Main idea: use a Bogoliubov transformation to transform the
+Hamiltonian to to a hamiltonian of an ideal gas of quasi-particles. 
 
-\subsection{Superfluidity}
+\paragraph{Harmonic oscillator interpretation in momentum space}
+Occupation number representation:
+\begin{equation}
+\ket{\psi}=\ket{n_{k_1}, n_{k_2},\ldots, n_{k_i},\ldots}
+\end{equation}
+\begin{equation}
+\hat{n}_{k_i}\ket{n_{k_1}, \ldots, n_{k_i},\ldots}=
+{n}_{k_i}\ket{n_{k_1}, \ldots, n_{k_i},\ldots}
+\end{equation}
+For bosons:
+\begin{equation}
+\comm{a_k}{ a^\dagger_{k'}}=\delta_{k, k'},
+\end{equation}
+whereas for fermions
+\begin{equation}
+\acomm{c_k}{ c^\dagger_{k'}}=\delta_{k, k'}.
+\end{equation}
+
+The Hamiltonian for interacting bosons
+\begin{equation}
+H=\overbrace{\sum_k \epsilon_k a_k^\dagger a_k}^{\text{non-interating}}
++\frac{1}{2V}\sum_{k, k', q} U(q) a_{k+q}^\dagger a_{k'-q}^\dagger 
+a_{k'}a_{k}
+\end{equation}
+and for fermions
+\begin{equation}
+H=\overbrace{\sum_{k, \sigma} \epsilon_k c_{k,\sigma}^\dagger c_{k,\sigma}}^{\text{non-interating}}
++\frac{1}{2V}\sum_{k, k', q, \sigma, \sigma'} 
+U(q) c_{k+q,\sigma}^\dagger c_{k'-q,\sigma}^\dagger c_{k',\sigma'}c_{k,\sigma}.
+\end{equation}
+The inteaction, $U(q)$, is given by
+\begin{equation}
+U(\vb{r}-\vb{r'})=\frac{1}{V}\sum_q U(\vb{q})\ee^{\ii\vb{q}\vdot(\vb{r}-\vb{r}')},
+\end{equation}
+or
+\begin{equation}
+U(\vb{q})=\int\rd^3rU(\vb{r})\ee^{-\ii\vb{q}\vdot\vb{r}}.
+\end{equation}
+
+We can also talk about annihilation and creation operators in real
+space: $\psi^\dagger(\vb{r})$ creates a particle at position $\vb{r}$.
+\begin{equation}
+\int\!\rd^3r\, \phi^\dagger(\vb{r})\phi(\vb{r})=\sum_ka_k^\dagger a_k=\hat{N}
+\end{equation}
+These operators faoolw the same commuttation relations as the momentum
+space equivalence. 
+
+
+\subsection{Superfluidity in $^\vb{4}$He}
+At low enough temperatures most atoms will be in the ground state. 
+Our goual is to bring the Hamiltonian to a form:
+\begin{equation}
+H=\sum_k E_k \xi_k^\dagger\xi_k+\text{const.}
+\end{equation}
+
+Mean-field theory:
+\begin{equation}
+a_0a_0^\dagger \approx a_0^\dagger a_0 = \abs{a_0}= N_0
+\end{equation}
+meaning that
+\begin{equation}
+a_0=\sqrt{N_0} \ee^{\ii\phi}.
+\end{equation}
+
+\paragraph{Bogoliubov transformation}
+\begin{equation}
+\begin{cases}
+\xi_k=u_k a_k+v_ka_{-k}^\dagger\\
+\xi_k^\dagger=u_k a_k^\dagger+v_ka_{-k}\\
+\end{cases}
+\end{equation}
+We still want the commutation relation
+$\comm{\xi_k}{\xi_k^\dagger}=1$, which gives
+\begin{equation}
+u_k=\cosh\theta_k\qcomma
+v_k\sinh\theta_k.
+\end{equation}
+And
+\begin{equation}
+\cosh2\theta_k=\frac{A_k}{\sqrt{A_k^2-B_k^2}}\qcomma
+\sinh2\theta_k=\frac{B_k}{\sqrt{A_k^2-B_k^2}}\qcomma
+\end{equation}
+where
+\begin{equation}
+A_k=\epsilon_k+nU(k)\qcomma
+B_k=nU(k).
+\end{equation}
+
+\paragraph{Energy of the quasi-particles}
+\begin{equation}
+\begin{aligned}
+E_k=&A_k\cosh2\theta_k-B_k\sinh2\theta_K\\
+=&\sqrt{A_k^2-B_k^2}=\sqrt{\epsilon_k[\epsilon_k+2nU(k)]}
+\end{aligned}
+\end{equation}
+Long wavelength limit ($k\approx0$)
+\begin{equation}
+E_k\approx\hbar|k|\sqrt{\frac{nU(0)}{m}}
+\end{equation}
+same form as phonons, and $\cs=\sqrt{nU(0)/m}$. The super fluid
+behaves more like a solid than a liquid. 
+
+As long as some disturbance is slower than $\cs$, there can not be any
+dissipation of energy into the super fluid. 
+
+\paragraph{Spontaneously broken symmetry}
+We can choose $\phi$ in the mean-field therory description of $a_0$
+freely. And the particles curren will be
+\begin{equation}
+\vb{j}=\frac{\hbar n}{m} \grad\phi
+\end{equation}
+But if the geomery has holes, we must have a periodically varying
+$\phi$, meaning that $\grad\phi=\ell2\pi$ becomes quantized.
+
 
 \subsection{BCS theory of superconductivity}
 The BCS (mean-field) equation:
@@ -275,7 +445,6 @@ Sums transfroms according to
 where $\wD$ is the Debye frequency, and $\hbar\wD\ll\eF$ (typ. values
 $\hbar\wD\sim\unit[10^2]{K}$, while $\eF\sim\unit[10^4]{K}$). Only the
 states around $\epsilon=\eF$ ($\xi=0$) affects superconductivity. 
-
 
 
 \subsection{Ginsburg-Landau theory of superconductivity}
@@ -338,7 +507,7 @@ $1.20206$ & $1.03693$ & $1.00835$
 
 
 
-
+\section{The harmonic oscillator}
 
 
 
