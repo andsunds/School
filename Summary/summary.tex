@@ -37,6 +37,7 @@
 \newcommand{\ns}{\ensuremath{{n_{\text{s}}}}}
 \newcommand{\Hc}{\ensuremath{{H_{\text{c}}}}}
 \newcommand{\Hcc}{\ensuremath{{H_{\text{c}_2}}}}
+\newcommand{\rD}{\ensuremath{{\mathrm{D}}}}
 
 %\usepackage{tikz}
 
@@ -853,26 +854,151 @@ In absens of $B$
 \end{cases}
 \end{equation}
 which is divergen at $\Tc$ from both directions. 
+Critical exponent
+\begin{equation}
+\chi\propto \abs{t}^{\gamma}\qcomma \gamma=1.
+\end{equation}
+
+\paragraph{Scaling relations (mean-field)}
+\begin{equation}
+M(t,B)=\abs{t}^{1/2}\,\varphi\qty(\frac{B}{\abs{t}^{1/2}})
+\end{equation}
+\begin{equation}
+f=\abs{t}^2\,F\qty(\frac{B}{\abs{t}^{3/2}})
+\end{equation}
+for some function $F$.
+
+With mean-field, we only get these exponents.
 
 
 \subsubsection{Improvements to mean-field theory}
+We can generalize the scaling relations to
+\begin{equation}
+f=\abs{t}^{2-\alpha}\,F\qty(\frac{B}{\abs{t}^{\Delta}})
+\end{equation}
+All other critical exponents can be derived from any two,
+e.g. $\alpha$ and $\Delta$. 
+\begin{equation}
+M=-\pdv{f}{B}\propto \abs{t}^{2-\alpha-\Delta}\qcomma
+\beta=2-\alpha-\Delta
+\end{equation}
+\begin{equation}
+\chi=\eval{\pdv{M}{B}}_{B=0}\propto \abs{t}^{2-\alpha-2\Delta}
+\qcomma \gamma=2\Delta+\alpha-2
+\end{equation}
 
 
+\paragraph{Calculating the critical exponents}
+We need to introduce some non-uniformity, $\vb{M}=\vb{M}(\vb{r})$. The
+full free energy becomes 
+\begin{equation}
+\begin{aligned}
+F[\vb{M}]=\int\!\rd^3r\bigg[&a(\vb{M}\vdot\vb{M})+
+\frac{b}{2}(\vb{M}\vdot\vb{M})^{2}\\
+&+\frac{1}{2}\rho (\grad\vb{M}\vdot\grad\vb{M})\bigg]
+\end{aligned}
+\end{equation}
+where
+\begin{equation}
+\grad\vb{M}\vdot\grad\vb{M} = \sum_{\alpha\in\{x,y,z\}} 
+\grad{M_\alpha}\vdot\grad{M_\alpha}.
+\end{equation}
+This last term penalizes non-uniformity.
+
+Regard $F$ as an effective Hamiltonian
+\begin{equation}
+\ZZ=\tr(\ee^{-H/T})\to\int\!\rD\vb{M}\,
+\exp(-\frac{F[\vb{M}]}{T}).
+\end{equation}
+This is a functional integral, over all functions $\vb{M}(\vb{r})$. 
+
+Switch to momentum space
+\begin{equation}
+\vb{M}(\vb{k})=\vb{M}^*(-\vb{k})
+\end{equation}
+\begin{equation}
+\begin{aligned}
+F[\vb{M}]=&\sum_{\vb{k}}\qty(a+\frac{\rho k^2}{2})\abs{\vb{M}(\vb{k})}\\
+&+\frac{b}{2V}\sum_{\vb{k}_{1, 2, 3, 4}}
+M_\alpha(\vb{k}_1)M_\alpha(\vb{k}_2) M_\beta(\vb{k}_3)M_\beta(\vb{k}_4)
+\end{aligned}
+\end{equation}
+Sum over both $\alpha,\,\beta\in\{x, y, z\}$.
+
+The partition function
+\begin{equation}
+\ZZ \int \prod_{\vb{k}, \alpha} \rd{M_\alpha}(\vb{k}) \exp(-\frac{F[\vb{M}]}{T}).
+\end{equation}
+This is just a countably infinit-dimensional integral.
+Mean-filed theory is equivalent to evaluating this integral using the
+saddle point method (Laplace's method).
+
+\paragraph{Correlation function}
+\begin{equation}
+\begin{aligned}
+G(\vb{r}{-}\vb{r}')=&\ev{\Big.\vb{M}(\vb{r})\vdot\vb{M}(\vb{r}')}\\
+=&\frac{1}{V}\sum_{\vb{k}_1,\vb{k}_2}
+\ev{\Big.\vb{M}(\vb{k}_1)\vdot\vb{M}(\vb{k}_2)}
+\ee^{\ii\vb{k}_1\vdot\vb{r}}\ee^{\ii\vb{k}_2\vdot\vb{r}'}
+\end{aligned}
+\end{equation}
+\begin{equation}
+\ev{\Big.\vb{M}(\vb{k}_1)\vdot\vb{M}(\vb{k}_2)}=\int\ldots=
+\ev{\abs{\vb{M}(\vb{k})}^2}
+\end{equation}
+
+For $T>\Tc$
+\begin{equation}
+\ev{\abs{\vb{M}(\vb{k})}^2}=\frac{3T}{\rho}\frac{1}{k^2+\xi^{-2}}
+\end{equation}
+where
+\begin{equation}
+\xi=\sqrt{\frac{\rho}{2a}}\propto \abs{t}^{-\nu}
+\qcomma \nu=\nicefrac{1}{2}
+\end{equation}
+is the correlation length. It diverges at $T\to\Tc$.
+Back to the real correlation function
+\begin{equation}
+\begin{aligned}
+G(\vb{r}{-}\vb{r}')=\frac{3T}{4\pi\rho}\,
+\frac{\exp(\frac{\abs{\vb{r}-\vb{r}'}}{\xi})}{\abs{\vb{r}-\vb{r}'}}
+\qcomma T>\Tc.
+\end{aligned}
+\end{equation}
+
+For $T<\Tc$, we have some magetization
+\begin{equation}
+\ev{\vb{M}}=\vb{M}_0\stackrel{\text{choose}}{=}M_z\vu{z}
+\end{equation}
+and
+\begin{equation}
+G(\vb{r}{-}\vb{r}')=
+\ev{\Big.\delta\vb{M}(\vb{r})\vdot\delta\vb{M}(\vb{r}')}
+\end{equation}
+is with respect to the deviations in $\vb{M}$ from $\vb{M}_0$.
+
+\begin{equation}
+G(\vb{r}{-}\vb{r}')=\frac{1}{V}\sum_{\vb{k}}
+\ev{\abs{\delta{M}_z}^2 + \abs{\delta\vb{M}_\perp}^2}
+\ee^{\ii \vb{k}\vdot(\vb{r}-\vb{r}')}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+\ev{\abs{\delta{M}_\perp}^2}=&\frac{2T}{\rho}\frac{1}{k^2+\xi_\text{transverse}^{-2}}\\
+\ev{\abs{\delta{M}_z}^2}=&\frac{T}{\rho}\frac{1}{k^2+\xi_\text{along}^{-2}}\Bigg.
+\end{aligned}
+\end{equation}
+\begin{equation}
+\xi_\text{transverse}=\infty\qcomma
+\xi_\text{along}=\sqrt{-\frac{\rho}{4a}}
+\end{equation}
+For $T<\Tc$.
 
 
-
-
-
-
-
-
-
-
-
-
+%\vspace{2cm}
 \clearpage
 \appendix
-\section{Special functions}
+\section{Special functions and integrals}
 \subsection{Gamma function}
 \begin{equation}
 \Gamma(\nu)=\int_0^\infty x^{\nu-1}\ee^{-x}\id{x}
@@ -916,6 +1042,26 @@ $1.20206$ & $1.03693$ & $1.00835$
 \end{tabular}
 \end{center}
 
+\subsection{Some integrals}
+\begin{equation}
+\int_{-\infty}^\infty\!\rd{x}\,\ee^{-\alpha x^2}
+=\sqrt{\frac{\pi}{\alpha}}
+\qcomma \Re[\alpha]\ge0
+\end{equation}
+
+For large $K$:
+\begin{equation}
+\int_{-\infty}^\infty\!\rd{x}\,
+f(x)\ee^{-\varphi(x)K}
+\approx
+f(c)\ee^{-\varphi(c)K}\sqrt{\frac{2\pi}{\varphi''(c)}}
+\end{equation}
+where $c$ is a min. ponit of $\varphi$.
+
+\begin{equation}
+\int_0^\infty\!\rd{x}\,
+\frac{x^3}{\ee^x-1}=\frac{\pi^4}{15}
+\end{equation}
 
 
 \section{The harmonic oscillator}
