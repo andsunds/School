@@ -19,7 +19,7 @@
 %%För att själv bestämma marginalerna. 
 \usepackage[
             top    = 2cm,
-%            bottom = 3cm,
+            bottom = 2cm,
             left   = 1.5cm, right  = 1.5cm
 ]{geometry}
 
@@ -34,7 +34,9 @@
 \newcommand{\eF}{\ensuremath{{\epsilon_{\text{F}}}}}
 \newcommand{\cs}{\ensuremath{{c_{\text{s}}}}}
 \newcommand{\wD}{\ensuremath{{\omega_{\text{D}}}}}
-
+\newcommand{\ns}{\ensuremath{{n_{\text{s}}}}}
+\newcommand{\Hc}{\ensuremath{{H_{\text{c}}}}}
+\newcommand{\Hcc}{\ensuremath{{H_{\text{c}_2}}}}
 
 %\usepackage{tikz}
 
@@ -47,7 +49,7 @@
 
 %%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
 
-\title{Statistical Physics -- PHYS\,704 \\
+\title{\vspace{-1.5cm}Statistical Physics -- PHYS\,704 \\
 Course summary}
 \author{Andréas Sundström}
 \date{\today}
@@ -55,6 +57,9 @@ Course summary}
 \maketitle
 
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+\tableofcontents
+\newpage
+
 
 \section{Some Thermodynamic relations}
 
@@ -352,13 +357,13 @@ U(\vb{q})=\int\rd^3rU(\vb{r})\ee^{-\ii\vb{q}\vdot\vb{r}}.
 We can also talk about annihilation and creation operators in real
 space: $\psi^\dagger(\vb{r})$ creates a particle at position $\vb{r}$.
 \begin{equation}
-\int\!\rd^3r\, \phi^\dagger(\vb{r})\phi(\vb{r})=\sum_ka_k^\dagger a_k=\hat{N}
+\int\!\rd^3r\, \psi^\dagger(\vb{r})\psi(\vb{r})=\sum_ka_k^\dagger a_k=\hat{N}
 \end{equation}
 These operators faoolw the same commuttation relations as the momentum
 space equivalence. 
 
 
-\subsection{Superfluidity in $^\vb{4}$He}
+\subsection{Superfluidity in $\mathbf{^4}$He}
 At low enough temperatures most atoms will be in the ground state. 
 Our goual is to bring the Hamiltonian to a form:
 \begin{equation}
@@ -371,7 +376,7 @@ a_0a_0^\dagger \approx a_0^\dagger a_0 = \abs{a_0}= N_0
 \end{equation}
 meaning that
 \begin{equation}
-a_0=\sqrt{N_0} \ee^{\ii\phi}.
+a_0=\sqrt{N_0} \ee^{\ii\theta}.
 \end{equation}
 
 \paragraph{Bogoliubov transformation}
@@ -379,6 +384,11 @@ a_0=\sqrt{N_0} \ee^{\ii\phi}.
 \begin{cases}
 \xi_k=u_k a_k+v_ka_{-k}^\dagger\\
 \xi_k^\dagger=u_k a_k^\dagger+v_ka_{-k}\\
+\end{cases}
+\Leftrightarrow
+\begin{cases}
+a_k=u_k\xi_k-v_k\xi_{-k}^\dagger\\
+a_k^\dagger=u_k\xi_k^\dagger-v_k\xi_{-k}\\
 \end{cases}
 \end{equation}
 We still want the commutation relation
@@ -388,6 +398,7 @@ u_k=\cosh\theta_k\qcomma
 v_k\sinh\theta_k.
 \end{equation}
 And
+
 \begin{equation}
 \cosh2\theta_k=\frac{A_k}{\sqrt{A_k^2-B_k^2}}\qcomma
 \sinh2\theta_k=\frac{B_k}{\sqrt{A_k^2-B_k^2}}\qcomma
@@ -416,17 +427,68 @@ As long as some disturbance is slower than $\cs$, there can not be any
 dissipation of energy into the super fluid. 
 
 \paragraph{Spontaneously broken symmetry}
-We can choose $\phi$ in the mean-field therory description of $a_0$
+We can choose $\theta$ in the mean-field therory description of $a_0$
 freely. And the particles curren will be
 \begin{equation}
-\vb{j}=\frac{\hbar n}{m} \grad\phi
+\vb{j}=\frac{\hbar n}{m} \grad\theta
 \end{equation}
 But if the geomery has holes, we must have a periodically varying
-$\phi$, meaning that $\grad\phi=\ell2\pi$ becomes quantized.
+$\theta$, meaning that the vorticity
+\begin{equation}
+\oint\rd\vb{r}\vdot\grad\theta(\vb{r})=\ell2\pi
+\end{equation}
+is quantized.
 
 
 \subsection{BCS theory of superconductivity}
-The BCS (mean-field) equation:
+Assume localized interaction
+$U(\vb{r}-\vb{r}')=(U/2)\delta(\vb{r}-\vb{r}')$, meaning that
+$U(q)\equiv U/2$, const.
+The Hmiltonian becomes
+\begin{equation}
+H=\sum_{k, \sigma} \epsilon_k c_{k,\sigma}^\dagger c_{k,\sigma}
++\frac{U}{V}\sum_{k, k', q} 
+c_{k+q,\uparrow}^\dagger c_{k'-q,\downarrow}^\dagger 
+c_{k',\downarrow}c_{k,\uparrow}.
+\end{equation}
+
+\paragraph{Bogoliubov transformation}
+Ideal gas of quasi-particles (fermions) with annihilation and creation
+operators $\gamma_k$ and $\gamma_k^\dagger$:
+\begin{equation}
+\acomm{\gamma_{k,\sigma}}{\gamma_{k',\sigma}^\dagger}=\delta_{k,k'}.
+\end{equation}
+\begin{equation}
+\begin{cases}
+\gamma_{k,\uparrow}^\dagger=u_kc_{k,\uparrow}^\dagger-v_kc_{-k,\downarrow}\\
+\gamma_{k,\downarrow}^\dagger=u_kc_{k,\downarrow}^\dagger+v_kc_{-k,\uparrow}\\
+\end{cases}
+\hspace{-11pt}\Leftrightarrow
+\begin{cases}
+c_{k,\uparrow}^\dagger=u_k\gamma_{k,\uparrow}^\dagger+v_k\gamma_{-k,\downarrow}\\
+c_{k,\downarrow}^\dagger=u_k\gamma_{k,\downarrow}^\dagger-v_k\gamma_{-k,\uparrow}\\
+\end{cases}
+\end{equation}
+\begin{equation}
+u_k=\cos\theta_k\qcomma
+v_k=\sin\theta_k.
+\end{equation}
+And
+\begin{equation}
+\cos2\theta_k=\frac{\xi_k}{\sqrt{\xi_k^2+\Delta^2}}\qcomma
+\sin2\theta_k=\frac{\Delta}{\sqrt{\xi_k^2+\Delta^2}}.
+\end{equation}
+
+
+The new Hamiltonian
+\begin{equation}
+H=\sum_{k, \sigma} E_k\gamma_{k \sigma}^\dagger\gamma_{k \sigma}
++\overbrace{\frac{V\Delta^2}{U}+\sum_k\qty(\xi_k-E_k)}^{\text{const.}}.
+\end{equation}
+
+
+
+\subsubsection{BCS mean-field theory}
 \begin{equation}
 \begin{aligned}
 \Delta &= \frac{U}{2V}\sum_k \frac{\Delta}{\sqrt{\xi_k^2+\Delta^2}}
@@ -446,17 +508,249 @@ where $\wD$ is the Debye frequency, and $\hbar\wD\ll\eF$ (typ. values
 $\hbar\wD\sim\unit[10^2]{K}$, while $\eF\sim\unit[10^4]{K}$). Only the
 states around $\epsilon=\eF$ ($\xi=0$) affects superconductivity. 
 
+\paragraph{Some limit cases for the BCS eqn.}
+\mbox{}
 
-\subsection{Ginsburg-Landau theory of superconductivity}
+$T\to0$:\\
+Here, $\tanh(\frac{E_k}{2T})\to1$, and
+\begin{equation}
+\begin{aligned}
+1=&\frac{U}{2}g(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi
+\frac{1}{\sqrt{\xi^2+\Delta^2}}\\
+=&Ug(\eF)\ln(\frac{\hbar\wD+\sqrt{\hbar^2\wD^2+\Delta^2}}{\Delta}).
+\end{aligned}
+\end{equation}
+Since $\Delta\ll\hbar\wD$, then $1\approx
+Ug(\eF)\ln(\frac{2\hbar\wD}{\Delta})$ and
+\begin{equation}
+\Delta(T=0)=2\hbar\wD \exp[-\frac{1}{Ug(\eF)}]\ll\hbar\wD
+\end{equation}
+This is the maximum value of $\Delta$.
+
+$\Delta\to0$\\
+This will give us $\Tc$.
+\begin{equation}
+1=\frac{U}{2}g(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi
+\frac{\tanh(\frac{\xi}{2\Tc})}{\xi}.
+\end{equation}
+Numerical integration gives
+\begin{equation}
+\Tc\approx 1.14\hbar\wD \exp[-\frac{1}{Ug(\eF)}]\ll\hbar\wD
+\end{equation}
+or
+\begin{equation}
+\frac{2\Delta(T=0)}{\Tc}\approx 3.51
+\end{equation}
+this value has been confirmed through measurements.
+
+\paragraph{Ground state of a superconductor} (no quasi-particles)
+\begin{equation}
+\gamma_{k,\sigma}\ket{\psi_0}=0
+\end{equation}
+\begin{equation}
+\ket{\psi_0}=\prod_k \qty[
+\cos(\theta_k)+\sin(\theta_k)c_{k,\uparrow}^\dagger
+c_{k,\downarrow}^\dagger
+]\ket{0},
+\end{equation}
+where $\ket{0}$ is the vacuum state (no real particles).
+\begin{equation}
+E=\ev{H}{\psi_0}=-Vg(\eF)\qty[(\hbar\wD)^2+\frac{\Delta^2}{2}]
+\end{equation}
+or
+\begin{equation}
+\frac{E-E_\text{normal}}{V}=-\frac{1}{2}g(\eF)\Delta^2.
+\end{equation}
+This is the condensation energy.
+
+In a superconductor the density of sates is
+\begin{equation}
+g_\text{sc}(E)=g(\eF)\frac{E}{\sqrt{E^2-\Delta^2}}.
+\end{equation}
+It takes $2\Delta$ to excite a quasi-paricle.
+
+\subsection{Ginsburg-Landau theory of supercond.}
+The Helmholtz free energy
+\begin{equation}
+\begin{aligned}
+F=&-T\ln(Z)\\
+=&\sum_k\qty(\xi_k{-}E_k) + \frac{V}{U}\Delta^2 
+- 2T\sum_k \ln(1{+}\ee^{-\frac{E_k}{T}}).
+\end{aligned}
+\end{equation}
+This expanded in terms of $\Delta^2$, near $T=\Tc$, is
+\begin{equation}
+F\approx F_0+a\,\Delta^2
++\frac{1}{2}b\,\Delta^4,
+\end{equation}
+where
+\begin{equation}
+a=Vg(\eF)\,t\qcomma 
+b=0.107\,\frac{Vg(\eF)}{\Tc^2}
+\end{equation}
+and
+\begin{equation}
+t=\frac{T-\Tc}{\Tc}.
+\end{equation}
+Minimizing $F$ with resprect to $\Delta$ gives
+\begin{equation}
+\Delta=
+\begin{cases}
+\sqrt{-\frac{a}{b}}\approx3.1\,\Tc\sqrt{\frac{\Tc-T}{\Tc}}\qcomma &T<\Tc\\
+0,&T\ge\Tc.
+\end{cases}
+\end{equation}
+The critical exponent in $\Delta\propto t^\beta$, is $\beta=1/2$.
+
+\paragraph{Non-uniform gap ($\Delta$)}
+The Hamiltonian 
+\begin{equation}
+\begin{aligned}
+H=&\int\!\rd^3r\,\sum_\sigma \psi_\sigma^\dagger(\vb{r})
+\qty(-\frac{\hbar^2}{2m}\laplacian)\psi_\sigma(\vb{r})\\
+&-U\int\!\rd^3r\;
+\psi_\uparrow^\dagger(\vb{r})\psi_\downarrow^\dagger(\vb{r})
+\psi_\downarrow(\vb{r})\psi_\uparrow(\vb{r})
+\end{aligned}
+\end{equation}
+is invariant under a transformation of the complex phase
+$\psi_\sigma(\vb{r})\to\psi_\sigma(\vb{r})\ee^{\ii\chi(\vb{r})}$, for
+some arbitrary phase function $\chi(\vb{r})$.
+
+When applying a magnetic field
+\begin{equation}
+\vb{p}\to \vb{p}-\frac{q}{c}\vb{A}
+\end{equation}
+and the Hamiltonian changes accordingly. 
+The free energy will get a form
+\begin{equation}
+\begin{aligned}
+F=\int\!\rd^3r\Bigg[&
+a\abs{\Delta(\vb{r})}^2+\frac{1}{2}b\abs{\Delta(\vb{r})}^4\\
+&+\kappa\abs{\qty(-\ii\hbar\grad+\frac{2e}{c}\vb{A})\Delta(\vb{r})}^2
+\Bigg]
+\end{aligned}
+\end{equation}
+Rescale
+\begin{equation}
+\varphi:=\frac{\sqrt{2m\kappa}}{\hbar}\Delta(\vb{r})
+\end{equation}
+\begin{equation}
+\frac{\hbar^2}{2m\kappa}a\to a \qcomma 
+\frac{\hbar^2}{2m\kappa}b \to b
+\end{equation}
+which gives
+\begin{equation}
+\begin{aligned}
+F=\int\!\rd^3r\Bigg[&
+\frac{1}{2m}\abs{\qty(-\ii\hbar\grad+\frac{2e}{c}\vb{A})\varphi(\vb{r})}^2\\
+&+a\abs{\varphi(\vb{r})}^2+b\abs{\varphi(\vb{r})}^4+\frac{\vb{B}^2}{8\pi}
+\Bigg]
+\end{aligned}
+\end{equation}
+
+We minimize $F$ with respect to $\varphi$ and $\varphi^*$, and we
+get\\ 
+the \textbf{first Ginsburg-Landau equation}
+\begin{equation}
+a\varphi+b\abs{\varphi}^2\varphi
++\frac{1}{2m}\qty(-\ii\hbar\grad+\frac{2e}{m}\vb{A})^2\varphi=0
+\end{equation}
+and the \textbf{second G-L eqn.}
+\begin{equation}
+\vb{j}=\frac{\ii\hbar e}{m}
+\qty(\varphi^*\grad\varphi-\varphi\grad\varphi^*)
+-\frac{4e^2}{mc}\abs{\varphi}\vb{A}.
+\end{equation}
+
+Define $\ns:=\abs{\varphi}^2=-a/b$ (in absense of EM-fields), which is
+almost the pair density. Then
+\begin{equation}
+\varphi(\vb{r})=\sqrt{\ns(\vb{r})}\, \ee^{\ii\theta(\vb{r})}
+\end{equation}
+for some phase $\theta(\vb{r})$. If $\ns$ is uniform (but $\theta$ is
+not), then
+\begin{equation}
+\vb{j}=-\frac{2\hbar e\ns}{m}\qty(\grad\theta+\frac{2e}{\hbar c}\vb{A}).
+\end{equation}
+As for superfluids, the vorticity 
+\begin{equation}
+\oint\rd\vb{r}\vdot\grad\theta(\vb{r})=\ell2\pi
+\end{equation}
+is quantized. But now $\vb{j}$ is electrical current, so the magnetic
+flux trough a hole in the superconductor
+\begin{equation}
+\Phi=\int\!\rd\vb{S}\vdot\vb{B}=\oint\rd\vb{r}\vdot\vb{A}
+=\ell\,\frac{hc}{2e}=:\ell\varPhi_0
+\end{equation}
+is also quantized in terms of $\varPhi_0=hc/(2e)$.
+
+\subsubsection{The Meissner effect}
+This effect forces magnetic fields out of a superconductor.
+Say a superconductor begins at $x=0$ and $\vb{B}=B\vu{z}$ outside the
+super sonductor, then
+\begin{equation}
+\vb{B}(x)=\vb{B}(0)\ee^{-x/\lambda}\qcomma \text{for}\;x>0,
+\end{equation}
+where
+\begin{equation}
+\lambda=\sqrt{\frac{mc^2}{16\pi e^2\ns}}
+\end{equation}
+is the penetration depth ($\lambda\sim\unit[100]{Å}$).
+
+The Meissner effect is what separates a true super conductor from a
+``regular'' conductor with arbitrarily low resistivity. 
 
 
+There is a critical (magnetic) field strength
+\begin{equation}
+\Hc = \sqrt{\frac{4\pi a^2}{b}},
+\end{equation}
+above which the super conductor brakes down. 
 
+\subsubsection{Type I or II}
+With no magnetic field ($\vb{A}=0$) the first G-L eqn. in 1 dim. reads 
+\begin{equation}
+-\frac{\hbar^2}{2m}\dv{\varphi}{x}+a\varphi+b\abs{\varphi}^2\varphi=0
+\end{equation}
+and has the solution
+\begin{equation}
+\varphi(x)=\frac{1}{2}\sqrt{-\frac{a}{b}}
+\qty[\tanh(\frac{x}{\sqrt{2}\xi})+1]
+\end{equation}
+where
+\begin{equation}
+\xi=\sqrt{-\frac{\hbar^2}{2ma}}
+\end{equation}
+is the coherence length.
+
+It turns out that the ratio
+\begin{equation}
+\kappa=\frac{\lambda}{\xi}=\frac{mc}{2\hbar e}\sqrt{\frac{b}{2\pi}}
+\end{equation}
+affects the type of
+super conductor.
+\begin{equation}
+\begin{cases}
+\kappa<\frac{1}{\sqrt{2}} \quad\Longrightarrow\quad \text{Type I},\\
+\kappa>\frac{1}{\sqrt{2}} \quad\Longrightarrow\quad \text{Type II}.
+\end{cases}
+\end{equation}
+The  Meissner effect applies to type I. For type II, it turns out that
+it's possible to trap small vorticies, which contains a magnetic
+field, inside the superconductor. 
+
+There is a second critical field strength
+\begin{equation}
+\Hcc =-\frac{amc}{\hbar e} = \sqrt{2}\kappa \Hc.
+\end{equation}
+If this is larger than $\Hc$, we can have vortecies
 
 \section{Second order phase transitions}
 
 \subsection{Ising model}
 
-\subsection{Landau theory of cont. phase transitions}
+\subsection{Landau theory of cont. phase trans.}
 
 
 \clearpage
@@ -511,9 +805,25 @@ $1.20206$ & $1.03693$ & $1.00835$
 
 
 
-
-
-
+\section{Genergal mean-field therory}
+We assume that two quantities, $X$ and $Y$, varies very little from
+their mean values. We can write
+\begin{equation}
+\begin{aligned}
+X=&X-\ev{X}+\ev{X}\\
+Y=&Y-\ev{Y}+\ev{Y}
+\end{aligned}
+\end{equation}
+and
+\begin{equation}
+\begin{aligned}
+XY=&\Big[(X-\ev{X})+\ev{X}\Big]
+\Big[(Y-\ev{Y})+\ev{Y}\Big]
+\\\approx&
+X\ev{Y}+\ev{X}Y-\ev{X}\ev{Y}.
+\end{aligned}
+\end{equation}
+Here, we neglected the term $(X{-}\ev{X})(Y{-}\ev{Y})\approx0$. 
 
 
 \end{document}
