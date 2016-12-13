@@ -746,11 +746,128 @@ There is a second critical field strength
 \end{equation}
 If this is larger than $\Hc$, we can have vortecies
 
-\section{Second order phase transitions}
-
+\section{Landau theory phase transitions}
+Characterized by an order parameter which varies continously.
 \subsection{Ising model}
+A model for ferromagnetism. It consists of a lattice of ``bits'' which
+can have the value $-1$ or $+1$.
 
-\subsection{Landau theory of cont. phase trans.}
+Hamiltonian
+\begin{equation}
+H=-J\sum_{\ev{i,j}}\sigma_i\,\sigma_j,
+\end{equation}
+where $\sigma_n=\pm1$, and the sum is over all nearest neighbours. 
+
+Define the magnitazation
+\begin{equation}
+M=\ev{\sigma_i}=\ev{\sigma_j}.
+\end{equation}
+Mean-field approach
+\begin{equation}
+\sigma_i\sigma_j\approx M^2+M\,\qty(\sigma_i+\sigma_j)
+\end{equation}
+\begin{equation}
+H\approx -JzM\sum_i\sigma_i+\frac{JM^2Nz}{2},
+\end{equation}
+where $z$ is the connectivity (number of nearest neighbours).
+
+The free energy
+\begin{equation}
+\pdv{F}{M}=JzN\qty[M-\tanh(\frac{JzM}{T})].
+\end{equation}
+Minimizing $F$ means that
+\begin{equation}
+M=\tanh(\frac{JzM}{T}).
+\end{equation}
+This has non-zero solutions only if $Jz/T<1$. The critical temperature
+is
+\begin{equation}
+\Tc=Jz.
+\end{equation}
+
+Taylor expansion
+\begin{equation}
+f=\frac{F}{N}\approx \frac{\Tc}{2}\qty(1-\frac{\Tc}{T})^2
++\frac{\Tc}{12}M^4.
+\end{equation}
+At $T\le\Tc$
+\begin{equation}
+M=\pm\sqrt{3\qty(1-\frac{T}{\Tc})}\propto t^{1/2}.
+\end{equation}
+Critical exponent $\beta=1/2$.
+
+\subsection{Heissenberg model}
+\begin{equation}
+H=-J\sum_{\ev{i,j}}\vb{S}_i\vdot\vb{S}_j,
+\end{equation}
+\begin{equation}
+\vb{M}=\ev{\vb{S}_i}
+\end{equation}
+
+\begin{equation}
+F=a(T)\vb{M}\vdot\vb{M}+\frac{1}{2}b(\vb{M}\vdot\vb{M})^2
+\end{equation}
+Minimized ($T<\Tc$) when
+\begin{equation}
+\abs{\vb{M}}=M_0=\sqrt{-\frac{a}{b}}.
+\end{equation}
+This gives the (Landau) free energy if condensation
+\begin{equation}
+\varDelta{f}=-\frac{a_1^2t^2}{2b},
+\end{equation}
+where $a(T)=a_1t$. And the entropy of condensation is
+\begin{equation}
+\varDelta{s}=\eval{-\qty(\pdv{f}{T})}_{M=M_0}=\frac{a_1^2}{b\Tc^2}(T-\Tc).
+\end{equation}
+And the heat capacity of condensation
+\begin{equation}
+\varDelta{c_V}=T\pdv{S}{T}=\frac{a_1T}{b\Tc^2}
+\end{equation}
+
+\subsubsection{External magnetic field}
+If we apply an external magnetic field, we get
+\begin{equation}
+f=a(T)\vb{M}\vdot\vb{M}+\frac{1}{2}b(\vb{M}\vdot\vb{M})^2-\vb{B}\vdot\vb{M}.
+\end{equation}
+The symmetry is now broken; use
+$M:=\vb{M}\vdot\vb{B}/\abs{\vb{B}}$. The derivative
+\begin{equation}
+\pdv{f}{M}=2aM+2bM^3-B=0.
+\end{equation}
+Differentiate w.r.t. $B$:
+\begin{equation}
+2a\pdv{M}{B}+6bM^2\pdv{M}{B}=1.
+\end{equation}
+The sucepebility
+\begin{equation}
+\chi=\eval{\pdv{M}{B}}_{B=0}=\frac{1}{2a+6bM^2}
+\end{equation}
+At $T>\Tc$, $M=\chi B$ for weak fields.
+
+In absens of $B$
+\begin{equation}
+\chi=\frac{\Tc}{2a_1(T-T_c)}\times
+\begin{cases}
+1, &T>\Tc\\
+-\frac{1}{2}\qcomma &T<\Tc,
+\end{cases}
+\end{equation}
+which is divergen at $\Tc$ from both directions. 
+
+
+\subsubsection{Improvements to mean-field theory}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \clearpage
@@ -802,10 +919,34 @@ $1.20206$ & $1.03693$ & $1.00835$
 
 
 \section{The harmonic oscillator}
+\begin{equation}
+H=\sum_{k}\qty[\frac{1}{2m}p_{-k}p_{k}+\frac{m\omega_k^2}{2}q_{-k}q_{k}].
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+a_k^\dagger =& \frac{1}{\sqrt{2\hbar}}
+\qty[\sqrt{m\omega_k}q_{-k} - \frac{\ii}{\sqrt{m\omega_k}}p_{+k}]\\
+a_k =& \frac{1}{\sqrt{2\hbar}}
+\qty[\sqrt{m\omega_k}q_{+k} - \frac{\ii}{\sqrt{m\omega_k}}p_{-k}]\\
+\end{aligned}
+\end{equation}
+\begin{equation}
+\comm{a_k}{a_{k'}^\dagger}=\delta_{k,k'}
+\end{equation}
+\begin{equation}
+\hat{n}_k=a_k^\dagger a_k
+\end{equation}
+\begin{equation}
+\hat{n}_k\ket{n_k}=n_k\ket{n_k}
+\end{equation}
+
+\begin{equation}
+H=\sum_k \hbar\omega_k\qty(\hat{n}_k+\frac{1}{2})
+\end{equation}
 
 
-
-\section{Genergal mean-field therory}
+\section{General mean-field therory}
 We assume that two quantities, $X$ and $Y$, varies very little from
 their mean values. We can write
 \begin{equation}
