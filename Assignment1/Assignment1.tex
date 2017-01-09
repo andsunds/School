@@ -108,7 +108,7 @@ $T\to0$.
 \renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
 
 Here, we will use the Landau free energy
-\begin{equation}
+\begin{equation}\label{eq:2_F(M)}
 F=-bM+tM^2+uM^4+M^6,
 \end{equation}
 where $b=B/T$, $t=(T-\Tc)/\Tc$ and $u$ is some coefiicient with no
@@ -118,25 +118,68 @@ restrictions.
 There will be, depending on how precise you want to be, around four
 different generic forms of $F$, and they occur at
 \begin{enumerate}[label=\Roman*.]
-\item $t\ge0$, $u\ge0$ %$\quad\Longrightarrow\quad$ just one minimum at $M=0$
-\item $t<0$, $u$ any value; or $t=0$, $u<0$
-%$\quad\Longrightarrow\quad$ local maximum at $M=0$ and two minimums with $M^2{>}\,0$.
-\item $0<t<u^2/4$, $u<0$
-\item $t>u^2/4$, $u<0$
+\item $t\ge0$, $u\ge0$ \\
+Here, it's obvious that all we can get is a single minimum at $M=0$.
+\item $t<0$, $u$ any value; or $t=0$, $u<0$\\
+For $t<0$, the initial behaviour around $M=0$ is to drop down, but at
+large $|M|$ we still get $F\to+\infty$. So we must have two minima at
+$M\neq0$, and a local maximum at $M=0$. The same is true for $t=0$ and
+$u<0$. 
+\item $0<t<u^2/4$, $u<0$\footnotemark{}\addtocounter{footnote}{-1}\\
+Here, we initially get a growing $F$, near $M=0$, but the effects of a
+negative enough $u$ will then come into play and force down $F(m)$ to
+two minima at $M\neq0$ which are stronger than the one at $M=0$.
+\item $t>u^2/4$, $u<0$\footnotemark{}\\
+In this case, there might not even be two minima at $M\neq0$, but if
+they excist they are weaker than the one at $M=0$.
 \end{enumerate}
 These four cases encompass all of the $u{-}T$ plane. The generic forms
-of $F(M)$ can be seen in 
+of $F(M)$ can be seen in \figref{fig:2a}.
+
+\footnotetext{The difference between these two cases will be
+  further elaborated on in part (b) of this problem.}
 
 \begin{figure}
 \centering
 \input{figures/generic_forms.tex}
-\caption{}
+\caption{The four (or five) different generic forms of $F(M)$, as
+  given by \eqref{eq:2_F(M)}. }
 \label{fig:2a}
 \end{figure}
 
+\subsection{First order transition, when $u<0$}
+As illustrated in the difference between case III and IV, we see that
+when $u<0$ it is indeed possible to get a scenario when the global
+minimum of $F(M)$ jumps from $M=0$ to $\pm M_0\neq0$. The transition
+occurs when the equation 
+\begin{equation}
+tM^2+uM^4+M^6=M^2(t+uM^2+M^4)=0
+\end{equation}
+goes from only one real solution to three/five. This is because we
+know that the minimum at $M=0$ gives $F(M=0)=0$. So if we were to get
+more solutions to this equation, that would mean that $F$ can assume
+negative values. Ergo, there are some other minima which are stronger
+than the one at $M=0$. 
 
+We are therefore looking for when
+\begin{equation}
+t+uM^2+M^4=0
+\end{equation}
+starts having real solutions. These solutions are
+\begin{equation}
+M^2=\frac{-u\pm\sqrt{u^2-4t}}{2},
+\end{equation}
+and we see that this occurs only if $t\le u^2/4$. We are now in case
+III, where the \emph{global} minima is away from $M=0$, but $M=0$ is
+still however a \emph{local} minimum. This means that there is a
+chance that the system will remain in $M=0$ all the way until $t=0$,
+when we enter case II. In case II, $M=0$ is now a local maximum so the
+system will quickly find its way to one of the two minima with
+non-zero $M$. 
 
-
+% Note also that the temperature at which this sudden jump in
+% magetization happens is at $t=u^2/4>0$. That is the phase
+% transition occurs at a temerature above $\Tc$.
 
 
 
