@@ -23,9 +23,7 @@
 ]{geometry}
 
 %%För att ändra hur rubrikerna ska formateras
-\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 
-\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
 
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
@@ -53,11 +51,79 @@ Assignment 1}
 
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
-\section{MF magnetic susceptibility}
+\section{Mean field magnetic susceptibility}
+\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+
+In this problem, we will study the magnetic susceptibility, $\chi$, in
+view of the MFT approach to the Ising model. We will look at the
+asymptotic behaviour of $\chi$ for $T\to0^+$ and $T\to\Tc$.
+
+We begin from the MF equation
+\begin{equation}\label{eq:1_MFE}
+M=\tanh(\frac{MJ + B}{T}),
+\end{equation}
+and the definition of susceptibility
+\begin{equation}\label{eq:1_chi}
+\chi:=\eval{\dv{M}{B}}_{B=0}.
+\end{equation}
+
+By applying \eqref{eq:1_chi} to \eqref{eq:1_MFE}, we get
+\begin{equation}
+\chi=\frac{1}{\cosh^2(MJ/T)}\, 
+\qty(\frac{J}{T}\chi+\frac{1}{T}),
+\end{equation}
+or in other words
+\begin{equation}\label{eq:1_chi_exact}
+\chi=\frac{1}{T\cosh^2(MJ/T)-\Tc}.
+\end{equation}
+In the last step we also used the fact that $\Tc=J$ using the MFT approach.
+
+\subsection{Zero temperature limit}
+As $T\to0^+$, the leading order behaviour of the hyperbolic cosine is
+\begin{equation}
+\cosh^2\qty(\frac{MJ}{T})\sim \frac{1}{4}\exp(2\frac{\abs{M}J}{T}).
+\end{equation}
+This exponential growth will dominate over the factor $T$ in
+front and the constant $-\Tc$ in the denominator. And \eqref{eq:1_MFE}
+also shows us that $M\to\pm1$ as $T\to0^+$. 
+
+The asymptotic behaviour of \eqref{eq:1_chi_exact} will be 
+\begin{equation}
+\chi\sim \frac{4}{T}\exp(-2\frac{J}{T})
+\qcomma \text{as}\ T\to0.
+\end{equation}
+And to be clear, this asymptotic behaviour results in $\chi(T)\to0$ as
+$T\to0$. 
+
+
+\subsection{Critical temperature limit}
+
+
+
 
 
 
 \section{Phase transitions in Landau theory}
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+Here, we will use the Landau free energy
+\begin{equation}
+F=-bM+tM^2+uM^4+M^6,
+\end{equation}
+where $b=B/T$, $t=(T-\Tc)/\Tc$ and $u$ is some coefiicient with no
+restrictions. 
+
+\subsection{Generic forms of $F$}
+There will be, depending on how precise you want to be, around four
+different generic forms of $F$, and they occur at
+\begin{enumerate}[label=\roman*.]
+\item $t,\,u\ge0$ %$\quad\Longrightarrow\quad$ just one minimum at $M=0$
+\item $t<0$, $u$ any value; and $t=0$, $u<0$
+%$\quad\Longrightarrow\quad$ local maximum at $M=0$ and two minimums with $M^2{>}\,0$.
+\item $0<t<u^2/4$, $u<0$
+\item $t>u^2/4$, $u<0$
+\end{enumerate}
 
 
 
@@ -74,5 +140,6 @@ Assignment 1}
 \end{document}
 
 
-%  LocalWords:  Pathria  idealities bosonic Bogoliubov Beale BCS
-%  LocalWords:  Laplace's
+
+
+%  LocalWords:  MFT MF
