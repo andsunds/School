@@ -13,3 +13,5 @@ Assignment?.pdf
 *.snm
 
 *.fig.bak
+
+*-eps-converted-to.pdf
