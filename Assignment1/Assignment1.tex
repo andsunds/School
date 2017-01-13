@@ -117,6 +117,18 @@ on $x\in\R$.
 
 
 \subsection{Periodic boundary conditions}
+\begin{figure}\centering
+\includegraphics[width=.8\textwidth]{1_time_evolution.eps}
+\caption{The time evolution of a soluotion to \eqref{eq:1_start} with
+  periodic BC. The parameter values and IC are: $\sigma=a=1$ and 
+  $\varphi(x)=\cos(\pi x)+2\cos(3\pi x)$. We see how, at $t=0.2$, the
+  general form of the function is shifted to the right and not
+  distorted very much; but at $t=0.3$ we also see that the high
+  frequency component have been attenuated more; at $t=3$ almost all
+  of the fluctuations are gone.}
+\label{fig:1}
+\end{figure}
+
 Periodic bondary conditions are equivalent to changing from case I to
 case II. 
 
@@ -127,7 +139,7 @@ the right for $t>0$).
 
 \footnotetext{See part (c) of this problem for more details.}
 
-\todo[inline]{Plot!}
+An exampe of this behaviour is shown in \figref{fig:1}.
 
 \subsection{Relating this solution to the solutions of the original PDE's}
 As said before the factor $\ee^{-\ii kat}$, resulting from the term
@@ -293,6 +305,13 @@ And substituting that back into \eqref{eq:2_start} yields
 
 
 \section{Round-off errors}
+Here we're going to study round-off errors.
+
+\begin{figure}\centering
+\includegraphics[width=1\textwidth]{3_FD.eps}
+\caption{}
+\label{fig:3_error}
+\end{figure}
 
 
 
