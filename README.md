@@ -1,4 +1,4 @@
-# PHYS 705 - Statistical Physics 2, UWaterloo
+# AMATH 741 - Num. sol. to PDE's, UWaterloo
 
 Here I keep my assignments and stuff.
 
