@@ -1,3 +1,23 @@
+%% A1, Q2 a)
+clc;clear
+
+A=repmat(-2:2,5,1).^repmat((0:4).',1,5);
+
+b2=[0,0,1,0,0].'*24;%this should be 12...
+b3=[0,0,0,1,0].'*12;
+
+A\b2
+
+A\b3
+
+%% A1, Q2 a)
+clc;clear
+
+A=repmat(0:5,6,1).^repmat((0:5).',1,6);
+b=[zeros(1,4),1,0].'*24
+
+A\b
+
 %% A1, Q3 a)
 clc;clf;clear
 
