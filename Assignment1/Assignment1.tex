@@ -1,0 +1,159 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+\usepackage[makeroom
+]{cancel}
+\graphicspath{{figures/}}
+
+\swapcommands{\Delta}{\varDelta}
+\swapcommands{\Omega}{\varOmega}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 2.5cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+
+\begin{document}
+
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{Numerical solutions to PDE's -- AMATH\,741 \\
+Assignment 1}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+\section{Advection-diffusion equation}
+
+Here we will consider the equation
+\begin{equation}\label{eq:1_start}
+u_t+au_x=\sigma u_{xx}\qcomma
+a>0\qcomma \sigma>0
+\end{equation}
+on some domain.
+The solutions are assumed to be of the form
+\begin{equation}\label{eq:1_sol1}
+u(x, t)=\sum_k \hat{u}(k, t)\ee^{\ii kx}.
+\end{equation}
+(The exact specification of $k$ in the sum is not given here. That is
+because the values of $k$ depends on the IC or BC.)
+
+\subsection{Finding a solution}
+To find the form of each term in \eqref{eq:1_sol1}, we can omit the
+sum in \eqref{eq:1_sol1}, since the governing PDE is linear. We get
+\begin{equation}\label{eq:1_disp}
+\hat{u}_t + \ii ka\, \hat{u}
+=-\sigma k^2\hat{u},
+\end{equation}
+where we've also canceled the factor $ee^{\ii kx}$ appearing in all of
+the terms in the dispersion relation \eqref{eq:1_disp}. We see now
+that \eqref{eq:1_disp} is a DE in $t$ with the solution
+\begin{equation}
+\hat{u}(k, t)= c(k)\, \ee^{-(\ii ka+\sigma k^2)t},
+\end{equation}
+where $c(k)$ is some function of $k$ (that depends on the I.C.).
+The solution to \eqref{eq:1_start} thus becomes
+\begin{equation}\label{eq:1_sol2}
+u(x, t) = \sum_k c(k)\, \ee^{\ii k(x-at)}\ee^{-\sigma k^2t}.
+\end{equation}
+
+The initial conditions come into play on determining $c(k)$. Let's say
+that
+\begin{equation}
+u(x, 0)=\varphi(x)
+\end{equation}
+on the domain of the problem. Then, setting $t=0$ in
+\eqref{eq:1_sol2}, we get
+\begin{equation}
+\sum_k c(k)\, \ee^{\ii kx}=\varphi(x)
+\end{equation}
+This is a Fourier series expansion of $\varphi$; for this to work we
+need either of these two cases to be satisfied
+\begin{enumerate}[label=\Roman*.]
+\item the domain of the problem is bounded with length $P$,
+\item or $\varphi$ is periodic with period $P$.
+\end{enumerate}
+The allowed frequencies will be $k=n/P$, $n\in\Z$.
+And the coefficients are the regular Fourier coefficients
+\begin{equation}
+c(k)=\frac{1}{P}\int_{x_0}^{x_0+P} \varphi(x)\ee^{-\ii kx}\id{x}.
+\end{equation}
+
+An example of a possible IC of the first kind would be 
+\begin{equation}
+\varphi_\mathrm{I}(x)=1-|x|
+\end{equation}
+on the finite domain $x\in[-1, 1]$. An expample of the second kind of
+IC could be
+\begin{equation}
+\varphi_\mathrm{II}(x)=\cos(x)+\cos(2x)
+\end{equation}
+on $x\in\R$.
+
+
+\subsection{Periodic boundary conditions}
+Periodic bondary conditions are equivalent to changing from case I to
+case II. 
+
+What will happen is that each frequency will be attenuated according
+to $\ee^{-\sigma k^2t}$, and then Fourier analysis tells us that the
+(space domain) solution will be shifted\footnotemark{} by $akt$. 
+
+\footnotetext{See part (c) of this problem for more details.}
+
+\todo[inline]{Plot!}
+
+\subsection{Relating this solution to the solutions of the original PDE's}
+
+
+
+
+
+
+\section{Higher order approximations of derivatives}
+
+
+
+
+\section{Round-off errors}
+
+
+
+\section{Numerical solution of the heat equation}
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+%  LocalWords:  MFT MF Advection PDE's AMATH
