@@ -3,8 +3,13 @@
 \pdfoutput=1
 
 \usepackage{../custom_as}
-\usepackage[makeroom
-]{cancel}
+
+\usepackage{listings} 
+\usepackage[framed,numbered,autolinebreaks,useliterate]{../mcode}
+\lstloadlanguages{matlab} 
+\lstset{language=matlab} 
+
+\usepackage[makeroom]{cancel}
 \graphicspath{{figures/}}
 
 
@@ -305,18 +310,156 @@ And substituting that back into \eqref{eq:2_start} yields
 
 
 \section{Round-off errors}
-Here we're going to study round-off errors.
+Here we're going to study round-off errors. That is, we will
+study the effects of rounding error in the subtraction between two
+floating point numbers that are close to each others. 
 
 \begin{figure}\centering
 \includegraphics[width=1\textwidth]{3_FD.eps}
-\caption{}
+\caption{Plot of the absolute error between approximate and ``exact''
+  derivatives of $\sin(x)$ at $x=1$ as a function of the $x$-step,
+  $\Dx$, used for the approximation. The asymptotic behaviours are
+  also shown.}
 \label{fig:3_error}
 \end{figure}
+
+In general the $d$th derivative can be approximated as
+\begin{equation}\label{eq:3_du/dx}
+u_{dx}=\frac{\delta^d[u, \Dx]}{\Dx^d}+\order{\Dx^E},
+\end{equation}
+where $\delta^d[u, x]$ is some linear combination of $u(x+i\Dx)$ for a
+given set of $i$'s. Assuming $u_{dx}$ is finite we see that
+\begin{equation}
+\delta^d[u, \Dx]=\order{\Dx^d},
+\end{equation}
+meaning that the numerator in \eqref{eq:3_du/dx} will become
+arbitrarily small as $\Dx\to0$. This is due to the fact that the
+linear combination will be a combination of additions and subtractions
+of numbers that all tends to the same value. One of the easiest
+examples of this is the first FD:
+\begin{equation}
+u_x=\frac{u(x+\Dx)-u(x)}{\Dx}+\order{\Dx};
+\end{equation}
+here $u(x+\Dx)\to u(x)$ as $\Dx\to0$ so the difference in the
+numerator eventually becomes too small for the floating point number
+precision. 
+
+This is true in theory with prefect real numbers. In a computer,
+however, we have to do with a finite precision. This means that the
+numerical scheme $\hat\delta^d$ will have some rounding error:
+\begin{equation}
+\hat\delta^d[u, \Dx]=\delta^d[u, \Dx]+\epsilon(\Dx),
+\end{equation}
+where $|\epsilon(\Dx)|\ge\epsilon_0>0$. In other words
+\begin{equation}
+\hat\delta^d[u, \Dx]=\epsilon(\Dx)+\order{\Dx^d}\not\to0
+\quad\text{as } \Dx\to0.
+\end{equation}
+Any mordern computer should however have a very small rounding error;
+so for $\Dx$ sufficiently large, the rounding error should be neglible
+compared to the discretization error.
+This means that the asymptotic\footnotemark{} behaviour of the errors
+between the approximation and the exact derivatives are 
+\begin{equation}
+\hat{e}_d(\Dx)=\abs{u_{dx}-\frac{\hat\delta^d[u, \Dx]}{\Dx^d}}
+\sim\begin{cases}
+c_1\,\Dx^E\qcomma& \Dx\gg\Delta_0\\
+c_2\,\Dx^{-d},& \Dx\ll\Delta_0,
+\end{cases}
+\end{equation}
+where $\Delta_0$ is some threshold value for $\Dx$ where the rounding
+and discretization errors are comparable in size. 
+\footnotetext{This is a bit of abusing notation since $\epsilon(\Dx)$
+  does \emph{not} have a limit, but will fluctuate, as $\Dx\to0$.}
+
+We can furthermore estimate where the smallet total error will be by
+estimating the error as
+\begin{equation}
+\hat{e}_d(\Dx)\approx\tilde{e}_d(\Dx)=c_1\Dx^E + c_2\Dx^{-d}.
+\end{equation}
+The minimum of $\tilde{e}_d$ will be when
+\begin{equation}\label{eq:3_de/dDx}
+\dv{\tilde{e}_d}{(\Dx)}=Ec_1\Dx^{E-1}-dc_2\Dx^{-d-1}=0
+\end{equation}
+which is when
+\begin{equation}\label{eq:3_Dxmin}
+\Dx_\text{min}=\qty(\frac{dc_2}{Ec_1})^{1/(E+d)}.
+\end{equation}
+If we're only looking for an order of magnitude esimate
+\eqref{eq:3_de/dDx} can be simplified by neglecting the factors $E$
+and $d$; this is the same as saying that the two types of errors are
+roughtly equal in size at the minimum.
+
+\subsection{FD first derivative}
+For the FD first derivative we have $d=1$ and $E=1$.
+From \figref{fig:3_error}, we find the asymptotic behaviour
+\begin{equation}
+\hat{e}_1(\Dx)=
+\sim\begin{cases}
+0.4\,\Dx \qcomma& \Dx\gg 10^{-8}\\
+3\times10^{-17}\,\Dx^{-1},& \Dx\ll 10^{-8}.
+\end{cases}
+\end{equation}
+Now, \eqref{eq:3_Dxmin} tells us that the minimum value should be at 
+\begin{equation}
+\Dx_\text{min}=\qty(\frac{1\times(3\times10^{-17})}{1\times0.4})^{1/2}
+=8.7\times10^{-9}\approx 10^{-8},
+\end{equation}
+which agrees up to the order of magnitude with what we can see in
+\figref{fig:3_error}. 
+
+
+\subsection{FD fourth derivative (from 2b)}
+In this case we have $d=4$ and $E=4$, and \figref{fig:3_error} gives
+\begin{equation}
+\hat{e}_4(\Dx)=
+\sim\begin{cases}
+2.5\,\Dx^2 \qcomma& \Dx\gg 10^{-8}\\
+3\times10^{-15}\,\Dx^{-1},& \Dx\ll 10^{-8},
+\end{cases}
+\end{equation}
+and 
+\begin{equation}
+\Dx_\text{min}=\qty(\frac{4\times(3\times10^{-15})}{1\times2.5})^{1/6}
+=4.1\times10^{-3}\approx 10^{-2},
+\end{equation}
+which again agrees up to the order of magnitude with the result in
+\figref{fig:3_error}.
+
+\subsection*{End notes}
+There are two more points I would like to address in this problem.
+
+The first one is that $c_2$, which is roughly the rounding errors,
+differs between the two derivatives. At a first glace they should be
+the same, since the same machine/programe should have roughly the same
+rounding errors. But for the fourth derivative, $\delta_4$ involve
+many more terms than in the first FD. This means that, depending on
+how the additions and subtractinos are carried out, there are more
+instances where rounding errors are introduced. The difference, of 2
+orders of magnitude, is still somewhat remarkable though. 
+
+The second point is that it's safer to use a $\Dx_\text{min}$ rounded
+\emph{up}. In this case the outcome was such that the (logarithmic)
+rounding already was upwards. But it's always better to be in a
+regime where you know the errors, i.e. when we don't have to wory
+about rounding errors (of which we don't know the ecaxt size).
+
+\subsection*{Code printout}
+The calculations, done in MATLAB, for this problem is shown below; non
+of the graphics code were included here.
+\lstinputlisting[firstline=55, lastline=69]{code/a1.m}
+
 
 
 
 \section{Numerical solution of the heat equation}
 
+\subsection{Simple numerical solution}
+\begin{figure}\centering
+\includegraphics[width=1\textwidth]{4a.eps}
+\caption{}
+\label{fig:4a}
+\end{figure}
 
 
 
