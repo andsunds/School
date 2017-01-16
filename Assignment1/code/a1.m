@@ -48,33 +48,129 @@ b=[zeros(1,4),1,0].'*24
 
 A\b
 
-%% A1, Q3 (a+b)
+%% A1, Q3 (a+b) 
 clc;clf;clear
+%N.B! 
+%The row numbers, from the declaration of f to e42, should be kept at 55-69!
+f=@(x) sin(x); %the original function
+Df=@(x) cos(x); %the first derivative (exact)
+D4f=@(x) sin(x); %the fourth derivative (exact)
 
-f=@(x) sin(x);
-Df=@(x) cos(x);
-D4f=@(x) sin(x);
-
-FDf=@(dx, x0) (f(x0+dx)-f(x0))./dx;
-
-FD42f=@(dx,x0) (3*f(x0+0*dx)-14*f(x0+1*dx)+26*f(x0+2*dx)-24*f(x0+3*dx)+11*f(x0+4*dx)-2*f(x0+5*dx))./(dx.^4);
-
-
-
+%FD first derivative
+FDf=@(dx, x0) (f(x0+dx)-f(x0))./dx; 
+%FD fourth derivative
+FD42f=@(dx,x0) ( 3*f(x0+0*dx)-14*f(x0+1*dx)+26*f(x0+2*dx)...
+                 -24*f(x0+3*dx)+11*f(x0+4*dx)-2*f(x0+5*dx) )./(dx.^4);
+%initializing
 dx=logspace(-15,-1,100);
 x0=1;
-
+%Calculating the absolute errors
 e=abs(Df(x0)-FDf(dx,x0));
 e42=abs(D4f(x0)-FD42f(dx,x0));
 
-plot(dx,e,'-'), hold on
-plot(dx,e42,'--')
+y11=.4*dx.^1;
+y12=3e-17*dx.^(-1);
+y21=2.5*dx.^2;
+y22=3e-15*dx.^(-4);
+
+
+plot(dx,e,'+-','linewidth',3,'markersize',8), hold on
+plot(dx(50:end),e42(50:end),'*-', 'linewidth',3,'markersize',10)
+
+plot(dx,y11,'-k', dx,y12,'--k', 'linewidth',2)
+plot(dx,y21,'-.k', dx,y22,':k', 'linewidth',2)
+
 set(gca,'yscale','log', 'xscale','log', 'fontsize',23,...
-    'XTick',10.^(-15:-1), 'xLim',[1e-15,1e-1], 'yLim', [1e-10,1e0])
+    'XTick',10.^(-15:-1), 'xLim',[1e-15,1e-1], 'yLim', [1e-10,1e1])
 
 xlabel('$\Delta{x}$','interpreter','LaTeX')
 ylabel('Difference between exact and approximated derivatives','interpreter','LaTeX')
 
-l=legend('FD, 1st derivative', 'FD, 4th derivative (from problem 2b)');
-set(l, 'location', 'northWest', 'interpreter','LaTeX', 'fontsize', 25)
+l=legend('FD 1st derivative', 'FD 4th derivative (from problem 2b)',...
+         '$0.4\,\Delta{x}$','$3\times10^{-17}\,\Delta{x}^{-1}$','$2.5\,\Delta{x}^2$','$3\times10^{-15}\,\Delta{x}$');
+set(l, 'location', 'north', 'interpreter','LaTeX', 'fontsize', 25)
+
+
+
+%% A1, Q4: num sol of heat equation
+clc;clf;clear
+
+sigma=1;
+dX=0.01; %mesh size
+r=.4;
+dt=(r*dX^2/sigma)
+
+X=-1:dX:1; %the mesh
+N=length(X);
+
+T=.2;
+n=floor(T/dt);
+
+u0=sin(pi*X).'; %IC
+%u_end=0;      %BC
+
+
+%The transfer matrix
+A=(1-2*r)*eye(N)...%the diagonal
+   +[zeros(N-1,2),[zeros(1,N-2); r*eye(N-2)];zeros(1,N)]...%the upper off-diagonal
+   +[zeros(1,N);[r*eye(N-2);zeros(1,N-2)],zeros(N-1,2)];%the lower off-diagonal
+
+
+U=[u0,zeros(N,n)];%init
+
+for i=2:n
+    U(:,i)=A*U(:,i-1);
+end
+
+%plot(X,U(:,[1,floor(n/3),floor(2*n/3),n]))
+plot(X,U(:,1),':'), hold on
+plot(X,U(:,floor(n/3)),'-')
+plot(X,U(:,floor(2*n/3)),'--')
+plot(X,U(:,floor(n)),'-.')
+
+
+set(gca,'fontsize',30)
+
+xlabel('$x$','interpreter','LaTeX')
+ylabel('$U_j^n$','interpreter','LaTeX')
+
+l=legend(sprintf('$t=%0.2f$',0), sprintf('$t=%0.2f$',n/3*dt),...
+         sprintf('$t=%0.2f$',2*n/3*dt),sprintf('$t=%0.2f$',n*dt));
+
+set(l, 'location', 'northwest', 'interpreter','LaTeX', 'fontsize', 25)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
