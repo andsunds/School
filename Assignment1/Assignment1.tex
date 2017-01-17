@@ -97,7 +97,8 @@ on the domain of the problem. Then, setting $t=0$ in
 \sum_k c(k)\, \ee^{\ii kx}=\varphi(x)
 \end{equation}
 This is a Fourier series expansion of $\varphi$; for this to work we
-need  either of these two cases to be satisfied
+need $\varphi$ to be piecewise continuous and either of these two
+cases must to be satisfied
 \begin{enumerate}[label=\Roman*.]
 \item the domain of the problem is bounded with length $P$,
 \item or $\varphi$ is periodic with period $P$,
@@ -427,7 +428,7 @@ which again agrees up to the order of magnitude with the result in
 \figref{fig:3_error}.
 
 \subsection*{End notes}
-There are two more points I would like to address in this problem.
+There are three more points I would like to address in this problem.
 
 The first one is that $c_2$, which is roughly the rounding errors,
 differs between the two derivatives. At a first glace they should be
@@ -443,6 +444,11 @@ The second point is that it's safer to use a $\Dx_\text{min}$ rounded
 rounding already was upwards. But it's always better to be in a
 regime where you know the errors, i.e. when we don't have to worry
 about rounding errors (of which we don't know the exact size).
+
+There is ofcourse rounding errors occuring in the subtraction between
+the ``exact'' and approximated derivative. Those rounding errors are
+however not significant. That is because the rounding errors in the
+approximation of the derivative aer divided by $\Dx\ll1$.
 
 \subsection*{Code printout}
 The calculations, done in MATLAB, for this problem is shown below; non
