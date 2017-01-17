@@ -94,35 +94,55 @@ set(l, 'location', 'north', 'interpreter','LaTeX', 'fontsize', 25)
 
 %% A1, Q4: num sol of heat equation
 clc;clf;clear
-
 sigma=1;
-dX=0.01; %mesh size
+u0=@(x) sin(pi*x); %IC
+u=@(x,t) u0(x).*exp(-sigma*pi^2*t);
+
+dX=0.1*2.^(-(0:6)); %mesh size
+Nmax=zeros(size(dX));
+N2=zeros(size(dX));
+
+
+for j=1:length(dX)
+
 r=.4;
-dt=(r*dX^2/sigma)
-
-X=-1:dX:1; %the mesh
+X=-1:dX(j):1; %the mesh
 N=length(X);
+T=.1;%end time
 
-T=.2;
+
+
+% The transfer matrix
+A=(1-2*r)*eye(N)...%the diagonal
+  +[zeros(N-1,2),[zeros(1,N-2); r*eye(N-2)];zeros(1,N)]...%the upper off-diagonal
+  +[zeros(1,N);[r*eye(N-2);zeros(1,N-2)],zeros(N-1,2)];%the lower off-diagonal
+
+
+
+
+dt=(r*dX(j)^2/sigma);%dt is chosen based on what r value we want
+
 n=floor(T/dt);
 
-u0=sin(pi*X).'; %IC
-%u_end=0;      %BC
 
-
-%The transfer matrix
-A=(1-2*r)*eye(N)...%the diagonal
-   +[zeros(N-1,2),[zeros(1,N-2); r*eye(N-2)];zeros(1,N)]...%the upper off-diagonal
-   +[zeros(1,N);[r*eye(N-2);zeros(1,N-2)],zeros(N-1,2)];%the lower off-diagonal
-
-
-U=[u0,zeros(N,n)];%init
+U=[u0(X).',zeros(N,n-1)];%init
 
 for i=2:n
     U(:,i)=A*U(:,i-1);
 end
 
-%plot(X,U(:,[1,floor(n/3),floor(2*n/3),n]))
+plot(X,U(:,end)),hold on
+
+Nmax(j)=max(abs(U(:,end)-u(X.',T)));
+
+N2(j)=sqrt(dX(j)*sum( (U(:,end)-u(X.',T)).^2 ));
+
+end
+
+(Nmax-N2)
+
+%% Plots for Q4 a
+clf,clc
 plot(X,U(:,1),':'), hold on
 plot(X,U(:,floor(n/3)),'-')
 plot(X,U(:,floor(2*n/3)),'--')
@@ -140,13 +160,43 @@ l=legend(sprintf('$t=%0.2f$',0), sprintf('$t=%0.2f$',n/3*dt),...
 set(l, 'location', 'northwest', 'interpreter','LaTeX', 'fontsize', 25)
 
 
+%% Plots for Q4 b
+clf;clc
+plot(X,u0,':'), hold on
+plot(X,UU(:,1),'-'), hold on
+plot(X,UU(:,2),'--')
+plot(X,UU(:,3),'-.')
 
 
+set(gca,'fontsize',30)
+
+xlabel('$x$','interpreter','LaTeX')
+ylabel('$U_j^{n}$ at $t=T=0.1$','interpreter','LaTeX')
+
+l=legend('$u(x, 0)$', '$\sigma=0.5$', '$\sigma=1$', '$\sigma=2$');
+
+set(l, 'location', 'northwest', 'interpreter','LaTeX', 'fontsize', 25)
 
 
+%% Plots for Q4 c
+clc;clf
 
+C=[log(dX.'),ones(length(dX),1)]\log(Nmax.');
 
+dx=logspace(-3,-1);
 
+loglog(dX,Nmax,'d', dX,N2,'x', 'markersize',15),hold on
+plot(dx,exp(C(2))*dx.^C(1),'--k')
+grid on
+
+set(gca,'fontsize',30)
+
+xlabel('$\Delta{x}$','interpreter','LaTeX')
+ylabel('$||U-u||$ at $t=0.1$','interpreter','LaTeX')
+
+l=legend('$||U-u||_\infty$', '$||U-u||_2$', '$\propto\Delta{x}^2$');
+
+set(l, 'location', 'northwest', 'interpreter','LaTeX', 'fontsize', 25)
 
 
 
