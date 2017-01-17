@@ -74,14 +74,14 @@ By applying \eqref{eq:1_chi} to \eqref{eq:1_MFE}, we get
 \end{equation}
 or in other words
 \begin{equation}\label{eq:1_chi_exact}
-\chi=\frac{1}{T\cosh^2(MJ/T)-\Tc}.
+\chi=\frac{1}{T\cosh^2(M\Tc/T)-\Tc}.
 \end{equation}
 In the last step we also used the fact that $\Tc=J$ using the MFT approach.
 
 \subsection{Zero temperature limit}
 As $T\to0^+$, the leading order behaviour of the hyperbolic cosine is
 \begin{equation}
-\cosh^2\qty(\frac{MJ}{T})\sim \frac{1}{4}\exp(2\frac{\abs{M}J}{T}).
+\cosh^2\qty(\frac{M\Tc}{T})\sim \frac{1}{4}\exp(2\frac{\abs{M}\Tc}{T}).
 \end{equation}
 This exponential growth will dominate over the factor $T$ in
 front and the constant $-\Tc$ in the denominator. And \eqref{eq:1_MFE}
@@ -89,7 +89,7 @@ also shows us that $M\to\pm1$ as $T\to0^+$.
 
 The asymptotic behaviour of \eqref{eq:1_chi_exact} will be 
 \begin{equation}
-\chi\sim \frac{4}{T}\exp(-2\frac{J}{T})
+\chi\sim \frac{4}{T}\exp(-2\frac{\Tc}{T})
 \qcomma \text{as}\ T\to0.
 \end{equation}
 And to be clear, this asymptotic behaviour results in $\chi(T)\to0$ as
@@ -97,9 +97,34 @@ $T\to0$.
 
 
 \subsection{Critical temperature limit}
+We begin with aproaching the limit from below, $T<\Tc$. We do still
+evaluate the derivative for $\chi$ at $B=0$, so the MFT value for $M$
+can be used:
+\begin{equation}
+M=\sqrt{3}\frac{T}{\Tc}\sqrt{-t}.
+\end{equation}
+Plugging this into the exact expression \eqref{eq:1_chi_exact} and
+Taylor expanding the hyperbolic cosine gives
+\begin{equation}
+\begin{aligned}
+\chi(T\to\Tc^-)\sim&\frac{1}{T\qty[1+3(T/\Tc)^2(\Tc-T)/\Tc]-\Tc}\\
+=&\frac{1}{T-3(T/\Tc)^3(T-\Tc) -\Tc}\\
+=&\frac{1}{T-\Tc}\times\frac{1}{1-3(T/\Tc)^3}\\
+\sim&\frac{1}{2}\times\frac{1}{\Tc-T}=\frac{1}{2\Tc}|t|^{-1}.
+\end{aligned}
+\end{equation}
+If we approach the limit from the other end, we know that $M=0$. So
+\eqref{eq:1_chi_exact} is just
+\begin{equation}
+\chi(T\to\Tc^+)=\frac{1}{T-\Tc}=\frac{1}{\Tc} |t|^{-1}.
+\end{equation}
 
-
-
+To conclude this part of the problem we note that in both cases, we
+can write
+\begin{equation}
+\chi=C_\pm |t|^{-\gamma},
+\end{equation}
+where $\gamma=1$ and $C_+/C_-=1/2$.
 
 
 
