@@ -124,7 +124,7 @@ can write
 \begin{equation}
 \chi=C_\pm |t|^{-\gamma},
 \end{equation}
-where $\gamma=1$ and $C_+/C_-=1/2$.
+where $\gamma=1$ and $C_+/C_-=2$.
 
 
 
@@ -195,16 +195,101 @@ starts having real solutions. These solutions are
 M^2=\frac{-u\pm\sqrt{u^2-4t}}{2},
 \end{equation}
 and we see that this occurs only if $t\le u^2/4$. We are now in case
-III, where the \emph{global} minima is away from $M=0$, but $M=0$ is
-still however a \emph{local} minimum. This means that there is a
+III, where the \emph{global} minima is away from $M=0$. But $M=0$ is
+still however a \emph{local} minimum; this means that there is a
 chance that the system will remain in $M=0$ all the way until $t=0$,
-when we enter case II. In case II, $M=0$ is now a local maximum so the
+when we enter case II. In case II, $M=0$ is instead a local maximum so the
 system will quickly find its way to one of the two minima with
 non-zero $M$. 
 
 % Note also that the temperature at which this sudden jump in
 % magetization happens is at $t=u^2/4>0$. That is the phase
 % transition occurs at a temerature above $\Tc$.
+
+
+\subsection{The tri-critical point}
+
+\subsubsection{Phase transitions}
+From the analysis in the previous part of the problem, we know that
+the line of the first order transition is at $t=u^2/4$. This is
+however only valid for $u<0$, so the first order transition line ends
+at $(t, u)=(0, 0)$; that is the tri-critical point.
+
+The second order phase transition is on the $t=0$ line with
+$u\ge0$. All of this is ilustrated in \figref{fig:2_phase}.
+
+\begin{figure}\centering
+\input{figures/phase_diagram.pdf_t}
+\caption{A phase diagram showing the reagions where the different
+  cases, from the previous figure, are located. Case I and IV are 
+  uncondensed, whereas case II and III are condensed phases. There
+  might be some hysterisis involved in case III. }
+\label{fig:2_phase}
+\end{figure}
+
+\subsubsection{Critical exponents}
+Here we're going to find the critical exponents as we approach the
+tri-critical point along the $u=0$ line. 
+
+Let's begin by $\beta$. For this we need to know
+$M(t,B=0)\propto(-t)^\beta$. We just use \eqref{eq:2_F(M)} and
+differentiate both sides, remembering that $u=b=0$:
+\begin{equation}\label{eq:2ii_M}
+2tM+6M^5=0\quad\Longrightarrow\quad
+M=\qty(-\frac{1}{3}t)^{1/4}.
+\end{equation}
+So $\beta=1/4$.
+
+Next is $\gamma$: $\chi=C_\pm|t|^{-\gamma}$. To get $\chi$ we need to
+keep the term involving $b$ when we calculate $M$:
+\begin{equation}\label{eq:2ii_gamma}
+-b+2tM+6M^5=0.
+\end{equation}
+For $t>0$, we can assume that $M\ll1$ which means that the $M^5$ term
+can be disregarded ($M^5\lll1$). This gives us $M=b/(2t)$ or
+\begin{equation}
+\chi(T\to\Tc^+)=\frac{1}{2t}.
+\end{equation}
+For $t<0$, we need a bit more work.
+Assuming $b\ll t$, we can use perturbation theory and write
+$M(b)=M_0+bM_1+\ldots$. By substituing this into \eqref{eq:2ii_gamma},
+we get
+\begin{equation}
+\begin{aligned}
+0=&-b+2t(M_0+bM_1)+6(M_0+bM_1)^5+\order{b^2}\\
+=& \qty(M_0+6M_0^5)+b\qty(-1+2tM_1+30M_0^4M_1) +\order{b^2}.
+\end{aligned}
+\end{equation}
+The unperturbed solution $M_0$ is just what we got in
+\eqref{eq:2ii_M}, and since the above equation should hold for any
+$b$ we have
+\begin{equation}
+\qty(-1+2tM_1+30M_0^4M_1)=0 \quad\Longrightarrow\quad
+M_1=\frac{1}{2t+30M_0^4}=\frac{1}{8|t|}.
+\end{equation}
+So in this case we got $\gamma=1$, and $C_+/C_-=4$.
+
+Next we can take $\alpha$:
+$C_V=-T\dv*[2]{F}{T}=A_\pm|t|^{-\alpha}$. For $t>0$, we have $\dv{M}{T}=0$
+meaning that $\dv[2]{F}{T}=0$. For $t<0$ however, we get $M$ as in
+\eqref{eq:2ii_M} which results in
+\begin{equation}
+F(t<0, u=0, b=0)=t(-\frac{1}{3}t)^{1/2}+(-\frac{1}{3}t)^{3/2}
+=-\frac{2}{3\sqrt{3}}(-t)^{3/2}.
+\end{equation}
+This, in turn, gives
+\begin{equation}
+C_V=-T\dv[2]{F}{(-t)}\qty(\dv{(-t)}{T})^2=\ldots
+=\frac{T}{2\sqrt{3}\Tc}|t|^{-1/2}.
+\end{equation}
+So here we got $\alpha=1/2$, $A_-=1/(2\sqrt{3})$ and $A_+=0$.
+
+And lastly we have $\delta$: $M(b,t=0)\propto b^{1/\delta}$. This time
+we can again use \eqref{eq:2ii_gamma}, but with $t=0$, which gives
+\begin{equation}
+M=\qty(\frac{1}{6}b)^{1/5},
+\end{equation}
+or in other words $\delta=5$.
 
 
 
