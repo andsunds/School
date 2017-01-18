@@ -305,30 +305,68 @@ symmery in $n$ dimansions, we should still express $F$ in terms of
 something invariant under rotations. The simplest such object is
 $\varphi_i\varphi_i=\vb*{\varphi}\vdot\vb*{\varphi}$. And the Landau
 free energy, in its simplest form, can be written as
-\begin{equation}
+\begin{equation}\label{eq:4_start}
 F(\varphi_i)=-\vb*{b}\vdot\vb*{\varphi}+t\vb*{\varphi}\vdot\vb*{\varphi}
 +(\vb*{\varphi}\vdot\vb*{\varphi})^2.
 \end{equation}
-The units are also rescaled so that the coefficient in front of the
+The units are rescaled so that the coefficient in front of the
 last term is $1$. 
-
-As before, we see that (in the absence of $\vb*{b}$) the behaviour of
-$F$ is very similar to the 1D version. For instance, at $t>0$ the
-minimum of $F$ will occur at $\vb*{\varphi}\vdot\vb*{\varphi}=0$
-meaning that $\ev{\varphi_i}=0$. Where as when $t<0$, we would get
-some non-zero minimum where $|\vb*\varphi|=(-t/2)^{1/2}>0$ and
-$\ev{\varphi_i}\neq0$ at least for some $i$'s. 
 
 In the absence of a magnetic field, there is no perfered
 direction. And yet, the system will fall into a $\vb*\varphi$ pointing
 in some direction --- spontaneous symmetry-breaking. Apart from the 1D
-case, the broken symmetry can however change continuously. The only
+case, the direction of $\vb*\varphi$ can however change continuously. The only
 restriction on $\vb*\varphi$ is that its magnitue is some specific
 value, other than that $\vb*\varphi$ is free to rotate in any
-direction.
+direction. That is, the system keeps its symmetry; so the symmetry
+isn't really broken here ($d\ge2$).
 
+Since the system keeps its rotational symmetry in the absence of a
+magnetic field, regardless of temperature, $\ev{\varphi_i}=0$. In the
+case of $T<\Tc$, our analysis tells us that $|\vb*\varphi|=0$, so then
+it's obvious that $\ev{\varphi_i}=0$. In the case of $T<\Tc$ however,
+it's the rotational symmetry that will assure that $\varphi_i$ over
+time will average out to 0. 
+
+% As before, we see that (in the absence of $\vb*{b}$) the behaviour of
+% $F$ is very similar to the 1D version. For instance, at $t>0$ the
+% minimum of $F$ will occur at $\vb*{\varphi}\vdot\vb*{\varphi}=0$
+% meaning that $\ev{\varphi_i}=0$. Where as when $t<0$, we would get
+% some non-zero minimum where $|\vb*\varphi|=(-t/2)^{1/2}>0$ and
+% \todo{Or should it be 0.}$\ev{\varphi_i}\neq0$ at least for some $i$'s. 
+
+
+
+
+\subsubsection*{Critical exponents}
 The critical exponents will be the same as for regular, 1D, Landau
-theory. 
+theory since \eqref{eq:4_start} generalize to the 1D case and the
+dimensionality of $\vb*\varphi$ won't affect the critical exponents. 
+So let's just do the calculations in 1D\footnotemark{}.
+\footnotetext{Another way of justifying this is to say that when the
+  symmetry is broken, $\vb*\varphi = \varphi\vu*\lambda$ and use
+  $\varphi=|\vb*\varphi|$ as the parameter in the following
+  calculations. }
+
+\begin{itemize}
+\item[$\beta$: ] Minimizing $F(\varphi, b=0)=t\varphi^2+\varphi^4$,
+gives $2t\varphi+4\varphi^3=0$ or $\varphi\propto(-t)^{\beta}$ where $\beta=1/2$.
+\item[$\gamma$: ] Now we minimize $F(\varphi,
+b)=-b\varphi+t\varphi^2+\varphi^4$: $-b+2t\varphi+4\varphi^3$. And if
+we do it for $t>0$, we can disregard the cubic term to get
+$\varphi\propto b/t$, which gives $\chi\propto[t]^{-\gamma}$ where
+$\gamma=1$.
+\item[$\alpha$: ] Here we calculate $C_V=-T\dv[2]{F}{T}$, with
+$\varphi\propto(-t)^{1/2}$. This gives
+$C_V\propto\dv[2]{t}t^2=\text{const.}$ or in other words
+$C_V\propto|t|^{-\alpha}$ where $\alpha=0$.
+\item[$\delta$: ] Here we want to minimize $F(t=0,
+b)=-b\varphi+\varphi^4$, which gives $-b+4\varphi^3=0$ or
+$\varphi\propto b^{1/\delta}$ where $\delta=3$.
+\end{itemize}
+
+
+
 
 
 
