@@ -298,8 +298,37 @@ or in other words $\delta=5$.
 
 
 \section{Ising model generalization}
+The simple Ising model only has a symmetry between positiv and
+negative $\varphi$, therefor the Landau free enregy $F$ is expressed in
+terms of $\varphi^2$. If we however consider a model with rotational
+symmery in $n$ dimansions, we should still express $F$ in terms of
+something invariant under rotations. The simplest such object is
+$\varphi_i\varphi_i=\vb*{\varphi}\vdot\vb*{\varphi}$. And the Landau
+free energy, in its simplest form, can be written as
+\begin{equation}
+F(\varphi_i)=-\vb*{b}\vdot\vb*{\varphi}+t\vb*{\varphi}\vdot\vb*{\varphi}
++(\vb*{\varphi}\vdot\vb*{\varphi})^2.
+\end{equation}
+The units are also rescaled so that the coefficient in front of the
+last term is $1$. 
 
+As before, we see that (in the absence of $\vb*{b}$) the behaviour of
+$F$ is very similar to the 1D version. For instance, at $t>0$ the
+minimum of $F$ will occur at $\vb*{\varphi}\vdot\vb*{\varphi}=0$
+meaning that $\ev{\varphi_i}=0$. Where as when $t<0$, we would get
+some non-zero minimum where $|\vb*\varphi|=(-t/2)^{1/2}>0$ and
+$\ev{\varphi_i}\neq0$ at least for some $i$'s. 
 
+In the absence of a magnetic field, there is no perfered
+direction. And yet, the system will fall into a $\vb*\varphi$ pointing
+in some direction --- spontaneous symmetry-breaking. Apart from the 1D
+case, the broken symmetry can however change continuously. The only
+restriction on $\vb*\varphi$ is that its magnitue is some specific
+value, other than that $\vb*\varphi$ is free to rotate in any
+direction.
+
+The critical exponents will be the same as for regular, 1D, Landau
+theory. 
 
 
 
