@@ -28,8 +28,7 @@
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 \newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
-\newcommand{\eF}{\ensuremath{\epsilon_{\text{F}}}}
-\newcommand{\wD}{\ensuremath{\omega_{\text{D}}}}
+\newcommand{\sign}{\ensuremath{\text{sign}}}
 
 %\usepackage{tikz}
 
@@ -294,7 +293,187 @@ or in other words $\delta=5$.
 
 
 \section{1D Ising model}
+We begin with the (1D) Ising model
+\begin{equation}\label{eq:3_H}
+H=-J\sum_{i=1}^{N}\sigma_{i}\sigma_{i+1}-B\sum_{i=1}^N\sigma_i,
+\end{equation}
+where $\sigma_i=\pm1$. We have $N$ lattice sites, and periodic pondary
+conditions which means that the coupling
+$\sigma_N\sigma_{N+1}=\sigma_N\sigma_1$. 
 
+From this we want to write down the free
+energy when $B=0$ and when $B\neq0$. In both cases we will want to
+knwo the partition function
+\begin{equation}\label{eq:3_Z}
+Z=\Tr{\ee^{\beta H}}
+=\sum_{\sigma_1=\pm1}\sum_{\sigma_2=\pm1}\cdots\sum_{\sigma_N=\pm1}\ee^{-\beta H}.
+\end{equation}
+
+\subsection{No magnetic field}
+We want a way to represent $\ee^{-\beta H}$, and since $H$ itself
+consits of a sum we have
+\begin{equation}
+\ee^{-\beta H}=
+\ee^{\beta J\sigma_1\sigma_2}\ee^{\beta J\sigma_2\sigma_3}
+\cdots\ee^{\beta J\sigma_{N-1}\sigma_N}.
+\end{equation}
+To represent this product we can create a \emph{transfer matrix}
+$T$ with elements
+\begin{equation}\label{eq:3_T_sigma}
+\mel{\sigma_i}{T}{\sigma_j}=\ee^{\beta J\sigma_i\sigma_j},
+\end{equation}
+which results in
+\begin{equation}\label{eq:3_e^H_mel}
+\ee^{-\beta H}=\mel{\sigma_1}{T}{\sigma_2}\mel{\sigma_2}{T}{\sigma_3}
+\cdots\mel{\sigma_{N-1}}{T}{\sigma_N}\mel{\sigma_{N}}{T}{\sigma_1}.
+\end{equation}
+
+The really elegant thing about this is that when we put
+\eqref{eq:3_e^H_mel} into all of the summs we get lots of
+\emph{identities} --- that is 
+\begin{equation}
+\sum_{\sigma_2}\bra{\sigma_1}{T}
+\overbrace{\ket{\sigma_2}\bra{\sigma_2}}^{=1}
+{T}\ket{\sigma_3}
+=\mel{\sigma_1}{T^2}{\sigma_3}.
+\end{equation}
+So the partition function becomes
+\begin{equation}
+\begin{aligned}
+Z=&\sum_{\sigma_1}\sum_{\sigma_2}\cdots\sum_{\sigma_N}
+\mel{\sigma_1}{T}{\sigma_2}\mel{\sigma_2}{T}{\sigma_3}
+\cdots\mel{\sigma_{N-1}}{T}{\sigma_N}\mel{\sigma_{N}}{T}{\sigma_1}\\
+=&\sum_{\sigma_1}\mel{\sigma_1}{T^N}{\sigma_1}
+=\Tr{T^N}=\lambda_1^N+\lambda_2^N,
+\end{aligned}
+\end{equation}
+where $\lambda_n$ are the eigenvalues of $T$ --- there are only two
+eigenvalues because $\sigma_i$ only has two values. 
+
+To calculate the eigenvalues of $T$, we use \eqref{eq:3_T_sigma} to
+see that
+\begin{equation}
+T=\begin{pmatrix}
+\ee^{\beta J} &\ee^{-\beta J}\\
+\ee^{-\beta J} & \ee^{\beta J}
+\end{pmatrix}
+\end{equation}
+in the $\sigma$ representation/basis. Now it's just a matter of
+turning the crank to get the eigenvalues:
+\begin{equation}
+\begin{aligned}
+&0=\det(T-\lambda I)=\qty(\ee^{\beta J}-\lambda)^2-\ee^{-2\beta J}\\
+\Longrightarrow\quad&
+\lambda=\ee^{\beta J}\pm\ee^{-\beta J}
+=2\cosh(\beta J)\qcomma 2\sinh(\beta J). 
+\end{aligned}
+\end{equation}
+
+We now have the free energy
+\begin{equation}
+F=-T\ln(Z)=-T\ln(\lambda_1^N+\lambda_2^N)
+=-T\ln(2^N\qty[\cosh^N(\beta J) + \sinh^N(\beta J)]).
+\end{equation}
+If we want to, we can get an asymptotic behaviour in the thermodynamic
+limit of $N\to\infty$, then the $\cosh^N(\beta J)\gg\sinh^N(\beta
+J)$, and
+\begin{equation}
+F\sim-NT\ln(2\cosh(\beta J))
+\qcomma \text{as }\ N\to\infty.
+\end{equation}
+
+
+\subsection{With magnetic field}
+If we now have $B\neq0$, we need to add the magnetic field terms into
+the reasoning. We want to use the transfer matrix method again, to do
+that we rewrite the magnetic field coupling term in \eqref{eq:3_H} so
+as to include both $\sigma_i$ and $\sigma_{i+1}$:
+\begin{equation}
+B\sum_{i=1}^N\sigma_i=\frac{1}{2}B\sum_{i=1}^N(\sigma_i+\sigma_{i+1}),
+\end{equation}
+again with $\sigma_{N+1}=\sigma_1$. 
+
+Now we can write the new transfer matrix as
+\begin{equation}
+\mel{\sigma_i}{T}{\sigma_j}
+=\exp[\beta J\sigma_i\sigma_j+\frac{\beta B}{2}(\sigma_i+\sigma_{i+1})].
+\end{equation}
+From here, we can once again write $\ee^{-\beta H}$ as in
+\eqref{eq:3_e^H_mel}, and the same reasoning applies up to that we
+need to calculate the new eigenvalues. Written out the transfermatrix
+looks like
+\begin{equation}
+T=\begin{pmatrix}
+\ee^{\beta (J+B)} &\ee^{-\beta J}\\
+\ee^{-\beta J} & \ee^{\beta (J-B)},
+\end{pmatrix}
+\end{equation}
+and has the eigenvalues (omitting the middle steps)
+\begin{equation}\label{eq:3_lambda_pm}
+\lambda_\pm=\ee^{\beta J}
+\qty[\cosh(\beta B)\pm\sqrt{\sinh^2(\beta B)+\ee^{-4\beta J}}].
+\end{equation}
+Note that these eigenvalues generalize, by setting $B=0$, to the ones
+in the previous part of this problem. 
+
+The free energy is
+\begin{equation}
+F=-T\ln(\lambda_+^N+\lambda_-^N)
+\end{equation}
+with $\lambda_\pm$ as in \eqref{eq:3_lambda_pm}. The asymptotic
+behaviour, as $N\to\infty$, is (because $\lambda_+>\lambda_-$)
+\begin{equation}
+F\sim-TN\ln(\lambda_+)
+=-JN -TN\ln(\cosh(\beta B)+\sqrt{\sinh^2(\beta B)+\ee^{-4\beta J}}).
+\end{equation}
+
+\subsubsection*{Magetization in this model}
+The maroscopic magnetization per spin is
+\begin{equation}
+\begin{aligned}
+M=&-\frac{1}{N}\pdv{F}{B}\\
+=&T\frac{\beta\sinh(\beta B)
++\beta\sinh(\beta B)\cosh(\beta B)
+\qty[\sinh^2(\beta B)+\ee^{-4\beta J}]^{-1/2}}
+{\cosh(\beta B)+\sqrt{\sinh^2(\beta B)+\ee^{-4\beta J}}}\\
+=&\frac{\sinh(\beta B)
++\sinh(\beta B)\cosh(\beta B)
+\qty[\sinh^2(\beta B)+\ee^{-4\beta J}]^{-1/2}}
+{\cosh(\beta B)+\sqrt{\sinh^2(\beta B)+\ee^{-4\beta J}}}.
+\end{aligned}
+\end{equation}
+
+We therefore see that as $B\to0$ ($\beta$ finite), $\sinh(\beta
+B)\to0$ and $\cosh(\beta B)\to1$; so $M\to0$ as $B\to0$ with a finite 
+$\beta$. Whereas if we let $\beta\to\infty$ ($B\neq0$), we
+get\footnotemark{} 
+\begin{equation}
+\begin{aligned}
+M\sim&\frac{\sinh(\beta B)
++\sinh(\beta B)\cosh(\beta B)
+\qty|\sinh(\beta B)|^{-1}}
+{\cosh(\beta B)+|\sinh(\beta B)|}\\
+=&\frac{\sinh(\beta B)+\sign(B)\cosh(\beta B)}
+{\cosh(\beta B)+|\sinh(\beta B)|}\\
+=&\sign(B)\frac{|\sinh(\beta B)|+\cosh(\beta B)}
+{\cosh(\beta B)+|\sinh(\beta B)|}
+=\sign(B).
+\end{aligned}
+\end{equation}
+To conclude we have
+\begin{equation}
+M=\begin{cases}
+0\quad&\text{if }\ T>0,\\
+\pm1\quad&\text{if }\ T=0.
+\end{cases}
+\end{equation}
+The $\pm$ is an artifact from when we still had some magnetic field,
+but $\pm$ is still relevant in the end case since the spontaneously
+broken symmetry equally well could have gone to $+1$ as to $-1$. 
+
+\footnotetext{This is a bit abusive notation saying that $M$ is
+  asymptotically 1 as $\beta\to\infty$, but this is physics and not
+  math\ldots }
 
 
 \section{Ising model generalization}
