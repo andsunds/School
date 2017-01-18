@@ -282,12 +282,11 @@ When plugged back into \eqref{eq:2_start}, we get
 +\order{\Dx^2}.
 \end{equation}
 
-\subsection{Fourth forward derivative}
+\subsection{Fourth derivative}
 The method presented in the beginning of this problem is general. All
 we need to do is to pick what error we want, and then we know how many
-steps we need. The only thing to keep in mind is that we're looking
-for a \emph{forward} derivative, which means that we can only choose
-$i\ge 1$.
+steps we need. I'm choosing to calculate a strictly forward
+approximation here, but we don't have to do that.
 
 Let's say we want an error of $E=2$, then $I=d+E=6$, so we choose
 $i\in\mathcal{I}=\{0, 1, 2, 3, 4, 5\}$. The matrix elements are 
