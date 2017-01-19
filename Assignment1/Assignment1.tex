@@ -55,7 +55,7 @@ Assignment 1}
 
 In this problem, we will study the magnetic susceptibility, $\chi$, in
 view of the MFT approach to the Ising model. We will look at the
-asymptotic behaviour of $\chi$ for $T\to0^+$ and $T\to\Tc$.
+asymptotic behavior of $\chi$ for $T\to0^+$ and $T\to\Tc$.
 
 We begin from the MF equation
 \begin{equation}\label{eq:1_MFE}
@@ -78,7 +78,7 @@ or in other words
 In the last step we also used the fact that $\Tc=J$ using the MFT approach.
 
 \subsection{Zero temperature limit}
-As $T\to0^+$, the leading order behaviour of the hyperbolic cosine is
+As $T\to0^+$, the leading order behavior of the hyperbolic cosine is
 \begin{equation}
 \cosh^2\qty(\frac{M\Tc}{T})\sim \frac{1}{4}\exp(2\frac{\abs{M}\Tc}{T}).
 \end{equation}
@@ -86,17 +86,17 @@ This exponential growth will dominate over the factor $T$ in
 front and the constant $-\Tc$ in the denominator. And \eqref{eq:1_MFE}
 also shows us that $M\to\pm1$ as $T\to0^+$. 
 
-The asymptotic behaviour of \eqref{eq:1_chi_exact} will be 
+The asymptotic behavior of \eqref{eq:1_chi_exact} will be 
 \begin{equation}
 \chi\sim \frac{4}{T}\exp(-2\frac{\Tc}{T})
 \qcomma \text{as}\ T\to0.
 \end{equation}
-And to be clear, this asymptotic behaviour results in $\chi(T)\to0$ as
+And to be clear, this asymptotic behavior results in $\chi(T)\to0$ as
 $T\to0$. 
 
 
 \subsection{Critical temperature limit}
-We begin with aproaching the limit from below, $T<\Tc$. We do still
+We begin with approaching the limit from below, $T<\Tc$. We do still
 evaluate the derivative for $\chi$ at $B=0$, so the MFT value for $M$
 can be used:
 \begin{equation}
@@ -135,7 +135,7 @@ Here, we will use the Landau free energy
 \begin{equation}\label{eq:2_F(M)}
 F=-bM+tM^2+uM^4+M^6,
 \end{equation}
-where $b=B/T$, $t=(T-\Tc)/\Tc$ and $u$ is some coefiicient with no
+where $b=B/T$, $t=(T-\Tc)/\Tc$ and $u$ is some coefficient with no
 restrictions. 
 
 \subsection{Generic forms of $F$}
@@ -145,7 +145,7 @@ different generic forms of $F$, and they occur at
 \item $t\ge0$, $u\ge0$ \\
 Here, it's obvious that all we can get is a single minimum at $M=0$.
 \item $t<0$, $u$ any value; or $t=0$, $u<0$\\
-For $t<0$, the initial behaviour around $M=0$ is to drop down, but at
+For $t<0$, the initial behavior around $M=0$ is to drop down, but at
 large $|M|$ we still get $F\to+\infty$. So we must have two minima at
 $M\neq0$, and a local maximum at $M=0$. The same is true for $t=0$ and
 $u<0$. 
@@ -155,7 +155,7 @@ negative enough $u$ will then come into play and force down $F(m)$ to
 two minima at $M\neq0$ which are stronger than the one at $M=0$.
 \item $t>u^2/4$, $u<0$\footnotemark{}\\
 In this case, there might not even be two minima at $M\neq0$, but if
-they excist they are weaker than the one at $M=0$.
+they exist they are weaker than the one at $M=0$.
 \end{enumerate}
 These four cases encompass all of the $u{-}T$ plane. The generic forms
 of $F(M)$ can be seen in \figref{fig:2a}.
@@ -215,11 +215,11 @@ however only valid for $u<0$, so the first order transition line ends
 at $(t, u)=(0, 0)$; that is the tri-critical point.
 
 The second order phase transition is on the $t=0$ line with
-$u\ge0$. All of this is ilustrated in \figref{fig:2_phase}.
+$u\ge0$. All of this is illustrated in \figref{fig:2_phase}.
 
 \begin{figure}\centering
 \input{figures/phase_diagram.pdf_t}
-\caption{A phase diagram showing the reagions where the different
+\caption{A phase diagram showing the regions where the different
   cases, from the previous figure, are located. Case I and IV are 
   uncondensed, whereas case II and III are condensed phases. There
   might be some hysterisis involved in case III. }
@@ -297,13 +297,13 @@ We begin with the (1D) Ising model
 \begin{equation}\label{eq:3_H}
 H=-J\sum_{i=1}^{N}\sigma_{i}\sigma_{i+1}-B\sum_{i=1}^N\sigma_i,
 \end{equation}
-where $\sigma_i=\pm1$. We have $N$ lattice sites, and periodic pondary
-conditions which means that the coupling
+where $\sigma_i=\pm1$. We have $N$ lattice sites, and periodic
+boundary conditions which means that the coupling
 $\sigma_N\sigma_{N+1}=\sigma_N\sigma_1$. 
 
 From this we want to write down the free
 energy when $B=0$ and when $B\neq0$. In both cases we will want to
-knwo the partition function
+know the partition function
 \begin{equation}\label{eq:3_Z}
 Z=\Tr{\ee^{\beta H}}
 =\sum_{\sigma_1=\pm1}\sum_{\sigma_2=\pm1}\cdots\sum_{\sigma_N=\pm1}\ee^{-\beta H}.
@@ -311,7 +311,7 @@ Z=\Tr{\ee^{\beta H}}
 
 \subsection{No magnetic field}
 We want a way to represent $\ee^{-\beta H}$, and since $H$ itself
-consits of a sum we have
+consists of a sum we have
 \begin{equation}
 \ee^{-\beta H}=
 \ee^{\beta J\sigma_1\sigma_2}\ee^{\beta J\sigma_2\sigma_3}
@@ -329,7 +329,7 @@ which results in
 \end{equation}
 
 The really elegant thing about this is that when we put
-\eqref{eq:3_e^H_mel} into all of the summs we get lots of
+\eqref{eq:3_e^H_mel} into all of the sums we get lots of
 \emph{identities} --- that is 
 \begin{equation}
 \sum_{\sigma_2}\bra{\sigma_1}{T}
@@ -374,7 +374,7 @@ We now have the free energy
 F=-T\ln(Z)=-T\ln(\lambda_1^N+\lambda_2^N)
 =-T\ln(2^N\qty[\cosh^N(\beta J) + \sinh^N(\beta J)]).
 \end{equation}
-If we want to, we can get an asymptotic behaviour in the thermodynamic
+If we want to, we can get an asymptotic behavior in the thermodynamic
 limit of $N\to\infty$, then the $\cosh^N(\beta J)\gg\sinh^N(\beta
 J)$, and
 \begin{equation}
@@ -400,7 +400,7 @@ Now we can write the new transfer matrix as
 \end{equation}
 From here, we can once again write $\ee^{-\beta H}$ as in
 \eqref{eq:3_e^H_mel}, and the same reasoning applies up to that we
-need to calculate the new eigenvalues. Written out the transfermatrix
+need to calculate the new eigenvalues. Written out the transfer matrix 
 looks like
 \begin{equation}
 T=\begin{pmatrix}
@@ -421,14 +421,14 @@ The free energy is
 F=-T\ln(\lambda_+^N+\lambda_-^N)
 \end{equation}
 with $\lambda_\pm$ as in \eqref{eq:3_lambda_pm}. The asymptotic
-behaviour, as $N\to\infty$, is (because $\lambda_+>\lambda_-$)
+behavior, as $N\to\infty$, is (because $\lambda_+>\lambda_-$)
 \begin{equation}
 F\sim-TN\ln(\lambda_+)
 =-JN -TN\ln(\cosh(\beta B)+\sqrt{\sinh^2(\beta B)+\ee^{-4\beta J}}).
 \end{equation}
 
 \subsubsection*{Magetization in this model}
-The maroscopic magnetization per spin is
+The macroscopic magnetization per spin is
 \begin{equation}
 \begin{aligned}
 M=&-\frac{1}{N}\pdv{F}{B}\\
@@ -477,10 +477,10 @@ broken symmetry equally well could have gone to $+1$ as to $-1$.
 
 
 \section{Ising model generalization}
-The simple Ising model only has a symmetry between positiv and
-negative $\varphi$, therefor the Landau free enregy $F$ is expressed in
+The simple Ising model only has a symmetry between positive and
+negative $\varphi$, therefor the Landau free energy $F$ is expressed in
 terms of $\varphi^2$. If we however consider a model with rotational
-symmery in $n$ dimansions, we should still express $F$ in terms of
+symmetry in $n$ dimensions, we should still express $F$ in terms of
 something invariant under rotations. The simplest such object is
 $\varphi_i\varphi_i=\vb*{\varphi}\vdot\vb*{\varphi}$. And the Landau
 free energy, in its simplest form, can be written as
@@ -495,7 +495,7 @@ In the absence of a magnetic field, there is no perfered
 direction. And yet, the system will fall into a $\vb*\varphi$ pointing
 in some direction --- spontaneous symmetry-breaking. Apart from the 1D
 case, the direction of $\vb*\varphi$ can however change continuously. The only
-restriction on $\vb*\varphi$ is that its magnitue is some specific
+restriction on $\vb*\varphi$ is that its magnitude is some specific
 value, other than that $\vb*\varphi$ is free to rotate in any
 direction. That is, the system keeps its symmetry; so the symmetry
 isn't really broken here ($d\ge2$).
@@ -507,7 +507,7 @@ it's obvious that $\ev{\varphi_i}=0$. In the case of $T<\Tc$ however,
 it's the rotational symmetry that will assure that $\varphi_i$ over
 time will average out to 0. 
 
-% As before, we see that (in the absence of $\vb*{b}$) the behaviour of
+% As before, we see that (in the absence of $\vb*{b}$) the behavior of
 % $F$ is very similar to the 1D version. For instance, at $t>0$ the
 % minimum of $F$ will occur at $\vb*{\varphi}\vdot\vb*{\varphi}=0$
 % meaning that $\ev{\varphi_i}=0$. Where as when $t<0$, we would get
@@ -554,4 +554,4 @@ $\varphi\propto b^{1/\delta}$ where $\delta=3$.
 
 
 
-%  LocalWords:  MFT MF
+%  LocalWords:  MFT MF Ising
