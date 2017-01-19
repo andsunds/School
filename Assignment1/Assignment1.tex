@@ -567,19 +567,21 @@ max-norm, and the second one is a scaled 2-norm:
 The result is shown in the table below and in \figref{fig:4c}. We see
 that the two different norms are exactly the same (to the 4th decimal
 place), which was very unexpected. 
-%\begin{table}
+\begin{table}
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|c|c|c|}\hline
 $||U-u||_\infty\times10^3$&26.3436&6.3680&1.5789&0.3939&0.0984&0.0246&0.0062\\
 \hline
 $||U-u||_2\times10^3$&26.3436&6.3680&1.5789&0.3939&0.0984&0.0246&0.0062\\
 \hline
+$\log_2(e_{i-1}/e_{i})$&---&2.0485&2.0120&2.0030&2.0007&2.0002&2.0000\\
+\hline
 \end{tabular}
 \end{center}
-% \end{table}
-
-From the log-plot in \figref{fig:4c}, we see that the rate of
-convergence is quadratic.
+Also listed, in the bottom row, is the order of convergence between
+the two adjecent points. The values suggests a n order of convergence
+of $2$. The same can also be seen from the log-plot in
+\figref{fig:4c}, i.e. that the convergence is quadratic.
 
 \end{document}
 
