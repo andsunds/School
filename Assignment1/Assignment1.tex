@@ -7,8 +7,10 @@
 ]{cancel}
 \graphicspath{{figures/}}
 
-\swapcommands{\Delta}{\varDelta}
+\swapcommands{\Phi}{\varPhi}
 \swapcommands{\Omega}{\varOmega}
+
+\newcommand{\enaught}{\ensuremath\varepsilon_0}
 
 %%Drar in tabell och figurtexter
 \usepackage[margin=10 pt]{caption}
@@ -25,10 +27,10 @@
 %%För att ändra hur rubrikerna ska formateras
 
 
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 %\newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
-%\newcommand{\sign}{\ensuremath{\text{sign}}}
+\newcommand{\sign}{\ensuremath{\,\text{sign}}}
 
 %\usepackage{tikz}
 
@@ -55,11 +57,135 @@ Assignment 1}
 
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
-\section{Electric potential and filed along the $z$-axis}
+\section{Electric potential and filed along the $z$ axis}
+\begin{figure}\centering
+\input{figures/1_geometry.pdf_t}
+\caption{The geometry of this problem. Two point charges, each of
+  charge $+Q$, are located at $z=\pm R$, and a circular ring centered
+  atround the origin with a total charge of $-2Q$.}
+\label{fig:1_geometry}
+\end{figure}
+
+In this problem, we are tasked to find the electric field and
+potential along the $z$~axis, from a geometry given in
+\figref{fig:1_geometry}. 
+
+\subsection{The electro static potential}
+By the superposition principles we can easili solve this problem in
+parts by combining the potentials from each source
+$\Phi=\Phi_{+R}+\Phi_{-R}+\Phi_{\text{ring}}$. 
+
+Let's begin with the teo easiest terms. The two terms from the point
+charges, which we all know is just
+\begin{equation}\label{eq:1_Phi_dot}
+\Phi_{\pm{R}}(\vb*r=z\vu{z})=\frac{Q}{4\pi\enaught}
+\frac{1}{\abs{\vb*r\mp R\vu{z}}}
+=\frac{Q}{4\pi\enaught} \frac{1}{\abs{z\mp R}}.
+\end{equation}
+
+Next up is the ring charge. In this case we could easily argue that
+the symmetry of the circular charge will make the potential due to
+that ring 
+\begin{equation}\label{eq:1_Phi_ring}
+\Phi_\text{ring}(\vb*r=z\vu{z})=\frac{-2Q}{4\pi\enaught}
+\frac{1}{\sqrt{z^2+R^2}},
+\end{equation}
+where $\sqrt{z^2+R^2}$ is the distance from any point of the ring to
+the $z$~axis at $z$. But let's do it more rigorously this time. In
+cylindrical coordinates the charge distribution of that ring is
+\begin{equation}
+\rho(r, \phi, z)=\lambda \delta(z)\delta(r-R),
+\end{equation}
+where $\lambda=-2Q/(2\pi R)$ is the uniform linear charge density
+along the ring. 
+Therefore the potential, at any point in space, due to that ring is
+\begin{equation}
+\Phi_\text{ring}(y, x, z)=\frac{\lambda}{4\pi\enaught}
+\int_0^{2\pi}\rd\phi'\int_{-\infty}^\infty\rd{z'}\int_0^\infty\rd{r'}\,r'
+\frac{\delta(z)\delta(r-R)}{\abs{\vb*r-\vb*r'}}
+\end{equation}
+which upon evaluating the $\delta$ functions yields
+\begin{equation}
+\Phi_\text{ring}(y, x, z)
+= \frac{\lambda}{4\pi\enaught} \int_0^{2\pi}\rd\phi'
+\frac{R}{\sqrt{(x-R\cos\phi')^2+(y-R\sin\phi'^2)+z^2}}.
+\end{equation}
+From here, we can clearly see that by setting $x=y=0$ the expression
+in the denominator simplifies to $\sqrt{z^2+R^2}$, which is
+independent of $\phi'$; we thus end up with exactly
+\eqref{eq:1_Phi_ring} as the potential due to the ring on the
+$z$~axis.  
+
+The end result from all three sources therefore becomes
+\begin{align}\label{eq:1_Phi_a}
+\Phi(\vb*r=z\vu{z})=&\frac{Q}{4\pi\enaught}
+\qty[\frac{1}{\abs{z-R}}+\frac{1}{\abs{z+R}}
+-\frac{2}{\sqrt{z^2+R^2}}]
+\\\label{eq:1_Phi_b}
+=&\frac{Q}{4\pi\enaught z}
+\qty[\frac{1}{\abs{1-R/z}}+\frac{1}{\abs{1+R/z}}
+-\frac{2}{\sqrt{1+(R/z)^2}}].
+\end{align}
+
+\subsection{The electric field along the $z$ axis}
+To calculate the $E$~field along the $z$~axis we use
+$\vb*E=-\grad\Phi$, meaning that $E_z=-\pdv*{\Phi}{z}$. This
+derivative is easiest done using \eqref{eq:1_Phi_a}. We begin by
+rewriting the absolute values\footnotemark, then we differentiate:
+\begin{equation}
+\begin{aligned}
+E_z(\vb*r=z\vu{z})=&
+-\frac{Q}{4\pi\enaught} \pdv{z}\qty[
+\frac{\sign(z-R)}{(z-R)} +\frac{\sign(z+R)}{(z+R)}
+-\frac{2}{\sqrt{z^2+R^2}}]\\
+=&-\frac{Q}{4\pi\enaught} \qty[
+-\frac{\sign(z-R)}{(z-R)^2} -\frac{\sign(z+R)}{(z+R)^2}
++\frac{2z}{(z^2+R^2)^{3/2}}].
+\end{aligned}
+\end{equation}
+If we want to, we can rewrite this expression as
+\begin{equation}
+E_z(\vb*r=z\vu{z})
+=\frac{Q}{4\pi\enaught z^2} \qty[
+\frac{\sign(z-R)}{(1-R/z)^2} +\frac{\sign(z+R)}{(1+R/z)^2}
+-\frac{2\sign(z)}{(1+(R/z)^2)^{3/2}}].
+\end{equation}
+\footnotetext{We are not concerned about the derivatives of the
+  ``sign'' functions at their switching point since the rest of the
+  expression is not analytic there either. }
+
+
+\subsection{Asymptotic behaviour of the potential along the $z$ axis}
+To find the asymptotic behaviour as $z\to+\infty$, we will need to use
+the following Taylor expansion
+\begin{equation}
+(1+x)^\alpha=1+\alpha x+\frac{\alpha(\alpha-1)}{2}x^2+\order{x^3}
+\end{equation}
+for sufficiently small $x$. 
+
+In our case, with $\zeta=R/z$, that would correspond to
+\begin{equation}
+(1\pm\zeta)^{-1}=1\mp\zeta+\zeta^2+\order{\zeta^3}
+\end{equation}
+and
+\begin{equation}
+\qty(1+\zeta^2)^{-1/2}=1-\frac{1}{2}\zeta^2+\order{\zeta^4}
+\end{equation}
+Subsituting these expansions into \eqref{eq:1_Phi_b} gives us the
+asymptotic behaviour
+\begin{equation}
+\Phi(\vb*r=z\vu{z})\sim
+\frac{Q}{4\pi\enaught z}
+\qty[\qty(1-\zeta+\zeta^2)+\qty(1+\zeta+\zeta^2)
+-2\qty(1-\frac{1}{2}\zeta^2)]
+=\frac{3Q}{4\pi\enaught}\frac{R^2}{z^3},
+\end{equation}
+as $\zeta\to0$ or $z\to\infty$.
 
 
 
-\section{Shperically symmetric charge distributions}
+
+\section{Spherically symmetric charge distributions}
 \renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
 
 
