@@ -5,6 +5,7 @@
 \usepackage{../custom_as}
 \usepackage[makeroom
 ]{cancel}
+\usepackage{esint}
 \graphicspath{{figures/}}
 
 \swapcommands{\Phi}{\varPhi}
@@ -185,8 +186,126 @@ as $\zeta\to0$ or $z\to\infty$.
 
 
 
-\section{Spherically symmetric charge distributions}
+\section{Charged balls}
 \renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+This problem concerns charged balls, of radius a, with different chrge
+distribution but all with a total charge $Q$. We will be calculating
+the $E$-field produced by these charge distributions. 
+
+One generla remark about these fields is that the all have to be of
+the form $\vb*E=E_r\vu{r}$, where $\vu{r}$ is the radial unit vector
+of a spherical coordinate system. This is due to the spherical
+symmetry in this problem. 
+
+
+\figref{fig:2_e-field} shows a plot of the non-dimensionalized field
+strengths as a function of the non-dimensionlized radius
+$\xi=r/a$. This is the result of the calculations below. Note that
+only the conducting ball produces a discontinuous filed.
+
+\begin{figure}\centering
+\input{figures/2_e-field.tex}
+\caption{A non-dimensionalized plot of some of the electric filed
+  strengths produced by the charged balls of radius $\xi=r/a=1$. The first
+  graph is the field from a conducting ball, and the three others are
+  from balls with charge densities $\rho\propto\xi^n$.}
+\label{fig:2_e-field}
+\end{figure}
+
+\subsection{Conductive ball}
+In this care, we are not explicitly given any chrge distribution, but
+we should know by now that all charge on a conductor will gather on
+the surface. In other words, there will be no $E$~filed inside the
+bulk of the conductor. To show this we can, for instance, use the fact
+that $\Phi$ is constant in a conductor; then we 
+clearly see that $\vb*E=-\grad\Phi=\vb0$. Furthermore since we have a
+ball, the spherical symmetry will result in the charge being evenly
+distributed over the surface. 
+
+Now to the field produced by this ball. By applying Gauss's law on
+a spherical Gauss surface $S_R$, of radius $R>a$, we get
+\begin{equation}
+\oiint\limits_{S_R}E_r\vu{r}\vdot\rd\vb*{A}
+=\frac{1}{\enaught}\iiint\limits_{V_R} \rho(\vb*r)\id{V}
+=\frac{Q}{\enaught}.
+\end{equation}
+Now since $E_r$ is constant on $S_R$ and $\rd\vb*A=\vu{r}\rd{A}$, the
+LHS is just $4\pi R^2\, E_r\!(R)$. The full expression for the $E$~field is
+now
+\begin{equation}
+E_r(r)=
+\begin{cases}
+0, &r<a,\\
+\frac{Q}{4\pi\enaught r^2}\qcomma &r>a,
+\end{cases}
+\end{equation}
+and $\vb*E=E_r\vu{r}$.
+
+We can also note that the field outside any of the balls in this
+problem will be the same. This is due to the fact that enclosed charge
+by any surface enclosing the whole ball will be~$Q$. 
+
+\subsection{Uniform charge density}
+This time we have to use Gauss's law inside the surface as
+well. However, the RHS still has the same form. The charge density
+will of course be $\rho(r<a)=Q/(4\pi a^3/3)$.
+We therefore get
+\begin{equation}
+4\pi R^2 E_r(R<a)
+=\frac{1}{\enaught}\iiint\limits_{V_R}
+\frac{3Q}{4\pi a^3}\id{V}
+=\frac{Q}{\enaught}\frac{R^3}{a^3}.
+\end{equation}
+And the final result is
+\begin{equation}
+E_r(r)=\frac{Q}{4\pi\enaught}\times
+\begin{cases}
+\frac{r}{a^3}, &r<a,\\
+\frac{1}{r^2}\qcomma &r>a.
+\end{cases}
+\end{equation}
+
+\subsection{Power relation}
+In this case we have a power relation for the charge density
+$\rho(r<a)\propto r^n$, $n>-3$; i.e. $\rho(r<a)=(r/a)^n\rho_0$. We
+have to begin with calculating $\rho_0$. To do this we note that
+\begin{equation}\label{eq:2_rho_0}
+Q=\iiint\limits_{V_{a}}\rho(r)\id{V}
+=\frac{\rho_0}{a^n}\int_0^{2\pi}\rd\phi\int_0^\pi\rd\theta
+\int_0^a r^n\,r^2\rd{r}
+=\frac{4\pi \rho_0}{a^n}\,\frac{a^{n+3}}{n+3}
+\end{equation}
+so
+\begin{equation}
+\rho_0=\frac{(n+3)Q}{4\pi a^3}.
+\end{equation}
+
+Now to the electric field. We once again use Gauss's law, which will
+just be the same integral as in \eqref{eq:2_rho_0} but with 
+$a\to R$. So we get
+\begin{equation}
+4\pi R^2  E_r(R<a)
+=\frac{\rho_0}{a^n\enaught}\iiint\limits_{V_R}r^n\id{V}
+=\frac{4\pi\rho_0}{a^n\enaught}\,\frac{R^{n+3}}{n+3}
+=\frac{Q}{\enaught}\qty(\frac{R}{a})^{n+3},
+\end{equation}
+and the final electric field will be
+\begin{equation}
+E_r(r)=\frac{Q}{4\pi\enaught a^2}\times
+\begin{cases}
+\qty(\frac{r}{a})^{n+1}, &r<a,\\
+\qty(\frac{r}{a})^{-2}\qcomma &r>a.
+\end{cases}
+\end{equation}
+
+Also note that the previous cases just were special cases of this
+case. It's easy to see this for the uniform charge distribution, where
+$n=0$. But we can reproduce the same behaviour (pointwise) for the
+conducting shpere by letting $n\to\infty$.
+
+
+
+
 
 
 \section{Mean charge distribution of a hydrogen atom}
