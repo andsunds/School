@@ -305,18 +305,54 @@ conducting shpere by letting $n\to\infty$.
 
 
 
-
-
-
 \section{Mean charge distribution of a hydrogen atom}
 \renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+Given the mean potential 
+\begin{equation}
+\Phi(r)=\frac{q}{4\pi\enaught}\,\frac{\ee^{-\alpha r}}{r}
+\qty(1+\frac{\alpha r}{2})
+\end{equation}
+of a neutral hydrogen atom, we now want to find the charge
+distribution $\rho(r)$ that would give rise to such a potential.
 
+We begin with the Poisson equation
+\begin{equation}
+-\laplacian\Phi=\frac{\rho(r)}{\enaught}.
+\end{equation}
+Then we need to express the Laplacian in spherical coordinates
+\begin{equation}
+\laplacian f = \frac{1}{r}\pdv[2]{r}[rf] + 
+\text{``Derivatives in }\phi\text{ and }\theta\text{''}.
+\end{equation}
+We only need the $r$ derivatives since we see that $\Phi$ is
+spherically symmetric. 
+
+Finding $\rho$ now is just a matter of doing the derivatives
+\begin{equation}
+\frac{1}{r}\pdv[2]{r}\qty[\ee^{-\alpha r}
+\qty(1+\frac{\alpha r}{2})]
+=\frac{1}{r} \qty[-\alpha^2\ee^{-\alpha r} 
++\alpha^2\ee^{-\alpha r}\qty(1+\frac{\alpha r}{2})]
+=\alpha^3\ee^{-\alpha r} 
+\end{equation}
+The charge distribution is therefore
+\begin{equation}
+\rho(r)=-\enaught\laplacian\Phi=
+q\frac{\alpha^3}{4\pi}\ee^{-\alpha r}
+\end{equation}
+This would correspond to $q$ times the electron's probability density
+around the nucleus for a ``1s'' state. It is also quite easy to see that 
+\begin{equation}
+\iiint \rho(r)\id{V}=q,
+\end{equation}
+which means that we have one ``whole'' electron here --- as we
+would expect. 
 
 \section{Capacitances}
 
 
 
-\section{Method of mirror charges}
+\section{Method of mirrored charges}
 
 
 
