@@ -6,6 +6,8 @@
 \usepackage[makeroom
 ]{cancel}
 \usepackage{esint}
+\let\oldint\int 
+\renewcommand{\int}{\oldint\limits}
 \graphicspath{{figures/}}
 
 \swapcommands{\Phi}{\varPhi}
@@ -271,7 +273,7 @@ $\rho(r<a)\propto r^n$, $n>-3$; i.e. $\rho(r<a)=(r/a)^n\rho_0$. We
 have to begin with calculating $\rho_0$. To do this we note that
 \begin{equation}\label{eq:2_rho_0}
 Q=\iiint\limits_{V_{a}}\rho(r)\id{V}
-=\frac{\rho_0}{a^n}\int_0^{2\pi}\rd\phi\int_0^\pi\rd\theta
+=\frac{\rho_0}{a^n}\int_0^{2\pi}\rd\phi\int_0^\pi\sin\theta\id\theta
 \int_0^a r^n\,r^2\rd{r}
 =\frac{4\pi \rho_0}{a^n}\,\frac{a^{n+3}}{n+3}
 \end{equation}
@@ -333,20 +335,86 @@ Finding $\rho$ now is just a matter of doing the derivatives
 \qty(1+\frac{\alpha r}{2})]
 =\frac{1}{r} \qty[-\alpha^2\ee^{-\alpha r} 
 +\alpha^2\ee^{-\alpha r}\qty(1+\frac{\alpha r}{2})]
-=\alpha^3\ee^{-\alpha r} 
+=\frac{\alpha^3}{2}\ee^{-\alpha r} 
 \end{equation}
-The charge distribution is therefore
+So the charge distribution resulting from
+this is
 \begin{equation}
-\rho(r)=-\enaught\laplacian\Phi=
-q\frac{\alpha^3}{4\pi}\ee^{-\alpha r}
+\rho'(r)=-q\frac{\alpha^3}{8\pi}\ee^{-\alpha r}.
 \end{equation}
-This would correspond to $q$ times the electron's probability density
-around the nucleus for a ``1s'' state. It is also quite easy to see that 
+This would correspond to $-q$ times the electron's probability density
+around the nucleus for a ``1s'' state. It is also easy to see that 
+\begin{equation}\label{eq:3_q'}
+\iiint \rho'(r)\id{V}=-q,
+\end{equation}
+which means that we have one ``whole'' electron here.
+
+There is one problem thogh; the potential was that of a \emph{neutral}
+hydrogen atom. And we can also see that\footnotemark{}
+\begin{equation}\label{eq:3_Phi'}
+\begin{aligned}
+\Phi'(R)&=\frac{1}{4\pi\enaught}\int_0^{2\pi}\rd\phi\int_0^\pi\sin\theta\id\theta
+\int_0^\infty\rd{r}\, 
+r^2\frac{\rho'(r)}{\sqrt{R^2+r^2-2Rr\cos\theta}}\\
+&=\frac{1}{2\enaught}\int_0^\infty\rd{r}\,
+\qty(-\frac{q\alpha^3}{8\pi})r^2\ee^{-\alpha r}
+\int_0^\pi\frac{\sin\theta\,\rd\theta}{\sqrt{R^2+r^2-2Rr\cos\theta}}\\
+\end{aligned}
+\end{equation}
+To do the $\theta$ integral, we can substitute $u=\cos\theta$ giving
+$\rd{u}=-\sin\theta\id\theta$. The $\theta$ integral therefore becomes
 \begin{equation}
-\iiint \rho(r)\id{V}=q,
+\begin{aligned}
+\int_0^\pi\frac{\sin\theta\,\rd\theta}{\sqrt{R^2+r^2-2Rr\cos\theta}}
+=&\int_{-1}^1\frac{\rd{u}}{\sqrt{R^2+r^2-2Rru}}\\
+=&-\frac{1}{Rr}\eval{\sqrt{R^2+r^2-2Rru}}_{-1}^1\\
+=&\frac{1}{Rr}\Big(|R+r|-|R-r|\Big)
+&=\begin{cases}
+2/R\qcomma&R>r\\
+2/r,&-r<R<r\\
+-2/R,&R<-r.
+\end{cases}
+\end{aligned}
 \end{equation}
-which means that we have one ``whole'' electron here --- as we
-would expect. 
+When we plug this back into \eqref{eq:3_Phi'}, we get
+\begin{equation}\label{eq:3_Phi'_final}
+\begin{aligned}
+\Phi'(R)=&-\frac{q\alpha^3}{16\pi\enaught}\qty{
+\int_0^R\frac{2}{R}r^2\ee^{-\alpha r}\id{r}
++\int_R^\infty\frac{2}{r}r^2\ee^{-\alpha r}\id{r} }\\
+=&\ldots=-\frac{q}{4\pi\enaught R}
++\frac{q}{4\pi\enaught}\frac{\ee^{-\alpha R}}{R}
+\qty(1+\frac{\alpha R}{2}),
+\end{aligned}
+\end{equation}
+which is \emph{not} the potential that we started out with.
+
+\footnotetext{In doing this integral, I've used the common trick of
+  setting the ``$z$~axis'' of the spherical integral along the
+  direction of the position vector of the field point. This means that
+  $|\vb*R-\vb*r|=\sqrt{R^2+r^2-2Rr\cos\theta}$. }
+
+
+The relatively easy fix here is to insert a $\delta$ function into the
+charge distribution:
+\begin{equation}
+\rho(r)=\rho'(r)+q\delta^3(r).
+\end{equation}
+It is clear that this will take care of the unwanted term in
+\eqref{eq:3_Phi'_final} and the non-zero total charge in
+\eqref{eq:3_q'}. 
+
+The reason why we can do this however, is that the Laplacian is
+singular at $r=0$; so what we really should have done from the
+beginning was to write 
+\begin{equation}
+\rho(r)=-\enaught\laplacian\Phi+c\delta^3(r),
+\end{equation}
+and then determined $c$ from the total charge integral. What I did
+here was more of a fun(\textinterrobang) exercise.
+
+
+
 
 \section{Capacitances}
 
@@ -354,6 +422,8 @@ would expect.
 
 \section{Method of mirrored charges}
 
+
+\section{Doing the derivatives}
 
 
 
