@@ -12,6 +12,8 @@
 
 \swapcommands{\Phi}{\varPhi}
 \swapcommands{\Omega}{\varOmega}
+\swapcommands{\Sigma}{\varSigma}
+
 
 \newcommand{\enaught}{\ensuremath\varepsilon_0}
 
@@ -567,6 +569,15 @@ We see that the exponential behaviour makes it practically imposible
 to achieve the lower of the two capacitances. 
 
 
+\subsection*{A quick note on the symmetry of the problem}
+I will be using ``the symmetry between $x$ and $y$'' a lot in the
+following calculations. By this symmetry I mean that the system is
+invariant under the symmetry transformation 
+\begin{equation}
+[x, y, x_0, y_0] \mapsto [y, x, y_0, y_0].
+\end{equation}
+I.e. the potential is unchanged under this transformation.
+
 
 
 
@@ -658,26 +669,89 @@ also be helpfull to now that
 \pdv{(\rho_{\pm x_0,y_0}^2/a^2)}{x}=\frac{2}{a^2}(x\mp x_0)
 \end{equation}
 Now we can take the $x$ derivative:
-\begin{equation}
+\begin{equation}\label{eq:5_dPhi/dx}
 \frac{4\pi\enaught}{\lambda}\pdv{\Phi}{x}
 =-\frac{2(x-x_0)}{\rho_{x_0,y_0}^2}
 -\frac{2(x+x_0)}{\rho_{-x_0,-y_0}^2}
 +\frac{2(x-x_0)}{\rho_{x_0,-y_0}^2}
 +\frac{2(x+x_0)}{\rho_{-x_0,y_0}^2}.
 \end{equation}
-Next we set $x=0$. There we note that
+Next we set $y=0$. There we note that
+\begin{equation}
+\rho_{x_0,y_0}(x, y=0)=\rho_{x_0,-y_0}(x, y=0)
+\qcomma\text{and}\quad
+\rho_{-x_0,y_0}(x=0, y)=\rho_{-x_0,-y_0}(x=0, y).
+\end{equation}
+Together this results in
+\begin{equation}
+E_x(x, y=0)=-\eval{\pdv{\Phi}{x}}_{y=0}=0.
+\end{equation}
+
+\subsection{Surface charge densities}
+In this part of the problem we will calculate the surface charge
+density on the grounded half planes. This is easily done since a
+surface charge density of $\sigma$ will result in a discontinuity in
+the normal $E$~filed of $\sigma/\enaught$. And since the two half
+planes are grounded, that means that the $E$~field outside our region
+of iterest is 0; i.e. the surface charge density is the same as the
+normal $E$~filed just inside the half plane. 
+
+Therefore
+\begin{equation}
+\frac{1}{\enaught}\sigma_x(x)=E_x(x=0, y)=-\eval{\pdv{\Phi}{x}}_{x=0}.
+\end{equation}
+Lucky for us, we already calculated the derivative in
+\eqref{eq:5_dPhi/dx}. This time, however, we're setting $x=0$, which
+means that
 \begin{equation}
 \rho_{x_0,y_0}(x=0, y)=\rho_{-x_0,y_0}(x=0, y)
 \qcomma\text{and}\quad
 \rho_{x_0,-y_0}(x=0, y)=\rho_{-x_0,-y_0}(x=0, y).
 \end{equation}
-Together this results in
+The surface charge on the $yz$ plane ($y\ge0$) is therfore
 \begin{equation}
-E_x(x=0)=-\eval{\pdv{\Phi}{x}}_{x=0}=0.
+\begin{aligned}
+\sigma_y(x)=\enaught E_x(x=0, y)=&
+\frac{\lambda}{2\pi}
+\qty[
+\frac{(-x_0)-(x_0)}{x_0^2+(y-y_0)^2}
++\frac{(x_0)-(-x_0)}{x_0^2+(y+y_0)^2}]\\
+=&\frac{\lambda x_0}{\pi}
+\qty[ \frac{1}{x_0^2+(y+y_0)^2}
+-\frac{1}{x_0^2+(y-y_0)^2}].
+\end{aligned}
+\end{equation}
+And, by the symmetry between $x$ and $y$, the surface charge on the
+$xz$ plane ($x\ge0$) is therefore
+\begin{equation}
+\sigma_x(x)=\enaught E_y(x, y=0)=
+\frac{\lambda y_0}{\pi}
+\qty[
+\frac{1}{(x+x_0)^2+y_0^2}
+-\frac{1}{(x-x_0)^2+y_0^2}].
 \end{equation}
 
-\subsection{Surface charge densities}
+\subsubsection{Plot}
+\begin{figure}\centering
+\input{figures/5_sigma.tex}
+\caption{Non-dimensionalized surface charge density plotted against
+  the non-dimensionalized $x$ coordinate. Here $\Sigma_x$ is given by
+  \eqref{eq:5_Sigma_x}, and $\xi=x/x_0$ and $\theta=y_0/x_0$.}
+\label{fig:5_sigma}
+\end{figure}
+We are also tasked with plotting $\sigma_x(x)$ again $x$, for some
+different values of $x_0$ and $y_0$. In a case like this, what we
+should really do is plot two \emph{dimension-less} quantities against
+each other. So instead of $\sigma_x$ versus $x$, we can use
+\begin{equation}\label{eq:5_Sigma_x}
+\Sigma_x(\xi, \theta)=\frac{\pi \sigma_x x_0^2}{\lambda y_0}
+=\frac{1}{(1+\xi)^2+\theta^2}-\frac{1}{(1-\xi)^2+\theta^2},
+\end{equation}
+where $\xi=x/x_0$ and $\theta=y_0/x_0$.
 
+The plots using these variables are shown in \figref{fig:5_sigma}. We
+clearly see that the closer the line charge is to the plane (compared
+to the other plane), the stronger the surface charge density becomes. 
 
 \subsection{Total charge on the plane}
 
