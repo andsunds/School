@@ -95,7 +95,8 @@ that ring
 \end{equation}
 where $\sqrt{z^2+R^2}$ is the distance from any point of the ring to
 the $z$~axis at $z$. But let's do it more rigorously this time. In
-cylindrical coordinates the charge distribution of that ring is
+cylindrical coordinates the charge distribution of that ring
+is\footnotemark{} 
 \begin{equation}
 \rho(r, \phi, z)=\lambda \delta(z)\delta(r-R),
 \end{equation}
@@ -113,6 +114,10 @@ which upon evaluating the $\delta$ functions yields
 = \frac{\lambda}{4\pi\enaught} \int_0^{2\pi}\rd\phi'
 \frac{R}{\sqrt{(x-R\cos\phi')^2+(y-R\sin\phi'^2)+z^2}}.
 \end{equation}
+\footnotetext{I'm using $r$ as the cylindrical radius because $\rho$,
+  the more conventional chioce, is already taken for the charge
+  density. }
+
 From here, we can clearly see that by setting $x=y=0$ the expression
 in the denominator simplifies to $\sqrt{z^2+R^2}$, which is
 independent of $\phi'$; we thus end up with exactly
@@ -540,7 +545,7 @@ C=\frac{2\pi\enaught L}{\ln(b/a)}.
 \end{equation}
 
 
-\subsection{Application of the previous part}
+\subsection{Application of the previous result}
 In this part we will apply the result from the previous part to
 calcualte the dimensions of a certain coaxial calbel. The cable has an
 outer diameter of $b=\unit[1]{mm}$ and a capacitance of
@@ -558,17 +563,157 @@ The two cases we get result in
 a(c=\unit[3\times10^{-11}]{F/m})=\unit[0.16]{mm}\qcomma
 a(c=\unit[3\times10^{-12}]{F/m})=\unit[8.8]{pm}.
 \end{equation}
+We see that the exponential behaviour makes it practically imposible
+to achieve the lower of the two capacitances. 
 
 
 
 
 
 \section{Method of mirrored charges}
+\begin{figure}\centering
+\input{figures/5_geometry.pdf_t}
+\caption{The geometry of probem 5, as seen in the negative $z$
+  direction. One line charge, of uniform linear charge density
+  $\lambda$, is at $(x_0, y_0)$ perpendicular to the $xy$~plane; then
+  there are two grounded planes at $x=0$, $y\ge0$ and at $x\ge0$,
+  $y=0$. These planes can be replaced with image charges as drawn in
+  this figure (dotted). } 
+\label{fig:5_geometry}
+\end{figure}
+
+In this problem concerns an infinite line charge perpendicular to the
+$xy$ plane, intersecting the plane at  $(x_0, y_0)$ as in
+\figref{fig:5_geometry}. There are furthermore two grounded half
+planes, parallell to the $z$ axis, cutting off the first quadrant. 
+
+To deal with the two grounded half planes, we will implement the
+\emph{method of mirrored charges} (MMC). Let's say that we only had one
+grounded plane, for instance the $xz$ plane; then MMC prescribes that
+we shuold place an image line charge at $(x_0, -y_0)$. Likewise, if we only
+hade the $yz$ plane grounded, then we would need an image line charge
+at $(-x_0, y_0)$. This is to ensure that the one plane in the middle
+will be at potential $\Phi=0$ due to the symmetry. 
+
+This time, however, we have \emph{two} grounded planes. It is oblious
+that just placing out the two image line charges for each plane won't
+work. The original charge and one of the image charges will produce
+zero potential at the plane inbetween them, but then we would also get
+a contribution from the second image charge resulting non-zero
+potential on either of the two half planes. 
+
+We therefore need to add one more image charge at $(-x_0, y_0)$. It is
+easy to see that this, very symmetric, setup will result in zero
+potential on both the $xz$ and $yz$ planes. It is as we had two real
+charges at, for instance, $(x_0, \pm{y_0})$ and only the $yz$ plane
+was grounded. 
+
+
+\subsection{The electric potential and field from this geometry}
+When we have established the geometry of the images charges, we can
+just use the superposition principle to add up the potentials due to
+the different charges. One line charge, with linear charge density
+$\lambda$, along the $z$ axis will give rise to a potential
+\begin{equation}
+\Phi_{0,0}(\rho)=\frac{\lambda}{4\pi\enaught}\ln(\frac{a^2}{\rho^2}),
+\end{equation}
+where $a$ is some constant of dimension length; its contribution
+to $\Phi_{0,0}$ is just additive.
+
+So the potential in our case will be
+\begin{equation}
+\begin{aligned}
+\Phi(x, y)=&\Phi_{x_0,y_0}(x, y)-\Phi_{x_0,-y_0}(x, y)
+-\Phi_{-x_0,y_0}(x, y)+\Phi_{-x_0,-y_0}(x, y)\\
+=&\frac{\lambda}{4\pi\enaught}
+\ln(\frac{\qty[(x-x_0)^2+(y+y_0)^2]\qty[(x+x_0)^2+(y-y_0)^2]}
+{\qty[(x-x_0)^2+(y-y_0)^2]\qty[(x+x_0)^2+(y+y_0)^2]}).
+\end{aligned}
+\end{equation}
+We aslo see that if we, for instance, set $x=0$ the fraction inside
+the log becomes
+\begin{equation}
+\frac{\bcancel{\qty[x_0^2+(y+y_0)^2]}\cancel{\qty[x_0^2+(y-y_0)^2]}}
+{\cancel{\qty[x_0^2+(y-y_0)^2]}\bcancel{\qty[x_0^2+(y+y_0)^2]}}
+=1,
+\end{equation}
+so the potential is indeed $\Phi(x=0, y)=0$; then the symmetry between
+$x$ and $y$ means that also $\Phi(x, y=0)=0$.
+
+The tangential $E$ filed at any of the grounded half planes is
+calculated using the derivatives in the coordinates parallell to the
+plane. Let us look at an example using the $xz$ plane, where we use the $x$
+and the $z$ derivatives of $\Phi$. Clearly $\pdv*{\Phi}{z}\equiv0$. So
+what we need now is the $x$ derivative. That is more easily calculated
+if we split up the logarithms:
+\begin{equation}
+\ln(\frac{\rho_{x_0,-y_0}^2\rho_{-x_0,y_0}^2}
+{\rho_{x_0,y_0}^2\rho_{-x_0,-y_0}^2})
+=-\ln(\frac{\rho_{x_0,y_0}^2}{a^2})-\ln(\frac{\rho_{-x_0,-y_0}^2}{a^2})
++\ln(\frac{\rho_{x_0,-y_0}^2}{a^2})+\ln(\frac{\rho_{-x_0,y_0}^2}{a^2}),
+\end{equation}
+where $\rho_{\pm x_0,\pm y_0}^2=(x\mp x_0)^2+(y\mp y_0)^2$. It will
+also be helpfull to now that
+\begin{equation}
+\pdv{(\rho_{\pm x_0,y_0}^2/a^2)}{x}=\frac{2}{a^2}(x\mp x_0)
+\end{equation}
+Now we can take the $x$ derivative:
+\begin{equation}
+\frac{4\pi\enaught}{\lambda}\pdv{\Phi}{x}
+=-\frac{2(x-x_0)}{\rho_{x_0,y_0}^2}
+-\frac{2(x+x_0)}{\rho_{-x_0,-y_0}^2}
++\frac{2(x-x_0)}{\rho_{x_0,-y_0}^2}
++\frac{2(x+x_0)}{\rho_{-x_0,y_0}^2}.
+\end{equation}
+Next we set $x=0$. There we note that
+\begin{equation}
+\rho_{x_0,y_0}(x=0, y)=\rho_{-x_0,y_0}(x=0, y)
+\qcomma\text{and}\quad
+\rho_{x_0,-y_0}(x=0, y)=\rho_{-x_0,-y_0}(x=0, y).
+\end{equation}
+Together this results in
+\begin{equation}
+E_x(x=0)=-\eval{\pdv{\Phi}{x}}_{x=0}=0.
+\end{equation}
+
+\subsection{Surface charge densities}
+
+
+\subsection{Total charge on the plane}
+
+
+\subsection{Asymptotic behavior}
+
+
+
 
 
 \section{Doing the derivatives}
+In this problem we will prove that
+\begin{equation}\label{eq:6_start}
+-\grad|\vb*x-\vb*x'|^{-1}
+=\frac{\vb*x-\vb*x'}{|\vb*x-\vb*x'|^{3}},
+\end{equation}
+and then use this result to prove that $\curl\vb*E=\vb0$ and show that
+this means that $\vb*E=-\grad\Phi$ has a scalar potential.
 
-
+We begin with the $i$th componet of the LHS of \eqref{eq:6_start}:
+\begin{equation}
+\begin{aligned}
+-\vu{x}_i\vdot\grad\qty|\vb*x-\vb*x'|^{-1}
+=&-\pdv{x_i}\qty[\sum_j(x_j-x_j')^2]^{-1/2}\\
+=&-\qty(-\frac{1}{2})\qty[\sum_j(x_j-x_j')^2]^{-3/2}
+\times 2(x_i-x_i')\\
+=&\frac{x_i-x_i'}{|\vb*x-\vb*x'|^3}.
+\end{aligned}
+\end{equation}
+We see that this calculations apply to all $i$'s, meaning that
+\begin{equation}
+-\grad\qty|\vb*x-\vb*x'|^{-1}=
+\sum_i\frac{(x_i-x_i')\vu{x}_i}{|\vb*x-\vb*x'|^3}
+=\frac{\vb*x-\vb*x'}{|\vb*x-\vb*x'|^{3}},
+\end{equation}
+which is exactly the RHS of \eqref{eq:6_start}.
 
 
 
