@@ -414,9 +414,152 @@ and then determined $c$ from the total charge integral. What I did
 here was more of a fun(\textinterrobang) exercise.
 
 
-
-
 \section{Capacitances}
+This problem concerns the capacitances resulting from some different
+geometries. 
+
+We will be using Gauss's law to derive the $E$~filed from the
+different geometries. 
+\textcolor{gray}{
+That usually warrants drawing some figures of
+the geometries and suitable Gauss surfaces. The cases in this problem
+is however very simple and common (I would guess that they can be
+found in any undergraduate E\&M textbook), so I will not bother
+drawing anything.
+}
+
+\subsection{Plate capacitor}
+Here we have two plates, of area $A$, with charge $\pm Q$, separated a
+distace $d$ ($d$ is much smaller than any of the sidelengths of the
+plates). 
+
+For sufficiently small $d$, we can regard the plates as infinite
+whereby the symmetry dictates that, if the plates are parallell to the
+$xy$~plane, $\vb*E=E_z\vu{z}$ and allways point away from (into) the
+plate if the charge is positive (negative). 
+
+The field from \emph{one} of the plates can therefore be determined by 
+\textit{a Gauss surface that is a cylinder with its base parallell and
+  mantle perpendicular to the plates}. If the cylinder has a base area
+$a$ and the plate has a surface charge density of $\pm\sigma=Q/A$,
+then Gauss's law tells us that
+\begin{equation}
+2a E_z(z)=\frac{a\sigma}{\enaught}
+\end{equation}
+(assuming that the charge is $+\sigma$).
+We get a facor $2a$ on the LHS because we get a contribution of $aE_z(z)$
+from each side of the plate. Also note that $E_z(-z)=-E_z(z)$, when
+the plate lies in the $z=0$ plane. The field from that one plate is
+therefore
+\begin{equation}
+E_z(z)=\frac{\sigma}{2\enaught}\sign(z).
+\end{equation}
+
+The total field inbetween both of these plates is thus
+\begin{equation}
+E_{z, \text{tot}}(0<z<d)
+=\frac{+\sigma}{2\enaught}-\frac{-\sigma}{2\enaught}
+=\frac{\sigma}{\enaught},
+\end{equation}
+(assuming the plate at $z=0$ hade charge $+Q$ and the plate at $z=d$
+had $-Q$). The potential difference between these two plates is easily
+calculated by doing a \textit{line integral, from the first to the
+  second plate, along a straight line perpendicular to the
+  plates}. That line integral gives
+\begin{equation}
+\Delta{V}=\int_0^d\frac{\sigma}{\enaught}\id{z}
+=\frac{\sigma d}{\enaught}
+=\frac{Qd}{A\enaught}.
+\end{equation}
+The capacitance is now
+\begin{equation}
+C=\frac{Q}{\Delta{V}}=\frac{A\enaught}{d}.
+\end{equation}
+
+
+\subsection{Spherical capacitor}
+This time we have two concentric spherical shells of radii $a$ and
+$b$, where $b>a$. The relevant \textit{Gauss surface here will be
+  another concentric sphere of any radius}. The sphereical symmetry of
+the geometry results in $\vb*E=E_r\vu{r}$.
+
+We begin by studying the field on the \emph{the inside of the outer
+  sphere}. By applying Gauss's law to any sphere inside the puter
+shell, we get
+\begin{equation}
+4\pi r^2 E_{r, \text{outer}}(r<b)=\frac{1}{\enaught}\text{``Enclosed charge''}=0.
+\end{equation}
+From this we see that the only filed we have inbetween the two shells
+will come from the \emph{inner} shell. And by applying Gauss's law to
+any shere \emph{outside} that inner shell, we get
+\begin{equation}
+4\pi r^2 E_{r, \text{inner}}(r>a)=\frac{Q}{\enaught},
+\end{equation}
+(assuming that the inner sphere has charge $+Q$).
+
+Then the potential difference, which can be calculated with a
+\textit{line integral, from the inner to the outer shell, along a
+  straight line in the radial direction}. This gives
+\begin{equation}
+\Delta{V}=\int_a^b\frac{Q}{4\pi\enaught r^2}\id{r}
+=\frac{Q}{4\pi\enaught}\qty(\frac{1}{a}-\frac{1}{b})
+=\frac{Q}{4\pi\enaught}\qty(\frac{b-a}{ab}).
+\end{equation}
+And the capacitance is
+\begin{equation}
+C=\frac{4\pi\enaught ab}{b-a}.
+\end{equation}
+
+
+\subsection{Cylindrical capacitor}
+This time it's concentric cylindrical shells of lengths $L$ and radii
+$a$ and $b$, where $a<b$. The \textit{Gauss surface is also a
+  concentric cylinder}. Once again we can use the symmetry of the
+problem to get $\vb*E=E_\rho\vu*\uprho$.
+
+And just like for the spheres, the field from the outer shell will be
+$0$ inside the dito. Therefore the only contribution to the potential
+difference comes from the inner shell. So let's use Gauss's law on a
+Gauss cylinder of length $l\ll L$ and radius $\rho>a$:
+\begin{equation}
+2\pi\rho l E_\rho(\rho>a)=\frac{\lambda l}{\enaught},
+\end{equation}
+where $\lambda=Q/L$ (assuming that the inner shell has charge $+Q$).
+
+The potential difference is givn by the \textit{line integral, from the
+inner to the outer shell, along any straight line perpendicular to the
+$z$~axix}. This gives
+\begin{equation}
+\Delta{V}=\int_a^b\frac{\lambda}{2\pi\enaught \rho}\id\rho
+=\frac{\lambda}{2\pi\enaught}\ln(\frac{b}{a})
+=\frac{Q}{2\pi\enaught L}\ln(\frac{b}{a}),
+\end{equation}
+which gives the capacitance
+\begin{equation}\label{eq:3c}
+C=\frac{2\pi\enaught L}{\ln(b/a)}.
+\end{equation}
+
+
+\subsection{Application of the previous part}
+In this part we will apply the result from the previous part to
+calcualte the dimensions of a certain coaxial calbel. The cable has an
+outer diameter of $b=\unit[1]{mm}$ and a capacitance of
+$c=\unit[3\times10^{-11}]{F/m}$ or $c=\unit[3\times10^{-12}]{F/m}$
+($c=C/L$); it is also air filled, meaning that we can use $\enaught$.
+
+From \eqref{eq:3c}, we get
+\begin{equation}
+\frac{b}{a}=\exp(\frac{2\pi\enaught}{c})
+\quad\Longleftrightarrow\quad
+a=b\,\exp(-\frac{2\pi\enaught}{c}).
+\end{equation}
+The two cases we get result in
+\begin{equation}
+a(c=\unit[3\times10^{-11}]{F/m})=\unit[0.16]{mm}\qcomma
+a(c=\unit[3\times10^{-12}]{F/m})=\unit[8.8]{pm}.
+\end{equation}
+
+
 
 
 
