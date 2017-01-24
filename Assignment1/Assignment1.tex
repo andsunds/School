@@ -13,6 +13,7 @@
 \swapcommands{\Phi}{\varPhi}
 \swapcommands{\Omega}{\varOmega}
 \swapcommands{\Sigma}{\varSigma}
+\swapcommands{\Lambda}{\varLambda}
 
 
 \newcommand{\enaught}{\ensuremath\varepsilon_0}
@@ -657,7 +658,7 @@ plane. Let us look at an example using the $xz$ plane, where we use the $x$
 and the $z$ derivatives of $\Phi$. Clearly $\pdv*{\Phi}{z}\equiv0$. So
 what we need now is the $x$ derivative. That is more easily calculated
 if we split up the logarithms:
-\begin{equation}
+\begin{equation}\label{eq:5_ln}
 \ln(\frac{\rho_{x_0,-y_0}^2\rho_{-x_0,y_0}^2}
 {\rho_{x_0,y_0}^2\rho_{-x_0,-y_0}^2})
 =-\ln(\frac{\rho_{x_0,y_0}^2}{a^2})-\ln(\frac{\rho_{-x_0,-y_0}^2}{a^2})
@@ -754,10 +755,116 @@ clearly see that the closer the line charge is to the plane (compared
 to the other plane), the stronger the surface charge density becomes. 
 
 \subsection{Total charge on the plane}
+To get the total charge per unit length, in the $z$ direction, of the
+$xz$~plane ($x\ge0$) we just integrate over the positive $x$~axis:
+\begin{equation}
+\begin{aligned}
+\Lambda_x=&\int_0^\infty\rd{x}\,\sigma_x(x)
+=\int_0^\infty x_0\rd{\xi}\,\frac{\lambda y_0}{\pi x_0^2}
+\qty[\frac{1}{(1+\xi)^2+\theta^2}-\frac{1}{(1-\xi)^2+\theta^2}]\\
+=&\frac{\lambda \theta}{\pi}
+\int_0^\infty \rd{\xi}\,\frac{1}{\theta^2}
+\qty[\frac{1}{(1+\xi)^2/\theta^2+1}-\frac{1}{(1-\xi)^2/\theta^2+1}].
+\end{aligned}
+\end{equation}
+From here, we can spit this integral into two separate integral with
+the new variabels
+\begin{equation}
+u_\pm=\frac{\xi\pm1}{\theta}
+\quad\Longrightarrow\quad
+\rd\xi=\theta\id{u_\pm}.
+\end{equation}
+And we get
+\begin{equation}
+\begin{aligned}
+\Lambda_x=&\frac{\lambda}{\pi}
+\qty[\;\int_{1/\theta}^\infty \frac{\rd u_+}{u_+^2+1}
+-\int_{-1/\theta}^\infty\frac{\rd u_-}{u_-^2+1}\;]\\
+=&\frac{\lambda}{\pi}\qty{
+\qty[\frac{\pi}{2}-\arctan(\theta^{-1})]
+-\qty[\frac{\pi}{2}-\arctan(-\theta^{-1})]}\\
+=&-\frac{2\lambda}{\pi}\arctan(\theta^{-1})
+&=-\frac{2\lambda}{\pi}\arctan(\frac{x_0}{y_0}).
+\end{aligned}
+\end{equation}
+By the symmetry between $x$ and $y$ in this problem, we also have
+\begin{equation}
+\Lambda_y=-\frac{2\lambda}{\pi}\arctan(\frac{y_0}{x_0}).
+\end{equation}
 
 
 \subsection{Asymptotic behavior}
+To calculate the asymptotic behaviour it will be helpfull to know
+the distance between two points $\vb*r'$ and $\vb*r$, in cylidrical
+coordimnates. Assumin that $\vb*r'$ has cyulidrical coordinates
+$(\rho', \phi')$ and similar for $\vb*r$, we get
+\begin{equation}
+|\vb*r-\vb*r'|^2=\rho^2+{\rho'}^2-2\rho\rho'\cos(\phi-\phi').
+\end{equation}
 
+Next up we note that the four charges have cylindrical coordinate
+angles $\pm\phi_0$ or $\pi\pm\phi_0$, but all have radius $\rho_0$.
+This means that we can rewrite the logarithms on the RHS of
+\eqref{eq:5_ln} as
+\begin{equation}
+\begin{aligned}
+\text{RHS\eqref{eq:5_ln}}=&
+-\ln(\frac{\rho^2}{a^2}
+  \qty[1+\frac{\rho_0^2}{\rho^2}-2\frac{\rho_0}{\rho}\cos(\phi-\phi_0)])
+-\ln(\frac{\rho^2}{a^2}
+  \qty[1+\frac{\rho_0^2}{\rho^2}-2\frac{\rho_0}{\rho}\cos(\phi-(\pi+\phi_0))])\\
+&+\ln(\frac{\rho^2}{a^2}
+  \qty[1+\frac{\rho_0^2}{\rho^2}-2\frac{\rho_0}{\rho}\cos(\phi+\phi_0)])
++\ln(\frac{\rho^2}{a^2}
+  \qty[1+\frac{\rho_0^2}{\rho^2}-2\frac{\rho_0}{\rho}\cos(\phi-(\pi-\phi_0))])\\
+=&
+-\ln(1+\frac{\rho_0^2}{\rho^2}-2\frac{\rho_0}{\rho}\cos(\phi-\phi_0))
+-\ln(1+\frac{\rho_0^2}{\rho^2}+2\frac{\rho_0}{\rho}\cos(\phi-\phi_0))\\
+&+\ln(1+\frac{\rho_0^2}{\rho^2}-2\frac{\rho_0}{\rho}\cos(\phi+\phi_0))
++\ln(1+\frac{\rho_0^2}{\rho^2}+2\frac{\rho_0}{\rho}\cos(\phi+\phi_0)).
+\end{aligned}
+\end{equation}
+Now we want to investigate the behavior as $\rho\to\infty$ or
+$\epsilon=\rho_0/\rho\to0$. 
+\begin{equation}
+\begin{aligned}
+\text{RHS\eqref{eq:5_ln}}=&
+-\ln(1+\epsilon^2-2\epsilon\cos(\phi-\phi_0))
+-\ln(1+\epsilon^2+2\epsilon\cos(\phi-\phi_0))\\
+&+\ln(1+\epsilon^2-2\epsilon\cos(\phi+\phi_0))
++\ln(1+\epsilon^2+2\epsilon\cos(\phi+\phi_0))\\
+=&-\qty[\qty(\xcancel{\epsilon^2}-\cancel{2\epsilon\cos(\phi-\phi_0)})
+-\frac{1}{2}\qty(\epsilon^2-2\epsilon\cos(\phi-\phi_0))^2]\\
+&-\qty[\qty(\xcancel{\epsilon^2}+\cancel{2\epsilon\cos(\phi-\phi_0)})
+-\frac{1}{2}\qty(\epsilon^2+2\epsilon\cos(\phi-\phi_0))^2]\\
+&+\qty[\qty(\xcancel{\epsilon^2}-\bcancel{2\epsilon\cos(\phi+\phi_0)})
+-\frac{1}{2}\qty(\epsilon^2-2\epsilon\cos(\phi+\phi_0))^2]\\
+&+\qty[\qty(\xcancel{\epsilon^2}+\bcancel{2\epsilon\cos(\phi+\phi_0)})
+-\frac{1}{2}\qty(\epsilon^2+2\epsilon\cos(\phi+\phi_0))^2]
++\order{\epsilon^3}\\
+&=4\epsilon^2\cos^2(\phi-\phi_0)-4\epsilon^2\cos^2(\phi+\phi_0)
++\order{\epsilon^3}.
+\end{aligned}
+\end{equation}
+If we now take a look at the two cosines, using the cosine angle
+addition formula, we get 
+\begin{equation}
+\begin{aligned}
+\cos^2(\phi-\phi_0)-\cos^2(\phi+\phi_0)=&
+\qty(\cos\phi\cos\phi_0+\sin\phi\sin\phi_0)^2\\
+&-\qty(\cos\phi\cos\phi_0-\sin\phi\sin\phi_0)^2\\
+=&4\cos\phi\cos\phi_0\sin\phi\sin\phi_0
+&=\frac{4xx_0yy_0}{\rho^2\rho_0^2}.
+\end{aligned}
+\end{equation}
+
+And finally we arrive at an asymptotic formula for the potential as
+$\rho\to\infty$:
+\begin{equation}
+\Phi\sim \frac{\lambda}{4\pi\enaught}\,
+4\epsilon^2\frac{4xx_0yy_0}{\rho^2\rho_0^2}
+=\frac{\lambda}{\pi\enaught}\,\frac{xx_0yy_0}{\rho^4}.
+\end{equation}
 
 
 
