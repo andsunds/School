@@ -896,6 +896,28 @@ We see that this calculations apply to all $i$'s, meaning that
 \end{equation}
 which is exactly the RHS of \eqref{eq:6_start}.
 
+Since all $E$ fields can be written as 
+\begin{equation}
+\vb*E(\vb*x)=\frac{1}{4\pi\enaught}\int\!\rd^3x'\,
+\rho(\vb*x') \frac{\vb*x-\vb*x'}{|\vb*x-\vb*x'|^{3}},
+\end{equation}
+we see that the integrand can be rewritten using
+\eqref{eq:6_start}. And bacause the gradient only operates on the
+$\vb*x$~variable, and \emph{not} on the integration variable, we can
+take that out of the integration:
+\begin{equation}
+\vb*E(\vb*x)=\frac{1}{4\pi\enaught}\int\!\rd^3x'\,
+\rho(\vb*x')\qty(-\grad_{\!\!\vb*x} \frac{1}{|\vb*x-\vb*x'|})
+=-\grad \overbrace{\int\!\rd^3x'\,
+\frac{\rho(\vb*x')}{4\pi\enaught}\frac{1}{|\vb*x-\vb*x'|}}^{\Phi(\vb*x)}.
+\end{equation}
+
+We also know the vector identity that $\curl(\grad f)\equiv\vb*0$ for
+any function $f$. So therefore, since $E=-\grad\Phi$, we also know
+that $\curl\vb*E=-\curl(\grad\Phi)=\vb*0$.
+
+
+
 
 
 \end{document}
