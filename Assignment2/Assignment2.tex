@@ -27,7 +27,7 @@
 \renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 \renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
 
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 \newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
 \newcommand{\sign}{\ensuremath{\text{sign}}}
@@ -53,6 +53,81 @@ Assignment 1}
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
 \section{The Ornstein-Zernike formula}
+In this problem we are concerned about the Ornstein-Zernike formula 
+$G(\vb*r)=r^{-(d-1)/2}\ee^{-r/\xi}$. We will start from the real space
+respresentation 
+\begin{equation}\label{eq:1_start}
+G(\vb*r) = \frac{T}{2}\int\!\rd^dq\,\frac{\ee^{\ii\vb*q\vdot\vb*r}}{kt+bq^2},
+\end{equation}
+where $q^2=\vb*q\vdot\vb*q$, $t=(T-\Tc)/\Tc$, $k$ and $b$ are some
+constants, and $r\gg\xi:=\sqrt{b/kt}$.
+
+\subsection*{1~(a+b)\quad Doing the integrals}\addtocounter{subsection}{1}
+Using 
+\begin{equation}\label{eq:1_1/c}
+\int_0^\infty\rd{u}\,\ee^{-cu}=\frac{1}{c}
+\qcomma a>0,
+\end{equation}
+we can rewrite the target integral as
+\begin{equation}
+g(\vb*r)=\int_{-\infty}^\infty\!\rd^dq\,
+\frac{\ee^{\ii\vb*q\vdot\vb*r}}{kt+bq^2}
+\stackrel{\eqref{eq:1_1/c}}{=}
+\int_{-\infty}^\infty\!\rd^dq\, \ee^{\ii\vb*q\vdot\vb*r}
+\int_0^\infty\!\rd{u}\,\ee^{-u\,(kt+bq^2)}.
+\end{equation}
+Now, since this is physics\footnotemark{}, we can swap the order of
+integration; and while we're at it we might as well change variables
+to $Q=\sqrt{b/kt}\,q=\xi q$ and $U=ktu$. We thereby get
+\begin{equation}
+g(\vb*r)=\int_0^\infty\!\frac{\rd{U}}{kt}\,\ee^{-U}
+\prod_i\int_{-\infty}^\infty\!\frac{\rd{Q}_i}{\xi}\,
+ \exp{-UQ_i^2+\frac{\ii r_i}{\xi}Q_i}.
+\end{equation}
+Each of these $Q_i$ integrals are just regular Gaussian so
+\begin{equation}
+\int_{-\infty}^\infty\!\rd{Q}_i\,
+ \exp{-UQ_i^2+\frac{\ii r_i}{\xi}Q_i}
+=\qty(\frac{\pi}{U})^{1/2}\exp{-\frac{r_i^2}{4\xi^2U}}.
+\end{equation}
+and we and up with
+\begin{equation}\label{eq:1b_end}
+g(\vb*r)=\frac{\pi^{d/2}}{\xi^d kt}\int_0^\infty\!\rd{U}\,
+U^{d/2}\exp{-U-\frac{r^2}{4\xi^2U}}.
+\end{equation}
+
+\footnotetext{I.e. we don't care, but in reality the functions are
+  nice enough, so we can do it.} 
+
+
+\subsection{Asymptotic behaviour}
+To get to the asymptotic behaviour of $g$, we enlist the help of
+\textit{Mathematica} which helps us to calculate the last remaining
+integral \eqref{eq:1b_end}. And we get
+\begin{equation}
+g(\vb*r)=\qty(\frac{\pi}{2})^{d/2}\frac{1}{\xi^dkt} 
+\qty(\frac{\xi}{r})^{-1-\frac{d}{2}} 
+K_{-1-\frac{d}{2}}\qty(\frac{r}{\xi}),
+\end{equation}
+where $K_\mu$ is the modified Bessel function of the second kind. Next
+we use the asymptotic formula 
+\begin{equation}
+K_\mu(z)\sim \ee^{-z}\sqrt{\frac{\pi}{2z}}
+\end{equation}
+to get
+\begin{equation}
+g(\vb*r)=\qty(\frac{\pi}{2})^{d/2}\frac{1}{\xi^dkt} 
+\qty(\frac{\xi}{r})^{-1-\frac{d}{2}} 
+\ee^{-r/\xi}\qty(\frac{\pi}{2})^{1/2}\qty(\frac{\xi}{r})^{1/2}
+\propto
+%=\qty(\frac{\pi}{2})^{(d+1)/2}\frac{1}{\xi^{(3d+1)/2}kt}\;
+r^{(1-d)/2}\ee^{-r/\xi},
+\end{equation}
+which was what we set out to show. 
+
+
+
+
 
 
 \section{Correlation length in the Ising model}
