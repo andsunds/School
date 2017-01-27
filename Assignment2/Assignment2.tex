@@ -127,10 +127,104 @@ which was what we set out to show.
 
 
 
+\section{MFT correlation length in the Ising model}
+From class, we derived an expression for the, momentum space,
+correlation function at $T>\Tc$:
+\begin{equation}
+G_{T>\Tc}(\vb*q)=\frac{1}{t+\frac{\kappa}{2T}q^2},
+\end{equation}
+for small $q$, where $t=(T-\Tc)/\Tc$ and $\kappa$ is a given
+constant. From this expression we got the correlation length
+\begin{equation}
+\xi(t>0)=\qty[\frac{\kappa}{2Tt}]^{1/2}
+=\qty[\frac{\kappa}{2(T-\Tc)}]^{1/2}.
+\end{equation}
+We got to this correlation length fisrst after we've done
+the inverse F.T. but if we can get the momentum space correlation
+function, for $t<0$, on the form
+\begin{equation}
+G_{T<\Tc}(\vb*q)\propto\qty[1+\xi^2q^2]^{-1},
+\end{equation}
+we don't have to redo the inverse F.T.
+
+We begin with the MFT equation for the correlation function
+\begin{equation}
+G_{ij}=(1-M^2)\sum_l \qty[\frac{1}{T}J_{il}G_{lj}+\delta_{ij}]
+\quad\Longleftrightarrow\quad
+\sum_l\qty(\frac{\delta_{il}}{1-M^2}-\frac{1}{T}J_{il})G_{lj}
+=\delta_{ij},
+\end{equation}
+where the MFT value for $M^2$ is $M^2=3|t|=-3t$.
+Next step is to F.T. this using the transformation
+\begin{equation}
+A_{ij}=\frac{1}{N}\sum_{\vb*q} A(\vb*q)\ee^{\ii\vb*q\vdot(\vb*r_i-\vb*r_j)}.
+\end{equation}
+And we get
+\begin{equation}\label{eq:2_MFT_FT}
+\frac{1}{N}\sum_{\vb*q} \frac{G(\vb*q)}{1-M^2}
+\ee^{\ii\vb*q\vdot(\vb*r_i-\vb*r_j)}
+-\frac{1}{T}\sum_l\frac{1}{n^2}\sum_{\vb*q', \vb*q''}
+J(\vb*q')\ee^{\ii\vb*q'\vdot(\vb*r_i-\vb*r_l)}
+G(\vb*q'')\ee^{\ii\vb*q''\vdot(\vb*r_l-\vb*r_j)}
+=\frac{1}{N}\sum_{\vb*q}\ee^{\ii\vb*q\vdot(\vb*r_l-\vb*r_j)}.
+\end{equation}
+From here, we use 
+\begin{equation}
+\frac{1}{N}\sum_n\ee^{-\ii \vb*r_n\vdot(\vb*q'-\vb*q'')}=\delta_{\vb*q', \vb*q''}
+\end{equation}
+to collapse the $l$ sum and one of the $\vb*q$ sums in the second term
+of \eqref{eq:2_MFT_FT}:
+\begin{equation}
+\frac{1}{N}\sum_{\vb*q} 
+\qty(\frac{1}{1-M^2} -\frac{1}{T}J(\vb*q))G(\vb*q)
+\ee^{\ii\vb*q\vdot(\vb*r_i-\vb*r_j)}
+=\frac{1}{N}\sum_{\vb*q}\ee^{\ii\vb*q\vdot(\vb*r_l-\vb*r_j)}.
+\end{equation}
+This should be valid for any $\vb*r_i$ and $\vb*r_j$, so we can equate
+the terms:
+\begin{equation}
+G(\vb*q)=\frac{1}{\frac{1}{1-M^2} -\frac{1}{T}J(\vb*q)}.
+\end{equation}
+
+Now we need the long-wavelength limit for $J$, which we derived in
+class to be
+\begin{equation}
+J(\vb*q)=J-\frac{\kappa}{2}q^2,
+\end{equation}
+where 
+\begin{equation}
+\kappa:=\frac{1}{Nd}\sum_{ij}J_{ij}\abs{\vb*r_i-\vb*r_j}^2
+\end{equation}
+is just a constant. 
+
+We now have all we need
+\begin{equation}
+\begin{aligned}
+G(\vb*q)=&\qty[\frac{1}{1-M^2}-\frac{J}{T}+\frac{\kappa}{2T}q^2]^{-1}
+&\stackrel{\text{MFT}}{=}&
+\qty[\frac{1}{1+3t}-\frac{\Tc}{T}+\frac{\kappa}{2T}q^2]^{-1}\\
+\stackrel{|t|\ll1}{\approx}&
+\qty[(1-3t)-\frac{\Tc}{T}+\frac{\kappa}{2T}q^2]^{-1}
+&=\hspace{5pt}&
+\qty[-3t+\frac{T-\Tc}{T}+\frac{\kappa}{2T}q^2]^{-1}\\
+\stackrel{T\approx\Tc}{\approx}&
+\qty[-3t+t+\frac{\kappa}{2T}q^2]^{-1}
+&\propto\hspace{5pt}&
+\qty[1+\frac{\kappa}{T|t|}q^2]^{-1}.
+\end{aligned}
+\end{equation}
+We therefore have
+\begin{equation}
+\xi(t<0)=\qty(\frac{\kappa}{T|t|})^{1/2}
+\propto |t|^{-\nu}\qcomma \nu=\frac{1}{2}
+\end{equation}
+and the amplitude ratio is
+\begin{equation}
+\frac{k_+}{k_-}=\sqrt{2}.
+\end{equation}
 
 
 
-\section{Correlation length in the Ising model}
 
 
 \section{Heissenberg ferromagnet}
