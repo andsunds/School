@@ -1,0 +1,99 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+
+\usepackage{listings} 
+\usepackage[framed,numbered,autolinebreaks,useliterate]{../mcode}
+\lstloadlanguages{matlab} 
+\lstset{language=matlab} 
+
+\usepackage[makeroom]{cancel}
+\graphicspath{{figures/}}
+
+
+\swapcommands{\Omega}{\varOmega}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 2.5cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+
+
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+
+\begin{document}
+
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{Numerical solutions to PDE's -- AMATH\,741 \\
+Assignment 2}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+
+\section{Consistency of a scheme for the heat equaiton}
+
+
+
+
+
+\section{Consistency for another scheme to solve the heat equation}
+
+
+
+
+
+
+
+\section{A scheme for the wave equation}
+
+
+
+
+
+
+
+
+
+
+
+\section{Matrix representation of a scheme for the advection equation}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+%  LocalWords:  MFT MF Advection PDE's AMATH IC discretization MATLAB
