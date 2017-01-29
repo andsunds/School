@@ -4,10 +4,10 @@
 
 \usepackage{../custom_as}
 
-\usepackage{listings} 
-\usepackage[framed,numbered,autolinebreaks,useliterate]{../mcode}
-\lstloadlanguages{matlab} 
-\lstset{language=matlab} 
+%\usepackage{listings} 
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{../mcode}
+%\lstloadlanguages{matlab} 
+%\lstset{language=matlab} 
 
 \usepackage[makeroom]{cancel}
 \graphicspath{{figures/}}
@@ -35,6 +35,8 @@
 \renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 \renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
 
+\newcommand{\Dx}{\ensuremath{\Delta{x}}}
+\newcommand{\Dt}{\ensuremath{\Delta{t}}}
 
 \begin{document}
 
@@ -54,8 +56,59 @@ Assignment 2}
 
 
 \section{Consistency of a scheme for the heat equaiton}
+Here we have a scheme
+\begin{equation}
+U_j^{n+1}=\alpha U_j^n+\frac{1-\alpha}{2}\qty(U_{j+1}^n+U_{j-1}^n)
+\end{equation}
+for the heat equation $u_t=\sigma u_{xx}$, and we want to find a
+criteria on $\alpha$ for this scheme to be consistent.
 
+Consistensy means that the truncation error
+\begin{equation}
+\tau_j^n=\order{\Dt^m, \Dx^k}
+\end{equation}
+where $m>0$ and $k>1$. 
+If we have a scheme of the form
+\begin{equation}
+V^{n+1}_j=\mathcal{Q}_jV^n,
+\end{equation}
+where $\mathcal{Q}_j$ is some FD scheme, for a PDE of the form
+$u_t+\mathcal{D}_xu=0$, where $\mathcal{D}_x$ is some differential
+operator in $x$, then the truncation error can be defined via
+\begin{equation}
+\Dt\,\tau_j^{n}=u_j^{n+1}-\mathcal{Q}_ju^n.
+\end{equation}
 
+In our case we have
+\begin{equation}
+\mathcal{Q}_jV^n=\alpha V_j^n+\frac{1-\alpha}{2}\qty(V_{j+1}^n+V_{j-1}^n),
+\end{equation}
+so the truncation error is
+\begin{equation}
+\begin{aligned}
+\Dt\,\tau_j^n=&u_j^{n+1}
+-\qty{\alpha u_j^n+\frac{1-\alpha}{2}\qty(u_{j+1}^n+u_{j-1}^n)}\\
+=& \qty[u_j^n+(u_t)_j^n+\order{\Dt^2}]\\
+&-\Bigg\{\alpha u_j^n+\frac{1-\alpha}{2}
+\Bigg[\qty(u_j^n+(u_x)_j^n\Dx+\frac{\Dx^2}{2}(u_{xx})_j^n)\\
+&\hspace{90pt}+\qty(u_j^n-(u_x)_j^n\Dx+\frac{\Dx^2}{2}(u_{xx})_j^n)
++\order{\Dx^4}\Bigg]\Bigg\}.
+\end{aligned}
+\end{equation}
+Now, canceling the terms that can cancel and dividing both sides by
+$\Dt$ gives
+\begin{equation}
+\tau_j^n=(u_t)_j^n-\frac{1-\alpha}{2\Dt}\Dx^2(u_{xx})_j^n
++\order{\Dt, \Dx^2}.
+\end{equation}
+We see that for this to be vanishing when $\Dt, \Dx\to0$, we need the
+first two terms to cancel. That will only happen if
+\begin{equation}
+\frac{1-\alpha}{2\Dt}\Dx^2=\sigma
+\quad\Longleftrightarrow\quad
+\alpha=1-2\frac{\sigma\Dt}{\Dx^2}=1-2r.
+\qed
+\end{equation}
 
 
 
