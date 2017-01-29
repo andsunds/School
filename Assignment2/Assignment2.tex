@@ -83,7 +83,7 @@ In our case we have
 \begin{equation}
 \mathcal{Q}_jV^n=\alpha V_j^n+\frac{1-\alpha}{2}\qty(V_{j+1}^n+V_{j-1}^n),
 \end{equation}
-so the truncation error is
+so the truncation error is found by Taylor expanding:
 \begin{equation}
 \begin{aligned}
 \Dt\,\tau_j^n=&u_j^{n+1}
@@ -95,6 +95,9 @@ so the truncation error is
 +\order{\Dx^4}\Bigg]\Bigg\}.
 \end{aligned}
 \end{equation}
+We see that by symmetry, all odd power terms in the $x$ expansion must
+vanish; whereby  it is justified to have $\order{\Dx^4}$. 
+
 Now, canceling the terms that can cancel and dividing both sides by
 $\Dt$ gives
 \begin{equation}
@@ -141,6 +144,9 @@ error is
 \Bigg\}.
 \end{aligned}
 \end{equation}
+As before, we see that all odd power terms in the $x$ expansion must
+vanish; so $\order{\Dx^6}$ is used. 
+
 We can now cancel most of these terms and simplify:
 \begin{equation}
 \begin{aligned}
@@ -192,12 +198,129 @@ equations
 
 
 \section{A scheme for the wave equation}
+This time we're dealing with a scheme
+\begin{equation}\label{eq:3_start}
+\mathcal{P}_j^nU=\frac{U_j^{n+1}-2U_j^{n}+U_j^{n-1}}{\Dt^2}
+-\frac{U_{j+1}^{n}-2U_j^{n}+U_{j-1}^{n}}{\Dx^2}=0
+\end{equation}
+for the wave equation $u_{tt}-u_{xx}=0$.
 
+\subsection{Truncation error}
+This time, since the scheme is written on a difference-quotient form,
+the truncation error is just
+\begin{equation}
+\tau_j^n=\mathcal{P}_j^nu
+=\frac{u_j^{n+1}-2u_j^{n}+u_j^{n-1}}{\Dt^2}
+-\frac{u_{j+1}^{n}-2u_j^{n}+u_{j-1}^{n}}{\Dx^2}.
+\end{equation}
+Both of htese terms have a very similar form and subsequently, their
+Taylor expansions will also be similar. Let's therefore look at one of
+them:
+\begin{equation}
+\begin{aligned}
+u_{j+1}^{n}-2u_j^{n}+u_{j-1}^{n}=&
+\qty[u_j^n+\frac{1}{2}(u_{xx})_j^n\Dx^2]-2u_j^n
++\qty[u_j^n+\frac{1}{2}(u_{xx})_j^n\Dx^2]+\order{\Dx^4}\\
+=&(u_{xx})_j^n\Dx^2+\order{\Dx^4}.
+\end{aligned}
+\end{equation}
+And as in the two previous problems, the odd power terms cancel each
+others from the $j+1$ and the $j-1$ expansion. Then divinding through
+by $\Dx^2$, we get $(u_{xx})_j^n+\order{\Dx^2}$.
+By symmetry the other term will be $(u_{tt})_j^n+\order{\Dt^2}$.
 
+We can therefore write the truncation error as
+\begin{equation}
+\tau_j^n=
+\overbrace{(u_{tt})_j^n-(u_{xx})_j^n}^{=0\ \text{by definig PDE}}
++\order{\Dt^2, \Dx^2}=\order{\Dt^2, \Dx^2}.
+\end{equation}
 
+\subsection{von Neumann approach}
+In the von Neumann approach we will use the Fourier transform
+\begin{equation}\label{eq:3_FT}
+U(t_n,x_j)=\sum_{k=0}^{J-1} A_k^n\exp(\ii\frac{2\pi k}{J}j)
+=:\sum_{k=0}^{J-1} A_k^nw_j^k.
+\end{equation}
+We also see that
+\begin{equation}
+w_{j+s}^k=\exp(\ii\frac{2\pi k}{J}s)w_j^k.
+\end{equation}
 
+We begin by rewriting \eqref{eq:3_start} as
+\begin{equation}
+U_j^{n+1}=\qty(1-c^{-2})2U_j^n+c^{-2}\qty[U_{j+1}^n+U_{j-1}^n]
+-U_j^{n-1},
+\end{equation}
+where $c=\Dx/\Dt$. Now we can apply the FT \eqref{eq:3_FT} to this
+expression
+\begin{equation}
+\begin{aligned}
+\sum_kA_k^{n+1}w_j^k=&\sum_k \qty{\qty[
+2(1-c^{-2})+c^{-2}\qty(\ee^{\ii 2\pi k/J}+\ee^{-\ii 2\pi k/J})]A_k^n
+-A_k^{n-1} }w_j^k\\
+=&\sum_k \qty{2c^{-2}\qty[
+c^{2}-1+\cos(\frac{2\pi k}{J})]A_k^n
+-A_k^{n-1} }w_j^k.
+\end{aligned}
+\end{equation}
+Equation this for all $j$, we get
+\begin{equation}\label{eq:3_FTcoef}
+A_k^{n+1}=2\lambda A_k^n-A_k^{n-1},
+\end{equation}
+where $\lambda=c^{-2}[c^{2}-1+\cos(2\pi k/J)]$.
 
+To calculate a possible amplification factor we assume that
+$A_k^n=C_k\,(M_k)^n$, meaning that \eqref{eq:3_FTcoef} becomes
+\begin{equation}
+C_k\,(M_k)^n=C_k\,(M_k)^{n-1}\qty[2\lambda M_k-1]
+\end{equation}
+or
+\begin{equation}
+M_k^2-2\lambda M_k+1=0
+\quad\Longrightarrow\quad
+M_k^\pm=\lambda\pm\sqrt{\lambda^2-1}.
+\end{equation}
+I  general we will have Fourier coefficients of the form
+\begin{equation}
+A_k^n=C_k^+\,(M_k^+)^n+C_k^-\,(M_k^-)^n.
+\end{equation}
+For this to be stable we want \emph{both} $|M_k^+|\le1$ and
+$|M_k^-|\le1$. 
 
+The conditions for this to occur are non-trivial, but we know that 
+\begin{equation}
+M_k^+M_k^-=\qty(\lambda+\sqrt{\lambda^2-1})
+\qty(\lambda-\sqrt{\lambda^2-1})
+=1.
+\end{equation}
+This means that if $M_k^\pm\in\R$, one of them must have magnitude
+greater than 1. That is $M_k^\pm$ \emph{cannot} be real for this
+scheme to be stable. If, on the other hand, $M_k^\pm$ were complex, we
+see that $M_k^\pm$ are a pair of komplex conjugates lying on the
+complex unit circle. This gives us the condition that
+\begin{equation}\label{eq:3_lambdacond}
+c^{-2}\abs{c^{2}-1+\cos(2\pi k/J)}=|\lambda|\le1.
+\end{equation}
+
+To study this condition closer, we begin by using the trigonometric
+identity
+\begin{equation}
+\cos(2\alpha)=1-2\sin^2(\alpha)
+\end{equation}
+to rewrite \eqref{eq:3_lambdacond} as
+\begin{equation}
+\abs{1-2c^{-2}\sin^2(2\pi k/J)}\le1.
+\end{equation}
+It is clear that this will only be satisfied when
+\begin{equation}
+\frac{\Dt^2}{\Dx^2}=c^{-2}\le1
+\quad\Longleftrightarrow\quad
+\Dt\le\Dx,
+\end{equation}
+(assuming both $\Dt$ and $\Dx$ to be positive).
+
+\subsection{Possible improvements}
 
 
 
