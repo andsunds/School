@@ -249,18 +249,18 @@ w_{j+s}^k=\exp(\ii\frac{2\pi k}{J}s)w_j^k.
 
 We begin by rewriting \eqref{eq:3_start} as
 \begin{equation}
-U_j^{n+1}=\qty(1-c^{-2})2U_j^n+c^{-2}\qty[U_{j+1}^n+U_{j-1}^n]
+U_j^{n+1}=\qty(1-v^{-2})2U_j^n+v^{-2}\qty[U_{j+1}^n+U_{j-1}^n]
 -U_j^{n-1},
 \end{equation}
-where $c=\Dx/\Dt$. Now we can apply the FT \eqref{eq:3_FT} to this
+where $v=\Dx/\Dt$. Now we can apply the FT \eqref{eq:3_FT} to this
 expression
 \begin{equation}
 \begin{aligned}
 \sum_kA_k^{n+1}w_j^k=&\sum_k \qty{\qty[
-2(1-c^{-2})+c^{-2}\qty(\ee^{\ii 2\pi k/J}+\ee^{-\ii 2\pi k/J})]A_k^n
+2(1-v^{-2})+v^{-2}\qty(\ee^{\ii 2\pi k/J}+\ee^{-\ii 2\pi k/J})]A_k^n
 -A_k^{n-1} }w_j^k\\
-=&\sum_k \qty{2c^{-2}\qty[
-c^{2}-1+\cos(\frac{2\pi k}{J})]A_k^n
+=&\sum_k \qty{2v^{-2}\qty[
+v^{2}-1+\cos(\frac{2\pi k}{J})]A_k^n
 -A_k^{n-1} }w_j^k.
 \end{aligned}
 \end{equation}
@@ -268,7 +268,7 @@ Equation this for all $j$, we get
 \begin{equation}\label{eq:3_FTcoef}
 A_k^{n+1}=2\lambda A_k^n-A_k^{n-1},
 \end{equation}
-where $\lambda=c^{-2}[c^{2}-1+\cos(2\pi k/J)]$.
+where $\lambda=v^{-2}[v^{2}-1+\cos(2\pi k/J)]$.
 
 To calculate a possible amplification factor we assume that
 $A_k^n=C_k\,(M_k)^n$, meaning that \eqref{eq:3_FTcoef} becomes
@@ -300,7 +300,7 @@ scheme to be stable. If, on the other hand, $M_k^\pm$ were complex, we
 see that $M_k^\pm$ are a pair of komplex conjugates lying on the
 complex unit circle. This gives us the condition that
 \begin{equation}\label{eq:3_lambdacond}
-c^{-2}\abs{c^{2}-1+\cos(2\pi k/J)}=|\lambda|\le1.
+v^{-2}\abs{v^{2}-1+\cos(2\pi k/J)}=|\lambda|\le1.
 \end{equation}
 
 To study this condition closer, we begin by using the trigonometric
@@ -310,11 +310,11 @@ identity
 \end{equation}
 to rewrite \eqref{eq:3_lambdacond} as
 \begin{equation}
-\abs{1-2c^{-2}\sin^2(2\pi k/J)}\le1.
+\abs{1-2v^{-2}\sin^2(2\pi k/J)}\le1.
 \end{equation}
 It is clear that this will only be satisfied when
 \begin{equation}
-\frac{\Dt^2}{\Dx^2}=c^{-2}\le1
+\frac{\Dt^2}{\Dx^2}=v^{-2}\le1
 \quad\Longleftrightarrow\quad
 \Dt\le\Dx,
 \end{equation}
@@ -322,17 +322,69 @@ It is clear that this will only be satisfied when
 
 \subsection{Possible improvements}
 
-
+\todo[inline]{Don't forget this one!}
 
 
 
 \section{Matrix representation of a scheme for the advection equation}
+\newcommand{\odelta}[1]{{\mathring{\delta}^{(J)}_{#1}}}
+In this problem we have the implicit scheme
+\begin{equation}
+\frac{U_j^{n+1}-U_j^n}{\Dt}
++a\frac{U_{j+1}^{n+1}-U_{j-1}^{n+1}}{2\Dx}=0.
+\end{equation}
+for the advection equation $u_t+au_x=0$. The PDE is applied
+together with periodic boundary conditions.
+We want to find the matrix representation of this scheme.
+
+We begin by rearranging the scheme to look like
+\begin{equation}\label{eq:4_SLE1}
+\nu U_j^{n+1}+U_{j+1}^{n+1}-U_{j-1}^{n+1}=U_j^n,
+\end{equation}
+where $\nu=\Dx/(a\Dt)$. 
+Since we have \emph{periodic boundary conditions}\footnotemark{},
+$U_0=U_J$ and $U_{J+1}=U_1$. With this in mind we clearly see that
+\eqref{eq:4_SLE1} is a system of linear equation which can be
+represented, using the Einstein sum convention, as
+\begin{equation}
+\qty(-\odelta{i,j-1}+\nu\odelta{i, j}+\odelta{i, j+1})U^{n+1}_i=U_j^n,
+\end{equation}
+where $\odelta{}$ is the ``periodic Kronecker delta'' of period $J$,
+defined as:
+\begin{equation}
+\mathring\delta^{P}_{k,l}:=
+\begin{cases}
+1\quad&\text{if}\ k\equiv l\mod P,\\
+0&\text{otherwise}.
+\end{cases}
+\end{equation}
+Written out in ``full'' matrix notation we get
+\begin{equation}
+\begin{bmatrix*}[r]
+\nu&+1&0&\cdots&0&0&-1\\
+-1&\nu&+1&0&\cdots&0&0\\
+0&-1&\nu&+1&0&\cdots&0\\
+\vdots&&&\ddots&&&\vdots\\
+0&\cdots&0&-1&\nu&+1&0\\
+0&0&\cdots&0&-1&\nu&+1\\
++1&0&0&\cdots&0&-1&\nu\\
+\end{bmatrix*}
+\begin{bmatrix*}
+%\\|\\ \\U^{n+1}\\ \\|\\
+{}\\|\;\\{}\\U^{n+1}\\{}\\|\;\\{}
+\end{bmatrix*}
+=
+\begin{bmatrix*}
+{}\\|\\{}\\U^{n}\\{}\\|\\{}
+\end{bmatrix*},
+\end{equation}
+where $\nu=\Dx/(a\Dt)$. In words, the matrix is a tridiagonal matrix
+with the extra addition of a $\pm1$ in the at the anti-diagonal
+corners. 
 
 
-
-
-
-
+\footnotetext{With the ``main'' idices being 
+$j\in\{1, 2, \ldots, J\}$.} 
 
 
 
