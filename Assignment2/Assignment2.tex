@@ -137,9 +137,9 @@ error is
 +\order{\Dx^6}\Bigg]
 \\ &\hspace{22pt}
 +\alpha_2\Bigg[
-\qty(u_j^n+\frac{4\Dx^2}{2}(u_{xx})_j^n+\frac{8\Dx^4}{24}(u_{xxxx})_j^n)
+\qty(u_j^n+\frac{4\Dx^2}{2}(u_{xx})_j^n+\frac{16\Dx^4}{24}(u_{xxxx})_j^n)
 \\ &\hspace{55pt}
-+\qty(u_j^n+\frac{4\Dx^2}{2}(u_{xx})_j^n+\frac{8\Dx^4}{24}(u_{xxxx})_j^n)
++\qty(u_j^n+\frac{4\Dx^2}{2}(u_{xx})_j^n+\frac{16\Dx^4}{24}(u_{xxxx})_j^n)
 +\order{\Dx^6}\Bigg]
 \Bigg\}.
 \end{aligned}
@@ -155,10 +155,10 @@ We can now cancel most of these terms and simplify:
 \qty(\Dx^2(u_{xx})_j^n+\frac{\Dx^4}{12}(u_{xxxx})_j^n)]
 \\ &\hspace{55pt}
 +\alpha_2\qty[
-\qty(4\Dx^2(u_{xx})_j^n+\frac{2\Dx^4}{3}(u_{xxxx})_j^n)]
+\qty(4\Dx^2(u_{xx})_j^n+\frac{16\Dx^4}{12}(u_{xxxx})_j^n)]
 \Bigg\} +\order{\Dt^2, \Dx^6}\\
 =& (u_t)_j^n\Dt-[\alpha_1+4\alpha_2](u_{xx})_j^n\Dx^2
-+\frac{1}{12}[\alpha_1+8\alpha_2](u_{4x})_j^n\Dx^4
++\frac{1}{12}[\alpha_1+16\alpha_2](u_{4x})_j^n\Dx^4
 +\order{\Dt^2, \Dx^6}.
 \end{aligned}
 \end{equation}
@@ -175,23 +175,23 @@ $\Dt\propto\Dx^2$.
 \subsection{Fourth order accuracy}
 Given the condition \eqref{eq:2a_end}, we have the accuracy
 \begin{equation}
-\tau_j^n=\frac{1}{12}[\alpha_1+8\alpha_2](u_{4x})_j^n\Dx^2
+\tau_j^n=\frac{1}{12}[\alpha_1+16\alpha_2](u_{4x})_j^n\Dx^2
 +\order{\Dt, \Dx^4}.
 \end{equation}
 To get fourth order accuracy, we also need
 \begin{equation}
-\alpha_1+8\alpha_2=0.
+\alpha_1+16\alpha_2=0.
 \end{equation}
 Both of these conditions together is a $2\times2$ system of linear
 equations 
 \begin{equation}
-\begin{bmatrix}1&4\\1&8\end{bmatrix}
+\begin{bmatrix}1&4\\1&16\end{bmatrix}
 \begin{bmatrix}\alpha_1\\\alpha_2\end{bmatrix}
 =\begin{bmatrix}r\\0\end{bmatrix}
 \quad\Longrightarrow\quad
 \begin{bmatrix}\alpha_1\\\alpha_2\end{bmatrix}
-=r\begin{bmatrix*}[r]
-2\\-1
+=\frac{r}{12}\begin{bmatrix*}[r]
+16\\-1
 \end{bmatrix*}.
 \qed
 \end{equation}
@@ -327,7 +327,7 @@ It is clear that this will only be satisfied when
 
 
 \section{Matrix representation of a scheme for the advection equation}
-\newcommand{\odelta}[1]{{\mathring{\delta}^{(J)}_{#1}}}
+\newcommand{\odelta}[1]{{\mathring{\delta}^{J}_{#1}}}
 In this problem we have the implicit scheme
 \begin{equation}
 \frac{U_j^{n+1}-U_j^n}{\Dt}
