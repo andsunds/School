@@ -178,7 +178,7 @@ $\Dt\propto\Dx^2$.
 Given the condition \eqref{eq:2a_end}, we have the truncation error
 \begin{equation}
 \tau_j^n=\frac{\Dt}{2}(u_{tt})_j^n
--\frac{1}{12}[\alpha_1+16\alpha_2](u_{4x})_j^n\Dx^2
+-\frac{1}{12}[\alpha_1+16\alpha_2](u_{4x})_j^n\frac{\Dx^4}{\Dt}
 +\order{\Dt^2, \Dx^4}.
 \end{equation}
 Since $\Dt\propto\Dx^2$, we can write $\order{\Dt^2,
@@ -194,11 +194,11 @@ u_{tt}=\pdv{t}u_t=\sigma\pdv{t}u_{xx}
 \end{equation}
 So to get fourth order accuracy, we need
 \begin{equation}
-\frac{\sigma^2\Dt}{2}-\frac{\alpha_1+16\alpha_2}{12}\Dx^2=0,
+\frac{\sigma^2\Dt}{2}-\frac{\alpha_1+16\alpha_2}{12}\frac{\Dx^4}{\Dt}=0,
 \end{equation}
 i.e.
 \begin{equation}
-\alpha_1+16\alpha_2=\frac{6\sigma^2\Dt}{\Dx^2}=6\sigma r.
+\alpha_1+16\alpha_2=\frac{6\sigma^2\Dt^2}{\Dx^4}=6r^2.
 \end{equation}
 
 
@@ -207,11 +207,11 @@ equations
 \begin{equation}
 \begin{bmatrix}1&4\\1&16\end{bmatrix}
 \begin{bmatrix}\alpha_1\\\alpha_2\end{bmatrix}
-=r\begin{bmatrix}1\\6\sigma\end{bmatrix}
+=r\begin{bmatrix}1\\6r\end{bmatrix}
 \quad\Longrightarrow\quad
 \begin{bmatrix}\alpha_1\\\alpha_2\end{bmatrix}
 =\frac{r}{12}\begin{bmatrix*}[c]
-16-24\sigma\\6\sigma-1
+16-24r\\6r-1
 \end{bmatrix*}.
 \qed
 \end{equation}
