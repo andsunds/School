@@ -21,11 +21,7 @@
 \usepackage{todonotes} %\todo{...}
 
 %%För att själv bestämma marginalerna. 
-\usepackage[
-%            top    = 2.5cm,
-%            bottom = 3cm,
-%            left   = 3cm, right  = 3cm
-]{geometry}
+\usepackage{geometry}
 
 %%För att ändra hur rubrikerna ska formateras
 
@@ -55,7 +51,7 @@ Assignment 2}
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
 
-\section{Consistency of a scheme for the heat equaiton}
+\section{Consistency of a scheme for the heat equation}
 Here we have a scheme
 \begin{equation}
 U_j^{n+1}=\alpha U_j^n+\frac{1-\alpha}{2}\qty(U_{j+1}^n+U_{j-1}^n)
@@ -63,7 +59,7 @@ U_j^{n+1}=\alpha U_j^n+\frac{1-\alpha}{2}\qty(U_{j+1}^n+U_{j-1}^n)
 for the heat equation $u_t=\sigma u_{xx}$, and we want to find a
 criteria on $\alpha$ for this scheme to be consistent.
 
-Consistensy means that the truncation error
+Consistency means that the truncation error
 \begin{equation}
 \tau_j^n=\order{\Dt^m, \Dx^k}
 \end{equation}
@@ -113,7 +109,7 @@ first two terms to cancel. That will only happen if
 \qed
 \end{equation}
 Also note that since $\alpha$ is kept constant, $r$ will also be
-constant; and therefore $\Dt\propto\Dx^2$, meannig that
+constant; and therefore $\Dt\propto\Dx^2$, meaning that
 $\order{\Dx^4/\Dt}=\order{\Dx^2}$.
 
 \section{Consistency for another scheme to solve the heat equation}
@@ -124,22 +120,22 @@ U_{j}^{n+1}=(1-2\alpha_1-2\alpha_2)U_{j}^{n}
 \end{equation}
 
 \subsection{Consistency}
-We have a very silimar case to the previous problem. The truncation
+We have a very similar case to the previous problem. The truncation
 error is
 \begin{equation}
 \begin{aligned}
 \Dt\,\tau_j^n=& \qty[u_j^n+(u_t)_j^n\Dt+\frac{1}{2}(u_{tt})_j^n\Dt^2+\order{\Dt^3}]\\
 &-\Bigg\{(1-2\alpha_1-2\alpha_2)u_j^n
 \\ &\hspace{22pt}+\alpha_1\Bigg[
-\qty(u_j^n+\frac{\Dx^2}{2}(u_{xx})_j^n+\frac{\Dx^4}{24}(u_{xxxx})_j^n)
+\qty(u_j^n+\frac{\Dx^2}{2}(u_{xx})_j^n+\frac{\Dx^4}{24}(u_{4x})_j^n)
 \\ &\hspace{55pt}
-+\qty(u_j^n+\frac{\Dx^2}{2}(u_{xx})_j^n+\frac{\Dx^4}{24}(u_{xxxx})_j^n)
++\qty(u_j^n+\frac{\Dx^2}{2}(u_{xx})_j^n+\frac{\Dx^4}{24}(u_{4x})_j^n)
 +\order{\Dx^6}\Bigg]
 \\ &\hspace{22pt}
 +\alpha_2\Bigg[
-\qty(u_j^n+\frac{4\Dx^2}{2}(u_{xx})_j^n+\frac{16\Dx^4}{24}(u_{xxxx})_j^n)
+\qty(u_j^n+\frac{4\Dx^2}{2}(u_{xx})_j^n+\frac{16\Dx^4}{24}(u_{4x})_j^n)
 \\ &\hspace{55pt}
-+\qty(u_j^n+\frac{4\Dx^2}{2}(u_{xx})_j^n+\frac{16\Dx^4}{24}(u_{xxxx})_j^n)
++\qty(u_j^n+\frac{4\Dx^2}{2}(u_{xx})_j^n+\frac{16\Dx^4}{24}(u_{4x})_j^n)
 +\order{\Dx^6}\Bigg]
 \Bigg\}.
 \end{aligned}
@@ -162,7 +158,7 @@ We can now cancel most of these terms and simplify:
 +\order{\Dt^3, \Dx^6}.
 \end{aligned}
 \end{equation}
-And we once again note that for consitency, we need 
+And we once again note that for consistency, we need 
 \begin{equation}\label{eq:2a_end}
 (u_t)_j^n-[\alpha_1+4\alpha_2](u_{xx})_j^n\frac{\Dx^2}{\Dt}=0
 \quad\Longrightarrow\quad
@@ -183,7 +179,7 @@ Given the condition \eqref{eq:2a_end}, we have the truncation error
 \end{equation}
 Since $\Dt\propto\Dx^2$, we can write $\order{\Dt^2,
   \Dx^4}=\order{\Dx^4}$, and all we need to do now is to make the
-fisrt terms cancel.
+first terms cancel.
 
 For this we employ a small trick:
 \begin{equation}
@@ -233,7 +229,7 @@ the truncation error is just
 =\frac{u_j^{n+1}-2u_j^{n}+u_j^{n-1}}{\Dt^2}
 -\frac{u_{j+1}^{n}-2u_j^{n}+u_{j-1}^{n}}{\Dx^2}.
 \end{equation}
-Both of htese terms have a very similar form and subsequently, their
+Both of these terms have a very similar form and subsequently, their
 Taylor expansions will also be similar. Let's therefore look at one of
 them:
 \begin{equation}
@@ -245,7 +241,7 @@ u_{j+1}^{n}-2u_j^{n}+u_{j-1}^{n}=&
 \end{aligned}
 \end{equation}
 And as in the two previous problems, the odd power terms cancel each
-others from the $j+1$ and the $j-1$ expansion. Then divinding through
+others from the $j+1$ and the $j-1$ expansion. Then dividing through
 by $\Dx^2$, we get $(u_{xx})_j^n+\order{\Dx^2}$.
 By symmetry the other term will be $(u_{tt})_j^n+\order{\Dt^2}$.
 
@@ -292,9 +288,9 @@ where $\lambda=v^{-2}[v^{2}-1+\cos(2\pi k/J)]$.
 
 To calculate a possible amplification factor we assume that
 $A_k^n=C_k\,(M_k)^n$, meaning that \eqref{eq:3_FTcoef} becomes
-\begin{equation}
+$%\begin{equation}
 C_k\,(M_k)^n=C_k\,(M_k)^{n-1}\qty[2\lambda M_k-1]
-\end{equation}
+$%\end{equation}
 or
 \begin{equation}
 M_k^2-2\lambda M_k+1=0
@@ -317,7 +313,7 @@ M_k^+M_k^-=\qty(\lambda+\sqrt{\lambda^2-1})
 This means that if $M_k^\pm\in\R$, one of them must have magnitude
 greater than 1. That is $M_k^\pm$ \emph{cannot} be real for this
 scheme to be stable. If, on the other hand, $M_k^\pm$ were complex, we
-see that $M_k^\pm$ are a pair of komplex conjugates lying on the
+see that $M_k^\pm$ are a pair of complex conjugates lying on the
 complex unit circle. This gives us the condition that
 \begin{equation}\label{eq:3_lambdacond}
 v^{-2}\abs{v^{2}-1+\cos(2\pi k/J)}=|\lambda|\le1.
@@ -341,14 +337,17 @@ It is clear that this will only be satisfied when
 (assuming both $\Dt$ and $\Dx$ to be positive).
 
 \subsection{The merits of this scheme}
-As far as I can tell this scheme isn't too bad. The truncation error
-is $\order{\Dt^2,\Dx^2}$, which becomes just $\order{\Dx^2}$ given the
-stability condition $\Dt\le\Dx$ meaning that $\Dt=\order{\Dx}$. Also,
-when the stability condition is met, we have $|M_k^\pm|=1$, meaning
-that there is no numerical dissipation in the scheme. 
+As far as I can tell this scheme isn't too bad. 
+The scheme is not unconditionally stable, but the requirement is not
+that hard, meaning that we can have $\Dt=\order{\Dx}$; so the
+conditional stability is not any big problem.
+The truncation error is $\order{\Dt^2,\Dx^2}$, which becomes just
+$\order{\Dx^2}$ given that we choose $\Dt=\order{\Dx}$. 
+Also, when the stability condition is met, we have $|M_k^\pm|=1$,
+meaning that there is no numerical dissipation in the scheme. 
 
-What I'm saying is that this scheme lacks many of the major drawbacks
-of other schemes discussed in class. 
+What I'm saying here is that this scheme lacks many of the major
+drawbacks of other schemes discussed in class. 
 
 
 
@@ -370,7 +369,14 @@ We begin by rearranging the scheme to look like
 \end{equation}
 where $\nu=\Dx/(a\Dt)$. 
 Since we have \emph{periodic boundary conditions}\footnotemark{},
-$U_0=U_J$ and $U_{J+1}=U_1$. With this in mind we clearly see that
+\begin{equation}
+U_j=U_{j'}\quad\text{if }j\equiv j'\mod J;
+\end{equation}
+we have especially $U_0=U_J$ and $U_{J+1}=U_1$. 
+\footnotetext{With the ``main'' indices being 
+$j\in\{1, 2, \ldots, J\}$.} 
+
+With this in mind we clearly see that
 \eqref{eq:4_SLE1} is a system of linear equation which can be
 represented, using the Einstein sum convention, as
 \begin{equation}
@@ -405,13 +411,12 @@ Written out in ``full'' matrix notation we get
 {}\\|\\{}\\U^{n}\\{}\\|\\{}
 \end{bmatrix*},
 \end{equation}
-where $\nu=\Dx/(a\Dt)$. In words, the matrix is a tridiagonal matrix
+where $\nu=\Dx/(a\Dt)$. In words, the matrix is a tri-diagonal matrix 
 with the extra addition of a $\pm1$ in the at the anti-diagonal
 corners. 
 
 
-\footnotetext{With the ``main'' idices being 
-$j\in\{1, 2, \ldots, J\}$.} 
+
 
 
 
