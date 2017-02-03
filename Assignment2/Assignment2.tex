@@ -320,10 +320,186 @@ We therefore get
 S[\vb*\varphi]=&\frac{1}{2T}\sum_{ij}J^{-1}_{ij}\vb*\varphi_i\vdot\vb*\varphi_j
 -\frac{1}{6T^2}\sum_i\vb*\varphi_i\vdot\vb*\varphi_i
 +\frac{1}{180T^4}\sum_i\big(\vb*\varphi_i\vdot\vb*\varphi_i\big)^2\\
-=&\frac{1}{6T^2}\sum_{ij}\qty(3TJ^{-1}_{ij}-\delta_{ij})\vb*\varphi_i\vdot\vb*\varphi_j
-+\frac{1}{180T^4}\sum_i\big(\vb*\varphi_i\vdot\vb*\varphi_i\big)^2.
+=&\underbrace{\frac{1}{6T^2}\sum_{ij}\qty(3TJ^{-1}_{ij}-\delta_{ij})
+\vb*\varphi_i\vdot\vb*\varphi_j}_{=:S_2[\vb*\varphi]}
++\underbrace{\frac{1}{180T^4}\sum_i
+\big(\vb*\varphi_i\vdot\vb*\varphi_i\big)^2}_{=:S_4[\vb*\varphi]}
 \end{aligned}
 \end{equation}
+
+\subsubsection{The quadratic term}
+We need to diagonalize the quadratic term, which we will do by Fourier
+transform:
+\begin{equation}
+\begin{aligned}
+S_2[\vb*\varphi]=&\frac{1}{6T^2}\sum_{ij}\frac{1}{N^3}
+\sum_{\vb*q, \vb*q', \vb*q''}\vb*\varphi(\vb*q)\vdot\vb*\varphi(\vb*q')
+\qty[\frac{3T}{J(\vb*q'')}-1]
+\ee^{\ii\vb*q\vdot\vb*r_i}\ee^{\ii\vb*q'\vdot\vb*r_j}
+\ee^{\ii\vb*q''\vdot(\vb*r_i-\vb*r_j)}\\
+=&\frac{1}{6NT^2}\sum_{\vb*q, \vb*q', \vb*q''}
+\vb*\varphi(\vb*q)\vdot\vb*\varphi(\vb*q')
+\qty[\frac{3T}{J(\vb*q'')}-1]
+\frac{1}{N^2}\sum_{ij}\ee^{\ii\vb*r_i\vdot(\vb*q+\vb*q')}
+\ee^{\ii\vb*r_j\vdot(\vb*q'-\vb*q'')}.
+\end{aligned}
+\end{equation}
+Now, using 
+\begin{equation}
+\frac{1}{N}\sum_i\ee^{\ii\vb*r_i\vdot(\vb*Q-\vb*Q')}=\delta_{\vb*Q, \vb*Q'},
+\end{equation}
+we get
+\begin{equation}
+S_2[\vb*\varphi]=\frac{1}{6NT^2}\sum_{\vb*q}
+\vb*\varphi(\vb*q)\vdot\vb*\varphi(-\vb*q)
+\qty[\frac{3T}{J(\vb*q)}-1].
+\end{equation}
+
+From here, we are going to use the fact that we are on our way to
+derive a GLW theory for this system. So we are close to $\Tc$,
+meaning that we really only need to wory about the long-wavelength
+limit for the coupling:
+\begin{equation}
+J(\vb*q)\sim J-\frac{\kappa}{2}q^2
+\end{equation}
+for small $q$. This means that
+\begin{equation}
+\frac{3T}{J(\vb*q)}-1\approx
+\frac{3T}{J}\qty(1+\frac{\kappa}{2J}q^2)-1
+=\frac{3T-J}{J}+\frac{3T\kappa}{2J^2}q^2.
+\end{equation}
+Already from here we can anticipate that $\Tc=J/3$, but let's not be
+too hasty; let's just settle for calling $\tilde{t}:=(3T-J)/J$. 
+
+We can now write
+\begin{equation}
+S_2[\vb*\varphi]=\frac{1}{6NT^2}\frac{3\kappa T}{2J^2}\sum_{\vb*q}
+\vb*\varphi(\vb*q)\vdot\vb*\varphi(-\vb*q)
+\qty[\frac{2J^2\tilde{t}}{3\kappa T}+q^2].
+\end{equation}
+If we set $r=2J^2\tilde{t}/(3\kappa T)$ and rescale
+\begin{equation}\label{eq:3_rescale}
+\qty(\frac{a^3\kappa}{TJ^2})^{1/2}\vb*\varphi\to\vb*\varphi.
+\end{equation}
+then we get
+\begin{equation}
+S_2[\vb*\varphi]=\frac{1}{4Na^3}\sum_{\vb*q}
+\vb*\varphi(\vb*q)\vdot\vb*\varphi(-\vb*q)
+\qty[r+q^2].
+\end{equation}
+We now want to change this back to real space.
+
+To do that we first have to go to the continuum limit and use 
+\begin{equation}
+\frac{1}{V}\sum_{\vb*q} \to \int\frac{\rd^3q}{(2\pi)^3},
+\end{equation}
+where $V=Na^d$. We thus have
+\begin{equation}\label{eq:3_S2_qint}
+S_2[\vb*\varphi]=\frac{1}{4}\int\frac{\rd^3q}{(2\pi)^3}\,
+\vb*\varphi(\vb*q)\vdot\vb*\varphi(-\vb*q)
+\qty[r+q^2].
+\end{equation}
+We now apply the (contimuum) FT
+\begin{equation}
+\vb*\varphi(\vb*q)=\int\rd^3x\,
+\vb*\varphi(\vb*x)\ee^{-\ii\vb*q\vdot\vb*x}
+\end{equation}
+to this.
+
+The first term is simple enough
+\begin{equation}
+\begin{aligned}
+\int\frac{\rd^3q}{(2\pi)^3}\,
+\vb*\varphi(\vb*q)\vdot\vb*\varphi(-\vb*q)
+=&\int\frac{\rd^3q}{(2\pi)^3}\,
+\int\rd^3x\int\rd^3x'\,
+\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)
+\ee^{-\ii\vb*q\vdot(\vb*x-\vb*x')}\\
+=&\int\rd^3x\,\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x),
+\end{aligned}
+\end{equation}
+since
+\begin{equation}
+\int\frac{\rd^3q}{(2\pi)^3}\ee^{\ii\vb*q\vdot(\vb*x-\vb*x')}
+=\delta((\vb*x-\vb*x')).
+\end{equation}
+
+The other term is a bit trickier. From class we know that, for a
+scalar $\psi$, we have
+\begin{equation}\label{eq:3_grad^2}
+\int\rd^3x \Big[\grad\psi(\vb*x)\Big]^2
+=\int\frac{\rd^3q}{(2\pi)^3}\psi(\vb*q)\psi(-\vb*q)q^2,
+\end{equation}
+which we know through the fact that
+\begin{equation}
+\begin{aligned}
+\int\rd{x}\qty(\pdv{\psi}{x})^2=&
+\int\rd{x}\int\frac{\rd{q}}{2\pi}\psi(q)\dv{x}\ee^{\ii qx}
+\int\frac{\rd{q'}}{2\pi}\psi(q')\dv{x}\ee^{\ii q'x}\\
+=&\int\frac{\rd{q}}{2\pi}\int\rd{q'}\,\psi(q)\psi(q')\,(\ii q)(\ii q')
+\underbrace{\int\frac{\rd{x}}{2\pi}\ee^{\ii x(q+q')}}_{=\delta(q+q')}\\
+=&\int\frac{\rd{q}}{2\pi}\,\psi(q)\psi(-q)\,q^2.
+\end{aligned}
+\end{equation}
+In this case however, all we have to do is to apply
+\eqref{eq:3_grad^2} to each of hte three terms in 
+$\vb*\varphi(\vb*q)\vdot\vb*\varphi(-\vb*q)
+=\varphi^x(\vb*q)\varphi^x(-\vb*q)
++\varphi^y(\vb*q)\varphi^y(-\vb*q)+
+\varphi^y(\vb*q)\varphi^y(-\vb*q)$. 
+
+Eventually we end up with a final result for the quadratc term:
+\begin{equation}
+S_2[\vb*\varphi]=\frac{1}{4}\int\rd^3x\,
+\qty{\qty[\qty(\grad\varphi^x(\vb*x))^2
++\qty(\grad\varphi^y(\vb*x))^2
++\qty(\grad\varphi^z(\vb*x))^2]
++r[\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)]}
+\end{equation}
+
+
+\subsubsection{The quartic term}
+For the quartic term, we don't have to go via the detour of FT. We can
+just convert the sum to an integral. Although we do have to remember that we
+rescaled $\vb*\varphi$ for the quartic term, \eqref{eq:3_rescale}. So
+with this in mind we get
+\begin{equation}
+S_4[\vb*\varphi]=
+\frac{1}{180T^4}\sum_i(\vb*\varphi_i\vdot\vb*\varphi_i)^2
+\to \frac{T^2J^4}{180T^4a^6\kappa}
+\sum_i(\vb*\varphi_i\vdot\vb*\varphi_i)^2.
+\end{equation}
+And in the continuum limit we have
+\begin{equation}
+a^3\sum_i\to\int\rd^3x,
+\end{equation}
+so 
+\begin{equation}
+S_4[\vb*\varphi]=\frac{J^4}{180T^2a^9\kappa}
+\int\rd^3x\,\Big[\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)\Big]^2
+=:\frac{u}{4}
+\int\rd^3x\,\Big[\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)\Big]^2.
+\end{equation}
+
+
+\subsubsection{Final result}
+The final result for the continuum behaviour of the action near
+$T=\Tc$ therefore is
+\begin{equation}
+S[\vb*\varphi]\approx S_2[\vb*\varphi]+S_4[\vb*\varphi]=
+\int\rd^3x\,\qty{
+\frac{1}{4}\qty[\sum_{\alpha=x,y,z}\qty(\grad\varphi^\alpha(\vb*x))^2]
++\frac{r}{2}[\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)]
++\frac{u}{4}[\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)]^2},
+\end{equation}
+where we have also rescaled $r\to2r$.
+
+From any general Landau theory we know that $r$ has to be the
+parameter that changes value at $\Tc$. This means that $\tilde{t}$
+really was the reduced temperature and that $\Tc=J/3$.
+
+
+
 
 
 \subsection{Mean field critical exponents}
