@@ -470,10 +470,7 @@ S_4[\vb*\varphi]=
 \sum_i(\vb*\varphi_i\vdot\vb*\varphi_i)^2.
 \end{equation}
 And in the continuum limit we have
-\begin{equation}
-a^3\sum_i\to\int\rd^3x,
-\end{equation}
-so 
+$a^3\sum_i\to\int\rd^3x$, so 
 \begin{equation}
 S_4[\vb*\varphi]=\frac{J^4}{180T^2a^9\kappa}
 \int\rd^3x\,\Big[\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)\Big]^2
@@ -485,7 +482,7 @@ S_4[\vb*\varphi]=\frac{J^4}{180T^2a^9\kappa}
 \subsubsection{Final result}
 The final result for the continuum behaviour of the action near
 $T=\Tc$ therefore is
-\begin{equation}
+\begin{equation}\label{eq:3b_end}
 S[\vb*\varphi]\approx S_2[\vb*\varphi]+S_4[\vb*\varphi]=
 \int\rd^3x\,\qty{
 \frac{1}{4}\qty[\sum_{\alpha=x,y,z}\qty(\grad\varphi^\alpha(\vb*x))^2]
@@ -500,12 +497,35 @@ really was the reduced temperature and that $\Tc=J/3$.
 
 
 
-
-
 \subsection{Mean field critical exponents}
+Next up is MFT, which corresponds to setting
+$\vb*\varphi(\vb*x)\equiv\bar{\vb*\varphi}$, where
+$\bar{\vb*\varphi}$ is the constant value that minimizes $S$. From
+\eqref{eq:3b_end} it is clear that all we have to do is to minimize
+\begin{equation}
+f=\frac{r}{2}\bar\varphi^2+\frac{u}{4}\bar\varphi^4,
+\end{equation}
+where $\bar\varphi=|\bar{\vb*\varphi}|$. And now we're back in regular
+Landau ``$\varphi^4$ theory''. 
 
-
-
+The critical exponents are just the regular critical exponents for
+this MFT:
+\begin{itemize}
+\item[$\beta$: ] Minimizing $f(\varphi)=r\varphi^2+\varphi^4$,
+gives $2t\bar\varphi+4\bar\varphi^3=0$ or 
+$\bar\varphi\propto(-r)^{\beta}\propto(-t)^{\beta}$ where $\beta=1/2$.
+\item[$\gamma$: ] Now we minimize $F(\varphi,
+b)=-b\varphi+t\varphi^2+\varphi^4$: $-b+2t\varphi+4\varphi^3$. And if
+we do it for $t>0$, we can disregard the cubic term to get
+$\varphi\propto b/t$, which gives $\chi\propto[t]^{-\gamma}$ where
+$\gamma=1$.
+\item[$\alpha$: ] Here we calculate $C_V=-T\dv[2]{F}{T}$, with
+$\bar\varphi\propto(-t)^{1/2}$. This gives
+$C_V\propto\dv[2]{t}t^2=\text{const.}$ or in other words
+$C_V\propto|t|^{-\alpha}$ where $\alpha=0$.
+\item[$\nu$: ] For the correlation length, we get the same behavior as
+calculated in problem~2 in this assignment, i.e. $\nu=1/2$.
+\end{itemize}
 
 
 \end{document}
