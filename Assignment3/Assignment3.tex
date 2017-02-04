@@ -4,10 +4,10 @@
 
 \usepackage{../custom_as}
 
-%\usepackage{listings} 
-%\usepackage[framed,numbered,autolinebreaks,useliterate]{../mcode}
-%\lstloadlanguages{matlab} 
-%\lstset{language=matlab} 
+\usepackage{listings} 
+\usepackage[framed,numbered,autolinebreaks,useliterate]{../mcode}
+\lstloadlanguages{matlab} 
+\lstset{language=matlab} 
 
 \usepackage[makeroom]{cancel}
 \graphicspath{{figures/}}
@@ -51,6 +51,77 @@ Assignment 3}
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
 \section{Numerical investigation of numerical dissipation and dispersion}
+In this problem we will be deal ing with numerical schemes of the form
+\begin{equation}
+U_j^{n+1}=(1-\beta)U_j^n+\frac{\beta-\alpha}{2}U_{j+1}^n+\frac{\alpha+\beta}{2}U_{j-1}^n
+\end{equation}
+for solving the linear advection equation $u_t+au_x=0$. Here
+$\alpha=a\Dt/\Dx$ and $\beta$ depends on the scheme:
+\begin{center}
+\begin{tabular}{l|c|c|c|c|}\cline{2-5}
+&Upwind&Lax-Friedrichs&Lax-Wendroff&Centered\\ \hline
+\multicolumn{1}{|l|}{$\beta$: }&$|\alpha|$&$1$&$\alpha^2$&0\\ \hline
+\end{tabular}
+\end{center}
+
+It is easy to show that, with \emph{periodic boundary conditions},
+each time step can be represented using a transfer matrix,
+$U^{n+1}=\mathsf{T}U^n$ where
+\begin{equation}
+T=\begin{bmatrix}
+D_0&D_{+1}&0&\cdots&0&0&D_{-1}\\
+D_{-1}&D_0&D_{+1}&0&\cdots&0&0\\
+0&D_{-1}&D_0&D_{+1}&0&\cdots&0\\
+\vdots&&&\ddots&&&\vdots\\
+0&\cdots&0&D_{-1}&D_0&D_{+1}&0\\
+0&0&\cdots&0&D_{-1}&D_0&D_{+1}\\
+D_{+1}&0&0&\cdots&0&D_{-1}&D_0\\
+\end{bmatrix}
+\end{equation}
+and $D_0=(1-\beta)$, $D_{-1}=(\alpha+\beta)/2$ and
+$D_{+1}=(\beta-\alpha)/2$. 
+This is them implemented in MATLAB through:
+\lstinputlisting{code/spTranferMatrix.m}
+With the matrix, the rest is just a matter of looping through all time
+steps.  
+
+\subsection{Numerical dissipation depending on $\Dx$}
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{1a.eps}
+\caption{}
+\label{fig:1a}
+\end{figure}
+
+\subsection{Numerical dissipation depending on scheme}
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{1b.eps}
+\caption{}
+\label{fig:1b}
+\end{figure}
+
+
+\subsection{The affects of the size of $\Dt$}
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{1c.eps}
+\caption{}
+\label{fig:1c}
+\end{figure}
+
+
+\subsection{Numerical dispersion}
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{1d.eps}
+\caption{}
+\label{fig:1d}
+\end{figure}
+
+
+
+\subsection{Other remarks}
 
 
 
