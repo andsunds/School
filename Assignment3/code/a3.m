@@ -61,20 +61,20 @@ lines={'-k',':k','-.k','--k'};
 %JJ=[501,141,101]
 %J=JJ(j);
 
-J=101;
+J=501;
 a=1;
 Dx=2/(J-1); %we have to have (J-1) here, to get J values in x.
 x=(-1:Dx:1).';
 
-%ALPHA=[0.1,0.5,0.9];
+ALPHA=[0.1,0.5,0.9];
 
-%for j=1:3
-alpha=.6;
-%alpha=ALPHA(j);
+for j=1:3
+%alpha=.6;
+alpha=ALPHA(j);
 
-Dt=alpha*Dx/a;
-t=10;
-N=floor(t/Dt);
+Dt=alpha*Dx/a
+t=.5;
+N=floor(t/Dt)
 
 %different beta for different schemes.
 % scheme |   LW    | LF |   upwind   | centered |
@@ -85,14 +85,14 @@ N=floor(t/Dt);
 
 %for j=1:4
 %beta=BETA(j);
-beta=alpha^2;
+beta=1;alpha^2;
 
 T=spTranferMatrix(J,alpha,beta);
 
-%k1=3;
-%IC=sin(2*pi*k1*x);
-sigma=0.01;
-IC=exp(-x.^2/(2*sigma));
+k1=3;
+IC=sin(2*pi*k1*x);
+%sigma=0.01;
+%IC=exp(-x.^2/(2*sigma));
 
 
 tic
@@ -103,12 +103,13 @@ toc
 
 plot(x,TN*IC,lines{j},'linewidth',3)
 hold on
-%end
+end
 %%
 %L=legend('LW',...
 %         'Upwind','Centered');
-L=legend('$\Delta{t}=2\times10^{-3}$',...
-         '$\Delta{t}=10\times10^{-3}$','$\Delta{t}=18\times10^{-3}$');
+L=legend('$\Delta{t}=0.4\times10^{-3}$, $\alpha=0.1$',...
+         '$\Delta{t}=2.0\times10^{-3}$, $\alpha=0.5$',...
+         '$\Delta{t}=3.6\times10^{-3}$, $\alpha=0.9$');
 set(L,'fontsize',30,'interpreter','latex')
 
 set(gca,'fontsize',30, 'ylim',[-1,1])
@@ -155,7 +156,7 @@ plot(x,TN*IC,'-k','linewidth',3)
 hold on
 plot(x,IC,':k','linewidth',3)
 
-L=legend('$U(x, t_{0}=0)$','$U(x,t_{849}=10.2)$');
+L=legend('$U(x,t_{849}=10.2)$', '$U(x, t_{0}=0)$');
 set(L,'fontsize',30,'interpreter','latex')
 
 set(gca,'fontsize',30, 'ylim',[-.5,1])

@@ -1,4 +1,4 @@
-Data for 1a.eps 
+Data for 1b.eps 
 J=101;
 a=1;
 Dx=2/(J-1);    % 0.02
@@ -6,7 +6,7 @@ x=(-1:Dx:1).';
 alpha=.6;
 Dt=alpha*Dx/a; % 0.0120
 t=10;
-N=floor(t/Dt); % 10
+N=floor(t/Dt); % 833
 
 k1=3;
 IC=sin(2*pi*k1*x);

@@ -1,4 +1,4 @@
-Data for 1c.eps 
+Data for 1d.eps 
 a=1;
 Dx=2/(J-1);    % 0.0200
 x=(-1:Dx:1).';

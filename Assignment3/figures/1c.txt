@@ -1,13 +1,14 @@
 Data for 1c.eps 
+J=501;
 a=1;
-Dx=2/(J-1);    % 0.0200
+Dx=2/(J-1);    % 0.0040
 x=(-1:Dx:1).';
-alpha=.6;
-Dt=alpha*Dx/a; % 0.0020   0.0100   0.0180
-t=10;
-N=floor(t/Dt); % 555
+alpha=; % [0.1, 0.5, 0.9];
+Dt=alpha*Dx/a; % 0.0004   0.0020   0.0036
+t=0.5;
+N=floor(t/Dt); % 1250   250   138
 
-beta=alpha^2; % LW
+beta=1; % LF
 
 k1=3;
 IC=sin(2*pi*k1*x);
