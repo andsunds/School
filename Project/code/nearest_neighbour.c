@@ -24,10 +24,15 @@ static void horizontal_check
 
 
 void get_NN(int *NN_arr, int index, int rows, int cols){
-  /* The argument NN_arr has to be a pointer to an ARRAY
-     of size _5_, otherwise expect big fuckups!
+  /* Finds the nearest neighbours (NN) to the site 
+     described by index. This method will take boundaries
+     into account when calculating the NN's. 
+       I.e. regular boundary sites will have 3 NN's,
+       while corner sites only have 2 NN's, and inner
+       sites have 4 NN's.
 
-            NN = Nearest Neighbour 
+     The argument NN_arr has to be a pointer to an ARRAY
+     of size _5_, otherwise expect big fuckups!
   */
   int row=get_row(index, cols);
   int col=get_col(index, cols);
