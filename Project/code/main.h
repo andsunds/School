@@ -1,4 +1,8 @@
-#ifndef MAIN_H_
+/* N.B.
+   In this implementation all matrices will be
+   represented as a 1D array of length rows*cols.
+*/
+#ifndef MAIN_H_ //A check so to not rerun all the definitions below.
 #define MAIN_H_
 
 
