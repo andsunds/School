@@ -1,25 +1,18 @@
-#ifndef NEAREST_NEIGHBOUR_H_
-#define NEAREST_NEIGHBOUR_H_
+#ifndef MAIN_H_
+#define MAIN_H_
 
-static void horizontal_check
-(int index, int col, int cols, int *arr_len,int *NNa, int *NNb);
+/* nearest_neighbour.c */
 
-int *get_NN(int index, int rows, int cols);
+void get_NN(int *NN_arr, int index, int rows, int cols);
 
 
-#endif
-
-#ifndef ISING_MODEL_H_
-#define ISING_MODEL_H_
-
+/* ising_model.c */
 int *ising_init(int rows, int cols);
 
-#endif
+double hamiltonian(double J, int *mtrx_as_arr, int rows, int cols);
 
 
-#ifndef GRID2d_H_
-#define GRID2d_H_
-
+/* grid2D.c */
 int index2d(int row, int col, int cols);
 
 int get_row(int index, int cols);
