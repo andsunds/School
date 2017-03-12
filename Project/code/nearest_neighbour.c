@@ -37,11 +37,16 @@ void get_NN(int *NN_arr, int index, int rows, int cols){
   int row=get_row(index, cols);
   int col=get_col(index, cols);
 
-  
-  NN_arr[0]=4; /* there should be 4 NN
-		  if there isn't, decreas by 1 (--) for each
-		  case where a NN won't exist.
-	       */
+  if ( index>=rows*cols || index<0 ){
+    for (int a=0; a<5; a++ )
+      NN_arr[a]=-1; 
+    printf("\n ERROR in get_NN. Index out of bounds. \n   Got index=%d, should be 0<=index<%d.\n\n", index, rows*cols);
+  }else{
+    NN_arr[0]=4; /* there should be 4 NN
+		    if there isn't, decreas by 1 (--) for each
+		    case where a NN won't exist.
+		 */
+  }
   
   /* There are 2 levels of if statements:
      - Level 1 checks vertically, if we're at the top or bottom.
