@@ -1,23 +1,25 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include "main.h"
+
 
 static void horizontal_check
 (int index, int col, int cols, int *arr_len,int *NNa, int *NNb){
   /* The second level of the if statements in get_NN.
      Here, the horizontal check is perforemed.*/
   if ( col==0 ){ //............2
+    //printf("DEBUG 2a\n"); //DEBUG
     *NNa=index+1;
-    *arr_len--;
-  }else if ( col==cols ){ //...2
+    *arr_len=*arr_len-1;
+    //printf("#NN = %d\n", *arr_len); //DEBUG
+  }else if ( col==cols-1 ){ //...2
     *NNa=index-1;
-    *arr_len--;
+    *arr_len=*arr_len-1;
   }else{ //....................2
     *NNa=index-1;
     *NNb=index+1;
   }
 }
-
-
-
-
 
 
 
@@ -45,7 +47,7 @@ int *get_NN(int index, int rows, int cols){
     NN1=index+cols;
     nbr_of_NN--;
     horizontal_check(index, col, cols, &nbr_of_NN, &NN2, &NN3);
-  }else if ( row==rows ){ //_1
+  }else if ( row==rows-1 ){ //_1
     NN1=index-cols;
     nbr_of_NN--;
     horizontal_check(index, col, cols, &nbr_of_NN, &NN2, &NN3);

@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include "main.h"
+
 int index2d(int row, int col, int cols){
   /* Returns the 1D index corresponding to 
      the 2D index of (row,col) in a matrix 
