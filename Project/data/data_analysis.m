@@ -2,7 +2,7 @@
 % Plots E and M as a function of time
 clc;clear;clf
 beta = 0.1 * (1.096^30);
-FILENAME = sprintf( 'beta_%0.5f.bin', beta);
+FILENAME = sprintf( 'bin/beta_%0.5f.bin', beta);
 fID=fopen(FILENAME,'rb');
 data=fread(fID,[2,inf],'real*8').';
 fclose(fID);
@@ -38,7 +38,7 @@ tic
 for i = 1:NT
     % Reading from file:
     beta     = beta0 * (factor^range(i));
-    FILENAME = sprintf( 'beta_%0.5f.bin', beta);
+    FILENAME = sprintf( 'bin/beta_%0.5f.bin', beta);
     fID      = fopen(FILENAME,'rb');
     data     = fread(fID,[2,inf],'real*8').';
     fclose(fID);
@@ -84,9 +84,9 @@ ylabel('$\langle E\rangle/J$', 'interpreter', 'LaTeX');
 
 
 subplot(1,2,2)
-errorbar(T,M,stdM, 'b*')
+errorbar(T,abs(M),stdM, 'b*')
 
-set(gca, 'yLim',[-1,1], 'xScale', 'log')
+set(gca, 'yLim',[0,1], 'xScale', 'log')
 xlabel('$T/J$', 'interpreter', 'LaTeX');
 ylabel('$\langle M\rangle$', 'interpreter', 'LaTeX');
 
