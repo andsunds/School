@@ -15,3 +15,8 @@ Assignment?.pdf
 *.fig.bak
 
 *-eps-converted-to.pdf
+
+#From the simulation project
+*~
+rename.py
+*.bin
