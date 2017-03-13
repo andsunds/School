@@ -120,6 +120,29 @@ int montecarlo_ising_full
      to writing everything to the file at the end. 
    */
 
+int montecarlo_ising_average
+(int rows, int cols, 
+ double J, double beta, double *return_values,
+ int Nsteps, int discard_first);
+  /* This function Monte Carlo simulates a 2D ising model
+     and retruns the average and std of the energy, E, and
+     order paramter, M. The values are retuned in the array
+     <return_values> in the fashion:
+                   {T, E, sdtE, M, stdM},
+     where T=1/<beta>.
+
+     The Ising model is that of a grid of size <rows>*<cols>
+     with Hamiltonian:
+               H = -J * \sum_{<i,j> NN} s_i*s_j
+     at temperature 1/<beta>.
+     <Nsteps> of Monte Carlo simulations are performed.
+
+     MAKE SURE THAT <return_values> IS AN ARRAY WITH 
+                             5
+     ELEMENTS.
+  */
+
+
 
 
 #endif

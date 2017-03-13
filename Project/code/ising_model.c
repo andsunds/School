@@ -268,8 +268,8 @@ int montecarlo_ising_full
 
 int montecarlo_ising_average
 (int rows, int cols, 
- double J, double beta,
- int Nsteps, double *return_values){
+ double J, double beta, double *return_values,
+ int Nsteps, int discard_first){
   /* This function Monte Carlo simulates a 2D ising model
      and retruns the average and std of the energy, E, and
      order paramter, M. The values are retuned in the array
@@ -291,8 +291,15 @@ int montecarlo_ising_average
 
   /* Initializations */
   int N=rows*cols; //total # sites
-  double E; //energy and its change
-   
+  double E, M; 
+
+  // Giving the pointers (human) understandable names.
+  return_values[0] = 1/beta;
+  double *meanE = return_values +1; *meanE = 0;
+  double *stdE  = return_values +2; *stdE  = 0;
+  double *meanM = return_values +3; *meanM = 0;
+  double *stdM  = return_values +4; *stdM  = 0;
+
   double arr_EM[2]; //array of current E and M values
   int *ising=ising_init(rows, cols); // init of random ising grid
 
@@ -307,14 +314,49 @@ int montecarlo_ising_average
      problems.
   */
   E = totE(J, ising, rows, cols);
-  for (int a=0; a<Nsteps; ++a ){ 
-    
+
+  for (int a=0; a<discard_first; ++a ){ //for #1
+    /* In this loop we just perform the Monte Carlo
+       step <discard_first> number of times, to get
+       the initial warm-up oscillations out.
+    */
     motecarlo_ising_step
       (ising, rows, cols, N, arr_EM, J, beta, &E, 0);
-    
+    //Passing 0 as the <current_index> because
+    //arr_EM only has 2 elements.
   }//end for #1
- 
-  
+
+  for (int a=0; a<Nsteps; ++a ){ //for #2
+    /* This is one ising step */
+    motecarlo_ising_step
+      (ising, rows, cols, N, arr_EM, J, beta, &E, 0);
+    //Passing 0 as the <current_index> because
+    //arr_EM only has 2 elements.
+    M = order_param(ising, N);
+
+    /* These expressions are not fully the mean and sdt,
+       but they will be modified after the loop.
+    */
+    *meanE += E; 
+    *stdE  += E*E;
+    *meanM += M; 
+    *stdM  += M*M;
+  }//end for #2
+  /* Calculating the means */
+  *meanE /= Nsteps;
+  *meanM /= Nsteps;
+
+  /*        Calculating the std's.
+     In this stage the *stdX's are just sums of X*X (X^2).
+
+     var = <x^2> - <x>^2 = sum x^2/N - sum (x/N)^2
+     std = sqrt( var )
+     In the estimates for var one should use N-1, however
+     in this case N>>1, so it makes no difference.
+  */
+  *stdE = sqrt( (*stdE)/Nsteps - ( *meanE )*( *meanE ) );
+  *stdM = sqrt( (*stdM)/Nsteps - ( *meanM )*( *meanM ) );
+
   free(ising); ising=NULL;
   return 0;
 }
