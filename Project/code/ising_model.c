@@ -10,8 +10,9 @@ int *ising_init(int rows, int cols){
      in the implementation. 
   */
   // Don't forget the sizeof!
-  int *ising_mtrx= malloc(rows*cols*sizeof(int)); 
-  for( int i=0; i<rows*cols; i++ ){
+  int N=rows*cols;
+  int *ising_mtrx= malloc(N*sizeof(int)); 
+  for( int i=0; i<N; i++ ){
     if( rand()<RAND_MAX/2 ) //random # to decide +-1.
       ising_mtrx[i]=-1;
     else
@@ -34,7 +35,8 @@ double totE(double J, int *mtrx_as_arr, int rows, int cols){
    */
   int sum = 0; // sum of spin products
   int NN[5];   // init for use be get_NN
-  for (int a=0; a<rows*cols; a++ ){
+  int N=rows*cols;
+  for (int a=0; a<N; a++ ){
     /* Loop/sum over all sites */
     get_NN(NN, a, rows, cols);
     for ( int b=0; b<NN[0]; b++){
