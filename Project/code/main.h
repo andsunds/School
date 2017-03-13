@@ -88,6 +88,38 @@ double order_param(int *mtrx_as_arr, int N);
      spins. 
    */
 
+int montecarlo_ising(int rows, int cols, 
+		     double J, double beta,
+		     int Nsteps, int write_chunk);
+  /* This function Monte Carlo simulates a 2D ising model
+     and writes the energy, E, and order paramter, M, to a
+     binary file. 
+
+     The Ising model is that of a grid of size [rows*cols]
+     with Hamiltonian:
+               H = -J * \sum_{<i,j> NN} s_i*s_j
+     at temperature 1/[beta].
+     [Nsteps] of Monte Carlo simulations are performed.
+
+
+     - The output file is named ("beta_%1.2f.bin",[beta]) 
+       and formated:
+             {E(1),M(1),E(2),M(2), ... ,E(end),M(end)}.
+     - It contains doubles (8 bytes).
+     - The size of the file is:
+ ( 1 + [Nsteps]*2/[write_chunk] )*( [write_chunk]/2 )*8 bytes,
+       i.e. up to
+             8*([Nsteps] + [write_chunk]) bytes.
+       The facor 8 is a consequence of the data type
+       beeing double, which is 8 bytes. 
+
+     Output is written to the file in chunks of size
+                 [write_chunk] doubles
+     at a time. This will supposedly make the file I/O
+     faster. At least this method is save memory compared
+     to writing everything to the file at the end. 
+   */
+
 
 
 #endif
