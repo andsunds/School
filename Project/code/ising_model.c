@@ -294,11 +294,16 @@ int montecarlo_ising_average
   double E, M; 
 
   // Giving the pointers (human) understandable names.
-  return_values[0] = 1/beta;
+  /*
   double *meanE = return_values +1; *meanE = 0;
   double *stdE  = return_values +2; *stdE  = 0;
   double *meanM = return_values +3; *meanM = 0;
   double *stdM  = return_values +4; *stdM  = 0;
+  */
+  double meanE = 0;
+  double stdE  = 0;
+  double meanM = 0;
+  double stdM  = 0;
 
   double arr_EM[2]; //array of current E and M values
   int *ising=ising_init(rows, cols); // init of random ising grid
@@ -322,11 +327,11 @@ int montecarlo_ising_average
     */
     motecarlo_ising_step
       (ising, rows, cols, N, arr_EM, J, beta, &E, 0);
-    //Passing 0 as the <current_index> because
-    //arr_EM only has 2 elements.
+     //Passing 0 as the <current_index> because
+     //arr_EM only has 2 elements.
   }//end for #1
 
-  for (int a=0; a<Nsteps; ++a ){ //for #2
+  for (int b=0; b<Nsteps; ++b ){ //for #2
     /* This is one ising step */
     motecarlo_ising_step
       (ising, rows, cols, N, arr_EM, J, beta, &E, 0);
@@ -337,15 +342,25 @@ int montecarlo_ising_average
     /* These expressions are not fully the mean and sdt,
        but they will be modified after the loop.
     */
+    /* DEBUG
     *meanE += E; 
     *stdE  += E*E;
     *meanM += M; 
     *stdM  += M*M;
+    */
+    meanE += E; 
+    stdE  += E*E;
+    meanM += M; 
+    stdM  += M*M;
   }//end for #2
   /* Calculating the means */
+  //printf("Calculating means\n"); //DEBUG
+  /* DEBUG
   *meanE /= Nsteps;
   *meanM /= Nsteps;
-
+  */
+  meanE /= Nsteps;
+  meanM /= Nsteps;
   /*        Calculating the std's.
      In this stage the *stdX's are just sums of X*X (X^2).
 
@@ -354,9 +369,26 @@ int montecarlo_ising_average
      In the estimates for var one should use N-1, however
      in this case N>>1, so it makes no difference.
   */
-  *stdE = sqrt( (*stdE)/Nsteps - ( *meanE )*( *meanE ) );
-  *stdM = sqrt( (*stdM)/Nsteps - ( *meanM )*( *meanM ) );
+  /* DEBUG
+  *stdE = sqrt( *stdE/Nsteps - ( *meanE )*( *meanE ) );
+  *stdM = sqrt( *stdM/Nsteps - ( *meanM )*( *meanM ) );
+  */
+  stdE = sqrt( stdE/Nsteps - meanE * meanE );
+  stdM = sqrt( stdM/Nsteps - meanM * meanM );
+
+  //  printf("Calculations done!\n"); //DEBUG
+
+  /*  DEBUG
+  return_values[0] = 1/beta;
+  return_values[1] = meanE;
+  return_values[2] = stdE;
+  return_values[3] = meanM;
+  return_values[4] = stdM;
+  */
 
   free(ising); ising=NULL;
   return 0;
+  /* Remember that the important values returned by this
+     fuction are in <return_values>.
+  */
 }
