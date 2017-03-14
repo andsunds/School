@@ -90,7 +90,7 @@ double order_param(int *mtrx_as_arr, int N);
 
 int montecarlo_ising_full
 (int rows, int cols, double J, double beta, int Nsteps,
- int chunk, char *save_directory);
+ int chunk, char *save_directory, FILE *logPTR);
   /* This function Monte Carlo simulates a 2D ising model
      and writes the energy, E, and order paramter, M, to a
      binary file. 
@@ -118,6 +118,9 @@ int montecarlo_ising_full
      at a time. This will supposedly make the file I/O
      faster. At least this method is save memory compared
      to writing everything to the file at the end. 
+
+     <logPTR> is a pointer to a log file, to which the
+     printpouts will be written.
    */
 
 int montecarlo_ising_average
