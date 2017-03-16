@@ -77,9 +77,13 @@ static int simulate_ising_write_all_to_bin
     runtime2= (float)(end2 - begin2) / CLOCKS_PER_SEC;
     runtime3= (float)(end2 - begin3) / CLOCKS_PER_SEC / 60;//min
 
-    sprintf(timeMSG,"Execution time (beta=%0.4f): %0.3f s. ( %0.2f min )\n", beta, runtime2, runtime3);
-    printf(        "%s",timeMSG);
-    fprintf(logPTR,"%s",timeMSG);
+    if ( runtime3 < 60 ){ //diplay accumulated time in min's
+      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f min )\n", beta, i, Nsims, runtime2, runtime3);
+    }else{ //diplay accumulated time in hours
+      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f hours )\n", beta, i, Nsims, runtime2, runtime3/60);
+    }
+      printf(        "%s",timeMSG);
+      fprintf(logPTR,"%s",timeMSG);
   } // end for
   return 0;
 }
@@ -89,7 +93,7 @@ static int simulate_ising_write_all_to_bin
 
 
 static int simulate_ising_write_avg_to_tsv
-( FILE *logPTR, char *save_directory){
+( FILE *logPTR, char *save_directory ){
   /* As the name suggests, simulates a bunch of
      differnt times and then oly writes the averages
      and std's of E and M to a tsv-file.
@@ -103,8 +107,8 @@ static int simulate_ising_write_avg_to_tsv
   double TEMarr[no_of_values]; // array with mean and std of E & M.
   int    L=16;                 // side length og the grid
   double J=1.0;                // energy factor in the Hamlitonian
-  double beta0 = 0.95;         // invers temperature
-  double d_beta = 1e-3;        // step size in beta
+  double beta0 = 0.25;         // invers temperature
+  double d_beta = 5e-3;        // step size in beta
   double beta;                 // init
   int Nsims      = 512;        // # sims, set to 0 if not active
   int Nsteps     = (int)2e7;   // # Monte Carlo steps
@@ -177,7 +181,11 @@ static int simulate_ising_write_avg_to_tsv
     runtime2= (float)(end2 - begin2) / CLOCKS_PER_SEC;
     runtime3= (float)(end2 - begin3) / CLOCKS_PER_SEC / 60;//min
 
-    sprintf(timeMSG,"Execution time (beta=%0.4f): %0.3f s. ( %0.2f min )\n", beta, runtime2, runtime3);
+    if ( runtime3 < 60 ){ //diplay accumulated time in min's
+      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f min )\n", beta, i, Nsims, runtime2, runtime3);
+    }else{ //diplay accumulated time in hours
+      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f hours )\n", beta, i, Nsims, runtime2, runtime3/60);
+    }
     printf(        "%s",timeMSG);
     fprintf(logPTR,"%s",timeMSG);
   } // end for
@@ -197,7 +205,9 @@ static int simulate_ising_write_avg_to_tsv
 
 int main(){
   int isOK = 0; // init (0 = ok, 1 = not ok)
-  char save_directory[] = "/tmp/";
+  //char save_directory[] = "../data/bin/";
+  char save_directory[] = "../data/";
+  //char save_directory[] = "/tmp/"; //DEBUG
 
 
 
