@@ -21,7 +21,7 @@ static int simulate_ising_write_all_to_bin
   double J=1;            // energy factor in tha Hamlitonian
   double beta = 0.0002;  // invers temperature
   double factor = 1.096; // this ^ 100 = 1e4
-  int Nsims = 1;         // # simulations, set to 0 if not active
+  int Nsims = 4;         // # simulations, set to 0 if not active
   int Nsteps = (int)1e7; // # Monte Carlo steps
   int write_chunk = 256; // # doubles to be written at once
   
@@ -78,9 +78,9 @@ static int simulate_ising_write_all_to_bin
     runtime3= (float)(end2 - begin3) / CLOCKS_PER_SEC / 60;//min
 
     if ( runtime3 < 60 ){ //diplay accumulated time in min's
-      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f min )\n", beta, i, Nsims, runtime2, runtime3);
+      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f min )\n", beta, i+1, Nsims, runtime2, runtime3);
     }else{ //diplay accumulated time in hours
-      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f hours )\n", beta, i, Nsims, runtime2, runtime3/60);
+      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f hours )\n", beta, i+1, Nsims, runtime2, runtime3/60);
     }
       printf(        "%s",timeMSG);
       fprintf(logPTR,"%s",timeMSG);
@@ -105,12 +105,12 @@ static int simulate_ising_write_avg_to_tsv
   /* Inits */
   int no_of_values = 5;        // do NOT change this! 
   double TEMarr[no_of_values]; // array with mean and std of E & M.
-  int    L=16;                 // side length og the grid
-  double J=1.0;                // energy factor in the Hamlitonian
-  double beta0 = 0.25;         // invers temperature
-  double d_beta = 5e-3;        // step size in beta
+  int    L       = 16;         // side length og the grid
+  double J       = 1.0;        // energy factor in the Hamlitonian
+  double beta0   = 0.33;       // invers temperature
+  double d_beta  = 6.7e-0;       // step size in beta
   double beta;                 // init
-  int Nsims      = 512;        // # sims, set to 0 if not active
+  int Nsims      = 2;       // # sims, set to 0 if not active
   int Nsteps     = (int)2e7;   // # Monte Carlo steps
   int disc_first = (int)5e4;   // discard values from warm-up period
 
@@ -182,9 +182,9 @@ static int simulate_ising_write_avg_to_tsv
     runtime3= (float)(end2 - begin3) / CLOCKS_PER_SEC / 60;//min
 
     if ( runtime3 < 60 ){ //diplay accumulated time in min's
-      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f min )\n", beta, i, Nsims, runtime2, runtime3);
+      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f min )\n", beta, i+1, Nsims, runtime2, runtime3);
     }else{ //diplay accumulated time in hours
-      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f hours )\n", beta, i, Nsims, runtime2, runtime3/60);
+      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f hours )\n", beta, i+1, Nsims, runtime2, runtime3/60);
     }
     printf(        "%s",timeMSG);
     fprintf(logPTR,"%s",timeMSG);
@@ -206,8 +206,8 @@ static int simulate_ising_write_avg_to_tsv
 int main(){
   int isOK = 0; // init (0 = ok, 1 = not ok)
   //char save_directory[] = "../data/bin/";
-  char save_directory[] = "../data/";
-  //char save_directory[] = "/tmp/"; //DEBUG
+  //char save_directory[] = "../data/";
+  char save_directory[] = "/tmp/"; //DEBUG
 
 
 
@@ -229,8 +229,8 @@ int main(){
 
   /* Computation goes in here: */
 
-  //isOK = simulate_ising_write_all_to_bin(logPTR,save_directory);
-  isOK = simulate_ising_write_avg_to_tsv(logPTR,save_directory);
+  isOK = simulate_ising_write_all_to_bin(logPTR,save_directory);
+  //isOK = simulate_ising_write_avg_to_tsv(logPTR,save_directory);
   //int N=L*L;int index=4; play_w_print_matrix(L, N, index);
   //play_w_ising_init(L, J);
 

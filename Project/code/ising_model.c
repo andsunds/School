@@ -76,7 +76,7 @@ static double deltaE
   }
   */
   int start = index*5;
-  for ( int b=0; b<arr_all_NN[start]; b++){
+  for ( int b=1; b<=arr_all_NN[start]; b++){
     /* Loop over all NN's, and sum the products.
        To acces the NN's for <index> start at <index>*5,
        and then check as many slots as are indicated in
@@ -118,11 +118,23 @@ static double order_param(int *mtrx_as_arr, int N){
  */
 }
 
+static double delta_order_param(int *mtrx_as_arr,int index, int N){
+  /* Returns the change in M.
+   */
+  
+  return 2*( (double)mtrx_as_arr[index] )/( (double)N );
+  /* Since M(after)-M(before)
+     = (mtrx_as_arr[index] - (-mtrx_as_arr[index]) )/N,
+     we get a facor 2 here.
+   */
+}
+
 
 /////////////////////////////////////////////////////////////////
 static void motecarlo_ising_step
 (int *ising, int rows, int cols, int N,
- double *arr_EM, double J, double beta, double *E_tot,
+ double *arr_EM, double J, double beta,
+ double *E_tot, double *M_tot,
  double *boltzmann_factors, //for runtime optimization
  int *arr_all_NN, //for runtime optimization
  int current_iteration){
@@ -136,6 +148,8 @@ static void motecarlo_ising_step
         dE = -8*J, -4*J, 0*J, +4*J, or +8*J
      this means that we only need to check the two cases
      dE=4*J and dE=8*J.
+
+     TODO: implement M_tot and dM in a similar manner as for E.
   */
 
   double dbl_rand; //a random dbl, to be used in a check
@@ -153,7 +167,7 @@ static void motecarlo_ising_step
     /* Generate a random number in [0,1] */
     dbl_rand = ( (double)rand() )/RAND_MAX;
     //if ( dbl_rand > exp(-beta*dE) ){
-    if ( dbl_rand > boltzmann_factors[1] ){
+    if ( dbl_rand > boltzmann_factors[0] ){
       /* If r is too big, then flip back
 	 and the change in energy is 0.
       */
@@ -164,7 +178,7 @@ static void motecarlo_ising_step
     /* Generate a random number in [0,1] */
     dbl_rand = ( (double)rand() )/RAND_MAX;
     //if ( dbl_rand > exp(-beta*dE) ){
-    if ( dbl_rand > boltzmann_factors[0] ){
+    if ( dbl_rand > boltzmann_factors[1] ){
       /* If r is too big, then flip back
 	 and the change in energy is 0.
       */
@@ -173,7 +187,8 @@ static void motecarlo_ising_step
     }
   }
 
-  *E_tot  = (*E_tot) + dE;
+  *E_tot = (*E_tot) + dE;
+  *M_tot = (*M_tot) + delta_order_param(ising, random_index, N);
   /* Writes the new values to the array passed to this
      function. 
 
@@ -181,7 +196,7 @@ static void motecarlo_ising_step
      PASSING IT TO THIS FUNCTION!!!
   */
   arr_EM[2*current_iteration]   = *E_tot; 
-  arr_EM[2*current_iteration+1] = order_param(ising, N);
+  arr_EM[2*current_iteration+1] = *M_tot;
 }
 
 
@@ -228,7 +243,7 @@ int montecarlo_ising_full
 
   /* Initializations */
   int N=rows*cols; //total # sites
-  double E; //energy and its change
+  double E, M; //energy and its change
   // The Boltzmann factors can be pre-computed since dE only can
   // assume some discrete values: +-8J, +-4J, or 0.
   double boltzmann_factors[2] = {exp(-beta*J*8), exp(-beta*J*4)};
@@ -263,15 +278,16 @@ int montecarlo_ising_full
   }
 
 
-  /* It's cheeper to calculate deltaE each iteration
-     and just add that to E, to get the next energy
-     value.
+  /* It's cheeper to calculate deltaE and deltaM in each
+     iteration and just add that to E and M, to get the
+     next energy or order parameter value.
 
-     This has a minor flaw in that, we don't get the
-     very first value of E, but that should not be any
+     This has a minor flaw in that, we don't get the very
+     first value of E or M, but that should not be any
      problems.
   */
   E = totE(J, ising, rows, cols);
+  M = order_param(ising, N);
   for (int a=0; a<loop1; ++a ){ // for #1
     /* In each iteration of this loop we write data
        to file in a chunk of size 2*chunk.
@@ -282,10 +298,10 @@ int montecarlo_ising_full
 	 This step requires the total energy, E, to be
 	 passed to it, because the total energy is only
 	 updated via the calculation of deltaE.
- */
+      */
       motecarlo_ising_step
 	(ising, rows, cols, N,
-	 arr_EM, J, beta, &E,
+	 arr_EM, J, beta, &E, &M,
 	 boltzmann_factors, arr_all_NN, b);
     } // end for #2
     // printf("%2.2f\n",arr_EM[chunk-1]); //DEBUG
@@ -357,16 +373,16 @@ int montecarlo_ising_average
   int *ising=ising_init(rows, cols); // init of random ising grid
 
 
-  /* It's cheeper to calculate deltaE each iteration
-     and just add that to E, to get the next energy
-     value.
+  /* It's cheeper to calculate deltaE and deltaM in each
+     iteration and just add that to E and M, to get the
+     next energy or order parameter value.
 
-     This has a minor flaw in that, we don't get the
-     very first value of E, but that should not be any
+     This has a minor flaw in that, we don't get the very
+     first value of E or M, but that should not be any
      problems.
   */
   E = totE(J, ising, rows, cols);
-
+  M = order_param(ising, N);
   for (int a=0; a<discard_first; ++a ){ //for #1
     /* In this loop we just perform the Monte Carlo
        step <discard_first> number of times, to get
@@ -374,7 +390,7 @@ int montecarlo_ising_average
     */
     motecarlo_ising_step
       (ising, rows, cols, N,
-       arr_EM, J, beta, &E,
+       arr_EM, J, beta, &E, &M,
        boltzmann_factors, arr_all_NN, 0);
      //Passing 0 as the <current_index> because
      //arr_EM only has 2 elements.
@@ -384,19 +400,20 @@ int montecarlo_ising_average
     /* This is one ising step */
     motecarlo_ising_step
       (ising, rows, cols, N,
-       arr_EM, J, beta, &E,
+       arr_EM, J, beta, &E, &M,
        boltzmann_factors, arr_all_NN, 0);
     //Passing 0 as the <current_index> because
     //arr_EM only has 2 elements.
-    M = order_param(ising, N);
+
+    //M = order_param(ising, N);
 
     /* These expressions are not fully the mean and sdt,
        but they will be modified after the loop.
     */
-    *meanE += E; 
-    *stdE  += E*E;
-    *meanM += M; 
-    *stdM  += M*M;
+    *meanE += arr_EM[0]; //E;
+    *stdE  += arr_EM[0]*arr_EM[0];  //E*E;
+    *meanM += arr_EM[1]; 
+    *stdM  += arr_EM[1]*arr_EM[1];
   }//end for #2
 
   /* Calculating the means */
