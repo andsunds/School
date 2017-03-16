@@ -2,40 +2,15 @@
    In this implementation all matrices will be
    represented as a 1D array of length rows*cols.
 */
-#include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include <math.h>
 #include "main.h"
 
-void play_w_print_matrix(int L,int N, int index){
-  int mtrx[N];
-  for (int a=0; a<N; a++ )
-    mtrx[a]=a; // initializing
-  
-  print_matrix(mtrx, L, L);
-  int NN[5]; // VERY important that it's _5_ here!
-  get_NN(NN, index, L, L);
-  for (int b=0; b<NN[0]; b++)
-    printf("NN%d: %2d\n", b+1, NN[b+1]);
-}
 
-void play_w_ising_init(int L, double J){
-  int *pmtrx=ising_init(L, L);
-  /* //creates non-random marix
-  int pmtrx[N];
-  for (int c=0; c<N; c++ ){
-    //pmtrx[c] = 1; // const, min energy
-    pmtrx[c] = 1 - 2*(c%2); // alternating, max E
-  } */
-  print_matrix_sign(pmtrx, L, L);
-  double E=totE(J, pmtrx, L,L);
-  printf("Total energy: %3.1f\n",E);
-  free(pmtrx); pmtrx=NULL;
-}
-
-
-static int simulate_ising_write_all_to_bin( FILE *logPTR ){
+static int simulate_ising_write_all_to_bin
+( FILE *logPTR, char *save_directory ){
   /* As the name suggests, simulates a bunch
      of differnt times and writes all data to
      a binary file.
@@ -46,13 +21,14 @@ static int simulate_ising_write_all_to_bin( FILE *logPTR ){
   double J=1;            // energy factor in tha Hamlitonian
   double beta = 0.0002;  // invers temperature
   double factor = 1.096; // this ^ 100 = 1e4
-  int Nsims = 0;         // # simulations, set to 0 if not active
-  int Nsteps = (int)2e7; // # Monte Carlo steps
+  int Nsims = 1;         // # simulations, set to 0 if not active
+  int Nsteps = (int)1e7; // # Monte Carlo steps
   int write_chunk = 256; // # doubles to be written at once
   
   clock_t begin2, begin3, end2; //init, for time tracking
   float runtime2, runtime3;
-  char save_directory[] = "../data/bin/";
+  //char save_directory[] = "../data/bin/";
+  
 
 
   /* Lots of differents messages */
@@ -109,7 +85,11 @@ static int simulate_ising_write_all_to_bin( FILE *logPTR ){
 }
 
 
-static int simulate_ising_write_avg_to_tsv( FILE *logPTR ){
+
+
+
+static int simulate_ising_write_avg_to_tsv
+( FILE *logPTR, char *save_directory){
   /* As the name suggests, simulates a bunch of
      differnt times and then oly writes the averages
      and std's of E and M to a tsv-file.
@@ -122,12 +102,12 @@ static int simulate_ising_write_avg_to_tsv( FILE *logPTR ){
   int no_of_values = 5;        // do NOT change this! 
   double TEMarr[no_of_values]; // array with mean and std of E & M.
   int    L=16;                 // side length og the grid
-  double J=1;                  // energy factor in the Hamlitonian
+  double J=1.0;                // energy factor in the Hamlitonian
   double beta0 = 0.95;         // invers temperature
   double d_beta = 1e-3;        // step size in beta
   double beta;                 // init
-  int Nsims      = 1;        // # sims, set to 0 if not active
-  int Nsteps     = (int)2e5;   // # Monte Carlo steps
+  int Nsims      = 512;        // # sims, set to 0 if not active
+  int Nsteps     = (int)2e7;   // # Monte Carlo steps
   int disc_first = (int)5e4;   // discard values from warm-up period
 
   int isOK;                    //init, for error checking
@@ -150,10 +130,9 @@ static int simulate_ising_write_avg_to_tsv( FILE *logPTR ){
 
   /*    file I/O    */
   char filename[128];
-  sprintf(filename, "../data/TEMstdEstdM_beta_%0.3f-%0.3f_%d.tsv",
-	  beta0, beta0+(Nsims-1)*d_beta, Nsims);
+  sprintf(filename, "%sTEMstdEstdM_beta_%0.3f-%0.3f_%d.tsv",
+  	  save_directory, beta0, beta0+(Nsims-1)*d_beta, Nsims);
 
-  //char filename[] = "/tmp/data-dump.tsv"; //DEBUG
 
   FILE *filePTR;
   filePTR = fopen(filename,"w");
@@ -168,7 +147,7 @@ static int simulate_ising_write_avg_to_tsv( FILE *logPTR ){
   /* A message before we start */
   printf(        "%s",startMSG);
   fprintf(logPTR,"%s",startMSG);
-  
+  printf("Writing data to: %s\n",filename);
 
   /* Starting the computations */
   begin3 = clock();
@@ -218,6 +197,10 @@ static int simulate_ising_write_avg_to_tsv( FILE *logPTR ){
 
 int main(){
   int isOK = 0; // init (0 = ok, 1 = not ok)
+  char save_directory[] = "/tmp/";
+
+
+
 
   /* Opens a log file with runtimes and possible errors */
   FILE *logPTR;
@@ -232,20 +215,12 @@ int main(){
   int hour, min;
   char timeMSG[128];
   
-
-
-
-
-
-
   begin1 = clock();
-
-
 
   /* Computation goes in here: */
 
-  //isOK = simulate_ising_write_all_to_bin(logPTR);
-  isOK = simulate_ising_write_avg_to_tsv(logPTR);
+  //isOK = simulate_ising_write_all_to_bin(logPTR,save_directory);
+  isOK = simulate_ising_write_avg_to_tsv(logPTR,save_directory);
   //int N=L*L;int index=4; play_w_print_matrix(L, N, index);
   //play_w_ising_init(L, J);
 

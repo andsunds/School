@@ -3,7 +3,7 @@
 #include <math.h>
 #include "main.h"
 
-int *ising_init(int rows, int cols){
+static int *ising_init(int rows, int cols){
   /* Initializes a matrix, in the form of an
      array, filled with +-1 randomly.
 
@@ -26,7 +26,7 @@ int *ising_init(int rows, int cols){
 }
 
 
-double totE(double J, int *mtrx_as_arr, int rows, int cols){
+static double totE(double J, int *mtrx_as_arr, int rows, int cols){
   /* Returns the total energy of the system according to
      the Hamiltonian:
              H = -J \sum_{<i,j> is NN} s_i * s_j,
@@ -34,6 +34,11 @@ double totE(double J, int *mtrx_as_arr, int rows, int cols){
 
      No need (in problem 1) to use double for J and the
      return value, but it might come in handy later. 
+
+     NOT to be used inside simulation loops, since this
+     function is not optimized. INSTEAD use this _once_
+     before the loop, and then use deltaE() inside the
+     loop to then get the new value. 
    */
   int sum = 0; // sum of spin products
   int NN[5];   // init for use be get_NN
@@ -53,8 +58,9 @@ double totE(double J, int *mtrx_as_arr, int rows, int cols){
  */
 }
 
-double deltaE
-(double J, int *mtrx_as_arr, int index, int rows, int cols){
+static double deltaE
+(double J, int *mtrx_as_arr, int index, int rows, int cols,
+ int *arr_all_NN){
   /* Calculates the change in energy after _one_ spin
      (at index) has been flipped. The calculation is
      based on the Hamiltonian:
@@ -62,10 +68,22 @@ double deltaE
      where s_i and s_j are described in mtrx_as_arr.
   */
   int sum = 0; // sum of spin products
-  int NN[5];   // init for use be get_NN
+  /*//  OLD VERSION!
+  int NN[5];   // init, for use be get_NN. 5 is important!
   get_NN(NN, index, rows, cols);
   for ( int b=0; b<NN[0]; b++){ // loop over all NN's
     sum += mtrx_as_arr[index]*mtrx_as_arr[NN[b+1]];
+  }
+  */
+  int start = index*5;
+  for ( int b=0; b<arr_all_NN[start]; b++){
+    /* Loop over all NN's, and sum the products.
+       To acces the NN's for <index> start at <index>*5,
+       and then check as many slots as are indicated in
+       that location.
+     */
+    sum += mtrx_as_arr[index] * 
+           mtrx_as_arr[arr_all_NN[start+b]];
   }
 
   return -J*sum;
@@ -81,8 +99,7 @@ double deltaE
   */
 }
 
-
-double order_param(int *mtrx_as_arr, int N){
+static double order_param(int *mtrx_as_arr, int N){
   /* Returns the order parameter of the sysyem:
         M = (1/N) * \sum_{all i} s_i,
      where the spin values s_i are described in the
@@ -102,52 +119,60 @@ double order_param(int *mtrx_as_arr, int N){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////
 static void motecarlo_ising_step
 (int *ising, int rows, int cols, int N,
  double *arr_EM, double J, double beta, double *E_tot,
+ double *boltzmann_factors, //for runtime optimization
+ int *arr_all_NN, //for runtime optimization
  int current_iteration){
-  /* Flips a random site and checks whether or not to
-     keep it. 
-  */
-  double dbl_rand; //a random dbl, to be used in a check
-  double dbl_RAND_MAX = (double)RAND_MAX; // a dbl const of RAND_MAX
+  /* Flips a random site and checks deltaE whether or not to
+     keep it. If deltaE is non-positive (dE<=0), the change
+     is keept and we just continue on. If deltaE is positive,
+     we have to do an extra check to see whether or not to
+     keep the change.
 
+     We also know that dE only can take on the values
+        dE = -8*J, -4*J, 0*J, +4*J, or +8*J
+     this means that we only need to check the two cases
+     dE=4*J and dE=8*J.
+  */
+
+  double dbl_rand; //a random dbl, to be used in a check
+  
   int random_index = rand() % N; // random index.
   ising[random_index] = -ising[random_index]; //flip
-  double dE = deltaE(J, ising, random_index, rows, cols); // deltaE
-  /* If deltaE is positive, we have to do an extra
-     check to see whether or not to keep the change.
-     
-     If deltaE is negative, the change is keept and
-     we just continue on.
+  double dE = deltaE(J, ising, random_index, rows, cols,
+		     arr_all_NN); // deltaE
+  
+  /* I'm beeing conservative in the use of == when
+     it comes to floats/doubles. I don't know if this is
+     a bad thing to worry ablout. 
   */
-  if ( dE>0 ){
+  if ( dE>7*J ){ 
     /* Generate a random number in [0,1] */
-    dbl_rand = (double)rand()/dbl_RAND_MAX;
-    if ( dbl_rand > exp(-beta*dE) ){
-      /* If r is too big, then flip back and the
-	 change in energy is 0.
+    dbl_rand = ( (double)rand() )/RAND_MAX;
+    //if ( dbl_rand > exp(-beta*dE) ){
+    if ( dbl_rand > boltzmann_factors[1] ){
+      /* If r is too big, then flip back
+	 and the change in energy is 0.
+      */
+      ising[random_index]=-ising[random_index];
+      dE=0;
+    }
+  }else if ( dE>3*J ){
+    /* Generate a random number in [0,1] */
+    dbl_rand = ( (double)rand() )/RAND_MAX;
+    //if ( dbl_rand > exp(-beta*dE) ){
+    if ( dbl_rand > boltzmann_factors[0] ){
+      /* If r is too big, then flip back
+	 and the change in energy is 0.
       */
       ising[random_index]=-ising[random_index];
       dE=0;
     }
   }
+
   *E_tot  = (*E_tot) + dE;
   /* Writes the new values to the array passed to this
      function. 
@@ -159,6 +184,9 @@ static void motecarlo_ising_step
   arr_EM[2*current_iteration+1] = order_param(ising, N);
 }
 
+
+
+/////////////////////////////////////////////////////////////////
 
 
 int montecarlo_ising_full
@@ -201,7 +229,12 @@ int montecarlo_ising_full
   /* Initializations */
   int N=rows*cols; //total # sites
   double E; //energy and its change
-   
+  // The Boltzmann factors can be pre-computed since dE only can
+  // assume some discrete values: +-8J, +-4J, or 0.
+  double boltzmann_factors[2] = {exp(-beta*J*8), exp(-beta*J*4)};
+  int  arr_all_NN[5*N]; // An array with info on all the NN's.
+  get_all_NN(arr_all_NN, rows, cols);
+
   if ( chunk % 2 == 1 )
     chunk++; //makes sure chunk is even
   double arr_EM[chunk]; //values to be written to file
@@ -219,7 +252,7 @@ int montecarlo_ising_full
 
 
   /*   I/O   */
-  char filename[64]; //longer then the filename
+  char filename[128]; //longer then the filename
   sprintf(filename,"%sbeta_%0.5f.bin",save_directory,beta);
   FILE *filePTR;
   filePTR=fopen(filename,"wb");
@@ -251,7 +284,9 @@ int montecarlo_ising_full
 	 updated via the calculation of deltaE.
  */
       motecarlo_ising_step
-	(ising, rows, cols, N, arr_EM, J, beta, &E, b);
+	(ising, rows, cols, N,
+	 arr_EM, J, beta, &E,
+	 boltzmann_factors, arr_all_NN, b);
     } // end for #2
     // printf("%2.2f\n",arr_EM[chunk-1]); //DEBUG
     /* Writes the contents of this chuck to file. */
@@ -275,8 +310,7 @@ int montecarlo_ising_full
 
 
 
-
-
+/////////////////////////////////////////////////////////////////
 
 
 int montecarlo_ising_average
@@ -305,6 +339,12 @@ int montecarlo_ising_average
   /* Initializations */
   int N=rows*cols; //total # sites
   double E, M; 
+  // The Boltzmann factors can be pre-computed since dE only can
+  // assume some discrete values: +-8J, +-4J, or 0.
+  double boltzmann_factors[2] = {exp(-beta*J*8), exp(-beta*J*4)};
+  int  arr_all_NN[5*N]; // An array with info on all the NN's.
+  get_all_NN(arr_all_NN, rows, cols);
+
 
   // Giving the pointers (human) understandable names.
   return_values[0] = 1/beta;
@@ -333,7 +373,9 @@ int montecarlo_ising_average
        the initial warm-up oscillations out.
     */
     motecarlo_ising_step
-      (ising, rows, cols, N, arr_EM, J, beta, &E, 0);
+      (ising, rows, cols, N,
+       arr_EM, J, beta, &E,
+       boltzmann_factors, arr_all_NN, 0);
      //Passing 0 as the <current_index> because
      //arr_EM only has 2 elements.
   }//end for #1
@@ -341,7 +383,9 @@ int montecarlo_ising_average
   for (int b=0; b<Nsteps; ++b ){ //for #2
     /* This is one ising step */
     motecarlo_ising_step
-      (ising, rows, cols, N, arr_EM, J, beta, &E, 0);
+      (ising, rows, cols, N,
+       arr_EM, J, beta, &E,
+       boltzmann_factors, arr_all_NN, 0);
     //Passing 0 as the <current_index> because
     //arr_EM only has 2 elements.
     M = order_param(ising, N);

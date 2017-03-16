@@ -38,20 +38,46 @@ void print_matrix_sign(int *matrix_as_arr, int rows, int cols);
 /************** nearest_neighbour.c **************/
 void get_NN(int *NN_arr, int index, int rows, int cols);
   /* Finds the nearest neighbours (NN) to the site 
-     described by index. This method will take boundaries
+     described by <index>. This method will take boundaries
      into account when calculating the NN's. 
        I.e. regular boundary sites will have 3 NN's,
        while corner sites only have 2 NN's, and inner
        sites have 4 NN's.
 
-     The argument NN_arr has to be a pointer to an ARRAY
-     of size _5_, otherwise expect big fuckups!
+     <arr_NN_index> is set up as:
+        {#NN's, NN1, NN2, (NN3), (NN4)}.
+     
+
+     The argument <arr_NN_index> has to be a pointer to an
+     array of size _5_, otherwise expect big fuckups!
+  */
+
+void get_all_NN(int *arr_all_NN, int rows, int cols);
+  /* This funtion returns an array <arr_all_NN> with
+     information about all NN's.
+
+     It is important that <arr_all_NN> is
+                5*<rows>*<cols> = 5*N
+     ints long. The factor 5 comes in because there
+     are 4 NN's, and for each index there is also a
+     value telling us 
+
+     <arr_all_NN> is structured acording to:
+      {#NN(i=0), NN1(i=0), NN2(i=0), (NN3(i=0)), (NN4(i=0)),
+       #NN(i=1), NN1(i=1), NN2(i=1), (NN3(i=1)), (NN4(i=1)),
+       ...,
+       #NN(i=N), NN1(i=N), NN2(i=N), (NN3(i=N)), (NN4(i=N))}
+     So to acces the relevant infrmation for index i, just
+     use:
+             for ( int j=0; j<5; ++j )
+               ... = arr_all_NN[i*5 + j];
   */
 
 
 
+
 /***************** ising_model.c *****************/
-int *ising_init(int rows, int cols);
+// static int *ising_init(int rows, int cols);
   /* Initializes a matrix, in the form of an
      array, filled with +-1 randomly.
 
@@ -60,8 +86,8 @@ int *ising_init(int rows, int cols);
      in the implementation. 
   */
 
-double totE
-   (double J, int *mtrx_as_arr, int rows, int cols);
+//static double totE
+//(double J, int *mtrx_as_arr, int rows, int cols);
   /* Returns the total energy of the system according to
      the Hamiltonian:
              H = -J \sum_{<i,j> is NN} s_i * s_j,
@@ -71,8 +97,8 @@ double totE
      return value, but it might come in handy later. 
    */
 
-double deltaE
-(double J, int *mtrx_as_arr, int index, int rows, int cols);
+//static double deltaE
+//(double J, int *mtrx_as_arr, int index, int rows, int cols);
   /* Calculates the change in energy after _one_ spin
      (at index) has been flipped. The calculation is
      based on the Hamiltonian:
@@ -80,7 +106,7 @@ double deltaE
      where s_i and s_j are described in mtrx_as_arr.
   */
 
-double order_param(int *mtrx_as_arr, int N);
+//static double order_param(int *mtrx_as_arr, int N);
   /* Returns the order parameter of the sysyem:
         M = (1/N) * \sum_{all i} s_i,
      where the spin values s_i are described in the
