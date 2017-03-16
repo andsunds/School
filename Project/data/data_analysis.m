@@ -64,7 +64,8 @@ save_data = [T, EM, stdEM];
 %%
 clc;clf;clear
 
-data = load('T_E_M_stdE_stdM.tsv', '-ascii');
+%data = load('TEMstdEstdM_beta_.99-1.246_256.tsv', '-ascii');
+data = load('TEMstdEstdM_logscale.tsv', '-ascii');
 
 T = data(:,1);
 E = data(:,2); stdE = data(:,4);
@@ -78,6 +79,7 @@ subplot(1,2,1)
 errorbar(T,E,stdE, 'b*')
 
 set(gca, 'xScale', 'log');
+grid on;
 xlabel('$T/J$', 'interpreter', 'LaTeX');
 ylabel('$\langle E\rangle/J$', 'interpreter', 'LaTeX');
 
@@ -87,6 +89,7 @@ subplot(1,2,2)
 errorbar(T,abs(M),stdM, 'b*')
 
 set(gca, 'yLim',[0,1], 'xScale', 'log')
+grid on;
 xlabel('$T/J$', 'interpreter', 'LaTeX');
 ylabel('$\langle M\rangle$', 'interpreter', 'LaTeX');
 
