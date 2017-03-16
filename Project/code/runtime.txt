@@ -1,0 +1,19 @@
+Runtimes are given for runs with 1e7 Monte Carlo steps, and for
+when all time steps are written to file ("all") and when just
+the averages are saved ("avg").
+
+   1st try: 
+Calculating NN and calculating exp( -beta*delta_E ), and
+initializing 4 new variables in each call to motecarlo_ising_step.
+Runtimes: 18.2 s - "all", 33.4 s - "avg".
+
+
+
+  2nd try:
+Pre-calculating Boltzmann factors, exp( -beta*delta_E ).
+Runtimes: 17.6 s - "all", 32.3 s - "avg".
+
+
+  3rd try:
+Pre-calculating Boltzmann factors, AND all NN's into an array.
+Runtimes: 17.4 s - "all", 32.0 s - "avg".
