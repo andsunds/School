@@ -171,8 +171,75 @@ the curve $x= t\,u^2$.
 
 \section{More modified Burgers}
 \renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+Here we begin with Burgers' equation
+\begin{equation}\label{eq:3_u}
+u_t + \frac{1}{2}(u^2)_x = u_t + uu_x = 0.
+\end{equation}
+Then we multiply both sides by $u$ and rewrite to get
+\begin{equation}\label{eq:3_w}
+w_t + \frac{2}{3} (w^{3/2}) = 0,
+\end{equation}
+where $w=u^2$.
 
+\subsection{Show equivalence}
+Here we want to show that \eqref{eq:3_w} is equivalent to
+\eqref{eq:3_u} given that $u$ and $w$ are \emph{smooth} solutions to
+their respective equation and that $w=u^2$.
 
+Given that $u$ is smooth, so must $w=u^2$, so we now subsitute this
+into \eqref{eq:3_w} and get
+\begin{equation}
+0 = (u^2)_t + \frac{2}{3} (u^{3})_x = 2u \qty[u_t+uu_x].
+\end{equation}
+But the expression in brackets are nothing but the LHS of
+\eqref{eq:3_u}. This means that
+\eqref{eq:3_u}~$\Rightarrow$~\eqref{eq:3_w}, and
+\eqref{eq:3_w}~$\Rightarrow$~\eqref{eq:3_u} if $u\neq0$.
+
+To show that $w=u^2$ also requires that their initial conditions must
+satisfy $w_0=(u_0)^2$. We can look at the equations for their
+characteristics
+\begin{equation}
+\begin{cases}
+\dv{x_u}{t} = u \\
+\dv{x_w}{t} = w^{1/2}.
+\end{cases}
+\end{equation}
+We see that if we put $w=u^2$, both characteristics are going to be
+the same, given $u>0$. This means that if we want $w(x(t),t) =
+w_0(x(0))$ to equal the square of $u(x(t),t) = u_0(x(0))$, then
+obliously $w_0 = (u_0)^2$. Or vice versa, if $w_0 = (u_0)^2$, then
+it's clear from the characteristics that $w=u^2$.
+
+\subsection{Counter example when solutions not smooth}
+If the solutions aren't smooth, then we cannot safely differentiate
+and expect us to get the same in the two cases. 
+
+For instance let's use this example:
+\begin{equation}
+u(x, 0) = u_0(x) =
+\begin{cases}
+b\qcomma x<0\\
+a\qcomma x\ge0,
+\end{cases}
+\end{equation}
+where $0<a<b$. And $w(x, 0) = w_0(x) = [u_0(x)]^2$. The
+Rankine-Hugoniot shock speeds for the two equations are
+\begin{equation}
+\begin{cases}
+\dot\xi_u = \frac{1}{2}\frac{b^2-a^2}{b-a},\\
+\dot\xi_w = \frac{2}{3}\frac{(b^2)^{3/2}-(a^2)^{3/2}}{b-a}.
+\end{cases}
+\end{equation}
+Obviously
+\begin{equation}
+\frac{\dot\xi_u}{\dot\xi_w}=\frac{3}{4}\frac{b^2-a^2}{b^{3}-a^{3}} 
+\neq1
+\end{equation}
+in general. 
+This means that the shock will propagate with different speeds
+depending on which equation is used, thus resulting in $w\neq u^2$.
+ 
 
 \section{A type of advection equation with non-constant coefficients}
 
