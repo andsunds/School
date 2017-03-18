@@ -51,15 +51,127 @@ Assignment 4}
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
 \section{Two characteristics for the Burgers' equation}
+%\renewcommand{\thesubsection}{(\roman{subsection})}
+In this problem we have two different IC's for the Burgers' equation
+\begin{equation}
+u_t + \frac{1}{2} (u^2)_x = 0.
+\end{equation}
+We already know that the characteristics for the Burgers' equation are
+\begin{equation}
+\dv{x}{t} = u \quad\text{constant.}
+\end{equation}
+This equation will be used to determine the slopes of the
+characterisitcs. 
+\\[11pt]
+\noindent
+\textbf{(i) }
+The first IC is
+\begin{equation}\label{eq:1_iIC}
+u(x, 0) = 
+\begin{cases}
+-2\qcomma x<0,\\
+-1\qcomma x\ge0.
+\end{cases}
+\end{equation}
+The characteristics and solution at $t=1$ are shown in \figref{fig:1i}.
+
+\begin{figure}
+\centering
+\resizebox{!}{3.6cm}{\input{figures/1i.pdf_t}}
+\caption{The characteristics (left) and the solution at $t=1$ (right) 
+  resulting from the IC \eqref{eq:1_iiIC}. We get rearefaction since
+  the characteristics move away from each other.} 
+\label{fig:1i}
+\end{figure}
+
+%\\[11pt]
+\noindent
+\textbf{(ii) }
+The second IC is
+\begin{equation}\label{eq:1_iiIC}
+u(x, 0) = 
+\begin{cases}
+-1\qcomma x<0,\\
+-2\qcomma x\ge0.
+\end{cases}
+\end{equation}
+It is oblious that we will get a shock, so we calculate the kown shock
+speed for Burgers' equation, whick is
+\begin{equation}
+\dot\xi = \frac{u^++u^-}{2} = -\frac{3}{2}.
+\end{equation}
+The characteristics and solution at $t=1$ are shown in \figref{fig:1ii}.
+
+\begin{figure}
+\centering
+\resizebox{!}{3.6cm}{\input{figures/1ii.pdf_t}}
+\caption{The characteristics (left) and the solution at $t=1$ (right)
+  resulting from the IC \eqref{eq:1_iIC}. This time we get a shock
+  since the characteristics overlap. } 
+\label{fig:1ii}
+\end{figure}
 
 
 
+\section{Same as before, but different equation}
+This time the governing equation is
+\begin{equation}\label{eq:2_pde}
+0 = u_t + \frac{1}{3} (u^3)_x = u_t + u^2u_x.
+\end{equation}
+To get the characteristic, $x(t)$ s.t. $u(x(t), t)$ is const., we use
+\begin{equation}
+0 = \dv{t} \qty[u(x(t), t)] = u_t + \dv{x}{t}u_x,
+\end{equation}
+which together with \eqref{eq:2_pde} leads to
+\begin{equation}
+\dv{x}{t} = u^2.
+\end{equation}
+We might as well calculate the shock speed while we're at it. Using
+the Rankine-Hugoniot condition, we get
+\begin{equation}
+\dot\xi = \frac{f(u^+) - f(u^-) }{u^+ - u^-} 
+= \frac{1}{3}\frac{(u^+)^3 - (u^-)^3}{u^+ - u^-}.
+\end{equation}
+From here, we just proced as in the previous problem.
+\\[11pt]
+\noindent
+\textbf{(i) }
+The first IC is the same as \eqref{eq:1_iIC}.
+The characteristics and solution at $t=1$ are shown in \figref{fig:2i}.
 
-\section{Modified Burgers' 1}
+\begin{figure}
+\centering
+\resizebox{!}{3.6cm}{\input{figures/2i.pdf_t}}
+\caption{The characteristics (left) and the solution at $t=1$ (right)
+  resulting from the IC \eqref{eq:1_iIC}. We get a shock
+  since the characteristics overlap, this time the shock speed is
+  $\dot\xi=7/3$. } 
+\label{fig:2i}
+\end{figure}
 
+%\\[11pt]
+\noindent
+\textbf{(ii) }
+The second IC is the same as \eqref{eq:1_iiIC}.
+The characteristics and solution at $t=1$ are shown in
+\figref{fig:2ii}. It is interesting to note however that since the
+propagation speed from \eqref{eq:2_pde} is $u^2$, we would expect the
+connecting curve between the upper and lower parts of the former
+discontinuity to be parabolic. More precisely it would be a segment of
+the curve $x= t\,u^2$.
+\begin{figure}
+\centering
+\resizebox{!}{3.6cm}{\input{figures/2ii.pdf_t}}
+\caption{The characteristics (left) and the solution at $t=1$ (right) 
+  resulting from the IC \eqref{eq:1_iiIC}. We get rearefaction since
+  the characteristics move away from each other. Note the parabolic
+  shape of the connectiong curve between the upper and lower level.} 
+\label{fig:2ii}
+\end{figure}
 
+\section{More modified Burgers}
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 
-\section{Modified Burgers' 2}
 
 
 \section{A type of advection equation with non-constant coefficients}
