@@ -292,11 +292,25 @@ plot of different characterisics can be found in \figref{fig:4b}.
 \centering
 \includegraphics[width=.7\textwidth]{4b.eps}
 \caption{Different characteristics of \eqref{eq:4_pde}. Especially the
-  characteristic $x_0(t) = 9/4 -(t+1/2)^2$, that goes through the
+  characteristic $x(t) = 9/4 -(t+1/2)^2$, that goes through the
   point $(x_0, t_0) = (0, 1)$, is marked out as a thicker line.} 
 \label{fig:4b}
 \end{figure}
 
+\subsection{Solution formula}
+To get the solution $u$ at point $(x_0, t_0)$, we just use
+\begin{equation}
+u(x_0, t_0) = u_0(x(0)) + \int_0^{t_0} \dv{t}[u(x(t), t)]\id{t}
+=u_0(C_0+1/4) + \int_0^{t_0} \varphi(x_0(t), t) \id{t},
+\end{equation}
+where $u(x, 0) = u_0(x)$, and $x(t) = C_0 - (t-1/2)^2$ with $C_0$
+s.t. $x(t_0)=x_0$.
+
+In the special case of $(x_0, t_0) = (0, 1)$, we get
+\begin{equation}
+u(0, 1) = u_0(2) 
++ \int_0^{t_0} \varphi(9/4-(t+1/2)^2, t) \id{t}.
+\end{equation}
 
 
 \end{document}
