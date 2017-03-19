@@ -52,7 +52,7 @@ Assignment 4}
 
 \section{Two characteristics for the Burgers' equation}
 %\renewcommand{\thesubsection}{(\roman{subsection})}
-In this problem we have two different IC's for the Burgers' equation
+In this problem we have two different IC's for Burgers' equation
 \begin{equation}
 u_t + \frac{1}{2} (u^2)_x = 0\qcomma
 -\infty<x<\infty, t>0.
@@ -62,7 +62,7 @@ We already know that the characteristics for the Burgers' equation are
 \dv{x}{t} = u \quad\text{constant.}
 \end{equation}
 This equation will be used to determine the slopes of the
-characterisitcs. 
+characteristics. 
 \\[11pt]
 \noindent
 \textbf{(i) }
@@ -80,7 +80,7 @@ The characteristics and solution at $t=1$ are shown in \figref{fig:1i}.
 \centering
 \resizebox{!}{3.6cm}{\input{figures/1i.pdf_t}}
 \caption{The characteristics (left) and the solution at $t=1$ (right) 
-  resulting from the IC \eqref{eq:1_iiIC}. We get rearefaction since
+  resulting from the IC \eqref{eq:1_iiIC}. We get rarefaction since
   the characteristics move away from each other.} 
 \label{fig:1i}
 \end{figure}
@@ -96,8 +96,8 @@ u(x, 0) =
 -2\qcomma x\ge0.
 \end{cases}
 \end{equation}
-It is oblious that we will get a shock, so we calculate the kown shock
-speed for Burgers' equation, whick is
+It is obvious that we will get a shock, so we calculate the known shock
+speed for Burgers' equation, which is
 \begin{equation}
 \dot\xi = \frac{u^++u^-}{2} = -\frac{3}{2}.
 \end{equation}
@@ -134,7 +134,7 @@ the Rankine-Hugoniot condition, we get
 \dot\xi = \frac{f(u^+) - f(u^-) }{u^+ - u^-} 
 = \frac{1}{3}\frac{(u^+)^3 - (u^-)^3}{u^+ - u^-}.
 \end{equation}
-From here, we just proced as in the previous problem.
+From here, we just proceed as in the previous problem.
 \\[11pt]
 \noindent
 \textbf{(i) }
@@ -165,9 +165,9 @@ the curve $x= t\,u^2$.
 \centering
 \resizebox{!}{3.6cm}{\input{figures/2ii.pdf_t}}
 \caption{The characteristics (left) and the solution at $t=1$ (right) 
-  resulting from the IC \eqref{eq:1_iiIC}. We get rearefaction since
+  resulting from the IC \eqref{eq:1_iiIC}. We get rarefaction since
   the characteristics move away from each other. Note the parabolic
-  shape of the connectiong curve between the upper and lower level.} 
+  shape of the connecting curve between the upper and lower level.} 
 \label{fig:2ii}
 \end{figure}
 
@@ -188,7 +188,7 @@ Here we want to show that \eqref{eq:3_w} is equivalent to
 \eqref{eq:3_u} given that $u$ and $w$ are \emph{smooth} solutions to
 their respective equation and that $w=u^2$.
 
-Given that $u$ is smooth, so must $w=u^2$, so we now subsitute this
+Given that $u$ is smooth, so must $w=u^2$, so we now substitute this
 into \eqref{eq:3_w} and get
 \begin{equation}
 0 = (u^2)_t + \frac{2}{3} (u^{3})_x = 2u \qty[u_t+uu_x].
@@ -210,11 +210,11 @@ characteristics
 We see that if we put $w=u^2$, both characteristics are going to be
 the same, given $u>0$. This means that if we want $w(x(t),t) =
 w_0(x(0))$ to equal the square of $u(x(t),t) = u_0(x(0))$, then
-obliously $w_0 = (u_0)^2$. Or vice versa, if $w_0 = (u_0)^2$, then
+obviously $w_0 = (u_0)^2$. Or vice versa, if $w_0 = (u_0)^2$, then
 it's clear from the characteristics that $w=u^2$.\footnotemark{}
 
 \footnotetext{We also need the BC's to match according to the square
-  realtion. But since we don't even know the domain, it is hard to
+  relation. But since we don't even know the domain, it is hard to
   specify them any further. }
 
 \subsection{Counter example when solutions not smooth}
@@ -268,7 +268,7 @@ equation for the characteristics, namely
 \quad\Longrightarrow\quad
 x(t) = C - \qty(t + \frac{1}{2})^2,
 \end{equation}
-where $C$ is some constant. In words the caracteristics are parabolas,
+where $C$ is some constant. In words the characteristics are parabolas,
 with their openings in the negative $x$ direction and their vertexes
 in the points $(C, -1/2)$. Also since $t>0$, the characteristics are
 only the sections above the $x$ axis. 
@@ -277,40 +277,150 @@ only the sections above the $x$ axis.
 \subsection{Plot of the characteristics}
 
 To get the specific characteristic that goes through a point
-$(x_0, t_0)$, we just solve the equation
+$(\bar{x}, \bar{t})$, we just solve the equation
 \begin{equation}
-x_0 = C - \qty(t_0 + \frac{1}{2})^2
+\bar{x} = C - \qty(\bar{t} + \frac{1}{2})^2
 \end{equation}
 for $C$, and get
 \begin{equation}
-C_0 = x_0 + \qty(t_0 + \frac{1}{2})^2.
+C_0 = \bar{x} + \qty(\bar{t} + \frac{1}{2})^2.
 \end{equation}
-In the special case of $(x_0, t_0) = (0, 1)$, we have $C_0 = 9/4$. A
-plot of different characterisics can be found in \figref{fig:4b}.
+In the special case of $(\bar{x}, \bar{t}) = (0, 1)$, we have 
+$C_0 = 9/4$. A plot of different characteristics can be found in
+\figref{fig:4b}. 
 
 \begin{figure}
 \centering
 \includegraphics[width=.7\textwidth]{4b.eps}
 \caption{Different characteristics of \eqref{eq:4_pde}. Especially the
   characteristic $x(t) = 9/4 -(t+1/2)^2$, that goes through the
-  point $(x_0, t_0) = (0, 1)$, is marked out as a thicker line.} 
+  point $(\bar{x}, \bar{t}) = (0, 1)$, is marked out as a thicker line.} 
 \label{fig:4b}
 \end{figure}
 
 \subsection{Solution formula}
-To get the solution $u$ at point $(x_0, t_0)$, we just use
+To get the solution $u$ at point $(\bar{x}, \bar{t})$, we just use
 \begin{equation}
-u(x_0, t_0) = u_0(x(0)) + \int_0^{t_0} \dv{t}[u(x(t), t)]\id{t}
-=u_0(C_0+1/4) + \int_0^{t_0} \varphi(x_0(t), t) \id{t},
+u(\bar{x}, \bar{t}) 
+= u_0(x(0)) + \int_{0}^{\bar{t}} \dv{t}[u(x(t), t)]\id{t}
+=u_0(C_0+1/4) + \int_0^{\bar{t}} \varphi(x(t), t) \id{t},
 \end{equation}
 where $u(x, 0) = u_0(x)$, and $x(t) = C_0 - (t-1/2)^2$ with $C_0$
-s.t. $x(t_0)=x_0$.
+s.t. $x(\bar{t})=\bar{x}$.
 
-In the special case of $(x_0, t_0) = (0, 1)$, we get
+In the special case of $(\bar{x}, \bar{t}) = (0, 1)$, we get
 \begin{equation}
 u(0, 1) = u_0(2) 
-+ \int_0^{t_0} \varphi(9/4-(t+1/2)^2, t) \id{t}.
++ \int_0^{\bar{t}} \varphi(9/4-(t+1/2)^2, t) \id{t}.
 \end{equation}
+
+
+\subsection{Two FD discretization}
+Here we have two different discretizations for \eqref{eq:4_pde}:
+\begin{equation}\label{eq:4di}
+\frac{U_j^{n+1}-U_j^n}{\Dt} 
+- (1+2t_n)\frac{U_j^n-U_{j-1}^n}{\Dx}
+-\varphi_j^n = 0
+\end{equation}
+and
+\begin{equation}\label{eq:4dii}
+\frac{U_j^{n+1}-U_j^n}{\Dt} 
+- (1+2t_n)\frac{U_{j+1}^n-U_{j}^n}{\Dx}
+-\varphi_j^n = 0.
+\end{equation}
+And we want to analyze the stability and consistency of these two
+discretizations. 
+
+\subsubsection{Stability}
+Based on the shape of the characteristics, we see that the domain of
+dependence lies to the \emph{right} of a given point. I.e. we see that
+the value of $u(\bar{x}, \bar{t})$ only depends on the values with
+$x>\bar{x}$ (and with $t<\bar{t}$). 
+Therefore we would expect that \eqref{eq:4di} would be
+\emph{unstable}, since it takes its dependence from the \emph{left}
+and thus the numerical domain of dependence does not enclose the exact
+domain of dependence.
+%, where as \eqref{eq:4dii} would be stable.  
+
+\subsubsection{Consistency}
+The truncation error for \eqref{eq:4dii} is
+\begin{equation}
+\begin{aligned}
+\tau_j^n =& 
+\frac{1}{\Dt}\qty[u_j^n + \Dt(u_t)_j^n + \order{\Dt^2} - u_j^n]
+-(1+2t_n)\frac{1}{\Dx}
+\qty[u_j^n + \Dx(u_x)_j^n + \order{\Dx^2} - u_j^n] 
+-\varphi_j^n\\
+=& (u_t)_j^n -(1+2t_n)(u_x)_j^n -\varphi_j^n +\order{\Dx, \Dt}\\
+=& \order{\Dx, \Dt}.
+\end{aligned}
+\end{equation}
+Both schemes are very similar; the only difference lies in the second
+term, which in the truncation error will look like
+\begin{equation}
+\frac{1}{\Dx}
+\qty[u_j^n - \qty(u_j^n - \Dx(u_x)_j^n + \order{\Dx^2})]
+= (u_x)_j^n + \order{\Dx}.
+\end{equation}
+So the truncation error will be the same up to $\order{\Dx, \Dt}$.
+That is, both of the schemes are consistent to order 1.
+
+\subsubsection{CFL number}
+For the scheme \eqref{eq:4dii} we, need the numerical domain to be
+shallower than the characteristic going through the point of
+interest. From the equation for the characteristics,
+\eqref{eq:4_char}, and \figref{fig:4b}, we see that the slope of the
+characteristics ($\dv*{t}{x}$) becomes shallower with higher~$t$, i.e.
+$t(x)$ is concave, and that the slope only depends on $t$. 
+
+This means that the CFL condition for a numerical scheme must be such
+that the numerical slope, $\alpha := \Dt/Dx$, is shallower than the
+characteristic at the final time to which the scheme is to be used. 
+For a scheme going up to $t=t_N$, that would correspond to
+\begin{equation}
+\alpha \le \qty|\qty[\dv{x}{t}]_{t=t_N}|^{-1}
+= \frac{1}{2t_N +1}.
+\end{equation}
+In our special case of $(\bar{x}, \bar{t}) = (0, 1)$ this would mean that 
+$\alpha\le1/3$, assuming that $t_N=\bar{t}$.
+
+
+\subsection{Variable time steps}
+This time we redo part (d), but with a variable time step.
+All analysis, except the CFL, is exactly the same here as before. So
+without further ado, we skip directly to the CLF analysis. 
+
+Once again $\alpha_n$ has to be shallower than the slope of the
+characteristic, but now we just have to take the current time into
+account. So obviously
+\begin{equation}\label{eq:4e_easy}
+\alpha_n = \frac{\Dt_n}{\Dx} \le \qty|\qty[\dv{x}{t}]_{t=t_n}|^{-1}
+= \frac{1}{2t_N +1}.
+\end{equation}
+
+It is however possible to get a slightly more aggressive CLF condition,
+by exploiting the discreteness of the steps and the concaveness of
+$t(x)$. Instead of 
+\eqref{eq:4e_easy}, we can write
+\begin{equation}
+\alpha_n = \frac{\Dt_n}{\Dx} 
+\le \frac{\Dt_n}{\qty|\oldint_{t_{n-1}}^{t_{n}}\dv{x}{t}\id{t}|}.
+\end{equation}
+The integral in question is straight forward to solve
+\begin{equation}
+\qty|\int_{t_{n-1}}^{t_{n}}\dv{x}{t}\id{t}| 
+%= \qty(t_{n+1}^2+t_{n+1}) - \qty(t_{n}^2 + t_{n})
+= \qty[t_{n}^2 + t_{n}] -\qty[ \qty(t_{n}-\Dt_n)^2+(t_{n}-\Dt_n) ]
+= \Dt_n\Big[2t_n + 1 - \Dt_n\Big].
+\end{equation}
+This means that 
+\begin{equation}
+\alpha_n = \frac{\Dt_n}{\Dx} 
+\le \frac{1}{2t_n + 1 - \Dt_n},
+\end{equation}
+which is slightly more aggressive than \eqref{eq:4e_easy}, since
+$\Dt_n>0$. This is however, hardly worth pursuing any further. 
+
 
 
 \end{document}
@@ -319,4 +429,4 @@ u(0, 1) = u_0(2)
 
 
 %  LocalWords:  MFT MF Advection PDE's AMATH IC discretization MATLAB
-%  LocalWords:  termwise Neumann von
+%  LocalWords:  termwise Neumann von Hugoniot CFL CLF
