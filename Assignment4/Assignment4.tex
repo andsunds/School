@@ -53,6 +53,162 @@ Assignment 4}
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
 \section{Gaussian expectationvalue of fast fields}
+In this problem we want to prove the equality
+\begin{equation}\label{eq:1_want}
+\ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)}
+= G_0(\vb*k_1) (2\pi)^d \delta(\vb*k_1+\vb*k_2),
+\end{equation}
+where $G_0(\vb*k) = (k^2+r)^{-1}$. Our starting ponint is
+\begin{equation}\label{eq:1_start}
+\ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)}
+:= \frac{1}{Z_{0>}}\! \int\!\mathcal{D}\phi_> 
+\qty[\phi_>(\vb*k_1)\phi_>^*(-\vb*k_2)
+\exp(\!{-}\frac{1}{2V}\sum_{\vb*q}G_0^{-1}(\vb*q)\,
+%\phi_{\!>}\!(\vb*q) \phi_{\!>}^*\!(\vb*q)
+\qty|\phi_{>}\!(\vb*q)|^2
+)],
+\end{equation}
+where $Z_{0>} = \int\mathcal{D}\phi_>\,
+\exp(\sum_{\vb*q}G_0^{-1}\!(\vb*q)\,
+\qty|\phi_{\!>}\!(\vb*q)|^2/2V)$.
+
+
+To do this, we will use a formula from class, based on Wick's
+theorem. For $N$ real variables $x_n$ and a non-singular, symmetric
+matrix $\mathsf{M}$, we write
+\begin{equation}\label{eq:1_ev1}
+\begin{aligned}
+\ev{x_{i}x_{j}} =& 
+\frac{\int\rd^N\!x\,\qty[x_{i}x_{j}
+\exp(-\frac{1}{2}\vb*x^\mathsfrm{T}\mathsf{M}\vb*x)]}
+{\int\rd^N\!x\, \exp(-\frac{1}{2}\vb*x^\mathsfrm{T}\mathsf{M}\vb*x)}\\
+=&\frac{\eval{\pdv[2]{}{J_i}{J_j}
+\qty[\int\rd^N\!x\, 
+\exp(-\frac{1}{2}\vb*x^\mathsfrm{T}\mathsf{M}\vb*x
++\vb*J^\mathsfrm{T}\vb*x)]}_{J=0}}
+{\int\rd^N\!x\, \exp(-\frac{1}{2}\vb*x^\mathsfrm{T}\mathsf{M}\vb*x)},
+\end{aligned}
+\end{equation}
+where $\vb*J\in\R^N$ is just a help variable. Now rewrite, using the
+Hubbard–Stratonovich transformation, the integral in the numerator as
+\begin{equation}
+\begin{aligned}
+I[\mathsf{M}, \vb*J] =& \int\rd^N\!x\, 
+\exp(-\frac{1}{2}\vb*x^\mathsfrm{T}\mathsf{M}\vb*x
++\vb*J^\mathsfrm{T}\vb*x) \\
+=& I[\mathsf{M}, 0]\,\exp(\frac{1}{2}\vb*J^\mathsfrm{T}\mathsf{M}^{-1}\vb*J).
+\end{aligned}
+\end{equation}
+This means that we can rewrite \eqref{eq:1_ev1} as
+\begin{equation}\label{eq:1_ev2}
+\begin{aligned}
+\ev{x_{i}x_{j}} =&
+\frac{\eval{\pdv[2]{}{J_i}{J_j}
+\qty[I[\mathsf{M}, \vb*J]]}_{J=0}}
+{I[\mathsf{M}, 0]}\\
+=&\eval{\pdv[2]{}{J_i}{J_j}
+\qty[\exp(\frac{1}{2}\vb*J^\mathsfrm{T}\mathsf{M}^{-1}\vb*J)]}_{J=0}.
+\end{aligned}
+\end{equation}
+
+This is all good and well, but we have a small problem in that
+$\phi_>$ is a \emph{complex} variable. We are however saved by the
+fact that $\mathsf{M} = \mathsf{G}_0^{-1}/V$ is diagonal, which means
+that we still can write
+\begin{equation}
+\sum_{\vb*q} \frac{G_0^{-1}(\vb*q)}{V}\qty|\phi_{\!>}\!(\vb*q)|^2
+=\sum_{\vb*q} \phi_{>}^*\!(\vb*q)M(\vb*q)\phi_{>}\!(\vb*q) 
+= \vb*\phi_{>}^\dagger\mathsf{M}\vb*\phi_{>}\in\R
+\end{equation}
+and still have $\mathsf{M}\in\R^{N\times N}$. I.e. since $\mathsf{M}$
+is diagonal, we do still end up with a real value despite $\vb*\phi_>$
+being complex. And now to keep the term $\vb*J^\dagger\vb*\phi_>$ real,
+corresponding to $\vb*J^\mathsfrm{T}\vb*x$ in \eqref{eq:1_ev1}, 
+we have to make sure that
+\begin{equation}
+J^*(\vb*k)\phi_>(\vb*k)\in\R, \quad\forall\vb*k;
+\end{equation}
+i.e. $J(\vb*k)$ and $\phi_>(\vb*k)$ have to have the same complex phase:
+\begin{equation}\label{eq:1_J_restr}
+\phi_>(\vb*k) = |\phi_>(\vb*k)|\ee^{\ii\alpha}
+\quad\Longrightarrow\quad
+J(\vb*k) = |J(\vb*k)|\ee^{\ii\alpha}.
+\end{equation}
+Another way of looking at these conditions for $\vb*J$, is that we have
+changed variables to $x(\vb*k)=|\phi_>(\vb*k)|$ to keep $\vb*J$
+real. And then reintroducing the complex phase in the derivatives.
+
+We begin the final steps in this problem by noting a few important
+corollaries of \eqref{eq:1_J_restr}. That is
+\begin{enumerate}[label=(\roman*)]
+\item Since $\phi_>(-\vb*k)=\phi_>^*(\vb*k)$, so must
+$J(-\vb*k)=J^*(\vb*k)$.
+\item $\displaystyle \phi_>(\vb*k_1) \ee^{\vb*J^\dagger\vb*\phi_>}
+=\phi_>(\vb*k_1) \exp(\sum_{\vb*q}J^*(\vb*q)\phi_>(\vb*q))
+=\pdv{J^*(\vb*k_1)}\qty[\ee^{\vb*J^\dagger\vb*\phi_>}]$.
+\item $\displaystyle \phi_>^*(-\vb*k_2) \ee^{\vb*J^\dagger\vb*\phi_>}
+=\phi_>^*(-\vb*k_2) \exp(\sum_{\vb*q}J(-\vb*q)\phi_>(\vb*q))
+=\pdv{J(-\vb*k_2)}\qty[\ee^{\vb*J^\dagger\vb*\phi_>}]$.
+\end{enumerate}
+Now, using \eqref{eq:1_ev2}, with (ii) and (iii), on
+\eqref{eq:1_start} yields 
+\begin{equation}
+\begin{aligned}
+\ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)} 
+=& \eval{\pdv[2]{}{J^*(\vb*k_1)}{J(-\vb*k_2)}
+\qty[\exp(\frac{1}{2}\vb*J^\dagger\mathsf{M}^{-1}\vb*J)]}_{J=0}\\
+=&\eval{\pdv[2]{}{J^*(\vb*k_1)}{J(-\vb*k_2)}
+\qty[\exp(\frac{V}{2}\sum_{\vb*q} J^*(\vb*q)G_0(\vb*q)J(\vb*q))]}_{J=0}.
+\end{aligned}
+\end{equation}
+Here $M(\vb*k)=G_0^{-1}(\vb*k)/V$. 
+
+We now have two cases. The first one being $\vb*k_1\neq-\vb*k_2$, then
+we obviously get
+\begin{equation}
+\begin{aligned}
+\ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)} 
+= \frac{V}{2}\eval{\Big[
+2G_0(\vb*k_1)J(\vb*k_1) + 2J^*(-\vb*k_2)G_0(-\vb*k_2)
+\Big]\exp(\ldots)}_{J=0} = 0.
+\end{aligned}
+\end{equation}
+Each term has a seemily additional factor 2 here, but that is due to
+fact that for each derivative, we have 2 contributions: one from e.g.
+$J(\vb*k_1)$ and one from $J^*(-\vb*k_2)$.
+But in the second case, when $\vb*k_1=-\vb*k_2=:\vb*k$, we get
+\begin{equation}
+\begin{aligned}
+\ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)} 
+=&\eval{\pdv[2]{}{J^*(\vb*k)}{J(\vb*k)}
+\qty[\exp(\frac{V}{2} \sum_{\vb*q}
+J^*(\vb*q)G_0(\vb*q)J(\vb*q))]}_{J=0}\\
+=&\eval{\pdv{J^*(\vb*k)}\qty[\frac{V}{2} 
+2J^*(\vb*k)G_0(\vb*k)]\exp(\frac{V}{2} \sum_{\vb*q}
+J^*(\vb*q)G_0(\vb*q)J(\vb*q))
+}_{J=0}\\
+=&\eval{\qty[VG_0(\vb*k) + \frac{V}{2} 
+2J(\vb*k)G_0(\vb*k)]\exp(\ldots)
+}_{J=0}\\
+&=VG_0(\vb*k)
+\end{aligned}
+\end{equation}
+
+We can write these two cases together as
+\begin{equation}
+\ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)} 
+=G_0(\vb*k_1) \,V\delta_{\vb*k_1, -\vb*k_2},
+\end{equation}
+which is just the discrete version of \eqref{eq:1_want}. To get to
+\eqref{eq:1_want}, we just have to use the thermo\-dynamic limit
+$V\delta_{\vb*k_1, -\vb*k_2} \to (2\pi)^d\delta(\vb*k_1+\vb*k_2)$,
+which arises from 
+\begin{equation}
+V\sum_{\vb*k} \to \int\frac{\rd^dk}{(2\pi)^d}.
+\end{equation}
+
+
+
 
 
 
