@@ -52,13 +52,13 @@ Assignment 4}
 
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
-\section{Gaussian expectationvalue of fast fields}
+\section{Gaussian expectation value of fast fields}
 In this problem we want to prove the equality
 \begin{equation}\label{eq:1_want}
 \ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)}
 = G_0(\vb*k_1) (2\pi)^d \delta(\vb*k_1+\vb*k_2),
 \end{equation}
-where $G_0(\vb*k) = (k^2+r)^{-1}$. Our starting ponint is
+where $G_0(\vb*k) = (k^2+r)^{-1}$. Our starting point is
 \begin{equation}\label{eq:1_start}
 \ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)}
 := \frac{1}{Z_{0>}}\! \int\!\mathcal{D}\phi_> 
@@ -173,7 +173,7 @@ we obviously get
 \Big]\exp(\ldots)}_{J=0} = 0.
 \end{aligned}
 \end{equation}
-Each term has a seemily additional factor 2 here, but that is due to
+Each term has a seemingly additional factor 2 here, but that is due to
 fact that for each derivative, we have 2 contributions: one from e.g.
 $J(\vb*k_1)$ and one from $J^*(-\vb*k_2)$.
 But in the second case, when $\vb*k_1=-\vb*k_2=:\vb*k$, we get
@@ -226,10 +226,10 @@ We are given the differential form RG relations
 \end{cases}
 \end{equation}
 with the regular definition of $l$ as $b=\ee^l$. From this we want to
-fins the asymptotic behaviour of some different physical quantities as
+fins the asymptotic behavior of some different physical quantities as
 $T$ or $h$ goes towards $0$.  
 
-The methos used, will be similar in the two first cases. We will first
+The methods used, will be similar in the two first cases. We will first
 need to find $\TT(l)$ and $\hT(l)$.\footnotemark{} To do that, we
 recognize that \eqref{eq:2_RG} are two ODE's. The first RG relation
 yields:
@@ -243,7 +243,7 @@ which results in
 \TT(l) = \frac{\TT(0)}{1-C\TT(0)l} = \frac{T}{1-CTl}.
 \end{equation}
 Here $\TT(0)$ have been replaced by $T$, since $\TT(0)$ is the value
-of the tempereature after \emph{no} RG ``steps'' hence just the
+of the temperature after \emph{no} RG ``steps'' hence just the
 physical temperature $T$. For $h(l)$, we have a much simpler ODE:
 \begin{equation}\label{eq:2_hT(l)}
 \dv{\hT}{l} = 2\hT
@@ -262,7 +262,7 @@ RG method where if we had a variable
 X(T,h) = b^{y_X}X(b^{y_T}T, b^{y_h}h),
 \end{equation}
 we do a certain number, $n$, of RG steps and then set $b^{ny_T}T=K_T$
-as a costant, which then leads us to rewite $b^n = (K_T/T)^{1/y_T}$ so
+as a constant, which then leads us to rewrite $b^n = (K_T/T)^{1/y_T}$ so
 that we can write
 \begin{equation}
 X(T,h) \propto (T)^{-y_X/y_T}\mathcal{X}\qty(h/(T^{y_h/y_T})).
@@ -282,8 +282,8 @@ Back to the example variable $X$. With $b=\ee^l$, we can write
 \begin{equation}
 X(T, h) = \ee^{ly_X} X(\TT(l), \hT(l)).
 \end{equation}
-Now we fix $\TT(l_0)=\TT_0$ and use \eqref{eq:2_l(TT)} to rewite the
-prefactor and $\hT(l_0) = \ee^{2l_0}$, which results in
+Now we fix $\TT(l_0)=\TT_0$ and use \eqref{eq:2_l(TT)} to rewire the
+pre-factor and $\hT(l_0) = \ee^{2l_0}$, which results in
 \begin{equation}
 X(T, h) = \exp(\frac{y_X}{C}\qty[\frac{1}{T}-\frac{1}{\TT_0}])
 \mathcal{X}\qty(h\times\exp{\frac{2}{C}\qty[\frac{1}{T}-\frac{1}{\TT_0}]})
@@ -337,7 +337,7 @@ $\eval{\mathcal{F}_\text{s}''\qty(h\ee^{\frac{2}{CT}})}_{h\to0}
 
 
 
-\section{Fixedpoints from RG recursion relations}
+\section{Fixed points from RG recursion relations}
 \renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
 The LGW functional for an $n$-component field with cubic anisotropy is
 \begin{equation}
@@ -368,7 +368,7 @@ $\epsilon v = 36Cv^2 \quad\Longrightarrow\quad v^* = \epsilon/(36C)$.
 second relation in \eqref{eq:3_start}, we get 
 \[ v = \frac{\epsilon-48Cu}{36C}. \]
 Substituting this into the first relation in \eqref{eq:3_start} and
-solving\footnotemark{} for $u$, then subsituting that back into the
+solving\footnotemark{} for $u$, then substituting that back into the
 expression for $v$, gives
 \[ u^* = \frac{\epsilon}{12Cn}\qcomma v^* = \frac{(n-4)\epsilon}{36Cn} \]
 \end{enumerate}
@@ -376,9 +376,9 @@ expression for $v$, gives
 \footnotetext{This is really just a simple quadratic equation, but to
   not risk anything, I used \textit{Mathematica}. }
 
-Now when we have the fidxed points, we need to figure out the flow
+Now when we have the fixed points, we need to figure out the flow
 pattern. To do that we need to calculate the scaling variables and
-their scaing dimensions. To do that we will use the variables
+their scaling dimensions. To do that we will use the variables
 $\beta_u=\dv*{u}{l}$ and $\beta_v=\dv*{v}{l}$ and the matrix
 \begin{equation}
 M=
@@ -393,7 +393,8 @@ M=
 \end{pmatrix}.
 \end{equation}
 With this all we need to do is to substitute in the various fixed
-points (obviously using \textit{Mathematica})
+points (obviously using \textit{Mathematica's} \texttt{Eigenvalue} and
+\texttt{Eigenvector})
 \begin{enumerate}[label=(\roman*)]
 \item $u^*=v^*=0$: 
 \[%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -445,44 +446,87 @@ y_1=\frac{\epsilon}{3},\;y_2=-\epsilon.
 \]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item $u^* = \epsilon/(12Cn)$, $v^* = (n-4)\epsilon/(36Cn)$:
 \[%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{aligned}
+\begin{aligned}
 M=
 \begin{pmatrix}
 -\frac{\epsilon(n+8)}{3n} & -\frac{2\epsilon}{n} \\
 -\frac{4\epsilon(n-4)}{3n} & \frac{\epsilon(n-4)}{n}
 \end{pmatrix}
-\quad\Longrightarrow\quad
+\quad\Longrightarrow\quad &
 e_1=\begin{pmatrix}
 -1/2\\1
 \end{pmatrix},\;
 e_2=\begin{pmatrix}
 \frac{3}{n-4}\\1
-\end{pmatrix}\qcomma
-y_1=-\frac{\epsilon(n-4)}{3n},\;y_2=-\epsilon.
-%\end{aligned}
+\end{pmatrix}\qcomma \\
+&y_1=-\frac{\epsilon(n-4)}{3n},\;y_2=-\epsilon.
+\end{aligned}
 \]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{enumerate}
 
-\subsection{$n<4$}
+To draw the RG fixed points and flow diagrams we just take a look at
+items (i)--(iv) above and determine the relevant positions of the fixed
+point, the direction of the scaling variables $e_i$, and the
+corresponding eigenvalues $y_i$. If $y_i>0$, the RG flow is away from
+the fixed point along the axis $e_i$, and if $y_i<0$ then the flow is
+towards the fixed point. The RG flow diagram for $n<0$ is shown in
+\figref{fig:3i}, while the one for $n>0$ is in \figref{fig:3ii}.
+
+
+And lastly to the relevance of $v$ at the different stable fixed
+points. 
+\begin{enumerate}[label=(\roman*)]
+\item This fixed point is unstable in all directions for any $n$.
+\item For $n<4$ this fixed point is attractive in both its scaling
+directions, meaning that a small perturbation in $v$ would also be
+stable; i.e. $v$ is irrelevant. Whereas for $n>4$, we see that this
+fixed point is unstable in its $e_2$ direction, thus rendering $v$
+relevant, since a small perturbation in $v$ would land outside (ii)'s
+basin of attraction; i.e. $v$ is relevant.
+\item This fixed point has its $e_2$ direction along the $v$ axis, and
+the corresponding eigenvalue is negative for any $n$. This means that
+$v$ is irrelevant.
+\item For $n<4$ this fixed point is unstable in its $e_1$ direction,
+meaning that $v$ is relevant. But for $n>4$, (iv) is attractive in
+both its scaling directions, meaning that $v$ is irrelevant. 
+\end{enumerate}
+
+The fact that whether $n$ is smaller or greater than $4$, affects the
+relevance of $v$ for the fixed points (ii) and (iv) is
+interesting. It is also interesting to note that for $n<4$, a small
+perturbation in $v$ from (iv) will flow into (ii), while the opposite
+is true for $n>4$. The last part here is interesting, since (ii) has
+$v^*=0$, meaning that for a system where cubical anisotropy ($v\neq0$)
+is possible, the system will condense to (iv) instead of (ii);
+i.e. condensing to a state with a clear non-zero value of $v$. 
+
+
+
 
 \begin{figure}
 \centering
 \input{figures/3_nl4.pdf_t}
-\caption{}
+\caption{RG flow diagram with $n<4$. The fixed points (i)--(iv) are
+  marked and numbered, also their ``scaling directions'', $e_1$ and
+  $e_2$, are marked out, as dotted lines through the relevant fixed
+  point, in the cases where they do not line up with any of the $u$
+  or $v$ axes. }
 \label{fig:3i}
 \end{figure}
-
-
-
-\subsection{$n>4$}
-
 
 \begin{figure}
 \centering
 \input{figures/3_ng4.pdf_t}
-\caption{}
+\caption{RG flow diagram with $n>4$. The fixed points (i)--(iv) are
+  marked and numbered, also their ``scaling directions'', $e_1$ and
+  $e_2$, are marked out, as dotted lines through the relevant fixed
+  point, in the cases where they do not line up with any of the $u$ 
+  or $v$ axes. } 
 \label{fig:3ii}
 \end{figure}
+
+
+
 
 
 
@@ -492,5 +536,5 @@ y_1=-\frac{\epsilon(n-4)}{3n},\;y_2=-\epsilon.
 
 
 
-%  LocalWords:  MFT MF Ising Ornstein Zernike Stratonovich GLW
-%  LocalWords:  rescale quartic rescaled
+%  LocalWords:  MFT MF Ising Ornstein Zernike Stratonovich GLW RG
+%  LocalWords:  rescale quartic rescaled anisotropy
