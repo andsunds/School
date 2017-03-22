@@ -1,0 +1,86 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+\usepackage[makeroom
+]{cancel}
+\usepackage{esint}
+\let\oldint\int 
+\renewcommand{\int}{\oldint\limits}
+\graphicspath{{figures/}}
+
+\swapcommands{\Phi}{\varPhi}
+\swapcommands{\Omega}{\varOmega}
+\swapcommands{\Sigma}{\varSigma}
+\swapcommands{\Lambda}{\varLambda}
+
+
+\newcommand{\enaught}{\ensuremath\varepsilon_0}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 2.5cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+
+
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+%\newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
+\newcommand{\sign}{\ensuremath{\,\text{sign}}}
+
+%\usepackage{tikz}
+
+
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+
+\begin{document}
+
+%\tikzstyle{every picture}+=[remember picture]
+%\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{E\&M -- PHYS\,706 \\
+Assignment 1}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+\section{Three indeces of refracion --- normal incidence}
+
+
+\section{Weak condoctor --- normal incidence}
+
+
+\section{Angeled incidence}
+
+
+\section{Dispersion relation in conducting media}
+
+
+
+
+
+\end{document}
+
+
+
+
+%  LocalWords:  MFT MF Ising
