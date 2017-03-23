@@ -307,7 +307,7 @@ A plot of $T$ as a function of $d/\lambda_0$ is shown in
 \includegraphics[width=.9\textwidth]{1b_T.eps}
 \caption{The transmitivity as a function of slab thickness $d$. The
   relectivity is for $n_1=1$, $n_3=1.5$ and $n_2=1.0, 1.2$ and 3.}
-\label{fig:1a_T}
+\label{fig:1b_T}
 \end{figure}
 
 
@@ -566,22 +566,102 @@ is inside the brackets must be 0. I.e.
 -\mu\sigma(-\ii\omega) - \mu\epsilon(-\ii\omega)^2
 \end{equation}
 or when cleaned up
-\begin{equation}
-k^2 = \ii\mu\sigma\omega +\mu\epsilon\omega^2.
+\begin{equation}\label{eq:4_disp}
+\kt^2 = \ii\mu\sigma\omega +\mu\epsilon\omega^2,
 \end{equation}
+where $\kt^2 = \vb*k\vdot\vb*k$.
 This is our dispersion relation for an Ohmic condutive media. 
 
 
 
-
-$\kt=k+\ii\kappa$
+Now, we want to prove that $\kt=k+\ii\kappa$ will satisfy
+\eqref{eq:4_disp} with
 \begin{equation}\label{eq:4_ktilde}
 k=\omega\sqrt{\frac{\epsilon\mu}{2}}
 \qty[\sqrt{1+\qty(\frac{\sigma}{\epsilon\omega})^2}+1]^{1/2}
 \qcomma
 \kappa=\omega\sqrt{\frac{\epsilon\mu}{2}}
-\qty[\sqrt{1+\qty(\frac{\sigma}{\epsilon\omega})^2}-1]^{1/2}
+\qty[\sqrt{1+\qty(\frac{\sigma}{\epsilon\omega})^2}-1]^{1/2}.
 \end{equation}
+The easiest way would be to just subsitute \eqref{eq:4_ktilde} into
+\eqref{eq:4_disp}, but I guess that would be a bit cheating. So
+instead we subsitute $\kt=k+\ii\kappa$ into \eqref{eq:4_disp}. We then
+get
+\begin{equation}
+k^2-\kappa^2 + 2\ii k\kappa 
+= \ii\mu\sigma\omega +\mu\epsilon\omega^2.
+\end{equation}
+We know that the real and imaginary parts both have to be equal, which
+gives us two equations. From the imaginary part we get
+\begin{equation}
+\kappa=\frac{\mu\sigma\omega}{2k}.
+\end{equation}
+When we put this into the equation for the real part we get
+\begin{equation}
+k^2- \qty(\frac{\mu\sigma\omega}{2k})^2
+= \mu\epsilon\omega^2.
+\end{equation}
+Multiplying both sides by $k^2$ and moving every thing to one side
+yields 
+\begin{equation}
+k^4- \qty(\frac{\mu\sigma\omega}{2})^2
+- k^2\mu\epsilon\omega^2 =0.
+\end{equation}
+This is a quadratic equation in the variable $k^2$, which has the
+solutions
+\begin{equation}\label{eq:4_k2}
+\begin{aligned}
+k^2 =& \frac{\mu\epsilon\omega^2}{2}
+\pm\sqrt{
+\qty(\frac{\mu\epsilon\omega^2}{2})^2 
++ \qty(\frac{\mu\sigma\omega}{2})^2   }\\
+=& \frac{\mu\epsilon\omega^2}{2}
+\qty[ 1 \pm\sqrt{
+1+ \qty(\frac{\mu\sigma\omega}{\mu\epsilon\omega^2})^2
+} ].
+\end{aligned}
+\end{equation}
+For just the value $k$, we see that the square root is greater than 1,
+so to keep $k$ real we must choose the ``+'' solution. We therefore
+end up with
+\begin{equation}
+k = \omega\sqrt{\frac{\mu\epsilon}{2}}
+\qty[ 1 +\sqrt{
+1+ \qty(\frac{\sigma}{\epsilon\omega})^2
+} ]^{1/2}.
+\end{equation}
+To get $\kappa$, we use 
+\begin{equation}
+k^2-\kappa^2 = \mu\epsilon\omega^2
+\end{equation}
+together with \eqref{eq:4_k2}. This gives
+\begin{equation}
+\begin{aligned}
+\kappa^2 =& k^2-\mu\epsilon\omega^2\\
+=&\frac{\mu\epsilon\omega^2}{2}
+\qty[ 1 +\sqrt{
+1+ \qty(\frac{\mu\sigma\omega}{\mu\epsilon\omega^2})^2
+} ]
+-\mu\epsilon\omega^2\\
+=&\frac{\mu\epsilon\omega^2}{2}
+\qty[ -1 +\sqrt{
+1+ \qty(\frac{\mu\sigma\omega}{\mu\epsilon\omega^2})^2
+} ].
+\end{aligned}
+\end{equation}
+And the ``unsquared'' value is
+\begin{equation}
+\kappa = \omega\sqrt{\frac{\mu\epsilon}{2}}
+\qty[ -1 +\sqrt{
+1+ \qty(\frac{\sigma}{\epsilon\omega})^2
+} ]^{1/2}.
+\end{equation}
+Both the expressions for $k$ and $\kappa$ are exactly the same as
+\eqref{eq:4_ktilde}. We are therby done.
+
+
+
+
 
 
 
