@@ -488,6 +488,55 @@ This gives
 
 
 \section{Dispersion relation in conducting media}
+Starting off from the Maxwell equation
+\begin{equation}
+\curl\vb*B = \mu\vb*J + \mu\epsilon\pdv{\vb*E}{t},
+\end{equation}
+we can introduce Ohm's law $\vb*J=\sigma\vb*E$ and take the curl of
+both sides. We now have
+\begin{equation}\label{eq:4_wave-eqn}
+\curl[\curl\vb*B] = 
+\curl\qty[\mu\sigma\vb*E + \mu\epsilon\pdv{\vb*E}{t}]
+=-\mu\sigma\pdv{\vb*B}{t} - \mu\epsilon\pdv[2]{\vb*B}{t},
+\end{equation}
+where the last step was due to Faraday's law 
+$\curl\vb*E = -\pdv{\vb*B}{t}$ and the fact that the partial
+derivative commute $\curl\pdv{\vb*E}{t} = \pdv{\curl\vb*E}{t}$. 
+Next we need to use the vector identity
+\begin{equation}
+\curl(\curl\vb*B) = \grad{}(\cancelto{0}{\div\vb*B}) - \laplacian\vb*B.
+\end{equation}
+The first term is canceled by the ``no monopoles Maxwell
+equation''. All together we therefore have
+\begin{equation}\label{eq:4_wave-eqn}
+\laplacian\vb*B
+-\mu\sigma\pdv{\vb*B}{t} - \mu\epsilon\pdv[2]{\vb*B}{t} =0
+\end{equation}
+
+We now have a (damped) wave equation for the $\vb*B$ field. Assuming
+harmonic solutions
+\begin{equation}
+\vb*B(\vb*r, t) = B_0\ee^{\ii\vb*k\vdot\vb*r - \ii\omega t}\vu{n}
+\end{equation}
+we can get a dispersion relation by substituting this into
+\eqref{eq:4_wave-eqn}. We then get
+\begin{equation}
+\qty[(\ii\vb*k)^2
+-\mu\sigma(-\ii\omega) - \mu\epsilon(-\ii\omega)^2
+]B_0\ee^{\ii\vb*k\vdot\vb*r - \ii\omega t}\vu{n} =0.
+\end{equation}
+Now, the things outside the brackets are not always 0, so instead what
+is inside the brackets must be 0. I.e.
+\begin{equation}
+0=(\ii\vb*k)^2
+-\mu\sigma(-\ii\omega) - \mu\epsilon(-\ii\omega)^2
+\end{equation}
+or when cleaned up
+\begin{equation}
+k^2 = \ii\mu\sigma\omega +\mu\epsilon\omega^2.
+\end{equation}
+This is our dispersion relation for an Ohmic condutive media. 
+
 
 
 
