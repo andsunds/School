@@ -40,7 +40,7 @@ l=legend(sprintf('$n_2=%1.1f$',n2(1)),...
 set(l, 'interpreter', 'latex')
 xlabel('$d/\lambda_0$','interpreter', 'latex')
 ylabel('$T(d)$','interpreter', 'latex')
-set(gca, 'fontsize', 12)
+set(gca, 'fontsize', 12, 'ylim', [0,1])
 
 
 figure(1)
@@ -49,7 +49,7 @@ l=legend(sprintf('$n_2=%1.1f$',n2(1)),...
 set(l, 'interpreter', 'latex')
 xlabel('$d/\lambda_0$','interpreter', 'latex')
 ylabel('$R(d)$','interpreter', 'latex')
-set(gca, 'fontsize', 12)
+set(gca, 'fontsize', 12, 'ylim', [0,1])
 
 
 
