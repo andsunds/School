@@ -15,6 +15,8 @@
 \swapcommands{\Sigma}{\varSigma}
 \swapcommands{\Lambda}{\varLambda}
 
+\swapcommands{\epsilon}{\varepsilon}
+
 
 \newcommand{\enaught}{\ensuremath\varepsilon_0}
 
@@ -73,12 +75,12 @@ boundary conditions are
 &(\vb*H_1 - \vb*H_2)\cross\vu{n}_{12} = \vb*j \label{eq:03}\\
 &(\vb*B_1 - \vb*B_2)\vdot\vu{n}_{12} = 0,     \label{eq:04}
 \end{align}
-wher $\vu{n}_{12}$ is a normal to the inteface pointing from region 1
+where $\vu{n}_{12}$ is a normal to the interface pointing from region 1
 to 2, $\sigma$ is the surface charge density at the interface, and
 $\vu*j$ is the surface current density at the interface. These
-boundary conditions will be usefull in the following problems. 
+boundary conditions will be useful in the following problems. 
 
-\section{Three indeces of refracion --- normal incidence}
+\section{Three indices of refraction -- normal incidence}
 \newcommand{\Ep}{{\mathcal{E}_1^+}}
 \newcommand{\Epp}{{\mathcal{E}_2^+}}
 \newcommand{\Eppp}{{\mathcal{E}_3^+}}
@@ -88,7 +90,7 @@ boundary conditions will be usefull in the following problems.
 In this problem we have a normally incident wave, with wavenumber
 $k_0=2\pi/\lambda_0$, at an interface to a second media of finite
 width $d$; after the waves has passed through the second region, it
-enters a third region that is infinite. The three regions have indeces
+enters a third region that is infinite. The three regions have indices
 of refraction $n_1=1$, $n_2$ and $n_3$. All of this together with some 
 definition of notation are shown in \figref{fig:1_geometry}.
 
@@ -101,7 +103,7 @@ definition of notation are shown in \figref{fig:1_geometry}.
 \label{fig:1_geometry}
 \end{figure}
 
-This problem will reqiure the use of the boundary conditions
+This problem will require the use of the boundary conditions
 \eqref{eq:02} and \eqref{eq:03} with $\sigma=0$ and $\vb*j=0$. To use
 these boundary conditions we must first establish expressions for the
 fields:
@@ -230,8 +232,9 @@ R = \abs{\frac{\Em}{\Ep}}^2=
 }{
 n_2^2(n_1 - n_3)^2\cos^2(dk_0n_2) 
 +(n_1n_3 - n_2^2)^2\sin^2(dk_0n_2) 
-}.
+},
 \end{equation}
+where $k_0=2\pi/\lambda_0$.
 From here it is possible to go nuts with trig identities and expanding
 the squares to get (via Mathematica) 
 \begin{equation}
@@ -265,8 +268,9 @@ T = \abs{\frac{\Eppp}{\Ep}}^2 =
 \frac{
 4n_1^2n_2^2
 }{
-n_2^2(n_1 - n_3)^2\cos^2(dk_0n_2) + (n_2^2 - n_1n_3)^2\sin^2(dk_0n2)}.
+n_2^2(n_1 - n_3)^2\cos^2(dk_0n_2) + (n_2^2 - n_1n_3)^2\sin^2(dk_0n2)},
 \end{equation}
+where $k_0=2\pi/\lambda_0$.
 Doing the same trigonometric expansion as above, we get
 \begin{equation}
 T = 
@@ -291,14 +295,210 @@ T =
 
 
 
-\section{Weak conductor --- normal incidence}
+\section{Weak conductor -- normal incidence}
+\newcommand{\kt}{\tilde{k}}
+
+This time a plane monochromatic wave is normally incident on a flat
+surface of a weak conductor $\zeta=\sigma/(\epsilon_2\omega)\ll1$. And
+once again we will use \eqref{eq:02} and \eqref{eq:03} to get
+\begin{equation}\label{eq:2_BC1}
+\Ep+\Em -\Epp =0, 
+\end{equation}
+and 
+\begin{equation}\label{eq:2_BC2}
+\frac{k_1}{\mu_1}\qty(\Ep-\Em) 
+-\frac{\kt_2}{\mu_2}\Epp =0.
+\end{equation}
+In the last equation we do not need to worry about any surface
+current, because media with finite $\sigma$ only has bulk
+current. Here we also have $\kt_{2} = k_2 + \ii\kappa_2$, where
+$k_2$ and $\kappa_2$ are given by problem 4 in \eqref{eq:4_ktilde}.
+
+Since $\zeta=\sigma/(\epsilon_2\omega)\ll1$, we can get some
+approximate expressions. Using \eqref{eq:4_ktilde}, we can get
+approximations for $k_2$ and $\kappa_2$. We begin by rewriting
+\begin{equation}
+\omega\sqrt{\frac{\epsilon_2\mu_2}{2}} 
+=\frac{1}{\sqrt{2}}\; \frac{\omega}{c} 
+\sqrt{\frac{\epsilon_2\mu_2}{\epsilon_0\mu_0}}
+=\frac{1}{\sqrt{2}}k_0n_2.
+\end{equation}
+Now we can continue on $k_2$:
+\begin{equation}
+\begin{aligned}
+k_2 =& \frac{1}{\sqrt{2}}k_0n_2
+\qty[\sqrt{1+\zeta^2}+1]^{1/2}\\
+=& \frac{1}{\sqrt{2}}k_0n_2
+\qty[1+\frac{1}{2}\zeta^2+\order{\zeta^4}+1]^{1/2}\\
+=& k_0n_2  +\order{\zeta^2}.
+%\qty[1+\frac{1}{8}\zeta^2] +\order{\zeta^4}.
+\end{aligned}
+\end{equation}
+Similarly for $\kappa_2$:
+\begin{equation}
+\begin{aligned}
+\kappa_2 =& \frac{1}{\sqrt{2}}k_0n_2
+\qty[\sqrt{1+\zeta^2}-1]^{1/2}\\
+=& \frac{1}{\sqrt{2}}k_0n_2
+\qty[\cancel{1}+\frac{1}{2}\zeta^2-\frac{1}{8}\zeta^4+
+\order{\zeta^6}-\cancel{1}]^{1/2}\\
+=& \frac{1}{2}k_0n_2\zeta
+\qty[1-\frac{1}{4}\zeta^2+\order{\zeta^4}]^{1/2}\\
+=& \frac{1}{2}k_0n_2\zeta +\order{\zeta^3}.
+\end{aligned}
+\end{equation}
+
+\subsection{The reflected wave}
+We are now ready to start on an expression for the refelcted wave. 
+From \eqref{eq:2_BC1} we can get $\Epp=\Ep+\Em$. Substitute this into
+\eqref{eq:2_BC2}, and we get
+\begin{equation}
+\qty(\frac{k_1}{\mu_1} - \frac{\kt_2}{\mu_2})\Ep 
+=\qty(\frac{k_1}{\mu_1} + \frac{\kt_2}{\mu_2})\Em.
+\end{equation}
+Continuing on, assuming that $\mu_1=\mu_2$, we get
+\begin{equation}
+\begin{aligned}
+\frac{\Em}{\Ep} 
+= \frac{k_1-\kt_2}{k_1+\kt_2}
+=& \frac{k_0n_1 - k_0n_2 - \ii k_0n_2\zeta/2}
+{k_0n_1 + k_0n_2 + \ii k_0n_2\zeta/2}
+= \frac{(n_1-n_2) - \ii n_2\zeta/2}
+{(n_1+n_2) + \ii n_2\zeta/2}\\
+=&\frac{(n_1-n_2)}{(n_1+n_2)}
+\qty[1-\frac{\ii n_2\zeta}{2(n_1-n_2)}]
+\qty[1+\frac{\ii n_2\zeta}{2(n_1+n_2)}]^{-1}\\
+=&\frac{(n_1-n_2)}{(n_1+n_2)}
+\qty[1-\frac{\ii n_2\zeta}{2(n_1-n_2)}]
+\qty[1-\frac{\ii n_2\zeta}{2(n_1+n_2)}] +\order{\zeta^2}\\
+=&\frac{n_1-n_2}{n_1+n_2}
+\qty[1-\frac{\ii n_2\zeta}{2(n_1-n_2)}
+-\frac{\ii n_2\zeta}{2(n_1+n_2)}] +\order{\zeta^2}\\
+=&\frac{(n_1-n_2)}{(n_1+n_2)}
+-\ii\frac{n_2\zeta}{2(n_1+n_2)}
+\qty[1+\frac{n_1-n_2}{n_1+n_2}]+\order{\zeta^2}\\
+=&\frac{n_1-n_2}{n_1+n_2}
+-\ii\frac{n_1n_2\zeta}{(n_1+n_2)^2}.
+\end{aligned}
+\end{equation}
+The intensity, to order 1 in $\zeta$, of the reflected wave (i.e. the
+reflectivity) is given by
+\begin{equation}
+\abs{\frac{\Em}{\Ep}}^2 
+= \qty(\frac{n_1-n_2}{n_1+n_2})^2
++\qty(\frac{n_1n_2\zeta}{(n_1+n_2)^2})^2
+=\qty(\frac{n_1-n_2}{n_1+n_2})^2 + \order{\zeta^2}.
+\end{equation}
+And the phase shift of the reflected wave is
+\begin{equation}
+\arg\qty{\frac{\Em}{\Ep}} 
+= \arctan(\frac{-n_1n_2\zeta/(n_1+n_2)^2}{(n_1+n_2)/(n_1+n_2)})
+= -\frac{n_1n_2\zeta}{n_1^2-n_2^2}.
+\end{equation}
+
+
+
+
+\subsection{The transmitted wave}
+The transmitted amplitude is given by
+\begin{equation}
+\frac{\Epp}{\Ep} = \frac{\Ep + \Em}{\Ep} 
+= 1 + \qty[\frac{n_1-n_2}{n_1+n_2}
+-\ii\frac{n_1n_2\zeta}{(n_1+n_2)^2}]
+= \frac{2n_1}{n_1+n_2}
+-\ii\frac{n_1n_2\zeta}{(n_1+n_2)^2},
+\end{equation}
+meaning that the transmitted intensity is
+\begin{equation}
+\frac{I_2(z=0)}{I_1} = \qty(\frac{2n_1}{n_1+n_2})^2
++\qty(\frac{n_1n_2\zeta}{(n_1+n_2)^2})^2
+= \frac{4n_1^2}{(n_1+n_2)^2} + \order{\zeta^2},
+\end{equation}
+where $I_1$ is the incident intensity. 
+
+The $z=0$ is to denote that that's the intensity right at the
+interface (assuming that the wave travels in the positive $\vu{z}$
+direction). But since the medium is conductive, there will be
+losses. These are manifested through the complex $\kt$:
+\begin{equation}
+\vb*E_2^+(z) = \Epp \ee^{\ii\kt_2 z - \ii\omega t}
+=\Epp \ee^{\ii k_2z - \ii\omega t}\,\ee^{-\kappa_2z}.
+\end{equation}
+That is the intensity as a function of $z$ is
+\begin{equation}
+\begin{aligned}
+I_2(z)=&\qty(\vb*E_2^+(z))^2)=I_2(z=0)\ee^{-2\kappa_2z}
+\approx I_1 \frac{4n_1^2}{(n_1+n_2)^2}\,\exp[-2z\frac{1}{2}k_0n_0\zeta]\\
+=&I_1 \frac{4n_1^2}{(n_1+n_2)^2}\,
+\exp[-k_0n_2z\frac{\sigma}{\omega\epsilon_2}]
+=I_1 \frac{4n_1^2}{(n_1+n_2)^2}\,
+\exp[-z\sigma\sqrt{\frac{\mu_2}{\epsilon_2}}]
+\end{aligned}
+\end{equation}
+
+
+
 
 
 \section{Angled incidence}
 
 
+\subsection{Reflectivity}
+
+\subsection{Grazing incidence to a medium with 
+refractive indec near unity}
+\newcommand{\thetac}{\theta_\text{c}}
+\newcommand{\phic}{\phi_\text{c}}
+
+Here, we have grazingng incidence, where 
+$\phi_1=\pi/2 - \theta\ll1$, and the medium has an index of refraction
+$n_2=1-\delta$, where $\delta\ll1$. We want to find the critical angle. 
+
+We begin with Snell's law 
+\begin{equation}
+n_1\sin(\theta_1) = n_2\sin(\theta_2),
+\end{equation}
+which for the critical angle looks like
+\begin{equation}
+n_1\sin(\thetac) = n_2\sin(\pi/2) = n_2,
+\end{equation}
+or in other words
+\begin{equation}\label{eq:3b_phic}
+\cos(\phic) = \frac{n_2}{n_1}.
+\end{equation}
+
+In our case the incidence is from vacuum, meaning that the RHS just
+becomes $n_2$. Furthermore, we know that $n_2$ is really cose to 1,
+meaning that $\phic\ll1$. So we can expand the LSH of
+\eqref{eq:3b_phic} to get
+\begin{equation}
+1-\frac{1}{2}\phic^2 \approx n_2 = 1-\delta.
+\end{equation}
+This gives
+\begin{equation}
+\phic \approx \sqrt{2\delta}.
+\end{equation}
+
+
+\subsection{Approximate expression for the refelctivity}
+
+
+\subsection{Plot}
+
+
+
 \section{Dispersion relation in conducting media}
 
+
+
+$\kt=k+\ii\kappa$
+\begin{equation}\label{eq:4_ktilde}
+k=\omega\sqrt{\frac{\epsilon\mu}{2}}
+\qty[\sqrt{1+\qty(\frac{\sigma}{\epsilon\omega})^2}+1]^{1/2}
+\qcomma
+\kappa=\omega\sqrt{\frac{\epsilon\mu}{2}}
+\qty[\sqrt{1+\qty(\frac{\sigma}{\epsilon\omega})^2}-1]^{1/2}
+\end{equation}
 
 
 
