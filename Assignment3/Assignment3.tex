@@ -63,13 +63,238 @@ Assignment 1}
 
 %%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
 
+\section*{Boundary conditions}
+Before we begin, I will just list the boundary conditions for the
+electromagnetic field at a boundary, see Jackson (I.17)--(I.20). The
+boundary conditions are
+\begin{align}
+&(\vb*E_1 - \vb*E_2)\cross\vu{n}_{12} = 0     \label{eq:01}\\
+&(\vb*D_2 - \vb*D_1)\vdot\vu{n}_{12} = \sigma \label{eq:02}\\
+&(\vb*H_1 - \vb*H_2)\cross\vu{n}_{12} = \vb*j \label{eq:03}\\
+&(\vb*B_1 - \vb*B_2)\vdot\vu{n}_{12} = 0,     \label{eq:04}
+\end{align}
+wher $\vu{n}_{12}$ is a normal to the inteface pointing from region 1
+to 2, $\sigma$ is the surface charge density at the interface, and
+$\vu*j$ is the surface current density at the interface. These
+boundary conditions will be usefull in the following problems. 
+
 \section{Three indeces of refracion --- normal incidence}
+\newcommand{\Ep}{{\mathcal{E}_1^+}}
+\newcommand{\Epp}{{\mathcal{E}_2^+}}
+\newcommand{\Eppp}{{\mathcal{E}_3^+}}
+\newcommand{\Em}{{\mathcal{E}_1^-}}
+\newcommand{\Emm}{{\mathcal{E}_2^-}}
+
+In this problem we have a normally incident wave, with wavenumber
+$k_0=2\pi/\lambda_0$, at an interface to a second media of finite
+width $d$; after the waves has passed through the second region, it
+enters a third region that is infinite. The three regions have indeces
+of refraction $n_1=1$, $n_2$ and $n_3$. All of this together with some 
+definition of notation are shown in \figref{fig:1_geometry}.
+
+\begin{figure}
+\centering
+\resizebox{.6\textwidth}{!}{\input{figures/1_geometry.pdf_t}}
+\caption{Three different regions all with their own index of
+  refraction. This figure also shows the notation used for the
+  different fields. }
+\label{fig:1_geometry}
+\end{figure}
+
+This problem will reqiure the use of the boundary conditions
+\eqref{eq:02} and \eqref{eq:03} with $\sigma=0$ and $\vb*j=0$. To use
+these boundary conditions we must first establish expressions for the
+fields:
+\begin{equation}
+\begin{aligned}
+\vb*E_1^\pm=&\vu{x}\mathcal{E}_1^\pm\ee^{\pm\ii k_1z -\ii\omega t}\\
+\vb*E_2^\pm=&\vu{x}\mathcal{E}_2^\pm\ee^{\pm\ii k_2z -\ii\omega t}\\
+\vb*E_3^{+}=&\vu{x}\mathcal{E}_3^+\ee^{+\ii k_3z -\ii\omega t},
+\end{aligned}
+\end{equation}
+where $k_i=n_ik_0=n_i2\pi/\lambda_0$. We see that since $\omega$
+is the same for all, we can drop the factor $\ee^{-\i\omega t}$ in all
+further calculations. 
+
+We also note that all the fields are in the $\vu{x}$ direction, all
+wavevectors are in the $\pm\vu{z}$ direction, and
+$\vu{n}_{12}=\vu{z}$, so it will be sufficient to work with the
+complex amplitudes and phases. With this observation we are ready to
+write down the boundary conditions for each boundary. 
+
+First the $z=0$ boundary, where \eqref{eq:02} gives
+\begin{equation}
+\Ep+\Em -(\Epp-\Emm) =0, 
+\end{equation}
+and \eqref{eq:03} gives
+\begin{equation}
+\frac{k_1}{\mu_1}\qty(\Ep-\Em) 
+-\frac{k_2}{\mu_2}\qty(\Epp-\Emm) =0.
+\end{equation}
+In the last step we used the fact that 
+$\vb*H = \vb*B/\mu = \vb*k\cross\vb*E/(\omega\mu)$. The different
+signs between ``$+$'' and ``$-$'' amplitudes are due to the fact that
+they travel in different directions. 
+
+Similarly for the $z=d$ boundary, now we do however need to keep the
+complex phases, due a to non-zero $z$ value, in mind. Nonetheless the
+result is similar. From \eqref{eq:02} we get
+\begin{equation}
+\Epp\ee^{\ii k_2d}+\Emm\ee^{-\ii k_2d} -\Eppp\ee^{\ii k_3d} =0, 
+\end{equation}
+and from \eqref{eq:03} we get
+\begin{equation}
+\frac{k_2}{\mu_2}\qty(\Epp\ee^{\ii k_2d}-\Emm\ee^{-\ii k_2d}) 
+-\frac{k_3}{\mu_3}\Eppp\ee^{\ii k_3d} =0.
+\end{equation}
+
+We now have four equations and four unknowns (given $\Ep$, the
+unknowns are $\Em$, $\Epp$, $\Emm$, and $\Eppp$). Furthermore, the
+equations are all linear, meaning that we can write them on matrix
+form
+\begin{equation}\label{eq:1_master_eqn}
+\begin{bmatrix}
++1 & -1 & -1 & 0 \\
+-K_1 & -K_2 & +K_2 &0\\
+0& \ee^{\ii k_2d}& \ee^{-\ii k_2d}& -\ee^{\ii k_3d}\\
+0& K_2\ee^{\ii k_2d}& -K_2\ee^{-\ii k_2d}& K_3\ee^{\ii k_3d}\\
+\end{bmatrix}
+\begin{bmatrix}
+\Em \\ \Epp \\ \Emm \\ \Eppp
+\end{bmatrix}
+= \Ep
+\begin{bmatrix}
+-1 \\ -K_1 \\ 0 \\ 0
+\end{bmatrix},
+\end{equation}
+where $K_i:=k_i/\mu_i$. This linear system of equations is not trivial
+to solve, but the methods needed are (first year linear algebra), so I
+will let \textit{Mathematica} do the grunt work and solve this system
+for me. The raw output from Mathematica is
+\begin{equation}\label{eq:1_Em}
+\frac{\Em}{\Ep}=
+\frac{k_2\mu_2(k_1\mu_3 + k_3\mu_1)(1+\ee^{2\ii d k_2}) 
++(k_1k_3\mu_2^2 + k_2^2\mu_1\mu_3)(-1+\ee^{2\ii d k_2})
+}{
+-k_2\mu_2(k_3\mu_1 - k_1\mu_3)(1+\ee^{2\ii dk_2})
++(k_1k_3\mu_2^2 - k_2^2\mu_1\mu_3)(-1+\ee^{2\ii dk_2})
+}
+\end{equation}
+and 
+\begin{equation}\label{eq:1_Eppp}
+\frac{\Eppp}{\Ep} = 
+\frac{4k_1k_2\mu_2\mu_3 \ee^{\ii d (k_2-k_3)}
+}{
+-k_2\mu_2(k_3\mu_1 - k_1\mu_3)(1+\ee^{2\ii d k2}) 
++(k_1k_3\mu_2^2 + k2^2\mu_1\mu_3) (-1+\ee^{2\ii d k2})
+}.
+\end{equation}
+The other two outputs, $\Epp$ and $\Emm$, will not be relevant to the
+rest of the problem, so they are omitted here. 
 
 
-\section{Weak condoctor --- normal incidence}
 
 
-\section{Angeled incidence}
+\subsection{Reflectivity}
+In this part of the problem we want to calculate the reflectivity
+$R=|\Em/Ep|^2$. By studyin \eqref{eq:1_Em}, we see that we can
+multiply both the numerator and denominator by $\ee^{-\ii dk_2}/2$ to
+get
+\begin{equation}
+\frac{\Em}{\Ep}=
+\frac{k_2\mu_2(k_1\mu_3 + k_3\mu_1)\cos(dk_2) 
++\ii(k_1k_3\mu_2^2 + k_2^2\mu_1\mu_3)\sin(dk_2) 
+}{
+-k_2\mu_2(k_3\mu_1 - k_1\mu_3)\cos(dk_2) 
++\ii(k_1k_3\mu_2^2 - k_2^2\mu_1\mu_3)\cos(dk_2) 
+}.
+\end{equation}
+To simplify matters a bit I will assume that $\mu_1=\mu_2=\mu_3$, so
+that they all cancel. We can also replace $k_i=k_0n_i$. In the end we
+get
+\begin{equation}
+\frac{\Em}{\Ep}=
+\frac{n_2(n_1 + n_3)\cos(dk_0n_2) 
++\ii(n_1n_3 + n_2^2)\sin(dk_0n_2) 
+}{
+n_2(n_1 - n_3)\cos(dk_0n_2) 
++\ii(n_1n_3 - n_2^2)\sin(dk_0n_2) 
+}.
+\end{equation}
+And finally the reflectivity is the square of the absolute value of
+this, meaning that
+\begin{equation}
+R = \abs{\frac{\Em}{\Ep}}^2=
+\frac{n_2^2(n_1 + n_3)^2\cos^2(dk_0n_2) 
++(n_1n_3 + n_2^2)^2\sin^2(dk_0n_2) 
+}{
+n_2^2(n_1 - n_3)^2\cos^2(dk_0n_2) 
++(n_1n_3 - n_2^2)^2\sin^2(dk_0n_2) 
+}.
+\end{equation}
+From here it is possible to go nuts with trig identities and expanding
+the squares to get (via Mathematica) 
+\begin{equation}
+R = 
+\frac{4n_1n_2^2n_3 + n_1^2\qty(n_2^2 + n_3^2) 
++n_2^2\qty(n_2^2 + n_3^2) + \qty(n_1^2 - n_2^2)\qty(n_2^2 - n_3^2) 
+\cos(2dk_0n_2)
+}{
+-4n_1n_2^2n_3 + n_1^2\qty(n_2^2 + n_3^2) 
++n_2^2\qty(n_2^2 + n_3^2) + \qty(n_1^2 - n_2^2)\qty(n_2^2 - n_3^2) 
+\cos(2dk_0n_2)
+},
+\end{equation}
+which only has one cosine on either side of the division.
+
+\todo[inline]{FIGURE!!!}
+
+\subsection{Transmitivity}
+Here we start off from \eqref{eq:1_Eppp}, and do almost the same
+procedure as above. Skipping the details we get
+\begin{equation}
+\frac{\Eppp}{\Ep} = 
+\frac{
+2n_1n_2 \ee^{\ii dk_0n_3}
+}{
+n_2(n_1 - n_3)\cos(dk_0n_2) - \ii (n_2^2 - n_1n_3)\sin(dk_0n2)}.
+\end{equation}
+This gives a transmitivity of
+\begin{equation}
+T = \abs{\frac{\Eppp}{\Ep}}^2 = 
+\frac{
+4n_1^2n_2^2
+}{
+n_2^2(n_1 - n_3)^2\cos^2(dk_0n_2) + (n_2^2 - n_1n_3)^2\sin^2(dk_0n2)}.
+\end{equation}
+Doing the same trigonometric expansion as above, we get
+\begin{equation}
+T = 
+\frac{
+4n_1^2n_2^2
+}{
+-4n_1n_2^2n_3 + n_1^2\qty(n_2^2 + n_3^2) 
++n_2^2\qty(n_2^2 + n_3^2) + \qty(n_1^2 - n_2^2)\qty(n_2^2 - n_3^2) 
+\cos(2dk_0n_2)
+}.
+\end{equation}
+
+\todo[inline]{FIGURE!!!}
+
+
+\subsection{Application}
+
+
+
+
+
+
+
+
+\section{Weak conductor --- normal incidence}
+
+
+\section{Angled incidence}
 
 
 \section{Dispersion relation in conducting media}
