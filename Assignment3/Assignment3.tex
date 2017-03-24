@@ -154,7 +154,7 @@ We now have four equations and four unknowns (given $\Ep$, the
 unknowns are $\Em$, $\Epp$, $\Emm$, and $\Eppp$). Furthermore, the
 equations are all linear, meaning that we can write them on matrix
 form
-\begin{equation}\label{eq:1_master_eqn}
+\begin{equation}\label{eq:1_master}
 \begin{bmatrix}
 +1 & -1 & -1 & 0 \\
 -K_1 & -K_2 & +K_2 &0\\
@@ -174,17 +174,11 @@ to solve, but the methods needed are (first year linear algebra), so I
 will let \textit{Mathematica} do the grunt work and solve this system
 for me. 
 
-So simplity the expressions a bit we set $\mu_1=\mu_2=\mu_3$, and also
+To simplify the expressions a bit we set $\mu_1=\mu_2=\mu_3$, and also
 remember that $k_i=k_0n_i$. With this in mind, we get the raw output
 from Mathematica:
 \begin{equation}\label{eq:1_Em}
 \frac{\Em}{\Ep}=
-%\frac{k_2\mu_2(k_1\mu_3 + k_3\mu_1)(1+\ee^{2\ii d k_2}) 
-%+(k_1k_3\mu_2^2 + k_2^2\mu_1\mu_3)(-1+\ee^{2\ii d k_2})
-%}{
-%-k_2\mu_2(k_3\mu_1 - k_1\mu_3)(1+\ee^{2\ii dk_2})
-%+(k_1k_3\mu_2^2 - k_2^2\mu_1\mu_3)(-1+\ee^{2\ii dk_2})
-%}
 \frac{
 n_1 (n_2(1 + \ee^{2\ii dk_0n_2}) + n_3(1 - \ee^{2\ii dk_0n_2})) + 
  n_2 (n_2(-1 + \ee^{2\ii dk_0n_2}) - n_3(1 + \ee^{2\ii dk_0n_2}))
@@ -196,11 +190,6 @@ n_1 (n_2(1 + \ee^{2\ii dk_0n_2}) + n_3(1 - \ee^{2\ii dk_0n_2})) +
 and 
 \begin{equation}\label{eq:1_Eppp}
 \frac{\Eppp}{\Ep} = 
-%\frac{4k_1k_2\mu_2\mu_3 \ee^{\ii d (k_2-k_3)}
-%}{
-%-k_2\mu_2(k_3\mu_1 - k_1\mu_3)(1+\ee^{2\ii d k2}) 
-%+(k_1k_3\mu_2^2 + k2^2\mu_1\mu_3) (-1+\ee^{2\ii d k2})
-%}.
 \frac{
 4n_1n_2 \ee^{\ii d k_0(n_2-n_3)}
 }{
@@ -238,17 +227,18 @@ n_2(n_1 +n_3)\cos(dk_0n_2) - \ii(n_2^2 +n_1n_3)\sin(dk_0n_2)
 }.
 \end{equation}
 
-And finally the reflectivity is the square of the absolute value of
-this, meaning that
+And finally the reflectivity is the ration of reflected over incident
+\emph{intensity}. Since both the incident and reflected wave travel in
+the same media we can just write
 \begin{equation}
-R = \abs{\frac{\Em}{\Ep}}^2=
+R =\frac{I_1^-}{I_2^+}= \abs{\frac{\Em}{\Ep}}^2=
 \frac{
 \Big[n_2(n_1-n_3)\cos(dk_0n_2)\Big]^2 
 +\Big[(n_2^2 -n_1n_3)\sin(dk_0n_2)\Big]^2
 }{
 \Big[n_2(n_1 +n_3)\cos(dk_0n_2)\Big]^2 
 +\Big[(n_2^2 +n_1n_3)\sin(dk_0n_2)\Big]^2 
-}
+},
 \end{equation}
 where $k_0=2\pi/\lambda_0$.
 
@@ -260,14 +250,14 @@ A plot of $R$ as a function of $d/\lambda_0$ is shown in
 \centering
 \includegraphics[width=.9\textwidth]{1a_R.eps}
 \caption{The reflectivity as a function of slab thickness $d$. The
-  relectivity is for $n_1=1$, $n_3=1.5$ and $n_2=1.0, 1.2$ and 3.}
+  reflectivity is for $n_1=1$, $n_3=1.5$ and $n_2=1.0, 1.2$ and 3.}
 \label{fig:1a_R}
 \end{figure}
 
 
 \subsection{Transmitivity}
 Here we start off from \eqref{eq:1_Eppp}, and do almost the same
-procedure as above. But we can begin by noting that the denomenator is
+procedure as above. But we can begin by noting that the denominator is
 exactly the same in \eqref{eq:1_Eppp} as in \eqref{eq:1_Em}. So by
 multiplying both the numerator and denominator by $\ee^{-\ii dk_0n_2}/2$,
 we get
@@ -285,30 +275,121 @@ we get
 }.
 \end{aligned}
 \end{equation}
-This gives a transmitivity of
+
+For the transmitivity $T=I_3^+/I_1^+$, it is not as straight forward
+as just squaring the absolute values. Since the intensity of a wave is
+given by
 \begin{equation}
-T = \abs{\frac{\Eppp}{\Ep}}^2 = 
+I = \frac{1}{2} \epsilon v \abs{E}^2 
+= \frac{1}{2} n^2\frac{\epsilon_0\mu_0}{\mu} \,\frac{c}{n} \abs{E}^2 
+= \frac{1}{2} \frac{n}{\mu c} \abs{E}^2. 
+\end{equation}
+The transmitivity should therefore be
+\begin{equation}
+T = \frac{I_3^+}{I_1^+} 
+= \frac{\frac{n_3}{\mu c}\abs{\Eppp}^2}{\frac{n_1}{\mu c}\abs{\Ep}^2}
+= \frac{n_3}{n_1}\,\abs{\frac{\Eppp}{\Ep}}^2.
+\end{equation}
+This gives
+\begin{equation}
+T =
 \frac{
-4n_1^2n_2^2
+4n_1n_3\,n_2^2
 }{
 \Big[n_2(n_1 +n_3)\cos(dk_0n_2)\Big]^2 
 +\Big[(n_2^2 +n_1n_3)\sin(dk_0n_2)\Big]^2 
-},
+}
 \end{equation}
 where $k_0=2\pi/\lambda_0$.
 
 A plot of $T$ as a function of $d/\lambda_0$ is shown in
 \figref{fig:1b_T}. 
 
-
-
 \begin{figure}
 \centering
 \includegraphics[width=.9\textwidth]{1b_T.eps}
 \caption{The transmitivity as a function of slab thickness $d$. The
-  relectivity is for $n_1=1$, $n_3=1.5$ and $n_2=1.0, 1.2$ and 3.}
+  reflectivity is for $n_1=1$, $n_3=1.5$ and $n_2=1.0, 1.2$ and 3.}
 \label{fig:1b_T}
 \end{figure}
+
+\subsubsection*{Sanitycheck}
+By conservation of energy, we should have $R+T\equiv1$. So let's try
+out and see if our expressions add up:
+\begin{equation}
+\begin{aligned}
+R+T =& \frac{
+\Big[n_2(n_1-n_3)\cos(dk_0n_2)\Big]^2 
++\Big[(n_2^2 -n_1n_3)\sin(dk_0n_2)\Big]^2
++4n_1n_3\,n_2^2
+}{
+\Big[n_2(n_1 +n_3)\cos(dk_0n_2)\Big]^2 
++\Big[(n_2^2 +n_1n_3)\sin(dk_0n_2)\Big]^2 
+}\\
+=& \frac{
+(n_1-n_3)^2\cos^2(dk_0n_2)
++\qty(n_2 -\frac{n_1n_3}{n_2})^2\sin^2(dk_0n_2)
++4n_1n_3
+}{
+\Big[(n_1 +n_3)\cos(dk_0n_2)\Big]^2 
++\Big[\qty(n_2 +\frac{n_1n_3}{n_2})\sin(dk_0n_2)\Big]^2 
+}.
+\end{aligned}
+\end{equation}
+Now we do one of the most wonderful tricks there are in mathematics,
+multiply by 1:
+\begin{equation}
+4n_1n_3 = 4n_1n_3\,\qty[\cos^2(dk_0n_2) + \sin^2(dk_0n_2)].
+\end{equation}
+Let's start by looking at the coefficient $\cos^2$ in the 
+numerator:
+\begin{equation}
+\begin{aligned}
+(n_1-n_3)^2 + 4n_1n_3
+=& n_1^2 - 2n_1n_3 +n_3^2+ 4n_1n_3\\
+=& n_1^2 + 2n_1n_3 +n_3^2
+&= (n_1+n_3)^2.
+\end{aligned}
+\end{equation}
+Next, do the same thing fot the $\sin^2$ coefficient:
+\begin{equation}
+\begin{aligned}
+\qty(n_2-\frac{n_1n_3}{n_2})^2 + 4n_1n_3
+=& n_1^2 - 2n_1n_3 +\qty(\frac{n_1n_3}{n_2})^2+ 4n_1n_3\\
+=& n_1^2 + 2n_1n_3 +\qty(\frac{n_1n_3}{n_2})^2
+&= \qty(n_2+\frac{n_1n_3}{n_2})^2.
+\end{aligned}
+\end{equation}
+
+The sum of the reflectivity and transmitivity is therefore
+\begin{equation}
+\begin{aligned}
+R+T = \frac{
+(n_1+n_3)^2\cos^2(dk_0n_2)
++\qty(n_2 +\frac{n_1n_3}{n_2})^2\sin^2(dk_0n_2)
+}{
+\Big[(n_1 +n_3)\cos(dk_0n_2)\Big]^2 
++\Big[\qty(n_2 +\frac{n_1n_3}{n_2})\sin(dk_0n_2)\Big]^2 
+}
+\equiv 1.
+\end{aligned}
+\end{equation}
+This means that ``at least our calculations aren't completely
+wrong''. 
+
+
+\paragraph{Side-note}
+One could argue that we just as well could have used $T=1-R$ to
+calculate $T$ in this problem. But, then we wouldn't have caught any
+possible mistakes made on the way. By doing this sanity check from $R$
+and $T$ directly from the fields, we can be a bit more sure that the
+calculations were right. 
+
+Also, it was easier to get $T$ directly from the fields, since we
+already had the transmitted field ``for free'', from when Mathematica
+solved \eqref{eq:1_master}. 
+
+
 
 
 \subsection{Application}
@@ -317,8 +398,8 @@ for $n_2=3$, this means that this could be used as a filter. If we fix
 $d$ we could effectively pick out some specific wavelengths (given
 that the incoming light is already reasonably well filtered). 
 
-Another application that is similar would be anti-reflective coating
-on e.g. optical intruments. This time however, we want to
+Another application, that is similar, would be anti-reflective coating
+on e.g. optical instruments. This time however, we want to
 choose $d$ in respect to lambda such that $R$ is minimized. 
 
 
@@ -381,7 +462,7 @@ Similarly for $\kappa_2$:
 \end{equation}
 
 \subsection{The reflected wave}
-We are now ready to start on an expression for the refelcted wave. 
+We are now ready to start on an expression for the reflected wave. 
 From \eqref{eq:2_BC1} we can get $\Epp=\Ep+\Em$. Substitute this into
 \eqref{eq:2_BC2}, and we get
 \begin{equation}
@@ -529,12 +610,12 @@ Since the cross product wasn't 0, then we must have
 \end{equation}
 \footnotetext{Note that the incident wave hits the interface at all
   points in the plane $z=0$. If we chose some other point, that would
-  just mean that we would have to adjust the equation by sme complex
+  just mean that we would have to adjust the equation by some complex
   phases. But $\vb*r=0$ is as good as any point, so there is no reason
   not to choose it. }
 
 Next we take a look at \eqref{eq:03}. Once again we have harmonic
-fields, meaning that we can express the magentic fields as
+fields, meaning that we can express the magnetic fields as
 \begin{equation}
 \begin{aligned}
 \vb*B_1^\pm=&\frac{1}{\omega}\vb*k_1^\pm\cross\vb*E_1^\pm
@@ -634,7 +715,7 @@ refractive index near unity}
 \newcommand{\thetac}{\theta_\text{c}}
 \newcommand{\phic}{\phi_\text{c}}
 
-Here, we have grazingng incidence, where 
+Here, we have grazing incidence, where 
 $\phi_1=\pi/2 - \theta\ll1$, and the medium has an index of refraction
 $n_2=1-\delta$, where $\delta\ll1$. We want to find the critical angle. 
 
@@ -650,7 +731,7 @@ or in other words
 where $\phic=\pi/2-\thetac$.
 
 In our case the incidence is from vacuum, meaning that the RHS just
-becomes $n_2$. Furthermore, we know that $n_2$ is really cose to 1,
+becomes $n_2$. Furthermore, we know that $n_2$ is really close to 1,
 meaning that $\phic\ll1$. So we can expand the LSH of
 \eqref{eq:3b_phic} to get
 \begin{equation}
@@ -663,7 +744,7 @@ This gives
 
 
 \subsection*{3 (c+d)\;
-Approximate expression for the refelctivity 
+Approximate expression for the reflectivity 
 at a gracing incidence}
 In the case of gracing incidence, we can write down an approximate
 expression of \eqref{eq:3a_refl-ampl}. We begin by noting that with
@@ -691,16 +772,20 @@ means that $n_2^2 \approx 1 -2\delta$. With all this we end up with
 {\phi_1 + \frac{\mu_1}{\mu_2}\sqrt{1-2\delta-(1-\phi_1^2)}}.
 \end{aligned}
 \end{equation}
-Lastly we assume that $\mu_1=\mu_2$ and also use
+Lastly we assume\footnotemark{} that $\mu_1=\mu_2$ and also use
 $\phic\approx\sqrt{2\delta}$, to get
-\begin{equation}
+\begin{equation}\label{eq:3c_reflected_field}
 \frac{\Em}{\Ep} \approx
 \frac{\phi_1 - \sqrt{\phi_1^2 - \phic^2}}
 {\phi_1 + \sqrt{\phi_1^2 - \phic^2}}.
 \end{equation}
+\footnotetext{It is also possible to argue that since $n_2$ is so
+  very close to $n_1$, $\mu_2$ should also be very close to $\mu_1$. }
+
 To get the reflectivity, we take the square of the absolute value of
-this. Note that ew have to use the absolute value here, since the
-square roots might be imaginary. The relectivity is therefore
+\eqref{eq:3c_reflected_field}. Note that we have to use the absolute
+value here, since the square roots might be imaginary. The
+reflectivity is therefore 
 \begin{equation}
 R = \abs{\frac{\Em}{\Ep}}^2 \approx
 \frac{\abs{\phi_1 - \sqrt{\phi_1^2 - \phic^2}}^2}
@@ -776,7 +861,7 @@ or when cleaned up
 \kt^2 = \ii\mu\sigma\omega +\mu\epsilon\omega^2,
 \end{equation}
 where $\kt^2 = \vb*k\vdot\vb*k$.
-This is our dispersion relation for an Ohmic condutive media. 
+This is our dispersion relation for an Ohmic conductive media. 
 
 
 
@@ -789,9 +874,9 @@ k=\omega\sqrt{\frac{\epsilon\mu}{2}}
 \kappa=\omega\sqrt{\frac{\epsilon\mu}{2}}
 \qty[\sqrt{1+\qty(\frac{\sigma}{\epsilon\omega})^2}-1]^{1/2}.
 \end{equation}
-The easiest way would be to just subsitute \eqref{eq:4_ktilde} into
+The easiest way would be to just substitute \eqref{eq:4_ktilde} into
 \eqref{eq:4_disp}, but I guess that would be a bit cheating. So
-instead we subsitute $\kt=k+\ii\kappa$ into \eqref{eq:4_disp}. We then
+instead we substitute $\kt=k+\ii\kappa$ into \eqref{eq:4_disp}. We then
 get
 \begin{equation}
 k^2-\kappa^2 + 2\ii k\kappa 
@@ -855,7 +940,7 @@ together with \eqref{eq:4_k2}. This gives
 } ].
 \end{aligned}
 \end{equation}
-And the ``unsquared'' value is
+And the ``un-squared'' value is
 \begin{equation}
 \kappa = \omega\sqrt{\frac{\mu\epsilon}{2}}
 \qty[ -1 +\sqrt{
@@ -863,7 +948,7 @@ And the ``unsquared'' value is
 } ]^{1/2}.
 \end{equation}
 Both the expressions for $k$ and $\kappa$ are exactly the same as
-\eqref{eq:4_ktilde}. We are therby done.
+\eqref{eq:4_ktilde}. We are thereby done.
 
 
 
@@ -877,4 +962,5 @@ Both the expressions for $k$ and $\kappa$ are exactly the same as
 
 
 
-%  LocalWords:  MFT MF Ising
+%  LocalWords:  wavenumber wavevectors Mathematica
+%  LocalWords:  reflectivity transmitivity
