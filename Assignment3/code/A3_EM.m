@@ -12,7 +12,7 @@ R=@(n1,n2,n3, D) ...
    
 
 T=@(n1,n2,n3, D) ...
-    ( 4*n1.^2*n2.^2 )...
+    ( 4*n1*n3*n2.^2 )...
     ./( (n2*(n1+n3)*cos(D*n2)).^2 + ((n2^2 + n1*n3)*sin(D*n2)).^2 );
 
 
@@ -27,17 +27,17 @@ linetype = {'-k', '--k', '-.k'};
 for i=1:3
 figure(1)
 hold on
-plot(D0, R(n1,n2(i),n3, 2*pi*D0), linetype{i})
+plot(D0, R(n1,n2(i),n3, 2*pi*D0), linetype{i}, 'linewidth',2)
 figure(2)
 hold on
-plot(D0, T(n1,n2(i),n3, 2*pi*D0), linetype{i})
-     %D0, R(n1,n2,n3, 2*pi*D0)+T(n1,n2,n3, 2*pi*D0))
+plot(D0, T(n1,n2(i),n3, 2*pi*D0), linetype{i}, 'linewidth',2)
+%plot(D0, R(n1,n2(i),n3, 2*pi*D0)+T(n1,n2(i),n3, 2*pi*D0), linetype{i})
 end
 
 
 l=legend(sprintf('$n_2=%1.1f$',n2(1)),...
     sprintf('$n_2=%1.1f$',n2(2)),sprintf('$n_2=%1.1f$',n2(3)));
-set(l, 'interpreter', 'latex')
+set(l, 'interpreter', 'latex', 'location','SouthEast')
 xlabel('$d/\lambda_0$','interpreter', 'latex')
 ylabel('$T(d)$','interpreter', 'latex')
 set(gca, 'fontsize', 12, 'ylim', [0,1])
@@ -54,7 +54,8 @@ set(gca, 'fontsize', 12, 'ylim', [0,1])
 
 
 %%
-clc;clear;clf
+clc;clear;
+figure(3);clf
 
 R=@(x) abs(x-sqrt(x.^2-1)).^2./abs(x+sqrt(x.^2-1)).^2;
 
