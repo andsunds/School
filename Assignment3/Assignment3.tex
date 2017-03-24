@@ -104,7 +104,7 @@ definition of notation are shown in \figref{fig:1_geometry}.
 \end{figure}
 
 This problem will require the use of the boundary conditions
-\eqref{eq:02} and \eqref{eq:03} with $\sigma=0$ and $\vb*j=0$. To use
+\eqref{eq:01} and \eqref{eq:03} with $\vb*j=0$. To use
 these boundary conditions we must first establish expressions for the
 fields:
 \begin{equation}
@@ -124,7 +124,7 @@ $\vu{n}_{12}=\vu{z}$, so it will be sufficient to work with the
 complex amplitudes and phases. With this observation we are ready to
 write down the boundary conditions for each boundary. 
 
-First the $z=0$ boundary, where \eqref{eq:02} gives
+First the $z=0$ boundary, where \eqref{eq:01} gives
 \begin{equation}
 \Ep+\Em -(\Epp+\Emm) =0, 
 \end{equation}
@@ -140,7 +140,7 @@ they travel in different directions.
 
 Similarly for the $z=d$ boundary, now we do however need to keep the
 complex phases, due a to non-zero $z$ value, in mind. Nonetheless the
-result is similar. From \eqref{eq:02} we get
+result is similar. From \eqref{eq:01} we get
 \begin{equation}
 \Epp\ee^{\ii k_2d}+\Emm\ee^{-\ii k_2d} -\Eppp\ee^{\ii k_3d} =0, 
 \end{equation}
@@ -332,7 +332,7 @@ choose $d$ in respect to lambda such that $R$ is minimized.
 
 This time a plane monochromatic wave is normally incident on a flat
 surface of a weak conductor $\zeta=\sigma/(\epsilon_2\omega)\ll1$. And
-once again we will use \eqref{eq:02} and \eqref{eq:03} to get
+once again we will use \eqref{eq:01} and \eqref{eq:03} to get
 \begin{equation}\label{eq:2_BC1}
 \Ep+\Em -\Epp =0, 
 \end{equation}
@@ -473,9 +473,161 @@ I_2(z)=&\qty(\vb*E_2^+(z))^2)=I_2(z=0)\ee^{-2\kappa_2z}
 
 
 \section{Angled incidence}
+\newcommand{\kp}{\vb*{k}_1^+}
+\newcommand{\km}{\vb*{k}_1^-}
+\newcommand{\kpp}{\vb*{k}_2^+}
+
+\begin{figure}
+\centering
+\resizebox{.45\textwidth}{!}{\input{figures/3_geometry.pdf_t}}
+\caption{The geometry of the problem. This time it's only one
+  interface, but the incidence is angled. This figure also shows the
+  notation used. Note that although the unit vectors are drawn at the
+  side, we choose to put the origin at the point of incidence. }
+\label{fig:3_geometry}
+\end{figure}
+
+In this problem, we have a plane wave with an angled incidence to an
+interface. We know that the $\vb*E$ field is perpendicular to the
+plane of incidence. This is shown in \figref{fig:3_geometry}.
+
+Using the notation and coordinate system defined in
+\figref{fig:3_geometry}, we can write down the important variables. 
+Let's begin with the fields
+\begin{equation}
+\begin{aligned}
+\vb*E_1^\pm=&\vu{x}\mathcal{E}_1^\pm\ee^{\ii \vb*k_1^\pm\vb*r -\ii\omega t}\\
+\vb*E_2^+=&\vu{x}\mathcal{E}_2^+\ee^{\ii \kpp\vb*r -\ii\omega t},
+\end{aligned}
+\end{equation}
+where the wavevectors can be written as
+\begin{equation}
+\begin{aligned}
+\vb*k_1^\pm =& k_1^\pm\Big(-\vu{y}\sin\theta_1 \pm \vu{z}\cos\theta_1\Big)\\
+\kpp       =& k_2^+ \Big(-\vu{y}\sin\theta_2 + \vu{z}\cos\theta_2\Big),
+\end{aligned}
+\end{equation}
+and last but not least we have the normal vector $\vu{n}_{12}=\vu{z}$.
+We can now start with the problems at hand.
+
 
 
 \subsection{Reflectivity}
+To get the reflectivity, we need to find the amplitude of the
+reflected wave, $\Em$, and to do that we will once again use the
+boundary conditions \eqref{eq:01} and \eqref{eq:03}. 
+
+From \eqref{eq:01}, at time $t=0$ and at the interface where
+$\vb*r=0$\footnotemark{}, we get 
+\begin{equation}
+(\Ep + \Em - \Epp)
+\overbrace{\vu{x}\cross\vu{n}_{12}}^{-\vu{y}} =0.
+\end{equation}
+Since the cross product wasn't 0, then we must have
+\begin{equation}\label{eq:3a_BC1}
+\Ep + \Em - \Epp =0.
+\end{equation}
+\footnotetext{Note that the incident wave hits the interface at all
+  points in the plane $z=0$. If we chose some other point, that would
+  just mean that we would have to adjust the equation by sme complex
+  phases. But $\vb*r=0$ is as good as any point, so there is no reason
+  not to choose it. }
+
+Next we take a look at \eqref{eq:03}. Once again we have harmonic
+fields, meaning that we can express the magentic fields as
+\begin{equation}
+\begin{aligned}
+\vb*B_1^\pm=&\frac{1}{\omega}\vb*k_1^\pm\cross\vb*E_1^\pm
+=\frac{k_1^\pm\mathcal{E}_1^\pm}{\omega}
+\ee^{\ii \vb*k_1^\pm\vb*r -\ii\omega t}
+\Big(+\vu{z}\sin\theta_1 \pm \vu{y}\cos\theta_1 \Big)
+\\
+\vb*B_2^+=&\frac{1}{\omega}\kpp\cross\vb*E_2^+
+=\frac{k_2^+\mathcal{E}_2^+}{\omega}
+\ee^{\ii \vb*k_2^+\vb*r -\ii\omega t}
+\Big(+\vu{z}\sin\theta_2 + \vu{y}\cos\theta_2 \Big).
+\end{aligned}
+\end{equation}
+This means that \eqref{eq:03}, once again at $t=0$ and $\vb*r=0$,
+becomes 
+\begin{equation}
+\begin{aligned}
+\Bigg[\frac{k_1^+\mathcal{E}_1^+}{\mu_1\omega}
+\Big(\vu{z}\sin\theta_1 + \vu{y}\cos\theta_1 \Big)
++\frac{k_1^-\mathcal{E}_1^-}{\mu_1\omega}
+\Big(\vu{z}\sin\theta_1 - \vu{y}\cos\theta_1 \Big)&\\
+-\frac{k_2^+\mathcal{E}_2^+}{\mu_2\omega}
+\Big(+\vu{z}\sin\theta_2 + \vu{y}\cos\theta_2 \Big)
+&\Bigg]
+\cross\vu{n}_{12} = 0.
+\end{aligned}
+\end{equation}
+We begin by noting that $\vu{n}_{12}=\vu{z}$, so we can already cancel
+all the $\vu{z}$ terms inside the brackets; next we see that $\omega$
+is the same for all terms so we can factor that out; furthermore we
+to know that $k_i^\pm = n_ik_0$, so we can factor out $k_0$ as
+well; and lastly we see that the remaining cross produce will be of
+the form $\vu{y}\cross\vu{z}\neq0$. In the end we have
+\begin{equation}\label{eq:3a_BC2}
+\frac{n_1}{\mu_1}\Ep\cos\theta_1 
+-\frac{n_1}{\mu_1}\Em\cos\theta_1
+-\frac{n_2}{\mu_2}\Epp\cos\theta_2 
+ = 0.
+\end{equation}
+
+Now substitute $\Epp = \Ep+\Em$ from \eqref{eq:3a_BC1} into
+\eqref{eq:3a_BC2}, which yields
+\begin{equation}
+\begin{aligned}
+0 =& 
+\frac{n_1}{\mu_1}\Ep\cos\theta_1 
+-\frac{n_1}{\mu_1}\Em\cos\theta_1
+-\frac{n_2}{\mu_2}(\Ep+\Em)
+\cos\theta_2 
+\\ =&
+\qty(\frac{n_1\cos\theta_1}{\mu_1}-\frac{n_2\cos\theta_2}{\mu_2})\Ep
+-\qty(\frac{n_1\cos\theta_1}{\mu_1}+\frac{n_2\cos\theta_2}{\mu_2})\Em.
+\end{aligned}
+\end{equation}
+From this we get
+\begin{equation}
+\begin{aligned}
+\frac{\Em}{\Ep}=&
+\qty(\frac{n_1\cos\theta_1}{\mu_1}-\frac{n_2\cos\theta_2}{\mu_2})
+\qty(\frac{n_1\cos\theta_1}{\mu_1}+\frac{n_2\cos\theta_2}{\mu_2})^{-1}\\
+=&\frac{n_1\cos\theta_1 - \frac{\mu_1}{\mu_2}n_2\cos\theta_2}
+{n_1\cos\theta_1 + \frac{\mu_1}{\mu_2}n_2\cos\theta_2}.
+\end{aligned}
+\end{equation}
+
+From here we will need to use Snell's law
+\begin{equation}\label{eq:3_Snell}
+n_1\sin(\theta_1) = n_2\sin(\theta_2).
+\end{equation}
+To apply Snell's law in our case, we note that
+\begin{equation}
+n_2\cos\theta_2 = \sqrt{n_2^2 - n_2^2\sin\theta_2}
+\stackrel{\eqref{eq:3_Snell}}{=} \sqrt{n_2^2 - n_1^2\sin\theta_1}.
+\end{equation}
+With this result, the reflected field looks like
+\begin{equation}
+\frac{\Em}{\Ep}=
+\frac{n_1\cos\theta_1 - 
+\frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\sin\theta_1}}
+{n_1\cos\theta_1 + \frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\sin\theta_1}}.
+\end{equation}
+To get the reflectivity, we just square this:
+\begin{equation}
+R=\abs{\frac{\Em}{\Ep}}^2=
+\qty(\frac{n_1\cos\theta_1 - 
+\frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\sin\theta_1}}
+{n_1\cos\theta_1 + \frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\sin\theta_1}}
+)^2.
+\end{equation}
+
+
+
+
 
 \subsection{Grazing incidence to a medium with 
 refractive indec near unity}
@@ -486,10 +638,7 @@ Here, we have grazingng incidence, where
 $\phi_1=\pi/2 - \theta\ll1$, and the medium has an index of refraction
 $n_2=1-\delta$, where $\delta\ll1$. We want to find the critical angle. 
 
-We begin with Snell's law 
-\begin{equation}
-n_1\sin(\theta_1) = n_2\sin(\theta_2),
-\end{equation}
+We begin with Snell's law \eqref{eq:3_Snell},
 which for the critical angle looks like
 \begin{equation}
 n_1\sin(\thetac) = n_2\sin(\pi/2) = n_2,
