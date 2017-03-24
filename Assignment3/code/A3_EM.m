@@ -53,9 +53,17 @@ set(gca, 'fontsize', 12, 'ylim', [0,1])
 
 
 
+%%
+clc;clear;clf
 
+R=@(x) abs(x-sqrt(x.^2-1)).^2./abs(x+sqrt(x.^2-1)).^2;
 
-
+X=linspace(0,4,1000);
+plot(X, R(X),'k')
+xlabel('$\phi_1/\phi_{\rm c}$','interpreter', 'latex')
+ylabel('$R$','interpreter', 'latex')
+set(gca, 'fontsize', 12, 'yscale', 'log')
+grid on
 
 
 

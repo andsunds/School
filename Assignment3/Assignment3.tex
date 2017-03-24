@@ -607,22 +607,22 @@ n_1\sin(\theta_1) = n_2\sin(\theta_2).
 To apply Snell's law in our case, we note that
 \begin{equation}
 n_2\cos\theta_2 = \sqrt{n_2^2 - n_2^2\sin\theta_2}
-\stackrel{\eqref{eq:3_Snell}}{=} \sqrt{n_2^2 - n_1^2\sin\theta_1}.
+\stackrel{\eqref{eq:3_Snell}}{=} \sqrt{n_2^2 - n_1^2\sin^2\theta_1}.
 \end{equation}
 With this result, the reflected field looks like
-\begin{equation}
+\begin{equation}\label{eq:3a_refl-ampl}
 \frac{\Em}{\Ep}=
 \frac{n_1\cos\theta_1 - 
-\frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\sin\theta_1}}
-{n_1\cos\theta_1 + \frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\sin\theta_1}}.
+\frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\sin^2\theta_1}}
+{n_1\cos\theta_1 + \frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\sin^2\theta_1}}.
 \end{equation}
 To get the reflectivity, we just square this:
 \begin{equation}
 R=\abs{\frac{\Em}{\Ep}}^2=
-\qty(\frac{n_1\cos\theta_1 - 
-\frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\sin\theta_1}}
-{n_1\cos\theta_1 + \frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\sin\theta_1}}
-)^2.
+\abs{\frac{n_1\cos\theta_1 - 
+\frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\sin^2\theta_1}}
+{n_1\cos\theta_1 + \frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\sin^2\theta_1}}
+}^2.
 \end{equation}
 
 
@@ -630,7 +630,7 @@ R=\abs{\frac{\Em}{\Ep}}^2=
 
 
 \subsection{Grazing incidence to a medium with 
-refractive indec near unity}
+refractive index near unity}
 \newcommand{\thetac}{\theta_\text{c}}
 \newcommand{\phic}{\phi_\text{c}}
 
@@ -647,8 +647,7 @@ or in other words
 \begin{equation}\label{eq:3b_phic}
 \cos(\phic) = \frac{n_2}{n_1},
 \end{equation}
-where $\phic=\pi/2-\theta_\text{c}$.
-
+where $\phic=\pi/2-\thetac$.
 
 In our case the incidence is from vacuum, meaning that the RHS just
 becomes $n_2$. Furthermore, we know that $n_2$ is really cose to 1,
@@ -658,15 +657,73 @@ meaning that $\phic\ll1$. So we can expand the LSH of
 1-\frac{1}{2}\phic^2 \approx n_2 = 1-\delta.
 \end{equation}
 This gives
-\begin{equation}
+\begin{equation}\label{eq:3b_phic}
 \phic \approx \sqrt{2\delta}.
 \end{equation}
 
 
-\subsection{Approximate expression for the refelctivity}
+\subsection*{3 (c+d)\;
+Approximate expression for the refelctivity 
+at a gracing incidence}
+In the case of gracing incidence, we can write down an approximate
+expression of \eqref{eq:3a_refl-ampl}. We begin by noting that with
+$\phi=\pi/2-\theta$ we can change all sines of $\theta$'s to cosines
+of $\phi$'s, and also the same for cosines to sines. We now have
+\begin{equation}
+\frac{\Em}{\Ep}=
+\frac{n_1\sin\phi_1 - 
+\frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\cos^2\phi_1}}
+{n_1\sin\phi_1 + \frac{\mu_1}{\mu_2}\sqrt{n_2^2-n_1^2\cos^2\phi_1}}.
+\end{equation}
 
+The next step is to utilize the fact that $\phi_1\ll1$, which means
+that $\sin\phi_1 \approx \phi_1$ and 
+$\cos\phi_1 \approx 1 - \phi_1^2/2$. 
+We will also use $n_1=1$ and $n_2=1-\delta$, where $\delta\ll1$, which
+means that $n_2^2 \approx 1 -2\delta$. With all this we end up with
+\begin{equation}
+\begin{aligned}
+\frac{\Em}{\Ep}\approx&
+\frac{\phi_1 - \frac{\mu_1}{\mu_2}\sqrt{1-2\delta-(1-\phi_1^2/2)^2}}
+{\phi_1 + \frac{\mu_1}{\mu_2}\sqrt{1-2\delta-(1-\phi_1^2/2)^2}}\\
+\approx&
+\frac{\phi_1 - \frac{\mu_1}{\mu_2}\sqrt{1-2\delta-(1-\phi_1^2)}}
+{\phi_1 + \frac{\mu_1}{\mu_2}\sqrt{1-2\delta-(1-\phi_1^2)}}.
+\end{aligned}
+\end{equation}
+Lastly we assume that $\mu_1=\mu_2$ and also use
+$\phic\approx\sqrt{2\delta}$, to get
+\begin{equation}
+\frac{\Em}{\Ep} \approx
+\frac{\phi_1 - \sqrt{\phi_1^2 - \phic^2}}
+{\phi_1 + \sqrt{\phi_1^2 - \phic^2}}.
+\end{equation}
+To get the reflectivity, we take the square of the absolute value of
+this. Note that ew have to use the absolute value here, since the
+square roots might be imaginary. The relectivity is therefore
+\begin{equation}
+R = \abs{\frac{\Em}{\Ep}}^2 \approx
+\frac{\abs{\phi_1 - \sqrt{\phi_1^2 - \phic^2}}^2}
+{\abs{\phi_1 + \sqrt{\phi_1^2 - \phic^2}}^2}
+=\frac{\abs{\xi - \sqrt{\xi^2 - 1}}^2}
+{\abs{\xi + \sqrt{\xi^2 - 1}}^2},
+\end{equation}
+where $\xi=\phi_1/\phic$.
 
-\subsection{Plot}
+\begin{figure}
+\centering
+\includegraphics[width=.7\textwidth]{3d_R.eps}
+\caption{The reflectivity as a function of $\phi_1/\phic$. Note the
+  log scale on the $R$ axis.}
+\label{fig:3d_R}
+\end{figure}
+
+One interesting thing to note here is that $R=1$ as soon as
+$\phi_1\le\phic$, since then the square roots become imaginary and the
+absolute values in the numerator and denominator then are equal. 
+A plot of $R$ as a function of $\xi=\phi_1/\phic$, can be found in
+\figref{fig:3d_R}. 
+
 
 
 
