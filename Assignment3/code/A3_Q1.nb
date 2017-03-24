@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     10527,        311]
-NotebookOptionsPosition[      9886,        287]
-NotebookOutlinePosition[     10223,        302]
-CellTagsIndexPosition[     10180,        299]
+NotebookDataLength[     10621,        314]
+NotebookOptionsPosition[      9933,        289]
+NotebookOutlinePosition[     10270,        304]
+CellTagsIndexPosition[     10227,        301]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -249,9 +249,11 @@ Cell[BoxData[
          SuperscriptBox["\[ExponentialE]", 
           RowBox[{"2", " ", "\[ImaginaryI]", " ", "d", " ", "k", " ", "n2"}]],
           " ", "n3"}]}], ")"}]}]}]]}], "}"}]], "Output",
- CellChangeTimes->{3.699284986557993*^9, 3.699287611415271*^9, 
-  3.699287681974391*^9}]
+ CellChangeTimes->{3.699307560075753*^9}]
 }, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.699291437957346*^9, 3.69929144963843*^9}}],
 
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
@@ -304,15 +306,16 @@ Notebook[{
 Cell[558, 20, 2756, 78, 262, "Input"],
 Cell[CellGroupData[{
 Cell[3339, 102, 191, 4, 34, "Input"],
-Cell[3533, 108, 5293, 144, 219, "Output"]
+Cell[3533, 108, 5246, 143, 252, "Output"]
 }, Open  ]],
-Cell[8841, 255, 500, 10, 143, "Input"],
-Cell[9344, 267, 70, 1, 32, "Input"],
-Cell[9417, 270, 92, 1, 32, InheritFromParent],
-Cell[9512, 273, 89, 2, 32, "Input"],
-Cell[9604, 277, 91, 1, 32, InheritFromParent],
-Cell[9698, 280, 89, 2, 32, "Input"],
-Cell[9790, 284, 92, 1, 32, InheritFromParent]
+Cell[8794, 254, 91, 1, 32, InheritFromParent],
+Cell[8888, 257, 500, 10, 143, "Input"],
+Cell[9391, 269, 70, 1, 32, "Input"],
+Cell[9464, 272, 92, 1, 32, InheritFromParent],
+Cell[9559, 275, 89, 2, 32, "Input"],
+Cell[9651, 279, 91, 1, 32, InheritFromParent],
+Cell[9745, 282, 89, 2, 32, "Input"],
+Cell[9837, 286, 92, 1, 32, InheritFromParent]
 }
 ]
 *)
