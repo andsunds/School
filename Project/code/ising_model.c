@@ -3,27 +3,23 @@
 #include <math.h>
 #include "main.h"
 
-//DEBUG: instead allocating here, pass ising_mtrx to here.
+
 static int *ising_init(int *ising_mtrx, int rows, int cols){
-  /* Initializes a matrix, in the form of an
+  /* Initializes a matrix, passed to here, in the form of an
      array, filled with +-1 randomly.
 
      The array is allocated as a pointer inside
      this function, so it must be freed after use
      in the implementation. 
   */
-  // Don't forget the sizeof!
+  
   int N=rows*cols;
-  //int *ising_mtrx= malloc(N*sizeof(int)); 
   for( int i=0; i<N; i++ ){
     if( rand()<RAND_MAX/2 ) //random # to decide +-1.
       ising_mtrx[i]=-1;
     else
       ising_mtrx[i]= 1;
   }
-  /* Do not forget to free ising_mtrx after use
-     in the implementeation! */
-  //return ising_mtrx;
 }
 
 
@@ -87,7 +83,6 @@ static double deltaE
            mtrx_as_arr[arr_all_NN[start+b]];
   }
 
-  //return 0; //DEBUG
   return -2*J*sum;
   /* The return should realy be:
            -J*( sum - (-sum) )  =  -J*(2*sum).
@@ -123,7 +118,6 @@ static double order_param(int *mtrx_as_arr, int N){
 static double delta_order_param(int *mtrx_as_arr,int index, int N){
   /* Returns the change in M.
    */
-  //return 0;//DEBUG
   return 2*( (double)mtrx_as_arr[index] )/( (double)N );
   /* Since M(after)-M(before)
      = (mtrx_as_arr[index] - (-mtrx_as_arr[index]) )/N,
@@ -163,14 +157,6 @@ static void motecarlo_ising_step
      it comes to floats/doubles. I don't know if this is
      a bad thing to worry ablout. 
   */
-
-  /* //DEBUG
-  if ( dE>0 ){ //DEBUG
-    ising[random_index]=-ising[random_index];
-    dE=0;dM=0;
-  }
-  */
-
   if ( dE>7*J ){ 
     /* Generate a random number in [0,1] */
     dbl_rand = ( (double)rand() )/RAND_MAX;
@@ -194,8 +180,6 @@ static void motecarlo_ising_step
       dE=0;dM=0;
     }
   }
-  //DEBUG
-  //printf("INSIDE step: E,M = %2.3f, %2.3f\n", *E_tot, *M_tot);
 
   *E_tot = *E_tot + dE;
   *M_tot = *M_tot + dM;
@@ -263,10 +247,8 @@ int montecarlo_ising_full
   if ( chunk % 2 == 1 )
     chunk++; //makes sure chunk is even
   double arr_EM[chunk]; //values to be written to file
-  //DEBUG  int *ising=ising_init(rows, cols); // init of random ising grid
-  //DEBUG 
-  int ising[N];
-  ising_init(ising,rows, cols);
+  int ising[N];                // init of random ising grid
+  ising_init(ising,rows, cols);// init of random ising grid
 
   // The length of the loops. These values are such
   // that loop1*loop2 should be just over Nsteps.
@@ -317,7 +299,6 @@ int montecarlo_ising_full
 	 arr_EM, J, beta, &E, &M,
 	 boltzmann_factors, arr_all_NN, b);
     } // end for #2
-    // printf("%2.2f\n",arr_EM[chunk-1]); //DEBUG
     /* Writes the contents of this chuck to file. */
     fwrite(&arr_EM, sizeof(double), chunk, filePTR);
   }//end for #1
@@ -333,7 +314,6 @@ int montecarlo_ising_full
   fprintf(logPTR,"%s",endMSG);
 
   fclose(filePTR);
-  //DEBUG free(ising); ising=NULL;
   return 0;
 }
 
@@ -367,7 +347,6 @@ int montecarlo_ising_average
 
   /* Initializations */
   int N=rows*cols; //total # sites
-  //double E, M; //DEBUG
   double *Ept=malloc(sizeof(double));//&E;
   double *Mpt=malloc(sizeof(double));//&M; 
   // The Boltzmann factors can be pre-computed since dE only can
@@ -384,12 +363,9 @@ int montecarlo_ising_average
   double *meanM; meanM = return_values +3; *meanM = 0;
   double *stdM;  stdM  = return_values +4; *stdM  = 0;
   
-  double arr_EM[2] = {0,0}; //array of current E and M values
-
-  //DEBUG  int *ising=ising_init(rows, cols); // init of random ising grid
-  //DEBUG 
-  int ising[N];
-  ising_init(ising,rows, cols);
+  double arr_EM[2] = {0,0};    // init, array of current E and M values
+  int ising[N];                // init, of random ising grid
+  ising_init(ising,rows, cols);// init, of random ising grid
 
   /* It's cheeper to calculate deltaE and deltaM in each
      iteration and just add that to E and M, to get the
@@ -401,12 +377,6 @@ int montecarlo_ising_average
   */
   *Ept = totE(J, ising, rows, cols);
   *Mpt = order_param(ising, N);
-  
-  //DEBUG
-  //printf("\nSTART: E,M = %3.2f, %3.2f\n", *Ept, *Mpt);
-
-  //E = totE(J, ising, rows, cols);
-  //M = order_param(ising, N);
   for (int a=0; a<discard_first; ++a ){ //for #1
     /* In this loop we just perform the Monte Carlo
        step <discard_first> number of times, to get
@@ -425,11 +395,13 @@ int montecarlo_ising_average
     motecarlo_ising_step
       (ising, rows, cols, N,
        arr_EM, J, beta, Ept, Mpt,
-       boltzmann_factors, arr_all_NN, 0);
-    //Passing 0 as the <current_index> because
-    //arr_EM only has 2 elements.
-
-    //M = order_param(ising, N);
+       boltzmann_factors, arr_all_NN, 0);//Passing 0 as the <current_index>
+                                         //because arr_EM only has 2 elements.
+    
+    /* Taking the absolute value of M. */
+    if ( arr_EM[1]<0 ){
+      arr_EM[1] = -arr_EM[1];
+    }
 
     /* These expressions are not fully the mean and sdt,
        but they will be modified after the loop.
@@ -438,17 +410,6 @@ int montecarlo_ising_average
     *stdE  += arr_EM[0]*arr_EM[0];  //E*E;
     *meanM += arr_EM[1]; 
     *stdM  += arr_EM[1]*arr_EM[1];
-    ///*
-    //DEBUG
-    if ( (b%1) == 0 ){
-      printf("b = %d\n", b);
-      printf("E,M = %3.4f, %3.4f\n", *Ept, *Mpt);
-      printf("E,M = %3.4f, %3.4f\n",
-	     totE(J, ising, rows, cols), order_param(ising, N));
-      
-      //print_matrix(ising, rows, cols); //DEBUG
-    }
-    //*/
   }//end for #2
 
   /* Calculating the means */
@@ -463,15 +424,11 @@ int montecarlo_ising_average
      In the estimates for var one should use N-1, however
      in this case N>>1, so it makes no difference.
   */
-  //DEBUG
-  *stdE = 0*sqrt( *stdE/Nsteps - ( *meanE )*( *meanE ) );
-  *stdM = 0*sqrt( *stdM/Nsteps - ( *meanM )*( *meanM ) );
-
-  //print_matrix(ising, rows, cols); //DEBUG
+  *stdE = sqrt( *stdE/Nsteps - ( *meanE )*( *meanE ) );
+  *stdM = sqrt( *stdM/Nsteps - ( *meanM )*( *meanM ) );
 
   free(Ept); Ept = NULL;
   free(Mpt); Mpt = NULL;
-  //DEBUG free(ising); ising=NULL;
   return 0;
   /* Remember that the important values returned by this
      fuction are in <return_values>.

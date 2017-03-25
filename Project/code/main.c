@@ -15,20 +15,19 @@ static int simulate_ising_write_all_to_bin
      of differnt times and writes all data to
      a binary file.
   */
-  srand(time(NULL)); //seeds rand, should only be called once
+  srand((unsigned) time(NULL)); //seeds rand, should only be called once
 
-  int L=16;
-  double J=1;            // energy factor in tha Hamlitonian
-  double beta = 0.0002;  // invers temperature
-  double factor = 1.096; // this ^ 100 = 1e4
-  int Nsims = 4;         // # simulations, set to 0 if not active
-  int Nsteps = (int)1e7; // # Monte Carlo steps
-  int write_chunk = 256; // # doubles to be written at once
+  int    L        = 16;         // side length of the grid
+  double J        = 1.0;        // energy factor in the Hamlitonian
+  double beta0    = 0.25;       // invers temperature
+  double d_beta   = 16e-3;      // step size in beta
+  double beta;                  // init
+  int Nsims       = 128;        // # sims, set to 0 if not active
+  int Nsteps      = (int)2e7;   // # Monte Carlo steps
+  int write_chunk = 256;        // # doubles to be written at once
   
   clock_t begin2, begin3, end2; //init, for time tracking
-  float runtime2, runtime3;
-  //char save_directory[] = "../data/bin/";
-  
+  float runtime2, runtime3;  
 
 
   /* Lots of differents messages */
@@ -54,7 +53,7 @@ static int simulate_ising_write_all_to_bin
   /* Starting the computations */
   begin3 = clock();
   for ( int i=0; i<Nsims; ++i ){
-    //    beta = beta/factor; // the new/next value 
+    beta = beta0 + i*d_beta;
     
     /* A timer for how long the execution took */
     begin2 = clock();
@@ -92,6 +91,9 @@ static int simulate_ising_write_all_to_bin
 
 
 
+
+
+
 static int simulate_ising_write_avg_to_tsv
 ( FILE *logPTR, char *save_directory ){
   /* As the name suggests, simulates a bunch of
@@ -100,23 +102,23 @@ static int simulate_ising_write_avg_to_tsv
 
      <logPTR> is a pointer to a log file.
   */
-  srand(time(NULL));// seeds rand, should only be called once
+  srand((unsigned) time(NULL)); //seeds rand, should only be called once
 
   /* Inits */
-  int no_of_values = 5;        // do NOT change this! 
-  double TEMarr[no_of_values]; // array with mean and std of E & M.
-  int    L       = 16;         // side length og the grid
-  double J       = 1.0;        // energy factor in the Hamlitonian
-  double beta0   = 0.33;       // invers temperature
-  double d_beta  = 6.7e-0;       // step size in beta
-  double beta;                 // init
-  int Nsims      = 2;       // # sims, set to 0 if not active
-  int Nsteps     = (int)2e7;   // # Monte Carlo steps
-  int disc_first = (int)5e4;   // discard values from warm-up period
+  int no_of_values = 5;         // do NOT change this! 
+  double TEMarr[no_of_values];  // array with mean and std of E & M.
+  int    L       = 16;          // side length og the grid
+  double J       = 1.0;         // energy factor in the Hamlitonian
+  double beta0   = 0.10;        // invers temperature
+  double d_beta  = 1e-3;        // step size in beta
+  double beta;                  // init
+  int Nsims      = 2048;        // # sims, set to 0 if not active
+  int Nsteps     = (int)2e7;    // # Monte Carlo steps
+  int disc_first = (int)5e4;    // discard values from warm-up period
 
-  int isOK;                    //init, for error checking
-  clock_t begin2,end2, begin3; //init, for time tracking
-  float runtime2, runtime3;    //init, for time tracking
+  int isOK;                     //init, for error checking
+  clock_t begin2,end2, begin3;  //init, for time tracking
+  float runtime2, runtime3;     //init, for time tracking
 
 
   /* Lots of differents messages */
@@ -134,9 +136,9 @@ static int simulate_ising_write_avg_to_tsv
 
   /*    file I/O    */
   char filename[128];
-  sprintf(filename, "%sTEMstdEstdM_beta_%0.3f-%0.3f_%d.tsv",
+  sprintf(filename, "%sEstdEMstdM_beta_%0.3f-%0.3f_%d.tsv",
   	  save_directory, beta0, beta0+(Nsims-1)*d_beta, Nsims);
-
+  //sprintf(filename,"%sDEBUG_.tsv",save_directory); //DEBUG
 
   FILE *filePTR;
   filePTR = fopen(filename,"w");
@@ -206,8 +208,8 @@ static int simulate_ising_write_avg_to_tsv
 int main(){
   int isOK = 0; // init (0 = ok, 1 = not ok)
   //char save_directory[] = "../data/bin/";
-  //char save_directory[] = "../data/";
-  char save_directory[] = "/tmp/"; //DEBUG
+  char save_directory[] = "../data/";
+  //char save_directory[] = "../data/DEBUG/"; //DEBUG
 
 
 
@@ -228,11 +230,9 @@ int main(){
   begin1 = clock();
 
   /* Computation goes in here: */
-
-  isOK = simulate_ising_write_all_to_bin(logPTR,save_directory);
-  //isOK = simulate_ising_write_avg_to_tsv(logPTR,save_directory);
-  //int N=L*L;int index=4; play_w_print_matrix(L, N, index);
-  //play_w_ising_init(L, J);
+  //isOK = simulate_ising_write_all_to_bin(logPTR,save_directory);
+  isOK = simulate_ising_write_avg_to_tsv(logPTR,save_directory);
+  
 
   end1 = clock();
   time_spent = (float)(end1 - begin1) / CLOCKS_PER_SEC; 
