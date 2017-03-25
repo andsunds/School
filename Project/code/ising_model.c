@@ -88,9 +88,9 @@ static double deltaE
   }
 
   //return 0; //DEBUG
-  return -J*sum;
+  return -2*J*sum;
   /* The return should realy be:
-           -J*( sum - (-sum) )/2  =  -J*(2*sum)/2.
+           -J*( sum - (-sum) )  =  -J*(2*sum).
      This is because dE= E_f-E_i, where the only differnce
      between E_f and E_i occurs due to the flipped spin at
      site index. I.e. summation would look like
@@ -164,12 +164,12 @@ static void motecarlo_ising_step
      a bad thing to worry ablout. 
   */
 
-  /* //DEBUG
+  ///* //DEBUG
   if ( dE>0 ){ //DEBUG
     ising[random_index]=-ising[random_index];
     dE=0;dM=0;
   }
-  */
+  //*/
 
   if ( dE>7*J ){ 
     /* Generate a random number in [0,1] */
@@ -440,7 +440,7 @@ int montecarlo_ising_average
     *stdM  += arr_EM[1]*arr_EM[1];
     ///*
     //DEBUG
-    if ( (b%10) == 0 ){
+    if ( (b%1) == 0 ){
       printf("b = %d\n", b);
       printf("E,M = %3.4f, %3.4f\n", *Ept, *Mpt);
       printf("E,M = %3.4f, %3.4f\n",
