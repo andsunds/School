@@ -3,7 +3,8 @@
 #include <math.h>
 #include "main.h"
 
-static int *ising_init(int rows, int cols){
+//DEBUG: instead allocating here, pass ising_mtrx to here.
+static int *ising_init(int *ising_mtrx, int rows, int cols){
   /* Initializes a matrix, in the form of an
      array, filled with +-1 randomly.
 
@@ -13,7 +14,7 @@ static int *ising_init(int rows, int cols){
   */
   // Don't forget the sizeof!
   int N=rows*cols;
-  int *ising_mtrx= malloc(N*sizeof(int)); 
+  //int *ising_mtrx= malloc(N*sizeof(int)); 
   for( int i=0; i<N; i++ ){
     if( rand()<RAND_MAX/2 ) //random # to decide +-1.
       ising_mtrx[i]=-1;
@@ -22,7 +23,7 @@ static int *ising_init(int rows, int cols){
   }
   /* Do not forget to free ising_mtrx after use
      in the implementeation! */
-  return ising_mtrx;
+  //return ising_mtrx;
 }
 
 
@@ -86,6 +87,7 @@ static double deltaE
            mtrx_as_arr[arr_all_NN[start+b]];
   }
 
+  //return 0; //DEBUG
   return -J*sum;
   /* The return should realy be:
            -J*( sum - (-sum) )/2  =  -J*(2*sum)/2.
@@ -121,7 +123,7 @@ static double order_param(int *mtrx_as_arr, int N){
 static double delta_order_param(int *mtrx_as_arr,int index, int N){
   /* Returns the change in M.
    */
-  
+  //return 0;//DEBUG
   return 2*( (double)mtrx_as_arr[index] )/( (double)N );
   /* Since M(after)-M(before)
      = (mtrx_as_arr[index] - (-mtrx_as_arr[index]) )/N,
@@ -148,21 +150,27 @@ static void motecarlo_ising_step
         dE = -8*J, -4*J, 0*J, +4*J, or +8*J
      this means that we only need to check the two cases
      dE=4*J and dE=8*J.
-
-     TODO: implement M_tot and dM in a similar manner as for E.
   */
 
   double dbl_rand; //a random dbl, to be used in a check
   
   int random_index = rand() % N; // random index.
   ising[random_index] = -ising[random_index]; //flip
-  double dE = deltaE(J, ising, random_index, rows, cols,
-		     arr_all_NN); // deltaE
+  double dE = deltaE(J, ising, random_index, rows, cols, arr_all_NN);// deltaE
+  double dM = delta_order_param(ising, random_index, N);             // deltaM
   
   /* I'm beeing conservative in the use of == when
      it comes to floats/doubles. I don't know if this is
      a bad thing to worry ablout. 
   */
+
+  /* //DEBUG
+  if ( dE>0 ){ //DEBUG
+    ising[random_index]=-ising[random_index];
+    dE=0;dM=0;
+  }
+  */
+
   if ( dE>7*J ){ 
     /* Generate a random number in [0,1] */
     dbl_rand = ( (double)rand() )/RAND_MAX;
@@ -172,7 +180,7 @@ static void motecarlo_ising_step
 	 and the change in energy is 0.
       */
       ising[random_index]=-ising[random_index];
-      dE=0;
+      dE=0;dM=0;
     }
   }else if ( dE>3*J ){
     /* Generate a random number in [0,1] */
@@ -183,12 +191,14 @@ static void motecarlo_ising_step
 	 and the change in energy is 0.
       */
       ising[random_index]=-ising[random_index];
-      dE=0;
+      dE=0;dM=0;
     }
   }
+  //DEBUG
+  //printf("INSIDE step: E,M = %2.3f, %2.3f\n", *E_tot, *M_tot);
 
-  *E_tot = (*E_tot) + dE;
-  *M_tot = (*M_tot) + delta_order_param(ising, random_index, N);
+  *E_tot = *E_tot + dE;
+  *M_tot = *M_tot + dM;
   /* Writes the new values to the array passed to this
      function. 
 
@@ -253,7 +263,10 @@ int montecarlo_ising_full
   if ( chunk % 2 == 1 )
     chunk++; //makes sure chunk is even
   double arr_EM[chunk]; //values to be written to file
-  int *ising=ising_init(rows, cols); // init of random ising grid
+  //DEBUG  int *ising=ising_init(rows, cols); // init of random ising grid
+  //DEBUG 
+  int ising[N];
+  ising_init(ising,rows, cols);
 
   // The length of the loops. These values are such
   // that loop1*loop2 should be just over Nsteps.
@@ -268,7 +281,7 @@ int montecarlo_ising_full
 
   /*   I/O   */
   char filename[128]; //longer then the filename
-  sprintf(filename,"%sbeta_%0.5f.bin",save_directory,beta);
+  sprintf(filename,"%sEM_beta_%0.5f.bin",save_directory,beta);
   FILE *filePTR;
   filePTR=fopen(filename,"wb");
   if ( !filePTR ){ //check if the file opened.
@@ -320,7 +333,7 @@ int montecarlo_ising_full
   fprintf(logPTR,"%s",endMSG);
 
   fclose(filePTR);
-  free(ising); ising=NULL;
+  //DEBUG free(ising); ising=NULL;
   return 0;
 }
 
@@ -354,7 +367,9 @@ int montecarlo_ising_average
 
   /* Initializations */
   int N=rows*cols; //total # sites
-  double E, M; 
+  //double E, M; //DEBUG
+  double *Ept=malloc(sizeof(double));//&E;
+  double *Mpt=malloc(sizeof(double));//&M; 
   // The Boltzmann factors can be pre-computed since dE only can
   // assume some discrete values: +-8J, +-4J, or 0.
   double boltzmann_factors[2] = {exp(-beta*J*8), exp(-beta*J*4)};
@@ -364,14 +379,17 @@ int montecarlo_ising_average
 
   // Giving the pointers (human) understandable names.
   return_values[0] = 1/beta;
-  double *meanE = return_values +1; *meanE = 0;
-  double *stdE  = return_values +2; *stdE  = 0;
-  double *meanM = return_values +3; *meanM = 0;
-  double *stdM  = return_values +4; *stdM  = 0;
+  double *meanE; meanE = return_values +1; *meanE = 0;
+  double *stdE;  stdE  = return_values +2; *stdE  = 0;
+  double *meanM; meanM = return_values +3; *meanM = 0;
+  double *stdM;  stdM  = return_values +4; *stdM  = 0;
   
-  double arr_EM[2]; //array of current E and M values
-  int *ising=ising_init(rows, cols); // init of random ising grid
+  double arr_EM[2] = {0,0}; //array of current E and M values
 
+  //DEBUG  int *ising=ising_init(rows, cols); // init of random ising grid
+  //DEBUG 
+  int ising[N];
+  ising_init(ising,rows, cols);
 
   /* It's cheeper to calculate deltaE and deltaM in each
      iteration and just add that to E and M, to get the
@@ -381,8 +399,14 @@ int montecarlo_ising_average
      first value of E or M, but that should not be any
      problems.
   */
-  E = totE(J, ising, rows, cols);
-  M = order_param(ising, N);
+  *Ept = totE(J, ising, rows, cols);
+  *Mpt = order_param(ising, N);
+  
+  //DEBUG
+  //printf("\nSTART: E,M = %3.2f, %3.2f\n", *Ept, *Mpt);
+
+  //E = totE(J, ising, rows, cols);
+  //M = order_param(ising, N);
   for (int a=0; a<discard_first; ++a ){ //for #1
     /* In this loop we just perform the Monte Carlo
        step <discard_first> number of times, to get
@@ -390,7 +414,7 @@ int montecarlo_ising_average
     */
     motecarlo_ising_step
       (ising, rows, cols, N,
-       arr_EM, J, beta, &E, &M,
+       arr_EM, J, beta, Ept, Mpt,
        boltzmann_factors, arr_all_NN, 0);
      //Passing 0 as the <current_index> because
      //arr_EM only has 2 elements.
@@ -400,7 +424,7 @@ int montecarlo_ising_average
     /* This is one ising step */
     motecarlo_ising_step
       (ising, rows, cols, N,
-       arr_EM, J, beta, &E, &M,
+       arr_EM, J, beta, Ept, Mpt,
        boltzmann_factors, arr_all_NN, 0);
     //Passing 0 as the <current_index> because
     //arr_EM only has 2 elements.
@@ -414,6 +438,17 @@ int montecarlo_ising_average
     *stdE  += arr_EM[0]*arr_EM[0];  //E*E;
     *meanM += arr_EM[1]; 
     *stdM  += arr_EM[1]*arr_EM[1];
+    ///*
+    //DEBUG
+    if ( (b%10) == 0 ){
+      printf("b = %d\n", b);
+      printf("E,M = %3.4f, %3.4f\n", *Ept, *Mpt);
+      printf("E,M = %3.4f, %3.4f\n",
+	     totE(J, ising, rows, cols), order_param(ising, N));
+      
+      //print_matrix(ising, rows, cols); //DEBUG
+    }
+    //*/
   }//end for #2
 
   /* Calculating the means */
@@ -428,10 +463,15 @@ int montecarlo_ising_average
      In the estimates for var one should use N-1, however
      in this case N>>1, so it makes no difference.
   */
-  *stdE = sqrt( *stdE/Nsteps - ( *meanE )*( *meanE ) );
-  *stdM = sqrt( *stdM/Nsteps - ( *meanM )*( *meanM ) );
+  //DEBUG
+  *stdE = 0*sqrt( *stdE/Nsteps - ( *meanE )*( *meanE ) );
+  *stdM = 0*sqrt( *stdM/Nsteps - ( *meanM )*( *meanM ) );
 
-  free(ising); ising=NULL;
+  //print_matrix(ising, rows, cols); //DEBUG
+
+  free(Ept); Ept = NULL;
+  free(Mpt); Mpt = NULL;
+  //DEBUG free(ising); ising=NULL;
   return 0;
   /* Remember that the important values returned by this
      fuction are in <return_values>.
