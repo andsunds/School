@@ -74,7 +74,42 @@ void get_all_NN(int *arr_all_NN, int rows, int cols);
   */
 
 
+void get_NN_periodic(int *arr_NN_index, int index, int rows, int cols);
+  /* Finds the nearest neighbours (NN) to the site 
+     described by <index>. This method applies periodic boundary
+     conditions to the NN's.
 
+     <arr_NN_index> is set up as:
+        {#NN's, NN1, NN2, (NN3), (NN4)}.
+     (This is to keep backwards compatibility with the non-periodic
+     version of this functino.)
+
+     The argument <arr_NN_index> has to be a pointer to an
+     array of size _5_, otherwise expect big fuckups!
+  */
+
+
+void get_all_NN_periodic(int *arr_all_NN, int rows, int cols);
+  /* This funtion returns an array <arr_all_NN> with
+     information about all NN's, with _periodic_ boundary
+     conditinos.
+
+     It is important that <arr_all_NN> is
+                5*<rows>*<cols> = 5*N
+     ints long. The factor 5 comes in because there
+     are 4 NN's, and for each index there is also a
+     value telling us 
+
+     <arr_all_NN> is structured acording to:
+      {#NN(i=0), NN1(i=0), NN2(i=0), (NN3(i=0)), (NN4(i=0)),
+       #NN(i=1), NN1(i=1), NN2(i=1), (NN3(i=1)), (NN4(i=1)),
+       ...,
+       #NN(i=N), NN1(i=N), NN2(i=N), (NN3(i=N)), (NN4(i=N))}
+     So to acces the relevant infrmation for index i, just
+     use:
+             for ( int j=0; j<5; ++j )
+               ... = arr_all_NN[i*5 + j];
+  */
 
 /***************** ising_model.c *****************/
 // static int *ising_init(int rows, int cols);
