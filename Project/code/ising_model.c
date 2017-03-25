@@ -164,12 +164,12 @@ static void motecarlo_ising_step
      a bad thing to worry ablout. 
   */
 
-  ///* //DEBUG
+  /* //DEBUG
   if ( dE>0 ){ //DEBUG
     ising[random_index]=-ising[random_index];
     dE=0;dM=0;
   }
-  //*/
+  */
 
   if ( dE>7*J ){ 
     /* Generate a random number in [0,1] */
