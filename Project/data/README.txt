@@ -4,7 +4,9 @@ The data files contains data from simulations of the Ising model:
 
 This is unless their file names start with XY, then the model used 
 were:
-       H = -J * sum_{<i,j> are NN} cos( theta_i - theta_j).
+       H = -J * sum_{<i,j> are NN} cos( theta_i - theta_j).   
+
+Unless otherwise stated the simulations were done on a 16x16 grid.
 
 
 ======================================================================
