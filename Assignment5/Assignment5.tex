@@ -1,0 +1,101 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+\usepackage[makeroom
+]{cancel}
+\graphicspath{{figures/}}
+
+\swapcommands{\Omega}{\varOmega}
+\swapcommands{\Lambda}{\varLambda}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 2.5cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+%\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
+\newcommand{\sign}{\ensuremath{\text{sign}}}
+
+%\usepackage{tikz}
+
+\begin{document}
+
+%\tikzstyle{every picture}+=[remember picture]
+%\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{Statistical Physics 2 -- PHYS\,705 \\
+Assignment 5}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+\section{Wavefunction renormalization}
+Here we want to find the renormalization, $z$, for $\sigma$ and
+$\vb*\pi$ in the non-linear $\sigma$ model. It is defined by 
+$\sigma'(\vb*k') = z^{-1}\sigma_<(\vb*k)$ and
+$\vb*\pi'(\vb*k') = z^{-1}\vb*\pi_<(\vb*k)$. What we want to show is
+that
+\begin{equation}\label{eq:1_want}
+\frac{z}{b^{d}} = 1 -\frac{n-1}{2}I_1,
+\end{equation}
+where
+\begin{equation}
+I_1:= \int_{\Lambda/b}^\Lambda \frac{\rd^dq}{(2\pi)^d}G_0(\vb*q)
+= \int_{\Lambda/b}^\Lambda \frac{\rd^dq}{(2\pi)^d} \frac{T}{q^2}
+= \frac{\mathcal{S}_d T}{(2\pi)^d} \Lambda^{d-2} \Delta{l},
+\end{equation}
+where $\mathcal{S}_d$ is the area of a unit sphere in $d$ dimensions
+and $\ee^{\Delta{l}} = b$.
+
+
+\section{The Kosterlitz recursion relations}
+
+We are given the Kosterlitz recursion relations in $d=2+\epsilon$
+dimensions:
+\begin{align}
+\label{eq:2_dT/dl}
+\dv{T}{l} =& \epsilon T +4\pi^3y^2\\
+\label{eq:2_dy/dl}
+\dv{y}{l} =& \qty(2 -\frac{\pi}{T})y.
+\end{align}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+%  LocalWords:  MFT MF Ising Ornstein Zernike Stratonovich GLW RG
+%  LocalWords:  rescale quartic rescaled anisotropy
