@@ -71,19 +71,128 @@ where $\mathcal{S}_d$ is the area of a unit sphere in $d$ dimensions
 and $\ee^{\Delta{l}} = b$.
 
 
+
+
+
+
+
+By Wick's theorem, we know that
+\begin{equation}
+\ev{\pi_a(\vb*k_1)\pi_b(\vb*k_2)}
+= \delta_{a, b} G_0(\vb*k_1) \,(2\pi)^d \delta(\vb*k_1 + \vb*k_2).
+\end{equation}
+We can use that to calculate
+\begin{equation}
+\begin{aligned}
+\ev{(\vb*\pi(\vb*x))^2} =& \frac{1}{Z_0}
+\int \mathcal{D}\vb*\pi\; 
+[\vb*\pi(\vb*x)\vdot\vb*\pi(\vb*x)] \ee^{-S[\vb*\pi]}\\
+=& \frac{1}{Z_0} \int \mathcal{D}\vb*\pi
+\qty[\int\frac{\rd^dk_1}{(2\pi)^d}\frac{\rd^dk_2}{(2\pi)^d}
+\vb*\pi(\vb*k_1)\vdot\vb*\pi(\vb*k_2) \ee^{\ii\vb*x\vdot(\vb*k_1+\vb*k_2)}]
+\ee^{-S[\vb*\pi]} \\
+%\end{aligned}
+%\end{equation}
+%To take care of the Fourier exponential, we can set
+%$\vb*x=\vb*0$. This is since 
+%\begin{equation}
+%\begin{aligned}
+%\ev{(\vb*\pi(\vb*0))^2}
+=& \int\frac{\rd^dk_1}{(2\pi)^d}\frac{\rd^dk_2}{(2\pi)^d}
+\ee^{\ii\vb*x\vdot(\vb*k_1+\vb*k_2)}
+\underbrace{\frac{1}{Z_0} \int \mathcal{D}\vb*\pi\; 
+\vb*\pi(\vb*k_1)\vdot\vb*\pi(\vb*k_2) 
+\ee^{-S[\vb*\pi]}}_{=\sum_a\ev{\pi_a(\vb*k_1)\pi_a(\vb*k_2)}}\\
+=& \sum_a \int\frac{\rd^dk}{(2\pi)^d}G_0(\vb*k)
+= (n-1) \int\frac{\rd^dk}{(2\pi)^d}G_0(\vb*k).
+\end{aligned}
+\end{equation}
+The factor $(n-1)$ comes from the fact that $\vb*\pi$ has $(n-1)$
+components. 
+
+
+
+
+
+
+
+
+
 \section{The Kosterlitz recursion relations}
+\newcommand{\TKT}{T_{\text{KT}}}
 
 We are given the Kosterlitz recursion relations in $d=2+\epsilon$
 dimensions:
 \begin{align}
 \label{eq:2_dT/dl}
-\dv{T}{l} =& \epsilon T +4\pi^3y^2\\
+\beta_T := \dv{T}{l} =& \epsilon T +4\pi^3y^2\\
 \label{eq:2_dy/dl}
-\dv{y}{l} =& \qty(2 -\frac{\pi}{T})y.
+\beta_y := \dv{y}{l} =& \qty(2 -\frac{\pi}{T})y.
 \end{align}
 
 
+\subsection{The finite-temperature fixed point}
+The fixed point, at $T>0$, is given by setting
+\begin{equation}
+\epsilon T +4\pi^3y^2 = 0
+\quad\Longrightarrow\quad
+y = \pm\sqrt{\frac{\epsilon T}{4\pi^3}} \neq0,
+\end{equation}
+which gives
+\begin{equation}
+T^* = \TKT = \frac{\pi}{2}
+\end{equation}
+and 
+\begin{equation}
+y^* = \pm\frac{\sqrt{\epsilon}}{2^{5/2},\pi}.
+\end{equation}
+\todo{Is $y\ge0$, so that we can drop the $\pm$.}
 
+\subsection{Scaling dimensions}
+To get the scaling dimensions we need the eigenvalues of 
+\begin{equation}
+M = \eval{
+\begin{pmatrix}
+\pdv{\beta_T}{T} & \pdv{\beta_T}{y}\\
+\pdv{\beta_y}{T} & \pdv{\beta_y}{y}
+\end{pmatrix}
+}_{T^*, y^*}
+=
+\begin{pmatrix}
+-\epsilon & 8\pi^3 y^*\\
+\frac{\pi y^*}{\TKT^2} & 2-\frac{\pi}{\TKT}
+\end{pmatrix}
+=
+\begin{pmatrix}
+-\epsilon & \pm2^{3/2}\pi^2\sqrt{\epsilon}\\
+\pm \frac{\sqrt{2\epsilon}}{\pi^2} & 0
+\end{pmatrix}.
+\end{equation}
+To get the eigenvalues we use the characteristic equation
+\begin{equation}
+0=
+\begin{vmatrix}
+(-\epsilon -\lambda) & \pm2^{3/2}\pi^2\sqrt{\epsilon}\\
+\pm \frac{\sqrt{2\epsilon}}{\pi^2} & 0-\lambda
+\end{vmatrix}
+= \lambda^2 + \epsilon\lambda - 4\epsilon,
+\end{equation}
+which has the solutions
+\begin{equation}
+\lambda_\pm = \frac{1}{2}\qty[ -\epsilon
+\pm\sqrt{\epsilon^2 + 16\epsilon}]
+= \frac{1}{2}\qty[ -\epsilon
+\pm4\sqrt{\epsilon}\sqrt{1+\frac{\epsilon}{16}}].
+\end{equation}
+\todo[inline]{Is the lowes order $\sqrt{\epsilon}$?}
+
+
+
+
+
+
+
+\subsection{Estimate of $\nu$ and $\alpha$}
 
 
 
