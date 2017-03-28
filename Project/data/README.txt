@@ -22,7 +22,7 @@ J used was 1, therefore the units of T and E are in terms of J.
 
 ======================================================================
         
-The .tsv file names are formated   
+The .tsv file with names that are formated   
 EstdEMstdM_beta_%0.3f-%0.3f_%d[_PERIODIC].tsv,   
 where the first value is the lowest beta value and the second is the 
 higest, followed by the number of steps; if periodic BC's were used, 
@@ -32,6 +32,7 @@ The files are formated as columns with T, E, stdE, M, and stdM. The
 value of J used was 1, therefore the units of T and E are in terms of 
 J.
 
+These files are created from 2e7 montecarlo steps.
 
 ======================================================================
 
@@ -40,3 +41,18 @@ energies, E. This is due to a miss in the calculation of the initial
 energy, where hard BC's were accidentally used.
 
 
+
+======================================================================
+        
+The .tsv file with names that are formated   
+TEstdErhoXY_beta_%0.3f-%0.3f_%d_PERIODIC.tsv,   
+where the first value is the lowest beta value and the second is the 
+higest, followed by the number of steps. Periodic BC's were used.
+
+The files are formated as columns with T, E, stdE, rhoX, and rhoY. 
+The value of J used was 1, therefore the units of T and E are in terms
+of J.
+
+These files are created from 1e6 montecarlo steps.
+
+======================================================================
