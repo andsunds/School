@@ -112,45 +112,10 @@ void get_all_NN_periodic(int *arr_all_NN, int rows, int cols);
   */
 
 /***************** ising_model.c *****************/
-// static int *ising_init(int rows, int cols);
-  /* Initializes a matrix, in the form of an
-     array, filled with +-1 randomly.
 
-     The array is allocated as a pointer inside
-     this function, so it must be freed after use
-     in the implementation. 
-  */
-
-//static double totE
-//(double J, int *mtrx_as_arr, int rows, int cols);
-  /* Returns the total energy of the system according to
-     the Hamiltonian:
-             H = -J \sum_{<i,j> is NN} s_i * s_j,
-     where s_i and s_j are described in mtrx_as_arr.
-
-     No need (in problem 1) to use double for J and the
-     return value, but it might come in handy later. 
-   */
-
-//static double deltaE
-//(double J, int *mtrx_as_arr, int index, int rows, int cols);
-  /* Calculates the change in energy after _one_ spin
-     (at index) has been flipped. The calculation is
-     based on the Hamiltonian:
-             H = -J \sum_{<i,j> is NN} s_i * s_j,
-     where s_i and s_j are described in mtrx_as_arr.
-  */
-
-//static double order_param(int *mtrx_as_arr, int N);
-  /* Returns the order parameter of the sysyem:
-        M = (1/N) * \sum_{all i} s_i,
-     where the spin values s_i are described in the
-     array mtrx_as_arr, and N is the total number of
-     spins. 
-   */
 
 int montecarlo_ising_full
-(int rows, int cols, double J, double beta, int Nsteps,
+(int rows, int cols, double J, double beta, int Nsteps, int isP,
  int chunk, char *save_directory, FILE *logPTR);
   /* This function Monte Carlo simulates a 2D ising model
      and writes the energy, E, and order paramter, M, to a
@@ -187,7 +152,7 @@ int montecarlo_ising_full
 int montecarlo_ising_average
 (int rows, int cols, 
  double J, double beta, double *return_values,
- int Nsteps, int discard_first);
+ int Nsteps, int discard_first, int isP);
   /* This function Monte Carlo simulates a 2D ising model
      and retruns the average and std of the energy, E, and
      order paramter, M. The values are retuned in the array
@@ -208,5 +173,27 @@ int montecarlo_ising_average
 
 
 
+/***************** XY_model.c *****************/
+int montecarlo_XY_average
+(int rows, int cols, 
+ double J, double beta, double *return_values,
+ int Nsteps, int discard_first, int isP);
+  /* This function Monte Carlo simulates a 2D ising model
+     and retruns the average and std of the energy, E, and
+     order paramter, M. The values are retuned in the array
+     <return_values> in the fashion:
+                   {T, E, sdtE, rho_sX, rho_sY},
+     where T=1/<beta>.
+
+     The Ising model is that of a grid of size <rows>*<cols>
+     with Hamiltonian:
+         H = -J * \sum_{<i,j> NN} cos(theta_i - theta_j),
+     at temperature 1/<beta>.
+     <Nsteps> of Monte Carlo simulations are performed.
+
+     MAKE SURE THAT <return_values> IS AN ARRAY WITH 
+                             5
+     ELEMENTS.
+  */
 
 #endif

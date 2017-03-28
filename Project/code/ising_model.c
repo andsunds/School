@@ -4,7 +4,7 @@
 #include "main.h"
 
 
-static int *ising_init(int *ising_mtrx, int rows, int cols){
+static void *ising_init(int *ising_mtrx, int rows, int cols){
   /* Initializes a matrix, passed to here, in the form of an
      array, filled with +-1 randomly.
 
@@ -14,8 +14,9 @@ static int *ising_init(int *ising_mtrx, int rows, int cols){
   */
   
   int N=rows*cols;
+  int threshold = RAND_MAX/2;
   for( int i=0; i<N; i++ ){
-    if( rand()<RAND_MAX/2 ) //random # to decide +-1.
+    if( rand()< threshold ) //random # to decide +-1.
       ising_mtrx[i]=-1;
     else
       ising_mtrx[i]= 1;
@@ -23,7 +24,8 @@ static int *ising_init(int *ising_mtrx, int rows, int cols){
 }
 
 
-static double totE(double J, int *mtrx_as_arr, int rows, int cols){
+static double totE(double J, int *mtrx_as_arr, int rows, int cols,
+		   int *arr_all_NN){
   /* Returns the total energy of the system according to
      the Hamiltonian:
              H = -J \sum_{<i,j> is NN} s_i * s_j,
@@ -38,16 +40,22 @@ static double totE(double J, int *mtrx_as_arr, int rows, int cols){
      loop to then get the new value. 
    */
   int sum = 0; // sum of spin products
-  int NN[5];   // init for use be get_NN
   int N=rows*cols;
+  int start;
   for (int a=0; a<N; a++ ){
     /* Loop/sum over all sites */
-    get_NN(NN, a, rows, cols);
-    for ( int b=0; b<NN[0]; b++){
-      /* For each site, loop/sum over all NN's. */
-      sum += mtrx_as_arr[a]*mtrx_as_arr[NN[b+1]];
+    start = a*5;
+    for ( int b=1; b<=arr_all_NN[start]; b++){
+      /* Loop over all NN's, and sum the products.
+	 To acces the NN's for <index> start at <index>*5,
+	 and then check as many slots as are indicated in
+	 that location.
+      */
+      sum += mtrx_as_arr[a] * 
+	mtrx_as_arr[arr_all_NN[a+b]];
     }
   }
+  
   return -J*sum/2;
   /* We have to divide by 2 due to double counting
      of NN's. We sum for EVERY site's NN's, which
@@ -65,13 +73,7 @@ static double deltaE
      where s_i and s_j are described in mtrx_as_arr.
   */
   int sum = 0; // sum of spin products
-  /*//  OLD VERSION!
-  int NN[5];   // init, for use be get_NN. 5 is important!
-  get_NN(NN, index, rows, cols);
-  for ( int b=0; b<NN[0]; b++){ // loop over all NN's
-    sum += mtrx_as_arr[index]*mtrx_as_arr[NN[b+1]];
-  }
-  */
+
   int start = index*5;
   for ( int b=1; b<=arr_all_NN[start]; b++){
     /* Loop over all NN's, and sum the products.
@@ -199,7 +201,7 @@ static void motecarlo_ising_step
 
 
 int montecarlo_ising_full
-(int rows, int cols, double J, double beta, int Nsteps,
+(int rows, int cols, double J, double beta, int Nsteps, int isP,
  int chunk, char *save_directory, FILE *logPTR){
   /* This function Monte Carlo simulates a 2D ising model
      and writes the energy, E, and order paramter, M, to a
@@ -242,7 +244,10 @@ int montecarlo_ising_full
   // assume some discrete values: +-8J, +-4J, or 0.
   double boltzmann_factors[2] = {exp(-beta*J*8), exp(-beta*J*4)};
   int  arr_all_NN[5*N]; // An array with info on all the NN's.
-  get_all_NN(arr_all_NN, rows, cols);
+  if ( isP == +1 )
+    get_all_NN_periodic(arr_all_NN, rows, cols);
+  else
+      get_all_NN(arr_all_NN, rows, cols);
 
   if ( chunk % 2 == 1 )
     chunk++; //makes sure chunk is even
@@ -263,7 +268,10 @@ int montecarlo_ising_full
 
   /*   I/O   */
   char filename[128]; //longer then the filename
-  sprintf(filename,"%sEM_beta_%0.5f.bin",save_directory,beta);
+  if ( isP == +1 )
+    sprintf(filename,"%sEM_beta_%0.5f_PERIODIC.bin",save_directory,beta);
+  else
+    sprintf(filename,"%sEM_beta_%0.5f.bin",save_directory,beta);
   FILE *filePTR;
   filePTR=fopen(filename,"wb");
   if ( !filePTR ){ //check if the file opened.
@@ -281,7 +289,7 @@ int montecarlo_ising_full
      first value of E or M, but that should not be any
      problems.
   */
-  E = totE(J, ising, rows, cols);
+  E = totE(J, ising, rows, cols, arr_all_NN);
   M = order_param(ising, N);
   for (int a=0; a<loop1; ++a ){ // for #1
     /* In each iteration of this loop we write data
@@ -325,7 +333,7 @@ int montecarlo_ising_full
 int montecarlo_ising_average
 (int rows, int cols, 
  double J, double beta, double *return_values,
- int Nsteps, int discard_first){
+ int Nsteps, int discard_first, int isP){
   /* This function Monte Carlo simulates a 2D ising model
      and retruns the average and std of the energy, E, and
      order paramter, M. The values are retuned in the array
@@ -353,7 +361,10 @@ int montecarlo_ising_average
   // assume some discrete values: +-8J, +-4J, or 0.
   double boltzmann_factors[2] = {exp(-beta*J*8), exp(-beta*J*4)};
   int  arr_all_NN[5*N]; // An array with info on all the NN's.
-  get_all_NN(arr_all_NN, rows, cols);
+  if ( isP == +1 )
+    get_all_NN_periodic(arr_all_NN, rows, cols);
+  else
+    get_all_NN(arr_all_NN, rows, cols);
 
 
   // Giving the pointers (human) understandable names.
@@ -375,7 +386,7 @@ int montecarlo_ising_average
      first value of E or M, but that should not be any
      problems.
   */
-  *Ept = totE(J, ising, rows, cols);
+  *Ept = totE(J, ising, rows, cols, arr_all_NN);
   *Mpt = order_param(ising, N);
   for (int a=0; a<discard_first; ++a ){ //for #1
     /* In this loop we just perform the Monte Carlo
@@ -399,9 +410,12 @@ int montecarlo_ising_average
                                          //because arr_EM only has 2 elements.
     
     /* Taking the absolute value of M. */
+    /* Not such a good idea to take |M|, because M fluctuates
+       around 0 at high temperatures.
     if ( arr_EM[1]<0 ){
       arr_EM[1] = -arr_EM[1];
     }
+    /*
 
     /* These expressions are not fully the mean and sdt,
        but they will be modified after the loop.

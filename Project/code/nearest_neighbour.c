@@ -192,7 +192,7 @@ void get_NN_periodic(int *arr_NN_index, int index, int rows, int cols){
     /* If inner row, then NN both above AND below as usual */
     arr_NN_index[1] = index - cols; //sets 1st NN
     arr_NN_index[2] = index + cols; //sets 2nd NN
-    horizontal_check
+    horizontal_check_periodic
       (index, col, cols, &arr_NN_index[3], &arr_NN_index[4]);
   }  
 }

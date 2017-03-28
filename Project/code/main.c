@@ -10,7 +10,7 @@
 
 
 static int simulate_ising_write_all_to_bin
-( FILE *logPTR, char *save_directory ){
+( int isP, FILE *logPTR, char *save_directory ){
   /* As the name suggests, simulates a bunch
      of differnt times and writes all data to
      a binary file.
@@ -60,7 +60,7 @@ static int simulate_ising_write_all_to_bin
 
     /* Here is the actual calculation */
     int isOK = montecarlo_ising_full
-                (L,L, J, beta, Nsteps,
+      (L,L, J, beta, Nsteps, isP,
 		 write_chunk, save_directory, logPTR);
     if ( isOK != 0 ){
       /* Just a small check to see that nothing went wrong
@@ -95,7 +95,7 @@ static int simulate_ising_write_all_to_bin
 
 
 static int simulate_ising_write_avg_to_tsv
-( FILE *logPTR, char *save_directory ){
+( int isP, FILE *logPTR, char *save_directory ){
   /* As the name suggests, simulates a bunch of
      differnt times and then oly writes the averages
      and std's of E and M to a tsv-file.
@@ -109,8 +109,8 @@ static int simulate_ising_write_avg_to_tsv
   double TEMarr[no_of_values];  // array with mean and std of E & M.
   int    L       = 16;          // side length og the grid
   double J       = 1.0;         // energy factor in the Hamlitonian
-  double beta0   = 0.10;        // invers temperature
-  double d_beta  = 1e-3;        // step size in beta
+  double beta0   = 0.40;        // invers temperature
+  double d_beta  = 2.5e-5;      // step size in beta
   double beta;                  // init
   int Nsims      = 2048;        // # sims, set to 0 if not active
   int Nsteps     = (int)2e7;    // # Monte Carlo steps
@@ -136,9 +136,14 @@ static int simulate_ising_write_avg_to_tsv
 
   /*    file I/O    */
   char filename[128];
-  sprintf(filename, "%sEstdEMstdM_beta_%0.3f-%0.3f_%d.tsv",
-  	  save_directory, beta0, beta0+(Nsims-1)*d_beta, Nsims);
   //sprintf(filename,"%sDEBUG_.tsv",save_directory); //DEBUG
+  if ( isP == +1 )
+    sprintf(filename, "%sEstdEMstdM_beta_%0.3f-%0.3f_%d_PERIODIC.tsv",
+	    save_directory, beta0, beta0+(Nsims-1)*d_beta, Nsims);
+  else 
+    sprintf(filename, "%sEstdEMstdM_beta_%0.3f-%0.3f_%d.tsv",
+	    save_directory, beta0, beta0+(Nsims-1)*d_beta, Nsims);
+
 
   FILE *filePTR;
   filePTR = fopen(filename,"w");
@@ -163,7 +168,7 @@ static int simulate_ising_write_avg_to_tsv
     /* Here is the actual calculation */
     beta = beta0 + i*d_beta;
     isOK = montecarlo_ising_average
-            (L,L, J, beta, TEMarr, Nsteps, disc_first);
+      (L,L, J, beta, TEMarr, Nsteps, disc_first, isP);
     if ( isOK != 0 ){
       /* Just a small check to see that nothing went wrong
 	 in the last simulation.
@@ -205,13 +210,135 @@ static int simulate_ising_write_avg_to_tsv
 
 
 
+
+static int simulate_XY_write_avg_to_tsv
+( int isP, FILE *logPTR, char *save_directory ){
+  /* As the name suggests, simulates a bunch of
+     differnt times and then oly writes the averages
+     and std's of E and M to a tsv-file.
+
+     <logPTR> is a pointer to a log file.
+  */
+  srand((unsigned) time(NULL)); //seeds rand, should only be called once
+
+  /* Inits */
+  int no_of_values = 5;           // do NOT change this! 
+  double TErho_arr[no_of_values]; // array with mean and std of E & M.
+  int    L       = 16;            // side length og the grid
+  double J       = 1.0;           // energy factor in the Hamlitonian
+  double beta0   = 0.72;          // invers temperature
+  double d_beta  = 2e-3;          // step size in beta
+  double beta;                    // init
+  int Nsims      = 256;           // # sims, set to 0 if not active
+  int Nsteps     = (int)1e6;      // # Monte Carlo steps
+  int disc_first = (int)5e4;      // discard values from warm-up period
+
+  int isOK;                       //init, for error checking
+  clock_t begin2,end2, begin3;    //init, for time tracking
+  float runtime2, runtime3;       //init, for time tracking
+
+
+  /* Lots of differents messages */
+  char startMSG[128];
+  sprintf(startMSG,"\n   Starting %d simulation(s) of %2g steps each (write avg, XY).\n \n", Nsims, (float)Nsteps);
+
+  char file_errorMSG[] = " ERROR in simulate_XY_write_avg_to_tsv(): unable to open file: ";
+
+  char sim_errorMSG[] = " ERROR in simulate_XY_write_avg_to_tsv(): error while simulating in sim number ";
+
+  char BC_errorMSG[] = "ERROR: Boundary conditions not periodic. For XY model, need periodic BC.";
+
+  char timeMSG[128]; //rewritten after each iteration
+
+  char endMSG[256]; //written later
+
+
+  /*    file I/O    */
+  char filename[128];
+  //sprintf(filename,"%sDEBUG_.tsv",save_directory); //DEBUG
+  if ( isP == +1 )
+    sprintf(filename, "%sTEstdErhoXY_beta_%0.3f-%0.3f_%d_PERIODIC.tsv",
+	    save_directory, beta0, beta0+(Nsims-1)*d_beta, Nsims);
+  else {
+    printf(         "%s\n", BC_errorMSG);
+    fprintf(logPTR, "%s\n", BC_errorMSG);
+    return 1;
+  }
+
+  FILE *filePTR;
+  filePTR = fopen(filename,"w");
+    /* Some error checking if the file opened correctly */
+  if ( !filePTR ){
+    printf(         "%s%s\n", file_errorMSG,filename);
+    fprintf(logPTR, "%s%s\n", file_errorMSG,filename);
+    return 1; 
+  }
+
+
+  /* A message before we start */
+  printf(        "%s",startMSG);
+  fprintf(logPTR,"%s",startMSG);
+  printf("Writing data to: %s\n",filename);
+
+  /* Starting the computations */
+  begin3 = clock();
+  for ( int i=0; i<Nsims; ++i ){
+    /* A timer for how long the execution took */
+    begin2 = clock();
+    /* Here is the actual calculation */
+    beta = beta0 + i*d_beta;
+    isOK = montecarlo_XY_average
+      (L,L, J, beta, TErho_arr, Nsteps, disc_first, isP);
+    if ( isOK != 0 ){
+      /* Just a small check to see that nothing went wrong
+	 in the last simulation.
+      */
+      printf(         "%s%d", sim_errorMSG,i);
+      fprintf(logPTR, "%s%d", sim_errorMSG,i);
+      return 1;
+    }
+    /* Write to file */
+    for ( int j=0; j<no_of_values; ++j ){
+      fprintf(filePTR, "%16e",TErho_arr[j]);
+    }
+    fprintf(filePTR, "\n"); //newline after the simulation
+
+    /* Time tracking */
+    end2 = clock();
+    runtime2= (float)(end2 - begin2) / CLOCKS_PER_SEC;
+    runtime3= (float)(end2 - begin3) / CLOCKS_PER_SEC / 60;//min
+
+    if ( runtime3 < 60 ){ //diplay accumulated time in min's
+      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f min )\n", beta, i+1, Nsims, runtime2, runtime3);
+    }else{ //diplay accumulated time in hours
+      sprintf(timeMSG,"Execution time (beta=%0.4f, %d of %d): %0.3f s. ( %0.2f hours )\n", beta, i+1, Nsims, runtime2, runtime3/60);
+    }
+    printf(        "%s",timeMSG);
+    fprintf(logPTR,"%s",timeMSG);
+  } // end for
+
+  sprintf(endMSG,"\nSimulations done, data written to:\n   %s\n",
+	  filename);
+  printf(        "%s",endMSG);
+  fprintf(logPTR,"%s",endMSG);
+
+  fclose(filePTR); 
+  return 0;
+}
+
+
+
+
 int main(){
   int isOK = 0; // init (0 = ok, 1 = not ok)
   //char save_directory[] = "../data/bin/";
-  char save_directory[] = "../data/";
-  //char save_directory[] = "../data/DEBUG/"; //DEBUG
+  char save_directory[] = "../data/"; 
+  //char save_directory[] = "/tmp/"; //DEBUG
 
-
+  /* Variable to indicate wheter or not to use periodic BC's.
+     isP == +1, means to use periodic BC's, otherwise not.
+  */
+  int isP = +1; 
 
 
   /* Opens a log file with runtimes and possible errors */
@@ -230,8 +357,9 @@ int main(){
   begin1 = clock();
 
   /* Computation goes in here: */
-  //isOK = simulate_ising_write_all_to_bin(logPTR,save_directory);
-  isOK = simulate_ising_write_avg_to_tsv(logPTR,save_directory);
+  //isOK = simulate_ising_write_all_to_bin(isP,logPTR,save_directory);
+  //isOK = simulate_ising_write_avg_to_tsv(isP,logPTR,save_directory);
+  isOK = simulate_XY_write_avg_to_tsv(isP,logPTR,save_directory);
   
 
   end1 = clock();
