@@ -10,20 +10,22 @@
 
 
 static int simulate_ising_write_all_to_bin
-( int isP, FILE *logPTR, char *save_directory ){
+( int L, double J, double beta0, double d_beta, 
+  int Nsims, int Nsteps, 
+  int isP, FILE *logPTR, char *save_directory ){
   /* As the name suggests, simulates a bunch
      of differnt times and writes all data to
      a binary file.
   */
-  srand((unsigned) time(NULL)); //seeds rand, should only be called once
+  //srand((unsigned) time(NULL)); //seeds rand, should only be called once
 
-  int    L        = 16;         // side length of the grid
-  double J        = 1.0;        // energy factor in the Hamlitonian
-  double beta0    = 0.25;       // invers temperature
-  double d_beta   = 16e-3;      // step size in beta
+  //int    L        = 16;         // side length of the grid
+  //double J        = 1.0;        // energy factor in the Hamlitonian
+  //double beta0    = 0.25;       // invers temperature
+  //double d_beta   = 16e-3;      // step size in beta
   double beta;                  // init
-  int Nsims       = 128;        // # sims, set to 0 if not active
-  int Nsteps      = (int)2e7;   // # Monte Carlo steps
+  //int Nsims       = 128;        // # sims, set to 0 if not active
+  //int Nsteps      = (int)2e7;   // # Monte Carlo steps
   int write_chunk = 256;        // # doubles to be written at once
   
   clock_t begin2, begin3, end2; //init, for time tracking
@@ -61,7 +63,7 @@ static int simulate_ising_write_all_to_bin
     /* Here is the actual calculation */
     int isOK = montecarlo_ising_full
       (L,L, J, beta, Nsteps, isP,
-		 write_chunk, save_directory, logPTR);
+       write_chunk, save_directory, logPTR);
     if ( isOK != 0 ){
       /* Just a small check to see that nothing went wrong
 	 in the last simulation.
@@ -95,26 +97,28 @@ static int simulate_ising_write_all_to_bin
 
 
 static int simulate_ising_write_avg_to_tsv
-( int isP, FILE *logPTR, char *save_directory ){
+( int L, double J, double T0, double dT, 
+  int Nsims, int Nsteps, int disc_first,
+  int isP, FILE *logPTR, char *save_directory ){
   /* As the name suggests, simulates a bunch of
      differnt times and then oly writes the averages
      and std's of E and M to a tsv-file.
 
      <logPTR> is a pointer to a log file.
   */
-  srand((unsigned) time(NULL)); //seeds rand, should only be called once
+  //srand((unsigned) time(NULL)); //seeds rand, should only be called once
 
   /* Inits */
   int no_of_values = 5;         // do NOT change this! 
   double TEMarr[no_of_values];  // array with mean and std of E & M.
-  int    L       = 16;          // side length og the grid
-  double J       = 1.0;         // energy factor in the Hamlitonian
-  double beta0   = 0.40;        // invers temperature
-  double d_beta  = 2.5e-5;      // step size in beta
+  //int    L       = 16;          // side length og the grid
+  //double J       = 1.0;         // energy factor in the Hamlitonian
+  //double beta0   = 0.40;        // invers temperature
+  //double d_beta  = 2.5e-5;      // step size in beta
   double beta;                  // init
-  int Nsims      = 2048;        // # sims, set to 0 if not active
-  int Nsteps     = (int)2e7;    // # Monte Carlo steps
-  int disc_first = (int)5e4;    // discard values from warm-up period
+  //int Nsims      = 2048;        // # sims, set to 0 if not active
+  //int Nsteps     = (int)2e7;    // # Monte Carlo steps
+  //int disc_first = (int)5e4;    // discard values from warm-up period
 
   int isOK;                     //init, for error checking
   clock_t begin2,end2, begin3;  //init, for time tracking
@@ -138,11 +142,11 @@ static int simulate_ising_write_avg_to_tsv
   char filename[128];
   //sprintf(filename,"%sDEBUG_.tsv",save_directory); //DEBUG
   if ( isP == +1 )
-    sprintf(filename, "%sEstdEMstdM_beta_%0.3f-%0.3f_%d_PERIODIC.tsv",
-	    save_directory, beta0, beta0+(Nsims-1)*d_beta, Nsims);
+    sprintf(filename, "%sEstdEMstdM_T_%0.3f-%0.3f_%d_L-%d_PERIODIC.tsv",
+	    save_directory, T0, T0+(Nsims-1)*dT, Nsims,L);
   else 
-    sprintf(filename, "%sEstdEMstdM_beta_%0.3f-%0.3f_%d.tsv",
-	    save_directory, beta0, beta0+(Nsims-1)*d_beta, Nsims);
+    sprintf(filename, "%sEstdEMstdM_T_%0.3f-%0.3f_%d_L-%d.tsv",
+	    save_directory, T0, T0+(Nsims-1)*dT, Nsims,L);
 
 
   FILE *filePTR;
@@ -166,7 +170,7 @@ static int simulate_ising_write_avg_to_tsv
     /* A timer for how long the execution took */
     begin2 = clock();
     /* Here is the actual calculation */
-    beta = beta0 + i*d_beta;
+    beta = 1/(T0 + i*dT);
     isOK = montecarlo_ising_average
       (L,L, J, beta, TEMarr, Nsteps, disc_first, isP);
     if ( isOK != 0 ){
@@ -212,26 +216,28 @@ static int simulate_ising_write_avg_to_tsv
 
 
 static int simulate_XY_write_avg_to_tsv
-( int isP, FILE *logPTR, char *save_directory ){
+( int L, double J, double T0, double dT, 
+  int Nsims, int Nsteps, int disc_first,
+  int isP, FILE *logPTR, char *save_directory ){
   /* As the name suggests, simulates a bunch of
      differnt times and then oly writes the averages
      and std's of E and M to a tsv-file.
 
      <logPTR> is a pointer to a log file.
   */
-  srand((unsigned) time(NULL)); //seeds rand, should only be called once
+  //srand((unsigned) time(NULL)); //seeds rand, should only be called once
 
   /* Inits */
   int no_of_values = 5;           // do NOT change this! 
   double TErho_arr[no_of_values]; // array with mean and std of E & M.
-  int    L       = 16;            // side length og the grid
-  double J       = 1.0;           // energy factor in the Hamlitonian
-  double beta0   = 0.72;          // invers temperature
-  double d_beta  = 2e-3;          // step size in beta
+  //int    L       = 16;            // side length og the grid
+  //double J       = 1.0;           // energy factor in the Hamlitonian
+  //double beta0   = 0.72;          // invers temperature
+  //double d_beta  = 2e-3;          // step size in beta
   double beta;                    // init
-  int Nsims      = 256;           // # sims, set to 0 if not active
-  int Nsteps     = (int)1e6;      // # Monte Carlo steps
-  int disc_first = (int)5e4;      // discard values from warm-up period
+  //int Nsims      = 256;           // # sims, set to 0 if not active
+  //int Nsteps     = (int)1e6;      // # Monte Carlo steps
+  //int disc_first = (int)5e4;      // discard values from warm-up period
 
   int isOK;                       //init, for error checking
   clock_t begin2,end2, begin3;    //init, for time tracking
@@ -257,8 +263,8 @@ static int simulate_XY_write_avg_to_tsv
   char filename[128];
   //sprintf(filename,"%sDEBUG_.tsv",save_directory); //DEBUG
   if ( isP == +1 )
-    sprintf(filename, "%sTEstdErhoXY_beta_%0.3f-%0.3f_%d_PERIODIC.tsv",
-	    save_directory, beta0, beta0+(Nsims-1)*d_beta, Nsims);
+    sprintf(filename, "%sTEstdErhoXY_T_%0.3f-%0.3f_%d_L-%d_PERIODIC.tsv",
+	    save_directory, T0, T0+(Nsims-1)*dT, Nsims,L);
   else {
     printf(         "%s\n", BC_errorMSG);
     fprintf(logPTR, "%s\n", BC_errorMSG);
@@ -286,7 +292,7 @@ static int simulate_XY_write_avg_to_tsv
     /* A timer for how long the execution took */
     begin2 = clock();
     /* Here is the actual calculation */
-    beta = beta0 + i*d_beta;
+    beta = 1/(T0 + i*dT);
     isOK = montecarlo_XY_average
       (L,L, J, beta, TErho_arr, Nsteps, disc_first, isP);
     if ( isOK != 0 ){
@@ -331,6 +337,20 @@ static int simulate_XY_write_avg_to_tsv
 
 int main(){
   int isOK = 0; // init (0 = ok, 1 = not ok)
+
+  srand((unsigned) time(NULL)); //seeds rand, should only be called once
+
+  
+  int L, Nsims, Nsteps, disc_first;
+  double J, T0, dT, beta0, d_beta;
+ 
+  J          = 1.0;         // energy factor in the Hamlitonian
+  disc_first = (int)5e4;    // discard values from warm-up period
+
+  
+
+
+
   //char save_directory[] = "../data/bin/";
   char save_directory[] = "../data/"; 
   //char save_directory[] = "/tmp/"; //DEBUG
@@ -343,7 +363,7 @@ int main(){
 
   /* Opens a log file with runtimes and possible errors */
   FILE *logPTR;
-  logPTR = fopen("Ising-sim.log","w");
+  logPTR = fopen("sim.log","w");
   if ( !logPTR )
     return 1; // Sumting went wong...
 
@@ -356,11 +376,53 @@ int main(){
   
   begin1 = clock();
 
-  /* Computation goes in here: */
-  //isOK = simulate_ising_write_all_to_bin(isP,logPTR,save_directory);
-  //isOK = simulate_ising_write_avg_to_tsv(isP,logPTR,save_directory);
-  isOK = simulate_XY_write_avg_to_tsv(isP,logPTR,save_directory);
+  /* Values for the Ising simulations */
+  L          = 16;          // side length of the grid
+  Nsteps     = (int)1e7;    // # Monte Carlo steps
   
+  /* Write all */
+  Nsims  = 2;  // # sims, set to 0 if not active
+  beta0  = 1;
+  d_beta = 2;
+  isOK = simulate_ising_write_all_to_bin
+    ( L, J, beta0,d_beta, Nsims, Nsteps,
+      isP, logPTR, save_directory );
+
+  fprintf(logPTR,"%s", "Starting Ising, avg.\n");
+  printf(        "%s", "Starting Ising, avg.\n");
+  
+  /* Write avg */
+  T0         = 1.40;        // invers temperature
+  dT         = 1e-3;        // step size in beta
+  Nsims      = 2048;        // # sims, set to 0 if not active
+  for (int i=0; i<4; ++i ){
+    /* Do the simulations for L=12, 16, 20, 24 */
+    L = 12 +4*i;
+    isOK = simulate_ising_write_avg_to_tsv 
+      ( L, J, T0, dT, Nsims, Nsteps, disc_first,
+	isP, logPTR, save_directory );
+  }
+  
+  fprintf(logPTR,"%s", "Starting XY.\n");
+  printf(        "%s", "Starting XY.\n");
+
+  /* Values for the XY simulations */
+  //L          = 16;          // side length of the grid
+  T0         = 0.80;        // invers temperature
+  dT         = 1e-2;        // step size in beta
+  Nsims      = 64;          // # sims, set to 0 if not active
+  Nsteps     = (int)5e5;    // # Monte Carlo steps
+  
+  for (int i=0; i<4;++i){
+    L=12+i*4;
+    isOK = simulate_XY_write_avg_to_tsv
+      ( L, J, T0, dT, Nsims, Nsteps, disc_first,
+	isP, logPTR, save_directory );
+  }
+  
+
+
+
 
   end1 = clock();
   time_spent = (float)(end1 - begin1) / CLOCKS_PER_SEC; 
