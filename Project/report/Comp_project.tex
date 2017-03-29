@@ -1,0 +1,306 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../../custom_as}
+\usepackage[makeroom
+]{cancel}
+\graphicspath{{figures/}}
+
+\swapcommands{\Omega}{\varOmega}
+\swapcommands{\Lambda}{\varLambda}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 2.5cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+%\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+%\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+%\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
+\newcommand{\DE}{\ensuremath{\Delta{E}}}
+\newcommand{\sign}{\ensuremath{\text{sign}}}
+
+%\usepackage{tikz}
+
+\begin{document}
+
+%\tikzstyle{every picture}+=[remember picture]
+%\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{Statistical Physics 2 -- PHYS\,705 \\
+Computational project}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+\section{The 2D Ising model}
+
+
+\subsection{The Ising model}
+
+%\addtocounter{subsection}{-1}
+\subsection{The algorithm}
+In this part we will Monte Carlo (MC) simulate a 2D Ising model. The
+rough outline of the algorithm is:
+\begin{enumerate}
+\item Initialize a grid, of $L\times L$ lattice points, with values
+either $+1$ or $-1$ chosen randomly.
+\item Flip one spin and check the change in energy $\DE$.
+\begin{itemize}
+\item If $\DE\le0$, then keep the new configuration. Record $E$ and
+$M$ towards the end mean value for this specific
+temperature\footnotemark{}.
+\item Else, then the new sate should only be accepted with a
+probabiltity of $\exp(-\beta\DE)$. This is done by
+\begin{enumerate}
+\item Generate a random number $r\in[0, 1]$, and
+\item only accept the change if $r<\exp(-\beta\DE)$.
+\end{enumerate}
+\addtocounter{footnote}{-1}
+After this, record the (possibly unchanged) values of $E$ and $M$
+towards the mean value for this specific temperature\footnotemark{}. 
+\end{itemize}
+\item Repeat 2 'til your heart's content.
+\end{enumerate}
+\footnotetext{\label{ftnt:warm-up}
+This should only be done after a certain warm-up period
+  from the initalization. For these simulations that warm-up period
+  was chosen to be $5\times10^4$ MC steps.}
+%\subsubsection{The implementation}
+This algorithm was implemented using C (the old one, not ++) as the
+programming language. 
+
+
+
+
+
+
+\setcounter{subsection}{0}
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+\subsection{MC-step (time) dependance in energy and order parameter}
+
+
+\subsection{Energy and order paramter as a function of temperature}
+From the simulations we can then extract the average energy per spin,
+$\ev{E}/N$, and the order paramter, $M$. These are shown in
+\figref{fig:EM1}. 
+
+\todo[inline]{REDO simulations with the right initial energy}
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{EM_L-16_Nsteps-2048_Nmean-16.eps}
+\caption{Average energy per spin, $\ev{E}/N$, and order parameter,
+  $|\ev{M}|$, in a $16\times16$ grid with periodic BC, as functinos of
+  $T/J$. The data was produced from a mean of 16 simulations of
+  $2\times10^7$ steps each; i.e. each data point for each temperature
+  is the average of 16 MC simulations. Note the different temperature
+  scales on the two plots.} 
+\label{fig:EM1}
+\end{figure}
+
+
+\subsubsection{The simulations}
+The simulations were performed according to the algorithm described
+above. From the results of the previous section, the first
+$5\times10^4$ MC steps were performed \emph{without} recording any
+data. Then $2\times10^7$ MC steps were performed, and $E$ and $M$ were
+added to the mean values of each parameter.
+
+For the order parameter $M$, which can be both positive and negative with
+the same probability, the values in \figref{fig:EM1} are
+\begin{equation}\label{eq:evM}
+|\ev{M}| = \abs{\frac{1}{N_\text{steps}} \sum_{\text{MC steps}} M}.
+\end{equation}
+This is not the same as $\ev{|M|}$. The reason for this choice is that
+the other one would not become $0$ in the high temperature limit,
+since there won't be any negative values in the averaging sum that
+could cancel any positive fluctuations. 
+
+Due to unsatisfactory noise levels in the data, first and foremost in
+$\ev{M}$ in the transition region with rapid change, the procedure
+were performed 16 times over for each temperature. I would argue that
+there is a point in taking an average over several simulations, over
+just doing a simulation with more timesteps. 
+
+That would be because in that transition region with values of
+$|\ev{M}|$ inbetween 0 and 1, the likeiehood of a complete flip in $M$
+is higher. I.e. there is a risk of having $M$ hovering around a stable
+value $M_0$, but then suddenly flip over to $-M_0$ and staying there
+for a while. This risk is obviously greater for $M_0$ closer to $0$,
+and with longer simulations. A behavior like this will also not be
+handeled well by the averaging in \eqref{eq:evM}, since changing signs
+will pull $|\ev{M}|$ towards 0 and not $M_0$.
+
+
+
+\subsubsection{Notes on the behavior of $\ev{E}$ and $\ev{M}$}
+The behavior of both $\ev{E}$ and $\ev{M}$, with a rapid change in a
+small region at $T$ just over $2J$, suggests that there is a critical
+temperature with some phase transitions. But more on this in the next
+part. 
+
+We can also note that the asymptotic behavior of the simulated
+$\ev{E}$ and $\ev{M}$ seems to correspond to what we would expect
+theoretically. 
+
+The order parameter should be $M=0$ above the critical
+temperature and below $\Tc$ it should tend towards $\pm1$ as
+$T\to0$. We see this behavior in \figref{fig:EM1}, apart from some
+``funkyness'' happening at the low end of the temperature spectrum. 
+
+For the energy, we would expect it to go towards 0 in the infinte
+tempereture limit; we do seem to see that in \figref{fig:EM1}. In the
+low temperature limit we would expect all the spinns to line up
+resulting in an energy of $-2J$ per spin\footnotemark{}, which is also
+what we see appart from the same ``funkyness'' at the very end of the
+temperature range. 
+\footnotetext{One could think that we would get $-4J$ per spin as the
+  lowest possible energy, due to there beeing 4 nearest
+  neighbours. But then we have to remember that if we just sum up
+  all nearest neighbours of every spin site, we would double count all
+  ``bonds''; so in the end we have to divide by 2. }
+
+\paragraph{The strange behavior in the lower temperature range}
+Before we end this part, we should address the ``funkyness'', in both
+$\ev{E}$ and $\ev{M}$, going on in the lower end of the temperature
+range. My best guess as to why this happens is becuse of the random
+number generator (RNG) in the standard C library \texttt{stdlib.h}.
+
+That RNG produces an integer value between 0 and about $2\times10^9$
+on my computer. That means that the \texttt{double}, that is generated
+by diving the random number by the maximum value, will have a
+resolution of around $5\times10^{-10}$. 
+That random number is then compared to the Boltzmann factor of
+$\exp(-\beta\DE)$, which at the lower temperatures can be as small as
+$4\times10^{-8}$ -- corresponding to a flip where all spins were
+prevoiusly aligned, which is most likely the case at low temperatures.  
+
+That would mean that we have a margin of around 2 orders of magnitude.
+A slight deviation from a ``true'' uniform RNG could therefore skew the
+results on that small of a margin. The study of RNG's is a field of
+its own, but I know this much that the basic C RNG is not recommended
+to use any more. I, however still used it out of lazyness. So this is
+my guess as to what might be the reason for the drop in $\ev{M}$ at
+the low temperature end of the range. 
+
+
+
+\subsection{Using the ``singularity'' of the heat capacity to determine the critical temperature}
+Before we can do any data analysis we need a way to calculate the heat
+capacity
+\begin{equation}\label{eq:CV_start}
+C_V = \pdv{\ev{E}}{T} = \pdv{\beta}{T}\pdv{\ev{E}}{\beta} 
+= -\frac{1}{T^2}\pdv{\ev{E}}{\beta}.
+\end{equation}
+To do that we recall from the theory of the 
+\emph{Canonical ensemble} that 
+\begin{equation}
+\ev{E} = \frac{1}{Z}\sum_{\{\sigma\}} H\ee^{-\beta H}
+= \frac{1}{Z} \pdv{\beta}\sum_{\{\sigma\}} -\ee^{-\beta H}
+= -\frac{1}{Z} \pdv{Z}{\beta}.
+\end{equation}
+Continuing \eqref{eq:CV_start} with this yields
+\begin{equation}
+C_V = -\frac{1}{T^2}\pdv{\beta}
+\qty[-\frac{1}{Z} \pdv{Z}{\beta}]
+=\frac{1}{T^2}\qty[
+\frac{1}{Z} \pdv[2]{Z}{\beta}
+-\frac{1}{Z^2} \pdv{Z}{\beta}\pdv{Z}{\beta}].
+\end{equation}
+Clearly the second term in the brackets is $\ev{E}^2$, and the first
+term is
+\begin{equation}
+\frac{1}{Z} \pdv[2]{Z}{\beta}
+=\frac{1}{Z} \pdv[2]{\beta}\sum_{\{\sigma\}} \ee^{-\beta H}
+=\frac{1}{Z} \sum_{\{\sigma\}} (-H)^2 \ee^{-\beta H}
+= \ev{E^2}.
+\end{equation}
+Therefore
+\begin{equation}
+C_V = \frac{\ev{E^2}-\ev{E}^2}{T^2}.
+\end{equation}
+
+\subsection{Finite scaling of the susceptibility and critical exponents}
+As in the previous part, we need an expression for the susceptibility
+\begin{equation}\label{eq:chi_start}
+\chi = \eval{\pdv{\ev{M}}{B}}_{B=0}.
+\end{equation}
+And again we use the theory of the Canonical ensemble to get
+\begin{equation}\label{eq:evM}
+\ev{M} = \frac{1}{Z}\sum_{\{\sigma\}} \ev{\sigma_i}'\ee^{-\beta H},
+\end{equation}
+where $\ev{\sigma_i}' = \sum_i\sigma_i/N$ is the
+average\footnotemark{} value of all $\sigma_i$'s for each specific
+state in $\{\sigma\}$. We also need the Hamiltonian
+\begin{equation}
+H = -J\sum_{\ev{i, j}} \sigma_i\sigma_j
+-B\sum_{i} \sigma_i
+=-BN\ev{\sigma_i}' -J\sum_{\ev{i, j}} \sigma_i\sigma_j.
+\end{equation}
+Therefore \eqref{eq:evM} can be written as
+\begin{equation}
+\ev{M} = \frac{1}{Z} 
+\pdv{B}\qty[\frac{1}{\beta N}\sum_{\{\sigma\}}\ee^{-\beta H}]
+=\frac{1}{\beta N}\,\frac{1}{Z}\pdv{Z}{B}.
+\end{equation}
+So \eqref{eq:chi_start} can be written as
+\begin{equation}
+\chi = \frac{1}{\beta N} 
+\eval{\pdv{B}\qty[\frac{1}{Z}\pdv{Z}{B}]}_{B=0}
+=\frac{1}{\beta N} 
+\eval{\qty[\frac{1}{Z}\pdv[2]{Z}{B}
+-\frac{1}{Z^2}\qty(\pdv{Z}{B})^2]}_{B=0}.
+\end{equation}
+And as before, the second term is clearly $(\beta N\ev{M})^2$ while te
+first term is
+\begin{equation}
+\frac{1}{Z}\pdv[2]{Z}{B}
+=\frac{1}{Z}\pdv[2]{B}\sum_{\{\sigma\}}\ee^{-\beta H}
+=\frac{1}{Z}\sum_{\{\sigma\}}
+\qty(\beta N\ev{\sigma_i}')^2\ee^{-\beta H}
+=\qty(\beta N)^2\ev{M^2}.
+\end{equation}
+So
+\begin{equation}
+\chi =\beta N \qty[\ev{M^2} - \ev{M}^2]
+\propto \frac{\ev{M^2} - \ev{M}^2}{T}.
+\end{equation}
+\footnotetext{The prime on the $\ev{\,\cdot\,}'$ is to mark that this is
+  not a thermodynamic average.}
+
+
+
+\section{The XY model}
+
+
+
+
+
+\end{document}
+
+
+
+
+%  LocalWords:  MFT MF Ising Ornstein Zernike Stratonovich GLW RG
+%  LocalWords:  rescale quartic rescaled anisotropy
