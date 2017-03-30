@@ -71,51 +71,128 @@ where $\mathcal{S}_d$ is the area of a unit sphere in $d$ dimensions
 and $\ee^{\Delta{l}} = b$.
 
 
-
-
-
-
-
-By Wick's theorem, we know that
+We begin this problem by rewriting
+\begin{equation}\label{eq:1_ev-sigma}
+\ev{\sigma(\vb*x)}_{0>} 
+= \ev{\sqrt{1-\vb*\pi^2(\vb*x)}}_{0>} 
+= \ev{1-\frac{1}{2}\vb*\pi^2(\vb*x) 
++\frac{1}{8}\qty(\vb*\pi^2(\vb*x))^2
++\ldots}_{0>}.
+\end{equation}
+We now split $\vb*\pi = \vb*\pi_< + \vb*\pi_>$ and get
 \begin{equation}
-\ev{\pi_a(\vb*k_1)\pi_b(\vb*k_2)}
+\vb*\pi^2(\vb*x) = 
+\vb*\pi_<^2(\vb*x) + \vb*\pi_>^2(\vb*x) 
++2\vb*\pi_<(\vb*x)\vdot\vb*\pi_>(\vb*x).
+\end{equation}
+We need to evaluate the expectation value of these terms.
+
+It is easy to realize that 
+\begin{equation}
+\begin{aligned}
+\ev{(\pi_<^a(\vb*x))^n(\pi_>^b(\vb*x))^m}
+=&\frac{1}{Z_{0>}}
+\int\!\mathcal{D}\vb*\pi_>\; (\pi_<^a(\vb*x))^n(\pi_>^b(\vb*x))^m
+\ee^{S[\vb*\pi_>]}\\
+=& \frac{(\pi_<^a(\vb*x))^n}{Z_{0>}}
+\int\!\mathcal{D}\vb*\pi_>\; (\pi_>^b(\vb*x))^m \ee^{S[\vb*\pi_>]}
+=(\pi_<^a(\vb*x))^n\ev{(\pi_>^b(\vb*x))^m},
+\end{aligned}
+\end{equation}
+where $a$ and $b$ are arbitrary indeces for any element in the
+vectors. We see especially, when $b=0$, that that any slow filed on
+its own will just facor out of the expectation value. 
+
+Next we can use Wick's theorem, to get
+\begin{equation}\label{eq:1_Wick's}
+\ev{\pi_>^a(\vb*k_1)\pi_>^b(\vb*k_2)}_{0>}
 = \delta_{a, b} G_0(\vb*k_1) \,(2\pi)^d \delta(\vb*k_1 + \vb*k_2).
 \end{equation}
 We can use that to calculate
 \begin{equation}
 \begin{aligned}
-\ev{(\vb*\pi(\vb*x))^2} =& \frac{1}{Z_0}
-\int \mathcal{D}\vb*\pi\; 
-[\vb*\pi(\vb*x)\vdot\vb*\pi(\vb*x)] \ee^{-S[\vb*\pi]}\\
-=& \frac{1}{Z_0} \int \mathcal{D}\vb*\pi
+\ev{(\vb*\pi_>(\vb*x))^2}_{0>} =& \frac{1}{Z_{0>}}
+\int \mathcal{D}\vb*\pi_>\; 
+[\vb*\pi_>(\vb*x)\vdot\vb*\pi_>(\vb*x)] \ee^{-S[\vb*\pi_>]}\\
+=& \frac{1}{Z_{0>}} \int \mathcal{D}\vb*\pi_>
 \qty[\int\frac{\rd^dk_1}{(2\pi)^d}\frac{\rd^dk_2}{(2\pi)^d}
-\vb*\pi(\vb*k_1)\vdot\vb*\pi(\vb*k_2) \ee^{\ii\vb*x\vdot(\vb*k_1+\vb*k_2)}]
-\ee^{-S[\vb*\pi]} \\
-%\end{aligned}
-%\end{equation}
-%To take care of the Fourier exponential, we can set
-%$\vb*x=\vb*0$. This is since 
-%\begin{equation}
-%\begin{aligned}
-%\ev{(\vb*\pi(\vb*0))^2}
+\vb*\pi_>(\vb*k_1)\vdot\vb*\pi_>(\vb*k_2) \ee^{\ii\vb*x\vdot(\vb*k_1+\vb*k_2)}]
+\ee^{-S[\vb*\pi_>]} \\
 =& \int\frac{\rd^dk_1}{(2\pi)^d}\frac{\rd^dk_2}{(2\pi)^d}
 \ee^{\ii\vb*x\vdot(\vb*k_1+\vb*k_2)}
-\underbrace{\frac{1}{Z_0} \int \mathcal{D}\vb*\pi\; 
-\vb*\pi(\vb*k_1)\vdot\vb*\pi(\vb*k_2) 
-\ee^{-S[\vb*\pi]}}_{=\sum_a\ev{\pi_a(\vb*k_1)\pi_a(\vb*k_2)}}\\
-=& \sum_a \int\frac{\rd^dk}{(2\pi)^d}G_0(\vb*k)
-= (n-1) \int\frac{\rd^dk}{(2\pi)^d}G_0(\vb*k).
+\underbrace{\frac{1}{Z_{0>}} \int \mathcal{D}\vb*\pi_>\; 
+\vb*\pi_>(\vb*k_1)\vdot\vb*\pi_>(\vb*k_2) 
+\ee^{-S[\vb*\pi]}}_{=\sum_a\ev{\pi_>^a(\vb*k_1)\pi_>^a(\vb*k_2)}_{0>}}\\[-8pt]
+\stackrel{\eqref{eq:1_Wick's}}{=}& 
+\sum_a \int_{\Lambda/b}^\Lambda\frac{\rd^dk}{(2\pi)^d}G_0(\vb*k)
+= (n-1) I_1.
 \end{aligned}
 \end{equation}
-The factor $(n-1)$ comes from the fact that $\vb*\pi$ has $(n-1)$
-components. 
+The factor $(n-1)$ comes from the fact that $\vb*\pi_>$ has $(n-1)$
+components. From Wick's theorem, we also have that
+\begin{equation}
+\ev{\pi_>^a(\vb*x)}_{0>} = 0.
+\end{equation}
 
+We are now ready to go back and tackle \eqref{eq:1_ev-sigma}. We can
+group the terms as
+\begin{equation}\label{eq:1_ev-sigma2}
+\begin{aligned}
+\ev{\sigma(\vb*x)}_{0>} 
+=& \qty[1 - \frac{1}{2}\vb*\pi_<^2(\vb*x) 
++ \frac{1}{8}(\vb*\pi_<^2(\vb*x))^2 +\ldots]\\
+&- \frac{1}{2}\ev{\vb*\pi_>^2(\vb*x)} 
++\ev{\text{``higher order (cross \& regular) terms with }
+\vb*\pi_>^2\text{''}}\\
+\sim&\sqrt{1-\vb*\pi_<^2(\vb*x)} -\frac{(n-1)}{2} I_1.
+\end{aligned}
+\end{equation}
+\todo{Here lies the problem!}
+We also note that the expectation value $\ev{\sigma(\vb*x)}_{0>}$
+shouldn't be affected by an RG step, so what we have is
+\begin{equation}
+\ev{\sigma(\vb*x)}_{0>} = \ev{\sigma'(\vb*x')}_{0>} 
+= \ev{\zeta^{-1}\sigma_<(\vb*x)}_{0>} 
+= \zeta^{-1}\sigma_<(\vb*x).
+\end{equation}
+Here we used the same principle behind how $\vb*\pi_<$ could be
+factored out from the expectation value. 
 
+We also have to use another scaling factor, $\zeta$, for
+$\sigma'(\vb*x')$ from $\sigma'(\vb*k')$. The two are however related
+through a FT. If $\zeta^{-1}\sigma_<(\vb*x) = \sigma'(\vb*x')$, then
+the FT would be
+\begin{equation}
+\zeta^{-1}
+\int\frac{\rd^dk}{(2\pi)^d}\sigma_<(\vb*k)\ee^{\ii\vb*k\vdot\vb*x}
+=\int\frac{\rd^dk'}{(2\pi)^d}
+\sigma'(\vb*k')\ee^{\ii\vb*k'\vdot\vb*x'}
+=\int\frac{b^d\rd^dk}{(2\pi)^d}
+\sigma'(\vb*k')\ee^{\ii b^d\vb*k\vdot\vb*x/b^d}.
+\end{equation}
+This would mean that
+$ z^{-1}\sigma_<(\vb*k) = \sigma'(\vb*k') 
+= \frac{\zeta^{-1}}{b^d}\sigma_<(\vb*k)$, 
+or in other words
+\begin{equation}
+\zeta = \frac{z}{b^d}.
+\end{equation}
 
-
-
-
-
+The last thing we have to do before we are done is to calculate value
+$\sigma_<(\vb*x=\vb*0)$. With the normalization criteria 
+\begin{equation}
+1 = (\vb*\pi'(\vb*x'))^2 +(\sigma'(\vb*x'))^2
+= \zeta^{-2}\qty[ (\vb*\pi_<(\vb*x))^2 +(\sigma_<(\vb*x))^2].
+\end{equation}
+Now, with $\vb*\pi_<(\vb*x=\vb*0)$, we see that
+\begin{equation}
+\sigma_<(\vb*x=\vb*0) = \zeta.
+\end{equation}
+Substituting this into \eqref{eq:1_ev-sigma2}, with
+$\vb*\pi_<(\vb*x=\vb*0)$, gives 
+\begin{equation}
+\zeta = 
+\end{equation}
 
 
 \section{The Kosterlitz recursion relations}
