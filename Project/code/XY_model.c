@@ -46,7 +46,7 @@ static double totE(double J, double *theta_mtrx, int rows, int cols,
 	 and then check as many slots as are indicated in
 	 that location.
       */
-      sum += cos( theta_mtrx[a] - theta_mtrx[arr_all_NN[a+b]] );
+      sum += cos( theta_mtrx[a] - theta_mtrx[arr_all_NN[start+b]] );
     }
   }
 

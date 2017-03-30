@@ -52,7 +52,7 @@ static double totE(double J, int *mtrx_as_arr, int rows, int cols,
 	 that location.
       */
       sum += mtrx_as_arr[a] * 
-	mtrx_as_arr[arr_all_NN[a+b]];
+	mtrx_as_arr[arr_all_NN[start+b]];
     }
   }
   
