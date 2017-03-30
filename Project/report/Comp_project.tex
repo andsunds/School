@@ -95,10 +95,33 @@ programming language.
 
 
 
-\setcounter{subsection}{0}
-\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
-\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
-\subsection{MC-step (time) dependance in energy and order parameter}
+%\setcounter{subsection}{0}
+%\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+%\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+\subsection{MC-step (time) dependance in the energy 
+and order parameter}
+In this initial part of the computations, we will just look at how the
+energy $E$ and order parameter $M$ evolve with the simulation
+iterations. This is shown in \figref{fig:EM_all}. 
+
+We see there that the system needs a certain warm-up time before it
+reaches equilibrium after the initialization. This warm-up time seems
+to be just under $10^4$ iterations. So for all the following
+computations, I've discarded the first $5\times10^4$ values from each
+run when calculating different averages. 
+
+
+
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{EM_all-time-steps.eps}
+\caption{Energy $E_i$ and order parameer $M_i$ as a funtion of
+  simulation iteration $i$. Note the log-scale on horizontal axis. We
+  see that the lower temperature has much less fluctuation once hte
+  system has reached an equlibrium. In these cases the equlibrium is
+  reached after around $10^4$ iterations.} 
+\label{fig:EM_all}
+\end{figure}
 
 
 \subsection{Energy and order paramter as a function of temperature}
@@ -120,7 +143,8 @@ $\ev{E}/N$, and the order paramter, $M$. These are shown in
 \end{figure}
 
 
-\subsubsection{The simulations}
+\subsubsection{Averaging over several simulations}
+\label{sec:sim_avg}
 The simulations were performed according to the algorithm described
 above. From the results of the previous section, the first
 $5\times10^4$ MC steps were performed \emph{without} recording any
@@ -148,10 +172,10 @@ $|\ev{M}|$ inbetween 0 and 1, the likeiehood of a complete flip in $M$
 is higher. I.e. there is a risk of having $M$ hovering around a stable
 value $M_0$, but then suddenly flip over to $-M_0$ and staying there
 for a while. This risk is obviously greater for $M_0$ closer to $0$,
-and with longer simulations. A behavior like this will also not be
-handeled well by the averaging in \eqref{eq:evM}, since changing signs
-will pull $|\ev{M}|$ towards 0 and not $M_0$.
-
+and with longer simulations. 
+A behavior like this will also not be handeled well by the averaging
+in \eqref{eq:evM}, since changing signs will pull $|\ev{M}|$ towards 0
+and not $M_0$. 
 
 
 \subsubsection{Notes on the behavior of $\ev{E}$ and $\ev{M}$}
@@ -237,21 +261,34 @@ term is
 = \ev{E^2}.
 \end{equation}
 Therefore
-\begin{equation}
+\begin{equation}\label{eq:CV}
 C_V = \frac{\ev{E^2}-\ev{E}^2}{T^2}.
 \end{equation}
-
 
 \todo[inline]{REDO simulations with the right initial energy}
 \begin{figure}
 \centering
 \includegraphics[width=.6\textwidth]{CV_L-16_Nsteps-8196_Nmean-32.eps}
-\caption{} 
+\caption{The heat capacity according to \eqref{eq:CV}, but normalized
+  so that the peak would be at 1. We have a peak in $C_V$, and it's at
+  around $T=2.32J$. From this plot it might not look like there is such
+  a significant peak, but from simulation runs with wider tempereraure
+  ranges, and sparser temperature steps, the peak is more prominent
+  over the rest of the plot.
+  Each data point is the mean of 32 MC simulations. } 
 \label{fig:CV1}
 \end{figure}
 
+The heat capacity calculated according to \eqref{eq:CV} from a
+series of simulation, done in the transitions regoin of
+\figref{fig:EM1}, is shown in \figref{fig:CV1}. There is a clear peak
+in the heat capacity, but it's a bit off from the exact 2D Ising
+($N\to\infty$) critical temperature of 
+$\Tc = 2/\ln(1+\sqrt2) \approx 2.27J$, but not by far. That
+discrepancy is probably due to the finite size of the system.
 
-\subsection{Finite scaling of the susceptibility and critical exponents}
+
+\subsection{Finite size scaling of the susceptibility and critical exponents}
 As in the previous part, we need an expression for the susceptibility
 \begin{equation}\label{eq:chi_start}
 \chi = \eval{\pdv{\ev{M}}{B}}_{B=0}.
@@ -292,13 +329,98 @@ first term is
 =\qty(\beta N)^2\ev{M^2}.
 \end{equation}
 So
-\begin{equation}
+\begin{equation}\label{eq:chi}
 \chi =\beta N \qty[\ev{M^2} - \ev{M}^2]
-\propto \frac{\ev{M^2} - \ev{M}^2}{T}.
+=N \frac{\ev{M^2} - \ev{M}^2}{T}.
 \end{equation}
 \footnotetext{The prime on the $\ev{\,\cdot\,}'$ is to mark that this is
   not a thermodynamic average.}
 
+\figref{fig:chi1} shows the susceptibility caluculated as above as a
+funtion of tempererature. 
+
+
+\begin{figure}
+\centering
+\includegraphics[width=.7\textwidth]{chi_L-16--24_Nsteps-2048_Nmean-16.eps}
+\caption{The magnetic susceptibility according to \eqref{eq:chi},
+  plotted for 4 different grid sizes. The grids were of size 
+  $L\times L$. Each data point is the mean of 8 MC simulations.}
+\label{fig:chi1}
+\end{figure}
+
+\paragraph{Finite size scaling}
+Next we know from class that for a finite size system the scaling
+reation for $\chi$ becomes
+\begin{equation}
+\chi\sim L^{\gamma/\nu}\varPhi\qty(t\,L^{1/\nu}),
+\end{equation}
+where $L$ is the linear dimension of the system. This means that
+plotting $\chi\,L^{-\gamma/\nu}$ against $t\,L^{1/\nu}$, should look
+the same independent of $L$. 
+
+This method has been applied to the susceptibilities from above. The
+result is shown in \figref{fig:finite-scaling1}. The first thing we
+notice with the curves in \figref{fig:finite-scaling1} is that they
+don't seem to agree very well in the region $t\,L^{1/\nu}=-2$ to $0$;
+that is also by far the noisiest region. But outside of that region we
+mangaded to get a reasonably good collaps onto one single curve. 
+
+The critical exponents were determined by plotting $\chi\,L^{-b}$ 
+against $t\,L^{a}$, and then varying $a$ and $b$ independently until
+we got a good match. That is in the end the values of $a$ and $b$
+relied on visual inspection, which isn't very reliable. By trying to
+vary $a$ and $b$ from the optimal values until the curved disagreed
+``too much'', we also got a measure on the uncertainty in the critical
+exponents. In the end the results were
+\begin{equation*}
+\nu = 1.1\pm0.1\qcomma\text{and} \quad
+\gamma = 1.7\pm0.2.
+\end{equation*}
+Which isn't too far off from the exact values of $\nu=1$ and
+$\gamma=7/4$; the exact values are within the maring of uncertainty,
+even though $\nu$ is a borderline case here. 
+
+\begin{figure}
+\centering
+\includegraphics[width=.9\textwidth]{finite-scaling_L-16--24_Nsteps-2048_Nmean-16.eps}
+\caption{Finite size scaling allpied to the susceptibilities in
+  \figref{fig:chi1} with $\nu=1.1$ and $\gamma=1.7$}
+\label{fig:finite-scaling1}
+\end{figure}
+
+\subsubsection{Error sources}
+The most ovbious error source here comes from the risk of beeing
+biased when I as a human has to decide which values give a good
+fit. Especially when knowing the exact 2D Ising values for the
+exponents, it becomes hard to ignore that unconcious bias. The best
+solution would be to write some algorithm calculating the internal
+descrepancies between the curves and then minimizing that with respect
+to $a$ and $b$. But that would requre more time than I have for this
+project. 
+
+Another topic which needs addressing is what is happening in region
+$t\,L^{1/\nu}=-2$ to $0$. Due to the noisyness of the data in that
+region, I disregarded the curves there when trying to find a good
+fit. 
+The noise in that region probably come from similar effects as the one 
+described in the end of section~\ref{sec:sim_avg}. This time, averaging
+over many simulation runs will not be fully as helpful as before,
+because of the non-linearity of the expression for $\chi$.  
+
+Despite te noise however, we do see that that the overall trend
+is that the curves do \emph{not} collapse to one there; they are
+clearly ordered with $L=12$ being above 16, then 20 and 24 at the
+bottom. 
+We can see a reason for this descrepancy in \figref{fig:chi1}, where
+the peaks of $\chi$ isn't at the same temperature. In the finite size
+scaling, we did however just use the exact 2D Ising critical
+tepmerature $\Tc=2/\ln(1+\sqrt2)$ for all sizes. This caused the
+curves (primaily $L=12$) to overshoot into the negative regime, which
+them made it hard to rescale all of them at once there. This same
+effect is probaly also causing errors in the values of $\nu$ and
+$\gamma$. Maybe we could get better results if we used some kind of
+adjusted $\Tc$ for each $L$. 
 
 
 \section{The XY model}
