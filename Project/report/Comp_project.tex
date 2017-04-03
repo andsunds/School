@@ -293,8 +293,8 @@ C_V = \frac{\ev{E^2}-\ev{E}^2}{T^2}.
 \centering
 \includegraphics[width=1\textwidth]{CV_L-16_all.eps}
 \caption{The heat capacity according to \eqref{eq:CV}, but normalized
-  so that the peak would be at 1. We have a peak in $C_V$, and it's at
-  around $T=2.32J$. 
+  so that the peak would be at 1, in a $16\times16$ grid. We have a
+  peak in $C_V$, and it's at around $T=2.32J$.  
   Each data point marked by crosses are the mean of 16 MC simulations,
   while the denser poins marked by dots are the means of 128 MC
   simulation. } 
@@ -468,19 +468,73 @@ The heat capacity still shows a peak
 
 \begin{figure}
 \centering
-\includegraphics[width=1\textwidth]{XY_ECV_L-16_Nsteps-128.eps}
-\caption{Average energy per spin, $\ev{E}/N$, and heat capacity $C_V$,
-  in a $16\times16$ grid with periodic BC, as functions of $T/J$. The
-  data was produced from a series of simulations at different
-  temperatures, each $5\times10^5$ steps long. Each data point is the
-  mean of 4 simulations per temperature.} 
+\includegraphics[width=1\textwidth]{XY_ECV_L-8-32_Nsteps-64.eps}
+\caption{Average energy per spin, $\ev{E}/N$, and normalized heat
+  capacity $C_V$, in a $16\times16$ grid with periodic BC, as
+  functions of $T/J$. The data was produced from a series of
+  simulations at different temperatures, each $5\times10^5$ steps
+  long. Each data point is the mean of 4 simulations per
+  temperature. } 
 \label{fig:ECV2}
 \end{figure}
 
 
+\subsection{The Kosterlitz-Thouless transition and finite size scaling}
+% References:
+%   https://uwspace.uwaterloo.ca/bitstream/handle/10012/6966/Iaconis_Jason.pdf;jsessionid=945D81E5A5C8B9A10A8136C54CA4701E?sequence=1
+
+\newcommand{\rhos}{\rho_{\text{s}}}
+\newcommand{\TKT}{T_{\text{KT}}}
+
+
+To study the Kosterlitz-Thouless transition, we study the spin
+stiffness
+\begin{equation}
+\rhos = \frac{1}{N}\ev{\sum_{\ev{i, j}_a}\cos(\theta_i - \theta_j)}
+-\frac{\beta J}{N}
+   \ev{\bigg[\sum_{\ev{i, j}_a}\sin(\theta_i - \theta_j)\bigg]^2},
+\end{equation}
+where $a$ is either the $x$ or $y$ direction. In theory there should
+be a discontinuity at $\TKT$, the so called Nelson-Kosterlitz
+universal jump, but in practice we see more a gradual drop. The
+transition will however still occur at the intersection between the
+curves $y=\rhos(T)$ and $y=2T/\pi$. We see this behavior in
+\figref{fig:rhos1}. 
+
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{XY_rhos_L-8-32_Nsteps-64.eps}
+\caption{The spin stiffness in both the $x$ and $y$ direction plotted
+  against temperature, for a $16\times16$ grid. A slight drop is
+  noticable, but much smaller than expected. } 
+\label{fig:rhos1}
+\end{figure}
+
+That is however only true for the specific finite size transition
+temperature. To get the thermodynamic limit we use the relation
+\cite{Melko-etal2004} 
+\begin{equation}
+\TKT(L) = \TKT(L=\infty)\qty[1+\frac{c^2}{[\log(L/a)]^2}],
+\end{equation}
+where $c$ is some constant and $a=1$ is the lattice spacing. This is
+expected to hold for large $L/a$.
 
 
 
+
+\subsection{Error sources}
+
+
+The anticipated Nelson-Kosterlitz universal jump in \figref{fig:rhos1}
+was much less pronounced than expected. It was expected that we
+wouldn't see a clear discontinuity
+
+
+\subsubsection{Some notes on the coding}
+
+
+\bibliographystyle{ieeetr}
+\bibliography{ref}
 
 \end{document}
 
