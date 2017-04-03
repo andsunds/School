@@ -433,7 +433,7 @@ int montecarlo_ising_average
   /*        Calculating the std's.
      In this stage the *stdX's are just sums of X*X (X^2).
 
-     var = <x^2> - <x>^2 = sum x^2/N - sum (x/N)^2
+     var = <x^2> - <x>^2 = sum x^2/N - (sum x/N)^2
      std = sqrt( var )
      In the estimates for var one should use N-1, however
      in this case N>>1, so it makes no difference.

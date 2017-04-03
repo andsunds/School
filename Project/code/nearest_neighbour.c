@@ -133,12 +133,12 @@ static void horizontal_check_periodic
     *NNb = index + (cols-1); //sets 4th NN
   }else if ( col==cols-1 ){
     /* If first column, then the NN left is on last column */
-    *NNa = index - 1;        //sets 3rd NN
-    *NNb = index - (cols-1); //sets 4th NN
+    *NNa = index - (cols-1); //sets 3rd NN
+    *NNb = index - 1;        //sets 4th NN
   }else{
     /* If inner column, then NN both to the left AND right as ususal */
-    *NNa = index - 1;
-    *NNb = index + 1;
+    *NNa = index + 1;
+    *NNb = index - 1;
   }
 }
 
@@ -178,8 +178,8 @@ void get_NN_periodic(int *arr_NN_index, int index, int rows, int cols){
   */
   if ( row==0 ){
     /* If first row, then the NN above is on last row */
-    arr_NN_index[1] = index + cols;          //sets 1st NN
-    arr_NN_index[2] = index + (rows-1)*cols; //sets 2nd NN
+    arr_NN_index[1] = index + (rows-1)*cols; //sets 1st NN
+    arr_NN_index[2] = index + cols;          //sets 2nd NN
     horizontal_check_periodic
       (index, col, cols, &arr_NN_index[3], &arr_NN_index[4]);
   }else if ( row==rows-1 ){ 

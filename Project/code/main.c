@@ -351,9 +351,10 @@ int main(){
 
 
 
-  //char save_directory[] = "../data/bin/";
-  char save_directory[] = "../data/"; 
-  //char save_directory[] = "/tmp/"; //DEBUG
+  //char save_directory[] = "../data/Ising/";
+  char save_directory[] = "../data/XY/"; 
+  //char save_directory[] = "../data/"; 
+  //char save_directory[] = "../data/DEBUG/"; //DEBUG
 
   /* Variable to indicate wheter or not to use periodic BC's.
      isP == +1, means to use periodic BC's, otherwise not.
@@ -376,27 +377,29 @@ int main(){
   
   begin1 = clock();
 
+
   /* Values for the Ising simulations */
   L          = 16;          // side length of the grid
   Nsteps     = (int)1e7;    // # Monte Carlo steps
   
-  /* Write all */
+  /*
+  // Write all 
   Nsims  = 2;  // # sims, set to 0 if not active
   beta0  = 1;
   d_beta = 2;
   isOK = simulate_ising_write_all_to_bin
     ( L, J, beta0,d_beta, Nsims, Nsteps,
       isP, logPTR, save_directory );
-
-  fprintf(logPTR,"%s", "Starting Ising, avg.\n");
-  printf(        "%s", "Starting Ising, avg.\n");
+  */
   
-  /* Write avg */
+  
+  /*
+  // Write avg 
   T0         = 1.40;        // invers temperature
   dT         = 1e-3;        // step size in beta
   Nsims      = 2048;        // # sims, set to 0 if not active
   for (int i=0; i<4; ++i ){
-    /* Do the simulations for L=12, 16, 20, 24 */
+    // Do the simulations for L=12, 16, 20, 24 
     L = 12 +4*i;
     isOK = simulate_ising_write_avg_to_tsv 
       ( L, J, T0, dT, Nsims, Nsteps, disc_first,
@@ -405,21 +408,30 @@ int main(){
   
   fprintf(logPTR,"%s", "Starting XY.\n");
   printf(        "%s", "Starting XY.\n");
-
-  /* Values for the XY simulations */
+  */
+  // Values for the XY simulations 
   //L          = 16;          // side length of the grid
-  T0         = 0.80;        // invers temperature
-  dT         = 1e-2;        // step size in beta
+  T0         = .01;        // temperature
+  dT         = 3e-2;        // step size in beta
   Nsims      = 64;          // # sims, set to 0 if not active
-  Nsteps     = (int)5e5;    // # Monte Carlo steps
-  
+  Nsteps     = (int)5e4;    // # Monte Carlo steps
+  disc_first = (int)2e3;
+  L = 32;
+  isOK = simulate_XY_write_avg_to_tsv
+    ( L, J, T0, dT, Nsims, Nsteps*L*L+1, disc_first*L*L,
+      isP, logPTR, save_directory );
+  ///*
+  T0         = .75;        // temperature
+  dT         = 1e-2;        // step size in beta
+  Nsims      = 32;          // # sims, set to 0 if not active
+  L=8;
   for (int i=0; i<4;++i){
-    L=12+i*4;
+    L*=2;
     isOK = simulate_XY_write_avg_to_tsv
-      ( L, J, T0, dT, Nsims, Nsteps, disc_first,
-	isP, logPTR, save_directory );
+      ( L, J, T0, dT, Nsims, Nsteps*L*L+1, disc_first*L*L,
+  	isP, logPTR, save_directory );
   }
-  
+  //*/
 
 
 
