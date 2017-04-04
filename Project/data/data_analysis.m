@@ -267,7 +267,7 @@ set(l,'interpreter','LaTeX');
 %% XY finding T_KT
 clc, clear all,clf
 
-L=2.^(4:7).';
+L=2.^(4:6).';
 rhos=zeros(32,length(L));
 
 for i=1:length(L)
@@ -282,13 +282,13 @@ c=2/pi;
 
 figure(3)
 plot(T,rhos(:,1),'.b',T,rhos(:,2),'*r',...
-     T,rhos(:,3),'oc',T,rhos(:,4),'dm')
+     T,rhos(:,3),'oc')%,T,rhos(:,4),'dm')
 hold on
 plot(t,t*c,'-k')
-axis([.75,1.1,.55,.8])
+%axis([.75,1.1,.4,.75])
 
-%%
-index=16:27;
+%
+index=16:21;
 y=rhos(index, :);
 x=T(index);
 
@@ -296,81 +296,46 @@ A=[x, ones(size(x))]\y;
 Y=[x, ones(size(x))]*A;
 
 plot(x,Y(:,1),':b',x,Y(:,2),'--r',...
-     x,Y(:,3),'-c',x,Y(:,4),'-.m')
+     x,Y(:,3),'-c')%,x,Y(:,4),'-.m')
 
-l=legend('$L=12$','$L=16$','$L=20$','$L=24$',...
-         '$y=2T/\pi$','Fit $L=12$','Fit $L=16$','Fit $L=20$','Fit $L=24$');
-set(l,'interpreter','LaTeX')
+set(gca, 'fontsize',13)
+grid on;
+xlabel('$T/J$', 'interpreter', 'LaTeX');
+ylabel('$\rho_{\rm s}$', 'interpreter', 'LaTeX');
 
+
+l=legend('$L=16$','$L=32$','$L=64$',...%'$L=128$',...
+         '$y=2T/(J\pi)$','Fit $L=16$','Fit $L=32$','Fit $L=64$');%,'Fit $L=128$');
+set(l,'interpreter','LaTeX','location','SouthWest','fontsize',11)
+set(gca,'xlim',[0.9,0.95], 'ylim',[0.40,0.65])
 
 intercept = ( A(2,:)./(c-A(1,:)) ).';
 %%
 clc
 figure(4),clf,hold on
 xx=log(L).^(-2);
-plot(xx,intercept, '*')
+plot(xx,intercept, '*k')
 
 
 
-B1=[xx(1:end), ones(4,1)]\intercept(1:end);
-B2=[xx(2:end), ones(3,1)]\intercept(2:end);
-B3=[xx(1:3), ones(3,1)]\intercept(1:3);
+B1=[xx(1:end), ones(length(xx),1)]\intercept(1:end);
+B2=[xx(2:end), ones(length(xx)-1,1)]\intercept(2:end);
+B3=[xx(1:end-1), ones(length(xx)-1,1)]\intercept(1:end-1);
 
-fprintf('T_KT = %0.3f\n', B3(2));
-XX=linspace(0,.17,8).';
+fprintf('T_KT = %0.3f +- %0.3f\n', B1(2), B1(2)-B2(2));
+XX=linspace(0,.15,8).';
 AA=[XX,ones(size(XX))];
-plot(XX,AA*B1,XX,AA*B2,XX,AA*B3)
+plot(XX,AA*B1,'-b',XX,AA*B2,'--r',XX,AA*B3,'-.g')
 
 
+set(gca, 'fontsize',13)
+grid on;
+xlabel('$[{\rm log}(L)]^{-2}$', 'interpreter', 'LaTeX');
+ylabel('$T_{\rm KT}(L)$', 'interpreter', 'LaTeX');
 
+l=legend('Data','Mean','Lower bound', 'Upper bound');      
+set(l,'interpreter','LaTeX', 'location','NorthWest');
 
-
-%% XY finding T_KT
-clc, clear all,clf
-
-L=[20:20:120, 200].';
-rhos=zeros(32,length(L));
-
-for i=1:length(L)
-    data = load(sprintf('TEstdErhoXY_T_0.950-1.105_32_L-%d_PERIODIC.tsv',L(i)));
-    rhos(:,i)=sum(data(:,4:5),2)/2;
-end
-T = data(:,1);
-clear data
-
-t=linspace(0.95,1.1);
-c=2/pi;
-
-plot(T,rhos,'.-')
-hold on
-plot(t,t*c)
-%axis([.95,1.1,.6,.7])
-
-
-%%
-clc
-index=1:32;
-y=rhos(index, :);
-x=T(index);
-
-
-
-A=[x, ones(size(x))]\y;
-
-intercept = ( A(2,:)./(c-A(1,:)) ).';
-
-clf
-xx=log(L).^(-2);
-plot(xx,intercept, '*'), hold on
-
-runs=1:6;
-B=[xx(runs), ones(size(xx(runs)))]\intercept(runs);
-
-xxx=linspace(0,.12);
-plot(xxx, B(1)*xxx+B(2))
-
-
-fprintf('T_KT = %0.3f\n', B(2));
 
 
 
