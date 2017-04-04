@@ -410,8 +410,7 @@ int main(){
   printf(        "%s", "Starting XY.\n");
   */
   // Values for the XY simulations 
-  //L          = 16;          // side length of the grid
-  T0         = .01;        // temperature
+  T0         = .01;         // temperature
   dT         = 3e-2;        // step size in beta
   Nsims      = 64;          // # sims, set to 0 if not active
   Nsteps     = (int)5e4;    // # Monte Carlo steps
@@ -421,11 +420,11 @@ int main(){
     ( L, J, T0, dT, Nsims, Nsteps*L*L+1, disc_first*L*L,
       isP, logPTR, save_directory );
   ///*
-  T0         = .75;        // temperature
-  dT         = 1e-2;        // step size in beta
-  Nsims      = 32;          // # sims, set to 0 if not active
+  T0         = .9;      // temperature
+  dT         = 1e-2;    // step size in beta
+  Nsims      = 6;       // # sims, set to 0 if not active
   L=8;
-  for (int i=0; i<4;++i){
+  for (int i=0; i<3;++i){
     L*=2;
     isOK = simulate_XY_write_avg_to_tsv
       ( L, J, T0, dT, Nsims, Nsteps*L*L+1, disc_first*L*L,
@@ -435,7 +434,7 @@ int main(){
 
 
 
-
+  /* Time tracking and logging */
   end1 = clock();
   time_spent = (float)(end1 - begin1) / CLOCKS_PER_SEC; 
   hour = floor(time_spent/3600);
