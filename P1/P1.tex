@@ -92,11 +92,12 @@ bracket yields
 \end{equation}
 where we have defined
 \begin{equation}\label{eq1:Debye}
-\lD := \qty[\frac{\varepsilon_0}{n_0e}
-\qty(\frac{1}{T_\ii}+\frac{1}{T_\ee})^{-1}]^{1/2}
+\lD := \qty[\frac{n_0e^2}{\varepsilon_0}
+\qty(\frac{1}{T_\ii}+\frac{1}{T_\ee})]^{-1/2}
 =\sqrt{\frac{\varepsilon_0 k_\text{B}T_\ii T_\ee}
 {n_0e^2(T_\ii + T_\ee)}}.
 \end{equation}
+(The Boltzmann constant has also been inserted in the last step.)
 Now \eqref{eq1:ODE} has the general solution
 %\begin{equation}
 $u(r) = A\ee^{-r/\lD} + B\ee^{+r/\lD}$
