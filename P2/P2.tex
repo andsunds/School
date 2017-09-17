@@ -27,6 +27,8 @@ english, swedish %% Make sure to put the main language last!
 
 
 \newcommand{\lD}{\ensuremath{\lambda_{\text{D}}}}
+\newcommand{\wc}{\ensuremath{\omega_{\text{c}}}}
+\newcommand{\rL}{\ensuremath{r_{\text{L}}}}
 
 
 %% If you want to chage the formating of the section headers
@@ -54,9 +56,52 @@ english, swedish %% Make sure to put the main language last!
 
 
 \section{Cyclotron motion}
+Here we want to calculate the cyclotron frquencies and Larmor radii
+for electrons and protons in two different systems. 
+
+The cyclotron frequency is simply given by
+\begin{equation} \label{eq1:wc}
+\wc = \frac{|q|B}{m}.
+\end{equation}
+Then the Larmor radius is simply $\rL=v_\perp/\wc$, where $v_\perp$ is
+the velocity component perpendicular to the magnetic field. We do
+however need some expression for $v_\perp$. For that we use the
+equipartition theorem from thermodynamics stating that, in thermal
+equilibrium, the thermal energy is equally distributed over all
+degrees of freedom. For single particle gases this means that 
+\begin{equation}
+\frac{m}{2} v_i^2 = \frac{1}{3} k_\text{B} T
+\quad\Longleftrightarrow\quad
+v_i^2 = \frac{2k_\text{B} T}{3m}.
+\end{equation}
+Now since the perpendicular component of the velocity ``lives'' in two
+spacial dimensions, we must have
+\begin{equation}
+v_\perp^2 = \frac{4k_\text{B} T}{3m}.
+\end{equation}
+For the Larmor radius, this means
+\begin{equation}
+\rL = \frac{m}{|q|B}\sqrt{\frac{4k_\text{B} T}{3m}}
+=\sqrt{\frac{4m k_\text{B} T}{3q^2B^2}}.
+\end{equation}
+\todo[inline]{VALUES!}
 
 
 \section{Uniforn electric and magnetic field}
+Here, we have a charged particle initially at rest with the
+electromagnetic field
+\begin{equation}
+\vb*E = E\vu{y}\qc
+\vb*B = B\vu{z}
+\end{equation}
+acting on the particle.
+
+The equation of motion is
+\begin{equation}
+m\dv{\vb*v}{t} = q\qty(\vb*E + \vb*v\cross\vb*B)
+\qc \vb*v(t=0) = \vb*0.
+\end{equation}
+There is no 
 
 
 \section{Magnetic ``beach''}
