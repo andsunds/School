@@ -8,7 +8,7 @@ english, swedish %% Make sure to put the main language last!
 \usepackage{../custom_as}
 
 %% Figures can now be put in a folder: 
-\graphicspath{ {figurer/} %{some_folder_name/}
+\graphicspath{ {figures/} %{some_folder_name/}
 }
 
 %% If you want to change the margins for just the captions
@@ -98,10 +98,106 @@ acting on the particle.
 
 The equation of motion is
 \begin{equation}
-m\dv{\vb*v}{t} = q\qty(\vb*E + \vb*v\cross\vb*B)
-\qc \vb*v(t=0) = \vb*0.
+m\dv{\vb*v}{t} = q\qty(\vb*E + \vb*v\cross\vb*B),
+%\qc \vb*v(t=0) = \vb*0.
 \end{equation}
-There is no 
+or in component form
+\begin{equation}\label{eq2:ODEs}
+\begin{cases}
+\dot{v}_x = \hat\omega v_y\\
+\dot{v}_y = -\hat\omega v_x + a_E\\
+\dot{v}_z = 0,
+\end{cases}
+\end{equation}
+where $\hat\omega = qB/m$ is the ``signed'' cyclotron frequency 
+(as opposed to $\wc=|q|B/m$), and $a_E=qE/m$ is an
+acceleration due to the electric field. The initial condition is 
+$v_x(0)=v_y(0)=v_z(0)=0$.
+
+The $z$ component obviously only has the solution $v_z(t)\equiv0$. But
+for the other two, let's begin by differentiating the first equation
+one more time:
+\begin{equation}
+\ddot{v}_x = \hat\omega \dot{v}_y
+=-\hat\omega^2 {v}_x + \hat\omega a_E
+\quad\Longleftrightarrow\quad
+\ddot{v}_x + \hat\omega^2 {v}_x = \hat\omega a_E.
+\end{equation}
+The RHS of the last equation is just a constant, so the general
+solution to this ODE is
+\begin{equation}
+v_x(t) = A\cos(\hat\omega t) + B\sin(\hat\omega t) 
++ \frac{a_E}{\hat\omega},
+\end{equation}
+with the initial condition $v_x(0)=0$ requiring
+\begin{equation}\label{eq2:vx}
+v_x(t) = \frac{a_E}{\hat\omega}[1-\cos(\hat\omega t)]
+ + B\sin(\hat\omega t).
+\end{equation}
+Note that since we went from a first order to a second order ODE we
+would need a second initial condition to fully specify $v_x$ at this
+point, but instead we will use the inteconnection between $v_x$ and
+$v_y$ together with the initial condition on $v_y$ to solve this
+problem. The second equation of \eqref{eq2:ODEs} thus becomes
+\begin{equation}
+\dot{v}_y = -\hat\omega v_x + a_E
+=a_E\cos(\hat\omega t)
+ - \hat\omega B\sin(\hat\omega t),
+\end{equation}
+which has the solution 
+\begin{equation}\label{eq2:vy}
+v_y(t) = \frac{a_E}{\hat\omega}\sin(\hat\omega t)
++B\cos(\hat\omega t) -B.
+\end{equation}
+The constant of integration must be $-B$ for $v_y(0)=0$ to be
+satisfied. To finally deal with $B$, we substitute \eqref{eq2:vy} back
+into the first equation of \eqref{eq2:ODEs} and compare it to direct
+differentiation of \eqref{eq2:vx}:
+\begin{equation}
+\overbrace{a_E\sin(\hat\omega t) + \hat\omega B\cos(\hat\omega t)}
+^{\dv*{t}:\;\eqref{eq2:vx}}
+\stackrel{\eqref{eq2:ODEs}}{=}
+\hat\omega v_y
+\stackrel{\eqref{eq2:vy}}{=}
+a_E\sin(\hat\omega t)
++\hat\omega B [\cos(\hat\omega t)-1].
+\end{equation}
+Here we see that the already determined coefficient for the sine term
+match and the coefficient for the cosine term do as well, but on the
+RHS there is a constant term which is not on the LHS. We are therefore
+forced to set $B=0$. 
+
+The particle velocity is now finally determined to be
+\begin{equation}
+\begin{cases}
+v_x(t) = \frac{E}{B}[1-\cos(\wc t)]\\
+v_y(t) = \xi\frac{E}{B}\sin(\wc t)\\
+v_z(t) \equiv 0,
+\end{cases}
+\end{equation}
+where $a_E/\hat\omega = (qe/m)/(qB/m)=E/B$, $\wc=\abs{\hat\omega}$ and
+$\xi$ carries the sign of the charge (which is not necessary in the
+cosine). Or in terms of position, using $r_x(0)=r_y(0)=r_z(0)=0$, we
+can write
+\begin{equation}
+\begin{cases}
+r_x(t) = \frac{E}{B}t-\frac{E}{B\wc}\sin(\wc t)\\
+r_y(t) = \xi\frac{E}{B\wc}[1-\cos(\wc t)]\\
+r_z(t) \equiv 0.
+\end{cases}
+\end{equation}
+
+This is seen to be Larmor gyration, with $\rL=E/(B\wc)=Em/(|q|B^2)$,
+and a drift of the guiding center. The drift velosity is also seen to
+be the expected\footnotemark{} ``E cross B'' drift:
+\begin{equation}
+\vb*v_\text{drift} = \frac{\vb*E\cross\vb*B}{B^2}
+=\frac{E}{B} (\vu{y}\cross\vu{z})
+=\frac{E}{B} \vu{x}.
+\end{equation}
+\footnotetext{This whole problem could easily have been solved on a
+  few lines using these formulas from the book, but I was unsure what
+  you were really asking for so I did it the long way around. }
 
 
 \section{Magnetic ``beach''}
