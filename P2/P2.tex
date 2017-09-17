@@ -1,5 +1,5 @@
 \documentclass[11pt,a4paper, 
-english, swedish %% Make sure to put the main language last!
+swedish, english %% Make sure to put the main language last!
 ]{article}
 \pdfoutput=1
 
@@ -12,7 +12,7 @@ english, swedish %% Make sure to put the main language last!
 }
 
 %% If you want to change the margins for just the captions
-\usepackage[margin=10 pt]{caption}
+\usepackage[]{caption}
 
 %% To add todo-notes in the pdf
 \usepackage[%disable  %%this will hide all notes
@@ -69,23 +69,48 @@ however need some expression for $v_\perp$. For that we use the
 equipartition theorem from thermodynamics stating that, in thermal
 equilibrium, the thermal energy is equally distributed over all
 degrees of freedom. For single particle gases this means that 
+(with $k_\text{B}=1$)
 \begin{equation}
-\frac{m}{2} v_i^2 = \frac{1}{3} k_\text{B} T
+\frac{m}{2} v_i^2 = \frac{1}{3} T
 \quad\Longleftrightarrow\quad
-v_i^2 = \frac{2k_\text{B} T}{3m}.
+v_i^2 = \frac{2 T}{3m}.
 \end{equation}
 Now since the perpendicular component of the velocity ``lives'' in two
 spacial dimensions, we must have
 \begin{equation}
-v_\perp^2 = \frac{4k_\text{B} T}{3m}.
+v_\perp^2 = \frac{4 T}{3m}.
 \end{equation}
 For the Larmor radius, this means
 \begin{equation}
-\rL = \frac{m}{|q|B}\sqrt{\frac{4k_\text{B} T}{3m}}
-=\sqrt{\frac{4m k_\text{B} T}{3q^2B^2}}.
+\rL = \frac{m}{|q|B}\sqrt{\frac{4 T}{3m}}
+=\sqrt{\frac{4m T}{3q^2B^2}}.
 \end{equation}
-\todo[inline]{VALUES!}
 
+Some numerical values are given in \tabref{tab1}.
+
+\begin{table}
+\begin{center}
+\caption{Numerical values of $\wc$ and $\rL$ for electrons and
+  protons, in Earth's ionosphere ($T_\ee=T_\text{p}=\unit[0.1]{eV}$,
+  and $B=\unit[0.3]{G}=\unit[30]{\micro T}$) and in the solar corona
+  wind ($T_\ee=T_\text{p}=\unit[10]{eV}$, and
+  $B=\unit[10^{-5}]{G}=\unit[1]{nT}$). [Problem 1]
+}\label{tab1}
+\begin{tabular}{|l|c|c|c|c|}\cline{2-5}
+\multicolumn{1}{c|}{}
+&\multicolumn{2}{|c|}{electron} 
+&\multicolumn{2}{|c|}{proton} \\ \hline
+ionosphere 
+&$\wc=\unit[5.3\times10^{6}]{rad/s}$ & $\rL=\unit[29]{mm}$
+&$\wc=\unit[2.9\times10^{3}]{rad/s}$ & $\rL=\unit[1.2]{m}$
+\\ \hline
+solar corona 
+&$\wc=\unit[8.8\times10^{2}]{rad/s}$ & $\rL=\unit[1.7]{km}$
+&$\wc=\unit[4.8\times10^{-1}]{rad/s}$ & $\rL=\unit[74]{km}$
+\\ \hline
+\end{tabular}
+\end{center}
+\end{table}
 
 \section{Uniforn electric and magnetic field}
 Here, we have a charged particle initially at rest with the
@@ -212,8 +237,7 @@ be the expected\footnotemark{} ``E cross B'' drift:
 \section{Dipole field}
 
 
-
-\section{Conservatio of magnetic moment}
+\section{Conservation of magnetic moment}
 
 
 
