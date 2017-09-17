@@ -389,7 +389,96 @@ reabsorbed by another particle in the plasma. And then energy is also
 added externally to the plasma to heat it up.
 
 
-\section{Dipole field}
+\section{Dipole pendulum}
+The electric field from a dipole $\vb*p$, in the origin, is given by
+\begin{equation}
+\vb*E(\vb*r) = 
+\frac{3\vu*r(\vb*p\vdot\vu*r)-\vb*p}{4\pi\varepsilon_0r^3},
+\end{equation}
+where $\vb*r=r\vu*r$, and $\vu*r\vdot\vu*r=1$. Separeted into
+componentes the field, produced by a dipole $\vb*p=p\vu{z}$, is given
+by [eqn. 4.12, J. D. Jackson, \textit{Classical Electrodynamics}, 3rd
+ed., 1999]
+\begin{equation}
+\begin{cases}
+E_r = \dfrac{2p\,\cos\theta}{4\pi\varepsilon_0 r^3}\\
+E_\theta = \dfrac{p\,\sin\theta}{4\pi\varepsilon_0 r^3}\\
+E_\phi=0.
+\end{cases}
+\end{equation}
+
+\subsection*{Similarities with the physical penulum}
+Given that that a charged particle, starting out at rest with
+$\theta=\pi/2$, will follow a semicircular\footnotemark{} trajectory
+($r=a$ constant) we can find a differential equation for the
+angle~$\theta$. The velocity along the tradjectory is $a\dot\theta$,
+so the equation of mothion will be
+\begin{equation}\label{eq6:EOM1}
+ma\ddot\theta = qE_\theta = \frac{qp}{4\pi\varepsilon_0 a^3}\sin\theta
+\quad\Longleftrightarrow\quad
+\ddot\theta - \xi\Omega^2\,\sin\theta=0,
+\end{equation}
+where
+\begin{equation}\label{eq6:Omega}
+\Omega= \sqrt{\frac{|q|p}{4\pi\varepsilon_0 a^4m}}
+\end{equation}
+is some constant with dimension of invers time,
+and $\xi=q/|q|=\pm1$ is the sign of the charge, and the initial
+conditions are $\theta(0)=\pi/2$ and $\dot\theta(0)=0$.
+\footnotetext{Which I assume we don't have to prove, otherwise 
+[R. S. Jones, \textit{Circular motion of charged particle in an
+  elextric dipole filed}, Am. J. Phys., \textbf{63}, November] has a
+very short and simple argument, and he seems to be the first one to
+prove this result.} 
+
+Note that this is \emph{exactly} the same equation of motion as for
+the simple physical pendulum ($\ddot\theta + \omega^2\sin\theta=0$),
+but here the initial condition is $\theta(0)=\pi/2$ and not 0 -- we
+can no longer make the assumtion $\sin\theta\approx\theta$). Also,
+\eqref{eq6:EOM1} has a differnt sign 
+depending on $\xi$, but all that really does is to determine wheter
+the pendulum swings upward or downward. 
+
+\subsection*{Using the centripital force to find the period of oscillation}
+We could also use the radial part of the elctric field and the
+centripetal force to get another differntial equation:
+\begin{equation}\label{eq6:EOM2}
+-ma(\dot\theta)^2 = qE_r
+=\frac{2qp\,\cos\theta}{4\pi\varepsilon_0 r^3}
+\quad\Longleftrightarrow\quad
+(\dot\theta)^2 + 2\xi\Omega^2\,\cos\theta=0,
+\end{equation}
+with $\xi$ and $\Omega$ as before. (The minus sign on the LHS is due
+tho the fact that the centripetal force points in the $-\vu*r$
+direction, while the radial elctric force is $+qE_r\vu*r$.)
+
+Now the period of oscillation can be calculated. We can assume,
+without loss of generality, that $q<0$ ($\xi=-1$); then the particle
+will swing upward and the angle $\theta\in[-\pi/2, \pi/2]$. Due to
+symmetry, the oscillation period, $T$, can be expressed as 4 times the
+time it takes for $\theta$ to swing from $-\pi/2$ to 0:
+\begin{equation}
+\begin{aligned}
+T=&4\int_{\theta=-\pi/2}^{\theta=0}\rd t
+=4\int_{\theta=-\pi/2}^{\theta=0}\dv{t}{\theta}\id\theta
+=4\int_0^{\pi/2}\frac{\rd\theta}{\dot\theta}
+\end{aligned}
+\end{equation}
+Now with \eqref{eq6:EOM2}, we can write this as
+\begin{equation}
+\begin{aligned}
+T=&4\int_{-\pi/2}^0\frac{\rd\theta}{\sqrt{2\Omega^2\cos\theta}}\\
+\qty{\alpha=\theta+\frac{\pi}{2}}
+=&\frac{2\sqrt{2}}{\Omega}\int_0^{\pi/2}\frac{\rd\alpha}{\sqrt{\sin\alpha}}
+=\frac{2\sqrt{2}}{\Omega}\frac{[\Gamma(\nicefrac14)]^2}{2\sqrt{2\pi}}
+=\frac{[\Gamma(\nicefrac14)]^2}{\sqrt{\pi}\Omega},
+\end{aligned}
+\end{equation}
+with $\Omega$ as in \eqref{eq6:Omega}.
+The last integral is due to [formula 3.621.7, I. S. Gradshteyn \&
+I. M. Ryzhik, \textit{Table of Integrals, Series, and Products}, 8th
+ed., 2015].
+\todo[inline]{Not fully satisfied with the presentation.}
 
 
 \section{Conservation of magnetic moment}
