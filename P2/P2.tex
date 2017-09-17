@@ -478,15 +478,108 @@ with $\Omega$ as in \eqref{eq6:Omega}.
 The last integral is due to [formula 3.621.7, I. S. Gradshteyn \&
 I. M. Ryzhik, \textit{Table of Integrals, Series, and Products}, 8th
 ed., 2015].
-\todo[inline]{Not fully satisfied with the presentation.}
+
 
 
 \section{Conservation of magnetic moment}
+Assuming that we have a slowly time and space varying magnetic field
+$\vb*B(\vb*r, t)$, we want to prove that
+\begin{equation}
+\mu:=I\pi\rL^2=\frac{|q|\wc}{2\pi}\,\pi\rL^2=
+\frac{mv_\perp^2}{2B}=\frac{W_\perp}{B}.
+\end{equation}
+is constant. The fact that the
+variations are slow can be expressed as
+\begin{equation}
+\rL\abs{\frac{1}{B}\pdv{B}{s}}=\epsilon_s\ll1
+\qc
+\frac{1}{\wc}\abs{\frac{1}{B}\pdv{B}{t}}=\epsilon_t\ll1,
+\end{equation}
+where $\pdv*{s}$ denotes differentiation in any direction.
 
+We first note that $\vb*F\vdot\vb*v_\perp$ is the power exerted by the
+force $\vb*F$ in the direction of $\vb*v_\perp$. We also note that
+\emph{spacial} variations in $\vb*B$ will not result in any (direct)
+force in the perpendicular direction. Therefore
+\begin{equation}\label{eq7:Wp1}
+\dv{W_\perp}{t} = q\vb*E\vdot\vb*v_\perp,
+\end{equation}
+where the electric field is due to Faraday's law
+\begin{equation}\label{eq7:Faraday}
+\pdv{B}{t} = -\curl\vb*E.
+\end{equation}
+The temporal variations were very slow compared to the Laramor period,
+which means that we can replace $\vb*E\vdot\vb*v_\perp$ with an
+averaged over one period of oscillation:
+\begin{equation}\label{eq7:evp}
+\vb*E\vdot\vb*v_\perp
+=\ev{\vb*E\vdot\vb*v_\perp}+\order{\epsilon_t}
+=\frac{\wc}{2\pi}\int_0^{\tau_\text{L}}\vb*E\vdot\vb*v_\perp\id{t}
++\order{\epsilon_t},
+\end{equation}
+where $\tau_\text{L}=2\pi/\wc$.
+Now, since $\vb*v_\perp\id{t}=\rd\vb*r_\perp$, we can write the last
+integral in \eqref{eq7:evp} as
+\begin{equation}
+\int_0^{\tau_\text{L}}\vb*E\vdot\vb*v_\perp\id{t}
+=\oint_{\pd S}\vb*E\vdot\rd\vb*r_\perp +\order{\epsilon_t}+\order{\epsilon_s}
+\end{equation}
+where $\pd S$ is the (unperturbed) Laramor orbit; this ofcourse
+introduces some errors 
+$\order{\epsilon_t}+\order{\epsilon_s}=\order{\epsilon_t, \epsilon_s}$
+due to variations of $\vb*B$ in both space and time. Now Stoke's
+theorem comes in handy:
+\begin{equation}
+\oint_{\pd S}\vb*E\vdot\rd\vb*r_\perp 
+=\int_{S}(\curl\vb*E)\vdot\rd\vb*a 
+=-\int_{S}\pdv{\vb*B}{t}\vdot\rd\vb*a 
+=-\pdv{t}\int_{S}\vb*B\vdot\rd\vb*a 
+\end{equation}
+Now assuming that the spacial variations of $\vb*B$ are small, the
+last integral just becomes
+\begin{equation}
+-\pdv{t}\int_{S}\vb*B\vdot\rd\vb*a 
+=-\pdv{t}\qty[\pi\rL^2 \vb*B\vdot\vu{n}_S]+\order{\epsilon_s}
+=-\pi\rL^2 \vu{n}_S\vdot\pdv{\vb*B}{t}+\order{\epsilon_s}
+\end{equation}
+where $\vu{n}_S$ is the surface normal to the surface of the disc
+whose perimiter is the Laramore orbit. 
 
+We can now collect the fruit of our work and return to
+\eqref{eq7:Wp1}. We note when going back trough all the steps that no
+more than first order corrections were introduced on the way, meaning
+that in the end
+\begin{equation}
+\dv{W_\perp}{t} = -\frac{q\wc}{2\pi}\pi\rL^2 \,
+\vu{n}_S\vdot\pdv{\vb*B}{t}
++\order{\epsilon_s, \epsilon_t}.
+\end{equation}
+We note that $\vu{n}_S$ has to be either parallel or anti-paralell to
+the magnetic field, and which one depends on the sign of the
+charge. Luckily we have a (signed) facor $q$ in the extression, so by
+thinking the Laramor orbit through, we see that we can write
+\begin{equation}
+\dv{W_\perp}{t} = +\frac{|q|\wc}{2\pi}\pi\rL^2 \,\pdv{B}{t}
++\order{\epsilon_s, \epsilon_t}
+=\mu\pdv{B}{t} +\order{\epsilon_s, \epsilon_t}.
+\end{equation}
 
+To pound in the last nain in this coffin, we also note that we can
+write
+\begin{equation}
+\dv{W_\perp}{t} = \dv{(\mu B)}{t}
+=B\dv{\mu}{t}+\mu\dv{B}{t}.
+\end{equation}
+Equating these last two we see that
+\begin{equation}
+B\dv{\mu}{t}+\mu\dv{B}{t}=\mu\pdv{B}{t} 
++\order{\epsilon_s, \epsilon_t}
+\quad\Longleftrightarrow\quad
+\dv{\mu}{t}=\order{\epsilon_s, \epsilon_t},
+\end{equation}
+which is what we wanted to prove.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  LocalWords:  Debye
+%  LocalWords:  Debye Laramor
