@@ -273,6 +273,68 @@ As expected if $v_{0\perp}=0$ there is no turning point
 
 
 \section{Adiabatic energy change}
+We want to calculate the energy change assuming that we have a system
+of a large number, $N$, of non-interacting electrons, with
+isotropically distributed velocities but all with speed $v_0$, moving
+in a uniform magnetic field which adiabatically increases from $B_0$
+to $\alpha B_0$ ($\alpha>1$).  
+
+To find the total energy of a system, we can use the distribution
+function:
+\begin{equation}
+U = \oldint_{\vb*x}\!\rd^3x \oldint_{\vb*v}\!\rd^3v \,
+\epsilon(\vb*x, \vb*v)f(\vb*x, \vb*v).
+\end{equation}
+Since there is no electric potential and the electron-electron
+interactions $\epsilon(\vb*x, \vb*v) = m v^2/2$. Initially all
+velociteis are isotropically distributed and have magnitude $v_0$,
+which means that 
+$f_0(\vb*x, \vb*v) = n_0(\vb*x)\delta(v-v_0)/(4\pi v_0^2)$.
+which means that the inital energy of
+the system is
+\begin{equation}
+U_0 = \oldint_{\vb*x}\!\rd^3x \oldint_{\vb*v}\!\rd^3v \,
+\frac{mv^2}{2}f_0(\vb*x, \vb*v)
+=\frac{mv_0^2}{2}\oldint_{\vb*x}\!\rd^3x\,n_0(\vb*x)
+=N\frac{mv_0^2}{2}
+\end{equation}
+
+
+To find the final energy, after the increas in magnetic field, we once
+again use the fact that the magnetic moment  $\mu=mv_\perp^2/(2B)$ is
+conserved, while the velocity component parallel to the field is
+unchanged. This means that the new energy of a particle is 
+\begin{equation}
+\epsilon = \frac{mv_{1||}^2}{2}+\frac{mv_{1\perp}^2}{2}
+=\frac{mv_{0||}^2}{2}+\alpha\frac{mv_{0\perp}^2}{2}.
+\end{equation}
+Note that this is expressed only in the original velocity components,
+which means that we can use $f_0$ when calculating the energy. 
+The integration over all of phase space is made significantly easier
+if we align the $z$-axis of the velocity integral with the magnetic
+field, which means that $v_{0||}=v_0\cos\theta$ and
+$v_{0\perp}=v_0\sin\theta$ if written in polar coordinates. 
+The final energy is therefore given by
+\begin{equation}
+\begin{aligned}
+U_1 =& \frac{m}{2}\oldint_{\vb*x}\!\rd^3x \oldint_{\vb*v}\!\rd^3v \,
+\qty[\cos^2\theta + \alpha\sin^2\theta] v^2 f_0(\vb*x, \vb*v)\\
+=&N\frac{m}{2}
+\int_0^{2\pi}\rd\phi\int_0^\pi\rd\theta\,\sin\theta
+\int_0^\infty \rd{v}\, v^2\,
+\qty[\alpha - (\alpha-1)\cos^2\theta] v^2\frac{\delta(v-v_0)}{4\pi v_0^2}\\
+=&N\frac{mv_0^2}{2}\,\frac{1}{2}
+\int_0^\pi\rd\theta\,\sin\theta
+\qty[\alpha - (\alpha-1)\cos^2\theta]\\
+=&N\frac{mv_0^2}{2}\,\frac{1+2\alpha}{3}
+=\frac{1+2\alpha}{3}U_0.
+\end{aligned}
+\end{equation}
+(The last integral can easily be calculated with a substitution of
+variables $s=\cos\theta$, $\rd{s}=-\sin\theta\,\rd\theta$.) As a
+sanity check, we see that if $\alpha\to1$ then $U_1\to U_0$ as
+expected. 
+
 
 
 \section{Cyclotron radiation}
