@@ -29,6 +29,7 @@ swedish, english %% Make sure to put the main language last!
 \newcommand{\lD}{\ensuremath{\lambda_{\text{D}}}}
 \newcommand{\wc}{\ensuremath{\omega_{\text{c}}}}
 \newcommand{\rL}{\ensuremath{r_{\text{L}}}}
+\newcommand{\vL}{\ensuremath{v_{\text{L}}}}
 
 
 %% If you want to chage the formating of the section headers
@@ -338,6 +339,54 @@ expected.
 
 
 \section{Cyclotron radiation}
+The total radiated power due to an acceleration $a$ of a
+non-relativistic charged particle is given by the Laramor formula 
+\begin{equation}
+P = \frac{e^2\, a^2}{6\pi \varepsilon_0 c^3},
+\end{equation}
+where $e$ is the charge of the paricle.
+
+If the particle motion is Laramor gyration, then $a=\vL^2/\rL$ where
+$\rL=m\vL/(eB)$. This means that the acceleration can be written as
+$a=\vL eB/m$
+radiated power is
+\begin{equation}\label{eq5:PL}
+P=\frac{e^4B^2\, \vL^2}{6\pi \varepsilon_0 c^3m^2}
+=\frac{e^4B^2}{3\pi \varepsilon_0 c^3m^3}
+\frac{m\vL^2}{2}
+=\frac{1}{\tau}W,
+\end{equation}
+where $W$ is the kinetic energy of the particle, and
+\begin{equation}\label{eq5:decay-time}
+\tau = \frac{3\pi \varepsilon_0 c^3m^3}{e^4B^2}
+\end{equation}
+is some constant with the dimensions of time.
+
+If there is no other sourse of energy the radiated $P=-\dv*{W}{t}$ has
+to be the rate of change of the kinetic energy. Therefore
+\eqref{eq5:PL} yields
+\begin{equation}\label{eq5:ODE}
+\dv{W}{t}+\frac{1}{\tau}W=0
+\end{equation}
+wich means that
+\begin{equation}
+W(t)=W(0)\ee^{-t/\tau}.
+\end{equation}
+We now see the physical interpretation of the constant $\tau$ from
+\eqref{eq5:decay-time}; it is the decay time of the kinetic energy.
+
+The decay time depends on the field strength. We can therefore express
+the magnetic field, given a set decay time, according to
+\begin{equation}
+B=\sqrt{\frac{3\pi \varepsilon_0 c^3m^3}{e^4\tau}}.
+\end{equation}
+For instance if $\tau=\unit[1]{s}$, then $B=\unit[1.6]{T}$. This is
+easily in the same order of magnitude as in tokamaks. However for  
+\eqref{eq5:ODE} to be valid, there cannot be any other interactions
+between paricles. E.g. almost all of the radiated energy radiated from
+particles \emph{within the bulk} of the plasma will probably be
+reabsorbed by another particle in the plasma. And then energy is also
+added externally to the plasma to heat it up.
 
 
 \section{Dipole field}
