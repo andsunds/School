@@ -6,7 +6,7 @@ swedish, english %% Make sure to put the main language last!
 %% Andréas's custom package 
 %% (Will work for most purposes, but is mainly focused on physics.)
 \usepackage{../custom_as}
-
+\usepackage{cancel}
 %% Figures can now be put in a folder: 
 \graphicspath{ {figures/} %{some_folder_name/}
 }
@@ -25,12 +25,16 @@ swedish, english %% Make sure to put the main language last!
 %            left   = 3cm, right  = 3cm %% left and right margins
 ]{geometry}
 
-
+\newcommand{\enull}{\ensuremath{\varepsilon_{0}}}
 \newcommand{\lD}{\ensuremath{\lambda_{\text{D}}}}
 \newcommand{\wc}{\ensuremath{\omega_{\text{c}}}}
 \newcommand{\rL}{\ensuremath{r_{\text{L}}}}
 \newcommand{\vL}{\ensuremath{v_{\text{L}}}}
-
+\newcommand{\mee}{\ensuremath{m_{\text{e}}}}
+\newcommand{\nee}{\ensuremath{{n_{\text{e}}}}}
+\newcommand{\nuen}{\ensuremath{{\nu_{\text{en}}}}}
+\newcommand{\ve}{\ensuremath{{\vb*{v}_{\text{e}}}}}
+\newcommand{\wpe}{\ensuremath{{\omega_{\text{p}}}}}
 
 %% If you want to chage the formating of the section headers
 \renewcommand{\thesubsection}{\arabic{section}.\Alph{subsection})}
@@ -54,10 +58,108 @@ swedish, english %% Make sure to put the main language last!
 %% If you want a list of all todos
 %\todolist
 
-
-
 \section{Collisional damping}
+In this problem, we study how high frequency, transvers EM-waves
+propagating through a cold, weakly ionized, unmagnetized, static and
+uniform plasma are affected by collisions with neutrals in the
+plasma. These collisons manifest them selves through a collisional term
+$-\mee\nee\nuen\ve$ in the fluid EOM, where $\nuen$ is the the
+electron-neutral collision rate and is assumed to be constant.
 
+The electron fluid equation now becomes
+\begin{align}
+\pdv{\nee}{t}+\div\qty[\nee\ve]&=0\\
+\label{eq1:EOM0}
+\mee\nee\qty[\pdv{\ve}{t}+\ve\vdot\grad\ve]
+&=-e\nee\qty[\vb*E+\ve\cross\vb*B]-\grad P_\ee 
+-\mee\nee\nuen\ve\\
+\dv{P_\ee}{t}&=\frac{\gamma_\ee P_\ee}{\nee^{\gamma_\ee}}\dv{\nee}{t}
+\end{align}
+Since the plasma is assumed to be cols and unmagnetized we can brop
+the preassure and magnetic terms in the EOM. Next, we assume that 
+$\ve=\ve_0+\ve_1$, where $\ve_1$ is a \emph{small} correction, and we
+linearize. Since the plasma was static and uniform, any derivative of
+zeroth order variables vanish, and if we also discard any higher than
+linear order correction we get the EOM
+\begin{equation}\label{eq1:EOM}
+\mee\nee\pdv{\vee_1}{t} = -e\nee_0\vb*E_1-\mee\nee_0\nuen\vb*\ve_1.
+\end{equation}
+
+Using the Fourier transform
+\begin{equation}
+g(\vb*x, t) = \oldint_{\vb*k}\oldint_{\omega}
+g(\vb*k, \omega)\ee^{\ii\vb*k\vdot\vb*x-\ii\omega t}
+\id^3k\id\omega,
+\end{equation}
+and denoting the Fouriertansforms of the first order correction with
+tildes, we can write \eqref{eq1:EOM} as
+\begin{equation}
+\qty[-\ii\omega\mee\nee + \mee\nee_0\nuen]
+\tilde{\vb*v}_\ee = -e\nee\widetilde{\vb*E}.
+\end{equation}
+This can be rewritten as
+\begin{equation}
+\tilde{\vb*v}_\ee 
+=\frac{-e\widetilde{\vb*E}}{-\ii\omega\mee + \mee\nuen}
+=\frac{-e\ii\widetilde{\vb*E}}{\mee(\omega + \ii\nuen)}.
+\end{equation}
+
+Then the current can be written as
+\begin{equation}
+\widetilde{\vb*J} = -e\nee_0\tilde{\vb*v}_\ee 
+=\frac{+\ii e^2\nee_0 \widetilde{\vb*E}}{\mee(\omega + \ii\nuen)}
+=\frac{\ii \enull\wpe^2}{\omega + \ii\nuen}\widetilde{\vb*E}
+=\sigma\widetilde{\vb*E},
+\end{equation}
+where the ions have been neglected due to them being much heavier than
+the electrons. The dielectric tensor then becomes
+\begin{equation}
+\epsilon_{ij}=\delta_{ij}+\frac{\ii \sigma_{ij}}{\enull\omega}
+=\qty(1-\frac{\wpe^2}{\omega^2(1 + \ii\nuen/\omega)})\delta_{ij}.
+\end{equation}
+The dispersion relation for the transverse waves can be found through
+the wave equation
+\begin{equation}
+\epsilon\vb*E_\perp = \frac{k^2c^2}{\omega^2}\vb*E_\perp,
+\end{equation}
+resulting in
+\begin{equation}
+\begin{aligned}
+0=&\omega^2-\frac{\wpe^2}{1 + \ii\nuen/\omega}-k^2c^2\\
+\qty{\text{High freq.}}\approx&
+\omega^2-\wpe^2\qty(1-\ii\frac\nuen\omega)-k^2c^2.
+\end{aligned}
+\end{equation}
+Now we can assume that $\omega=\omega_0+\eta\omega_1$, where
+$\eta=\nuen/\omega_0\ll1$. Keeping only terms of first order
+in $\eta$, we get
+\begin{equation}
+0=\omega_0^2+2\eta\omega_0\omega_1
+-\wpe^2\bigg[1-
+\overbrace{\frac{\ii\nuen}{\omega_0}}^{=\ii\eta}
+\qty(1-\cancel{\eta\frac{\omega_1}{\omega_0}})\bigg]
+-k^2c^2+\order{\eta^2}.
+\end{equation}
+We now get two equations for te different orders of $\eta$:
+\begin{equation}\label{eq1:omega0}
+\omega_0^2-\wpe^2-k^2c^2=0
+\quad\Longrightarrow\quad
+\omega_0=\sqrt{\wpe^2+k^2c^2}
+\end{equation}
+and
+\begin{equation}
+2\omega_0\omega_1 +\ii\wpe^2=0
+\quad\Longrightarrow\quad
+\omega_1=-\ii\frac{\wpe^2}{2\omega_0}.
+\end{equation}
+We see that the introduction of a collisoin term has made the
+frequency complex through
+\begin{equation}
+\omega=\omega_0-\ii\frac{\nuen\wpe^2}{2\omega_0^2}
++\order{\frac{\nuen^2}{\omega_0^2}},
+\end{equation}
+where $\omega_0$ is given in \eqref{eq1:omega0}, which results in
+an exponential decay of the wave. 
 
 \section{Two-stream instability (fluid model)}
 
