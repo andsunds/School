@@ -50,7 +50,7 @@ swedish, english %% Make sure to put the main language last!
 \title{Assignment 2 \\
 {\Large Plasma Physics -- RRY085}}
 \author{Andréas Sundström}
-\date\today%{2017-09-17}
+\date{2017-10-01}
 
 \maketitle
 
@@ -414,7 +414,90 @@ meaning that the growth rate, for $\lambda=1$, is
 
 
 
-\section{Two-stream instability (kinematic model)}
+\section{Two-stream instability (kinetic theory)}
+Here we will rederive the dispersion relation from the previous
+problem using kinetic theory. We will only consider electrostatic
+fields propagating along the $x$ direction, menaing that the 1D
+Poisson-Vlasow equations are nessecary:
+\begin{align}
+& \pdv{f_\alpha}{t}+v\pdv{f_\alpha}{x}
+-\frac{q_\alpha}{m_\alpha}\pdv{\varphi}{x}\pdv{f_\alpha}{v}=0\\
+&\pdv[2]{\varphi}{x}=-\frac1\enull 
+\sum_\alpha q_\alpha \int_{-\infty}^{\infty} [f_\alpha-F_{0\alpha}]\id{v}.
+\end{align}
+We are as always looking for perturbative solutions 
+$f_\alpha=F_{0\alpha}+f_{1\alpha}$ and $\varphi=\varphi_0+\varphi_1$.
+Like before the unperturbed solutions are static and uniform (in space
+and time) meaning that we get, to linear order in the perturbations,
+\begin{align}
+& \pdv{f_{1\alpha}}{t}+v\pdv{f_{1\alpha}}{x}
++\frac{e}{\mee}\pdv{\varphi_1}{x}\pdv{F_{0\alpha}}{v}=0\\
+&\pdv[2]{\varphi_1}{x}=\frac{e}{\enull}
+\sum_\alpha \int_{-\infty}^{\infty} f_{1\alpha}(v) \id{v}.
+\end{align}
+Here we have also used the fact that we can disregard the ions, hence
+all the charges are $q_\alpha=-e$ and $m_\alpha=\mee$.
+
+Now Forier transform, according to \eqref{eq:Fourier}, the space and
+time coordinates. Firstly 
+\begin{equation}
+\begin{aligned}
+&-\ii\omega\tilde{f}_{\alpha}+v\ii k \tilde{f}_{\alpha}
++\frac{\ii ke}{\mee}\varphi_1\pdv{F_{0\alpha}}{v}=0\\
+\quad\Longleftrightarrow\quad&
+\tilde{f}_{\alpha}=\frac{ke}{\mee(\omega-vk)}\pdv{F_{0\alpha}}{v}
+\tilde\varphi.
+\end{aligned}
+\end{equation}
+Then
+\begin{equation}
+-k^2\tilde\varphi=\frac{k e^2}{\enull\mee} \sum_\alpha
+\int_{-\infty}^{\infty}\pdv{F_{0\alpha}}{v}
+\frac{\rd{v}}{(\omega-vk)}\tilde\varphi.
+\end{equation}
+By cleaning up a bit we get the dispersion relation
+\begin{equation}
+\begin{aligned}
+-k=&\frac{e^2}{\enull\mee} \sum_\alpha
+\int_{-\infty}^{\infty}\pdv{F_{0\alpha}}{v}
+\frac{\rd{v}}{(\omega-vk)}\\
+=&\frac{e^2}{\enull\mee} \sum_\alpha \qty{
+\qty[\frac{F_{0\alpha}(v)}{(\omega-vk)^2}]_{v=-\infty}^\infty
+-\int_{-\infty}^{\infty}F_{0\alpha}(v)
+\frac{k\id{v}}{(\omega-vk)^2}
+}.
+\end{aligned}
+\end{equation}
+For the system to not have infinite energy, $F_{0\alpha}(v)\to0$ as
+$v\to\pm\infty$, which cancels the first term after the integration by
+parts. 
+
+To continue further, we need to know more about $F_{0\alpha}$. In this
+problem, we are given to assume
+$F_{0\alpha}=n_{0\alpha}\delta(v-v_{0\alpha})$, where $\back{v}{0}=0$
+and $\beam{v}{0}=v_0$. We can therefore write the dispersion relation
+as
+\begin{equation}
+\begin{aligned}
+1=&\frac{e^2\back{n}{0}}{\enull\mee} 
+\int_{-\infty}^{\infty}\delta(v-0)
+\frac{\id{v}}{(\omega-vk)^2}
++\frac{e^2\beam{n}{0}}{\enull\mee} 
+\int_{-\infty}^{\infty}\delta(v-v_0)
+\frac{\id{v}}{(\omega-vk)^2}\\
+=&\frac{\back{\omega}{\text{p }}^2}{\omega^2}
++\frac{\beam{\omega}{\text{p }}^2}{(\omega-v_0k)^2},
+\end{aligned}
+\end{equation}
+which is precisely the same dispersion relation as in the previous
+problem.
+
+We do not get any more information from \emph{this} approach with
+kinetic theory, because we choose such a simple unperturbed
+distribution function only containing \emph{one} velocity for each
+species. The potential extra theoretical insights gained from using
+kinetic theory comes from the fact that we, usually, have a
+\emph{continuous spectrum} of velocities. 
 
 
 
