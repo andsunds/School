@@ -6,6 +6,8 @@ swedish, english %% Make sure to put the main language last!
 %% Andréas's custom package 
 %% (Will work for most purposes, but is mainly focused on physics.)
 \usepackage{../custom_as}
+\usepackage{mathrsfs}
+\usepackage{eufrak}
 \usepackage{cancel}
 %% Figures can now be put in a folder: 
 \graphicspath{ {figures/} %{some_folder_name/}
@@ -13,7 +15,7 @@ swedish, english %% Make sure to put the main language last!
 \usepackage{multicol}
 
 %% If you want to change the margins for just the captions
-\usepackage[]{caption}
+\usepackage[size=small]{caption}
 
 %% To add todo-notes in the pdf
 \usepackage[%disable  %%this will hide all notes
@@ -96,10 +98,175 @@ collision rate dominates.
 
 
 
-\section{Different diffusion models}
+\section{Different heat conductivity models}
+In this problem we're considering a 1D plasma system, and we will
+investigate how different types of heat conductivity, $\chi$, will
+affect the temperatures of the plasma. The temperature is given by the
+ODE
+\begin{equation}
+\dv{r}\qty[\chi\dv{T}{r}]=-S(r)\qc
+\eval{\dv{T}{r}}_{r=0}=0\qc
+T(r=R)=T_0,
+\end{equation}
+where $S(r)=S_0(r-r_0)$ with $0<r_0<R$. With this information, we can
+integrate both sides once
+\begin{equation}\label{eq2:ODE}
+\chi\dv{T}{r}=-S_0\Theta(r-r_0),
+\end{equation}
+where $\Theta$ is the Heaviside step function. There should also be a
+constant of integration here, but with the initial condition
+$\eval{\dv*{T}{r}}_{r=0}=0$, we see that said constant has to be~0
+(unless $\chi$ diverges at $r\to0$).
+
+Seeing that we will be dealing with the Heaviside step function, we
+might as well state the following identity for integration with the
+step function. Given some (smooth) function $f(x')$ and the constants
+$x_1<x_0$, then 
+\begin{equation}
+\begin{aligned}
+\int_{x_1}^{x}\dv{f}{x'}\Theta(x'-x_0)\id{x'}=&
+\Theta(x-x_0)\int_{x_0}^{x}\dv{f}{x'}\id{x'}
+=\Big(f(x)-f(x_0)\Big)\Theta(x-x_0).
+\end{aligned}
+\end{equation}
+Obviously, any primitive function to $(\dv*{f}{x'})\Theta(x'-x_0)$
+will be given by the RHS plus some arbitrary constant, thus
+\begin{equation}\label{eq2:heaviside-int}
+\int\dv{f}{x}\Theta(x-x_0)\id{x}
+=C+\Big(f(x)-f(x_0)\Big)\Theta(x-x_0).
+\end{equation}
+
+
+
 \subsection{Classical transport}
+If the heat conductivity follows classical heat transport, then
+\begin{equation}
+\chi(T)=\alpha_1T^{-1/2}
+\end{equation}
+and \eqref{eq2:ODE} is separable and we get
+\begin{equation}
+\int\alpha_1T^{-1/2}\id{T}=-\int S_0\Theta(r-r_0)\id{r},
+\end{equation}
+which, by \eqref{eq2:heaviside-int}, becomes
+\begin{equation}
+T^{1/2}(r)=\mathcal{T}^{1/2}
+-\frac{S_0}{2\alpha_1}(r-r_0)\Theta(r-r_0).
+\end{equation}
+The constant of integration, $\mathcal{T}^{1/2}$, can easily be
+determined by the boundary condition $T(r=R)=T_0$ which yields
+\begin{equation}\label{eq2a:const}
+T_0^{1/2}=\mathcal{T}^{1/2}-\frac{S_0}{2\alpha_1}(R-r_0)
+\quad\Longleftrightarrow\quad
+\mathcal{T}^{1/2}=T_0^{1/2}+\frac{S_0}{2\alpha_1}(R-r_0).
+\end{equation}
+This means that the temperature is
+\begin{equation}
+T(r)=\qty{T_0^{1/2}+\frac{S_0}{2\alpha_1}
+\Big[(R-r_0)-(r-r_0)\Theta(r-r_0)\Big]}^2
+\end{equation}
+With words, the temperature stays constant $T=\mathcal{T}$, given by
+\eqref{eq2a:const}, up until $r=r_0$ when the temperature drops 
+``quadratically'' (along a parabola whose vertex is just to the right
+of $r=R$) down to $T=T_0$ at $r=R$. 
+
 \subsection{Neoclassical transport}
+With neoclassical transportation, the heat conductivity is
+\begin{equation}
+\chi(r, T)=
+\begin{cases}
+\alpha_2 r_1^{-3/2}T^{-1/2}\qc&0\le r<r_1\\
+\alpha_2 r^{-3/2}T^{-1/2}\qc& r_1\le r\le1,
+\end{cases}
+\end{equation}
+where $0<r_1<r_0$. 
+
+It is obvious that the tempereature, just as before, will be constant
+$T(r)=\mathscr{T}$ for $0\le r<r_0$ since $\dv*{T}{r}=0$ in that region. We
+can therefore focus on the region $r_0<r<R$. There \eqref{eq2:ODE} can
+be rewritten as 
+\begin{equation}
+\alpha_2T^{-1/2}\dv{T}{r}=-S_0\,r^{3/2}\Theta(r-r_0)=-S_0\,r^{3/2}
+\end{equation}
+which separates into
+\begin{equation}
+\alpha_2\int T^{-1/2}\id{T}=-S_0\int r^{3/2}\Theta(r-r_0) \id{r}.
+\end{equation}
+By \eqref{eq2:heaviside-int}, we therefore get
+\begin{equation}
+T^{1/2}(r)=\mathscr{T}^{1/2}
+-\frac{S_0}{5\alpha_2}\qty(r^{5/2}-r_0^{5/2})\Theta(r-r_0).
+\end{equation}
+Once again, the constant $\mathscr{T}^{1/2}$ is determined by the boundary
+condition $T(r=R)=T_0$, which yields
+\begin{equation}
+\mathscr{T}^{1/2}=T_0^{1/2}+
+\frac{S_0}{5\alpha_2}\qty(R^{5/2}-r_0^{5/2}).
+\end{equation}
+Therefore
+\begin{equation}
+T(r)=\qty{T_0^{1/2}+\frac{S_0}{5\alpha_2}
+\qty[\qty(R^{5/2}-r_0^{5/2})-\qty(r^{5/2}-r_0^{5/2})\Theta(r-r_0)]}^2.
+\end{equation}
+This is harder to describe with words, but the temperature is constant
+$T=\mathscr{T}$ for $0\le r<r_0$ and then it starts droppting down to
+$T(R)=T_0$. 
+
 \subsection{Turbulent Gyro-Bohm like transport}
+For turbulent Gyro-Bohm like transport, the heat conductivity is given
+by
+\begin{equation}
+\chi(T)=\alpha_3 T^{3/2}.
+\end{equation}
+Therefore, \eqref{eq2:ODE} separates into
+\begin{equation}
+\alpha_3\int T^{3/2}\id{T}=-S_0\int \Theta(r-r_0) \id{r}.
+\end{equation}
+As usual, \eqref{eq2:heaviside-int} gives
+\begin{equation}
+T^{5/2}(r)=\mathfrak{T}^{5/2}
+-\frac{5S_0}{2\alpha_3}\qty(r-r_0)\Theta(r-r_0).
+\end{equation}
+The boundary condition $T(r=R)=T_0$ yields
+\begin{equation}
+\mathfrak{T}^{5/2}=T_0^{5/2}+
+\frac{5S_0}{2\alpha_3}\qty(R-r_0)
+\end{equation}
+wherefore
+\begin{equation}
+T(r)=\qty{T_0^{5/2}+\frac{5S_0}{2\alpha_3}
+\Big[(R-r_0)-(r-r_0)\Theta(r-r_0)\Big]}^{2/5}.
+\end{equation}
+Once again, this is constant $T=\mathfrak{T}$ for $0\le r<r_0$, and
+then the temperature drops down to $T_0$ at $r=R$.
+
+\subsection*{Limiting type of transport}
+\begin{figure}
+\centering\vspace{-1.9cm}
+\includegraphics[width=12cm]{Q2.eps}
+\caption{Temperature profiles for the three different types of heat
+  transport, using the dimensionless values $S_0=10$, $R=1$,
+  $r_0=0.1$, $T_0=0.1$, $\alpha_1=0.05$, $\alpha_2=0.5$ and
+  $\alpha_3=5$. Also in the figure are numerical solutoins to the
+  differential equations shown as thick, dashed lines. Note the log
+  scale on the vertical axis.}
+\label{fig:transp}
+\end{figure}
+
+Using the dimensionless values $S_0=10$, $R=1$, $r_0=0.1$, $T_0=0.1$,
+$\alpha_1=0.05$, $\alpha_2=0.5$ and $\alpha_3=5$. The core temperature
+for the three different scenarios can be calculated to
+\begin{equation}
+\mathcal{T}\approx8\,160\qc
+\mathscr{T}\approx18.5\qc
+\mathfrak{T}\approx1.83,
+\end{equation}
+for classical, neoclassical and Gyro-Bohm transoprt
+respectively. We clearly see that classical transport would have
+yielded the, by almost three orders of magnitude, highest core
+tempereature, and that Gyro-Bohm yields the lowest core
+temperature. This can also be seen in \figref{fig:transp}, where the
+different temperatrue profiles have been plotted. 
+
 
 \section{MHD stability}
 Starting from the ideal MHD equations
