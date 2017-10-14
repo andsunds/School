@@ -119,9 +119,9 @@ $\eval{\dv*{T}{r}}_{r=0}=0$, we see that said constant has to be~0
 (unless $\chi$ diverges at $r\to0$).
 
 Seeing that we will be dealing with the Heaviside step function, we
-might as well state the following identity for integration with the
-step function. Given some (smooth) function $f(x')$ and the constants
-$x_1<x_0$, then 
+might as well state the following identity for finding primitive
+functions to a product with the step function. Given some (smooth)
+function $f(x')$ and the constants $x_1<x_0$, then 
 \begin{equation}
 \begin{aligned}
 \int_{x_1}^{x}\dv{f}{x'}\Theta(x'-x_0)\id{x'}=&
@@ -182,12 +182,14 @@ where $0<r_1<r_0$.
 
 It is obvious that the tempereature, just as before, will be constant
 $T(r)=\mathscr{T}$ for $0\le r<r_0$ since $\dv*{T}{r}=0$ in that region. We
-can therefore focus on the region $r_0<r<R$. There \eqref{eq2:ODE} can
-be rewritten as 
-\begin{equation}
-\alpha_2T^{-1/2}\dv{T}{r}=-S_0\,r^{3/2}\Theta(r-r_0)=-S_0\,r^{3/2}
-\end{equation}
-which separates into
+therefore only have to focus on the (overlapping) region
+$r_1<r<R$. Here \eqref{eq2:ODE} 
+%can be rewritten as 
+%\begin{equation}
+%\alpha_2T^{-1/2}\dv{T}{r}=-S_0\,r^{3/2}\Theta(r-r_0)=-S_0\,r^{3/2}
+%\end{equation}
+%which 
+separates into
 \begin{equation}
 \alpha_2\int T^{-1/2}\id{T}=-S_0\int r^{3/2}\Theta(r-r_0) \id{r}.
 \end{equation}
@@ -217,7 +219,7 @@ by
 \begin{equation}
 \chi(T)=\alpha_3 T^{3/2}.
 \end{equation}
-Therefore, \eqref{eq2:ODE} separates into
+Thus, \eqref{eq2:ODE} separates into
 \begin{equation}
 \alpha_3\int T^{3/2}\id{T}=-S_0\int \Theta(r-r_0) \id{r}.
 \end{equation}
@@ -241,7 +243,7 @@ then the temperature drops down to $T_0$ at $r=R$.
 
 \subsection*{Limiting type of transport}
 \begin{figure}
-\centering\vspace{-1.9cm}
+\centering
 \includegraphics[width=12cm]{Q2.eps}
 \caption{Temperature profiles for the three different types of heat
   transport, using the dimensionless values $S_0=10$, $R=1$,
