@@ -1,0 +1,246 @@
+\documentclass[11pt,a4paper, 
+swedish, english %% Make sure to put the main language last!
+]{article}
+\pdfoutput=1
+
+%% Andréas's custom package 
+%% (Will work for most purposes, but is mainly focused on physics.)
+\usepackage{../custom_as}
+\usepackage{cancel}
+%% Figures can now be put in a folder: 
+\graphicspath{ {figures/} %{some_folder_name/}
+}
+\usepackage{multicol}
+
+%% If you want to change the margins for just the captions
+\usepackage[]{caption}
+
+%% To add todo-notes in the pdf
+\usepackage[%disable  %%this will hide all notes
+]{todonotes} 
+
+%% Change the margin in the documents
+\usepackage[
+%            top    = 3cm,              %% top margin
+%            bottom = 3cm,              %% bottom margin
+%            left   = 3cm, right  = 3cm %% left and right margins
+]{geometry}
+
+\newcommand{\enull}{\ensuremath{\varepsilon_{0}}}
+\newcommand{\lD}{\ensuremath{\lambda_{\text{D}}}}
+\newcommand{\wc}{\ensuremath{\omega_{\text{c}}}}
+\newcommand{\rhom}{\ensuremath{{\rho_{\text{m}}}}}
+
+
+%% If you want to chage the formating of the section headers
+\renewcommand{\thesubsection}{\arabic{section}.\Alph{subsection}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%% vvv Internal title page vvv %%%%%%%%%%%%%%%%%%%%%
+\title{Assignment 4 \\
+{\Large Plasma Physics -- RRY085}}
+\author{Andréas Sundström}
+\date\today%{2017-10-01}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%% ^^^ Internal title page ^^^ %%%%%%%%%%%%%%%%%%%%%
+%% If you want a list of all todos
+%\todolist
+
+\section{Collisional diffusion in weakly ionized gas}
+
+\section{Different diffusion models}
+\subsection{Classical transport}
+\subsection{Neoclassical transport}
+\subsection{Tubulent Gyro-Bohm like transport}
+
+\section{MHD stability}
+Starting from the ideal MHD equations
+\vspace{-22pt}
+\begin{multicols}{2}
+\begin{subequations}
+\begin{align}
+\label{eq:MHD-a}
+&\rhom\dv{\vb*U}{t}=\vb*J\cross\vb*B-\grad P
+\\ \label{eq:MHD-b}
+&\pdv{\rhom}{t} +\div(\rhom\vb*U)=0
+\\ \label{eq:MHD-c}
+&\vb*E+\vb*U\cross\vb*B=0
+\end{align}
+\end{subequations}
+
+\columnbreak
+
+\addtocounter{equation}{-1}
+\begin{subequations}
+\addtocounter{equation}{3}
+\begin{align}
+\label{eq:MHD-d}
+&\dv{t}\qty[\frac{P}{\rhom}]=0
+\\ \label{eq:MHD-e}
+&\curl\vb*B=\mu_0\vb*J %\qc \div\vb*B=0
+\\ \label{eq:MHD-f}
+&\curl\vb*E=-\pdv{\vb*B}{t}
+\end{align}
+\end{subequations}
+\end{multicols}
+and linearizing all variables around a flow-less, static equilibrium:
+\begin{equation}
+\vb*U=\vb0+\epsilon\vb*U_1 \qc
+\vb*J=\vb*J_0+\epsilon\vb*J_1 \qc
+\vb*B=\vb*B_0+\epsilon\vb*B_1 \qc
+\ldots
+\end{equation}
+we want to find the MHD stability equation
+\begin{equation}
+\rhom_0\pdv[2]{\vb*U_1}{t}=\vb*F(\vb*U_1).
+\end{equation}
+
+It seems clear that we should start with \eqref{eq:MHD-a} and
+linearize it. To order $\epsilon$ we get
+\begin{equation}\label{eq:MHD-a-lin}
+\rhom_0\dv{\vb*U_1}{t} = 
+\vb*J_1\cross\vb*B_0+\vb*J_0\cross\vb*B_1-\grad P_1.
+\end{equation}
+Note that the term $\rhom_1\dv*{\vb*U_0}{t}=\vb0$, since
+$\vb*U_0\equiv\vb0$. We further note that a full time derivative can
+be written as
+\begin{equation}
+\dv{f}{t}=\pdv{f}{t}+\vb*U\vdot\grad{f},
+\end{equation}
+and when linearized
+\begin{equation}\label{eq:dv-lin}
+\dv{f_0}{t}+\epsilon\dv{f_1}{t}=
+\pdv{f_0}{t}
++\epsilon\qty[\pdv{f_1}{t}+\vb*U_1\vdot\grad{f_0}]
++\order{\epsilon^2}.
+\end{equation}
+Once again $\vb*U_0\equiv\vb0$ was used.
+In \eqref{eq:MHD-a-lin}, the full derivative therefore becomes
+\begin{equation}\label{eq:dvU1}
+\dv{\vb*U_1}{t}=\pdv{\vb*U_1}{t}+\vb*U_1\vdot\grad\vb*U_0
+=\pdv{\vb*U_1}{t}.
+\end{equation}
+If we therefore operate with a \emph{partial} time derivative on
+\eqref{eq:MHD-a-lin}, with \eqref{eq:dvU1} in mind, we get
+\begin{equation}\label{eq:MHD-stab1}
+\rhom_0\pdv[2]{\vb*U_1}{t} = 
+\pdv{\vb*J_1}{t}\cross\vb*B_0
++\vb*J_0\cross\pdv{\vb*B_1}{t}-\grad \pdv{P_1}{t}.
+\end{equation}
+Here we have used the fact that the unperturbed state is static,
+meaning that $X_0$ is constant in time for any variable $X$. We have
+also used the fact that different (partial) derivatives commute, i.e. 
+$\pdv*{(\grad P_1)}{t}=\grad\pdv*{P_1}{t}$.
+
+From here we can use \eqref{eq:MHD-e}, \eqref{eq:MHD-f} and
+\eqref{eq:MHD-c} to get 
+\begin{equation}
+\pdv{\vb*J_1}{t}=\frac{1}{\mu_0}\curl\pdv{\vb*B_1}{t}
+=\frac{1}{\mu_0}\curl\qty[-\curl\vb*E_1]
+=-\frac{1}{\mu_0}\curl\qty[\curl\qty(-\vb*U_1\cross\vb*B_0)].
+\end{equation}
+When linearizing \eqref{eq:MHD-c}, $\vb*U_0\equiv\vb0$ was used. 
+Next up we can use \eqref{eq:MHD-f} and \eqref{eq:MHD-c} to get
+\begin{equation}
+\pdv{\vb*B_1}{t}=-\curl\vb*E_1
+=-\curl\qty(-\vb*U_1\cross\vb*B_0).
+\end{equation}
+This, together with $\mu_0\vb*J_0=\curl\vb*B_0$, inserted into
+\eqref{eq:MHD-stab1} yields
+\begin{equation}\label{eq:MHD-stab2}
+\begin{aligned}
+\rhom_0\pdv[2]{\vb*U_1}{t} =& 
+\frac{1}{\mu_0}\qty{\curl\qty[\curl\qty(\vb*U_1\cross\vb*B_0)]}
+\cross\vb*B_0+\\
+&+\frac{1}{\mu_0}\vb*B_0\cross
+\qty[\curl\qty(\vb*U_1\cross\vb*B_0)]
+&-\grad \pdv{P_1}{t}.
+\end{aligned}
+\end{equation}
+
+Now we turn our attention to the last term. We have a (partial) time
+derivative of $P_1$, which suggests that we should use
+\eqref{eq:MHD-d}. Note the full derivative meaning that we have to
+use \eqref{eq:dv-lin},
+%This results in
+%\begin{equation}
+%\dv{f_1}{t}=\pdv{f_1}{t}+\vb*U_1\vdot\grad{f_0},
+%\end{equation}
+where
+\begin{equation}
+f=\frac{P_0+\epsilon P_1}{(\rhom_0+\epsilon\rhom_1)^\gamma}
+=\frac{P_0}{\rhom_0^\gamma}+\epsilon\qty[
+\frac{P_1}{\rhom_0^\gamma} 
+-\gamma\frac{P_0}{\rhom_0^\gamma}\frac{\rhom_1}{\rhom_0}].
+\end{equation}
+It is therefore clear that
+\begin{equation}
+f_0=\frac{P_0}{\rhom_0^\gamma}
+\qc\qquad
+f_1=\frac{P_1}{\rhom_0^\gamma} 
+-\gamma\frac{P_0}{\rhom_0^{(\gamma+1)}}\rhom_1
+\end{equation}
+We can now see that the linearized \eqref{eq:MHD-d} becomes
+\begin{equation}
+\begin{aligned}
+0=&\dv{f_1}{t}=\pdv{f_1}{t}+\vb*U_1\vdot\grad{f_0}\\
+=&\frac{1}{\rhom_0^\gamma}\pdv{P_1}{t}
+-\gamma\frac{P_0}{\rhom_0^{(\gamma+1)}}\pdv{\rhom_1}{t}
++\vb*U_1\vdot\qty[\frac{1}{\rhom_0^{\gamma}}\grad(P_0)
+-\gamma\frac{P_0}{\rhom_0^{(\gamma+1)}}\grad(\rhom_0)],
+\end{aligned}
+\end{equation}
+which can be rewritten as
+\begin{equation}
+\pdv{P_1}{t}=\gamma\frac{P_0}{\rhom_0}
+\qty(\pdv{\rhom_1}{t}+\vb*U_1\vdot\grad\rhom_0)
+-\vb*U_1\vdot\grad P_0.
+\end{equation}
+We now use \eqref{eq:MHD-b} and get
+\begin{equation}
+\pdv{\rhom_1}{t}=-\div(\rhom_0\vb*U_1)
+=-\grad(\rhom_0)\vdot\vb*U_1
+-\rhom_0\div\vb*U_1,
+\end{equation}
+which means that
+\begin{equation}
+\pdv{P_1}{t}=-\gamma P_0\div\vb*U_1
+-\vb*U_1\vdot\grad P_0.
+\end{equation}
+
+We can now write \eqref{eq:MHD-stab2} as
+\begin{equation}
+\begin{aligned}
+\rhom_0\pdv[2]{\vb*U_1}{t} =& 
+\frac{1}{\mu_0}\qty{\curl\qty[\curl\qty(\vb*U_1\cross\vb*B_0)]}
+\cross\vb*B_0+\\
+&+\frac{1}{\mu_0}\vb*B_0\cross
+\qty[\curl\qty(\vb*U_1\cross\vb*B_0)]
++\grad\qty[\gamma P_0\div\vb*U_1+\vb*U_1\vdot\grad P_0],
+\end{aligned}
+\end{equation}
+which is the full MHD stability/wave equation. 
+
+
+
+
+
+\section{Alfvén waves in infinite, homogeneous plasmas}
+
+\section{Alfvén waves in a sheared magnetic field}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  LocalWords:  Debye Laramor quartic Alfvén MHD
