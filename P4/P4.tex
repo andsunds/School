@@ -55,11 +55,51 @@ swedish, english %% Make sure to put the main language last!
 %\todolist
 
 \section{Collisional diffusion in weakly ionized gas}
+Assume that the electron-neutral interaction rate is
+\begin{equation}
+\nu_{\text{en}}=v_\ee N \sigma_\text{en},
+\end{equation}
+and the electron-ion interaction rate is
+\begin{equation}
+\nu_\text{ei}=\frac{\pi n e^4}{(4\pi\varepsilon_0 m_\ee)^2v_\ee^3},
+\end{equation}
+where $N$ is the neutral particle density and $n=n_\ee=n_\text{i}$ is
+the electron/ion density. Then
+\begin{equation}
+\frac{\nu_\text{ei}}{\nu_{\text{en}}}
+=\frac{n}{N}\frac{e^4}
+{16\pi\varepsilon_0^2\sigma_\text{en}m_\ee^2 v_\ee^4}.
+\end{equation}
+If we take $\sigma_\text{en}=\unit[10^{-19}]{m^2}$ and an electron
+energy of 1\,eV, then for the two different frequencies to be equal,
+we would require 
+\begin{equation}
+\frac{n}{N}=
+\frac{64\pi\varepsilon_0^2
+\sigma_\text{en}\,\epsilon^2}{e^4}
+\approx 0.06 = 6\,\%,
+\end{equation}
+where $\epsilon =m_\ee v_\ee^2/2$ is the energy of an electron.
+
+Given air normal atmospheric pressure at room temperature with
+$N=\unit[10^{26}]{m^{-3}}$ and weakly ionized plasma, and with the
+same electron energy and $\sigma_\text{en}$. Then the diffusion
+constant is roughly 
+\begin{equation}
+D=\frac{v_\ee^2}{\nu_\text{en}}
+=\frac{v_\ee}{N\sigma_\text{en}}
+=\frac{1}{N\sigma_\text{en}}\sqrt{\frac{2\epsilon}{m_\ee}}
+\approx \unit[0.06]{m^2/s}.
+\end{equation}
+Since the plasma would be weakly ionized the electron-neutral
+collision rate dominates. 
+
+
 
 \section{Different diffusion models}
 \subsection{Classical transport}
 \subsection{Neoclassical transport}
-\subsection{Tubulent Gyro-Bohm like transport}
+\subsection{Turbulent Gyro-Bohm like transport}
 
 \section{MHD stability}
 Starting from the ideal MHD equations
@@ -90,7 +130,7 @@ Starting from the ideal MHD equations
 &\curl\vb*E=-\pdv{\vb*B}{t}
 \end{align}
 \end{subequations}
-\end{multicols}
+\end{multicols}\noindent
 and linearizing all variables around a flow-less, static equilibrium:
 \begin{equation}
 \vb*U=\vb0+\epsilon\vb*U_1 \qc
@@ -243,4 +283,4 @@ which is the full MHD stability/wave equation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  LocalWords:  Debye Laramor quartic Alfvén MHD
+%  LocalWords:  Debye Laramor quartic Alfvén MHD Bohm
