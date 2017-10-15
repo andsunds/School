@@ -457,7 +457,7 @@ these observations, \eqref{eq:MHD-wave} can be written as
 +\gamma P_0 \grad(\div\vb*V_1).
 \end{equation}
 This can be further simplified using the identity
-\begin{equation}
+\begin{equation}\label{eq:curl-cross}
 \curl(\vb*F\cross\vb*G)
 =(\vb*G\vdot\grad)\vb*F - (\vb*F\vdot\grad)\vb*G
 +\vb*F(\div\vb*G) - \vb*G(\div\vb*F),
@@ -574,32 +574,177 @@ $\vb*W=W\vu{x}$ and is therefore perpendicular to both $\vb*B_0$ and
 $\vb*k$. Linearizing and Fourier transforming \eqref{eq:MHD-c} and
 \eqref{eq:MHD-f} yields
 \begin{equation}
-\vb*B_1 = \frac{(\vb*W\cross\vb*B_0)\cross\vb*k}{\omega}
-=\frac{\cancel{(\vb*k\vdot\vb*W)}\vb*B_0
--(\vb*k\vdot\vb*B_0)\vb*W}{\omega}
-=-\frac{(\vb*k\vdot\vb*B_0)}{\omega}\vb*W.
+\vb*B_1 = -\frac{\vb*k\cross(\vb*W\cross\vb*B_0)}{\omega}
+=\frac{\cancel{(\vb*W\vdot\vb*k)}\vb*B_0
+-(\vb*B_0\vdot\vb*k)\vb*W}{\omega}
+=-\frac{(\vb*B_0\vdot\vb*k)}{\omega}\vb*W.
 \end{equation}
 In other words, $\vb*B_1$ is perpendicular to $\vb*B_0$. This wave
 mode shifts the the magnetic field lines perpendicularly to their
 original direction (shearing), which is why it is called the
-\emph{shear Alfvén wave}. We can further more see that if we
-linearize and space (only) Fourier transform \eqref{eq:MHD-b}, we get 
+\emph{shear Alfvén wave}. We can further more see that 
+if $\vb*k\vdot\vb*W=0$ (which implies $\div\vb*V_1=0$) then the plasma
+becomes \emph{incompressible}. By linearizing \eqref{eq:MHD-b}, we get  
 \begin{equation}
-0=\pdv{\rhom_1}{t} + \rhom_0\cancel{\vb*k\vdot\vb*W}
-=\pdv{\rhom_1}{t}.
+0=\pdv{\rhom_1}{t} + \vb*V_1\vdot\grad\rhom_0
++\cancel{\rhom_0\,\div\vb*V_1}
+=\dv{\rhom_1}{t}.
 \end{equation}
-That is since $\vb*k\vdot\vb*W=0$ (which implies $\div\vb*V_1=0$) the
-density is constant to first order, i.e. the plasma does not compress
--- loosely takling it's \emph{incompressible} under this wave mode.
-
+That is the density is constant in time to first order, i.e. the
+plasma does not compress -- loosely talking it's \emph{incompressible}
+under this wave mode. 
 
 
 \section{Alfvén waves in a sheared magnetic field}
+\newcommand{\wA}{\omega_{\text{A}}}
+Assuming that the plasma is incompressible, $\div\vb*U=0$, and that
+the unperturbed magnetic field is given by
+\begin{equation}\label{eq5:B0}
+\vb*B_0(x)=B_{0y}(x)\vu{y}+B_{0z}(x)\vu{z},
+\end{equation}
+we want to show that the shear Alfvén wave mode dispersion relation is
+\begin{equation}\label{eq5:want}
+\dv{x}\qty[\qty(\omega^2-\wA^2(x))\dv{W_x}{x}]
+-k^2\qty(\omega^2-\wA^2(x))W_x(x)=0,
+\end{equation}
+where $\vb*W$ is the sesqui-Fourier amplitude of the first order
+perturbed velocity
+\begin{equation}
+\vb*U_1(x, y, z; t) = \vb*W(x)\ee^{\ii(k_yy+k_zz-\omega t)}.
+\end{equation}
 
+\subsection{Finding the dispersion relation}
+Since apparently \eqref{eq5:B0} makes the MHD system over-determined,
+we can scrap the adiabatic equation of state, and with it the
+pressure.\footnotemark{} We can therefore write \eqref{eq:MHD-wave} as
+\begin{equation}
+\begin{aligned}
+\rhom_0\pdv[2]{\vb*U_1}{t} =& 
+\frac{1}{\mu_0}\qty{\curl\qty[\curl\qty(\vb*U_1\cross\vb*B_0)]}
+\cross\vb*B_0+\\
+&+\frac{1}{\mu_0}(\curl\vb*B_0)\cross
+\qty[\curl\qty(\vb*U_1\cross\vb*B_0)].
+\end{aligned}
+\end{equation}
+\footnotetext{I'm not fully convinced that \eqref{eq5:B0} is single
+  handedly responsible for us being able to scrap the pressure, but I
+  guess it also has something to do with the fact that we're only
+  studying the shear mode.}
 
+From here we have to start simplifying things. We can begin with the
+simplest term first
+\begin{equation}
+\curl\vb*B_0=\pdv{x}\vu{x}\cross
+\qty[B_{0y}(x)\vu{y}+B_{0z}(x)\vu{z}]
+=B_{0y}'(x)\vu{z}-B_{0z}'(x)\vu{y},
+\end{equation}
+where prime denotes differentiation with respect to $x$.
+Then $\curl\qty(\vb*U_1\cross\vb*B_0)$, with \eqref{eq:curl-cross} we
+get 
+\begin{equation}
+\begin{aligned}
+\curl\qty(\vb*U_1\cross\vb*B_0) 
+=& (\vb*B_0\vdot\grad)\vb*U_1
+- (\vb*U_1\vdot\grad)\vb*B_0\\
+=&B_{0y}\pdv{\vb*U_1}{y}+B_{0z}\pdv{\vb*U_1}{z}
+-U_{1x}\pdv{\vb*B_0}{x}\\
+\to& (k_y B_{0y} + k_z B_{0z}) \vb*W 
+-W_{x}\qty(B_{0y}'(x)\vu{y} + B_{0z}'(x)\vu{z}),
+\end{aligned}
+\end{equation}
+where the two last terms in \eqref{eq:curl-cross} vanish since
+$\div\vb*U=\div\vb*B=0$. Next, using the identity
+\begin{equation}
+\curl(f\vb*G) = (\grad f)\cross\vb*G+f\curl\vb*G,
+\end{equation}
+we can write
+\begin{equation}
+\curl\qty[\curl\qty(\vb*U_1\cross\vb*B_0)]
+\to \Big(k_yB_{0y}+k_zB_{0z}\Big)(\curl\vb*W)
++\Big(k_yB_{0y}'+k_zB_{0z}'\Big)\vu{x}\cross\vb*W,
+\end{equation}
+where $\curl\vb*W=[(\pdv*{x})\vu{x}+k_y\vu{y}+k_z\vu{z}]\cross\vb*W$.
 
+Now assuming\footnotemark{} that $\vb*W=W\vu{x}$, what I seem to end
+up with (after a good deal of vector calculus) is
+\footnotetext{This is probably wrong, but it's late Sunday night, and
+  I've had enough och vector calculus...}
+\begin{equation}
+\begin{aligned}
+-\rhom_0\omega^2W\vu{x}=
+\frac{1}{\mu_0}\Bigg\{&\qty[(k_yB_{0y}+k_zB_{0z})^2
+-(B_{0y}B_{0y}''+B_{0z}B_{0z}'')
++\qty({B_{0y}'}^2+{B_{0z}'}^2)]W\\
+&+\qty[B_{0y}B_{0y}'+B_{0z}B_{0z}']W'
+\Bigg\}\vu{x}\quad
+ +\ldots\vu{y} +\ldots\vu{z}.
+\end{aligned}
+\end{equation}
+With some extra crap on the $y$ and $z$ components on the RHS. The
+lack of $W_x''$ terms also seems to suggest that $\vb*W=W\vu{x}$ is
+not valid.
+
+I had hoped that I would at least have gotten my hands on what $\wA$
+would be, but not even that. There is however some dimensionally sound
+alternatives here, however the only one which seem to have the right
+sign seems to be 
+\begin{equation}
+\wA^2\stackrel{?}{=}\frac{{B_{0y}'}^2+{B_{0z}'}^2}{\mu_0\rhom_0}.
+\end{equation}
+It feels right and it is dimenionally sound, so that's my guess. 
+
+\subsection{Singularity at $\omega=\wA$}
+We can rewrite \eqref{eq5:want} as
+\begin{equation}\label{eq5:ODE-B}
+\qty(\omega^2-\wA^2(x))(W_x''-k^2W_x)-2\wA(x)\wA'(x)W_x'=0.
+\end{equation}
+Next, for $\omega\approx\wA$, we can take
+\begin{equation}
+\wA(x)=\omega+\xi\wA'(x_0)+\order{\xi^2},
+\end{equation}
+where $\xi=(x-x_0)\ll1$ and $x_0$ is such that $\wA(x_0)=\omega$. We can
+write \eqref{eq5:ODE-B} as
+\begin{equation}\label{eq5:ODE-B2}
+-2\omega\wA'(x_0)\xi(W_x''-k^2W_x)-2\wA\wA'(x_0)W_x'=0.
+\end{equation}
+Now if\footnotemark{} $W_x(\xi)\sim\log(\xi)$ for $\xi\ll1$, then we
+can write the RHS of \eqref{eq5:ODE-B2} as
+\begin{equation}
+\text{RHS[\eqref{eq5:ODE-B2}]}\sim
+-2\omega\wA'(x_0)\xi\qty[\cancel{-\frac{1}{\xi^2}}-k^2\log(\xi)]
+-\cancel{2\wA\wA'(x_0)\frac{1}{\xi}}
+\sim2\omega\wA'(x_0)k^2\xi\log(\xi),
+\end{equation}
+and since $\xi\log(\xi)\to0$ as $\xi\to0$, we know that
+$W_x\sim\log(\xi)$, that is $W_x$ asymptotically approaches
+$\log(\xi)$ as $\xi\to0$ -- or in layman's terms $W_x$ is
+logaritmically singular as when $\omega=\wA$.
+\footnotetext{Note that we could have arrived at this conclusion
+  without prior knowledge of the singularity. Since singularities
+  become worse the more derivative that are applied, we would have
+  known that the \emph{dominant balance} in \eqref{eq5:ODE-B2} would
+  be between $\xi W_x''$ and $W_x'$, which gives $W_x\sim\log(\xi)$.
+  \label{fnt:sing}}
+
+\subsection{Higher order derivatives}
+To mitigate the singularity when $\omega=\wA$, we need to consider
+non-ideal MHD, which effectively introduces a fourth order derivative,
+\begin{equation}
+\eta W_x^{(4)}-2\omega\wA'(x_0)\xi(W_x''-k^2W_x)-2\wA\wA'(x_0)W_x'=0,
+\end{equation}
+where $\eta$ is small. By the same reasoning as in
+footnote~\ref{fnt:sing} (even though we don't have a singularity) we
+would assume a dominant balance between $\eta W_x^{(4)}$ and
+$2\wA\wA'(x_0)W_x'$, from there we would be able to build up an
+asymptotic series. If that doesn't work, then another technique from
+asymptotic analysis is to express
+\begin{equation}
+W_x(\xi)=\ee^{S(\xi)}
+\end{equation}
+and then finding an asymptotic expansion for $S$ near $\xi=0$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  LocalWords: Alfvén MHD Bohm quadratically incompressible
+%  LocalWords:  logaritmically
