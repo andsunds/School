@@ -32,9 +32,11 @@ swedish, english %% Make sure to put the main language last!
 \newcommand{\lD}{\ensuremath{\lambda_{\text{D}}}}
 \newcommand{\wc}{\ensuremath{\omega_{\text{c}}}}
 \newcommand{\rhom}{\ensuremath{{\rho_{\text{m}}}}}
+\newcommand{\vA}{\ensuremath{v_{\text{A}}}}
+\newcommand{\cs}{\ensuremath{c_{\text{s}}}}
 
 
-%% If you want to chage the formating of the section headers
+%% If you want to chage the formatting of the section headers
 \renewcommand{\thesubsection}{\arabic{section}.\Alph{subsection}}
 
 
@@ -180,7 +182,7 @@ With neoclassical transportation, the heat conductivity is
 \end{equation}
 where $0<r_1<r_0$. 
 
-It is obvious that the tempereature, just as before, will be constant
+It is obvious that the temperature, just as before, will be constant
 $T(r)=\mathscr{T}$ for $0\le r<r_0$ since $\dv*{T}{r}=0$ in that region. We
 therefore only have to focus on the (overlapping) region
 $r_1<r<R$. Here \eqref{eq2:ODE} 
@@ -210,7 +212,7 @@ T(r)=\qty{T_0^{1/2}+\frac{S_0}{5\alpha_2}
 \qty[\qty(R^{5/2}-r_0^{5/2})-\qty(r^{5/2}-r_0^{5/2})\Theta(r-r_0)]}^2.
 \end{equation}
 This is harder to describe with words, but the temperature is constant
-$T=\mathscr{T}$ for $0\le r<r_0$ and then it starts droppting down to
+$T=\mathscr{T}$ for $0\le r<r_0$ and then it starts dropping down to
 $T(R)=T_0$. 
 
 \subsection{Turbulent Gyro-Bohm like transport}
@@ -248,7 +250,7 @@ then the temperature drops down to $T_0$ at $r=R$.
 \caption{Temperature profiles for the three different types of heat
   transport, using the dimensionless values $S_0=10$, $R=1$,
   $r_0=0.1$, $T_0=0.1$, $\alpha_1=0.05$, $\alpha_2=0.5$ and
-  $\alpha_3=5$. Also in the figure are numerical solutoins to the
+  $\alpha_3=5$. Also in the figure are numerical solutions to the
   differential equations shown as thick, dashed lines. Note the log
   scale on the vertical axis.}
 \label{fig:transp}
@@ -262,12 +264,12 @@ for the three different scenarios can be calculated to
 \mathscr{T}\approx18.5\qc
 \mathfrak{T}\approx1.83,
 \end{equation}
-for classical, neoclassical and Gyro-Bohm transoprt
+for classical, neoclassical and Gyro-Bohm transport
 respectively. We clearly see that classical transport would have
 yielded the, by almost three orders of magnitude, highest core
-tempereature, and that Gyro-Bohm yields the lowest core
+temperature, and that Gyro-Bohm yields the lowest core
 temperature. This can also be seen in \figref{fig:transp}, where the
-different temperatrue profiles have been plotted. 
+different temperature profiles have been plotted. 
 
 
 \section{MHD stability}
@@ -369,7 +371,7 @@ This, together with $\mu_0\vb*J_0=\curl\vb*B_0$, inserted into
 \rhom_0\pdv[2]{\vb*U_1}{t} =& 
 \frac{1}{\mu_0}\qty{\curl\qty[\curl\qty(\vb*U_1\cross\vb*B_0)]}
 \cross\vb*B_0+\\
-&+\frac{1}{\mu_0}\vb*B_0\cross
+&+\frac{1}{\mu_0}(\curl\vb*B_0)\cross
 \qty[\curl\qty(\vb*U_1\cross\vb*B_0)]
 &-\grad \pdv{P_1}{t}.
 \end{aligned}
@@ -426,12 +428,12 @@ which means that
 \end{equation}
 
 We can now write \eqref{eq:MHD-stab2} as
-\begin{equation}
+\begin{equation}\label{eq:MHD-wave}
 \begin{aligned}
 \rhom_0\pdv[2]{\vb*U_1}{t} =& 
 \frac{1}{\mu_0}\qty{\curl\qty[\curl\qty(\vb*U_1\cross\vb*B_0)]}
 \cross\vb*B_0+\\
-&+\frac{1}{\mu_0}\vb*B_0\cross
+&+\frac{1}{\mu_0}(\curl\vb*B_0)\cross
 \qty[\curl\qty(\vb*U_1\cross\vb*B_0)]
 +\grad\qty[\gamma P_0\div\vb*U_1+\vb*U_1\vdot\grad P_0],
 \end{aligned}
@@ -439,10 +441,158 @@ We can now write \eqref{eq:MHD-stab2} as
 which is the full MHD stability/wave equation. 
 
 
-
-
-
 \section{Alfvén waves in infinite, homogeneous plasmas}
+Now we want to find harmonic solutions,
+$\vb*U_1\propto\vb*V_1(\vb*r)\ee^{\pm\ii\omega t}$, to
+\eqref{eq:MHD-wave} in a uniform and static plasma. The static
+assumption has already been heavily used in the previous problem to
+derive \eqref{eq:MHD-wave}. The uniform assumption however, will help
+us with the fact that $X_0$ is constant is space as well, for any
+variable $X$; especially $\curl\vb*B_0=0$ and $\grad P_0=0$. With
+these observations, \eqref{eq:MHD-wave} can be written as
+\begin{equation}
+-\rhom_0\omega^2\vb*V_1(\vb*r)
+=\frac{1}{\mu_0}
+\qty{\curl\qty[\curl\qty(\vb*V_1\cross\vb*B_0)]}\cross\vb*B_0
++\gamma P_0 \grad(\div\vb*V_1).
+\end{equation}
+This can be further simplified using the identity
+\begin{equation}
+\curl(\vb*F\cross\vb*G)
+=(\vb*G\vdot\grad)\vb*F - (\vb*F\vdot\grad)\vb*G
++\vb*F(\div\vb*G) - \vb*G(\div\vb*F),
+\end{equation}
+which gives
+$\curl(\vb*V_1\cross\vb*B_0)
+=(\vb*B_0\vdot\grad)\vb*V_1 - \vb*B_0(\div\vb*V_1)$
+since $\vb*B_0$ is constant.Thus
+\begin{equation}
+-\rhom_0\omega^2\vb*V_1(\vb*r)
+=\frac{1}{\mu_0}
+\qty{\curl\qty[(\vb*B_0\vdot\grad)\vb*V_1 
+- \vb*B_0(\div\vb*V_1)]}\cross\vb*B_0
++\gamma P_0 \grad(\div\vb*V_1).
+\end{equation}
+Now we can also choose our coordinate system such that
+$\vb*B_0=B_0\vu{z}$. This gives
+\begin{equation}\label{eq4:MHD-wave_real}
+-\omega^2\vb*V_1(\vb*r)
+=\vA^2\qty{\curl\qty[\pdv{z}\vb*V_1 
+- \vu{z}(\div\vb*V_1)]}\cross\vu{z}
++\cs^2 \grad(\div\vb*V_1),
+\end{equation}
+where
+\begin{equation}
+\vA^2:=\frac{B_0^2}{\mu_0\rhom_0}\qc\quad
+\cs^2:=\frac{\gamma P_0}{\rhom_0}
+\end{equation}
+are the Alfvén velocity and the sound speed respectively.
+
+Now, since the plasma is uniform and static, we can use the Fourier
+transform
+\begin{equation}
+\vb*V_1(\vb*r)=\frac{1}{(2\pi)^3}
+\int \rd^3k\, \vb*W(\vb*k)\,\ee^{+\ii\vb*k\vdot\vb*r},
+\end{equation}
+which means that $\grad\to\ii\vb*k$. We can furthermore rotate our
+coordinate system such that $\vb*k=k_{||}\vu{z}+k_\perp\vu{y}$. We
+can therefore write \eqref{eq4:MHD-wave_real} as
+\begin{equation}
+\begin{aligned}
+-\omega^2\vb*W(\vb*k)
+=&-\vA^2\qty{\vb*k\cross\qty[k_{||}\vb*W 
+- (\vb*k\vdot\vb*W)\vu{z}]}\cross\vu{z}
+-\cs^2 (\vb*k\vdot\vb*W)\vb*k\\
+=&-\vA^2k_{||}[(\vb*k\cross\vb*W)\cross\vu{z}]
++\vA^2(\vb*k\vdot\vb*W)[(\vb*k\cross\vu{z})\cross\vu{z}]
+-\cs^2 \vb*k(\vb*k\vdot\vb*W).
+\end{aligned}
+\end{equation}
+Now we use the vector triple product identity
+\begin{equation}
+(\vb*a\cross\vb*b)\cross\vb*c=
+(\vb*a\vdot\vb*c)\vb*b
+-(\vb*b\vdot\vb*c)\vb*a,
+\end{equation}
+and move $\omega^2\vb*W$ to the RHS, which yields
+\begin{equation}
+\vb0=
+\qty(\omega^2-\vA^2k_{||}^2)\vb*W+\vA^2k_{||}W_z\vb*k
+-\qty[\qty(\vA^2+\cs^2)k_\perp\vu{y}+\cs^2k_{||}\vu{z}
+](\vb*k\vdot\vb*W).
+\end{equation}
+This then simplifies down to
+\begin{equation}\label{eq:MHD-unif-disp}
+\begin{bmatrix}
+\omega^2-\vA^2k_{||}^2 & 0 & 0 \\
+0 & \omega^2-\vA^2k^2-\cs^2k_\perp^2 & -\cs^2k_{||}k_\perp\\
+0 & -\cs^2k_{||}k_\perp & \omega^2 -\cs^2k_{||}^2
+\end{bmatrix}
+\begin{bmatrix}
+W_x\\W_y\\W_z
+\end{bmatrix}
+=
+\begin{bmatrix}
+0\\0\\0
+\end{bmatrix},
+\end{equation}
+where $k^2=|\vb*k|^2=k_{||}^2+k_\perp^2$. 
+
+We get non-trivial solutions only when the determinant is 0, i.e.
+\begin{equation}
+\begin{aligned}
+0=&\qty(\omega^2-\vA^2k_{||}^2)\qty[
+\qty(\omega^2-\vA^2k^2-\cs^2k_\perp^2)\qty(\omega^2 -\cs^2k_{||}^2)
+-\qty(-\cs^2k_{||}k_\perp)^2]\\
+=&\qty(\omega^2-\vA^2k_{||}^2)\qty[\omega^4-
+\qty(\vA^2k^2+\cs^2k_\perp^2+\cs^2k_{||}^2)\omega^2
++\vA^2k^2\cs^2k_{||}^2
++\cs^4k_\perp^2k_{||}^2-\qty(\cs^2k_{||}k_\perp)^2]\\
+=&\qty(\omega^2-\vA^2k_{||}^2)\qty[
+\omega^4-\qty(\vA^2+\cs^2)k^2\omega^2
++\vA^2\cs^2k^2k_{||}^2],
+\end{aligned}
+\end{equation}
+which has the solutions
+\begin{equation}\label{eq4:MHD-shear}
+\omega^2=\vA^2k_{||}^2
+\end{equation}
+or
+\begin{equation}
+\begin{aligned}
+\omega^2=&\frac{1}{2}\qty(\vA^2+\cs^2)k^2
+\pm\sqrt{\frac{1}{4}\qty(\vA^2+\cs^2)^2k^4
+-\vA^2\cs^2k^2k_{||}^2}\\
+=&\frac{1}{2}\qty(\vA^2+\cs^2)k^2\qty[
+1\pm\sqrt{1-\frac{4\vA^2\cs^2k_{||}^2}{\qty(\vA^2+\cs^2)^2k^2}}].
+\end{aligned}
+\end{equation}
+
+We now see that \eqref{eq:MHD-unif-disp} has three different
+modes. The first one being \eqref{eq4:MHD-shear}, which requires
+$\vb*W=W\vu{x}$ and is therefore perpendicular to both $\vb*B_0$ and
+$\vb*k$. Linearizing and Fourier transforming \eqref{eq:MHD-c} and
+\eqref{eq:MHD-f} yields
+\begin{equation}
+\vb*B_1 = \frac{(\vb*W\cross\vb*B_0)\cross\vb*k}{\omega}
+=\frac{\cancel{(\vb*k\vdot\vb*W)}\vb*B_0
+-(\vb*k\vdot\vb*B_0)\vb*W}{\omega}
+=-\frac{(\vb*k\vdot\vb*B_0)}{\omega}\vb*W.
+\end{equation}
+In other words, $\vb*B_1$ is perpendicular to $\vb*B_0$. This wave
+mode shifts the the magnetic field lines perpendicularly to their
+original direction (shearing), which is why it is called the
+\emph{shear Alfvén wave}. We can further more see that if we
+linearize and space (only) Fourier transform \eqref{eq:MHD-b}, we get 
+\begin{equation}
+0=\pdv{\rhom_1}{t} + \rhom_0\cancel{\vb*k\vdot\vb*W}
+=\pdv{\rhom_1}{t}.
+\end{equation}
+That is since $\vb*k\vdot\vb*W=0$ (which implies $\div\vb*V_1=0$) the
+density is constant to first order, i.e. the plasma does not compress
+-- loosely takling it's \emph{incompressible} under this wave mode.
+
+
 
 \section{Alfvén waves in a sheared magnetic field}
 
@@ -452,4 +602,4 @@ which is the full MHD stability/wave equation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  LocalWords:  Debye Laramor quartic Alfvén MHD Bohm
+%  LocalWords: Alfvén MHD Bohm quadratically incompressible
