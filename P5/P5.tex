@@ -32,8 +32,16 @@ swedish, english %% Make sure to put the main language last!
 \newcommand{\lD}{\ensuremath{\lambda_{\text{D}}}}
 \newcommand{\wc}{\ensuremath{\omega_{\text{c}}}}
 \newcommand{\rhom}{\ensuremath{{\rho_{\text{m}}}}}
+\newcommand{\kB}{\ensuremath{k_{\text{B}}}}
+\newcommand{\mH}{\ensuremath{m_{\text{H}}}}
 \newcommand{\vD}{\ensuremath{v_{\text{D}}}}
+\newcommand{\TD}{\ensuremath{T_{\text{D}}}}
+\newcommand{\ED}{\ensuremath{E_{\text{D}}}}
+\newcommand{\mD}{\ensuremath{m_{\text{D}}}}
 \newcommand{\vT}{\ensuremath{v_{\text{T}}}}
+\newcommand{\TT}{\ensuremath{T_{\text{T}}}}
+\newcommand{\ET}{\ensuremath{E_{\text{T}}}}
+\newcommand{\mT}{\ensuremath{m_{\text{T}}}}
 \newcommand{\cs}{\ensuremath{c_{\text{s}}}}
 
 
@@ -60,8 +68,62 @@ swedish, english %% Make sure to put the main language last!
 %\todolist
 
 \section{Different frames of reference}
+In the rest frame of the tritium nucleus the D-T fusion reaction has
+its maximum cross section when the incoming deuterium nucleus has an
+temperature of around $\TD=\unit[100]{keV}$.
+(Note that $\ED\ll\mT c^2\approx\unit[2]{GeV}$ which means that we do
+not have to take relativity into account.) That would correspond to an
+velocity $\vD$ given by ($\kB=1$)
+\begin{equation}
+\ED=\frac{1}{2}\mD\vD^2=\alpha^{-1}\TD.
+\end{equation}
+The constant $\alpha$ is the constant you choose for your
+normalization of tempereature, it dosen't matter in the end.
 
+If we instead change to the rest frame of the deuterium nucleus the
+tritium nucleus would be rushing in at the same speed $\vT=\vD$, which
+would correspond to a temperature of
+\begin{equation}
+\TD = \alpha \ET = \frac{1}{2}\mT\vT^2
+= \frac{1}{2}\qty(\frac{3}{2}\mD)\vD^2 
+= \frac{2}{3}\alpha\ED = \frac{2}{3}\TD= \unit[150]{keV}.
+\end{equation}
+Here we have used the fact that the tritum nucleus basically has
+three times the mass of a proton ($\mT=3\mH$) and deuterium is twice
+the proton mass ($\mD=2\mH$).
 
+In the lab fram of reference, where the tempereatures are equal
+($\TD'=\TT'$), we instead get the equation
+\begin{equation}\label{eq1:eqT}
+\cancel{\frac{\alpha}{2}}\mD\vD'^2=\cancel{\frac{\alpha}{2}}\mT\vT'^2,
+\end{equation}
+together with the transformed velocities
+\begin{equation}
+\vD'=\vD-v_0\qc\quad\vT'=0+v_0.
+\end{equation}
+With this we can write \eqref{eq1:eqT} as
+\begin{equation}
+0=\mT v_0^2-\mD(\vD-v_0)^2
+=(\mT-\mD)v_0^2 +2\mD\vD v_0 - \mD\vD^2
+\end{equation}
+which has the solutions
+\begin{equation}
+v_0=\frac{-\mD\vD\pm
+\vD\sqrt{\mD^2+(\mT{-}\mD)\mD}
+}{\mT-\mD}
+%=\qty(\frac{-2\mH\pm\sqrt{4\mH^2+2\mH^2}}{1\mH})\vD
+=\qty(-2\pm\sqrt{6})\vD.
+\end{equation}
+We are only interested in the plus sign solution, since we want to
+transform into a frame of reference where the two nucleons are heading
+into each other ``head on''. This means that the tempereature has to
+be
+\begin{equation}
+\TD'=\TT'=\frac{\alpha}{2}\mT v_0^2
+=\frac{\alpha}{2}\qty(\frac{3}{2}\mD)\qty(\sqrt6-2)^2\vD^2
+=\frac{3}{2}\qty(\sqrt6-2)^2 \TD
+\approx\unit[30]{keV}.
+\end{equation}
 
 \section{Plasma profiles and ignition}
 
