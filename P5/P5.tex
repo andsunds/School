@@ -125,7 +125,60 @@ be
 \approx\unit[30]{keV}.
 \end{equation}
 
+
+
+
+
+
 \section{Plasma profiles and ignition}
+In this problem, we are concidering volume averages. Assuming that
+the only vaiation is along the radius of the toroidal cross section
+\begin{equation}\label{eq2:ev}
+\ev{x}_V=\frac{2}{a^2}\int_0^a x(r)r\id{r}.
+\end{equation}
+For the dentity and temperature, we assume that the profile follows
+follows this curve
+\begin{equation}\label{eq2:xsect}
+y(r)=\ev{y}_V\, (1+\nu_y)\qty(1-\frac{r^2}{a^2})^{\nu_y}.
+\end{equation}
+
+\subsection{Check normalisation}
+Here we have to check the normalization on \eqref{eq2:xsect}. We are
+especially interested in the integral
+\begin{equation}\label{eq2:norm}
+\int_0^a(1+\nu)\qty(1-\frac{r^2}{a^2})^{\nu}r\id{r}=
+\begin{Bmatrix}
+  s=1-\frac{r}{a^2}\\
+  \rd{s}=-\frac{2r}{a^2}\id{r}
+\end{Bmatrix}
+=-\frac{a^2}{2} \int_1^0(1+\nu)s^{\nu}\id{s}
+=\frac{a^2}{2}.
+\end{equation}
+This means that indeed \eqref{eq2:xsect} is consitent with \eqref{eq2:ev}.
+
+We can also state another useful result.
+\begin{equation}
+\begin{aligned}
+\ev{n^\xi T^\zeta}_V=&\ev{n}_V^\xi\ev{T}_V^\zeta
+\frac{2}{a^2}\int_0^a(1+\nu_n)^\xi(1+\nu_T)^\zeta
+\qty(1-\frac{r^2}{a^2})^{\xi\nu_n+\zeta\nu_T}r\id{r}\\
+=&\ev{n}_V^\xi\ev{T}_V^\zeta
+\frac{(1+\nu_n)^\xi(1+\nu_T)^\zeta}{1+\xi\nu_n+\zeta\nu_T},
+\end{aligned}
+\end{equation}
+which can easily be proven since
+\begin{equation}
+\frac{2}{a^2}\int_0^a(1+\xi\nu_n+\zeta\nu_T)
+\qty(1-\frac{r^2}{a^2})^{\xi\nu_n+\zeta\nu_T}r\id{r}
+=1
+\end{equation}
+by \eqref{eq2:norm}.
+This is especially useful for calculating the preasure $P=2nT$,
+menaing that we have $\xi=\zeta=1$ giving
+\begin{equation}
+\ev{P}_V=\ev{n}_V\ev{T}_V
+\frac{(1+\nu_n)(1+\nu_T)}{1+\nu_n+\nu_T}.
+\end{equation}
 
 
 
