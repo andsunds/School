@@ -175,15 +175,13 @@ which can easily be proven since
 by \eqref{eq2:norm}.
 This is especially useful for calculating the preasure $P=2nT$,
 menaing that we have $\xi=\zeta=1$ giving
-\begin{equation}
-\ev{P}_V=\ev{n}_V\ev{T}_V
+\begin{equation}\label{eq2:P}
+\ev{P}_V=2\ev{n}_V\ev{T}_V
 \frac{(1+\nu_n)(1+\nu_T)}{1+\nu_n+\nu_T}.
 \end{equation}
 
 
 \subsection*{Ignition}
-
-
 \begin{figure}
 \centering
 \includegraphics[width=14cm]{T_min.eps}
@@ -191,6 +189,55 @@ menaing that we have $\xi=\zeta=1$ giving
 \label{fig:T_min}
 \end{figure}
 
+For iginition to occur, we need to have more power genergated from
+fusion than is being lost for the whole volume,
+$\ev{S_\alpha}_V\ge\ev{S_\text{L}}_V$. In this problem we assuume that
+\begin{equation}
+S_\alpha = K_\alpha\ev{\sigma v}\frac{P^2}{T^2}
+= K_\alpha\ev{\sigma v} 4n^2 \qc
+S_\text{L} = K_\text{L} \frac{P}{\tau_E},
+\end{equation}
+where
+\begin{equation}\label{eq:sigma_v}
+\ev{\sigma v} = f(T) = 10^{16}
+\exp[a_{-1}T^{-\alpha} +a_0 +a_1T +a_2T^2 +a_3T^3 +a_4T^4].
+\end{equation}
+
+We can begin by calculating the average power loss
+\begin{equation}
+\ev{S_L}_V =K_\text{L} \frac{\ev{P}_V}{\tau_E}.
+\end{equation}
+Next the average generated power is
+\begin{equation}
+\begin{aligned}
+\ev{S_\alpha}_V =& K_\alpha\frac{2}{a^2}
+\int_0^a f(T(r)) 4n^2(r)r\id{r}
+=K_\alpha4\ev{n}_V^2
+\int_0^1 f(T(s))\,(1+\nu_n)^2s^{2\nu_n}\id{s},
+\end{aligned}
+\end{equation}
+and with \eqref{eq2:P} we can write
+\begin{equation}
+4\ev{n}_V^2=\frac{\ev{P}_V^2}{\ev{T}_V^2}
+\frac{(1+\nu_n+\nu_T)^2}{(1+\nu_n)^2(1+\nu_T)^2}.
+\end{equation}
+We therefore have
+\begin{equation}
+\ev{S_\alpha}_V =K_\alpha\frac{\ev{P}_V^2}{\ev{T}_V^2}
+\frac{(1+\nu_n+\nu_T)^2}{(1+\nu_T)^2}
+\int_0^1 f(T(s))\,s^{2\nu_n}\id{s}.
+\end{equation}
+
+The iginition condition, $\ev{S_\alpha}_V\ge\ev{S_\text{L}}_V$,
+therefore requires that 
+\begin{equation}
+\ev{P}_V\tau_E \ge
+\frac{K_\text{L}}{K_\alpha}
+\frac{(1+\nu_T)^2}{(1+\nu_n+\nu_T)^2}
+\frac{\ev{T}_V^2}{\int_0^1 f(T(s))\,s^{2\nu_n}\id{s}},
+\end{equation}
+where $f(T(s))$ is given by \eqref{eq:sigma_v} with $T(s)=T(r)$ given
+by \eqref{eq2:xsect} and with $s=1-r^2/a^2$.
 
 
 
