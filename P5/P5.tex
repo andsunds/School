@@ -10,7 +10,7 @@ swedish, english %% Make sure to put the main language last!
 \usepackage{eufrak}
 \usepackage{cancel}
 %% Figures can now be put in a folder: 
-\graphicspath{ {figures/} %{some_folder_name/}
+\graphicspath{ {figures/} {script/}%{some_folder_name/}
 }
 \usepackage{multicol}
 
@@ -142,7 +142,7 @@ follows this curve
 y(r)=\ev{y}_V\, (1+\nu_y)\qty(1-\frac{r^2}{a^2})^{\nu_y}.
 \end{equation}
 
-\subsection{Check normalisation}
+\subsection*{Check normalisation}
 Here we have to check the normalization on \eqref{eq2:xsect}. We are
 especially interested in the integral
 \begin{equation}\label{eq2:norm}
@@ -181,6 +181,15 @@ menaing that we have $\xi=\zeta=1$ giving
 \end{equation}
 
 
+\subsection*{Ignition}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=14cm]{T_min.eps}
+\caption{}
+\label{fig:T_min}
+\end{figure}
 
 
 
