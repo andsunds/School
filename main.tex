@@ -8,11 +8,11 @@ swedish, english %% Make sure to put the main language last!
 \usepackage{custom_as}
 
 %% Figures can now be put in a folder: 
-\graphicspath{ {figures/} %{some_folder_name/}
+\graphicspath{ {figures/} {figures/water/}%{some_folder_name/}
 }
 
 %% If you want to change the margins for just the captions
-\usepackage[margin=10 pt]{caption}
+\usepackage[size=small]{caption}
 
 %% To add todo-notes in the pdf
 \usepackage[%disable  %%this will hide all notes
@@ -20,8 +20,8 @@ swedish, english %% Make sure to put the main language last!
 
 %% Change the margin in the documents
 \usepackage[
-%            top    = 3cm,              %% top margin
-%            bottom = 3cm,              %% bottom margin
+             top    = 3.5cm,              %% top margin
+             bottom = 3.5cm,              %% bottom margin
              left   = 2.2cm, right  = 2.2cm %% left and right margins
 ]{geometry}
 
@@ -77,18 +77,25 @@ One type of such paper-water interaction is the diffusion of water
 into the paper and subsequent water self-diffusion inside the 
 paper. This has been studied previously~\cite{Perkins-Batchelor2012,
   Li-etal1992, Topgaard-Soderman2001} for different water contents in
-the paper. 
+the paper. The diffusion of water in paper is not only important for
+the end product, but it also plays a significant role in the
+production and recycling of paper.
 
-All three of the diffusion studies~\cite{Perkins-Batchelor2012, Li-etal1992,
-  Topgaard-Soderman2001} have been using a technique called pulsed
+One of The main results by
+Perkins~\&~Batchelor~\cite{Perkins-Batchelor2012} as well as by
+Li~et~al.~\cite{Li-etal1992} was that water 
+seemed to have two different modes of self-diffusion in paper, a fast
+and a slow mode. All three of the diffusion
+studies~\cite{Perkins-Batchelor2012, Li-etal1992,
+  Topgaard-Soderman2001} have been using a technique called pulsed 
 field gradient NMR. In this report we try to qualitatively replicate
-some of the results in~\cite{Perkins-Batchelor2012} using the simpler
-method of pulse echo NMR, developed by Hahn~\cite{Hahn1950} and
+some of the results in~\cite{Perkins-Batchelor2012} and
+~\cite{Li-etal1992} using the somewhat more primitive method of pulse
+echo NMR, developed by Hahn~\cite{Hahn1950} and
 Carr~\&~Purcell~\cite{Carr-Purcell1954} in the 1950's. We investigate
-the effects of self-diffusion in pure distilled water, tap-water, and
-glycerol; we then compare the results with those of similar
-measurements on wet printer and tissue paper with different levels of
-moisture content. 
+the effects of self-diffusion in distilled water and glycerol; we then
+compare the results to those of similar measurements on wet printer
+paper and tissue paper with different levels of moisture content.
 
 
 %Nuclear Magnetic Resonance refers to the phenomenon whereby nuclei of certain spin in the presence of an external magnetic field, undergo a transition of spin when exposed to a certain radio frequency. In the presence of a strong external magnetic field, the nuclei of the atoms of the sample undergo spin polarization. This is because any nuclei with magnetic moments that are not aligned with the direction of the magnetic field, experiences a magnetic torque which forces it to align to the direction of the magnetic field. The magnetic moment of the nuclei is perpendicular to the plane of spin of the nuclei. At the ground state (lower energy state), the magnetic moment of the nuclei is parallel to the direction of the magnetic field. However, when a certain radio frequency (Larmor frequency) is being transmitted onto the nuclei, some of the nuclei undergo Nuclear Magnetic Resonance. The nuclei on that ground state absorb photons of that frequency then transit to the excited energy state; refer to Fig 1. This happens by flipping the spin of the nuclei. The magnetic moments of the nuclei changes to anti-parallel to the direction of the magnetic field which corresponds to the excited state energy of the nuclei. If the resonance frequency (Larmor Frequency) source is turned off with the external magnetic field left on, the nuclei will then return to the ground state by reverting their spins and nuclear moments to parallel of the direction of the magnetic field. In the process, emitting photons of the Larmor Frequency. However, if both resonance frequency and external magnetic field are turned off, the nuclei will undergo random spontaneous emissions to return to its equilibrium state. At equilibrium state, the spin orientations and directions nuclear magnetic moments are random.   
@@ -252,12 +259,12 @@ diffuse to different regions with varying magnetic field,
 Hahn~\cite{Hahn1950} showed that the signal will decay even faster
 according to
 \begin{equation}\label{eq:echo-diffusion}
-A(t)=A_0\exp[-R_2t]
-\exp[-K\frac{t^3}{n^2}],
+A(t)=A_0\exp(-R_2t)
+\exp(-K\frac{t^3}{n^2}),
 \end{equation}
 where $n$ is the number of $\pi$ pulses before time $t$, and $K$ is a
 constant related to the diffusivity. Carr~\&~Purcell~\cite{Carr-Purcell1954} found the correct expression for
-\begin{equation}
+\begin{equation}\label{eq:K_simple}
 K=\frac{\gamma^2D}{12}\qty(\pdv{B_0}{z})^2,
 \end{equation}
 where $D$ is the self-diffusivity of the sample, i.e. how fast a
@@ -267,42 +274,159 @@ come at times
 t_{n}=\qty(n-\tfrac{1}{2})\tau,
 \end{equation}
 %(the first $\pi/2$ pulse being at $t=0$), 
-then the echoes will occur at
-time 
+then the echoes will occur at time 
 \begin{equation}
 t_n'=n\tau.
 \end{equation}
 This means that \eqref{eq:echo-diffusion} can be written as
-\begin{equation}
-A(t')=A_0\exp[-\mathcal{R}t']
+\begin{equation}\label{eq:multi-pulse_simple}
+A(t')=A_0\exp(-\mathcal{R}t')
 \end{equation}
 since the amplitude is only relevant at the time of the echoes, and
 where 
-\begin{equation}
-\mathcal{R}=\qty(R_2+K\tau^2).
+\begin{equation}\label{eq:multi-pulse-rate}
+\mathcal{R}=R_2+K\tau^2.
 \end{equation}
 By measuring the decay rate of the multi-pulse echoes, $\mathcal{R}$,
-as a function of pulse separation, $\tau$, both the spin-spin relaxation
+as a function of pulse interval, $\tau$, both the spin-spin relaxation
 rate, $R_2$, and the self-diffusivity (indirectly), $D$, can be measured.
 
+According to Perkins~\&~Batchelor~\cite{Perkins-Batchelor2012} water
+has two modes, with different diffusivities, of self-diffusion in
+paper. They also mean that this should manifest as a change of
+\eqref{eq:echo-diffusion} to
+\begin{equation}
+\begin{aligned}
+A(t){=}\hspace{-1pt}A_0\hspace{1pt}
+\ee^{{-}\!R_2t}\qty[
+p\ee^{{-}K_1\!\frac{t^3}{n^2}} + (1{-}p)\ee^{{-}K_2\frac{t^3}{n^2}}
+\!],
+\end{aligned}
+\end{equation}
+with a similar modification to \eqref{eq:multi-pulse_simple}
+\begin{equation}\label{eq:multi-pulse_dual}
+A(t')=A_0\qty[p\ee^{-\mathcal{R}_1t'}+
+(1{-}p)\ee^{-\mathcal{R}_2t'}],
+\end{equation}
+where $K_1$, $K_2$, $\mathcal{R}_1$ and $\mathcal{R}_2$ (not to be
+confused with $R_1$ and $R_2$) are defined analogously to
+\eqref{eq:K_simple} and \eqref{eq:multi-pulse-rate}. The
+scaling variable $0\le p\le1$ denotes the fraction of water undergoing
+diffusion according to $K_1$. 
 
 
 
+\section{Method} \label{sec:met}
+The main idea is to measure $A(t')$ for different values of $\tau$,
+and then try to fit \eqref{eq:multi-pulse_simple} to the measured
+peaks of the pule echoes. From there we fit $R_2$ and $K$ to the
+different observed decay rates $\mathcal{R}$ as a function of the
+pulse interval, $\tau$, with \eqref{eq:multi-pulse-rate}. For the
+measurements on wet paper we instead expect to find that
+\eqref{eq:multi-pulse_dual} would give better results.
 
-\section{Method}
+Different samples were placed in small test tubes, with an inner
+diameter of about 5\,mm. These test tubes were then lowered into the
+NMR apparatus consisting of two strong permanent magnets generating
+$B_0$, radio frequency (RF) coils for generating $B_1$ and a pick-up
+coil. The $B_1$ pulses were created with an accompanying pulse
+programmer, RF oscillator and mixer, and RF receiver. The RF amplitude
+envelope was then recorded on a digital oscilloscope, with which the
+wave-forms could be saved for later analysis. 
 
-In our experiment, we first used mineral oil as our sample. We measured 
-\subsection{Limitations in the equipment}
-\todo[inline]{We tried dry paper and didn't see anything. Also the
-  weird phenomenon with water and delays of 5\,ms.}
+For doing the pulse echo measurements, three parameters need to be
+calibrated -- the radio frequency, the length of the $\pi/2$ and $\pi$
+pulses. These three parameters were re-calibrated before each
+measurement to assure accurateness.
+
+When the pulse echo measurements had been taken and saved, a script
+was written to semi-automatically\footnotemark{} detect all the peaks
+of the pulse echoes. Then the peaks were all fitted to either
+\eqref{eq:multi-pulse_simple} or \eqref{eq:multi-pulse_dual}, and
+lastly the decay rates $\mathcal{R}$ (or $\mathcal{R}_{1, 2}$) was
+plotted against $\tau^2$ to try and find a linear fit,
+\eqref{eq:multi-pulse-rate}. This was primarily done for liquid water,
+as diffusion was fastest there -- the diffusion in the other samples
+turned out to be too slow to detect with this apparatus.
+
+\footnotetext{This means that the peaks were picked out by the
+  program, and then controlled visually by us to ensure that no false
+  peaks had been detected.}
+
+The samples tested were liquid water (distilled) and glycerol; 
+printer paper and tissue paper, wetted to different degrees with water
+or glycerol. The printer paper samples were cut to a size of about
+$\unit[2]{cm}\times\unit[4]{cm}$ ($\unit[2]{cm}\times\unit[8]{cm}$ for
+the tissue paper), wetted, folded lengthwise 2 times to about 5\,mm
+width, and then the paper was rolled into a tight roll which fitted
+snugly inside the test tubes.
+The wet paper is called either just ``wet'' or ``extra
+wet''; in the first case the paper was thoroughly wetted with the
+liquid in question then any excess liquid not soaked into the paper was
+wiped off with a dry tissue, for ``extra wet'' paper an additional
+drop of liquid was added to the sample when it was inside the test
+tube. 
+
+
+As demonstrated by \eqref{eq:K_simple} this experiment is sensitive to
+variations in $\pdv*{B_0}{z}$. We therefore took special care to make
+each sample roughly the same size, as described in the previous
+paragraph. Also the test tubes were marked so that each sample would 
+be at the same location between the permanent magnets in the NMR
+apparatus. To confirm the dependence of $\pdv*{B_0}{z}$ in
+\eqref{eq:K_simple}, a measurement series for liquid water was also
+taken with the sample moved off the mark by about 1\,mm, and then
+compared to the same measurements on the mark. This also gave us a
+sense of the sample positioning sensitivity of the experiment.
 
 
 
 \section{Results}
 
+\begin{figure}
+\centering
+\input{figures/water/water.tex}
+\caption{Amplitude decay rate $\mathcal{R}$ as a function of pulse
+  interval squared $\tau^2$ for two different positions of a water
+  sample, also linear fits to the two measurement series are
+  shown. Each measurement point is given with 95\,\% confidence
+  interval. The ``off mark'' sample was moved to about 1\,mm off the
+  mark which was used for the rest of the (``on mark'') measurements. } 
+\label{fig:water-pos}
+\end{figure}
+
+The first results of these measurements is the effect of sample
+positioning inside the NMR apparatus. The result of the two
+measurement series are shown in \figref{fig:water-pos}.
+The parameters for the two linear fits, \eqref{eq:multi-pulse-rate},
+were $R_2=\unit[0.67]{s^{-1}}$ and  
+$K=\unit[4.21\times10^{-3}]{s^{-1}/ms^2}$ for the ``on mark'' water
+measurements, and $R_2=\unit[0.76]{s^{-1}}$ and
+$K=\unit[6.75\times10^{-3}]{s^{-1}/ms^2}$ for the ``off mark''.
+
+
+
+
 
 \section{Discussion}
 \todo[inline]{Compare $T_2$ values to that of literature.}
+
+As mentioned in section~\ref{sec:met}, special care was taken so that
+the each measurement would be as equivalent to each other as
+possible. However since the devise is meant for student lab use $B_0$
+(and also $\pdv*{B_0}{z}$) was strongly non-uniform, as we saw when we
+tested to move the sample by just 1\,mm. This means that any
+qualitative results regarding the diffusivity would be highly
+unreliable. 
+\todo[inline]{We therefore only consider the quantitative results.}
+
+
+\todo[inline]{We also tried dry paper, but did not see anything.}
+
+
+\todo[inline]{Pulses much shorter than pulse intervals, menaing that
+  we don't have to worry about that. }
+
 
 \section{Conclusions}
 
@@ -334,4 +458,4 @@ In our experiment, we first used mineral oil as our sample. We measured
 
 
 
-%  LocalWords:  Larmor coherentness diffusivity multi
+%  LocalWords:  Larmor coherentness diffusivity multi Batchelor
