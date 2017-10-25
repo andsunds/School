@@ -17,12 +17,12 @@ set key width -6
 set output "fit_Rsq.tex"
 plot [3e-1:30] [1e-4:1e0] "d-water_Rsq.tsv" using 1:(1-$2) lt 1 pt 9 ps 1.2 lc 6 title s.'Liquid water',\
                           "d-water_Rsq.tsv" using 1:(1-$3) lt 1 pt 8 ps 1.2 lc 6 title '',\
-                          "wet-pp_Rsq.tsv" using 1:(1-$2) lt 1 pt 5 ps 1.2 lc 2 title s.'Wet paper',\
-                          "wet-pp_Rsq.tsv" using 1:(1-$3) lt 1 pt 4 ps 1.2 lc 2 title '',\
                           "ex-wet-pp_Rsq.tsv" using 1:(1-$2) lt 1 pt 7 ps 1.5 lc 7 title s.'Ex. wet paper',\
                           "ex-wet-pp_Rsq.tsv" using 1:(1-$3) lt 1 pt 6 ps 1.5 lc 7 title '',\
                           "wet-tp_Rsq.tsv" using 1:(1-$2) lt 1 pt 13 ps 1.5 lc 1 title s.'Wet tissue paper',\
                           "wet-tp_Rsq.tsv" using 1:(1-$3) lt 1 pt 12 ps 1.5 lc 1 title '',\
+                          #"wet-pp_Rsq.tsv" using 1:(1-$2) lt 1 pt 5 ps 1.2 lc 2 title s.'Wet paper',\
+                          #"wet-pp_Rsq.tsv" using 1:(1-$3) lt 1 pt 4 ps 1.2 lc 2 title '',\
 
 
 set out
