@@ -22,7 +22,7 @@ swedish, english %% Make sure to put the main language last!
 \usepackage[
 %            top    = 3cm,              %% top margin
 %            bottom = 3cm,              %% bottom margin
-             left   = 2.5cm, right  = 2.5cm %% left and right margins
+             left   = 2.2cm, right  = 2.2cm %% left and right margins
 ]{geometry}
 
 
@@ -38,7 +38,7 @@ swedish, english %% Make sure to put the main language last!
 %%%%%%%%%%%%%%%%%%%% vvv Internal title page vvv %%%%%%%%%%%%%%%%%%%%%
 
 \title{A qualitative investigation of self-diffusion in wet
-  paper using the pulsed NMR pulse echo method} 
+  paper using the NMR pulse echo method} 
 \author{Andréas Sundström \and Tan Qin Yuan}
 \date{\today}
 
@@ -256,8 +256,7 @@ A(t)=A_0\exp[-R_2t]
 \exp[-K\frac{t^3}{n^2}],
 \end{equation}
 where $n$ is the number of $\pi$ pulses before time $t$, and $K$ is a
-constant related to the diffusivity. Carr and
-Purcell~\cite{Carr-Purcell1954} found the correct expression for
+constant related to the diffusivity. Carr~\&~Purcell~\cite{Carr-Purcell1954} found the correct expression for
 \begin{equation}
 K=\frac{\gamma^2D}{12}\qty(\pdv{B_0}{z})^2,
 \end{equation}
@@ -292,6 +291,7 @@ rate, $R_2$, and the self-diffusivity (indirectly), $D$, can be measured.
 
 \section{Method}
 
+In our experiment, we first used mineral oil as our sample. We measured 
 \subsection{Limitations in the equipment}
 \todo[inline]{We tried dry paper and didn't see anything. Also the
   weird phenomenon with water and delays of 5\,ms.}
@@ -313,7 +313,7 @@ rate, $R_2$, and the self-diffusivity (indirectly), $D$, can be measured.
 %http://hyperphysics.phy-astr.gsu.edu/hbase/Nuclear/nmr.html
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% The bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%
-%\newpage
+\newpage
 %% This bibliography uses BibTeX
 \bibliographystyle{ieeetr}
 \bibliography{references}%requires a file named 'references.bib'
