@@ -8,7 +8,8 @@ swedish, english %% Make sure to put the main language last!
 \usepackage{custom_as}
 
 %% Figures can now be put in a folder: 
-\graphicspath{ {figures/} {figures/water/}%{some_folder_name/}
+\graphicspath{ {figures/} {figures/water/} {figures/good-fit/}
+{figures/glycerol/} {figures/dual-diff/}
 }
 
 %% If you want to change the margins for just the captions
@@ -42,16 +43,24 @@ swedish, english %% Make sure to put the main language last!
 \author{Andréas Sundström \and Tan Qin Yuan}
 \date{\today}
 
+%\newgeometry{top    = 3.5cm,              %% top margin
+%             bottom = 4cm,              %% bottom margin
+%             left   = 3.5cm, right  = 3.5cm %% left and right margins
+%}
+
 \twocolumn[
 \begin{@twocolumnfalse}
 \maketitle
 \begin{abstract}
-
+%\vspace{4cm}%To represent roughly the size of the abstract
 \end{abstract}
 %\tableofcontents
+\rule{\linewidth}{0.5pt}
 \end{@twocolumnfalse}
 ]
 %\clearpage
+%\restoregeometry
+
 %%%%%%%%%%%%%%%%%%%% ^^^ Internal title page ^^^ %%%%%%%%%%%%%%%%%%%%%
 %% If you want a list of all todos
 %\todolist
@@ -292,8 +301,10 @@ as a function of pulse interval, $\tau$, both the spin-spin relaxation
 rate, $R_2$, and the self-diffusivity (indirectly), $D$, can be measured.
 
 According to Perkins~\&~Batchelor~\cite{Perkins-Batchelor2012} water
-has two modes, with different diffusivities, of self-diffusion in
-paper. They also mean that this should manifest as a change of
+has two modes of self-diffusion in paper with different diffusivities,
+$D_1<D_2$; the first mode is called the slow mode and the second mode
+is the fast for obvious reasons. Perkins~\&~Batchelor also mean that
+this should manifest as a change of 
 \eqref{eq:echo-diffusion} to
 \begin{equation}
 \begin{aligned}
@@ -311,8 +322,8 @@ A(t')=A_0\qty[p\ee^{-\mathcal{R}_1t'}+
 where $K_1$, $K_2$, $\mathcal{R}_1$ and $\mathcal{R}_2$ (not to be
 confused with $R_1$ and $R_2$) are defined analogously to
 \eqref{eq:K_simple} and \eqref{eq:multi-pulse-rate}. The
-scaling variable $0\le p\le1$ denotes the fraction of water undergoing
-diffusion according to $K_1$. 
+scaling variable $0\le p\le1$ denotes the fraction of water in the
+slow diffusion mode. 
 
 
 
@@ -340,32 +351,33 @@ pulses. These three parameters were re-calibrated before each
 measurement to assure accurateness.
 
 When the pulse echo measurements had been taken and saved, a script
-was written to semi-automatically\footnotemark{} detect all the peaks
+was written to semi-automatically detect all the peaks
 of the pulse echoes. Then the peaks were all fitted to either
-\eqref{eq:multi-pulse_simple} or \eqref{eq:multi-pulse_dual}, and
-lastly the decay rates $\mathcal{R}$ (or $\mathcal{R}_{1, 2}$) was
+\eqref{eq:multi-pulse_simple} or \eqref{eq:multi-pulse_dual}.
+Lastly the decay rates $\mathcal{R}$ (or $\mathcal{R}_{1, 2}$) was
 plotted against $\tau^2$ to try and find a linear fit,
-\eqref{eq:multi-pulse-rate}. This was primarily done for liquid water,
-as diffusion was fastest there -- the diffusion in the other samples
-turned out to be too slow to detect with this apparatus.
+\eqref{eq:multi-pulse-rate}.\footnotemark{} 
+This was primarily done for liquid water, as diffusion was fastest
+there -- the diffusion in the other samples turned out to be too slow
+to detect with this apparatus. 
 
-\footnotetext{This means that the peaks were picked out by the
-  program, and then controlled visually by us to ensure that no false
-  peaks had been detected.}
+\footnotetext{More detail on the data analysis can be found in
+  Appendix~\ref{apx:data-analysis}. }
 
 The samples tested were liquid water (distilled) and glycerol; 
-printer paper and tissue paper, wetted to different degrees with water
-or glycerol. The printer paper samples were cut to a size of about
+printer paper and tissue paper. For brevity most investigation were
+carried out on the printer paper, which will be referred to as just
+``paper''. The printer paper samples were cut to a size of about  
 $\unit[2]{cm}\times\unit[4]{cm}$ ($\unit[2]{cm}\times\unit[8]{cm}$ for
 the tissue paper), wetted, folded lengthwise 2 times to about 5\,mm
 width, and then the paper was rolled into a tight roll which fitted
 snugly inside the test tubes.
-The wet paper is called either just ``wet'' or ``extra
-wet''; in the first case the paper was thoroughly wetted with the
-liquid in question then any excess liquid not soaked into the paper was
-wiped off with a dry tissue, for ``extra wet'' paper an additional
-drop of liquid was added to the sample when it was inside the test
-tube. 
+The water wetted printer paper was examined for two different levels of
+wetness, called either just ``wet'' or ``extra wet''; in the first
+case the paper was thoroughly wetted with the liquid in question then
+any excess liquid not soaked into the paper was wiped off with a dry
+tissue, for ``extra wet'' paper an additional drop of liquid was added
+to the sample when it was inside the test tube. 
 
 
 As demonstrated by \eqref{eq:K_simple} this experiment is sensitive to
@@ -389,9 +401,10 @@ sense of the sample positioning sensitivity of the experiment.
 \caption{Amplitude decay rate $\mathcal{R}$ as a function of pulse
   interval squared $\tau^2$ for two different positions of a water
   sample, also linear fits to the two measurement series are
-  shown. Each measurement point is given with 95\,\% confidence
+  shown. Each data point is given with 95\,\% confidence
   interval. The ``off mark'' sample was moved to about 1\,mm off the
-  mark which was used for the rest of the (``on mark'') measurements. } 
+  mark which was used for the rest of the measurements in this report,
+  which were ``on mark''. } 
 \label{fig:water-pos}
 \end{figure}
 
@@ -405,10 +418,92 @@ measurements, and $R_2=\unit[0.76]{s^{-1}}$ and
 $K=\unit[6.75\times10^{-3}]{s^{-1}/ms^2}$ for the ``off mark''.
 
 
+\begin{figure}
+\centering
+\input{figures/glycerol/glyc.tex}
+\caption{Amplitude decay rate $\mathcal{R}$ as a function of pulse
+  interval squared $\tau^2$ for liquid glycerol, and printer paper
+  wetted with glycerol, also a linear fit for the liquid glycerol
+  measurement series. The error-bars signifies 95\,\% confidence
+  intervals. The the two measurement series for wetted paper are for
+  ``regularly'' wetted paper and ditto with one extra drop of glycerol
+  added. }
+\label{fig:glyc}
+\end{figure}
 
+Pulse echo measurement were performed for glycerol and
+different levels of glycerol-wetted printer paper. The results are
+shown in \figref{fig:glyc}. This time, the agreement with linear fit
+is much poorer, even for liquid glycerol, compared to the liquid water
+in \figref{fig:water-pos}. The linear fit,
+\eqref{eq:multi-pulse-rate}, in \figref{fig:glyc} are for the liquid
+glycerol measurement points; the fit parameters are
+$R_2=\unit[44]{s^{-1}}$ and
+$K=\unit[3.75\times10^{-2}]{s^{-1}/ms^2}$.
+
+
+\begin{figure*}
+\centering
+\input{figures/good-fit/fit_Rsq.tex}
+\caption{One minus confidence of determination ($1-r^2$),
+  degree-of-freedom adjusted, for the fits using either the single
+  mode diffusion model (open markers) or dual mode diffusion (solid
+  markers) for different samples. [Lower values means better fits.]
+  The horizontal axis is the pulse interval, $\tau$, but has no
+  significance to the $r^2$ values. Especially note the clear
+  separation for liquid water and for extra wet printer paper.
+} 
+\label{fig:good-fit}
+\end{figure*}
+
+To examine whether the dual diffusion mode theory better corresponds
+to the measurements, \figref{fig:good-fit} presents the
+degree-of-freedom adjusted confidence of determination (colloquially
+known as ``R-squared'') for fits to the data either by
+\eqref{eq:multi-pulse_simple} or \eqref{eq:multi-pulse_dual}. The
+figure shows the R-squared values for liquid water, extra wet
+printer paper, and wet tissue paper. Corresponding values for other
+samples are omitted form the figure, partly to not make it too
+crowded, and partly because they did not show any separation between
+the two theories. There is a clear separation between the two theories for
+both liquid water and extra wet printer paper -- the wet tissue paper
+also shows some separation but it is less
+pronounced. Do note however that the separation is in opposite
+directions; the single mode theory fits better to the liquid water
+than dual mode diffusion, while the opposite is true for extra wet
+paper -- and to some extent wet tissue paper. 
+
+
+\begin{figure*}
+\centering
+\input{figures/dual-diff/diff.tex}
+\caption{Amplitude decay rate $\mathcal{R}$ as a function of pulse
+  interval squared $\tau^2$ for the fast (solid markers) and slow
+  (open markers) diffusion mode of water in extra wet printer paper or
+  tissue paper. The data points for extra wet printer paper is given
+  with 95\,\% confidence intervals. (The error-bars for the tissue
+  paper is omitted for clarity in the plot.) } 
+\label{fig:dual-diff}
+\end{figure*}
+
+The dual mode theory, \eqref{eq:multi-pulse_dual}, was fitted to the
+measured pulse echo amplitudes for extra wet printer paper and tissue
+paper. These samples were chosen 
+The two decay rates for the two samples are presented in
+\figref{fig:dual-diff}. There is a somewhat clear resemblance between
+the two samples, at least for $\tau^2<40$ where there is data on both
+samples. Also note the much higher decay rates compared to pure liquid
+water, even the slow modes. The values of $p$ (corresponding to the
+fraction of water in the slow mode) were all quite sable except for a
+few outliers for each sample. However, the two samples had
+significantly different $p$ values. The extra wet printer paper had
+values around $p=0.25\pm0.05$, while the tissue paper had values of 
+$p=0.7\pm0.1$.
 
 
 \section{Discussion}
+
+
 \todo[inline]{Compare $T_2$ values to that of literature.}
 
 As mentioned in section~\ref{sec:met}, special care was taken so that
@@ -423,8 +518,18 @@ unreliable.
 
 \todo[inline]{We also tried dry paper, but did not see anything.}
 
+Note the much narrower range of $\tau^2$ in both \figref{fig:glyc} and
+\figref{fig:dual-diff}, compared to in \figref{fig:water-pos}. This is
+due to the much higher decay rates, $\mathcal{R}$, measured which
+effectively eliminated any detectable pulse echoes at longer pulse
+interval times. 
 
-\todo[inline]{Pulses much shorter than pulse intervals, menaing that
+\todo[inline]{We do not see any difference in diffusion speed ($K$) in
+  \figref{fig:dual-diff}. Maybe because $\mathcal{R}_{1, 2}$ is too
+  high, which makes the range of $\tau$ values too small to see any
+  measurable effect from diffusion.}
+
+\todo[inline]{Pulses much shorter than pulse intervals, meaning that
   we don't have to worry about that. }
 
 
@@ -437,7 +542,7 @@ unreliable.
 %http://hyperphysics.phy-astr.gsu.edu/hbase/Nuclear/nmr.html
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% The bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
+\clearpage
 %% This bibliography uses BibTeX
 \bibliographystyle{ieeetr}
 \bibliography{references}%requires a file named 'references.bib'
@@ -448,8 +553,19 @@ unreliable.
 \appendix  %% This will change the page numbering to A1, A2, A3, ...;
            %% and also change the sections to A, A.1, ...; B, B.1, ...
 
+\section{Detailed data analysis}\label{apx:data-analysis}
 
-
+\todo[inline]{
+Semi-automatic peak detection means that the peaks were picked out by the
+program, and then controlled visually by us to ensure that no false
+peaks had been detected.}
+\todo[inline]{
+Background noise level was accounted for by subtracting the
+\emph{median} of the oscilloscope wave-forms \emph{after} the last
+detected peak. }
+\todo[inline]{Figure of wave-form, peak and fit.}
+\todo[inline]{Degree-of-freedom adjusted $r^2$?}
+\todo[inline]{Lin fits were made with weights of inverse conf int.}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
