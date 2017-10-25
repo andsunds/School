@@ -12,6 +12,8 @@
 *.toc
 main.pdf
 
+figures/test/*
+
 *-eps-converted-to.pdf
 
 #Från Beamer
