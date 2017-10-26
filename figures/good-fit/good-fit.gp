@@ -1,4 +1,4 @@
-set terminal epslatex size 15cm,7.5cm font ',10' color
+set terminal epslatex size 15cm,9cm font ',10' color
 #input header '\small'
 
 
