@@ -9,15 +9,15 @@ set grid
 set format y '%g'
 
 
-A2 =system("head -1 fit-param.tsv | awk '{print $1}'")+0
-p  =system("head -1 fit-param.tsv | awk '{print $2}'")+0
-R1 =system("head -1 fit-param.tsv | awk '{print $3}'")+0
-R2 =system("head -1 fit-param.tsv | awk '{print $4}'")+0
+A2 =system("head -1 fit-param_1_0ms_xwpp.tsv | awk '{print $1}'")+0
+p  =system("head -1 fit-param_1_0ms_xwpp.tsv | awk '{print $2}'")+0
+R1 =system("head -1 fit-param_1_0ms_xwpp.tsv | awk '{print $3}'")+0
+R2 =system("head -1 fit-param_1_0ms_xwpp.tsv | awk '{print $4}'")+0
 
-A1 =system("head -1 fit-param.tsv | awk '{print $5}'")+0
-R  =system("head -1 fit-param.tsv | awk '{print $6}'")+0
+A1 =system("head -1 fit-param_1_0ms_xwpp.tsv | awk '{print $5}'")+0
+R  =system("head -1 fit-param_1_0ms_xwpp.tsv | awk '{print $6}'")+0
 
-bkg=system("head -1 fit-param.tsv | awk '{print $7}'")+0
+bkg=system("head -1 fit-param_1_0ms_xwpp.tsv | awk '{print $7}'")+0
 
 
 s='\footnotesize '
