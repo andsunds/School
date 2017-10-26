@@ -22,7 +22,7 @@ swedish, english %% Make sure to put the main language last!
 
 %% Change the margin in the documents
 \usepackage[
-             top    = 3.5cm,              %% top margin
+             top    = 3.0cm,              %% top margin
              bottom = 3.5cm,              %% bottom margin
              left   = 2.2cm, right  = 2.2cm %% left and right margins
 ]{geometry}
@@ -31,8 +31,9 @@ swedish, english %% Make sure to put the main language last!
 %% If you want to change the formatting of the section headers
 %\renewcommand{\thesection}{...}
 
-
-
+%\usepackage{abstract}
+%\usepackage[affil-it]{authblk}
+\usepackage{placeins}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -41,7 +42,11 @@ swedish, english %% Make sure to put the main language last!
 
 \title{A qualitative investigation of self-diffusion in liquid water
   and glycerol and wet paper using the NMR pulse echo method} 
-\author{Andréas Sundström \and Tan Qin Yuan}
+\author{Andréas Sundström$^*$%\footnote{\href{mailto:andsunds@student.chalmers.se}{andsunds@student.chalmers.se}}
+  \and 
+Tan Qin Yuan$^\dagger$%\footnote{\href{mailto:qiny@student.chalmers.se}{qiny@student.chalmers.se}}
+}
+
 \date{\today}
 
 %\newgeometry{top    = 3.5cm,              %% top margin
@@ -69,10 +74,16 @@ high spin-spin relaxation rate, limiting the range of measurable
 times. The dual water-layer theory is found to be able to explain
 all our observations on (water) wet paper.
 \end{abstract}
-%\tableofcontents
+
+%This is such a bodgy solution to the problem. But hey! It works.
+$^*${\footnotesize\href{mailto:andsunds@student.chalmers.se}{andsunds@student.chalmers.se}}
+\\ %\hspace{50pt}
+$^\dagger${\footnotesize\href{mailto:qiny@student.chalmers.se}{qiny@student.chalmers.se}}
+
 \rule{\linewidth}{0.5pt}
 \end{@twocolumnfalse}
 ]
+
 %\clearpage
 %\restoregeometry
 
@@ -311,7 +322,7 @@ time
 t_n'=n\tau.
 \end{equation}
 This means that \eqref{eq:echo-diffusion} can be written as
-\begin{equation}\label{eq:multi-pulse_simple}
+\begin{equation}\label{eq:multi-pulse_single}
 A(t')=A_0\exp(-\mathcal{R}t')
 \end{equation}
 since the amplitude is only relevant at the time of the echoes, and
@@ -337,7 +348,7 @@ p\ee^{{-}K_1\!\frac{t^3}{n^2}} + (1{-}p)\ee^{{-}K_2\frac{t^3}{n^2}}
 \!],
 \end{aligned}
 \end{equation}
-with a similar modification to \eqref{eq:multi-pulse_simple}
+with a similar modification to \eqref{eq:multi-pulse_single}
 \begin{equation}\label{eq:multi-pulse_dual}
 A(t')=A_0\qty[p\ee^{-\mathcal{R}_1t'}+
 (1{-}p)\ee^{-\mathcal{R}_2t'}],
@@ -352,7 +363,7 @@ slow diffusion mode.
 
 \section{Method} \label{sec:met}
 The main idea is to measure $A(t')$ for different values of $\tau$,
-and then try to fit \eqref{eq:multi-pulse_simple} to the measured
+and then try to fit \eqref{eq:multi-pulse_single} to the measured
 peaks of the pule echoes. From there we fit $R_2$ and $K$ to the
 different observed decay rates $\mathcal{R}$ as a function of the
 pulse interval, $\tau$, with \eqref{eq:multi-pulse-rate}. For the
@@ -366,11 +377,11 @@ $B_0$, radio frequency (RF) coils for generating $B_1$ and a pick-up
 coil. The $B_1$ pulses were created with an accompanying pulse
 programmer, RF oscillator and mixer, and RF receiver. The RF amplitude
 envelope was then recorded on a digital oscilloscope, with which the
-wave-forms could be saved for later analysis. 
+waveforms could be saved for later analysis. 
 For doing the pulse echo measurements, three parameters need to be
 calibrated -- the radio frequency, the length of the $\pi/2$ and $\pi$
 pulses. These three parameters were re-calibrated before each
-measurement to assure accurateness. The pulse programer was such that
+measurement to assure accurateness. The pulse programmer was such that
 the $\pi$ pulses came as described in
 \eqref{eq:pulse-times}. Furthermore the
 Meiboom-Gill\cite{Meiboom-Gill1958} method for correcting slight
@@ -381,7 +392,7 @@ Section~\ref{sec:pulse-echo}.
 When the pulse echo measurements had been taken and saved, a script
 was written to semi-automatically detect all the peaks
 of the pulse echoes. Then the peaks were all fitted to either
-\eqref{eq:multi-pulse_simple} or \eqref{eq:multi-pulse_dual}.
+\eqref{eq:multi-pulse_single} or \eqref{eq:multi-pulse_dual}.
 Lastly the decay rates $\mathcal{R}$ (or $\mathcal{R}_{1, 2}$) was
 plotted against $\tau^2$ to try and find a linear fit,
 \eqref{eq:multi-pulse-rate}.\footnotemark{} 
@@ -476,8 +487,9 @@ around $\mathcal{R}\approx\unit[45]{s^{-1}}$.
   mode diffusion model (open markers) or dual mode diffusion (solid
   markers) for different samples. [Lower values means better fits.]
   The horizontal axis is the pulse interval, $\tau$, but has no
-  significance to the $r^2$ values. Especially note the clear
-  separation for liquid water and for extra wet printer paper.
+  significance to the $r^2$ values. Examples of the goodness of the
+  differnt fits are shown in \figref{fig:fitted-peaks} in
+  Appendix~\ref{apx:data-analysis}. 
 } 
 \label{fig:good-fit}
 \end{figure*}
@@ -486,7 +498,7 @@ To examine whether the dual diffusion mode theory better corresponds
 to the measurements, \figref{fig:good-fit} presents the
 degree-of-freedom adjusted confidence of determination (colloquially
 known as ``R-squared'') for fits to the data either by
-\eqref{eq:multi-pulse_simple} or \eqref{eq:multi-pulse_dual}. The
+\eqref{eq:multi-pulse_single} or \eqref{eq:multi-pulse_dual}. The
 figure shows one minus the R-squared values for liquid water, extra
 wet printer paper, and wet tissue paper. Corresponding values for other
 samples are omitted form the figure, partly to not make it too
@@ -494,10 +506,12 @@ crowded, and partly because they did not show any separation between
 the two theories. There is a clear separation between the two theories for
 both liquid water and extra wet printer paper -- the wet tissue paper
 also shows some separation but it is less
-pronounced. Do note however that the separation is in opposite
+pronounced. Do note however that the separations are in opposite
 directions; the single mode theory fits better to the liquid water
 than dual mode diffusion, while the opposite is true for extra wet
-paper -- and to some extent wet tissue paper. 
+paper -- and to some extent wet tissue paper. Examples of the
+fits of the two decay modes are shown in \figref{fig:fitted-peaks} in
+Appendix~\ref{apx:data-analysis}. 
 
 
 \begin{figure*}
@@ -608,24 +622,24 @@ diffusion. This is not what we see. \figref{fig:dual-diff} shows two
 quite clearly separated modes of signal decay, running almost parallel
 along the whole range of $\tau^2$.
 
-However \figref{fig:good-fit} do seems to suggest that a dual
-decay rate model fits better with the data than a single decay rate
-model. This could be due to the increased number of fit parameters
+However \figref{fig:good-fit}, together with the example in
+\figref{fig:fitted-peaks} in Appendix~\ref{apx:data-analysis},
+strongly suggest that the deay of extra wet printer paper and tissue
+paper follows a dual decay rate model rather than single decay rate.
+This could be due to the increased number of fit parameters
 which makes it easier to fit a function to data. The values presented
 in \figref{fig:good-fit} are however the so called
 ``degree-of-freedom adjusted'' R-squared values as calculated by
-Matlab's \texttt{fit} function\footnotemark{}. We do not know the
+Matlab's \texttt{fit} function, see \cite{Matlab-fit}. We do not know the
 full details, but it is reasonable to believe that this means that the
 better fits of the dual decay rate model actually stems from better
 agreement with reality rather than just it having more fit
-parameters. 
-\footnotetext{See 
-  \url{https://se.mathworks.com/help/curvefit/fit.html?requestedDomain=www.mathworks.com}. 
-This is also where the 95\,\% confidence intervals in the other
-presented results come from.}
+parameters. Also the example in \figref{fig:fitted-peaks} clearly
+shows that a single decay rate does not represent the data very well
+at all.
 
-It is also conceivable that we should expect two different spin-spin
-decay rates, $R_2$, in wet paper -- as observed in
+It is furthermore conceivable that we should expect two different
+spin-spin decay rates, $R_2$, in wet paper -- as observed in
 \figref{fig:dual-diff}. Perkins~\&~Batchelor~\cite{Perkins-Batchelor2012}
 speculates that their observed dual modes of diffusion can be due to
 the water splitting up in two layers, one inner layer close to the
@@ -713,42 +727,108 @@ mode in extra wet paper.
 \appendix  %% This will change the page numbering to A1, A2, A3, ...;
            %% and also change the sections to A, A.1, ...; B, B.1, ...
 
-\section{Detailed data analysis}\label{apx:data-analysis}
+\section{Detailed data analysis 
+with examples of the observed raw-data}
+\label{apx:data-analysis}
 
 \begin{figure*}
 \centering
 \input{figures/example-waveform/waveform.tex}
-\caption{Represeantative waveform of pulse echo peaks, with the
+\caption{Representative waveform of pulse echo peaks, with the
   semi-automatically detected peaks marked, and single exponential
   decay mode fits for liquid water at two different pulse intervals,
-  $\tau$. The noise background level, has not been canceld in this
-  plot. } 
+  $\tau$. The noise background level has not been canceled in this
+  plot, instead for this plot the fitted curves have been offsetted
+  with said noise background. } 
 \label{fig:waveform}
 \end{figure*}
 
 \begin{figure*}
 \centering
 \input{figures/example-waveform/peaks.tex}
-\caption{Detected pulse echo peaks together with singel and dual mode
-  decay fits. Here the noise background level have been subtracted
-  from the heights of the peaks. If the decay had been single moded,
-  then we would have expected that the peaks fall on a line here in
-  the log-plot, as shown by the single mode decay fit.  }
-\label{fig:peaks-exwpp}
+\caption{Detected pulse echo peaks from extra wet paper and liquid
+  water together with single mode decay fits, and a dual mode decay
+  fit for the extra wet paper. The liquid water peaks belong to the
+  $\tau=\unit[28]{ms}$ measurement sown in \figref{fig:waveform}.
+  The noise background level have been subtracted from the heights of
+  the peaks. For a true single mode decay the peaks would thus all
+  fall on a straight line in this log-plot, as shown by the liquid
+  water peaks. } 
+\label{fig:fitted-peaks}
 \end{figure*}
 
+As mentioned in the main report, the overall modus operandi is to
+record the pulse echoes from the NMR apparatus on an oscilloscope, and
+then from the saved waveform measure the decay rate of the pulse
+echoes. This appendix aims to describe this process in a little more
+detail. 
 
-\todo[inline]{
-Semi-automatic peak detection means that the peaks were picked out by the
-program, and then controlled visually by us to ensure that no false
-peaks had been detected.}
-\todo[inline]{
-Background noise level was accounted for by subtracting the
-\emph{median} of the oscilloscope wave-forms \emph{after} the last
-detected peak. }
-\todo[inline]{Figure of wave-form, peak and fit.}
-\todo[inline]{Degree-of-freedom adjusted $r^2$?}
-\todo[inline]{Lin fits were made with weights of inverse conf int.}
+\figref{fig:waveform} shows two typical waveforms directly as they
+were recorded from the oscilloscope. There were in general two
+types of peaks in the waveform, the actual pulse echoes and then
+sometimes the $\pi$ pulse generated unwanted glitches. These glitches
+can be seen in the middle between two pulse echo peaks, e.g. in
+\figref{fig:waveform} in the $\tau=\unit[28]{ms}$ waveform between
+$t=\unit[500]{ms}$ and $t=\unit[800]{ms}$. A special script for
+semi-automatic peak detection was therefore written and implemented. 
+The ``semi-automatic'' part only means that the peaks were picked out
+by the program, and then controlled visually by us to ensure that no
+false peaks, like the $\pi$ pulse glitches, had been detected. 
+
+The next thing to notice in \figref{fig:waveform} is that the
+waveforms are all offsetted vertically by a small amount, which will
+be called the noise background level (NBL). This NBL was estimated by
+the \emph{median} of the oscilloscope signal after the last detected
+peak. As a concrete example, the NBL for the $\tau=\unit[28]{ms}$
+waveform in \figref{fig:waveform} is taken as the median of the
+waveform after the peak at just below $t=\unit[800]{ms}$. 
+The median was used for calculating the NBL since it is less sensitive
+to rouge outliers in the data -- some of the recorded wave forms had
+clear $\pi$ pulse glitches showing long after the last detected pulse
+echo peak. Note that the NBL was individually calculated for each
+waveform, althogh all our waveforms had an NBL of around 0.05\,V. 
+
+Then the detected peaks, with the noise background level subtracted
+from their heights, were fitted to either the single mode decay
+\eqref{eq:multi-pulse_single} or the dual mode decay
+\eqref{eq:multi-pulse_dual}, using Matlab's built-in \texttt{fit}
+function~\cite{Matlab-fit}. This function also provided 95\,\%
+confidence intervals for each fit parameter as well as
+degree-of-freedom (DoF) adjusted coefficients of determination (R-squared
+values). Supposedly this DoF adjustment is to
+compensate for the number of fit parameters used. We do not know the
+full details in either the confidence interval calculation or the DoF
+adjustment, but we are confident in this built-in Matlab function. 
+
+
+
+\subsection{Examples of single and dual mode decay}
+The main report presents already calculated decay rates for a number
+of different scenarios. It would be too much to show all the waveforms
+and fits made for this work\footnotemark{}, but \figref{fig:waveform}
+and~\ref{fig:fitted-peaks} present some representative examples. 
+\footnotetext{Of course any raw-data, together with any related data
+  anlysis, can be presented if requested. }
+
+\figref{fig:waveform} shows two waveforms from the liquid water
+diffusion measurement. The pulse echoe peaks and accompanying fits are
+also shown. Notice that the $\tau=\unit[50]{ms}$ pule echoes are
+decaying much faster than the $\tau=\unit[28]{ms}$ echoes. This is the
+essence of the linear relationships, \eqref{eq:multi-pulse-rate},
+shown in \figref{fig:water-pos}. 
+
+Next \figref{fig:fitted-peaks} shows the difference between a single
+mode and a dual mode decaying signal. In a log-plot, such as
+\figref{fig:fitted-peaks}, the peaks from a single mode decay will lie
+on a straight line, as is the case with the peaks from the liquid
+water. We also clearly see that the peaks from extra wet paper
+do not lie on a straigt line. They do however seem to follow a dual
+mode decay well. This is the message conveyed by
+\figref{fig:good-fit}, only that \figref{fig:good-fit} shows this same
+message for every measured value. The extra wet paper peaks in
+\figref{fig:fitted-peaks} are only an example, but it is a
+representative example for all the measurements for both ``extra wet
+printer paper'' and ``wet tissue paper''.
 
 
 
@@ -758,5 +838,5 @@ detected peak. }
 
 
 
-%  LocalWords:  Larmor coherentness diffusivity multi Batchelor
-%  LocalWords:  Matlab's
+%  LocalWords:  Larmor coherentness diffusivity multi Batchelor DoF
+%  LocalWords:  Matlab's Meiboom Matlab

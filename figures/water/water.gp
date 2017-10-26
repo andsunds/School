@@ -17,7 +17,7 @@ s='\footnotesize '
 
 set grid
 
-set key width -3.6
+set key width -3.5
 set output "water.tex"
 plot [0:2500] [0:10] "d-water.tsv" using 1:(1e3*$2):(1e3*($2-$3)):(1e3*($2+$4)) with yerrorbars lt 1 pt 3 ps 1.2 lc 7 title s.'On mark',\
                        "tap-water.tsv" using 1:(1e3*$2):(1e3*($2-$3)):(1e3*($2+$4)) with yerrorbars lt 1 pt 9 ps 1.2 lc 6 title s.'Off mark',\

@@ -169,8 +169,12 @@
  %% The fancy appendix
  \renewcommand{\appendix}{
    \oldappendix %Resets the section counter and changes it to Alph
-   \setcounter{page}{1} %Resets the pagenumbering
-   \renewcommand*{\thepage}{A\arabic{page}}%Changes the pagenubering to 'A...'
+   \setcounter{page}{1} %Resets the page numbering
+   %Changes the page nubering to 'A...'
+   \renewcommand*{\thepage}{A\arabic{page}}
+   \setcounter{figure}{0} %Resets the figure numbering
+   %% Changes thefigure nubering to '\figurename~A...'
+   \renewcommand{\thefigure}{A\arabic{figure}}
    %%
    %% Adds appendicies to the ToC:
    \makeatletter%This is needed because this code runs in the document
@@ -191,7 +195,11 @@
  \renewcommand{\appendix}{
    \oldappendix %Resets the section counter and changes it to Alph
    \setcounter{page}{1} %Resets the pagenumbering
-   \renewcommand*{\thepage}{A\arabic{page}}%Changes the pagenubering to 'A...'
+   %% Changes the pagenubering to 'A...'
+   \renewcommand*{\thepage}{A\arabic{page}}
+   \setcounter{figure}{0} %Resets the figure numbering
+   %% Changes thefigure nubering to '\figurename~A...'
+   \renewcommand{\thefigure}{A\arabic{figure}}x
 }
 \fi
 
