@@ -18,7 +18,7 @@ set grid
 
 set key width -3.6
 set output "diff.tex"
-plot [0:90] [0:60] "wet-pp-ex.tsv" using 1:(1e3*$2):(1e3*($2-$4)):(1e3*($2+$5)) with yerrorbars lt 1 pt 4 ps 1.2 lc 7 title s.'Ex. wet printer paper',\
+plot [0:50] [0:60] "wet-pp-ex.tsv" using 1:(1e3*$2):(1e3*($2-$4)):(1e3*($2+$5)) with yerrorbars lt 1 pt 4 ps 1.2 lc 7 title s.'Ex. wet printer paper',\
                    "wet-pp-ex.tsv" using 1:(1e3*$3):(1e3*($3-$6)):(1e3*($3+$7)) with yerrorbars lt 1 pt 5 ps 1.2 lc 7 title '',\
                    "wet-tp.tsv" using 1:(1e3*$2) lt 1 pt 6 ps 1.2 lc 6 title s.'Wet tissue paper',\
                    "wet-tp.tsv" using 1:(1e3*$3) lt 1 pt 7 ps 1.2 lc 6 title '',\

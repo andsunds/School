@@ -19,10 +19,10 @@ set grid
 
 set key width -3.6
 set output "water.tex"
-plot [0:2500] [0:10] "d-water.tsv" using 1:(1e3*$2):(1e3*($2-$3)):(1e3*($2+$4)) with yerrorbars lt 1 pt 3 ps 1.2 lc rgb 'blue' title s.'On mark',\
-                       "tap-water.tsv" using 1:(1e3*$2):(1e3*($2-$3)):(1e3*($2+$4)) with yerrorbars lt 1 pt 9 ps 1.2 lc rgb 'red' title s.'Off mark',\
-                       1e3*(x*d_p1+d_p2) lt 0 lw 4 lc rgb 'blue' title '',\
-                       1e3*(x*t_p1+t_p2) lt 0 lw 4 lc rgb 'red' title ''
+plot [0:2500] [0:10] "d-water.tsv" using 1:(1e3*$2):(1e3*($2-$3)):(1e3*($2+$4)) with yerrorbars lt 1 pt 3 ps 1.2 lc 7 title s.'On mark',\
+                       "tap-water.tsv" using 1:(1e3*$2):(1e3*($2-$3)):(1e3*($2+$4)) with yerrorbars lt 1 pt 9 ps 1.2 lc 6 title s.'Off mark',\
+                       1e3*(x*d_p1+d_p2) lt 0 lw 4 lc 7 title '',\
+                       1e3*(x*t_p1+t_p2) lt 0 lw 4 lc 6 title ''
 
 
 
