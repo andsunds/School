@@ -185,7 +185,7 @@ voltage which can be measured, and it is this measured voltage (or
 rather its envelope) which is of interest in pulsed NMR
 measurements. The signal will generally decay exponentially as
 $\vb*M$ returns back to its equilibrium, the so called 
-\emph{free induction decay}. The total exponential decay rate, by
+\emph{free induction decay}. The total exponential decay-rate, by
 convention called $R_2^*$ (sometimes also given as $T_2^*=1/R_2^*$),
 can be said to generally consist of three terms 
 \begin{equation}
@@ -199,20 +199,20 @@ decay. Unfortunately this last term often dominates. This means that
 other methods must be used to measure $R_1$ and $R_2$ which are the
 sample specific parameters. 
 
-The first of the two intrinsic decay rates, $R_1$, the so called
+The first of the two intrinsic decay-rates, $R_1$, the so called
 \emph{longitudinal} or the \emph{spin-lattice} relaxation rate, is
 related to the rate of energy loss of the spin. Since the
 magnetization has been rotated the energy of the system has therefore
 increased. The energy of the macroscopic magnetization is proportional
 to $M_z$, similar to \eqref{eq:mag-energy}. The spin-lattice
 relaxation rate is therefore related to the relaxation of $M_z$. We
-will however not study or use this decay rate any further in this
+will however not study or use this decay-rate any further in this
 report. 
 
 %\subsubsection{The pulse echo method}
 Instead we will focus on the second type of signal decay, $R_2$,
 called the \emph{transverse} or the \emph{spin-spin} relaxation
-rate. This decay rate is related to the coherentness of the individual
+rate. This decay-rate is related to the coherentness of the individual
 spins. As said before to measure any signal $M_\perp$ has to be
 non-zero, which in turn requires the individual spins to be coherent
 with each other. Consider an ideal ($\gamma\Delta B_0=0$) system
@@ -246,8 +246,8 @@ of $\pi$ pulses.
 To understand the effect of of the subsequent $\pi$ pulses assume that
 $R_2=0$, i.e. that the only source of de-coherence is due to
 variations in the precession frequency. The initial signal from the
-$\pi/2$ pulse (at time $t=0$) will decay as usual then the $\pi$ pulse
-(at $t=\tau/2$) effectively flips all spins, including the
+$\pi/2$ pulse, at time $t=0$, will decay as usual then a $\pi$ pulse
+at $t=\tau/2$ effectively flips all spins, including the
 perpendicular components, $\vb*I_\perp\to-\vb*I_\perp$, of each
 spin. The spins which had precessed faster due to having a slightly
 higher precession frequency and was \emph{ahead} will now end up
@@ -265,25 +265,30 @@ A(t)=A_0\exp[-R_2t].
 
 This is almost the whole picture. If the molecules in the sample can
 diffuse to different regions with varying magnetic field,
-Hahn~\cite{Hahn1950} showed that the signal will decay even faster
-according to
+Hahn~\cite{Hahn1950} showed that the signal will decay even faster if
+diffusion is allowed. Afterwards
+Carr~\&~Purcell~\cite{Carr-Purcell1954} further showed that the decay
+is slowed when more pulses are used,
 \begin{equation}\label{eq:echo-diffusion}
 A(t)=A_0\exp(-R_2t)
 \exp(-K\frac{t^3}{n^2}),
 \end{equation}
-where $n$ is the number of $\pi$ pulses before time $t$, and $K$ is a
-constant related to the diffusivity. Carr~\&~Purcell~\cite{Carr-Purcell1954} found the correct expression for
+where $n$ is the number of $\pi$ pulses before time $t$, and 
 \begin{equation}\label{eq:K_simple}
-K=\frac{\gamma^2D}{12}\qty(\pdv{B_0}{z})^2,
+K=\frac{\gamma^2D}{12}\qty(\pdv{B_0}{z})^2
 \end{equation}
-where $D$ is the self-diffusivity of the sample, i.e. how fast a
-molecule of the sample diffuses through it. Now if the $\pi$ pulses
-come at times
+is a constant related to the diffusivity. Here $D$ is the
+self-diffusivity of the sample, i.e. how fast a molecule of the sample
+diffuses through it. There is also a strong dependence on the magnetic
+field gradient $\pdv*{B_0}{z}$, which is linked to how fast the
+precession frequency changes when a molecule diffuses.
+
+Now if the $\pi$ pulses come at times
 \begin{equation}
-t_{n}=\qty(n-\tfrac{1}{2})\tau,
+t_{n}=\qty(n-\tfrac{1}{2})\tau
 \end{equation}
-%(the first $\pi/2$ pulse being at $t=0$), 
-then the echoes will occur at time 
+for some set pulse interval time $\tau$, then the echoes will occur at
+time  
 \begin{equation}
 t_n'=n\tau.
 \end{equation}
@@ -296,7 +301,7 @@ where
 \begin{equation}\label{eq:multi-pulse-rate}
 \mathcal{R}=R_2+K\tau^2.
 \end{equation}
-By measuring the decay rate of the multi-pulse echoes, $\mathcal{R}$,
+By measuring the decay-rate of the multi-pulse echoes, $\mathcal{R}$,
 as a function of pulse interval, $\tau$, both the spin-spin relaxation
 rate, $R_2$, and the self-diffusivity (indirectly), $D$, can be measured.
 
@@ -331,7 +336,7 @@ slow diffusion mode.
 The main idea is to measure $A(t')$ for different values of $\tau$,
 and then try to fit \eqref{eq:multi-pulse_simple} to the measured
 peaks of the pule echoes. From there we fit $R_2$ and $K$ to the
-different observed decay rates $\mathcal{R}$ as a function of the
+different observed decay-rates $\mathcal{R}$ as a function of the
 pulse interval, $\tau$, with \eqref{eq:multi-pulse-rate}. For the
 measurements on wet paper we instead expect to find that
 \eqref{eq:multi-pulse_dual} would give better results.
@@ -354,7 +359,7 @@ When the pulse echo measurements had been taken and saved, a script
 was written to semi-automatically detect all the peaks
 of the pulse echoes. Then the peaks were all fitted to either
 \eqref{eq:multi-pulse_simple} or \eqref{eq:multi-pulse_dual}.
-Lastly the decay rates $\mathcal{R}$ (or $\mathcal{R}_{1, 2}$) was
+Lastly the decay-rates $\mathcal{R}$ (or $\mathcal{R}_{1, 2}$) was
 plotted against $\tau^2$ to try and find a linear fit,
 \eqref{eq:multi-pulse-rate}.\footnotemark{} 
 This was primarily done for liquid water, as diffusion was fastest
@@ -398,7 +403,7 @@ sense of the sample positioning sensitivity of the experiment.
 \begin{figure}
 \centering
 \input{figures/water/water.tex}
-\caption{Amplitude decay rate $\mathcal{R}$ as a function of pulse
+\caption{Amplitude decay-rate $\mathcal{R}$ as a function of pulse
   interval squared $\tau^2$ for two different positions of a water
   sample, also linear fits to the two measurement series are
   shown. Each data point is given with 95\,\% confidence
@@ -421,7 +426,7 @@ $K=\unit[6.75\times10^{-3}]{s^{-1}/ms^2}$ for the ``off mark''.
 \begin{figure}
 \centering
 \input{figures/glycerol/glyc.tex}
-\caption{Amplitude decay rate $\mathcal{R}$ as a function of pulse
+\caption{Amplitude decay-rate $\mathcal{R}$ as a function of pulse
   interval squared $\tau^2$ for liquid glycerol, and printer paper
   wetted with glycerol, also a linear fit for the liquid glycerol
   measurement series. The error-bars signifies 95\,\% confidence
@@ -477,7 +482,7 @@ paper -- and to some extent wet tissue paper.
 \begin{figure*}
 \centering
 \input{figures/dual-diff/diff.tex}
-\caption{Amplitude decay rate $\mathcal{R}$ as a function of pulse
+\caption{Amplitude decay-rate $\mathcal{R}$ as a function of pulse
   interval squared $\tau^2$ for the fast (solid markers) and slow
   (open markers) diffusion mode of water in extra wet printer paper or
   tissue paper. The data points for extra wet printer paper is given
@@ -489,10 +494,10 @@ paper -- and to some extent wet tissue paper.
 The dual mode theory, \eqref{eq:multi-pulse_dual}, was fitted to the
 measured pulse echo amplitudes for extra wet printer paper and tissue
 paper. These samples were chosen 
-The two decay rates for the two samples are presented in
+The two decay-rates for the two samples are presented in
 \figref{fig:dual-diff}. There is a somewhat clear resemblance between
 the two samples, at least for $\tau^2<40$ where there is data on both
-samples. Also note the much higher decay rates compared to pure liquid
+samples. Also note the much higher decay-rates compared to pure liquid
 water, even the slow modes. The values of $p$ (corresponding to the
 fraction of water in the slow mode) were all quite sable except for a
 few outliers for each sample. However, the two samples had
@@ -503,24 +508,62 @@ $p=0.7\pm0.1$.
 
 \section{Discussion}
 
+We can primarily draw two conclusions from \figref{fig:water-pos}. The
+first one is that the static magnetic field, $B_0$, is too non-uniform
+in our apparatus to be able to do any quantitative diffusivity
+calculations. This is due to the large difference in slopes from just
+a small change, of around 1\,mm, in sample position. The parameter
+$K$, from which the diffusivity would be derived, changed by 60\,\%
+for the ``off mark'' sample compared to the ``on mark''. Furthermore,
+the rest of the measurements are supposed to on the mark, however that
+was hard to gauge when inserting the samples into the NMR devise. We
+estimate that the position uncertainty probably lies in the range of
+at least $\pm\unit[0.5]{mm}$, which promptly makes any quantitative
+diffusivity measurements unusably uncertain.
 
-\todo[inline]{Compare $T_2$ values to that of literature.}
+The second main conclusion from \figref{fig:water-pos} is that our
+data suggests that the diffusion effect, \eqref{eq:echo-diffusion} by
+Carr~\&~Purcell~\cite{Carr-Purcell1954}, is valid. By the same
+argument as in the previous paragraph, we can however not draw any
+conclusions regarding the validity of the quantitative expression in
+\eqref{eq:K_simple}. The conclusion we can draw is that the
+qualitative relation \eqref{eq:multi-pulse-rate} between the pulse
+interval, $\tau$, and the observed pulse echo amplitude decay-rate,
+$\mathcal{R}$. This relationship was directly derived from
+\eqref{eq:echo-diffusion}, which therefore also suggests the
+qualitative validity of ditto. That is, our measurements suggests that
+there is a second exponential decay, and that the second exponential
+decay has a $t^3/n^2$ time and pulse number dependence. 
 
-As mentioned in section~\ref{sec:met}, special care was taken so that
-the each measurement would be as equivalent to each other as
-possible. However since the devise is meant for student lab use $B_0$
-(and also $\pdv*{B_0}{z}$) was strongly non-uniform, as we saw when we
-tested to move the sample by just 1\,mm. This means that any
-qualitative results regarding the diffusivity would be highly
-unreliable. 
-\todo[inline]{We therefore only consider the quantitative results.}
+Although any conclusions regarding diffusivity are only
+qualitative, we can however obtain one quantitative result from
+\figref{fig:water-pos}. That is the intrinsic spin-spin relaxation
+rate $R_2$. The two measurement series both converge at around
+$R_2\approx\unit[0.7]{s^{-1}}$ ($T_2=1/R_2\approx\unit[1.4]{s}$) when
+$\tau\to0$. This is further testimony 
+of the validity of \eqref{eq:multi-pulse-rate} and
+\eqref{eq:echo-diffusion}. Other studies have gotten results of
+$R_2=\unit[0.39]{s^{-1}}$~\cite{Sabadini-etal2008}
+($T_2=\unit[2.56]{s^{-1}}$), which is almost half of what we
+found. However different impurities can strongly affect the values of
+$R_2$, as shown by both~\cite{Sabadini-etal2008}
+and~\cite{Nelson-etal2002}. For instance,~\cite{Sabadini-etal2008}
+showed that $R_2$ gets as high as $\unit[1.70]{s^{-1}}$ with only
+1\,\% glucose in the solution. We used distilled water and tried to
+rinse out all the test tubes before use to try and mitigate any
+impurities, but it seems likely that we did have some impurities in
+the end which could explain our rather high value of $R_2$ for pure
+water. 
+
+
+
 
 
 \todo[inline]{We also tried dry paper, but did not see anything.}
 
 Note the much narrower range of $\tau^2$ in both \figref{fig:glyc} and
 \figref{fig:dual-diff}, compared to in \figref{fig:water-pos}. This is
-due to the much higher decay rates, $\mathcal{R}$, measured which
+due to the much higher decay-rates, $\mathcal{R}$, measured which
 effectively eliminated any detectable pulse echoes at longer pulse
 interval times. 
 
@@ -535,7 +578,7 @@ interval times.
 
 \section{Conclusions}
 
-In conclusion, we only considered quantitative results due to the due to unreliability of results of diffusitivity. Experiments were done for  No results were seen in dry paper due to its molecular structure. 
+In conclusion, we only considered quantitative results due to the due to unreliability of results of diffusivity. Experiments were done for  No results were seen in dry paper due to its molecular structure. 
 
 %\section{References}
 %http://hyperphysics.phy-astr.gsu.edu/hbase/Nuclear/nmr.html
