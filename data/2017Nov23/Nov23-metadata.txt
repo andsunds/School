@@ -1,0 +1,4 @@
+Date and time		Observer 	Glon [ d : ' : " ]		Glat [ d : ' : " ] 	Bandw [MHz]	Center freq [MHz] 	integration time [s] 	Telescope
+
+2017-11-23 06:37	andsunds	75:12:44.8 (9 deg above hor)	-0:14:25.1		2.5		1420.400		50			Brage
+2017-11-23 06:35	andsunds	84:50:27.4 (14deg above hor)	-0:06:01.0		2.5		1420.400		50			Brage
