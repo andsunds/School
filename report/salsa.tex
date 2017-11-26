@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper, 
+\documentclass[11pt,a4paper, twocolumn,
 swedish, english %% Make sure to put the main language last!
 ]{article}
 \pdfoutput=1
@@ -12,7 +12,7 @@ swedish, english %% Make sure to put the main language last!
 }
 
 %% If you want to change the margins for just the captions
-\usepackage[margin=10 pt]{caption}
+\usepackage[size=small]{caption}
 
 %% To add todo-notes in the pdf
 \usepackage[%disable  %%this will hide all notes
@@ -22,7 +22,7 @@ swedish, english %% Make sure to put the main language last!
 \usepackage[
 %            top    = 3cm,              %% top margin
 %            bottom = 3cm,              %% bottom margin
-%            left   = 3cm, right  = 3cm %% left and right margins
+             left   = 1.2cm, right  = 1.2cm %% left and right margins
 ]{geometry}
 
 
@@ -37,28 +37,73 @@ swedish, english %% Make sure to put the main language last!
 
 
 %%%%%%%%%%%%%%%%%%%% vvv Internal title page vvv %%%%%%%%%%%%%%%%%%%%%
-\title{SALSA Project report}
+\title{SALSA project report}
 \author{Andréas Sundström}
 \date{\today}
 
+
+\twocolumn[
+\begin{@twocolumnfalse}
 \maketitle
-
-\begin{abstract} 
-
+\begin{abstract}
 
 \end{abstract}
+\end{@twocolumnfalse}
+]
+
+
 %%%%%%%%%%%%%%%%%%%% ^^^ Internal title page ^^^ %%%%%%%%%%%%%%%%%%%%%
 %% If you want a list of all todos
 %\todolist
 
 \section{Introduction}
-
+The interstellar medium (ISM) contains clouds, among others, atomic
+hydrogen HI, which trough quantum mechanical hyperfine structure
+electronic transitions emitts electromagnetic radiation with a
+frequency of about 1420\,MHz or 21\,cm. This frequency then gets
+Doppler shifted depending on the relative radial velocity between us
+and the cloud. Therefore by observing the frequency spectrum of the
+incoming radiation in the 21\,cm band, it is possible to determine the
+the presense and relative radial velocity of clouds in the line of
+sight. 
 
 
 \section{Method}
 
-
+\clearpage %temporary
 \section{Results and Discussion}
+\begin{figure}\centering
+\includegraphics[width=1\linewidth]{rotation_curve.eps}
+\caption{Velocity curve for HI clouds in the Milky Way, as observed
+  between $20^\circ{-}85^\circ$ Galactic longitude with $5^\circ$
+  increments. These velocites are calculated using the circular orbit
+  assumption, as well as assuming that the cloud with the highest
+  radial velocity is moving tangent to the line of sight. }
+\label{fig:rot}
+\end{figure}
+
+\begin{figure}\centering
+\includegraphics[width=1\linewidth]{gas_clouds.eps}
+\caption{Position of HI clouds in the Milky Way. The positions are
+  calculated using the assumptions that all clouds have circular
+  orbits and that their orbital velocities are
+  $V_0=\unit[220]{km/s}$. For some of the coulds there are two
+  possible solutions to their position (red crosses). This ambiguity
+  problem have been resolved for one cloud on $l=50^\circ$ (red ring,
+  correct position filled in). }
+\label{fig:clouds}
+\end{figure}
+
+\begin{figure}\centering
+\includegraphics[width=1\linewidth]{ambiguity.eps}
+\caption{Velocity spectra to resolve the ambiguity problem for
+  $l=50^\circ$. By observing that that the peak near $V=0$ remains for
+  different Galactic latitudes, $b$, we can conclude that this gas
+  cloud has to be much closer to us than the two others which can be
+  seen at $b=0^\circ$. }
+\label{fig:ambiguity}
+\end{figure}
+
 
 
 \section{Conclusions}
@@ -76,52 +121,13 @@ swedish, english %% Make sure to put the main language last!
 %%%%%%%%%%%%%%%%%%%%%%%%%% The bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%
 %\newpage
 %% This bibliography uses BibTeX
-\bibliographystyle{ieeetr}
-\bibliography{references}%requires a file named 'references.bib'
+%\bibliographystyle{ieeetr}
+%\bibliography{references}%requires a file named 'references.bib'
 %% Citations are as usual: \cite{example_article}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% Appendices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage %% on a new page 
-\appendix  %% This will change the page numbering to A1, A2, A3, ...;
-           %% and also change the sections to A, A.1, ...; B, B.1, ...
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-%%%%  Some (useful) templates
-
-
-%% På svenska ska citattecknet vara samma i både början och slut.
-%% Använd två apostrofer: ''.
-
-
-%% Including PDF-documents
-\includepdf[pages={1-}]{filnamn.pdf} % NO blank spaces in the file name
-
-%% Figures (pdf, png, jpg, ...)
-\begin{figure}\centering
-\centerline{ % centers figures larges than 1\textwidth
-\includegraphics[width=.8\textwidth]{file_name.pdf}
-}
-\caption{}
-\label{fig:}
-\end{figure}
-
-%% Figures from xfig's "Combined PDF/LaTeX"
-\begin{figure}\centering
-\resizebox{.8\textwidth}{!}{\input{file_name.pdf_t}}
-\caption{}
-\label{fig:}
-\end{figure}
-
-
-%% If you want to add something to the ToC
-%% (Without having an actual header in the text.)
-\stepcounter{section} %For example a 'section'
-\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
 
