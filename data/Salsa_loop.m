@@ -209,7 +209,7 @@ plot(X,Y,'o')
 hold on
 %plotting the ambigous positions
 plot(X(i_bad),Y(i_bad),'rx')
-plot([X_fixed,X(i_fixed)],[Y_fixed,Y(i_fixed)],'o')
+plot([X_fixed],[Y_fixed],'r.','markersize',23)
 
 %Drawing our position
 plot(0,R0,'k.','markersize',20)
@@ -251,6 +251,8 @@ plot(x2,y2,'k:',x3,y3,'k:',x4,y4,'k:',x5,y5,'k:',x6,y6,'k:',...
 %cross hairs
 plot([-5,15],[0,0],'k:',[0,0],[-15,20],':k')
 
+% marking out the wrong position
+plot([X_fixed,X(i_fixed)],[Y_fixed,Y(i_fixed)],'ro')
 
 axis equal
 axis([-5,15, -15,20])
