@@ -214,9 +214,17 @@ plot([X_fixed,X(i_fixed)],[Y_fixed,Y(i_fixed)],'o')
 %Drawing our position
 plot(0,R0,'k.','markersize',20)
 
+%Drawing line of sight for l=50
+r=[0,20];
+L=l(i_fixed);
+x=r*sind(L);
+y=R0-r*cosd(L);
+plot(x,y,'--k')
+
+
 %Drawing circles
 t=linspace(-pi,pi);
-r1=8.5;
+r1=R0;
 x1=r1*cos(t);y1=r1*sin(t);
 r2=12;
 x2=r2*cos(t);y2=r2*sin(t);
@@ -228,14 +236,21 @@ r5=14;
 x5=r5*cos(t);y5=r5*sin(t);
 r6=16;
 x6=r6*cos(t);y6=r6*sin(t);
-plot(x1,y1,'-.k',x2,y2,'k:',x3,y3,'k:',x4,y4,'k:',x5,y5,'k:',x6,y6,'k:')
+r7=6;
+x7=r7*cos(t);y7=r7*sin(t);
+r8=18;
+x8=r8*cos(t);y8=r8*sin(t);
+r9=20;
+x9=r9*cos(t);y9=r9*sin(t);
+r10=4;
+x10=r10*cos(t);y10=r10*sin(t);
+plot(x1,y1,'-k')
+plot(x2,y2,'k:',x3,y3,'k:',x4,y4,'k:',x5,y5,'k:',x6,y6,'k:',...
+    x7,y7,'k:',x8,y8,'k:',x9,y9,'k:',x10,y10,'k:','linewidth',1.5)
 
-%Drawing line of sight for l=50
-r=[0,20];
-L=l(i_fixed);
-x=r*sind(L);
-y=R0-r*cosd(L);
-plot(x,y,'--k')
+%cross hairs
+plot([-5,15],[0,0],'k:',[0,0],[-15,20],':k')
+
 
 axis equal
 axis([-5,15, -15,20])
@@ -244,8 +259,72 @@ axis([-5,15, -15,20])
 xlabel('$X$ /[kpc]', 'interpreter','latex')
 ylabel('$Y$ /[kpc]', 'interpreter','latex')
 
+
 set(gca,'fontsize',14)
 
+leg=legend('Gas clouds', 'Ambiguous','Resolved',...
+    'Our position','$l=50^\circ$','$R_0=8.5$ kpc','$R=(4{:}2{:}20)$\,kpc');
+
+set(leg,'interpreter','latex','fontsize',10,'location','SouthWest')
+
+
+
+
+%%
+clc;clf;clear
+
+clc;clf;clear
+direc = './Ambiguity/';
+files = dir ([direc, '*.fits']);
+N=length(files);
+latspec=zeros(N,1);
+longspec=zeros(N,1);
+plot_cell=cell(N,1);
+
+
+for i = 1:N
+    fname = [ direc, files(i).name ];
+    spec{i}= SalsaSpectrum(fname);
+    latspec(i)= spec{i}.getKeyword ('CRVAL3');
+    longspec(i) = spec{i}.getKeyword ('CRVAL2');
+    l = longspec(i);
+    
+    if(l >0 && l <40)
+        spec{i}.fitBaseline([-240,-205 -140 -100 120 220] , 'vel' ,3);
+    elseif(l >=40 && l <90)
+        spec{i}.fitBaseline([-230,-200 -150 -110 100 220] , 'vel' ,3);
+    elseif (l >=90 && l <180)
+        spec{i}.fitBaseline([-230,-190 -130 -110 50 220] , 'vel' ,3);
+    elseif (l>=180)
+        spec{i}.fitBaseline([-230,-180 -120 -40 60 220] , 'vel' ,3);
+    end
+    spec{i}.subtractBaseline();
+    %spec{i}.plot()
+    plot_cell{i}=[spec{i}.vel;spec{i}.data].';
+    %hold on
+    %pause()
+end
+
+
+J=[1,2,3];
+l_cell=cell(length(J),1);
+type_cell={'-','--','-.',':'};
+
+for j=1:length(J)
+    plot(plot_cell{J(j)}(:,1), plot_cell{J(j)}(:,2), type_cell{j},'linewidth',1.5)
+    hold on
+    l_cell{j}=[sprintf('$b=%2.0f',latspec(J(j))),'^\circ$'];
+end
+
+L=legend(l_cell);
+set(L,'location','NorthWest','interpreter','latex')
+
+
+axis([-100,100,-5,60])
+xlabel('$V$ /[km/s]', 'interpreter','latex')
+ylabel('Signal intensity /[a.u.]', 'interpreter','latex')
+
+set(gca,'fontsize',14,'yscale','lin')
 
 
 
