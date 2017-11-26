@@ -146,10 +146,15 @@ for i = 1:N
     end
 end
 
+plot(R_min,V,'o'), hold on
+%plot([0,9],[210,210],':k')
+axis([0,9,0,250])
 
-plot(R_min,V,'o')
-axis([0,8.5,0,250])
+xlabel('$R$ /[kpc]', 'interpreter','latex')
+ylabel('$V$ /[km/s]', 'interpreter','latex')
 
+set(gca,'fontsize',14)
+grid on
 
 
 %% 
@@ -186,6 +191,15 @@ end
 i_very_bad=[find(imag(d)>0), find(d<0)];
 d(i_very_bad)=NaN;
 
+%Fixed ambiguity on l=50 deg
+i_fixed=33;
+l_fixed=l(i_fixed);
+R_fixed=R(i_fixed);
+d_fixed=R0*cosd(l_fixed)-sqrt(R_fixed.^2-R0.^2*sind(l_fixed).^2);
+X_fixed=d_fixed.*sind(l_fixed);
+Y_fixed=R0-d_fixed.*cosd(l_fixed);
+
+
 %positions in the galaxy
 X=d.*sind(l);
 Y=R0-d.*cosd(l);
@@ -195,31 +209,42 @@ plot(X,Y,'o')
 hold on
 %plotting the ambigous positions
 plot(X(i_bad),Y(i_bad),'rx')
+plot([X_fixed,X(i_fixed)],[Y_fixed,Y(i_fixed)],'o')
 
 %Drawing our position
 plot(0,R0,'k.','markersize',20)
 
 %Drawing circles
-t=linspace(-.2,pi*0.6);
+t=linspace(-pi,pi);
 r1=8.5;
 x1=r1*cos(t);y1=r1*sin(t);
 r2=12;
 x2=r2*cos(t);y2=r2*sin(t);
-r3=6.7;
+r3=10;
 x3=r3*cos(t);y3=r3*sin(t);
 r4=8;
 x4=r4*cos(t);y4=r4*sin(t);
-plot(x1,y1,':k',x2,y2,'k:',x3,y3,'k:',x4,y4,'k:')
+r5=14;
+x5=r5*cos(t);y5=r5*sin(t);
+r6=16;
+x6=r6*cos(t);y6=r6*sin(t);
+plot(x1,y1,'-.k',x2,y2,'k:',x3,y3,'k:',x4,y4,'k:',x5,y5,'k:',x6,y6,'k:')
 
 %Drawing line of sight for l=50
 r=[0,20];
-x=r*sind(50);
-y=R0-r*cosd(50);
+L=l(i_fixed);
+x=r*sind(L);
+y=R0-r*cosd(L);
 plot(x,y,'--k')
 
 axis equal
+axis([-5,15, -15,20])
+%grid on
 
+xlabel('$X$ /[kpc]', 'interpreter','latex')
+ylabel('$Y$ /[kpc]', 'interpreter','latex')
 
+set(gca,'fontsize',14)
 
 
 
