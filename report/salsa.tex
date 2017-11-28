@@ -29,7 +29,7 @@ swedish, english %% Make sure to put the main language last!
 %% If you want to change the formatting of the section headers
 %\renewcommand{\thesection}{...}
 
-
+\newcommand{\rr}{\mathrm{r}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
@@ -59,13 +59,69 @@ swedish, english %% Make sure to put the main language last!
 \section{Introduction}
 The interstellar medium (ISM) contains clouds, among others, atomic
 hydrogen HI, which trough quantum mechanical hyperfine structure
-electronic transitions emitts electromagnetic radiation with a
-frequency of about 1420\,MHz or 21\,cm. This frequency then gets
-Doppler shifted depending on the relative radial velocity between us
-and the cloud. Therefore by observing the frequency spectrum of the
-incoming radiation in the 21\,cm band, it is possible to determine the
-the presense and relative radial velocity of clouds in the line of
-sight. 
+electronic transitions emits electromagnetic radiation with a
+frequency of about 1420\,MHz corresponding to a wavelength of
+21\,cm. This frequency then gets Doppler shifted depending on the
+relative radial velocity between us and the cloud. Therefore by
+observing the frequency spectrum of the incoming radiation in the
+21\,cm band, it is possible to determine the presence and relative
+radial velocity of clouds in the line of sight.
+Once a rotation curve has been established, it can be used to
+determine the positions of these clouds.
+
+In this report we use the SALSA 2.4\,m radio telescopes a Onsala Space
+Observatory to scan a portion of the Galaxy, that is visible from Onsala,
+in the 21\,cm band to find HI clouds. The Doppler shift is then used
+to calculate the radial velocity of these clouds, as seen from
+Earth. This is then used to determine the rotation curve and the
+positions of the observed clouds.
+
+\subsection{Galactic coordinates and measurements}
+The Galactic longitude, $l$, of an object is the angle, as seen from
+us, in the plane of the Galactic disc between the Galactic center (GC)
+and the object in question. %, see \figref{fig:glon}.
+The Galactic latitude is measured as the angle above the Galactic
+plane. 
+
+% \begin{figure}\centering
+% \resizebox{0.4\linewidth}{!}{
+% \input{figures/glon.pdf_t}}
+% \caption{Illustration of Galactic coordinates. The Galactic longitude,
+%   $l$, is measured as the angle between an object and the Galactic
+%   center (GC). }
+% \label{fig:glon}
+% \end{figure}
+
+\begin{figure}\centering
+\resizebox{0.5\linewidth}{!}{
+\input{figures/geom.pdf_t}}
+\caption{The geometry of an HI measurement, as seen in the plane of
+  the Galaxy. If there is a cloud on Galactic longitude $l$ on a circular
+  orbit the observed radial velocity is $V_\rr=V\cos\alpha-V_0\sin l$. }
+\label{fig:geom}
+\end{figure}
+
+Given the geometry of \figref{fig:geom}, the law of sines gives the
+relation
+\begin{equation}\label{eq:sine-law}
+\frac{\sin l}{R_0}=\frac{\sin\beta}{R}
+\end{equation}
+Assuming circular orbits further gives $\beta=\alpha-\pi/2$.
+This together with \eqref{eq:sine-law} means that observed radial
+velocity has to be
+\begin{equation}
+V_\rr=V\cos\alpha-V_0\sin l
+=\sin(l)\qty[\tfrac{R_0}{R}V-V_0].
+\end{equation}
+This is one equation with two unknowns. To solve this we (highly
+dubiously) assume that the clouds we observe having the highest radial
+velocity, $V_\rr$, are on a trajectory tangent to our line of sight
+($\alpha=0$). The justification for this that in each direction
+looking into the Galaxy, we tend to observe two or three clouds and
+therefor it is possible that one of those clods have $\alpha=0$.
+
+\subsubsection{Position determination}
+
 
 
 \section{Method}
@@ -76,9 +132,9 @@ sight.
 \includegraphics[width=1\linewidth]{rotation_curve.eps}
 \caption{Velocity curve for HI clouds in the Milky Way, as observed
   between $20^\circ{-}85^\circ$ Galactic longitude with $5^\circ$
-  increments. These velocites are calculated using the circular orbit
+  increments. These velocities are calculated using the circular orbit
   assumption, as well as assuming that the cloud with the highest
-  radial velocity is moving tangent to the line of sight. }
+  radial velocity is moving tangent to the line of sight.}
 \label{fig:rot}
 \end{figure}
 
@@ -87,7 +143,7 @@ sight.
 \caption{Position of HI clouds in the Milky Way. The positions are
   calculated using the assumptions that all clouds have circular
   orbits and that their orbital velocities are
-  $V_0=\unit[220]{km/s}$. For some of the coulds there are two
+  $V_0=\unit[220]{km/s}$. For some of the clouds there are two
   possible solutions to their position (red crosses). This ambiguity
   problem have been resolved for one cloud on $l=50^\circ$ (red ring,
   correct position filled in). }
@@ -131,3 +187,10 @@ sight.
 \end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+
+%  LocalWords:  hyperfine Onsala
