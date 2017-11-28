@@ -109,24 +109,71 @@ relation
 Assuming circular orbits further gives $\beta=\alpha-\pi/2$.
 This together with \eqref{eq:sine-law} means that observed radial
 velocity has to be
-\begin{equation}
+\begin{equation}\label{eq:Vr}
 V_\rr=V\cos\alpha-V_0\sin l
-=\sin(l)\qty[\tfrac{R_0}{R}V-V_0].
+=\sin(l)\qty[\tfrac{R}{R_0}V-V_0].
 \end{equation}
-This is one equation with two unknowns. To solve this we (highly
-dubiously) assume that the clouds we observe having the highest radial
-velocity, $V_\rr$, are on a trajectory tangent to our line of sight
-($\alpha=0$). The justification for this that in each direction
-looking into the Galaxy, we tend to observe two or three clouds and
-therefor it is possible that one of those clods have $\alpha=0$.
+This is one equation with two unknowns\footnote{We already know 
+  $R_0=\unit[8.5]{kpc}$ and $V_0=\unit[220]{km/s}$.}. To solve this 
+we (highly dubiously) assume that the clouds we observe having the
+highest radial velocity, $V_\rr$, are on a trajectory tangent to our
+line of sight ($\alpha=0$). The justification for this that in each
+direction looking into the Galaxy, we tend to observe two or three
+clouds and therefor it is possible that one of those clods have
+$\alpha=0$. If $\alpha=0$ then \eqref{eq:sine-law} yields
+$R_0/R=\sin(l)$, or in other words
+\begin{equation}
+V=V_{\rr,\max}+V_0\sin l.
+\end{equation}
+We can now determine both $V$ and $R$ together, which makes it
+possible to find  the rotation curve.
 
-\subsubsection{Position determination}
+This is however only possible for when looking in towards the center
+of the Galaxy, $0<l<\pi/2$ (or $3\pi/2<l<2\pi$), otherwise the
+assumption of trajectorie tangential to the line of sight can not be
+fulfilled. For $\pi/2<l<3\pi/2$, which also implies $R>R_0$, we cannot
+observe the orbital velocity. Instead we just have to blindly hope
+that the observed rotation curve extrapolates nicely to $R>R_0$.
 
 
+
+\subsubsection{Position determination and ambiguity}
+Assuming that we managed to get a rotation curve $V(R)$, and that it
+can be extrapolated to all $R$, the position of the observed cloud can
+be determined by first inverting \eqref{eq:Vr} to get $R$. Once we
+have $R$, we need $d$ to fully determine the postion of the HI
+cloud.
+
+By the law of cosines, we have
+\begin{equation}
+R^2=R_0^2+d^2-2R_0d\cos l,
+\end{equation}
+which inverts to
+\begin{equation}\label{eq:d}
+d=R_0\cos l \pm\sqrt{R^2-R_0^2\sin^2l}.
+\end{equation}
+For $R>R_0$ it is clear that one of the above solution must be
+negative, hence the cloud position is uniquely determined.
+If, on the other hand, $R<R_0$ (which implies that $0<l<\pi/2$ or
+$3\pi/2<l<2\pi$) there might be two positive solutions, which means
+that $d$ could be ambiguous. This happens when 
+\begin{equation}
+R_0\cos l>\sqrt{R^2-R_0^2\sin^2l}.
+\end{equation}
+Since the premise was that $0<l<\pi/2$ or $3\pi/2<l<2\pi$ we have
+$\cos l>0$, hence we have ambiguity when
+$R_0^2\cos^2l>R^2-R_0^2\sin^2l$ which is equivalent to
+\begin{equation}
+R_0^2>R^2.
+\end{equation}
+This is always true with the initial assumption $R<R_0$. Hence the
+position is \emph{ambiguous} for all $R<R_0$ and \emph{unique} for all
+$R>R_0$. This type of ambiguity is ilustrated in \figref{fig:geom} by
+the position marked by the dotted line.
 
 \section{Method}
 
-\clearpage %temporary
+%\clearpage %temporary
 \section{Results and Discussion}
 \begin{figure}\centering
 \includegraphics[width=1\linewidth]{rotation_curve.eps}

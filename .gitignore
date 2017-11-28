@@ -17,3 +17,7 @@ salsa.pdf
 #Från Beamer
 *.nav
 *.snm
+
+
+#X-fig
+*.fig.bak
