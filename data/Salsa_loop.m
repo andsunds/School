@@ -272,7 +272,7 @@ set(leg,'interpreter','latex','fontsize',10,'location','SouthWest')
 
 
 
-%%
+%% l=50 velocity spectra
 clc;clf;clear
 
 clc;clf;clear
@@ -323,7 +323,7 @@ set(L,'location','NorthWest','interpreter','latex')
 
 
 axis([-100,100,-5,60])
-xlabel('$V$ /[km/s]', 'interpreter','latex')
+xlabel('$V_\mathrm{r}$ /[km/s]', 'interpreter','latex')
 ylabel('Signal intensity /[a.u.]', 'interpreter','latex')
 
 set(gca,'fontsize',14,'yscale','lin')
