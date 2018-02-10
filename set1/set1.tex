@@ -1,5 +1,5 @@
 \documentclass[11pt,a4paper, 
-english, swedish %% Make sure to put the main language last!
+swedish, english %% Make sure to put the main language last!
 ]{article}
 \pdfoutput=1
 
@@ -53,19 +53,89 @@ english, swedish %% Make sure to put the main language last!
 %\todolist
 
 
-
-\section{}
-
-
-\subsection{}
+\section{Some Lorentz transformations}
 
 
+\subsection{Proper time}
+To show that the proper time is invariant, we just use the definition
+of $\rd\tau$ and the transformed coordinates 
+$\rd{x'}^\alpha={\Lambda^\alpha}_\gamma \rd{x}^{\gamma}$,
+\begin{equation}
+\rd{\tau'}^2=-\eta_{\alpha\beta}\rd{x'}^{\alpha}\rd{x'}^{\beta}
+=-\eta_{\alpha\beta}({\Lambda^\alpha}_\gamma \rd{x}^{\gamma})
+({\Lambda^\beta}_\delta\rd{x}^{\delta})
+=-\eta_{\alpha\beta}{\Lambda^\alpha}_\gamma{\Lambda^\beta}_\delta
+\rd{x}^{\gamma}\rd{x}^{\delta}.
+\end{equation}
+next we use the condition that the Lorentz transform must satify
+\begin{equation}
+\eta_{\alpha\beta}{\Lambda^\alpha}_\gamma{\Lambda^\beta}_\delta
+=\eta_{\gamma\delta},
+\end{equation}
+which therefore yields
+\begin{equation}
+\rd{\tau'}^2=\eta_{\gamma\delta}\rd{x}^{\gamma}\rd{x}^{\delta}
+=\rd\tau^2.
+\end{equation}
+Since we have now concluded that $\rd\tau^2$ is a scalar (invariant)
+under Lorentz transforms, so must $\rd\tau=\sqrt{\rd\tau^2}$.
 
-
-
-
-
-
+\subsection{Relativistic particle velocity}
+For a Lorentz boost with $\vb*v=(v,0,0)$, the transformations are as
+follows
+\begin{equation}
+\begin{cases}
+\rd{t}'=\gamma(\rd{t}-v\rd{x})\\
+\rd{x}'=\gamma(\rd{x}-v\rd{t})\\
+\rd{y}'=\rd{y}\\
+\rd{z}'=\rd{z}
+\end{cases}
+\qand
+\begin{cases}
+\rd{t}=\gamma(\rd{t}'+v\rd{x}')\\
+\rd{x}=\gamma(\rd{x}'+v\rd{t}')\\
+\rd{y}=\rd{y}'\\
+\rd{z}=\rd{z}'.
+\end{cases}
+\end{equation}
+The velocity of a particle 
+\begin{equation}
+\vb*u=\qty(\dv{x}{t},\dv{y}{t},\dv{z}{t})
+=(u_x,u_y,u_z)=(u\cos\theta,u\sin\theta,0)
+\end{equation}
+in the first frame, will transform as
+\begin{equation}\label{eq1:upx1}
+u'_x=\dv{x'}{t'}=\dv{x'}{t}\dv{t}{t'}
+=\qty(\pdv{x'}{t}+\pdv{x'}{x}\pdv{x}{t})
+\qty(\pdv{t}{t'}+\pdv{t}{x'}\pdv{x'}{t'})
+=\gamma^2(-v+u_x)(1+vu'_x)
+\end{equation}
+and
+\begin{equation}\label{eq1:upy1}
+u'_y=\dv{y'}{t'}=\dv{y'}{t}\dv{t}{t'}
+=\qty(\pdv{y'}{y}\pdv{y}{t})
+\qty(\pdv{t}{t'}+\pdv{t}{x'}\pdv{x'}{t'})
+=\gamma u_y(1+vu'_x).
+\end{equation}
+Solving for $u'_x$ in \eqref{eq1:upx1} yields
+\begin{equation}
+u'_x=\frac{u_x-v}{\gamma^{-2}-v(u_x-v)}
+=\frac{u_x-v}{1-v^2-v(u_x-v)}
+=\frac{u_x-v}{1-u_x v},
+\end{equation}
+similarly with \eqref{eq1:upy1}
+\begin{equation}
+u'_y=\gamma u_y\qty(1+v\frac{u_x-v}{1-u_x v})
+=\frac{u_y}{\gamma(1-u_x v)}.
+\end{equation}
+The transform of $\theta$, theangle $\vb*u$ makes with the $x$ axis,
+is easily given by 
+\begin{equation}
+\tan\theta'=\frac{u_y'}{u_x'}
+=\qty(\frac{u\sin\theta}{\gamma(1-u\cos\theta v)})
+\qty(\frac{1-u\cos\theta v}{u\cos\theta-v})
+=\frac{\sin\theta}{\gamma(\cos\theta-\nicefrac{v}{u})}.
+\end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% The bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%
 %\newpage
