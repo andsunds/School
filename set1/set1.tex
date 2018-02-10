@@ -31,6 +31,9 @@ swedish, english %% Make sure to put the main language last!
 
 \newcommand{\EM}{\text{EM}}
 \newcommand{\E}{\text{E}}
+%\newcommand{\GR}{\text{GR}}
+%\newcommand{\SR}{\text{SR}}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
@@ -288,15 +291,131 @@ the system.
 
 
 \renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
-\section{Time dialation}
+\section{Time dilation}
+\swapcommands{\phi}{\varphi}
+\subsection{Two separate effects}
+For a satellite in circular orbit around the Earth, as in
+\figref{fig:orbit}, the time dilation can be seen as two separate
+effects. Firstly the slowing down of time from the orbital speed due
+to special relativity, and secondly a speed-up from weaker gravity due
+to general relativity. It is not really correct to take these two as
+separate effects, but in a case like the earth where both the orbital
+speed and gravitation is extremely small (in natural units) this
+approximation holds.
+
+We can begin with the effects of gravity. The strength of gravity in
+the weak field limit is given by the Newtonian potential
+\begin{equation}\label{eq3:phi}
+\phi(r)=-\frac{\mu}{r},
+\end{equation}
+where $\mu=GM$, $G$ being the constant of gravity and $M$ the mass
+of the Earth. For a distant observer, unaffected by Earth's gravity,
+a stationary clock (both the Earth and the clock being stationary in
+the observer's frame of reference) only the 00 component of the metric
+affects the time dilation, since the gravitational field is static in
+this frame of reference, this component is in the weak field limit
+$g_{00}=-(1+2\phi)$. The time dilation therefore becomes 
+\begin{equation}
+\rd\tau=
+\overbrace{(-g_{\mu\nu}\rd{x}^\mu\rd{x}^\nu)^{1/2}}
+^{=(-g_{00})^{1/2}\rd{t},\text{ static clock and field}}
+=\Big(1+2\phi(r)\Big)^{1/2}\rd{t}
+\approx\qty(1-\frac{\mu}{r})\rd{t},
+\end{equation}
+where $\rd{x}^\mu$ and $\rd{t}$ are in the coordinate system of the distant
+observer, and $\rd\tau$ is the proper time recorded by that stationary
+clock. Note that since $\rd\tau<\rd{t}$, the distant observer
+will see the clock tick \emph{slower}\footnotemark{} by the amount
+given above.  
+\footnotetext{Say the clock is ticking with a time $\rd\tau$ between
+  ticks. The distant observer sees the clock above Earth tick with a
+  time $\rd{t}$ between ticks in his or her frame of reference.
+  Therefore since $\rd{t}>\rd\tau$ the Earth clock seems slower than
+  an identical clock at the distant observer.}
 
 \begin{figure}\centering
 %\resizebox{.8\textwidth}{!}{
 \input{figures/Laika.pdf_t}%}
 \caption{}
-\label{fig:}
+\label{fig:orbit}
 \end{figure}
 
+To get the SR time dilation, we need the orbital speed which is
+handily calculated using Newtonian mechanics to be
+\begin{equation}
+v^2=\frac{GM}{R}=\frac{\mu}{R}.
+\end{equation}
+Only accounting for the SR effects of the orbital speed that time
+dilation becomes
+\begin{equation}
+\rd\tau=\gamma^{-1}\,\rd{t}=\qty(1-v^2)^{1/2}\rd{t}
+=\qty(1-\frac{\mu}{R})^{1/2}\rd{t}
+\approx\qty(1-\frac{\mu}{2R})\rd{t}.
+\end{equation}
+Once again $\rd\tau$ is the proper time of a clock moving at a speed
+$v$, without gravity, while $\rd{t}$ is its time recorded by the
+distant observer. 
+
+In this weak field and slow moving limit the real proper time of the
+satellite should therefore be the product of the two effects
+\begin{equation}
+\rd\tau_\text{sat}=\qty(1-\frac{\mu}{R})\qty(1-\frac{\mu}{2R})\rd{t}
+\approx\qty(1-\frac{3\mu}{2R})\rd{t}.
+\end{equation}
+This we want to compare to a stationary clock on the surface of the
+Earth, which only has the GR effects
+\begin{equation}\
+\rd\tau_\E=\eval{\rd\tau}_{R_\E}=\qty(1-\frac{\mu}{R_\E})\rd{t}.
+\end{equation}
+Setting these two equal, we get
+\begin{equation}\label{eq3:R}
+R=\frac{3}{2}R_\E.
+\end{equation}
+
+
+\subsection{But there is really only one time dilation}
+Since the previous section felt a bit hand-wavy, we can also redo the
+same calculations a bit more rigorously. We actually had the answer in
+front of our noses from the very begining. We start off with the
+square of the proper time compared to the time of the distant observer 
+\begin{equation}\label{eq3:dtaudt}
+\qty(\frac{\rd\tau}{\rd{t}})^2=
+-g_{\mu\nu}\frac{\rd{x}^\mu}{\rd{t}}\frac{\rd{x}^\nu}{\rd{t}}.
+\end{equation}
+Next, in the weak field approximation we can write the metric as
+\begin{equation}
+g_{\mu\nu}=\eta_{\mu\nu}+h_{\mu\nu}\qc h_{\mu\nu}\ll1.
+\end{equation}
+Since we know that the satellite is slow,
+\begin{equation}
+1=\dv{x^0}{t}\gg\dv{x^i}{t}= v^i
+\end{equation}
+we know that the only correction to the metric which survives to firt
+order is $h_{00}=-2\phi$, the rest of them get multiplied by a factor
+$v^i\sim v\ll1$.
+
+We can now evaluate \eqref{eq3:dtaudt} to be
+\begin{equation}
+\qty(\frac{\rd\tau}{\rd{t}})^2\approx
+-g_{00}+\eta_{ij}\frac{\rd{x}^i}{\rd{t}}\frac{\rd{x}^j}{\rd{t}}
+=1+2\phi-v^2.
+\end{equation}
+For the orbiting satellite this becomes
+\begin{equation}
+\qty(\frac{\rd\tau_\text{sat}}{\rd{t}})^2
+=1-2\frac{\mu}{R}-\frac{\mu}{R}
+=1-3\frac{\mu}{R},
+\end{equation}
+and for the stationary clock on the surface of the Earth we get
+\begin{equation}
+\qty(\frac{\rd\tau_\text{E}}{\rd{t}})^2=1-2\frac{\mu}{R}.
+\end{equation}
+For these two proper times to be the same, we recover \eqref{eq3:R}
+from the previous calculation.
+
+
+\section{Stereographic projection}
+\swapcommands{\phi}{\varphi}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -339,4 +458,4 @@ the system.
 \addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
 
 
-%  LocalWords:  contravariant
+%  LocalWords:  contravariant Stereographic
