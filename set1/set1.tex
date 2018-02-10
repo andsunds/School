@@ -52,6 +52,7 @@ swedish, english %% Make sure to put the main language last!
 %% If you want a list of all todos
 %\todolist
 
+\newcommand{\EM}{\text{EM}}
 
 \section{Some Lorentz transformations}
 
@@ -67,7 +68,7 @@ $\rd{x'}^\alpha={\Lambda^\alpha}_\gamma \rd{x}^{\gamma}$,
 =-\eta_{\alpha\beta}{\Lambda^\alpha}_\gamma{\Lambda^\beta}_\delta
 \rd{x}^{\gamma}\rd{x}^{\delta}.
 \end{equation}
-next we use the condition that the Lorentz transform must satify
+next we use the condition that the Lorentz transform must satisfy
 \begin{equation}
 \eta_{\alpha\beta}{\Lambda^\alpha}_\gamma{\Lambda^\beta}_\delta
 =\eta_{\gamma\delta},
@@ -128,7 +129,7 @@ similarly with \eqref{eq1:upy1}
 u'_y=\gamma u_y\qty(1+v\frac{u_x-v}{1-u_x v})
 =\frac{u_y}{\gamma(1-u_x v)}.
 \end{equation}
-The transform of $\theta$, theangle $\vb*u$ makes with the $x$ axis,
+The transform of $\theta$, the angle $\vb*u$ makes with the $x$ axis,
 is easily given by 
 \begin{equation}
 \tan\theta'=\frac{u_y'}{u_x'}
@@ -136,6 +137,158 @@ is easily given by
 \qty(\frac{1-u\cos\theta v}{u\cos\theta-v})
 =\frac{\sin\theta}{\gamma(\cos\theta-\nicefrac{v}{u})}.
 \end{equation}
+
+
+
+\section{The stress tensor}
+To show the conservation laws for the stress tensor\footnotemark{}
+\footnotetext{I call the stress tensor of a particle
+  ${T_n}^{\alpha\beta}$, with subscript $n$, and use $x_n(\tau)$ and
+  $p_n$ for the trajectory and momentum of the particle, to more
+  clearly distinguish what ``belongs'' to the particle and what are
+  free variables.} 
+\begin{equation}
+{T_n}^{\alpha\beta}(x)=\int\rd\tau\,{p_n}^\alpha
+\dv{{x_n}^\beta}{\tau}\delta^4\big(x-x_n(\tau)\big).
+\end{equation}
+The divergence of the stress tensor therefore becomes
+\begin{equation}\label{eq2:pdvT1}
+\pd_\beta{T_n}^{\alpha\beta}(x)=\int\rd\tau\,{p_n}^\alpha
+\dv{{x_n}^\beta}{\tau}\,\pdv{x^\beta}\delta^4\big(x-x_n(\tau)\big).
+\end{equation}
+We note that the derivatives only act on the delta function since
+$x_n$ and $p_n$ are the trajectory and momentum of the particle, while
+the derivatives act on the free variable $x$. Next we note that for
+any function $f$ 
+\begin{equation}
+\pdv{x}\Big[f(x-y)\Big]=-\pdv{y}\Big[f(x-y)\Big],
+\end{equation}
+which means that \eqref{eq2:pdvT1} can be written as
+\vspace{-1em}
+\begin{equation}
+\begin{aligned}
+\pd_\beta{T_n}^{\alpha\beta}(x)=&-\int\rd\tau\,{p_n}^\alpha
+\overbrace{\dv{{x_n}^\beta}{\tau}\,\pdv{{x_n}^\beta}}^{=\dv*\tau}
+\delta^4\big(x-x_n(\tau)\big)\\
+=&-\int\rd\tau\,{p_n}^\alpha\dv{\tau}\delta^4\big(x-x_n(\tau)\big).
+\end{aligned}
+\end{equation}
+Integration by parts now yields
+\begin{equation}
+\begin{aligned}
+\pd_\beta{T_n}^{\alpha\beta}(x)=&
+-\int\rd\tau\,{p_n}^\alpha\dv{\tau}\delta^4\big(x-x_n(\tau)\big)\\
+=&-\cancel{\qty[{p_n}^\alpha\delta^4\big(x-x_n(\tau)\big)]}
++\int\rd\tau\,\dv{{p_n}^\alpha}{\tau}\delta^4\big(x-x_n(\tau)\big).
+\end{aligned}
+\end{equation}
+The first term from the integration by parts cancel since the
+integration is over ``all $\tau$'' and therefore $x_n\neq x$ at the
+end points, which means that the delta function is zero.
+
+Now if the particle interacts with an electromagnetic field, it will
+experience a Lorentz force
+\begin{equation}
+\dv{{p_n}^\alpha}{\tau}=e_n\eta_{\beta\gamma}F^{\alpha\beta}
+\dv{{x_n}^\gamma}{\tau}={F^{\alpha}}_\gamma \,e_n{u_n}^\gamma.
+%={F^{\alpha}}_\gamma J^\gamma.
+\end{equation}
+This means that
+\begin{equation}\label{eq2:pdvT}
+\pd_\beta{T_n}^{\alpha\beta}(x)=\int\rd\tau\,{F^{\alpha}}_\gamma e_n{u_n}^\gamma
+\delta^4\big(x-x_n(\tau)\big)
+={F^{\alpha}}_\gamma e_n{u_n}^\gamma
+\delta^3\big(\vb*x-\vb*x_n(\tau)\big)
+={F^{\alpha}}_\gamma J^\gamma
+\end{equation}
+which in general is non-vanishing. Note that since we are assuming
+that this particle is the only particle the current is indeed
+$J^\alpha=e_n{u_n}^\alpha\delta^3\big(\vb*x-\vb*x_n(\tau)\big)$, and
+if we were to have more particles all the above calculations would be
+exactly the same (but with summation signs in front of them). 
+
+We now take a look at the electromagnetic stress tensor
+\begin{equation}
+{T_{\EM}}^{\alpha\beta}={F^{\alpha}}_\gamma F^{\beta\gamma}
+-\frac{1}{4}\eta^{\alpha\beta}F_{\gamma\delta}F^{\gamma\delta},
+\end{equation}
+and then Maxwell's equations will come in handy later
+\begin{subequations}
+\begin{equation}\label{eq:Maxwell}
+\pd_\alpha F^{\alpha\beta}=-J^\beta,
+\end{equation}
+\begin{equation}\label{eq:Bianchi}
+%\pd_{[\alpha}F_{\beta\gamma]}=
+\pd_\alpha F_{\beta\gamma} +\pd_\beta F_{\gamma\alpha} +\pd_\gamma F_{\beta\alpha} 
+=0.
+\end{equation}
+\end{subequations}
+Its divergence therefore is
+\begin{equation}
+\begin{aligned}
+\pd_{\beta}{T_{\EM}}^{\alpha\beta}=&
+{F^{\alpha}}_\gamma \qty(\pd_\beta F^{\beta\gamma})
++\qty(\pd_\beta{F^{\alpha}}_\gamma) F^{\beta\gamma}
+-\frac{1}{4}\eta^{\alpha\beta}\pd_\beta\qty[F_{\gamma\delta}F^{\gamma\delta}]\\
+=&-{F^{\alpha}}_\gamma J^\gamma
++F^{\beta\gamma} \,\pd_\beta{F^{\alpha}}_\gamma
+-\frac{1}{2}F_{\gamma\delta}\,\pd^\alpha F^{\gamma\delta}.
+\end{aligned}
+\end{equation}
+The first term is given directly from \eqref{eq:Maxwell}.
+We now take a look at the last two terms. Firstly we can raise and
+lower the betas and gammas which are contracted in the second term, 
+$F^{\beta\gamma} \,\pd_\beta{F^{\alpha}}_\gamma
+=F_{\beta\gamma} \,\pd^\beta F^{\alpha\gamma}$, then in the last term
+we are free to rename the two contracted indices $\gamma\to\beta$ and
+$\delta\to\gamma$. We now have
+\begin{equation}
+F_{\beta\gamma} \,\pd^\beta F^{\alpha\gamma}
+-\frac{1}{2}F_{\beta\gamma}\,\pd^\alpha F^{\beta\gamma}=
+\frac{1}{2}\qty( F_{\beta\gamma}\pd^\beta F^{\alpha\gamma}
+-F_{\beta\gamma}\pd^\beta F^{\gamma\alpha})
+-\frac{1}{2}F_{\beta\gamma}\pd^\alpha F^{\beta\gamma}.
+\end{equation}
+Here we used the anti-symmetry of the EM tensor, 
+$F^{\alpha\gamma}=-F^{\gamma\alpha}$. Now we do some more index
+gymnastics by interchanging $\beta\leftrightarrow\gamma$ in the first
+term, $F_{\gamma\beta}\pd^\gamma F^{\alpha\beta}
+=-F_{\beta\gamma}\pd^\gamma F^{\alpha\beta}$. 
+In the end what we have is
+\begin{equation}
+F_{\beta\gamma} \,\pd^\beta F^{\alpha\gamma}
+-\frac{1}{2}F_{\beta\gamma}\,\pd^\alpha F^{\beta\gamma}=
+-\frac{1}{2}F_{\beta\gamma}\qty( 
+\pd^\gamma F^{\alpha\beta}
++\pd^\beta F^{\gamma\alpha}
++\pd^\alpha F^{\beta\gamma}).
+\end{equation}
+The expression inside the parentheses is just the contravariant version
+of the RHS of \eqref{eq:Bianchi} and therefore vanishes.
+So what we are left with for the divergence is
+\begin{equation}
+\pd_{\beta}{T_{\EM}}^{\alpha\beta}=-{F^{\alpha}}_\gamma J^\gamma,
+\end{equation}
+which is exactly $-\pd_\beta{T_n}^{\alpha\beta}$ from \eqref{eq2:pdvT}.
+
+Therefore since $\pd_\beta$ is a linear operator we know that
+\begin{equation}
+\pd_{\beta}\qty[{T_{\EM}}^{\alpha\beta}+{T_n}^{\alpha\beta}]=0.
+\end{equation}
+This is physically reasonable since the total stress tensor, which
+represents the total energy and momentum-current density, should
+reasonably be conserved in a system. The two terms
+${T_{\EM}}^{\alpha\beta}$ and ${T_n}^{\alpha\beta}$ are not conserved
+separately since the particle and EM field exchanges energy and
+momentum with each other, which also leads to the above conclusion
+that there is no \emph{net} change in the total energy or momentum of
+the system.
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% The bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%
 %\newpage
@@ -189,3 +342,5 @@ is easily given by
 \stepcounter{section} %For example a 'section'
 \addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
 
+
+%  LocalWords:  contravariant
