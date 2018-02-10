@@ -10,7 +10,7 @@
 *.log
 *.out
 *.toc
-#<namn>.pdf
+set?.pdf
 
 *-eps-converted-to.pdf
 

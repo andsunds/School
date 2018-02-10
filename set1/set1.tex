@@ -1,0 +1,121 @@
+\documentclass[11pt,a4paper, 
+english, swedish %% Make sure to put the main language last!
+]{article}
+\pdfoutput=1
+
+%% Andréas's custom package 
+%% (Will work for most purposes, but is mainly focused on physics.)
+\usepackage{../custom_as}
+
+%% Figures can now be put in a folder: 
+\graphicspath{ {figures/} %{some_folder_name/}
+}
+
+%% If you want to change the margins for just the captions
+\usepackage[margin=10 pt]{caption}
+
+%% To add todo-notes in the pdf
+\usepackage[%disable  %%this will hide all notes
+]{todonotes} 
+
+%% Change the margin in the documents
+\usepackage[
+%            top    = 3cm,              %% top margin
+%            bottom = 3cm,              %% bottom margin
+%            left   = 2.5cm, right  = 2.5cm %% left and right margins
+]{geometry}
+
+
+%% If you want to change the formatting of the section headers
+%\renewcommand{\thesection}{...}
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you want to use an external file for the title page
+%\input{titlepages.tex}
+
+
+%%%%%%%%%%%%%%%%%%%% vvv Internal title page vvv %%%%%%%%%%%%%%%%%%%%%
+\title{Gravitation and Cosmology -- FFM 071
+\\ {\Large Hand-in set 1} }
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%% ^^^ Internal title page ^^^ %%%%%%%%%%%%%%%%%%%%%
+%% If you want a list of all todos
+%\todolist
+
+
+
+\section{}
+
+
+\subsection{}
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% The bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+%% This bibliography uses BibTeX
+\bibliographystyle{ieeetr}
+\bibliography{references}%requires a file named 'references.bib'
+%% Citations are as usual: \cite{example_article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Appendices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage %% on a new page 
+\appendix  %% This will change the page numbering to A1, A2, A3, ...;
+           %% and also change the sections to A, A.1, ...; B, B.1, ...
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%  Some (useful) templates
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer: ''.
+
+
+%% Including PDF-documents
+\includepdf[pages={1-}]{filnamn.pdf} % NO blank spaces in the file name
+
+%% Figures (pdf, png, jpg, ...)
+\begin{figure}\centering
+\centerline{ % centers figures larges than 1\textwidth
+\includegraphics[width=.8\textwidth]{file_name.pdf}
+}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figures from xfig's "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{file_name.pdf_t}}
+\caption{}
+\label{fig:}
+\end{figure}
+
+
+%% If you want to add something to the ToC
+%% (Without having an actual header in the text.)
+\stepcounter{section} %For example a 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
