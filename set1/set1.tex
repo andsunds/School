@@ -28,8 +28,9 @@ swedish, english %% Make sure to put the main language last!
 
 %% If you want to change the formatting of the section headers
 %\renewcommand{\thesection}{...}
-\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 
+\newcommand{\EM}{\text{EM}}
+\newcommand{\E}{\text{E}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
@@ -52,11 +53,9 @@ swedish, english %% Make sure to put the main language last!
 %% If you want a list of all todos
 %\todolist
 
-\newcommand{\EM}{\text{EM}}
 
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
 \section{Some Lorentz transformations}
-
-
 \subsection{Proper time}
 To show that the proper time is invariant, we just use the definition
 of $\rd\tau$ and the transformed coordinates 
@@ -288,19 +287,16 @@ the system.
 
 
 
+\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+\section{Time dialation}
 
+\begin{figure}\centering
+%\resizebox{.8\textwidth}{!}{
+\input{figures/Laika.pdf_t}%}
+\caption{}
+\label{fig:}
+\end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% The bibliography %%%%%%%%%%%%%%%%%%%%%%%%%%
-%\newpage
-%% This bibliography uses BibTeX
-\bibliographystyle{ieeetr}
-\bibliography{references}%requires a file named 'references.bib'
-%% Citations are as usual: \cite{example_article}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Appendices %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage %% on a new page 
-\appendix  %% This will change the page numbering to A1, A2, A3, ...;
-           %% and also change the sections to A, A.1, ...; B, B.1, ...
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
