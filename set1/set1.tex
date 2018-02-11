@@ -294,8 +294,9 @@ the system.
 \section{Time dilation}
 \swapcommands{\phi}{\varphi}
 \subsection{Two separate effects}
-For a satellite in circular orbit around the Earth, as in
-\figref{fig:orbit}, the time dilation can be seen as two separate
+For a satellite in circular orbit around the Earth, 
+%as in \figref{fig:orbit}, 
+the time dilation can be seen as two separate
 effects. Firstly the slowing down of time from the orbital speed due
 to special relativity, and secondly a speed-up from weaker gravity due
 to general relativity. It is not really correct to take these two as
@@ -333,20 +334,20 @@ given above.
   Therefore since $\rd{t}>\rd\tau$ the Earth clock seems slower than
   an identical clock at the distant observer.}
 
-\begin{figure}\centering
+%\begin{figure}\centering
 %\resizebox{.8\textwidth}{!}{
-\input{figures/Laika.pdf_t}%}
-\caption{}
-\label{fig:orbit}
-\end{figure}
+%\input{figures/Laika.pdf_t}%}
+%\caption{A circular orbit around the Earth}
+%\label{fig:orbit}
+%\end{figure}
 
 To get the SR time dilation, we need the orbital speed which is
 handily calculated using Newtonian mechanics to be
 \begin{equation}
-v^2=\frac{GM}{R}=\frac{\mu}{R}.
+v^2=\frac{GM}{R}=\frac{\mu}{R},
 \end{equation}
-Only accounting for the SR effects of the orbital speed that time
-dilation becomes
+where $R$ is the orbital radius. Only accounting for the SR effects of
+the orbital speed that time dilation becomes
 \begin{equation}
 \rd\tau=\gamma^{-1}\,\rd{t}=\qty(1-v^2)^{1/2}\rd{t}
 =\qty(1-\frac{\mu}{R})^{1/2}\rd{t}
@@ -363,8 +364,9 @@ satellite should therefore be the product of the two effects
 \approx\qty(1-\frac{3\mu}{2R})\rd{t}.
 \end{equation}
 This we want to compare to a stationary clock on the surface of the
-Earth, which only has the GR effects
-\begin{equation}\
+Earth, at a distance $R_\E$ from the center of the Earth, which only
+has the GR effects 
+\begin{equation}
 \rd\tau_\E=\eval{\rd\tau}_{R_\E}=\qty(1-\frac{\mu}{R_\E})\rd{t}.
 \end{equation}
 Setting these two equal, we get
@@ -376,7 +378,7 @@ R=\frac{3}{2}R_\E.
 \subsection{But there is really only one time dilation}
 Since the previous section felt a bit hand-wavy, we can also redo the
 same calculations a bit more rigorously. We actually had the answer in
-front of our noses from the very begining. We start off with the
+front of our noses from the very beginning. We start off with the
 square of the proper time compared to the time of the distant observer 
 \begin{equation}\label{eq3:dtaudt}
 \qty(\frac{\rd\tau}{\rd{t}})^2=
@@ -390,7 +392,7 @@ Since we know that the satellite is slow,
 \begin{equation}
 1=\dv{x^0}{t}\gg\dv{x^i}{t}= v^i
 \end{equation}
-we know that the only correction to the metric which survives to firt
+we know that the only correction to the metric which survives to first
 order is $h_{00}=-2\phi$, the rest of them get multiplied by a factor
 $v^i\sim v\ll1$.
 
@@ -417,6 +419,169 @@ from the previous calculation.
 \section{Stereographic projection}
 \swapcommands{\phi}{\varphi}
 
+\begin{figure}\centering
+%\resizebox{.8\textwidth}{!}{
+\input{figures/stereographic.pdf_t}%}
+\caption{}
+\label{fig:stereographic}
+\end{figure}
+
+\figref{fig:stereographic} shows the geometry of a stereographic
+projection from the south pole of the unit sphere onto the equatorial
+plane, for two points on the sphere with the same polar angle
+$\phi$. From the Theorem of inscribed angles it is clear that the
+vertical angle from the south pole is exactly half the azimuthal
+angle $\theta$. This means that the distance from $(x,y)$ to the
+origin, $r$, must be given by $r=\tan(\theta/2)$. Therefore,
+expressing $x$ and $y$ in polar coordinates we get
+\begin{equation}
+\begin{cases}
+x=\tan\tfrac{\theta}{2}\,\cos\phi\\
+y=\tan\tfrac{\theta}{2}\,\sin\phi.
+\end{cases}
+\end{equation}
+
+Here we want to find the metric 
+\begin{equation}
+\rd{s}^2=\rd\theta^2+\sin^2\theta\,\rd\phi^2
+\end{equation}
+in terms of the $(x,y)$ coordinates. As a good first start, we can
+begin to compute
+\begin{equation}
+\rd{x}=\pdv{x}{\theta}\rd\theta+\pdv{x}{\phi}\rd\phi
+=\frac{\cos\phi\;\rd\theta}{2\cos^2(\theta/2)}
+-\tan\frac{\theta}{2}\,\sin\phi\,\rd\phi
+\end{equation}
+and
+\begin{equation}
+\rd{y}=\pdv{y}{\theta}\rd\theta+\pdv{y}{\phi}\rd\phi
+=\frac{\sin\phi\;\rd\theta}{2\cos^2(\theta/2)}
++\tan\frac{\theta}{2}\,\cos\phi\,\rd\phi.
+\end{equation}
+From here we easily calculate
+\begin{equation}
+\rd{x}^2+\rd{y}^2=
+\frac{\rd\theta^2}{4\cos^4(\theta/2)} 
++\tan^2\frac{\theta}{2}\;\rd\phi^2
+\end{equation}
+by using $\cos^2+\sin^2\equiv1$ and seeing that the cross
+terms cancel. To simplify this, we use the trigonometric identities
+\begin{equation}
+\cos^2(\theta/2)\equiv\frac{1+\cos\theta}{2}
+\end{equation}
+and
+\begin{equation}
+\tan\frac{\theta}{2}\equiv \frac{\sin\theta}{1+\cos\theta},
+\end{equation}
+which gives
+\begin{equation}
+\rd{x}^2+\rd{y}^2
+=\frac{\rd\theta^2+\sin^2\theta\,\rd\phi^2}{(1+\cos\theta)^2} 
+=\frac{\rd{s}^2}{(1+\cos\theta)^2}.
+\end{equation}
+We see that we are almost there. We just need to use one more
+trigonometric identity,
+\begin{equation}
+r^2=\tan^2\frac{\theta}{2}\equiv
+\frac{1-\cos\theta}{1+\cos\theta}
+=\frac{1+1-(1+\cos\theta)}{1+\cos\theta}
+=\frac{2}{1+\cos\theta}-1.
+\end{equation}
+Solving for $(1+\cos\theta)$ yields
+\begin{equation}
+1+\cos\theta=\frac{2}{1+r^2},
+\end{equation}
+and we see that we can write down the metric for this coordinate
+system as
+\begin{equation}
+\rd{s}^2=4\,\frac{\,\rd{x}^2+\rd{y}^2\,}{(1+r^2)^2},
+\end{equation}
+with $r^2=x^2+y^2$.
+
+\todo[inline]{There is a part ii and iii to this problem as well.}
+
+
+\section{Variational method}
+
+
+
+\section{Covariant Laplacian}
+\swapcommands{\phi}{\varphi}
+The covariant Laplacian acting on a scalar field is given by
+\begin{equation}
+\Box\phi=\nabla_\mu\nabla^\mu\phi=\nabla_\mu(g^{\mu\nu}\nabla_\nu)\phi
+=(g^{\mu\nu}\nabla_\mu)\nabla_\nu\phi
+=\nabla^\nu\nabla_\nu\phi.
+\end{equation}
+We are free to move around the metric tensor as we wish because of the
+\emph{metric postulate}.
+
+Let's use the middle expression to write out the Laplacian
+explicitly. First of all, we note that $\nabla_\nu\phi=\pd_\nu\phi$
+since there is no indeces for the affine connection to work on. Next
+we get
+\begin{equation}
+\Box\phi=\pd_\mu(g^{\mu\nu}\pd_\nu)\phi
++\Gamma^\mu_{\mu\rho}(g^{\rho\nu}\pd_{\nu}\phi).
+\end{equation}
+From here we use the determinant formula
+\begin{equation}
+\Gamma^\mu_{\mu\rho}=\frac{1}{2}
+\Big(\cancel{g^{\mu\sigma}\pd_\mu g_{\rho\sigma}}
+-\cancel{g^{\mu\sigma}\pd_\sigma g_{\mu\rho}} \Big)
++\frac{1}{2}g^{\mu\sigma}\pd\rho g_{\mu\sigma}
+=\frac{1}{2}g^{-1}\pd_\rho g,
+\end{equation}
+where $g=\det(g_{\mu\nu})$ is the determinant of the metric.
+
+In the even more concrete example of polar coordinates on a flat 2D
+surface, we have the metric
+\begin{equation}
+g_{\mu\nu}=
+\begin{bmatrix}
+1&0\\
+0&r^2
+\end{bmatrix}
+\qand
+g^{\mu\nu}=
+\begin{bmatrix}
+1&0\\
+0&r^{-2}
+\end{bmatrix},
+\end{equation}
+resulting in $g=r^2$ and
+\begin{equation}
+\Gamma^\mu_{\mu\rho}=\frac{1}{2}g^{-1}
+\begin{bmatrix}
+\pd_r g\\\pd_\varphi g
+\end{bmatrix}
+=
+\begin{bmatrix}
+r^{-1}\\0
+\end{bmatrix}.
+\end{equation}
+We can now write down the Laplacian as
+\begin{equation}
+\Box\phi=\pd_r(g^{rr}\pd_r\phi)
++\pd_\varphi(g^{\varphi\varphi}\pd_\varphi\phi)
++\Gamma^{\mu}_{\mu r}(g^{rr}\pd_r\phi)
+=\Big[\pd_{rr}+r^{-1}\pd_r+r^{-2}\pd_{\varphi\varphi}
+\Big]\phi.
+\end{equation}
+
+
+\section{A geodesic}
+
+
+
+\section{Some curved geometries}
+
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -424,38 +589,5 @@ from the previous calculation.
 
 
 
-
-%%%%  Some (useful) templates
-
-
-%% På svenska ska citattecknet vara samma i både början och slut.
-%% Använd två apostrofer: ''.
-
-
-%% Including PDF-documents
-\includepdf[pages={1-}]{filnamn.pdf} % NO blank spaces in the file name
-
-%% Figures (pdf, png, jpg, ...)
-\begin{figure}\centering
-\centerline{ % centers figures larges than 1\textwidth
-\includegraphics[width=.8\textwidth]{file_name.pdf}
-}
-\caption{}
-\label{fig:}
-\end{figure}
-
-%% Figures from xfig's "Combined PDF/LaTeX"
-\begin{figure}\centering
-\resizebox{.8\textwidth}{!}{\input{file_name.pdf_t}}
-\caption{}
-\label{fig:}
-\end{figure}
-
-
-%% If you want to add something to the ToC
-%% (Without having an actual header in the text.)
-\stepcounter{section} %For example a 'section'
-\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
-
-
-%  LocalWords:  contravariant Stereographic
+%  LocalWords:  contravariant Stereographic covariant variational
+%  LocalWords:  azimuthal
