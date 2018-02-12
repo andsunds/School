@@ -532,7 +532,7 @@ we get
 +\Gamma^\mu_{\mu\rho}(g^{\rho\nu}\pd_{\nu}\phi).
 \end{equation}
 From here we use the determinant formula
-\begin{equation}
+\begin{equation}\label{eq:det-formula}
 \Gamma^\mu_{\mu\rho}=\frac{1}{2}
 \Big(\cancel{g^{\mu\sigma}\pd_\mu g_{\rho\sigma}}
 -\cancel{g^{\mu\sigma}\pd_\sigma g_{\mu\rho}} \Big)
@@ -634,12 +634,219 @@ $x(t)<t$ for $t>0$.
 
 
 
-
-
-
-
 \section{Some curved geometries}
+\swapcommands{\phi}{\varphi}
+Given the metrics
+\begin{equation}\label{eq8:ds2}
+\rd{s}^2=\frac{\rd{r}^2}{1-k\frac{r^2}{R_0^2}}+r^2\rd\phi^2
+\qc k=-1,0,+1,
+\end{equation}
+we want to compute the curvature scalar
+\begin{equation}
+R=g^{\mu\nu}R_{\mu\nu},
+\end{equation}
+where
+\begin{equation}
+R_{\mu\nu}=R^{\rho}_{\mu\rho\nu}
+\end{equation}
+and
+\begin{equation}
+R^{\rho}_{\sigma\mu\nu}
+=\pd_\mu\Gamma^{\rho}_{\nu\sigma}-\pd_\nu\Gamma^{\rho}_{\mu\sigma}
++\Gamma^\rho_{\mu\tau}\Gamma^\tau_{\nu\sigma}
+-\Gamma^\rho_{\nu\tau}\Gamma^\tau_{\mu\sigma}.
+\end{equation}
+The metric tensor is diagonal and has the form
+\begin{equation}\label{eq8:g}
+g_{\mu\nu}=
+\begin{bmatrix}
+\qty(1-kr^2/R_0^2)^{-1}&0\\
+0&r^{2}
+\end{bmatrix}
+\qand
+g^{\mu\nu}=
+\begin{bmatrix}
+\qty(1-kr^2/R_0^2)&0\\
+0&r^{-2}
+\end{bmatrix}.
+\end{equation}
+Then we need the affine connection
+\begin{equation}
+\Gamma^\rho_{\mu\nu}=\frac{1}{2}g^{\rho\sigma}
+\Big(
+\pd_{\mu}g_{\nu\sigma} +\pd_{\nu}g_{\mu\sigma} -\pd_{\sigma}g_{\mu\nu}
+\Big).
+\end{equation}
+Since $g_{\mu\nu}$ is diagonal we will only have
+$g^{\rho\sigma}=g^{\rho\rho}$ in the first factor, which means that
+\begin{equation}
+\Gamma^r_{\mu\nu}=\frac{1}{2}g^{rr}
+\Big(
+\pd_{\mu}g_{\nu r} +\pd_{\nu}g_{\mu r} -\pd_{r}g_{\mu\nu}
+\Big)
+\end{equation}
+and
+\begin{equation}
+\Gamma^\phi_{\mu\nu}=\frac{1}{2}g^{\phi\phi}
+\Big(
+\pd_{\mu}g_{\nu \phi} +\pd_{\nu}g_{\mu \phi}
+-\cancelto{0}{\pd_{\phi}g_{\mu\nu}}\hspace{1em}
+\Big)
+\end{equation}
+We also point out that $g_{\mu\nu}$ only depends on $r$, meaning that
+only $\pd_r$ survives. With these two comments in mind we get
+\begin{subequations}
+\begin{equation}
+\Gamma^{r}_{r\phi}=\Gamma^{r}_{\phi r}=\frac{1}{2}g^{rr}
+\Big(
+\pd_{r}\cancelto{0}{g_{\phi r}}\hspace{1em}
++\cancelto{0}{\pd_{\phi}g_{rr}}\hspace{1em}
+-\pd_{r}\cancelto{0}{g_{r\phi}}\hspace{1em}
+\Big)
+=0,
+\end{equation}
+\begin{equation}
+\Gamma^{r}_{rr}=\frac{1}{2}g^{rr}\pd_r g_{rr}
+=k\frac{r}{R_0^2}\qty(1-k\frac{r^2}{R_0^2})^{-1},
+\end{equation}
+\begin{equation}
+\Gamma^{r}_{\phi\phi}=-\frac{1}{2}g^{rr}\pd_r g_{\phi\phi}
+=-r\qty(1-k\frac{r^2}{R_0^2}),
+\end{equation}
+\begin{equation}
+\Gamma^\phi_{rr}=\Gamma^{\phi}_{\phi\phi}=0,
+\end{equation}
+\begin{equation}
+\Gamma^\phi_{r\phi}=\Gamma^{\phi}_{\phi r}
+=\frac{1}{2}g^{\phi\phi}\pd_rg_{\phi\phi}
+=\frac{1}{r}.
+\end{equation}
+\end{subequations}
 
+
+For the Riemann tensor, we begin by noting that it is anti-symmetric
+in its last two indices,
+$R^{\rho}_{\sigma\mu\nu}=-R^{\rho}_{\sigma\nu\mu}$, which means that
+we directly get $R^{\rho}_{\sigma rr}=R^{\rho}_{\sigma\phi\phi}=0$ and
+we only have to look at
+\begin{equation}
+R^{\rho}_{\sigma r\phi}=-R^{\rho}_{\sigma \phi r}
+=\pd_{r}\Gamma^{\rho}_{\phi\sigma}
+-\cancelto{0}{\pd_\phi\Gamma^{\rho}_{r\sigma}}\hspace{1em}
++\Gamma^\rho_{r\tau}\Gamma^\tau_{\phi\sigma}
+-\Gamma^\rho_{\phi\tau}\Gamma^\tau_{r\sigma}.
+\end{equation}
+For $\rho=r$ we get
+\begin{equation}
+R^{r}_{\sigma r\phi}=-R^{r}_{\sigma \phi r}
+=\pd_{r}\Gamma^{r}_{\phi\sigma}
++\Gamma^r_{rr}\Gamma^r_{\phi\sigma}
+-\Gamma^r_{\phi\phi}\Gamma^\phi_{r\sigma}
+\end{equation}
+and for $\rho=\phi$ we get
+\begin{equation}
+R^{\phi}_{\sigma r\phi}=-R^{\phi}_{\sigma \phi r}
+=\pd_{r}\Gamma^{\phi}_{\phi\sigma}
++\Gamma^\phi_{r\phi}\Gamma^\phi_{\phi\sigma}
+-\Gamma^\phi_{\phi r}\Gamma^r_{r\sigma}.
+%=\pd_{r}\Gamma^{\phi}_{\phi\sigma}
+%+\frac{1}{r}\Big(
+%\Gamma^\phi_{\phi\sigma}-\Gamma^r_{r\sigma}
+%\Big).
+\end{equation}
+We can now write down the remaining elements
+\begin{subequations}
+\begin{equation}
+R^{r}_{r r\phi}=-R^{r}_{r \phi r}
+=\pd_{r}\cancelto{0}{\Gamma^{r}_{\phi r}}
++\Gamma^r_{rr}\cancelto{0}{\Gamma^r_{\phi r}}
+-\Gamma^r_{\phi\phi}\cancelto{0}{\Gamma^\phi_{rr}}=0,
+\end{equation}
+\begin{equation}
+R^{r}_{\phi r\phi}=-R^{r}_{\phi \phi r}
+=\pd_{r}\Gamma^{r}_{\phi\phi}
++\Gamma^r_{rr}\Gamma^r_{\phi\phi}
+-\Gamma^r_{\phi\phi}\Gamma^\phi_{r\phi}
+=\ldots=\frac{kr^2}{R_0^2},
+\end{equation}
+\begin{equation}
+R^{\phi}_{\phi r\phi}=-R^{\phi}_{\phi \phi r}
+=\pd_{r}\cancelto{0}{\Gamma^{\phi}_{\phi\phi}}
++\Gamma^\phi_{r\phi}\cancelto{0}{\Gamma^{\phi}_{\phi\phi}}
+-\Gamma^\phi_{\phi r}\cancelto{0}{\Gamma^r_{r\phi}}
+=0,
+\end{equation}
+\begin{equation}
+R^{\phi}_{r r\phi}=-R^{\phi}_{r \phi r}
+=\pd_{r}\Gamma^{\phi}_{\phi r}
++\Gamma^\phi_{r\phi}\Gamma^\phi_{\phi r}
+-\Gamma^\phi_{\phi r}\Gamma^r_{rr}
+=\ldots=-\frac{k}{R_0^2}\qty(1-k\frac{r^2}{R_0^2})^{-1}.
+\end{equation}
+\end{subequations}
+With these few non-zero elements the Ricci tensor is easily calculated
+\begin{equation}
+R_{\mu\nu}=R^\rho_{\mu\rho\nu}=R^r_{\mu r\nu}+R^\phi_{\mu\phi\nu}.
+\end{equation}
+We therefore get
+\begin{subequations}
+\begin{equation}
+R_{rr}=\cancelto{0}{R^r_{r r r}}+R^\phi_{r \phi r}
+=\frac{k}{R^2}\qty(1-k\frac{r^2}{R_0^2})^{-1},
+\end{equation}
+\begin{equation}
+R_{\phi\phi}=R^r_{\phi r\phi}+\cancelto{0}{R^{\phi}_{\phi\phi\phi}}\hspace{1em}
+=\frac{kr^2}{R_0^2},
+\end{equation}
+\begin{equation}
+R_{r\phi}=R_{\phi r} =0.
+\end{equation}
+\end{subequations}
+And lastly the curvature scalar becomes
+\begin{equation}\label{eq8:R}
+R=g^{\mu\nu}R_{\mu\nu}=g^{rr}R_{rr}+g^{\phi\phi}R_{\phi\phi}
+=\frac{2k}{R_0^2}.
+\end{equation}
+
+The value of the curvature scalar $R$ seems very reasonable since
+$k=0$ is obviously a flat surface. To see what the other two
+geometries are, $k=\pm1$, we first set $k=1$ and change the
+coordinates to 
+\begin{equation}\label{eq8:theta}
+\begin{cases}
+r= R_0\sin\theta,\\
+\phi=\phi.
+\end{cases}
+\end{equation}
+This means that
+\begin{equation}
+\theta=\arcsin(\frac{r}{R_0})
+\quad\Longrightarrow\quad
+\rd\theta^2=\qty(\frac{\,\rd{r}}{R_0\sqrt{1-r^2/R_0^2}})^2
+=\frac{\rd{r}^2}{R_0^2-r^2},
+\end{equation}
+and the metric \eqref{eq8:ds2} becomes 
+\begin{equation}\label{eq8:ds2+1}
+\eval{\rd{s}^2}_{k=1}=\frac{R_0^2\,\rd{r}^2}{R_0^2-r^2}+r^2\rd\phi^2
+=R_0^2\,\rd\theta^2+R_0^2\sin^2\theta\,\rd\phi^2.
+\end{equation}
+For $k=-1$, we see that changing $\sin\to\sinh$ in \eqref{eq8:theta}
+yields
+\begin{equation}
+\theta=\sinh^{-1}\qty(\frac{r}{R_0})
+\quad\Longrightarrow\quad
+\rd\theta^2=\qty(\frac{\,\rd{r}}{R_0\sqrt{1+r^2/R_0^2}})^2
+=\frac{\rd{r}^2}{R_0^2+r^2},
+\end{equation}
+the the metric then becomes
+\begin{equation}\label{eq8:ds2-1}
+\eval{\rd{s}^2}_{k=-1}=\frac{R_0^2\,\rd{r}^2}{R_0^2+r^2}+r^2\rd\phi^2
+=R_0^2\,\rd\theta^2+R_0^2\sinh^2\theta\,\rd\phi^2.
+\end{equation}
+These two metrics, \eqref{eq8:ds2+1} and \eqref{eq8:ds2-1}, belongs to
+a sphere of radius $R_0$ and a corresponding hyperbolic surface. So it
+is clear that the curvature scalar \eqref{eq8:R} behave just as
+expected. 
 
 
 
