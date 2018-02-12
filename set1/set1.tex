@@ -493,23 +493,169 @@ Solving for $(1+\cos\theta)$ yields
 \end{equation}
 and we see that we can write down the metric for this coordinate
 system as
-\begin{equation}
+\begin{equation}\label{eq4:ds2-sphere}
 \rd{s}^2=4\,\frac{\,\rd{x}^2+\rd{y}^2\,}{(1+r^2)^2},
 \end{equation}
 with $r^2=x^2+y^2$.
 
-\todo[inline]{There is a part ii and iii to this problem as well.}
+To show that this is an Einstein metric, I refer to
+Section~\ref{sec:geometries} where we have already calculaed the Ricci
+tensor for a flat, a spherical and a hyperbolic geometry. Using
+\eqref{eq8:g} and (\ref{eq8:Rmunu}a-c), we see that in
+that coordinate system $R_{\mu\nu}=kr_0^{-2}g_{\mu\nu}$, which in our
+geometry with $k=1$ (sphere) and $r_0=1$ (of radius 1) becomes
+\begin{equation}\label{eq4:R-g}
+R_{\mu\nu}=g_{\mu\nu}.
+\end{equation}
+This was in that coodrdinate system, but since \eqref{eq4:R-g} is a
+\emph{tensor equation} it holds in \emph{any} coordinate system,
+including this. Similarly when we take the metric
+\begin{equation}\label{eq4:ds2-hyper}
+\rd{s}^2=4\,\frac{\,\rd{x}^2+\rd{y}^2\,}{(1-r^2)^2}
+\end{equation}
+which belongs to a hyperbolic surface, we once again use \eqref{eq8:g}
+and (\ref{eq8:Rmunu}a-c), but with $k=-1$ and $r_0=1$. This leads to
+\begin{equation}
+R_{\mu\nu}=-g_{\mu\nu},
+\end{equation}
+which of course also holds in this coordinate system. We can therefore
+conclude that both \eqref{eq4:ds2-sphere} and \eqref{eq4:ds2-hyper}
+are Einstein metrics.
 
 
 \section{Variational method}
 
 \subsection{The basic Lagrangian}
-
-\subsection{Another Lagrangian}
-\begin{equation}\label{eq5:Lagrangian2}
-S'[x]=\int_A^B\rd\tau\,\qty(-g_{\mu\nu}\dv{x^\mu}{\tau}\dv{x^\nu}{\tau})
+We have the action
+\begin{equation}
+S[x]=\int_A^B\rd\tau=\int_A^B\rd\sigma\,\dv{\tau}{\sigma}
+=\int_A^B\rd\sigma\,
+\sqrt{-g_{\mu\nu}\dv{x^\mu}{\sigma}\dv{x^\nu}{\sigma}}.
+\end{equation}
+If we vary this action we get
+\vspace{-1em}
+\begin{equation}\label{eq5:dS1}
+\begin{aligned}
+\delta{S}[x]=&\int_A^B\overbrace{\rd\sigma}^{\rd\tau(\dv*{\sigma}{\tau})}
+\overbrace{\frac{1}{2\sqrt{-g_{\mu\nu}\dv{x^\mu}{\sigma}\dv{x^\nu}{\sigma}}}}
+^{=(2\dv*{\tau}{\sigma})^{-1}}
+\delta{x}^\rho\pd_\rho\qty[-g_{\mu\nu}\dv{x^\mu}{\sigma}\dv{x^\nu}{\sigma}
+]\\
+=&-\frac{1}{2}\int_A^B\rd\tau\,
+\qty(\dv{\sigma}{\tau})^2 \delta{x}^\rho
+\qty[(\pd_{\rho}g_{\mu\nu})\dv{x^\mu}{\sigma}\dv{x^\nu}{\sigma}
++2g_{\mu\nu}\qty(\pd_{\rho}\dv{x^\mu}{\sigma})\dv{x^\nu}{\sigma}
+].
+\end{aligned}
+\end{equation}
+From here we note that
+\begin{equation}
+\dv{x^\mu}{\sigma}+\dv{\delta{x}^\mu}{\sigma}
+=\dv{\sigma}\qty[x^\mu+\delta{x}^\mu]
+=\dv{x^\mu}{\sigma}+\delta{x}^\rho\pd_\rho\dv{x^\mu}{\sigma},
+\end{equation}
+which means that \eqref{eq5:dS1} can be written as
+\begin{equation}\label{eq5:dS2}
+\begin{aligned}
+\delta{S}[x]=&-\frac{1}{2}\int_A^B\rd\tau\,\qty(\dv{\sigma}{\tau})^2 
+\qty[ \delta{x}^\rho(\pd_{\rho}g_{\mu\nu})
+\dv{x^\mu}{\sigma}\dv{x^\nu}{\sigma}
++2g_{\mu\nu}\dv{\delta{x}^\mu}{\sigma}\dv{x^\nu}{\sigma}
+]\\
+=&-\frac{1}{2}\int_A^B\rd\tau\,
+\qty[ \delta{x}^\rho(\pd_{\rho}g_{\mu\nu})
+\dv{x^\mu}{\tau}\dv{x^\nu}{\tau}
++2g_{\mu\nu}\dv{\delta{x}^\mu}{\tau}\dv{x^\nu}{\tau}
+].
+\end{aligned}
+\end{equation}
+We now integrate the last term by parts, yielding
+\todo{Why does the $[...]_A^B$ term vanish?}
+\begin{equation}
+\begin{aligned}
+\int_A^B\rd\tau\,g_{\mu\nu}\dv{\delta{x}^\mu}{\tau}\dv{x^\nu}{\tau}
+=&\qty[g_{\mu\nu}\delta{x}^\mu\dv{x^\nu}{\tau}]_A^B
+-\int_A^B\rd\tau\,\delta{x}^\mu
+\qty(\dv{g_{\mu\nu}}{\tau}\dv{x^\nu}{\tau}
++g_{\mu\nu}\dv[2]{x^\nu}{\tau})\\
+=&-\int_A^B\rd\tau\,\delta{x}^\mu
+\qty((\pd_\sigma g_{\mu\nu})\dv{x^\sigma}{\tau}\dv{x^\nu}{\tau}
++g_{\mu\nu}\dv[2]{x^\nu}{\tau}).
+\end{aligned}
 \end{equation}
 
+We can rename the index $\mu\to\rho$ and then plug this back into
+\eqref{eq5:dS2}, which gives
+\begin{equation}%\label{eq5:dS2}
+\begin{aligned}
+\delta{S}[x]=&\frac{1}{2}\int_A^B\rd\tau\,\delta{x}^\rho
+\qty[ -(\pd_{\rho}g_{\mu\nu})\dv{x^\mu}{\tau}\dv{x^\nu}{\tau}
++2(\pd_\sigma g_{\rho\nu})\dv{x^\sigma}{\tau}\dv{x^\nu}{\tau}
++2g_{\rho\nu}\dv[2]{x^\nu}{\tau} ]\\
+=&\frac{1}{2}\int_A^B\rd\tau\,\delta{x}^\rho 
+\qty[ -(\pd_{\rho}g_{\mu\nu})\dv{x^\mu}{\tau}\dv{x^\nu}{\tau}
++2(\pd_\sigma g_{\rho\nu})\dv{x^\sigma}{\tau}\dv{x^\nu}{\tau}
++2g_{\rho\nu}\dv[2]{x^\nu}{\tau} ].
+\end{aligned}
+\end{equation}
+We want to find the minimum, meaning that $\delta{S}[x]=0$, i.e.
+\begin{equation}\label{eq5:big-geodesic}
+2(\pd_\sigma g_{\rho\nu})\dv{x^\sigma}{\tau}\dv{x^\nu}{\tau}
+-(\pd_{\rho}g_{\mu\nu})\dv{x^\mu}{\tau}\dv{x^\nu}{\tau}
++2g_{\rho\nu}\dv[2]{x^\nu}{\tau} =0
+\end{equation}
+Now we take a look at the first term
+\begin{equation}
+\begin{aligned}
+2(\pd_\sigma g_{\rho\nu})\dv{x^\sigma}{\tau}\dv{x^\nu}{\tau}=&
+\underbrace{(\pd_{\sigma}g_{\rho\nu})
+  \dv{x^\sigma}{\tau}\dv{x^\nu}{\tau}}
+_{\sigma\to\mu,\;\nu\to\sigma}
++\underbrace{(\pd_{\sigma}g_{\rho\nu})
+  \dv{x^\sigma}{\tau}\dv{x^\nu}{\tau}}
+_{\nu\to\mu}\\
+=&(\pd_\mu g_{\rho\sigma})\dv{x^\mu}{\tau}\dv{x^\sigma}{\tau}
++(\pd_\sigma g_{\rho\mu})\dv{x^\sigma}{\tau}\dv{x^\mu}{\tau}\\
+=&\Big(\pd_\mu g_{\rho\sigma}+\pd_\sigma g_{\rho\mu}\Big)
+\dv{x^\mu}{\tau}\dv{x^\sigma}{\tau}.
+\end{aligned}
+\end{equation}
+Then setting $\nu\to\sigma$ in the middle term of
+\eqref{eq5:big-geodesic}, yields
+\begin{equation}
+\Big(\pd_\mu g_{\rho\sigma}+\pd_\sigma g_{\rho\mu}
+-\pd_{\rho}g_{\mu\sigma}\Big)
+\dv{x^\mu}{\tau}\dv{x^\sigma}{\tau}
++2g_{\rho\nu}\dv[2]{x^\nu}{\tau} =0
+\end{equation}
+Then by multiplying everything by $\frac{1}{2}g^{\tau\rho}$ we get
+\begin{equation}
+0=\dv[2]{x^\tau}{\tau} +
+\frac{1}{2}g^{\tau\rho}
+\Big(\pd_\mu g_{\rho\sigma}+\pd_\sigma g_{\rho\mu}
+-\pd_{\rho}g_{\mu\sigma}\Big)
+\dv{x^\mu}{\tau}\dv{x^\sigma}{\tau}
+=\dv[2]{x^\tau}{\tau} +
+\Gamma^\tau_{\mu\sigma}
+\dv{x^\mu}{\tau}\dv{x^\sigma}{\tau},
+\end{equation}
+which is the geodesic equation just as expected.
+
+
+\subsection{Another Lagrangian}
+In this part of the problem we have a slightly different Lagrangian,
+\begin{equation}\label{eq5:Lagrangian2}
+S'[x]=\int_A^B\rd\tau\,\mathcal{L}(x,\dot{x})
+=\int_A^B\rd\tau\,\Big(-g_{\mu\nu}(x)\dot{x^\mu}\dot{x^\nu}\Big),
+\end{equation}
+where $\dot{x}=\dv*{x}{\tau}$. With the Euler-Lagrange equations we
+have
+\begin{equation}
+0=
+\dv{\tau}\qty[\frac{\delta\mathcal{L}}{\delta\dot{x}}]
+-\frac{\delta\mathcal{L}}{\delta{x}}
+=\dv{\tau}\qty[-2g_{\mu\nu}\dot{x^\nu}]
+\end{equation}
 
 
 \section{Covariant Laplacian}
@@ -635,10 +781,11 @@ $x(t)<t$ for $t>0$.
 
 
 \section{Some curved geometries}
+\label{sec:geometries}
 \swapcommands{\phi}{\varphi}
 Given the metrics
 \begin{equation}\label{eq8:ds2}
-\rd{s}^2=\frac{\rd{r}^2}{1-k\frac{r^2}{R_0^2}}+r^2\rd\phi^2
+\rd{s}^2=\frac{\rd{r}^2}{1-k\frac{r^2}{r_0^2}}+r^2\rd\phi^2
 \qc k=-1,0,+1,
 \end{equation}
 we want to compute the curvature scalar
@@ -660,13 +807,13 @@ The metric tensor is diagonal and has the form
 \begin{equation}\label{eq8:g}
 g_{\mu\nu}=
 \begin{bmatrix}
-\qty(1-kr^2/R_0^2)^{-1}&0\\
+\qty(1-kr^2/r_0^2)^{-1}&0\\
 0&r^{2}
 \end{bmatrix}
 \qand
 g^{\mu\nu}=
 \begin{bmatrix}
-\qty(1-kr^2/R_0^2)&0\\
+\qty(1-kr^2/r_0^2)&0\\
 0&r^{-2}
 \end{bmatrix}.
 \end{equation}
@@ -707,11 +854,11 @@ only $\pd_r$ survives. With these two comments in mind we get
 \end{equation}
 \begin{equation}
 \Gamma^{r}_{rr}=\frac{1}{2}g^{rr}\pd_r g_{rr}
-=k\frac{r}{R_0^2}\qty(1-k\frac{r^2}{R_0^2})^{-1},
+=k\frac{r}{r_0^2}\qty(1-k\frac{r^2}{r_0^2})^{-1},
 \end{equation}
 \begin{equation}
 \Gamma^{r}_{\phi\phi}=-\frac{1}{2}g^{rr}\pd_r g_{\phi\phi}
-=-r\qty(1-k\frac{r^2}{R_0^2}),
+=-r\qty(1-k\frac{r^2}{r_0^2}),
 \end{equation}
 \begin{equation}
 \Gamma^\phi_{rr}=\Gamma^{\phi}_{\phi\phi}=0,
@@ -767,7 +914,7 @@ R^{r}_{\phi r\phi}=-R^{r}_{\phi \phi r}
 =\pd_{r}\Gamma^{r}_{\phi\phi}
 +\Gamma^r_{rr}\Gamma^r_{\phi\phi}
 -\Gamma^r_{\phi\phi}\Gamma^\phi_{r\phi}
-=\ldots=\frac{kr^2}{R_0^2},
+=\ldots=\frac{kr^2}{r_0^2},
 \end{equation}
 \begin{equation}
 R^{\phi}_{\phi r\phi}=-R^{\phi}_{\phi \phi r}
@@ -781,7 +928,7 @@ R^{\phi}_{r r\phi}=-R^{\phi}_{r \phi r}
 =\pd_{r}\Gamma^{\phi}_{\phi r}
 +\Gamma^\phi_{r\phi}\Gamma^\phi_{\phi r}
 -\Gamma^\phi_{\phi r}\Gamma^r_{rr}
-=\ldots=-\frac{k}{R_0^2}\qty(1-k\frac{r^2}{R_0^2})^{-1}.
+=\ldots=-\frac{k}{r_0^2}\qty(1-k\frac{r^2}{r_0^2})^{-1}.
 \end{equation}
 \end{subequations}
 With these few non-zero elements the Ricci tensor is easily calculated
@@ -789,14 +936,14 @@ With these few non-zero elements the Ricci tensor is easily calculated
 R_{\mu\nu}=R^\rho_{\mu\rho\nu}=R^r_{\mu r\nu}+R^\phi_{\mu\phi\nu}.
 \end{equation}
 We therefore get
-\begin{subequations}
+\begin{subequations}\label{eq8:Rmunu}
 \begin{equation}
 R_{rr}=\cancelto{0}{R^r_{r r r}}+R^\phi_{r \phi r}
-=\frac{k}{R^2}\qty(1-k\frac{r^2}{R_0^2})^{-1},
+=\frac{k}{r_0^2}\qty(1-k\frac{r^2}{r_0^2})^{-1},
 \end{equation}
 \begin{equation}
 R_{\phi\phi}=R^r_{\phi r\phi}+\cancelto{0}{R^{\phi}_{\phi\phi\phi}}\hspace{1em}
-=\frac{kr^2}{R_0^2},
+=\frac{kr^2}{r_0^2},
 \end{equation}
 \begin{equation}
 R_{r\phi}=R_{\phi r} =0.
@@ -805,7 +952,7 @@ R_{r\phi}=R_{\phi r} =0.
 And lastly the curvature scalar becomes
 \begin{equation}\label{eq8:R}
 R=g^{\mu\nu}R_{\mu\nu}=g^{rr}R_{rr}+g^{\phi\phi}R_{\phi\phi}
-=\frac{2k}{R_0^2}.
+=\frac{2k}{r_0^2}.
 \end{equation}
 
 The value of the curvature scalar $R$ seems very reasonable since
@@ -814,37 +961,37 @@ geometries are, $k=\pm1$, we first set $k=1$ and change the
 coordinates to 
 \begin{equation}\label{eq8:theta}
 \begin{cases}
-r= R_0\sin\theta,\\
+r= r_0\sin\theta,\\
 \phi=\phi.
 \end{cases}
 \end{equation}
 This means that
 \begin{equation}
-\theta=\arcsin(\frac{r}{R_0})
+\theta=\arcsin(\frac{r}{r_0})
 \quad\Longrightarrow\quad
-\rd\theta^2=\qty(\frac{\,\rd{r}}{R_0\sqrt{1-r^2/R_0^2}})^2
-=\frac{\rd{r}^2}{R_0^2-r^2},
+\rd\theta^2=\qty(\frac{\,\rd{r}}{r_0\sqrt{1-r^2/r_0^2}})^2
+=\frac{\rd{r}^2}{r_0^2-r^2},
 \end{equation}
 and the metric \eqref{eq8:ds2} becomes 
 \begin{equation}\label{eq8:ds2+1}
-\eval{\rd{s}^2}_{k=1}=\frac{R_0^2\,\rd{r}^2}{R_0^2-r^2}+r^2\rd\phi^2
-=R_0^2\,\rd\theta^2+R_0^2\sin^2\theta\,\rd\phi^2.
+\eval{\rd{s}^2}_{k=1}=\frac{r_0^2\,\rd{r}^2}{r_0^2-r^2}+r^2\rd\phi^2
+=r_0^2\,\rd\theta^2+r_0^2\sin^2\theta\,\rd\phi^2.
 \end{equation}
 For $k=-1$, we see that changing $\sin\to\sinh$ in \eqref{eq8:theta}
 yields
 \begin{equation}
-\theta=\sinh^{-1}\qty(\frac{r}{R_0})
+\theta=\sinh^{-1}\qty(\frac{r}{r_0})
 \quad\Longrightarrow\quad
-\rd\theta^2=\qty(\frac{\,\rd{r}}{R_0\sqrt{1+r^2/R_0^2}})^2
-=\frac{\rd{r}^2}{R_0^2+r^2},
+\rd\theta^2=\qty(\frac{\,\rd{r}}{r_0\sqrt{1+r^2/r_0^2}})^2
+=\frac{\rd{r}^2}{r_0^2+r^2},
 \end{equation}
 the the metric then becomes
 \begin{equation}\label{eq8:ds2-1}
-\eval{\rd{s}^2}_{k=-1}=\frac{R_0^2\,\rd{r}^2}{R_0^2+r^2}+r^2\rd\phi^2
-=R_0^2\,\rd\theta^2+R_0^2\sinh^2\theta\,\rd\phi^2.
+\eval{\rd{s}^2}_{k=-1}=\frac{r_0^2\,\rd{r}^2}{r_0^2+r^2}+r^2\rd\phi^2
+=r_0^2\,\rd\theta^2+r_0^2\sinh^2\theta\,\rd\phi^2.
 \end{equation}
 These two metrics, \eqref{eq8:ds2+1} and \eqref{eq8:ds2-1}, belongs to
-a sphere of radius $R_0$ and a corresponding hyperbolic surface. So it
+a sphere of radius $r_0$ and a corresponding hyperbolic surface. So it
 is clear that the curvature scalar \eqref{eq8:R} behave just as
 expected. 
 
