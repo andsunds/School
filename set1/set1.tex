@@ -479,8 +479,8 @@ which gives
 =\frac{\rd\theta^2+\sin^2\theta\,\rd\phi^2}{(1+\cos\theta)^2} 
 =\frac{\rd{s}^2}{(1+\cos\theta)^2}.
 \end{equation}
-We see that we are almost there. We just need to use one more
-trigonometric identity,
+We are almost there. We just need to use one more trigonometric
+identity,
 \begin{equation}
 r^2=\tan^2\frac{\theta}{2}\equiv
 \frac{1-\cos\theta}{1+\cos\theta}
@@ -503,6 +503,13 @@ with $r^2=x^2+y^2$.
 
 \section{Variational method}
 
+\subsection{The basic Lagrangian}
+
+\subsection{Another Lagrangian}
+\begin{equation}\label{eq5:Lagrangian2}
+S'[x]=\int_A^B\rd\tau\,\qty(-g_{\mu\nu}\dv{x^\mu}{\tau}\dv{x^\nu}{\tau})
+\end{equation}
+
 
 
 \section{Covariant Laplacian}
@@ -518,7 +525,7 @@ We are free to move around the metric tensor as we wish because of the
 
 Let's use the middle expression to write out the Laplacian
 explicitly. First of all, we note that $\nabla_\nu\phi=\pd_\nu\phi$
-since there is no indeces for the affine connection to work on. Next
+since there is no indices for the affine connection to work on. Next
 we get
 \begin{equation}
 \Box\phi=\pd_\mu(g^{\mu\nu}\pd_\nu)\phi
@@ -560,17 +567,74 @@ resulting in $g=r^2$ and
 r^{-1}\\0
 \end{bmatrix}.
 \end{equation}
-We can now write down the Laplacian as
+We can now write down the covariant Laplacian on a flat surface with
+polar coordinates as
 \begin{equation}
 \Box\phi=\pd_r(g^{rr}\pd_r\phi)
 +\pd_\varphi(g^{\varphi\varphi}\pd_\varphi\phi)
 +\Gamma^{\mu}_{\mu r}(g^{rr}\pd_r\phi)
 =\Big[\pd_{rr}+r^{-1}\pd_r+r^{-2}\pd_{\varphi\varphi}
-\Big]\phi.
+\Big]\phi,
 \end{equation}
+which is precisely what we expected from previous knowledge on
+multi-variable calculus. 
 
 
 \section{A geodesic}
+To find the geodesics of the two dimensional metric
+\begin{equation}
+\rd\tau^2=t^{-2}\,\rd{t}^2 - t^{-2}\,\rd{x}^2,
+\end{equation}
+we begin by noting that it only depends on $t$. This means that if we
+use the Lagrangian from \eqref{eq5:Lagrangian2}
+\begin{equation}
+\mathcal{L}=-g_{\mu\nu}\dv{x^\mu}{\tau}\dv{x^\nu}{\tau}
+=t^{-2}\,\dot{t}^2 - t^{-2}\,\dot{x}^2,
+\end{equation}
+then we can use the Euler-Lagrange equation
+\begin{equation}
+\dv{\tau}\qty[\frac{\delta\mathcal{L}}{\delta\dot{x}}]
+-\cancelto{0}{\frac{\delta\mathcal{L}}{\delta{x}}}=0.
+\end{equation}
+This means that
+\begin{equation}
+\dv{\tau}\qty[-2t^{-2}\dot{x}]=0
+\end{equation}
+or in other words
+\begin{equation}
+\dot{x}=t^2C,
+\end{equation}
+where $C$ is a constant. We can also write
+\begin{equation}
+\dot{t}=\dv{t}{\tau}=\dv{t}{x}\dv{x}{\tau}
+=\dv{t}{x}\,t^2C.
+\end{equation}
+Now, for a time-like ($\rd{t}>\rd{x}$) geodesic we get
+\begin{equation}
++1=t^{-2}\,\qty(\dv{t}{\tau})^2
+- t^{-2}\,\qty(\dv{x}{\tau})^2
+=t^{-2}\,\qty(t^2C\dv{t}{x})^2
+- t^{-2}\qty(t^2C)^2
+\end{equation}
+which leads to
+\begin{equation}
+\qty(\dv{t}{x})^2=\frac{1+C^2t^2}{C^2t^2}
+\quad\Longrightarrow\quad
+\dv{x}{t}=\frac{Ct}{\sqrt{1+C^2t^2}}<1\qfor t>0.
+\end{equation}
+This has the solution
+\begin{equation}
+x(t)=\sqrt{1+C^2t^2}+x_0,
+\end{equation}
+for some constant of integration $x_0$. If we consider a light cone
+emanating from the origin $(t,x)=(0,0)$, and since we want the
+geodesic to lie inside the light cone, $x_0=-1$ and we see that indeed
+$x(t)<t$ for $t>0$.
+
+
+
+
+
 
 
 
@@ -589,5 +653,10 @@ We can now write down the Laplacian as
 
 
 
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+
 %  LocalWords:  contravariant Stereographic covariant variational
-%  LocalWords:  azimuthal
+%  LocalWords:  azimuthal affine
