@@ -334,13 +334,6 @@ given above.
   Therefore since $\rd{t}>\rd\tau$ the Earth clock seems slower than
   an identical clock at the distant observer.}
 
-%\begin{figure}\centering
-%\resizebox{.8\textwidth}{!}{
-%\input{figures/Laika.pdf_t}%}
-%\caption{A circular orbit around the Earth}
-%\label{fig:orbit}
-%\end{figure}
-
 To get the SR time dilation, we need the orbital speed which is
 handily calculated using Newtonian mechanics to be
 \begin{equation}
@@ -420,17 +413,17 @@ from the previous calculation.
 \swapcommands{\phi}{\varphi}
 
 \begin{figure}\centering
-%\resizebox{.8\textwidth}{!}{
-\input{figures/stereographic.pdf_t}%}
+\resizebox{.6\textwidth}{!}{
+\input{figures/stereographic.pdf_t}}
 \caption{}
 \label{fig:stereographic}
 \end{figure}
 
 \figref{fig:stereographic} shows the geometry of a stereographic
-projection from the south pole of the unit sphere onto the equatorial
+projection, from the south pole of the unit sphere onto the equatorial
 plane, for two points on the sphere with the same polar angle
-$\phi$. From the Theorem of inscribed angles it is clear that the
-vertical angle from the south pole is exactly half the azimuthal
+$\phi$. From the \emph{theorem of inscribed angles} it is clear that
+the vertical angle from the south pole is exactly half the azimuthal
 angle $\theta$. This means that the distance from $(x,y)$ to the
 origin, $r$, must be given by $r=\tan(\theta/2)$. Therefore,
 expressing $x$ and $y$ in polar coordinates we get
@@ -499,7 +492,7 @@ system as
 with $r^2=x^2+y^2$.
 
 To show that this is an Einstein metric, I refer to
-Section~\ref{sec:geometries} where we have already calculaed the Ricci
+Section~\ref{sec:geometries} where we have already calculate the Ricci
 tensor for a flat, a spherical and a hyperbolic geometry. Using
 \eqref{eq8:g} and (\ref{eq8:Rmunu}a-c), we see that in
 that coordinate system $R_{\mu\nu}=kr_0^{-2}g_{\mu\nu}$, which in our
@@ -507,7 +500,7 @@ geometry with $k=1$ (sphere) and $r_0=1$ (of radius 1) becomes
 \begin{equation}\label{eq4:R-g}
 R_{\mu\nu}=g_{\mu\nu}.
 \end{equation}
-This was in that coodrdinate system, but since \eqref{eq4:R-g} is a
+This was in that coordinate system, but since \eqref{eq4:R-g} is a
 \emph{tensor equation} it holds in \emph{any} coordinate system,
 including this. Similarly when we take the metric
 \begin{equation}\label{eq4:ds2-hyper}
@@ -525,9 +518,9 @@ are Einstein metrics.
 
 \section{Variational method}
 
-\subsection{The basic Lagrangian}
+\subsection{The basic action}
 We have the action
-\begin{equation}
+\begin{equation}\label{eq5:S}
 S[x]=\int_A^B\rd\tau=\int_A^B\rd\sigma\,\dv{\tau}{\sigma}
 =\int_A^B\rd\sigma\,
 \sqrt{-g_{\mu\nu}\dv{x^\mu}{\sigma}\dv{x^\nu}{\sigma}}.
@@ -570,11 +563,10 @@ which means that \eqref{eq5:dS1} can be written as
 \end{aligned}
 \end{equation}
 We now integrate the last term by parts, yielding
-\todo{Why does the $[...]_A^B$ term vanish?}
 \begin{equation}
 \begin{aligned}
 \int_A^B\rd\tau\,g_{\mu\nu}\dv{\delta{x}^\mu}{\tau}\dv{x^\nu}{\tau}
-=&\qty[g_{\mu\nu}\delta{x}^\mu\dv{x^\nu}{\tau}]_A^B
+=&\cancel{\qty[g_{\mu\nu}\delta{x}^\mu\dv{x^\nu}{\tau}]_A^B}
 -\int_A^B\rd\tau\,\delta{x}^\mu
 \qty(\dv{g_{\mu\nu}}{\tau}\dv{x^\nu}{\tau}
 +g_{\mu\nu}\dv[2]{x^\nu}{\tau})\\
@@ -583,6 +575,9 @@ We now integrate the last term by parts, yielding
 +g_{\mu\nu}\dv[2]{x^\nu}{\tau}).
 \end{aligned}
 \end{equation}
+The term $[\ldots]_A^B$ vanish, since we require that
+$\delta{x}^\mu=0$ at the end points -- otherwise the path would no
+longer be from $A$ to $B$.
 
 We can rename the index $\mu\to\rho$ and then plug this back into
 \eqref{eq5:dS2}, which gives
@@ -598,11 +593,12 @@ We can rename the index $\mu\to\rho$ and then plug this back into
 +2g_{\rho\nu}\dv[2]{x^\nu}{\tau} ].
 \end{aligned}
 \end{equation}
-We want to find the minimum, meaning that $\delta{S}[x]=0$, i.e.
+We want to find the path that minimizes the action, meaning that
+$\delta{S}[x]=0$, or in other words
 \begin{equation}\label{eq5:big-geodesic}
 2(\pd_\sigma g_{\rho\nu})\dv{x^\sigma}{\tau}\dv{x^\nu}{\tau}
 -(\pd_{\rho}g_{\mu\nu})\dv{x^\mu}{\tau}\dv{x^\nu}{\tau}
-+2g_{\rho\nu}\dv[2]{x^\nu}{\tau} =0
++2g_{\rho\nu}\dv[2]{x^\nu}{\tau} =0.
 \end{equation}
 Now we take a look at the first term
 \begin{equation}
@@ -642,21 +638,47 @@ Then by multiplying everything by $\frac{1}{2}g^{\tau\rho}$ we get
 which is the geodesic equation just as expected.
 
 
-\subsection{Another Lagrangian}
-In this part of the problem we have a slightly different Lagrangian,
+\subsection{Another action}
+In this part of the problem we have a slightly different Lagrangian
+for the action,
 \begin{equation}\label{eq5:Lagrangian2}
 S'[x]=\int_A^B\rd\tau\,\mathcal{L}(x,\dot{x})
 =\int_A^B\rd\tau\,\Big(-g_{\mu\nu}(x)\dot{x^\mu}\dot{x^\nu}\Big),
 \end{equation}
 where $\dot{x}=\dv*{x}{\tau}$. With the Euler-Lagrange equations we
-have
+get
+\vspace{-1ex}
 \begin{equation}
-0=
-\dv{\tau}\qty[\frac{\delta\mathcal{L}}{\delta\dot{x}}]
--\frac{\delta\mathcal{L}}{\delta{x}}
-=\dv{\tau}\qty[-2g_{\mu\nu}\dot{x^\nu}]
+\begin{aligned}
+0=&
+\dv{\tau}\qty[\pdv{\mathcal{L}}{\dot{x}^\rho}]
+-\dv{\mathcal{L}}{{x}^\rho}
+=\dv{\tau}\bigg[-2g_{\mu\nu}
+\overbrace{\pdv{\dot{x}^\mu}{\dot{x}^\rho}}^{=\delta^\mu_\rho}
+\dot{x^\nu}\bigg]
+-\Big(-(\pd_{\rho}g_{\mu\nu})\dot{x}^{\mu}\dot{x}^\nu\Big)\\
+=&-2g_{\nu\rho}\ddot{x}^\nu
+-2\dv{g_{\nu\rho}}{\tau}\dot{x}^\nu
++(\pd_{\rho}g_{\mu\nu})\dot{x}^{\mu}\dot{x}^\nu\\
+=&-2g_{\nu\rho}\dv[2]{x^\nu}{\tau}
+-2(\pd_{\sigma}g_{\nu\rho})\dv{x^\sigma}{\tau}\dv{x^\nu}{\tau}
++(\pd_{\rho}g_{\mu\nu})\dv{x^{\mu}}{\tau}\dv{x^\nu}{\tau}.
+\end{aligned}
 \end{equation}
-
+This last step is exactly minus the LHS of \eqref{eq5:big-geodesic},
+which we just showed resulted in the geodesic equation. We can
+therefore now say that \eqref{eq5:Lagrangian2} also gives the same
+geodesic equation. However, one rather serious drawback of
+\eqref{eq5:Lagrangian2} is that it is \emph{not} parametrization
+invariant
+\begin{equation}
+S'[x]=\int_A^B\rd\sigma\,\dv{\tau}{\sigma}
+\qty(-g_{\mu\nu}\dv{x^\mu}{\tau}\dv{x^\nu}{\tau})
+=\int_A^B\rd\sigma\,\dv{\sigma}{\tau}
+\qty(-g_{\mu\nu}\dv{x^\mu}{\sigma}\dv{x^\nu}{\sigma}).
+\end{equation}
+There pops up an unwanted factor $\dv*{\sigma}{\tau}$ with this
+Lagrangian, which is avoided by the square root in \eqref{eq5:S}.
 
 \section{Covariant Laplacian}
 \swapcommands{\phi}{\varphi}
@@ -671,7 +693,7 @@ We are free to move around the metric tensor as we wish because of the
 
 Let's use the middle expression to write out the Laplacian
 explicitly. First of all, we note that $\nabla_\nu\phi=\pd_\nu\phi$
-since there is no indices for the affine connection to work on. Next
+since there is no indices for the affine connection to act on. Next
 we get
 \begin{equation}
 \Box\phi=\pd_\mu(g^{\mu\nu}\pd_\nu)\phi
@@ -723,7 +745,7 @@ polar coordinates as
 \Big]\phi,
 \end{equation}
 which is precisely what we expected from previous knowledge on
-multi-variable calculus. 
+multivariate calculus. 
 
 
 \section{A geodesic}
@@ -739,8 +761,8 @@ use the Lagrangian from \eqref{eq5:Lagrangian2}
 \end{equation}
 then we can use the Euler-Lagrange equation
 \begin{equation}
-\dv{\tau}\qty[\frac{\delta\mathcal{L}}{\delta\dot{x}}]
--\cancelto{0}{\frac{\delta\mathcal{L}}{\delta{x}}}=0.
+\dv{\tau}\qty[\pdv{\mathcal{L}}{\dot{x}}]
+-\cancelto{0}{\dv{\mathcal{L}}{x}}=0.
 \end{equation}
 This means that
 \begin{equation}
@@ -1013,4 +1035,4 @@ expected.
 %%% End:
 
 %  LocalWords:  contravariant Stereographic covariant variational
-%  LocalWords:  azimuthal affine
+%  LocalWords:  azimuthal affine parametrization Ricci
