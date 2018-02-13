@@ -48,7 +48,7 @@ swedish, english %% Make sure to put the main language last!
 \title{Gravitation and Cosmology -- FFM 071
 \\ {\Large Hand-in set 1} }
 \author{Andréas Sundström}
-\date{\today}
+\date{2018-02-13}
 
 \maketitle
 
@@ -392,7 +392,8 @@ $v^i\sim v\ll1$.
 We can now evaluate \eqref{eq3:dtaudt} to be
 \begin{equation}
 \qty(\frac{\rd\tau}{\rd{t}})^2\approx
--g_{00}+\eta_{ij}\frac{\rd{x}^i}{\rd{t}}\frac{\rd{x}^j}{\rd{t}}
+-g_{00}\dv{x^0}{t}\dv{x^0}{t}
++\eta_{ij}\dv{x^i}{t}\dv{x^j}{t}
 =1+2\phi-v^2.
 \end{equation}
 For the orbiting satellite this becomes
@@ -445,7 +446,7 @@ begin to compute
 =\frac{\cos\phi\;\rd\theta}{2\cos^2(\theta/2)}
 -\tan\frac{\theta}{2}\,\sin\phi\,\rd\phi
 \end{equation}
-and
+and similarly
 \begin{equation}
 \rd{y}=\pdv{y}{\theta}\rd\theta+\pdv{y}{\phi}\rd\phi
 =\frac{\sin\phi\;\rd\theta}{2\cos^2(\theta/2)}
@@ -457,8 +458,9 @@ From here we easily calculate
 \frac{\rd\theta^2}{4\cos^4(\theta/2)} 
 +\tan^2\frac{\theta}{2}\;\rd\phi^2
 \end{equation}
-by using $\cos^2+\sin^2\equiv1$ and seeing that the cross
-terms cancel. To simplify this, we use the trigonometric identities
+by using the Pythagorean trigonometric identity and seeing that the
+$\rd\theta\rd\phi$ terms cancel. To simplify this, we use the
+trigonometric identities
 \begin{equation}
 \cos^2(\theta/2)\equiv\frac{1+\cos\theta}{2}
 \end{equation}
@@ -668,9 +670,11 @@ get
 This last step is exactly minus the LHS of \eqref{eq5:big-geodesic},
 which we just showed resulted in the geodesic equation. We can
 therefore now say that \eqref{eq5:Lagrangian2} also gives the same
-geodesic equation. However, one rather serious drawback of
+geodesic equation. This action is of course also invariant under
+general coordinate transformation
+$x\to\tilde{x}=\tilde{x}(x)$. However, one major drawback of
 \eqref{eq5:Lagrangian2} is that it is \emph{not} parametrization
-invariant
+invariant 
 \begin{equation}
 S'[x]=\int_A^B\rd\sigma\,\dv{\tau}{\sigma}
 \qty(-g_{\mu\nu}\dv{x^\mu}{\tau}\dv{x^\nu}{\tau})
