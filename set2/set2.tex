@@ -1,0 +1,188 @@
+\documentclass[11pt,a4paper, 
+swedish, english %% Make sure to put the main language last!
+]{article}
+\pdfoutput=1
+
+%% Andréas's custom package 
+%% (Will work for most purposes, but is mainly focused on physics.)
+\usepackage{../custom_as}
+
+%% Figures can now be put in a folder: 
+\graphicspath{ {figures/} %{some_folder_name/}
+}
+
+%% If you want to change the margins for just the captions
+\usepackage[margin=10 pt]{caption}
+
+%% To add todo-notes in the pdf
+\usepackage[%disable  %%this will hide all notes
+]{todonotes} 
+
+%% Change the margin in the documents
+\usepackage[
+%            top    = 3cm,              %% top margin
+%            bottom = 3cm,              %% bottom margin
+%            left   = 2.5cm, right  = 2.5cm %% left and right margins
+]{geometry}
+
+
+%% If you want to change the formatting of the section headers
+%\renewcommand{\thesection}{...}
+
+\newcommand{\EM}{\text{EM}}
+\newcommand{\E}{\text{E}}
+%\newcommand{\GR}{\text{GR}}
+%\newcommand{\SR}{\text{SR}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you want to use an external file for the title page
+%\input{titlepages.tex}
+
+
+%%%%%%%%%%%%%%%%%%%% vvv Internal title page vvv %%%%%%%%%%%%%%%%%%%%%
+\title{Gravitation and Cosmology -- FFM 071
+\\ {\Large Hand-in set 2} }
+\author{Andréas Sundström}
+\date\today%{2018-02-13}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%% ^^^ Internal title page ^^^ %%%%%%%%%%%%%%%%%%%%%
+%% If you want a list of all todos
+%\todolist
+
+\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+\setcounter{section}{8}
+
+\section{3D anti-de Sitter}
+
+The $\text{AdS}_3$ metric
+\begin{equation}\label{eq1:metric1}
+\rd{s}^2=-\rd{u}^2-\rd{v}^2+\rd{x}^2+\rd{y}^2
+\end{equation}
+under the constraint
+\begin{equation}\label{eq1:constraint}
+-u^2-v^2+x^2+y^2=-R^2,
+\end{equation}
+can be rewritten using the change of variables
+\begin{equation}\label{eq1:var-change}
+\begin{aligned}
+&u=\sqrt{R^2+r^2}\cos(t/R)
+\qc\qquad &x=r\cos\phi, \\
+&v=\sqrt{R^2+r^2}\sin(t/R)
+\qc\qquad &y=r\sin\phi.
+\end{aligned}
+\end{equation}
+Firstly it is easy to confirm that \eqref{eq1:var-change} satify
+\eqref{eq1:constraint} by noting that
+\begin{equation}
+u^2+v^2=R^2+r^2\qand
+x^2+y^2=r^2.
+\end{equation}
+Then to calculate the metric, we need
+\begin{equation}
+\rd{u}=\pdv{u}{r}\rd{r}+\pdv{u}{t}\rd{t}+\pdv{u}{\phi}\rd\phi
+=\frac{r\cos(t/R)\rd{r}}{\sqrt{R^2+r^2}}
+-\frac{\sqrt{R^2+r^2}}{R}\sin(t/R)\rd{t}
+\end{equation}
+and similarly for
+\begin{equation}
+\rd{v}=\frac{r\sin(t/R)\rd{r}}{\sqrt{R^2+r^2}}
++\frac{\sqrt{R^2+r^2}}{R}\cos(t/R)\rd{t},
+\end{equation}
+which leads to
+\begin{equation}
+\rd{u}^2+\rd{v}^2=
+\frac{r^2\rd{r}^2}{R^2+r^2}+\frac{R^2+r^2}{R^2}\rd{t}^2
+\end{equation}
+Then since we already recognize the polar coordiantes for $x$ and $y$,
+we can write down
+\begin{equation}
+\rd{x}^2+\rd{y}^2=\rd{r}^2+r^2\rd\phi^2.
+\end{equation}
+We can now write down the metric \eqref{eq1:metric1} in terms of the
+new coodinates
+\begin{equation}
+\begin{aligned}
+\rd{s}^2=&-\frac{R^2+r^2}{R^2}\rd{t}^2
++\qty[1-\frac{r^2}{R^2+r^2}]\rd{r}^2+r^2\rd\phi^2\\
+=&-\frac{R^2+r^2}{R^2}\rd{t}^2
++\frac{R^2}{R^2+r^2}\rd{r}^2+r^2\rd\phi^2
+\end{aligned}
+\end{equation}
+
+The proper distance from $r=0$ to $r=\infty$ can easily be calcualted
+as
+\begin{equation}
+S=\int_{r=0}^{r=\infty}\rd{s}=
+\begin{Bmatrix}
+\rd{t}=0\\
+\rd{\phi}=0
+\end{Bmatrix}
+=\int_0^\infty\rd{r}
+\overbrace{\frac{R}{\sqrt{R^2+r^2}}}^{\sim R/r\text{ for }r\gg R}
+ =\infty.
+\end{equation}
+Meanwhile the time it takes for a light signal to traverses the same
+path is
+\begin{equation}
+T=\int_{r=0}^{r=\infty}\rd{t}
+=\int_0^\infty\rd{r}\frac{R^2}{R^2+r}
+=\frac{\pi R}{2},
+\end{equation}
+where $\rd{t}$ have been calculated using
+\begin{equation}
+0=\rd{\tau^2}=\frac{R^2+r^2}{R^2}\rd{t}^2
+-\frac{R^2}{R^2+r^2}\rd{r}^2
+\end{equation}
+for light.
+
+
+
+\section{Maximally symmetric metric?}
+We have a metric given by
+\begin{equation}
+\rd{s}^2=-\rd{t}^2+\rd{x}^2+\rd{y}^2+\rd{z}^2
+-4\cosh(\frac{x}{2})
+\qty[\cosh(\frac{x}{2})(\rd{t}+\rd{x})-\sinh(\frac{x}{2})\rd{y}]\rd{x},
+\end{equation}
+which in matrix form gives
+\begin{equation}
+g_{\mu\nu}=
+\begin{bmatrix}
+-1 & -2\cosh^2(\frac{x}{2}) &0 &0\\
+-2\cosh^2(\frac{x}{2}) &1-4\cosh^2(\frac{x}{2}) &+\sinh(x)&0\\
+0&+\sinh(x)&1&0\\
+0&0&0&1
+\end{bmatrix}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+
+%  LocalWords:  contravariant Stereographic covariant variational
+%  LocalWords:  azimuthal affine parametrization Ricci
