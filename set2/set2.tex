@@ -298,7 +298,8 @@ z'=z'(z)=z
 \end{cases}
 \end{equation}
 results in $\rd{s'}^2$ from \eqref{eq10:Mink1} and $\rd{s}^2$ from
-\eqref{eq10:ds} being equal.
+\eqref{eq10:ds} being equal. With this transformation of variables
+the maximal symmetry is obvious.
 
 
 
@@ -326,6 +327,9 @@ A^2(\phi_2)&0\\
 0&{r_2}^2
 \end{bmatrix}.
 \end{equation}
+Here $\phi_1$ denotes an angle running around the ``hole'' of the
+torus, and $\phi_2$ runs around the ``cylinder'' making up the torus;
+$r_1$ and $r_2$ are the corresponding radii.
 From this it is a simple task to compute the Affine connection
 \begin{equation}
 \Gamma^\rho_{\mu\nu}=\frac{1}{2}g^{\rho\sigma}
@@ -375,9 +379,73 @@ R=g^{\mu\nu}R_{\mu\nu}=g^{11}R_{11}+g^{22}R_{22}
 We now also note that $R_{\mu\nu}=g_{\mu\nu}R/2$ as is the case for
 maximally symmetric spaces.
 
-\todo[inline]{Still need to calculate the Killing vectors. Can't seem
-  to separate the varaibles properly.}
-
+Now to the Killing vectors. We start with the Killing equations
+\begin{equation}
+0=\nabla_\mu\xi_\nu+\nabla_\nu\xi_{\mu}
+=\pd_\mu\xi_\nu+\pd_\nu\xi_{\mu}-2\Gamma^\rho_{\mu\nu}\xi_\rho.
+\end{equation}
+This gives us three equations for $\mu\nu=11$, $12$, and $22$,
+\begin{equation}\label{eq11:Killing0}
+\begin{cases}
+\pd_1\xi_1=\Gamma^\rho_{11}\xi_{\rho}
+=\frac{A(\phi_2)\sin\phi_2}{r_2}\xi_{2}\\
+\pd_1\xi_2+\pd_2\xi_1=2\Gamma^\rho_{12}\xi_{\rho}
+=-2\frac{r_2\sin\phi_2}{A(\phi_2)}\xi_1\\
+\pd_2\xi_2=\Gamma^\rho_{22}\xi_{\rho}=0.
+\end{cases}
+\end{equation}
+Using the last equation we get
+\begin{equation}
+\xi_2=f(\phi_1),
+\end{equation}
+then substituting this into the first equation we get
+\begin{equation}\label{eq11:xi1}
+\xi_1=\frac{A(\phi_2)\sin\phi_2}{r_2}F(\phi_1)+g(\phi_2),
+\end{equation}
+where $\pdv*{F}{\phi_1}=f(\phi_1)$, and lastly the middle equation
+becomes 
+\begin{equation}
+f'(\phi_1)+\qty(\frac{A(\phi_2)}{r_2}\cos\phi_2-\sin^2\phi_2)F(\phi_1)
++g'(\phi_2)=-2
+\qty[\sin^2\phi_2F(\phi_1)+\frac{r_2\sin\phi_2}{A(\phi_2)}g(\phi_2)],
+\end{equation}
+where prime denotes differentiation with respect to the variable of the
+respective functions. This can now be rewritten, using
+$A(\phi_2)=r_1+r_2\cos\phi_2$, to 
+\begin{equation}\label{eq11:Killing1}
+f'(\phi_1)+g'(\phi_2)+\qty(1+\frac{r_1}{r_2}\cos\phi_2)F(\phi_1)
+=-\frac{2r_2\sin\phi_2}{r_1+r_2\cos\phi_2}g(\phi_2).
+\end{equation}
+This equation must hold for any combination of $\phi_1$ and
+$\phi_2$. Specifically if we fix $\phi_1$ at some value, we can
+find a solution for $g(\phi_2)=\tilde{g}(\phi_2)$. However, this
+solution must also be a solution for any other value of $\phi_1$, and
+the only way this can be fulfilled is if we require that
+$F(\phi_1)\equiv F_0$ is constant for all $\phi_1$. This also means
+that $f(\phi_1)\equiv0$ and $f'(\phi_1)\equiv0$. We can now write
+\eqref{eq11:Killing1} as
+\begin{equation}
+g'(\phi_2)+\frac{2r_2\sin\phi_2}{r_1+r_2\cos\phi_2}g(\phi_2)
+=-\qty(1+\frac{r_1}{r_2}\cos\phi_2)F_0,
+\end{equation}
+which can be solved using the particular and homogeneous
+solution. However to make the process a little more expedient we can
+also use \textsl{Mathematica}, which gives the solution
+\begin{equation}
+g(\phi_2)=C\qty(r_1{+}r_2\cos\phi_2)^2
+-F_0\frac{(r_1{+}r_2\cos\phi_2)\sin\phi_2}{r_2}
+=CA^2(\phi_2)-F_0\frac{A(\phi_2)\sin\phi_2}{r_2}.
+\end{equation}
+The final Killing vectors now become
+\begin{equation}
+\xi_1=CA^2(\phi_2)\qc
+\xi_2=0.
+\end{equation}
+Note that the second term in $g$ is canceled in \eqref{eq11:xi1}, and
+the seeming second Killing vector does not exist. I.e. there is only
+one Killing vector, and it corresponds to a translation in $\phi_1$;
+in the embedded geometry that is a rotation around the ``hole'' of 
+the torus, which obviously is the only symmetry of a torus.
 
 
 \section{Wormholes}
@@ -506,3 +574,4 @@ represents the energy density which can not be negative.
 
 %  LocalWords:  contravariant Stereographic covariant variational
 %  LocalWords:  azimuthal affine parametrization Ricci Minkowski
+%  LocalWords:  Mathematica
