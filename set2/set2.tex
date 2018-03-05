@@ -168,19 +168,71 @@ Here we have used the hyperbolic identities
 2\cosh(\frac{x}{2})\sinh(\frac{x}{2})
 \equiv \sinh x.
 \end{equation}
-\todo[inline]{Justify that this is Minkowski, i.e. that the Riemann
-  tensor is 0.}
 
-To get to the familiar Minkowski metric,
-\begin{equation}\label{eq10:Mink1}
-\rd{s'}^2=-\rd{t'}^2+\rd{x'}^2+\rd{y'}^2+\rd{z'}^2,
+To see if this is maximally symmetric, we calculate the Riemann
+tensor. To do that we need the affine connection
+\begin{equation}
+\Gamma^\rho_{\mu\nu}=\frac{1}{2}g^{\rho\sigma}
+\qty(\pd_{\mu}g_{\nu\sigma}+\pd_{\nu}g_{\mu\sigma}-\pd_{\sigma}g_{\mu\nu}).
 \end{equation}
-we introduce the new variables $t'=t'(t,x)$, $x'=x'(x)$, $y'=y'(x,y)$,
-and $z'=z'(z)=z$. For $z'$ the choice is obvious, and for the other
-three variables it is relatively easy to convince yourself that that
-they should only depend on $x$ and their non-primed counterpart. WE
-can now wirite out the metric \eqref{eq10:Mink1} (ignoring $z'$ and
-$z$ since we already know that transformation)
+However we inside the parenthesis only the elements with $\mu\nu=xx$
+survive. To prove this we take $\mu\nu=x\alpha$, where $\alpha\neq x$,
+this gives
+\begin{equation}
+\pd_{x}g_{\alpha\sigma}+\cancelto{0}{\pd_{\alpha}}g_{x\sigma}-\pd_{\sigma}g_{x\alpha}
+=\pd_{x}g_{\alpha\sigma}-\pd_{\sigma}g_{x\alpha}.
+\end{equation}
+The only way for either of the two remaining terms to survive is if
+$\sigma=x$, but in that case the two terms are identical and cancel
+each other. Then for $\mu\nu=\alpha\beta$, where $\alpha,\beta\neq x$,
+we get
+\vspace{-1em}
+\begin{equation}
+\cancelto{0}{\pd_{\alpha}}g_{\beta\sigma}
++\cancelto{0}{\pd_{\beta}}g_{\alpha\sigma}
+-\cancel{\pd_{\sigma}g_{\alpha\beta}}=0.
+\end{equation}
+The last term cancel because the only non-constant elements in
+$g_{\mu\nu}$ are on either $\mu=x$ or $\nu=x$, which is not the case
+for $\mu\nu=\alpha\beta$. Hence the only non-vanishing elements of the
+affine connection are $\Gamma^\rho_{xx}$. This then means that the
+Riemann tensor,
+\begin{equation}
+{R^\rho}_{\sigma\mu\nu}=
+\pd_{\mu}\Gamma^\rho_{\sigma\nu}-\pd_{\nu}\Gamma^\rho_{\sigma\mu}
++\Gamma^\rho_{\mu\tau}\Gamma^\tau_{\sigma\nu}
+-\Gamma^\rho_{\nu\tau}\Gamma^\tau_{\sigma\mu},
+\end{equation}
+actually vanishes. To see this more clearly, we note that the
+anti-symmetry in $\mu\nu$ means that $\mu\neq\nu$, but due to the
+restriction to $\Gamma^\rho_{xx}$ we must have one of $\mu$ or $\nu$
+to be $x$. Without loss of generality, we choose $\mu=x$ and
+$\nu=\alpha\neq x$, and we get
+\begin{equation}
+{R^\rho}_{\sigma x\alpha}=
+\pd_{x}\cancelto{0}{\Gamma^\rho_{\sigma\alpha}}
+-\cancelto{0}{\pd_{\alpha}}\Gamma^\rho_{\sigma x}
++\Gamma^\rho_{x\tau}\cancelto{0}{\Gamma^\tau_{\sigma\alpha}}
+-\cancelto{0}{\Gamma^\rho_{\alpha\tau}}\Gamma^\tau_{\sigma x}=0.
+\end{equation}
+This is in other words a flat space-time, and is therefore maximally
+symmetric.
+% Note to self: See Weinberg p. 380:
+% "Thus any flat metric admits $N(N+1)/2$ independent Killing vectors,
+% and is therefore maximally symmetric."
+
+
+We will therefore now try to get \eqref{eq10:ds} into the familiar
+form of the Minkowski metric,
+\begin{equation}\label{eq10:Mink1}
+\rd{s'}^2=-\rd{t'}^2+\rd{x'}^2+\rd{y'}^2+\rd{z'}^2.
+\end{equation}
+To do this we introduce the new variables $t'=t'(t,x)$, $x'=x'(x)$,
+$y'=y'(x,y)$, and $z'=z'(z)=z$. For $z'$ the choice is obvious, and
+for the other three variables it is relatively easy to convince
+yourself that that they should only depend on $x$ and their non-primed
+counterpart. WE can now write out the metric \eqref{eq10:Mink1}
+(ignoring $z'$ and $z$ since we already know that transformation) 
 \begin{equation}%\label{eq10:Mink2}
 \begin{aligned}
 \rd{s'}^2=&
@@ -384,7 +436,7 @@ $(r^2+a^2)$ (and also with $\sin^2\theta$ for the last equation), to
 \todo[inline]{Find wormhole solution!}
 
 Using \eqref{eq12:Gamma} we can easily calculate the Riemann tensor
-whose non-zero elemts are
+whose non-zero elements are
 \begin{equation}
 \begin{aligned}
 &{R^r}_{\theta r\theta}=-{R^r}_{\theta\theta r}
@@ -392,11 +444,11 @@ whose non-zero elemts are
 {R^r}_{\phi r\phi}=-{R^r}_{\phi\phi r}
 =-\frac{a^2\sin^2\theta}{R^2+a^2}\\
 &{R^\theta}_{r\theta r}=-{R^\theta}_{rr\theta}
-=-\frac{a^2}{r^2+a^2}\qc
+=-\frac{a^2}{(r^2+a^2)^2}\qc
 {R^\theta}_{\phi\theta\phi}=-{R^\theta}_{\phi\phi\theta}
 =\frac{a^2\sin^2\theta}{r^2+a^2},\\
 &{R^\phi}_{r\phi r}=-{R^\phi}_{rr\phi}
-=-\frac{r^2}{r^2+a^2}\qc
+=-\frac{a^2}{(r^2+a^2)^2}\qc
 {R^\phi}_{\theta\phi\theta}=-{R^\phi}_{\theta\theta\phi}
 =\frac{a^2}{r^2+a^2}.
 \end{aligned}
@@ -407,23 +459,33 @@ be diagonal and is given by
 \begin{equation}
 R_{\mu\nu}=\text{Diag}
 \begin{bmatrix}
-0,& -1,& 0, &0
+0,& -\frac{2a^2}{(r^2+a^2)^2},& 0, &0
 \end{bmatrix},
 \end{equation}
 and then the curvature tensor trivially becomes
 \begin{equation}
-R=g^{\mu\nu}R_{\mu\nu}=-1.
+R=g^{\mu\nu}R_{\mu\nu}=-\frac{2a^2}{(r^2+a^2)^2}.
 \end{equation}
-This means that we now can write down the Einstein tensor as
+We also see that $a\to0$ recovers a flat space, as we would expect
+from the metric.
+
+We now can write down the Einstein tensor as
 \begin{equation}
 G_{\mu\nu}=R_{\mu\nu}-\frac{R}{2}g_{\mu\nu}
-=\text{Diag}
+=\frac{a^2}{(r^2+a^2)^2}\,\text{Diag}\!
 \begin{bmatrix}
--\frac{1}{2},& \frac{3}{2},& \frac{r^2+a^2}{2},
-&\frac{r^2+a^2}{2}\sin^2\theta
+-1,& -1,&
+(r^2+a^2),&
+(r^2+a^2)\sin^2\theta
 \end{bmatrix}.
 \end{equation}
-\todo[inline]{Problems finding corresponding $T_{\mu\nu}$?}
+There are however problems with this Einstein tensor. According to
+Einstein's equations 
+\begin{equation}
+G_{\mu\nu}=8\pi G T_{\mu\nu},
+\end{equation}
+and therefore since $G_{00}<0$ also $T_{00}<0$, but $T_{00}$
+represents the energy density which can not be negative. 
 
 \todo[inline]{Find all isometries!}
 
