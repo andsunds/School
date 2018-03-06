@@ -480,7 +480,7 @@ forward to compute. Its only non-zero elements are
 \end{aligned}
 \end{equation}
 which gives the geodesic equations
-\begin{equation}
+\begin{equation}\label{eq12:geodesic}
 \begin{cases}
 \dv[2]{t}{\tau}=0\\
 \dv[2]{r}{\tau}-r\qty(\dv{\theta}{\tau})^2
@@ -500,8 +500,53 @@ $(r^2+a^2)$ (and also with $\sin^2\theta$ for the last equation), to
 \dv{\tau}\qty[\qty(r^2+a^2)\sin^2\theta\dv{\phi}{\tau}]=0.
 \end{cases}
 \end{equation}
+The last equation represents a conservation law similar to the $z$
+component of the angular momentum
+\begin{equation}\label{eq12:J}
+\qty(r^2+a^2)\sin^2\theta\dv{\phi}{\tau}=J,
+\end{equation}
+where $J$ is a constant of motion. We also have
+\begin{equation}\label{eq12:k}
+\dv{t}{\tau}=k
+\end{equation}
+from the first equation of \eqref{eq12:geodesic}, where $k$ is
+constant. Now for completeness sake, we note that the metric is
+asymptotically Minkowski, which means that for a massive particle
+\begin{equation}
+k=\eval{\dv{t}{\tau}}_{r\to\infty}=
+\eval{\dv{t}{\tau}}_{\text{Minkowski}}=\gamma=\qty(1-v^2)^{-1/2},
+\end{equation}
+where $v$ is the asymptotic velocity of the particle as $r\to\infty$.
 
-\todo[inline]{Find wormhole solution!}
+Now to see if there are time-like geodesics traversing the wormhole,
+we can restrict our search to the $\theta=\pi/2$ plane since the
+metric is spherically symmetric. In this plane, we have
+\begin{equation}
+\rd\tau^2=\rd{t}^2-\rd{r}^2-\qty(r^2+a^2)\rd{\phi}^2,
+\end{equation}
+which when dividing through with $\rd\tau^2$ and substituting in
+\eqref{eq12:J} and \eqref{eq12:k} becomes
+\begin{equation}
++1=k^{2}-\qty(\dv{r}{\tau})^2-\frac{J^2}{r^2+a^2}.
+\end{equation}
+The $+1$ on the LHS is for time-like geodesics, as we are looking
+for. We may now further simplify our search by restricting ourselves
+to ``radial'' geodesics, i.e. with no angular momentum $J=0$. This
+yields
+\begin{equation}
+\dv{r}{t}=\dv{\tau}{t}\dv{r}{\tau}=\pm\frac{1}{k}\sqrt{k^2-1}
+=\pm v,
+\end{equation}
+which means that
+\begin{equation}
+r(t)=\pm vt+r_0;
+\end{equation}
+a supringly simple result.
+This geodesic clearly has the capability to traverse the wormhole, in
+the sense that it can go from arbitrarily large negative values of $r$
+to arbitrarily large positive values of $r$. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Using \eqref{eq12:Gamma} we can easily calculate the Riemann tensor
 whose non-zero elements are
