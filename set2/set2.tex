@@ -48,7 +48,7 @@ swedish, english %% Make sure to put the main language last!
 \title{Gravitation and Cosmology -- FFM 071
 \\ {\Large Hand-in set 2} }
 \author{Andréas Sundström}
-\date\today%{2018-02-13}
+\date{2018-03-06}
 
 \maketitle
 
@@ -231,7 +231,7 @@ To do this we introduce the new variables $t'=t'(t,x)$, $x'=x'(x)$,
 $y'=y'(x,y)$, and $z'=z'(z)=z$. For $z'$ the choice is obvious, and
 for the other three variables it is relatively easy to convince
 yourself that that they should only depend on $x$ and their non-primed
-counterpart. WE can now write out the metric \eqref{eq10:Mink1}
+counterpart. We can now write out the metric \eqref{eq10:Mink1}
 (ignoring $z'$ and $z$ since we already know that transformation) 
 \begin{equation}%\label{eq10:Mink2}
 \begin{aligned}
@@ -520,7 +520,9 @@ where $v$ is the asymptotic velocity of the particle as $r\to\infty$.
 
 Now to see if there are time-like geodesics traversing the wormhole,
 we can restrict our search to the $\theta=\pi/2$ plane since the
-metric is spherically symmetric. In this plane, we have
+metric is spherically symmetric\footnotemark{}. In this plane, we have
+\footnotetext{See \eqref{eq12:ds-sphere} and the discussion
+  immediately preceding it.} 
 \begin{equation}
 \rd\tau^2=\rd{t}^2-\rd{r}^2-\qty(r^2+a^2)\rd{\phi}^2,
 \end{equation}
@@ -546,7 +548,6 @@ This geodesic clearly has the capability to traverse the wormhole, in
 the sense that it can go from arbitrarily large negative values of $r$
 to arbitrarily large positive values of $r$. 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Using \eqref{eq12:Gamma} we can easily calculate the Riemann tensor
 whose non-zero elements are
@@ -600,7 +601,34 @@ G_{\mu\nu}=8\pi G T_{\mu\nu},
 and therefore since $G_{00}<0$ also $T_{00}<0$, but $T_{00}$
 represents the energy density which can not be negative. 
 
-\todo[inline]{Find all isometries!}
+To find the isometries of this metric, we begin by noting that this
+metric has a maximally symmetric subspace. Namely a spherically
+symmetric sub-spaces, which is seen by writing \eqref{eq12:ds} on the
+form 
+\begin{equation}\label{eq12:ds-sphere}
+\rd{s}^2=\hat{g}_{ab}\rd{x^a}\rd{x^b}
++f(t,r)\tilde{g}_{ij}\rd{x^i}\rd{x^j},
+\end{equation}
+where $a,b\in\qty{t,x}$, $i,j\in\qty{\theta,\phi}$, and
+$\tilde{g}_{ij}$ is the maximally symmetric metric of the
+2-sphere. This means that we immediately have the isometries of the
+2-sphere, i.e. rotations around any axis. Apart from these isometries,
+we can refine our analysis of \eqref{eq12:ds-sphere} by noting that
+$f$ actually is also independent of $t$, and that $\hat{g}_{ab}$ is
+constant (i.e. independent of $t$ and $r$) and diagonal. This means
+that we can also do a parity transformation of $t$ and $r$, as well as
+translate $t$; these isometries are therefore
+\begin{equation}
+\begin{cases}
+t\to t'=\pm t+t_0\\
+r\to r'=\pm r.
+\end{cases}
+\end{equation}
+We cannot translate or boost in space, since the workhole is located
+at $r=0$ so any of those two transformations will obviously not be
+isometric. We can therfore not go any further unless $a=0$, and that
+would just result in the regular Minkowski metric which is maximally
+symmetric. 
 
 
 
@@ -617,6 +645,6 @@ represents the energy density which can not be negative.
 %%% TeX-master: t
 %%% End:
 
-%  LocalWords:  contravariant Stereographic covariant variational
+%  LocalWords:  contravariant stereographic covariant variational
 %  LocalWords:  azimuthal affine parametrization Ricci Minkowski
-%  LocalWords:  Mathematica
+%  LocalWords:  Mathematica isometries
