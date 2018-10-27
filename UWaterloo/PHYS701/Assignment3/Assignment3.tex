@@ -1,0 +1,1334 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+
+\graphicspath{ {figures/} }
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+
+
+\swapcommands{\varPhi}{\Phi}
+\swapcommands{\varPi}{\Pi}
+
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+% \begin{titlepage}
+\title{Quantum Mechanics -- PHYS\,701 \\
+Assignment 3}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+%Om man vill ha en lista med vilka todo:s som finns.
+%\todolist
+
+\section{A special case of the Baker-Campbell-Hausdorf theorem}
+Here we want to show that
+\begin{equation}\label{eq:1_want_this}
+\ee^{A+B} = \ee^A\ee^B\ee^{-\frac{1}{2}\comm{A}{B}}
+\end{equation}
+for two operators $A$ and $B$ which both commute with $\comm{A}{B}$,
+but not necessarily with each other.
+
+We begin by studying
+\begin{equation}
+\comm{B}{\ee^{x A}}=\sum_{n=0}^\infty \frac{x^n}{n!}\comm{B}{A^n},
+\end{equation}
+where $x$ is just a number (\emph{not} the operator). To expand this
+sum we can use the formula derived in the last problem
+set\footnotemark{}:
+\begin{equation}
+\comm{B}{A^{m}} =\sum_{i=0}^{m-1} A^{i}\comm{B}{A}A^{m-1-i}.
+\end{equation}
+In this case we also know that $A$ commutes with $\comm{B}{A}$, which
+means that we can write
+\begin{equation}\label{eq:1_comm}
+\comm{B}{\ee^{x A}}=\sum_{n=0}^\infty \frac{x^n}{n!}
+\sum_{k=0}^{n-1}A^{n-1}\comm{B}{A}
+=\sum_{n=0}^\infty \frac{x^n}{n!}
+nA^{n-1}\comm{B}{A}
+=x\ee^{xA}\comm{B}{A}.
+\end{equation}
+Here the case $n=0$ should be regraded as the whole term being equal
+to $0$, since $k$ starts above the summation limit.
+\footnotetext{I have attached a copy of the relevant derivation in Appendix~\ref{sec:comm}}
+
+Next up we study the function
+\begin{equation}\label{eq:1_G_def}
+G(x)=\ee^{xA}\ee^{xB}
+=\sum_{i=0}^\infty\frac{x^iA^i}{i!}\sum_{j=0}^\infty\frac{x^jB^j}{j!}.
+\end{equation}
+It's derivative is
+\begin{equation}
+\begin{aligned}
+\dv{G}{x}=&
+\sum_{i=1}^\infty\frac{x^{i-1}A^i}{(i-1)!}\sum_{j=0}^\infty\frac{x^jB^j}{j!}
++\sum_{i=0}^\infty\frac{x^iA^i}{i!}\sum_{j=1}^\infty\frac{x^{j-1}B^j}{(j-1)!}\\
+=&A\ee^{xA}\ee^{xB} + \ee^{xA}B\ee^{xB}.
+\end{aligned}
+\end{equation}
+Now we use the relation \eqref{eq:1_comm} to rewrite
+\begin{equation}
+\ee^{xA}B = B\ee^{xA}-\comm{B}{\ee^{xA}}
+=B\ee^{xA}-x\ee^{xA}\comm{B}{A}.
+\end{equation}
+All in all we get
+\vspace{-4mm}
+\begin{equation}
+\dv{G}{x}=A\ee^{xA}\ee^{xB}+\qty(B\ee^{xA}-x\ee^{xA}\comm{B}{A})\ee^{xB}
+=\Big(A+B+x\comm{A}{B}\Big)\overbrace{\ee^{xA}\ee^{xB}}^{=G(x)},
+\end{equation}
+which is a differential equation for $G$ and it results in
+\begin{equation}
+G(x)=\exp[x(A+B)+\frac{1}{2}x^2\comm{A}{B}].
+\end{equation}
+But with \eqref{eq:1_G_def} we have
+\begin{equation}\label{eq:1_almost}
+\ee^{xA}\ee^{xB}=\exp[x(A+B)+\frac{1}{2}x^2\comm{A}{B}]
+=\ee^{x(A+B)}\ee^{\frac{1}{2}x^2\comm{A}{B}}.
+\end{equation}
+The last step is possible since $\comm{A}{B}$ commutes with both $A$
+and $B$. By choosing $x=1$ we're almost where we want to be. 
+
+All that's left is to move $\ee^{\frac{1}{2}x^2\comm{A}{B}}$ to the
+other side. To do this we note that for any operator $\Xi$
+\begin{equation}
+\ee^{\Xi}\ee^{-\Xi}=\sum_{i\ge0}\sum_{j\ge0}(-1)^j\frac{\Xi^{i+j}}{i!j!}
+=\sum_i\sum_{j=2n}\frac{\Xi^{i+2n}}{i!(2n)!}
+-\sum_i\sum_{j=2n+1}\frac{\Xi^{i+2n+1}}{i!(2n+1)!}.
+\end{equation}
+Now since $i$ is still free to run over all values in both sums, we
+will get two sums where they almost cancel each other out. The
+exception is that the second double sum can't produce any $\Xi^0$
+term. Therefore
+\begin{equation}
+\ee^{\Xi}\ee^{-\Xi}=1,
+\end{equation}
+in the sense of $\Xi^0$ being the identity operator. 
+
+With this result its now safe to ``multiply'' both sides of
+\eqref{eq:1_almost} by $\ee^{-\frac{1}{2}x^2\comm{A}{B}}$, and we get
+\begin{equation}
+\ee^{A}\ee^{B}\ee^{-\frac{1}{2}\comm{A}{B}} = \ee^{A+B},
+\end{equation}
+with $x=1$.
+\qed
+
+
+\section{Coherent states}
+A coherent state of the 1D harmonic oscillator is an eigenstate of the
+annihilation operator:
+\begin{equation}
+a\ket{\lambda}=\lambda\ket{\lambda}\qcomma
+\lambda\in\C.
+\end{equation}
+
+\subsection{A normalized coherent state}
+Here we're going to prove that
+\begin{equation}\label{eq:2_coherent}
+\ket\lambda=\ee^{-|\lambda|^2/2}\ee^{\lambda a^\dagger}\ket0
+\end{equation}
+is a normalized coherent state.
+It will be helpful to express $\ket\lambda$ as it's power series
+\begin{equation}\label{eq:2_lambda_power}
+\ket\lambda = \ee^{-|\lambda|^2/2}\sum_{k}
+\frac{\lambda^k}{k!} (a^\dagger)^k \ket{0}
+= \ee^{-|\lambda|^2/2}\sum_{k}
+\frac{\lambda^k}{k!}\sqrt{k!}\ket{k}.
+\end{equation}
+Here we used the property of the creation operator that
+\begin{equation}
+a^\dagger\ket{n-1}=\sqrt{n}\ket{n}.
+\end{equation}
+
+\subsubsection{Normalized}
+To prove that $\ket\lambda$ is normalized we just use
+\eqref{eq:2_lambda_power} to express
+\begin{equation}
+\ip{\lambda} = \ee^{-|\lambda|^2}\sum_{m, n}
+\bra{m}\frac{(\lambda^\dagger)^m}{\sqrt{m!}}
+\frac{\lambda^n}{\sqrt{n!}}\ket{n}.
+\end{equation}
+From here we use $\ip{m}{n}=\delta_{m, n}$ and get
+\begin{equation}
+\ip{\lambda} = \ee^{-|\lambda|^2}
+\sum_n\frac{(\lambda^\dagger\lambda)^n}{n!}
+=\ee^{-|\lambda|^2}\ee^{+|\lambda|^2}=1.
+\end{equation}
+\qed
+
+\subsubsection{Eigenket}
+We apply $a$ to $\ket\lambda$:
+\begin{equation}\label{eq:2_eigenket}
+\begin{aligned}
+a\ket\lambda =& \ee^{-|\lambda|^2/2}\sum_{k=0}^\infty
+\frac{\lambda^k}{\sqrt{k!}} a \ket{k}
+= \ee^{-|\lambda|^2/2}\sum_{k=0}^\infty
+\lambda\frac{\lambda^{k}}{\sqrt{k!}}\sqrt{k} \ket{k-1}\\
+=& \ee^{-|\lambda|^2/2}\sum_{k=1}^\infty
+\lambda\frac{\lambda^{k-1}}{\sqrt{(k-1)!}} \ket{k-1}\\
+&\hspace{-24pt}\stackrel{\{n=k-1\}}{=} \lambda \ee^{-|\lambda|^2/2}\sum_{n=0}^\infty
+\lambda\frac{\lambda^{n}}{\sqrt{n!}} \ket{n}
+&=\lambda\ket{\lambda}.
+\end{aligned}
+\end{equation}
+\qed
+
+\subsection{Uncertainty relation}
+Here we're going to prove the minimum uncertainty relation
+\begin{equation}\label{eq:2_unc}
+\ev**{(\Delta{x})^2}{\lambda}\ev**{(\Delta{p})^2}{\lambda}
+=\frac{\hbar^2}{4}.
+\end{equation}
+To do this we use the relations
+\begin{equation}\label{eq:2_xp}
+x=\sqrt{\frac{\hbar}{2M\omega}}\qty(a+a^\dagger)\qcomma
+p=\ii\sqrt{\frac{M\hbar\omega}{2}}\qty(-a+a^\dagger),
+\end{equation}
+which follows directly from the definitions of $a$ and $a^\dagger$.
+
+Now all we have to do is evaluate the four different expectation
+values. We begin with
+\begin{equation}
+\ev{x}{\lambda}=\ee^{-|\lambda|^2}
+\sum_{m=0}^\infty\sum_{n=0}^\infty\sqrt{\frac{\hbar}{2M\omega}}
+\bra{m}\frac{(\lambda^\dagger)^m\lambda^{n}}{\sqrt{m!n!}}\qty(a+a^\dagger)
+\ket{n}
+\end{equation}
+We evaluate the terms:
+\begin{equation}
+\mel{m}{a+a^\dagger}{n}=\mel{m}{\sqrt{n}}{n-1}+\mel{m}{\sqrt{n+1}}{n+1}
+=\sqrt{n}\delta_{m, n-1}+\sqrt{n+1}\delta_{m, n+1}.
+\end{equation}
+This gives
+\begin{equation}
+\begin{aligned}
+\ev{x}{\lambda}=&\ee^{-|\lambda|^2}
+\sqrt{\frac{\hbar}{2M\omega}}\sum_{n=0}^\infty
+\qty[
+\lambda\frac{|\lambda|^{n-1}}{\sqrt{(n-1)!n!}}\sqrt{n} 
++\lambda^\dagger\frac{|\lambda|^{n}}{\sqrt{(n+1)!n!}}\sqrt{n+1} 
+]\\
+=&\ee^{-|\lambda|^2}\sqrt{\frac{\hbar}{2M\omega}}
+\qty[
+\sum_{n=1}^\infty\lambda\frac{|\lambda|^{n-1}}{(n-1)!}
++\sum_{n=0}^\infty\lambda^\dagger\frac{|\lambda|^{n}}{n!}
+]\\
+=&\ee^{-|\lambda|^2}\sqrt{\frac{\hbar}{2M\omega}}
+\qty[\lambda\ee^{|\lambda|^2}
++\lambda^\dagger\ee^{|\lambda|^2}]
+=2\Re[\lambda]\sqrt{\frac{\hbar}{2M\omega}}.
+\end{aligned}
+\end{equation}
+The expectation value of $p$ follows in a completely analogous way: 
+\begin{equation}
+\ev{p}{\lambda}=\ii\sqrt{\frac{M\hbar\omega}{2}}\qty(\lambda^\dagger-\lambda)
+=2\Im[\lambda]\sqrt{\frac{M\hbar\omega}{2}}.
+\end{equation}
+
+For $\ev{x^2}$ and $\ev{p^2}$ we just use \eqref{eq:2_xp} to get
+\begin{equation}
+x^2=\frac{\hbar}{2M\omega}
+\qty(a^2+(a^\dagger)^2+aa^\dagger+a^{\dagger}a)\qcomma
+p^2=\frac{M\hbar\omega}{2}
+\qty(-a^2+-(a^\dagger)^\dagger + aa^\dagger + a^{\dagger}a),
+\end{equation}
+and
+\begin{equation}
+\begin{aligned}
+\mel**{m}{\pm{}a^2\pm(a^\dagger)^2+aa^\dagger+a^{\dagger}a}{n}=&
+\pm\sqrt{n(n-1)}\delta_{m, n-2} \pm\sqrt{(n+1)(n+2)}\delta_{m, n+2}\\
+&+(2n+1)\delta_{m, n}. 
+\end{aligned}
+\end{equation}
+With this we get, after some calculations,
+\begin{equation}
+\ev{x^2}{\lambda}=\ldots=
+\frac{\hbar}{2M\omega}\qty(2\Re[\lambda^2] + 2|\lambda|^2 + 1)
+\end{equation}
+and
+\begin{equation}
+\ev{p^2}{\lambda}=\ldots=
+\frac{M\hbar\omega}{2}\qty(1+2|\lambda|^2 - 2\Re[\lambda^2]).
+\end{equation}
+
+Now we just have to evaluate the uncertainty product
+\begin{equation}
+\begin{aligned}
+\qty(\ev{x^2}{\lambda}-\ev{x}{\lambda}^2)
+\qty(\ev{p^2}{\lambda}-\ev{p}{\lambda}^2)
+=&\frac{\hbar^2}{4}
+\qty(2\Re[\lambda^2] + 2|\lambda|^2 + 1 - 2\Re[\lambda])\\
+&\times\qty(1+2|\lambda|^2 - 2\Re[\lambda^2]-2\Im[\lambda]).
+\end{aligned}
+\end{equation}
+To be frank, at this point I don't even want to try to do this by
+hand. So we turn to \emph{Mathematica}, which
+ says that
+\begin{equation}
+\qty(2\Re[\lambda^2] + 2|\lambda|^2 + 1 - 2\Re[\lambda])
+\times\qty(1+2|\lambda|^2 - 2\Re[\lambda^2]-2\Im[\lambda])
+=1\qcomma\forall\lambda\in\C.
+\end{equation}
+We do therefore have the minimum uncertainty relation
+\eqref{eq:2_unc}. 
+\qed
+
+\subsection{Poisson distributed energy}
+A Poisson distribution is given by
+\begin{equation}
+\mathcal{P}_\Lambda^{(\text{Poisson})}(k)=\frac{\Lambda^k\ee^{-\Lambda}}{k!}
+\end{equation}
+for some parameter $\Lambda$. The expectation value of a Poisson
+distribution is given by $\Lambda$ and the value with highest
+probability to occur is $\lfloor\Lambda\rfloor$ ($\Lambda$ rounded
+down to the nearest integer).
+
+By writing
+\begin{equation}
+\ket{\lambda}=\sum_n f(n)\ket{n}
+\end{equation}
+and using \eqref{eq:2_lambda_power}, we see that
+\begin{equation}
+\abs{f(n)}^2=\frac{\qty(|\lambda|^2)^n\ee^{-|\lambda|^2}}{n!}
+=\mathcal{P}_\lambda(n).
+\end{equation}
+This is clearly the same distribution as above with
+$\Lambda=|\lambda|^2$. Therefore the expectation value of the state's
+energy is
+\begin{equation}
+\ev{E}{\lambda}="E_{|\lambda|^2}"=\hbar\omega|\lambda|^2+\frac{1}{2}
+\end{equation}
+and the most probable energy is
+\begin{equation}
+\hbar\omega\left\lfloor|\lambda|^2\right\rfloor+\frac{1}{2}.
+\end{equation}
+Note how the two energies are almost the same, but not quite. 
+\qed
+
+\subsection{Translating the ground state}
+We want to show that an in space translated ground state,
+\begin{equation}
+\exp[-\ii\frac{p\ell}{\hbar}]\ket{0}=\ee^{\eta(-a+a^\dagger)}\ket{0}
+\end{equation}
+where $\eta=\sqrt{M\ell^2\omega/(2\hbar)}$, $p$ is the momentum
+operator and $\ell$ is a finite displacement, is a coherent state. All
+we have to do is to prove that this is an eigenstate of $a$.
+
+To do this we will use the relation \eqref{eq:1_want_this} to write
+\begin{equation}
+\ee^{-\eta a + \eta a^\dagger}=\ee^{-\eta a}\ee^{\eta a^\dagger}
+\ee^{-\frac{\eta^2}{2}\comm{-a}{a^\dagger}}.
+\end{equation}
+We can do this since $\comm{a}{a^\dagger}=1$ obviously commutes with
+both $a$ and $a^\dagger$. This makes it possible to write the
+translated ground state as
+\begin{equation}
+\exp[-\ii\frac{p\ell}{\hbar}]\ket{0}
+=\ee^{-\eta a}\qty(\ee^{\eta^2/2}\ee^{\eta a^\dagger}\ket{0}),
+\end{equation}
+where the expression in the parenthesis is of the same form as in
+\eqref{eq:2_coherent} apart from the sign of $\eta^2/2$, but the sign
+only affects the normalization, not the fact that it's an eigenstate
+of $a$. Furthermore, $a$ commutes with $\ee^{-\eta a}$, so 
+\begin{equation}
+\begin{aligned}
+a\exp[-\ii\frac{p\ell}{\hbar}]\ket{0}&=
+\ee^{-\eta a}a\qty(\ee^{\eta^2/2}\ee^{\eta a^\dagger}\ket{0})\\
+&\hspace{-2pt}\stackrel{\eqref{eq:2_eigenket}}{=}
+\ee^{-\eta a}\eta\qty(\ee^{\eta^2/2}\ee^{\eta a^\dagger}\ket{0})
+=\eta\exp[-\ii\frac{p\ell}{\hbar}]\ket{0}.
+\end{aligned}
+\end{equation}
+Or in other words, the translated ground state is an eigenstate of the
+annihilation operator $a$, which means that it's also a coherent
+state. Although it \emph{not} a normalized state.
+\qed
+
+
+\section{Harmonic oscillator and the Feynman path integral}
+
+\subsection{The action of a classic harmonic oscillator}
+The classical action, for an event happening in the interval $t_0$ to
+$t$, is generally given by 
+\begin{equation}
+S=\int_{t_0}^{t}\rd\tau\mathcal{L}(\dot{x}, x, \tau).
+\end{equation}
+Now since we're studying the harmonic oscillator we have the action
+\begin{equation}
+S=\frac{m}{2}\int_{t_0}^{t}\rd\tau
+\qty[\dot{x}^2(\tau)-\omega^2x^2(\tau)]. 
+\end{equation}
+A trick for solving this action is to integrate the $\dot{x}$ term by
+parts
+\begin{equation}
+\int_{t_0}^{t}\rd\tau\dot{x}^2
+=\Big[x\dot{x}\Big]_{t_0}^t-\int_{t_0}^{t}\rd\tau\ddot{x}x.
+\end{equation}
+But $\ddot{x}=-\omega^2x$ for an harmonic oscillator (follows from the
+Euler-Lagrange equation). Thus
+\begin{equation}\label{eq:3_S1}
+S=\frac{m}{2} \qty{\Big[x\dot{x}\Big]_{t_0}^t
++\int_{t_0}^{t}\rd\tau \omega^2x^2
+-\omega^2\int_{t_0}^{t}\rd\tau x^2}
+=\frac{m}{2} \Big[x\dot{x}\Big]_{t_0}^t.
+\end{equation}
+
+So far we haven't used any explicit expression for $x$, but now we
+need to use the fact that a simple harmonic oscillator has
+\begin{equation}\label{eq:3_x}
+x(\tau) = A\cos(\omega(\tau-t_0)\Big.) 
++B\sin(\omega(\tau-t_0)\Big.). 
+\end{equation}
+In the next part we want to compare our results here to the propagator
+of the quantum mechanical harmonic oscillator. That propagator is
+from $x'$ to $x''$. We therefore choose the boundary conditions on our
+oscillator to be
+\begin{equation}
+x(t_0)=x'\qcomma\text{and }\quad x(t)=x'',
+\end{equation}
+which results in
+\begin{equation}\label{eq:3_AB}
+A=x'\qcomma\text{and }\quad
+B=\frac{x''-x'\cos(\omega(t-t_0))}{\sin(\omega(t-t_0))}.
+\end{equation}
+
+With this and \eqref{eq:3_S1} the action for the harmonic oscillator
+now becomes
+\begin{equation}
+\begin{aligned}
+S=&\frac{m}{2}\Big(\overbrace{x(t)}^{x''}\dot{x}(t)
+-\overbrace{x(t_0)}^{x'}\dot{x}(t_0)\Big)\\
+=&\frac{m}{2}\Big(x''\qty[-A\sin(\omega(t-t_0))+B\cos(\omega(t-t_0))]
+-x'\qty[B]\Big).
+\end{aligned}
+\end{equation}
+The last term is only $B$ due to the definition of $x$ in
+\eqref{eq:3_x}. By invoking \eqref{eq:3_AB} and setting
+$\Delta{t}=t-t_0$, we get 
+\begin{equation}
+\begin{aligned}
+S=\frac{m}{2\sin(\omega\Delta{t})}
+\Big\{ &x''\qty[-x'\sin^2(\omega\Delta{t})
++\Big(x''-x'\cos(\omega\Delta{t})\Big)\cos(\omega\Delta{t})]
+\\ &
+-x'\Big(x''-x'\cos(\omega\Delta{t})\Big)\Big\}.
+\end{aligned}
+\end{equation}
+This simplifies to
+\begin{equation}
+S=\frac{m}{2\sin(\omega(t-t_0)\big.)}
+\qty[\qty({x'}^2+{x''}^2)\cos(\omega(t-t_0)\Big.)-2x'x''].
+\end{equation}
+Just to recap this is the action for a harmonic oscillator that
+started in position $x'$ at time $t_0$ and ended up at $x''$ at time
+$t$. 
+\qed
+
+\subsection{Comparison to the Propagator in Sakurai}
+In equation (2.6.18) in Sakurai\,\&\,Napolitano, \textit{Modern
+  Quantum Mechanics}, 2nd ed., we get the expression for this
+propagator of a harmonic oscillator:
+\begin{equation}
+\begin{aligned}
+K(x'',\, t;\; x',\,t_0)=&
+\sqrt{\frac{m\omega}{2\pi\ii\hbar\sin(\omega(t-t_0)\big.)}}\\
+&\times \exp[\frac{\ii}{\hbar}\frac{m\omega}{2\sin(\omega(t-t_0)\big.)}
+\qty{\qty({x'}^2+{x''}^2)\cos(\omega(t-t_0)\Big.)-2x'x''}].
+\end{aligned}
+\end{equation}
+
+The similarity of the expression in the exponential to the classical
+action is striking. This is however not too unexpected since the
+path-integral both resembles an integral of the propagator as well as
+of the exponential of $\ii/\hbar$ times the action. 
+
+The propagator also has a factor in front of the exponential. That is
+just a consequence of the normalization
+\begin{equation}
+\lim_{t\to t_0} K(x'',\, t;\; x',\, t_0)
+=\delta^3\qty(\vb{x}''-\vb{x}')
+\end{equation}
+
+
+\section{The Feynman path integral and EM potentials}
+Here we're going to show the equivalence of the Feynman path-integral
+to the Schrödinger equation in the presence of electromagnetic
+potentials. We're also going to show that the mid-point prescription is
+required. 
+
+First off is some definitions of the variables used here.
+The Laplacian
+\begin{equation}
+\mathcal{L}=\frac{1}{2}m v^2 - q\varphi(x, t) + qvA(x, t),
+\end{equation}
+which will be exponentiated an integrated. We will restrict ourselves
+to the 1D case, so no vector notation needed. Then there's
+\begin{equation}
+\epsilon=\Delta{t}\to0
+\end{equation}
+and
+\begin{equation}
+\eta=\Delta{x}=x''-x'
+\quad\Longrightarrow\quad
+v=\frac{\eta}{\epsilon}.
+\end{equation}
+And lastly we will be using the parameter $\alpha\in[0, 1]$ in
+\begin{equation}
+x'_\alpha=x'+\alpha\eta=\alpha x'' + (1-\alpha)x'
+\end{equation}
+to determine where the potentials shall be evaluated.
+
+Next a few word on where we're heading. Since we want to show the
+equivalence between the Schrödinger equation and the Feynman
+path-integral, we will need to look at the derivative
+\begin{equation}
+\pdv{\psi(x'', t')}{t'} = \frac{\psi(x'', t'+\epsilon)-\psi(x'', t')}{\epsilon}.
+\end{equation}
+this means that we will need to expand the integrand in the path-integral
+\begin{equation}
+\begin{aligned}
+\psi(x'', t'+\epsilon)=&\frac{1}{w(\epsilon)}\int_{-\infty}^{\infty}\!\rd{x'}
+\exp[\frac{\ii}{\hbar}\epsilon
+\mathcal{L}\qty(\frac{\eta}{\epsilon}, x'_\alpha, t')]\psi(x', t')\\
+=&\frac{1}{w(\epsilon)}\int_{-\infty}^{\infty}\!\rd{x'}
+\exp[\frac{\ii}{\hbar}\frac{m}{2}\frac{\eta^2}{\epsilon}]
+\exp[-\frac{\ii}{\hbar}\epsilon q\varphi(x'_\alpha)]
+\exp[\frac{\ii}{\hbar} q\eta A(x'_\alpha)]
+\psi(x', t')
+\end{aligned}
+\end{equation}
+in power series in $\epsilon$. I've also, for brevity, not written out
+the explicit time dependence of $\varphi$ and $A$. It turns out that
+the best way to do this expansion is to leave the first exponential
+intact and then expand the rest of the factors in the integrand in
+terms of both $\epsilon$ and $\eta$.
+
+The expansions are simple to do, so I'll just list them below:
+\begin{enumerate}[label=(\Roman*)]
+\item $\displaystyle
+\psi(x', t')=\sum_{j}  \frac{(-\eta)^j}{j!}\eval{\pdv[j]{\psi}{{x'}}}_{x'', t'}
+$
+\item $\displaystyle
+\exp[-\frac{\ii}{\hbar}\epsilon q\varphi(x'_\alpha)]
+=\sum_k \frac{1}{k!} 
+\qty[-\frac{\ii q\epsilon}{\hbar} \varphi(x'_\alpha)]^k
+=\sum_k \frac{1}{k!} 
+\qty[-\frac{\ii q\epsilon}{\hbar} 
+\sum_l \frac{[(\alpha-1)\eta]^l}{l!}\eval{\pdv[l]{\varphi}{{x'}}}_{x''}
+]^k
+$
+\item $\displaystyle
+\exp[\frac{\ii}{\hbar} q\eta A(x'_\alpha)]=\ldots
+=\sum_m \frac{1}{m!} 
+\qty[-\frac{\ii q\eta}{\hbar} 
+\sum_n \frac{[(\alpha-1)\eta]^n}{n!}\eval{\pdv[n]{A}{{x'}}}_{x''}
+]^m
+$
+\end{enumerate}
+The only detail that need some clarification is that all of the $x'$
+derivatives are evaluated at $x''$, which is independent of the
+integration variable. This also means the last two Taylor expansions
+should contain the expression $(x'_\alpha-x'')^a$, but that can be
+rewritten as $[(\alpha-1)\eta]^a$.
+
+After this we now see that the path-integral can be done over $\eta$
+instead of $x'$.
+The integral will furthermore be constituted of sums of integrals of
+the form 
+\begin{equation}\label{eq:4_int_form}
+\int_{-\infty}^{\infty}\!\rd{\eta}\,\eta^d
+\exp[\frac{\ii}{\hbar}\frac{m}{2}\frac{\eta^2}{\epsilon}]
+=\begin{cases}
+\sqrt{\frac{2\pi\ii\epsilon}{m}},&d=0\\
+0,&d=1\\
+\frac{\sqrt{\pi}}{2}\qty(\frac{2\ii\hbar\epsilon}{m})^{2/3},&d=2.
+\end{cases}
+\end{equation}
+It's worth noting that the integral in reality doesn't converge for
+since there's an $\ii$ in the exponential, but we disregard that
+caveat and soldier on. It's also not worth worrying about larger $d$'s
+since $\epsilon$ is infinitesimal. 
+
+The weight function is
+\begin{equation}
+\frac{1}{w(\epsilon)}=\sqrt{\frac{m}{2\pi\ii\epsilon}}.
+\end{equation}
+And since we will only expand the path-integral to $\order{\epsilon}$,
+we can list the cases which will contribute to the zeroth and first
+order terms:
+\begin{enumerate}[label=(\roman*)]
+\item $(j, k, l, m, n)=(0, 0, 0, 0, 0)$ giving an $\order{1}$ term and a
+$d=0$ integral. 
+\item $(j, k, l, m, n)=(0, 1, 0, 0, 0)$ giving an $\order{\epsilon}$ term
+and a $d=0$ integral. 
+\item $(j, k, l, m, n)=(2, 0, 0, 0, 0)$ giving an $\order{\epsilon}$ term
+and a $d=2$ integral.
+\item $(j, k, l, m, n)=(1, 0, 0, 1, 0)$ giving an $\order{\epsilon}$ term
+and a $d=2$ integral.
+\item $(j, k, l, m, n)=(0, 0, 0, 1, 1)$ giving an $\order{\epsilon}$ term
+and a $d=2$ integral.
+\item $(j, k, l, m, n)=(0, 0, 0, 2, 0)$ giving an $\order{\epsilon}$ term
+and a $d=2$ integral. 
+\end{enumerate}
+All of these integrals will just be of the form in
+\eqref{eq:4_int_form} with a prefactor determined by $1/w(x)$ and the
+factors from the relevant term in the expansion. The details of each
+of the six integrations from the cases above is of little
+interest. All of the calculations are very similar, so I will write
+out the details of the first integral. Then I'll just list the rest of
+the results below:
+\begin{enumerate}[label=(\roman*)]
+\item $\displaystyle
+\sqrt{\frac{m}{2\pi\ii\epsilon}} \int_{-\infty}^{\infty}\!\rd{\eta}
+\exp[\frac{\ii}{\hbar}\frac{m}{2}\frac{\eta^2}{\epsilon}]
+\psi(x'', t')
+=\sqrt{\frac{m}{2\pi\ii\epsilon}}\psi(x'', t')
+\sqrt{\frac{2\pi\ii\epsilon}{m}}
+=\psi(x'', t')
+$
+\item $\displaystyle
+\epsilon\frac{q}{\ii\hbar}\varphi(x'')\psi(x'', t')
+$
+\item $\displaystyle
+\epsilon\frac{\ii\hbar}{2m}\pdv[2]{\psi(x'', t')}{{x''}}
+$
+\item $\displaystyle
+\epsilon\frac{q}{m}A(x'')\pdv{\psi(x'', t')}{x''}
+$
+\item $\displaystyle
+\epsilon(1-\alpha)\frac{q}{m}\pdv{A(x'')}{x''}\psi(x'', t')
+$
+\item $\displaystyle
+\epsilon\frac{q^2}{\ii\hbar2m}A^2(x'')\psi(x'', t')
+$
+\end{enumerate}
+Note especially that (v) has a factor $(1-\alpha)$, originating from
+expansion (III) and the fact that $m=1$ and $n=1$.
+
+
+Now we just construct the path-integral from these terms:
+\begin{equation}
+\begin{aligned}
+\psi(x'', t'+\epsilon)
+=&\frac{1}{w(\epsilon)}\int_{-\infty}^{\infty}\!\rd{x'}
+\exp[\frac{\ii}{\hbar}\frac{m}{2}\frac{\eta^2}{\epsilon}]
+\exp[-\frac{\ii}{\hbar}\epsilon q\varphi(x'_\alpha)]
+\exp[\frac{\ii}{\hbar} q\eta A(x'_\alpha)]
+\psi(x', t')\\
+=& \psi(x'', t') + \epsilon \Bigg\{
+\frac{q}{\ii\hbar}\varphi(x'')\psi(x'', t')
++\frac{\ii\hbar}{2m}\pdv[2]{\psi(x'', t')}{{x''}}
++\frac{q}{m}A(x'')\pdv{\psi(x'', t')}{x''}\\
+&\phantom{\psi(x'', t') + \epsilon\{ }
++(1-\alpha)\frac{q}{m}\pdv{A(x'')}{x''}\psi(x'', t')
++\frac{q^2}{\ii\hbar2m}A^2(x'')\psi(x'', t')
+\Bigg\}.
+\end{aligned}
+\end{equation}
+This can be rewritten to%\todo{there's a sign error some
+%  where. Probably in the $x'\to\eta$ integration}
+\begin{equation}
+\begin{aligned}
+=\ii\hbar\frac{\psi(x'', t'+\epsilon)-\psi(x'', t')}{\epsilon}
+=&  \Bigg\{
+q\varphi(x'')
++\frac{(\ii\hbar)^2}{2m}\pdv[2]{{x''}}
++\frac{q\ii\hbar}{m}A(x'')\pdv{x''}\\
+&\phantom{(}
++(1-\alpha)\frac{q\ii\hbar}{m}\pdv{A(x'')}{x''}
++\frac{q^2}{2m}A^2(x'')
+\Bigg\}\psi(x'', t')
+\end{aligned}
+\end{equation}
+or in other words
+\begin{equation}
+\begin{aligned}
+\ii\hbar\pdv{\psi}{{t'}}
+=&  \Bigg\{\frac{1}{2m}\Bigg[
+(\ii\hbar)^2\pdv[2]{{x''}}
++2q\ii\hbar A(x'')\pdv{x''}\\
+&\phantom{(2m))}
++2(1-\alpha)q\ii\hbar\pdv{A(x'')}{x''}
++q^2A^2(x'')\Bigg]
++q\varphi(x'')\Bigg\}\psi(x'', t')\\
+=&  \Bigg\{\frac{1}{2m}\Bigg[
+(\ii\hbar)^2\pdv[2]{{x''}}
++q\ii\hbar\qty( 2A(x'')\pdv{x''}
++2(1-\alpha)\pdv{A(x'')}{x''})\\
+&\phantom{(2m)(}
++q^2A^2(x'')\Bigg]
++q\varphi(x'')\Bigg\}\psi(x'', t')\\
+\end{aligned}
+\end{equation}
+We want this to be equivalent to 
+\begin{equation}
+\begin{aligned}
+\ii\hbar\pdv{\psi}{{t'}}
+=H\psi
+=&\qty{\frac{1}{2m}\qty[p^2 - qpA-qAp+q^2A^2] + q\varphi}\psi\\
+=&\qty{\frac{1}{2m}\qty[(-\ii\hbar)^2\pdv[2]{{x''}} 
+- q(-\ii\hbar) \pdv{x''}[A\,\cdot]
+-qA(-\ii\hbar)\pdv{x''}+q^2A^2] + q\varphi}\psi\\
+=&\qty{\frac{1}{2m}\qty[(\ii\hbar)^2\pdv[2]{{x''}} 
++ \ii\hbar q\qty(\pdv{A}{x''}+A\pdv{x''})
++\ii\hbar qA\pdv{x''}+q^2A^2] + q\varphi}\psi\\
+=&\qty{\frac{1}{2m}\qty[(\ii\hbar)^2\pdv[2]{{x''}} 
++ \ii\hbar q\qty(\pdv{A}{x''}+2A\pdv{x''})
++q^2A^2] + q\varphi}\psi.
+\end{aligned}
+\end{equation}
+And this will be achieved only by setting $\alpha=1/2$.
+\qed
+
+\section{Hollow cylindrical shell}
+\newcommand{\E}{\ensuremath{\mathcal{E}}}
+
+\begin{figure}\centering
+\resizebox{.3\textwidth}{!}{\input{figures/cylinder.pdf_t}}
+\caption{The dimensions of the cylindrical shell wherein the electron
+  is confined together with the cylindrical coordinates. The
+  wave-function vanishes on the periphery of the shell.}
+\label{fig:cylinder}
+\end{figure}
+
+An electron is confined in a hollow cylindrical shell as in
+\figref{fig:cylinder}. The boundary conditions on the wave function is
+\begin{equation}
+\begin{cases}
+\psi(\rho_a, \phi, z)=\psi(\rho_b, \phi, z)=0\\
+\psi(\rho, \phi, 0)=\psi(\rho, \phi, L)=0\\
+\psi(\rho_a, \phi+k2\pi, z)=\psi(\rho, \phi, z)\qcomma k\in\Z.
+\end{cases}
+\end{equation}
+
+\subsection{Free particle (no magnetic field)}
+For a free electron, under influence of no potential, we have the
+Hamiltonian 
+\begin{equation}
+H=\frac{1}{2m_e}\vb{p}\vdot\vb{p} \,\dot{=}-\frac{\hbar^2}{2m_e}\laplacian
+=-\frac{\hbar^2}{2m_e}\qty[
+\frac{1}{\rho}\pdv{\rho}\qty(\rho\pdv{\rho})
++\frac{1}{\rho^2}\pdv[2]{\phi} + \pdv[2]{z}],
+\end{equation}
+where we have written the Laplacian in cylindrical coordinates.
+The time independent Schrödinger equation now becomes
+\begin{equation}\label{eq:5a_SE}
+\qty[
+\frac{1}{\rho}\pdv{\rho}\qty(\rho\pdv{\rho})
++\frac{1}{\rho^2}\pdv[2]{\phi} + \pdv[2]{z}
++\E]\psi(\rho, \phi, z)=0,
+\end{equation}
+where $\E=2m_eE/\hbar^2$.
+
+To tackle this problem we implement the technique of variable
+separation. Write
+\begin{equation}
+\psi(\rho, \phi, z)=R(\rho)\Phi(\phi)Z(z).
+\end{equation}
+Now we get
+\begin{equation}
+\frac{1}{\rho}\pdv{\rho}\qty(\rho\pdv{R}{\rho})\Phi Z
++\frac{1}{\rho^2}\pdv[2]{\Phi}{\phi}RZ + 
+\pdv[2]{Z}{z}R\Phi
++\E R\Phi Z=0,
+\end{equation}
+which leads us to
+\begin{equation}
+-\frac{1}{Z}\pdv[2]{Z}{z}
+=\frac{1}{\rho R}\pdv{\rho}\qty(\rho\pdv{R}{\rho})
++\frac{1}{\rho^2\Phi}\pdv[2]{\Phi}{\phi}
++\E = \zeta^2
+\end{equation}
+Now the LHS only depends on $z$ while the RHS only depends on $\rho$
+and $\phi$, meaning that they must both be constant; call that
+constant $\zeta^2$. 
+
+The differential equation for $Z$ now becomes
+\begin{equation}
+\pdv[2]{Z}{z}=-\zeta^2Z\qcomma
+Z(0)=Z(L)=0.
+\end{equation}
+With the boundary conditions we get
+\begin{equation}\label{eq:5a_Z}
+Z(z)=A\sin(\zeta_l z)\qcomma 
+\zeta_l=\frac{l\pi}{L}\qcomma l\in\Z^+.
+\end{equation}
+
+Next we can get the differential equation for $\Phi$ by writing
+\begin{equation}
+-\frac{1}{\Phi}\pdv[2]{\Phi}{\phi} 
+= \rho^2\qty[\frac{1}{\rho R}\pdv{\rho}
+\qty(\rho\pdv{R}{\rho})+\E-\zeta_l^2]
+=m^2.
+\end{equation}
+Same as before, LHS only depends on $\phi$ and RHS only depends on
+$\rho$, meaning that both sides are constant; call that constant
+$m^2$. This gives
+\begin{equation}
+\pdv[2]{\Phi}{\phi} =-m^2\Phi\qcomma
+\Phi(\phi+k2\pi)=\Phi(\phi),\;k\in\Z.
+\end{equation}
+With the boundary conditions we get
+\begin{equation}
+\Phi(\phi)=B\cos(m\phi+\phi_0)\qcomma
+m\in\Z.
+\end{equation}
+We can furthermore argue that $\phi_0$ only depends on the choice of
+where to put the $x$~axis; thus we are free to set $\phi_0=0$ without
+changing any physics.
+
+And finally we get to the equation for $R$. By now what we have is
+\begin{equation}
+m^2=\rho^2\qty[\frac{1}{\rho R}\pdv{\rho}
+\qty(\rho\pdv{R}{\rho})+\E-\zeta_l^2]
+=\frac{1}{R}\qty[\rho^2\pdv[2]{R}{\rho}
++\rho\pdv{R}{\rho}+\rho^2\qty(\E-\zeta_l^2)R],
+\end{equation}
+which in turn gives us
+\begin{equation}\label{eq:5a_Bessel}
+\rho^2\pdv[2]{R}{\rho}
++\rho\pdv{R}{\rho}+\qty[\rho^2\qty(\E-\zeta_l^2)-m^2]R=0.
+\end{equation}
+This is the equation for the Bessel functions of the first kind, which
+has the solution
+\begin{equation}
+R(\rho)=CJ_m(\mathcal{K}\rho)+DN_m(\mathcal{K}\rho)
+\end{equation}
+where
+\begin{equation}\label{eq:5a_kappa}
+\mathcal{K}=%\mathcal{K}_l=
+\sqrt{\E-\zeta_l^2}=\sqrt{\frac{2m_eE}{\hbar^2}-\qty(\frac{l\pi}{L})^2}.
+\end{equation}
+Now it's time to invoke the boundary conditions:
+\begin{equation}\label{eq:5a_R_boundry}
+\begin{cases}
+CJ_m(\mathcal{K}\rho_a)+DN_m(\mathcal{K}\rho_a)=0\\
+CJ_m(\mathcal{K}\rho_b)+DN_m(\mathcal{K}\rho_b)=0
+\end{cases}
+\quad\Longleftrightarrow\quad
+\begin{cases}
+CJ_m(\mathcal{K}\rho_a)=-DN_m(\mathcal{K}\rho_a)\\
+CJ_m(\mathcal{K}\rho_b)=-DN_m(\mathcal{K}\rho_b)
+\end{cases}
+\end{equation}
+Now divide both sides with each other and we get
+\begin{equation}
+\frac{J_m(\mathcal{K}\rho_a)}{J_m(\mathcal{K}\rho_b)}=
+\frac{N_m(\mathcal{K}\rho_a)}{N_m(\mathcal{K}\rho_b)}.
+\end{equation}
+This is an equation for $\mathcal{K}$
+\begin{equation}\label{eq:5a_K}
+J_m(\mathcal{K}\rho_a)N_m(\mathcal{K}\rho_b)-J_m(\mathcal{K}\rho_b)N_m(\mathcal{K}\rho_a)=0
+\end{equation}
+which has infinitely many solutions. Call those solutions
+$\mathcal{K}_{m,n}$. We also need to find constants. This can be done
+by adding the two equations in \eqref{eq:5a_R_boundry}:
+\begin{equation}
+C\qty[J_m(\mathcal{K}_{m,n}\rho_a)+J_m(\mathcal{K}_{m,n}\rho_b)]
+=-D\qty[N_m(\mathcal{K}_{m,n}\rho_a)+N_m(\mathcal{K}_{m,n}\rho_b)],
+\end{equation}
+which results in an equation for $C/D$. But the only physics in the
+two constants are in this ratio; so we can set $D=1$. And thus
+\begin{equation}\label{eq:5a_C}
+C=
+\frac{J_m(\mathcal{K}_{m,n}\rho_a)+J_m(\mathcal{K}_{m,n}\rho_b)}
+{N_m(\mathcal{K}_{m,n}\rho_a)+N_m(\mathcal{K}_{m,n}\rho_b)}
+=:\mathcal{C}_{m,n}.
+\end{equation}
+
+
+By now we have an expression for the energy eigenstates:
+\begin{equation}
+\psi_{l,m,n}(\rho, \phi, z)=
+\mathcal{N}_{l,m,n}\cos(m\phi)\sin(\frac{l\pi}{L}z)
+\Big[\mathcal{C}_{m,n}J_m\qty(\mathcal{K}_{m,n}\rho)+
+N_m\qty(\mathcal{K}_{m,n}\rho) \Big],
+\end{equation}
+where $l\in\Z^+=\{1, 2, 3,\ldots\}$, $m\in\Z$, $\mathcal{N}_{l,m,n}$
+is a normalization factor,  $\mathcal{C}_{m,n}$ is given by
+\eqref{eq:5a_C}, and $\mathcal{K}_{m,n}$ is the $n$'th root of
+\eqref{eq:5a_K}. The energy of this state is given by
+\eqref{eq:5a_kappa} to be
+\begin{equation}
+E_{l,m,n}=\frac{\hbar^2}{2m_e}\qty[(\mathcal{K}_{m,n})^2 + \qty(\frac{l\pi}{L})^2].
+\end{equation}
+
+
+
+
+\subsection{Electron under influence of a magnetic potential}
+\newcommand{\q}{\ensuremath{\mathcal{Q}_B}}
+We will now allow for a uniform magnetic field inside the inner radius of
+the shell: $\vb{B}=B\hat{z}$ for $0\le\rho<\rho_a$ and $\vb{B}=\vb{0}$
+for $\rho\ge\rho_a$. The Hamiltonian is 
+\begin{equation}
+H=\frac{1}{2m_e}\qty[\vb{p}\vdot\vb{p}
+-q\vb{p}\vdot\vb{A}-q\vb{A}\vdot\vb{p}+q^2\vb{A}\vdot\vb{A}] 
++ q\varphi.
+\end{equation}
+Since we're only concerned about a static magnetic field, we can
+disregard $\varphi$.
+
+It's a good idea to calculate $\vb{A}$ before we continue. By the
+fact that $\curl{\vb{A}}=\vb{B}$ and
+$\div\vb{A}=0$ (in the Coulomb gauge), we conclude that
+\begin{equation}\label{eq:5b_Aphi}
+2\pi\rho' A_\phi(\rho')=\oint\limits_{\rho=\rho'}\!\vb{A}\vdot\rd{\vb{r}}
+=\iint\limits_{\rho\le\rho'}(\curl\vb{A})\vdot\rd\vb{S}
+=\iint\limits_{\rho\le\rho'}\vb{B}\vdot\rd\vb{S}
+=\varPhi_B\stackrel{\rho'\ge\rho_a}{=}\pi\rho_a^2B.
+\end{equation}
+Furthermore, by cylindrical symmetry $\vb{A}$ must be
+\begin{equation}
+\vb{A}=A_\phi(\rho)\hat\phi=\frac{\varPhi_B}{2\pi\rho}
+\stackrel{\rho\ge\rho_a}{=}\frac{\rho_a^2B}{2\rho}.
+\end{equation}
+With this we can write
+\begin{equation}
+q\vb{A}\vdot\vb{p}= qA_\phi p_\phi
+=-\ii\hbar\frac{q\varPhi_B}{2\pi\rho^2}\pdv{\phi}
+=-\ii\hbar^2\frac{\q}{\rho^2}\pdv{\phi},
+\end{equation}
+with $\q=q\varPhi_B/(2\pi\hbar)$, and
+\begin{equation}
+q\vb{p}\vdot\vb{A}=qp_\phi A_\phi 
+= -\ii\hbar\frac{1}{\rho}\pdv{\phi}\Big[A_\phi\cdot\Big]
+=-\ii\hbar^2\frac{\q}{\rho^2}\pdv{\phi},
+\end{equation}
+since $A_\phi$ is independent of $\phi$.
+Note that both of these expressions are the same.
+
+
+Finally we can write the Hamiltonian as
+\begin{equation}
+\begin{aligned}
+H=&\frac{-\hbar^2}{2m_e}\qty{\qty[
+\frac{1}{\rho}\pdv{\rho}\qty(\rho\pdv{\rho})
++\frac{1}{\rho^2}\pdv[2]{\phi} + \pdv[2]{z}]
+-2\ii\frac{\q}{\rho^2}\pdv{\phi}
+-\frac{\q^2}{\rho^2} }.
+\end{aligned}
+\end{equation}
+And the Schrödinger equation becomes
+\begin{equation}
+\qty{ \qty[
+\frac{1}{\rho}\pdv{\rho}\qty(\rho\pdv{\rho})
++\frac{1}{\rho^2}\pdv[2]{\phi} + \pdv[2]{z}]
+-2\ii \frac{\q\varPhi_B}{\pi\rho^2}\pdv{\phi}
+-\frac{\q^2}{\rho^2} +\E}\psi=0,
+\end{equation}
+where $\E=2m_eE/\hbar$ as before.
+
+Then we just apply the same technique of separation of variables. We
+do not however need to redo everything. Just add the new terms into
+the already derived differential equations for $Z$, $\Phi$ and $R$.
+
+For instance there is no
+change to the differential equation for $Z$, so we still have the same
+solution \eqref{eq:5a_Z} there. This is expected since the we still
+have the same symmetry in the $z$ direction.
+
+For $\Phi$ (not to be confused with $\varPhi_B$) we get a new term in
+the differential equation. And we get
+\begin{equation}
+\pdv[2]{\Phi}{\phi} - 2\ii\q \pdv{\Phi}{\phi} + m^2\Phi =  0,
+\end{equation}
+which is a homogeneous second order differential equation with
+constant coefficients. Therefore the solution is given by
+\begin{equation}
+\Phi(\phi)=\tilde{a}\exp[\ii\qty(\q+\sqrt{\q^2+m^2})\phi]
++\tilde{b}\exp[\ii\qty(\q-\sqrt{\q^2+m^2})\phi],
+\end{equation}
+where $\tilde{a}$ and $\tilde{b}$ are some constants.
+The condition that $\Phi(\phi+k2\pi)=\Phi(\phi)$ for $k\in\Z$ implies
+that
+\begin{equation}\label{eq:5_mk}
+\q\pm\sqrt{\q^2+m^2}=k
+\quad\Longrightarrow\quad
+\sqrt{\q^2+m^2_k}=\pm(k-\q)
+\end{equation}
+or if you want $\q^2+m^2_k=(k-\q)^2$. The sign of the square-root
+doesn't matter physically, so we can take it to be $+$.
+
+Lastly we can actually simplify the expression somewhat
+\begin{equation}
+\begin{aligned}
+\Phi(\phi)=&\ee^{\ii\q\phi}\qty{
+\tilde{a}\exp[\ii\phi\sqrt{\q^2+m_k^2}]
++\tilde{b}\exp[-\ii\phi\sqrt{\q^2+m_k^2}]}\\
+=&\ee^{\ii\q\phi}\qty{
+\hat{a}\cos\Big((k-\q)\phi\Big)
++\hat{b}\sin\Big((k-\q)\phi\Big)}\\
+=&a'\ee^{\ii\q\phi}
+\cos\Big((k-\q)\phi+\phi_0\Big),
+\end{aligned}
+\end{equation}
+where $\hat{a}$, $\hat{b}$ and $a'$ are some constants. As before
+$\phi_0$ only depends on where we put our $x$ axis, so we can choose
+$\phi_0=0$. This time our choice actually affects the function through
+the complex exponential. But the change is only a constant complex
+phase which can be swallowed by the constant $a'\to a$. And now it's
+really clear that the sign of the square-root in \eqref{eq:5_mk} didn't
+matter. 
+
+And for the radial part of the wave-function we get
+\begin{equation}
+m^2_k=\rho^2\qty[\frac{1}{\rho R}\pdv{\rho}
+\qty(\rho\pdv{R}{\rho})+\E-\zeta_l^2+\frac{\q^2}{\rho^2}],
+\end{equation}
+which amounts to
+\vspace{-4mm}\begin{equation}
+\rho^2\pdv[2]{R}{\rho}
++\rho\pdv{R}{\rho}+\bigg[\rho^2\qty(\E-\zeta_l^2)
+-\overbrace{\qty(m_k^2+\q^2)}^{(k-\q)^2}\bigg]R=0.
+\end{equation}
+Which is exactly \eqref{eq:5a_Bessel} but with
+$m^2\to(k-\q)^2$. Therefore everything said about $R$ in the
+previous part holds here as well, but with $m^2\to(k-\q)^2$.
+We therefore have
+\begin{equation}
+R(\rho)=\mathcal{C}'_{k, n}
+J_{(k-\q)}(\mathcal{K}'_{k,n}\rho)
++N_{(k-\q)}(\mathcal{K}'_{k,n}\rho),
+\end{equation}
+where $\mathcal{K}'_{k,n}$ is the $n$'th root of the equation
+\begin{equation}\label{eq:5b_K}
+J_{(k-\q)}(\mathcal{K}'_{k,n}\rho_a)N_{(k-\q)}(\mathcal{K}'_{k,n}\rho_b)
+-J_{(k-\q)}(\mathcal{K}'_{k,n}\rho_b)N_{(k-\q)}(\mathcal{K}'_{k,n}\rho_a)=0
+\end{equation}
+and
+\begin{equation}\label{eq:5b_C}
+\mathcal{C}'_{k,n}=
+\frac{J_{(k-\q)}(\mathcal{K}'_{k,n}\rho_a)+J_{(k-\q)}(\mathcal{K}'_{k,n}\rho_b)}
+{N_{(k-\q)}(\mathcal{K}'_{k,n}\rho_a)+N_{(k-\q)}(\mathcal{K}'_{k,n}\rho_b)}.
+\end{equation}
+
+
+And the full wave function is
+\begin{equation}
+\begin{aligned}
+\psi_{l,k,n}(\rho, \phi, z)=&
+\mathcal{N}'_{l,k,n}\ee^{\ii\q\phi}\cos\Big((k-\q)\phi\Big)
+\sin(\frac{l\pi}{L}z)\\
+&\times
+\Big[\mathcal{C}'_{k,n}J_{(k-\q)}\qty(\mathcal{K}'_{k,n}\rho)+
+N_{(k-\q)}\qty(\mathcal{K}'_{k,n}\rho) \Big],
+\end{aligned}
+\end{equation}
+where $l\in\Z^+=\{1, 2, 3,\ldots\}$, $k\in\Z$ is a normalization factor, 
+$\mathcal{C}'_{k,n}$ is given by \eqref{eq:5b_C}, 
+$\mathcal{K}'_{k,n}$ is the $n$'th root of \eqref{eq:5b_K},
+and 
+\begin{equation}
+\q=\frac{q\varPhi_B}{2\pi\hbar}
+=\frac{q \rho_a^2 B}{2\hbar}.
+\end{equation}
+The energy of this state is given by \eqref{eq:5a_kappa} to be
+\begin{equation}
+E'_{l,k,n}=\frac{\hbar^2}{2m_e}\qty[(\mathcal{K}'_{k,n})^2 + \qty(\frac{l\pi}{L})^2].
+\end{equation}
+\qed
+
+
+\subsection{Flux quantization}
+The minimum energy for the case with no magnetic flux is
+\begin{equation}
+\min\qty{E_{l,m,n}}=E_{1,0,1}
+=\qty[(\mathcal{K}_{0,1})^2 + \qty(\frac{\pi}{L})^2].
+\end{equation}
+The energy for the case with magnetic flux is similarly minimized with
+$l=1$ and $n=1$ but $k$ should be chosen so as to minimize
+$|k-\q|$. So if we want the two ground state energies to be equal,
+then
+\begin{equation}
+\min\qty{\abs{k-\q}}
+=\min\qty{\abs{k-\frac{q\varPhi_B}{2\pi\hbar}}}=0.
+\end{equation}
+This can only be achieved if $\q=q\varPhi_B/(2\pi\hbar)=N$ is an
+integer. In other words
+\begin{equation}
+\pi\rho_a^2B=\varPhi_B=\frac{2\pi\hbar N}{q}\qcomma N\in\Z.
+\end{equation}
+\qed
+
+
+
+
+
+\section{Spin-less particle in a uniform magnetic field}
+We have a static magnetic field $\vb{B}=B\hat{z}$. Then by
+the same argument as in \eqref{eq:5b_Aphi} we have
+\begin{equation}\label{eq:6_A}
+\vb{A}=\frac{1}{2}\rho B\hat{\phi}.
+\end{equation}
+
+We also know that $\vb{P}$ and $\vb{A}$ commute, in the Coulomb
+gauge. To see this we use the vector identity
+\begin{equation}
+\div[\vb{A}\psi]=(\div\vb{A})\psi + \vb{A}\vdot[\grad\psi],
+\end{equation}
+but in the Coulomb gauge $\div\vb{A}=0$. Therefore $\vb{P}$ and
+$\vb{A}$ commute. 
+
+With the prescription
+\begin{equation}
+\vb{p}\to \vb{p}-q\vb{A}
+\end{equation}
+the new Hamiltonian becomes
+\begin{equation}
+H=\frac{1}{2m}\qty[\vb{p}^2-q\vb{p}\vdot\vb{A}-q\vb{A}\vdot\vb{p}+q^2\vb{A}^2]
+=\frac{1}{2m}\qty[\vb{p}^2-2q\vb{A}\vdot\vb{p}+q^2\vb{A}^2]
+\end{equation}
+I this particular case with $\vb{A}$ as in \eqref{eq:6_A} the middle
+term in the brackets is
+\begin{equation}
+-2q\vb{A}\vdot\vb{p}=-q\rho B p_\phi.
+\end{equation}
+
+This can be compared to the term one would get for the coupling
+of orbital angular momentum, or rather orbital magnetic moment,
+to an external magnetic field. This coupling is given by
+\begin{equation}\label{eq:6_Ap}
+-\vb{\mu}\vdot\vb{B}=-\frac{q}{2m}\vb{L}\vdot\vb{B}
+=-\frac{q}{2m}(\vb{r}\cross\vb{p})\vdot\vb{B}.
+\end{equation}
+Now since $\vb{B}$ is only in the $\hat{z}$ direction, we
+only need to worry about the $z$ component of
+$\vb{r}\cross\vb{p}$. With $\vb{r}=\rho\hat\rho+z\hat{z}$ and
+$\vb{p}=p_\rho\hat\rho + p_\phi\hat\phi+p_z\hat{z}$ we would get
+\begin{equation}
+-\vb{\mu}\vdot\vb{B}
+=-\frac{q}{2m}(\rho p_\phi \hat\rho\cross\hat\phi)\vdot B\hat{z}
+=-\frac{q}{2m}\rho B p_\phi,
+\end{equation}
+which is exactly the term in \eqref{eq:6_Ap} when accounting for the
+prefactor in the expression for the Hamiltonian.
+
+Now there is also the $q^2\vb{A}^2$ term which gives a $\rho^2B$
+dependence in $H$. But there is no real significance to this term
+since $\vb{B}$ is uniform throughout the whole range of $(x, y)$. The
+symmetry of the problem doesn't have any preferd $z$-axis. So
+$q^2\vb{A}^2$ can be whatever we want depending of where we chose to
+put the $(x, y)$ origin. 
+
+The $\rho$ dependence in the middle term is i a similar way
+arbitrary. However for this component we can view the $\rho$
+dependence as an effect of the shown coupling between the magnetic
+field and the angular momentum.
+
+
+\section{Particle in a uniform magnetic field}
+\subsection{Commutation relation}
+Once again we have a uniform magnetic field $\vb{B}=B\hat{z}$, and
+once again 
+\begin{equation}\label{eq:7_A}
+\vb{A}=\frac{1}{2}\rho B\hat{\phi}
+=\frac{1}{2}B\Big[-\rho\sin(\phi)\hat{x}+\rho\cos(\phi)\hat{y}\Big]
+=\frac{1}{2}B\Big[-y\hat{x}+x\hat{y}\Big].
+\end{equation}
+With $\Pi_i=p_i-qA_i$, we get the commutation relation
+\begin{equation}
+\comm{\Pi_x}{\Pi_y}=\comm{p_x-qA_x}{p_y-qA_y}
+=\comm{p_x}{p_y}-\comm{qA_x}{p_y}-\comm{p_X}{qA_y}+\comm{qA_x}{qA_y}.
+\end{equation}
+With \eqref{eq:7_A} and the canonical commutation relations we now get
+\begin{equation}\label{eq:7_comm}
+\comm{\Pi_x}{\Pi_y}
+=\overbrace{\comm{p_x}{p_y}}^{0}
+-\frac{qB}{2}\overbrace{\comm{-y}{p_y}}^{-\ii\hbar}
+-\frac{qB}{2}\overbrace{\comm{p_x}{x}}^{-\ii\hbar}
++\frac{q^2B^2}{4}\overbrace{\comm{-y}{x}}^{0}
+=+\ii\hbar qB.
+\end{equation}
+
+\subsection{Analogy with the harmonic oscillator}
+With this prescription for dealing with magnetic fields we get the
+Hamiltonian 
+\begin{equation}\label{eq:7_H}
+H=\frac{1}{2m}\vb{\Pi}^2=\frac{1}{2m}\qty[\Pi_x^2+\Pi_y^2+\Pi_z^2]. 
+\end{equation}
+
+This can be compared to the Hamiltonian of a simple (1D) harmonic
+oscillator 
+\begin{equation}\label{eq:7_H_osc}
+H_\text{osc.}=\frac{1}{2m}\qty[p^2+(m\omega x)^2].
+\end{equation}
+The energy eigenvalues comes from the number operator, defined in
+terms of the annihilation and creation operators
+\begin{equation}
+a=A\Big[(m\omega x) +\ii p\Big]\qcomma
+a^\dagger=A\Big[(m\omega x) -\ii p\Big].
+%\frac{1}{\sqrt{2\hbar m\omega}}
+\end{equation}
+The prefactor is determined by the commutation
+relation $\comm{a}{a^\dagger}=1$ which gives an equation for the prefactor:
+\begin{equation}
+1={A}^2\comm{(m\omega x){+}\ii p\Big.}{\;(m\omega x){-}\ii p}
+={A}^2
+\Big(-\ii\comm{(m\omega x)}{p} +\ii\comm{p}{(m\omega x)}\Big)
+=-2\ii{A}^2\comm{(m\omega x)}{p},
+\end{equation}
+assuming $A$ is real. Next up is number operator
+\begin{equation}
+N=a^\dagger a = A^2\qty{p^2+(m\omega x)^2 
+-\ii\comm{(m\omega x)}{p}}
+=A^22m\,H_\text{osc.}-\frac{1}{2}.
+\end{equation}
+Its a well known fact that the eigenvalues of $N$ are 
+$n\in\N={0, 1, 2,\ldots}$. Therefore the eigenenergies are
+\begin{equation}
+E_n^{(\text{osc.})}=\frac{n+\nicefrac{1}{2}}{2mA^2}.
+\end{equation}
+
+As you've probably noted, I've been doing all this with the operators
+$(m\omega x)$ and $p$. This is to illustrate the similarities between
+\eqref{eq:7_H} and \eqref{eq:7_H_osc}. We have the exact same
+situation between $\Pi_x$ and $\Pi_y$ as between $(m\omega x)$ and
+$p$. This makes it possible to create a ``pseudo harmonic oscillator
+Hamiltonian'' out of the $\Pi_x^2+\Pi_y^2$ part of \eqref{eq:7_H}. But
+this time the energies  are given by
+\begin{equation}
+E_n^{x,y}=\frac{n+\nicefrac{1}{2}}{2m\abs{\mathcal{A}^2}},
+\end{equation}
+where $\mathcal{A}$ is given by
+\begin{equation}
+1=-2\ii\mathcal{A}^2\comm{\Pi_x}{\Pi_y}
+\stackrel{\eqref{eq:7_comm}}{=}2\mathcal{A}^2\hbar qB.
+\end{equation}
+We have to have $\abs{\mathcal{A}^2}$ in the energy because of the
+symmetry\footnotemark{} between $\Pi_x$ and $\Pi_y$, and we want
+energies to be positive. In other words
+\begin{equation}
+E_n^{x,y}=\qty(\frac{\hbar\abs{qB}}{m})\qty(n+\frac{1}{2}).
+\end{equation}
+For the remaining part of \eqref{eq:7_H}, the $\Pi_z^2$ term, that's
+unaffected by the magnetic field and will just give plane-wave
+solutions with energy
+\begin{equation}
+E^{(z)}_k=\frac{\hbar^2k^2}{2m}.
+\end{equation}
+
+\footnotetext{We should really have the same absolute value in the case
+of the harmonic oscillator, but we choose the order of $(m\omega x)$
+and $p$, so that $A^2$ would be positive.}
+
+\subsubsection*{A few remarks}
+A very important bit of the fact that the number-operator has
+non-negative integer (real) eigenvalues is that $A^2$ is real. So just
+because we had two Hamiltonians consisting of sum of squares of two
+operators which had a commutation relation, doesn't men that we can get
+a harmonic oscillator solution. It's crucial that
+$\comm{\Pi_x}{\Pi_y}$ is imaginary. 
+
+Another thing to point out is that $\Pi_z$ commutes with both $\Pi_x$
+and $\Pi_y$, which explains why we don't have to take $\Pi_z$ into
+account when getting the pseudo harmonic oscillator solution. 
+
+
+
+\newpage
+\appendix
+
+
+\section{Excerpt from my last hand-in}\label{sec:comm}
+\textit{All of the following appendix is copied from my last hand-in.}
+
+Before we set out to prove the two commutator relations, it will be
+helpful to derive an intermediary result first. We're going to prove
+the formula
+\begin{equation} \label{eq:comm_power}
+\comm{A}{B^n} = \sum_{i=0}^{n-1} B^{i}\comm{A}{B}B^{n-1-i}.
+\end{equation}
+This formula is readily derived with a proof by induction. 
+
+To start off with, we can clearly see that \eqref{eq:comm_power} holds
+in the base case of $n=1$. Then assume that it also holds for all
+integers up to some value $m$. Does it then also hold for $m+1$?
+To show that it does, use the elementary commutator
+identity
+\begin{equation} \label{eq:comm_A_BC}
+\comm{A}{BC} = \comm{A}{B}C+B\comm{A}{C},
+\end{equation}
+which gives
+\begin{equation}
+\begin{aligned}
+\comm{A}{B^{m+1}} &= \comm{A}{B^{m}B} \\
+&\hspace{-3pt}\stackrel{\eqref{eq:comm_A_BC}}{=} \comm{A}{B^{m}}B + B^m\comm{A}{B}\\
+&\hspace{-14pt}\stackrel{\stackrel{\text{\tiny induction}}{\text{\tiny assumption}}}{=}
+\left(\sum_{i=0}^{m} B^{i}\comm{A}{B}B^{m-1-i}\right) B + B^m\comm{A}{B}\\
+&=\sum_{i=0}^{m-1} B^{i}\comm{A}{B}B^{m-i} + B^m\comm{A}{B}&=\sum_{i=0}^{m} B^{i}\comm{A}{B}B^{m-i}.
+\end{aligned}
+\end{equation}
+The last expression is just \eqref{eq:comm_power} with $n=m+1$. This
+concludes the proof by induction. \qed
+
+
+
+\end{document}
+
+
+
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer (två enkelfjongar): ''.
+
+
+%% Inkludera PDF-dokument
+\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+
+%% Figurer inkluderade som pdf-filer
+\begin{figure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer roterade 90 grader
+\begin{sidewaysfigure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{sidewaysfigure}
+
+
+%%Om man vill lägga till något i TOC
+\stepcounter{section} %Till exempel en 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+

@@ -1,0 +1,709 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+
+
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+% \newcommand{\cbox}[2][cyan]
+% {\mathchoice
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\displaystyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\textstyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptstyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptscriptstyle#2$}}
+% }
+% \newcommand{\grande}{\cbox{\phantom{\frac{1}{xx}}}}
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+% \begin{titlepage}
+\title{Quantum Mechanics -- PHYS\,701 \\
+Assignment 2}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+%Om man vill ha en lista med vilka todo:s som finns.
+%\todolist
+
+\section{The uncertainty relation}
+
+\subsection{The Schwarz inequality}
+Here we're looking to derive the Schwarz inequality:
+\begin{equation}\label{eq:schwarz}
+\braket{\alpha}\braket{\beta} \ge \abs{\braket{\alpha}{\beta}}^2.
+\end{equation}
+
+
+We begin by observing that
+\begin{equation}\label{eq:ineq1}
+\big( \bra{\alpha} + \lambda^*\bra{\beta} \big) \cdot
+\big( \ket{\alpha} + \lambda\ket{\beta} \big) \ge 0
+\end{equation}
+for any $\lambda\in\C$ and any $\ket{\alpha}$ and $\ket{\beta}$. This
+is true because the LHS is just $\braket{\gamma}$ with
+$\ket{\gamma}=\ket{\alpha}+\lambda^*\ket{\beta}$, so the inequality
+is by axiom. 
+
+This can then be expanded to:
+\begin{equation}\label{eq:ineq2}
+\braket{\alpha} + \lambda \braket{\alpha}{\beta} +
+\lambda^*\braket{\beta}{\alpha} + \abs{\lambda}^2\braket{\beta} \ge 0.
+\end{equation}
+Before we continue let's introduce some shorter notation:
+\begin{equation}\label{eq:short_notation}
+\begin{aligned}
+\braket{\alpha}=:a \qcomma& \braket\beta := b \\
+\braket{\alpha}{\beta}=:r_0\ee^{\ii\phi_0}\qcomma & \lambda = -\rho\ee^{\ii\theta},
+\end{aligned}
+\end{equation}
+where $a$, $b$, $r_0$ and $\rho$ are all real and non-negative.
+Pleas also note that although $\ket\alpha$ and $\ket\beta$ are
+arbitrary, the only ``free'' parameters here are $\rho$ and $\theta$.
+
+Now the LHS of \eqref{eq:ineq2} looks like
+\begin{equation}
+a -\rho r_0\,\ee^{\ii(\theta + \phi_0)} 
+-\rho r_0\,\ee^{-\ii(\theta+\phi_0)} + \rho^2b 
+= a - \rho r_0 2\cos(\theta+\phi_0) + \rho^2b \ge 0.
+\end{equation}
+By choosing $\rho=\nicefrac{r_0}{b}$ and moving parts of the LSH to
+the RHS, we get
+\begin{equation}
+a \ge  \frac{r_0^2}{b} 2\cos(\theta+\phi_0) - \frac{r_0^2}{b^2}b 
+= \frac{r_0^2}{b} \Big( 2\cos(\theta+\phi_0) - 1 \Big).
+\end{equation}
+Mulitplying both side by $b$ (which is non-negative) and setting
+$\theta=-\phi_0$, the expression becomes
+\begin{equation}
+ab \ge r_0^2,
+\end{equation}
+which with \eqref{eq:short_notation} is precisely the Schwarz
+inequality:
+\begin{equation}
+\braket{\alpha}\braket{\beta} \ge \abs{\braket{\alpha}{\beta}}^2.
+\end{equation}
+\qed
+
+\subsection{An equality in the generalized uncertainty relation}
+For any given state $\ket{\alpha}$ and observables (Hermitian
+operators) $A$ and $B$, the generalized uncertainty relation states that
+\begin{equation} \label{eq:uncertainty}
+\ev**{(\Delta{A})^2}{\alpha}\ev{(\Delta{B})^2}{\alpha} 
+\ge \frac{1}{4} \abs{\ev{\comm{A}{B}}{\big.\alpha}}^2.
+\end{equation}
+We shall here show that, if the state $\ket{\alpha}$ satisfies
+\begin{equation}
+\Delta{A}\ket{\alpha}=\lambda \Delta{B}\ket{\alpha}\qcomma \lambda \in \ii\R,
+\end{equation}
+the inequality becomes an equality.
+
+First of all we note that $\comm{A}{B}=\comm{\Delta{A}}{\Delta{B}}$,
+since $\Delta{A}$ and $\Delta{B}$ are just $A$ and $B$ respectively
+shifted by a constant number. Therefore we can write the RHS of
+\eqref{eq:uncertainty} as
+\begin{equation}
+\begin{aligned}
+\frac{1}{4} \abs{\ev**{\comm{\Delta{A}}{\Delta{B}}}{\Big.\alpha}}^2 
+=& \frac{1}{4} 
+  \abs{\ev**{\Delta{A}\Delta{B} -\Delta{B}\Delta{A}}{\Big.\alpha}}^2 \\
+=& \frac{1}{4} \abs{
+    \ev**{\lambda^*\Delta{B}\Delta{B} - \lambda\Delta{B}\Delta{B}}{\Big.\alpha}
+   }^2\\
+=& \frac{1}{4} \Big| \underbrace{\big(\lambda^*-\lambda\big)}_{-2\Im(\lambda)}
+\ev**{(\Delta{B})^2}{\alpha} \Big|^2.
+\end{aligned}
+\end{equation}
+We can now turn our attension to the LHS of
+\eqref{eq:uncertainty}. There it's just a matter of rewiting the first
+factor
+\begin{equation}
+\ev**{(\Delta{A})^2}{\alpha} 
+= \ev{\lambda^*\Delta{B}\;\lambda\Delta{B}}{\Big.\alpha} 
+= \abs{\lambda}^2 \ev{\Delta{B}}{\alpha}.
+\end{equation}
+
+It is now clear that if $(\Im(\lambda))^2=\abs{\lambda}^2$, we would
+get an equality in \eqref{eq:uncertainty}. This is however precisely
+the case here, since $\lambda\in\ii\R$. We therefore have
+\begin{equation} 
+\ev**{(\Delta{A})^2}{\alpha}\ev**{(\Delta{B})^2}{\alpha} 
+= \frac{1}{4} \abs{\ev**{\comm{A}{B}}{\big.\alpha}}^2
+\end{equation}
+in this situation.\qed
+
+\subsection{Uncertainty in a Gaußian wave packet}
+We are given the (position) wave function of a 1D Gaußian wave packet
+\begin{equation}
+\phi_\alpha(x'') = \braket{x''}{\alpha} 
+= C'' \exp[\frac{\ii\ev{p}x''}{\hbar}-\frac{\big(x''-\ev{x}\!\big)^2}{4d^2}]
+\end{equation}
+with some normaization constant $C''$. For simplicity we can easily
+change coordiantes as follows
+\begin{equation}
+\begin{aligned}
+x'' \longmapsto&\; x'=x''-\ev{x}\\
+\phi_\alpha(x'') \longmapsto&\; \phi_\alpha(x') 
+= C' \exp[\frac{\ii\ev{p}x'}{\hbar}-\frac{x'^2}{4d^2}],
+\end{aligned}
+\end{equation}
+where the coordinate change only altered the wave function by
+changing the normailzation constant by a constant complex phase. This
+shift in the position coordinates gives us $\ev{x}=0$.
+
+We now want to show that $\Delta{p}\ket{\alpha}$ only differs to
+$\Delta{x}\ket{\alpha}$ by some imaginary factor. To do this we study
+the effect of the two operators on the wave function (in the position
+basis). 
+
+Clearly the the effects of $\Delta{x}=x-\ev{x}=x$ (in this new,
+shifted, position basis) is given by
+\begin{equation}
+\bra{x'}\Delta{x}\ket{\alpha} = \bra{x'}x\ket{\alpha} = x'\phi_\alpha{x'}
+\end{equation}
+since $\phi_\alpha$ is in the position basis. 
+
+The effects of $\Delta{p}$ is easily found by applying the property of
+the momentum operator on a wave function in the position basis:
+\begin{equation}
+\bra{x'}p\ket{\alpha} = -\ii\hbar \pdv{x'} \braket{x'}{\alpha} 
+= -\ii\hbar \pdv{x'} \phi_\alpha(x').
+\end{equation}
+This is known from earlier courses in quantum mechanics, or from
+Sakurai~\&~Napolitano, \textit{Modern Quantum Mechanics}, 2$^\text{nd}$
+ed., eqn. (1.7.17). This now gives us
+\begin{equation}
+\begin{aligned}
+\mel{x'}{\Delta{p}}{\alpha} =& \mel**{x'}{\big(p-\ev{p}\big)}{\alpha}\\
+=& \left[-\ii\hbar \pdv{x'} - \ev{p}\right] \phi_\alpha(x')\\
+=& \left(
+   -\ii\hbar\left[ \frac{\ii\ev{p}}{\hbar} - \frac{2x'}{4d}\right] 
+   - \ev{p}\right)\cdot \phi_\alpha(x')\\
+=& \ii\frac{x'}{2d\hbar}\phi_\alpha(x').
+\end{aligned}
+\end{equation}
+The derivative was evaluated with the fact that the exponential
+differentiatied yields itself times the inner derivative.\qed
+
+To conclude we can see that
+\begin{equation}
+\bra{x'}\Delta{x}\ket{\alpha} = \frac{\ii}{2d\hbar} \bra{x'}\Delta{p}\ket{\alpha},
+\end{equation}
+meaning that according to part (b) a Gaußian wave packet ideed
+satisfies the minimum uncertainty relation.
+
+
+
+\section{Uncertainty in spin operators}
+In this problem we have the two spin operators
+\begin{equation}
+\begin{aligned}
+S_x &= \phantom{-\ii}\frac{\hbar}{2}\Big[\big(\ketbra{+}{-}\big) + \big(\ketbra{-}{+}\big) \Big]\\
+S_y &= -\ii\frac{\hbar}{2}\Big[\big(\ketbra{+}{-}\big) - \big(\ketbra{-}{+}\big) \Big].
+\end{aligned}
+\end{equation}
+Now we're tasked to maximize the uncertinty product
+\begin{equation}
+\ev{\left(\Delta{S_x}\right)^2}\ev{\left(\Delta{S_y}\right)^2},
+\end{equation}
+by choosing some linear combination state
+\begin{equation}
+\ket{\psi}=\alpha\ket{+}+\beta\ket{-} 
+   \qcomma \alpha,\beta\in\C \text{ and } |\alpha|^2+|\beta|^2 = 1.
+\end{equation}
+The last condition is a nomalization condition $\braket{\psi}=1$.
+
+Before we continue, let's introduce a matrix representation in the
+problem. Let
+\begin{equation}
+\ket{+} \dot= \begin{pmatrix} 1\\0 \end{pmatrix}
+\qcomma \ket{-} \dot= \begin{pmatrix} 0\\1 \end{pmatrix},
+\end{equation}
+giving us the matrix representations of the spin operators
+\begin{equation}
+S_x \dot= \frac{\hbar}{2}\begin{pmatrix} 0&1\\1&0 \end{pmatrix}
+\qcomma
+S_y \dot= \ii\frac{\hbar}{2}\begin{pmatrix*}[r] 0&-1\\1&0 \end{pmatrix*},
+\end{equation}
+and our linear combination state is
+\begin{equation}
+\ket{\psi} \dot= \begin{pmatrix} \alpha\\\beta \end{pmatrix}.
+\end{equation}
+
+To calculate the uncertainty product, we have to go through and
+calculate four different quantities: $\ev*{S_x}$, $\ev*{S_x^2}$, 
+$\ev*{S_y}$ and $\ev*{S_y^2}$.
+\begin{enumerate}[label=(\roman*)]
+\item $\displaystyle{ 
+\ev**{S_x}{\psi} = \frac{\hbar}{2} 
+\begin{pmatrix}\alpha^*&\beta^*\end{pmatrix}
+\begin{pmatrix}0&1\\1&0\end{pmatrix}
+\begin{pmatrix}\alpha\\\beta\end{pmatrix}
+= \frac{\hbar}{2} \overbrace{\left(\alpha^*\beta + \alpha\beta^*\right)}^{2\Re(\alpha\beta^*)},
+}$
+\item $\displaystyle{ 
+\ev**{S_x^2}{\psi} = \frac{\hbar^2}{4} 
+\begin{pmatrix}\alpha^*&\beta^*\end{pmatrix}
+\begin{pmatrix}1&0 \\ 0&1\end{pmatrix}
+\begin{pmatrix}\alpha \\ \beta\end{pmatrix}
+= \frac{\hbar^2}{4} \left( |\alpha|^2+|\beta|^2 \right) 
+= \frac{\hbar^2}{4},
+}$
+\item $\displaystyle{ 
+\ev**{S_y}{\psi} = \ldots 
+=\ii\frac{\hbar}{2}\overbrace{\left(-\alpha^*\beta + \alpha\beta^*\right)}^{2\Im(\alpha\beta^*)},
+}$
+\item $\displaystyle{ 
+\ev**{S_x^2}{\psi} = \ldots = \frac{\hbar^2}{4}.
+}$
+\end{enumerate}
+The last two calculations have been left out due to their close
+resemblance to the first two respectivley. We can also note that
+$\ev*{S_x}$ and $\ev*{S_y}$ seems to contain a factor of the real and
+imaginary part respectivley of the complex number
+\begin{equation}
+\alpha\beta^*=:\frac{1}{2} \big(\xi+\ii\eta\big).
+\end{equation}
+Here $\xi$ and $\eta$ are defined as 2 times the real and imaginary
+part of $\alpha\beta^*$ respectivly. Note that $\xi, \eta \in\R$.
+
+The uncertainty product can now be evaluated:
+\begin{equation} \label{eq:unc_prod}
+\begin{aligned}
+\ev{\left(\Delta{S_x}\right)^2}\ev{\left(\Delta{S_y}\right)^2}
+&= \ev**{S_x^2-\ev{S_x}^2}{\psi}\ev**{S_y^2-\ev{S_y}^2}{\psi} \\
+&= \left[\frac{\hbar^2}{4}-\left(\frac{\hbar}{2}\xi\right)^2\right]
+   \left[\frac{\hbar^2}{4}-\left(\ii\frac{\hbar}{2}\eta\right)^2\right]\\
+&= \frac{\hbar^4}{16}\left(1 - \xi^2\right)\left(1 + \eta^2\right).
+\end{aligned}
+\end{equation}
+Now since $\alpha$ and $\beta$ are constrained by the normalization,
+it's easy to note that
+\begin{equation} \label{eq:constraint}
+\frac{1}{2}\abs{\xi+\ii\eta} = \abs{\alpha\beta^*}=\abs{\alpha}\abs{\beta}\le\frac{1}{2},
+\end{equation}
+where maximum is obtained when $\abs{\alpha}=\abs{\beta}=2^{-1/2}$.
+From \eqref{eq:constraint} it's easy to see that $\abs{\xi}\le1$ and
+$\abs{\eta}\le1$. The fact that $\abs{\xi}\le1$ shows us that to
+maximize \eqref{eq:unc_prod}, we should choose $\xi=0$ and
+$\abs{\eta}=1$, i.e. $\alpha\beta^*$ completly imaginary. This can be
+realized by choosing 
+\begin{equation}
+\alpha=\frac{1}{\sqrt{2}}\quad\text{and}\quad\beta=\frac{\pm\ii}{\sqrt{2}},
+\end{equation}
+any other solution is just a constant complex phase added to the one
+above. \qed
+
+We're also asked to explicitly verify that the uncertainty relation
+\eqref{eq:uncertainty}, for $S_x$ and $S_y$, is not violated in this
+case. The LHS is given by \eqref{eq:unc_prod} to be
+\begin{equation}
+\ev{\left(\Delta{S_x}\right)^2}\ev{\left(\Delta{S_y}\right)^2}
+= \frac{\hbar^4}{8}.
+\end{equation}
+While the RHS is given by
+\begin{equation}
+\begin{aligned}
+\frac{1}{4}\abs{\ev{\comm{S_x}{S_y}}{\psi}}^2
+&= \frac{1}{4} \abs{
+   \ii\frac{\hbar^2}{4}
+   \begin{pmatrix}\alpha^*&\beta^*\end{pmatrix}
+   \left[
+     \begin{pmatrix}1&0\\0&-1\end{pmatrix}-\begin{pmatrix}-1&0\\0&1\end{pmatrix}
+   \right]
+   \begin{pmatrix}\alpha\\\beta\end{pmatrix}
+ }^2\\
+&= \frac{1}{4} \abs{
+   \ii\frac{\hbar^2}{4}\cdot2\cdot\frac{1^2-\ii^2}{2}
+ }^2= \frac{\hbar^4}{16},
+\end{aligned}
+\end{equation}
+which is clearly less than the LHS. So the uncertainty relation for
+$S_x$ and $S_y$ is \emph{not} violated in this case.
+
+
+
+\section{Commutators involving $x$ and $p_x$}
+
+\subsection{The calssical case}
+It's pretty straight forward to evaluate the Poisson bracket here:
+\begin{equation}
+\comm{x}{F(x_x)}_\text{classical} 
+= \pdv{x}{x}\pdv{F(p_x)}{p} - \pdv{x}{p}\pdv{F(p_x)}{x} 
+= \pdv{F(p_x)}{p}.
+\end{equation}
+Where the second term in the middle expression is 0 because $x$ and
+$p$ are independent of each other.
+
+\subsection{Commuting $x$ and an exponential of $p_x$}
+This is clearly just a special case of the rule in
+problem~\ref{sec:p_power}. With \eqref{eq:p_power} we get
+\begin{equation} \label{eq:comm_exp}
+\comm{x}{\exp(\frac{\ii p_xa}{\hbar})} 
+= \ii\hbar \cdot \frac{\ii a}{\hbar} = -a \exp(\frac{\ii p_xa}{\hbar}).
+\end{equation}
+For prof of this rule, see problem~\ref{sec:4a}.
+
+\subsection{Inverstigating the effects of the expoential of $p_x$}\label{sec:3c}
+To prove that
+\begin{equation}
+\exp(\frac{\ii p_xa}{\hbar})\ket{x'}
+\end{equation}
+is an eigenstate of the $x$ operator, we just aply $x$ and se what it
+evaluates to:
+\begin{equation}
+%\begin{aligned}
+x\exp(\frac{\ii p_xa}{\hbar})\ket{x'} 
+= \left( \comm{x}{\exp(\frac{\ii p_xa}{\hbar})} 
++\exp(\frac{\ii p_xa}{\hbar}) x \right)\ket{x'}.
+%\end{aligned}
+\end{equation}
+From here we make use of the result in \eqref{eq:comm_exp} and the
+fact that $x\ket{x'}=x'\ket{x'}$. This gives us
+\begin{equation}\label{eq:3_exp_p}
+x\exp(\frac{\ii p_xa}{\hbar})\ket{x'} 
+= \overbrace{(x'-a)}^\text{eigenvalue}
+  \underbrace{\exp(\frac{\ii p_xa}{\hbar})\ket{x'}}_\text{eigenstate of $x$}
+= (x'-a)\ket{x'-a}.
+\end{equation}
+The last step follows directly from the definition of the position
+eisgenket $\ket{x'-a}$. From here it's easy to see that
+\begin{equation}
+\exp(\frac{\ii p_xa}{\hbar})\ket{x'} = \ket{x'-a},
+\end{equation}
+i.e. the operator here is a translation in position.
+
+\section{More comutators of $x$ and $p_x$}
+
+\subsection{Commutators of $x$ and power series in $p_x$ and vice versa}\label{sec:4a}
+Before we set out to prove the two commutator relations, it will be
+helpfull to derive an intermediary result first. We're going to prove
+the formula
+\begin{equation} \label{eq:comm_power}
+\comm{A}{B^n} = \sum_{i=0}^{n-1} B^{i}\comm{A}{B}B^{n-1-i}.
+\end{equation}
+This formula is readily derived with a proof by induction. 
+
+To start off with, we can clearly see that \eqref{eq:comm_power} holds
+in the base case of $n=1$. Then assume that it also holds for all
+intergers up to some value $m$. Does it then also hold for $m+1$?
+To show that it does, use the elementary commutator
+indentity
+\begin{equation} \label{eq:comm_A_BC}
+\comm{A}{BC} = \comm{A}{B}C+B\comm{A}{C},
+\end{equation}
+which gives
+\begin{equation}
+\begin{aligned}
+\comm{A}{B^{m+1}} &= \comm{A}{B^{m}B} \\
+&\hspace{-3pt}\stackrel{\eqref{eq:comm_A_BC}}{=} \comm{A}{B^{m}}B + B^m\comm{A}{B}\\
+&\hspace{-14pt}\stackrel{\stackrel{\text{\tiny induction}}{\text{\tiny assumption}}}{=}
+\left(\sum_{i=0}^{m-1} B^{i-1}\comm{A}{B}B^{m-1-i}\right) B + B^m\comm{A}{B}\\
+&=\sum_{i=0}^{m-1} B^{i-1}\comm{A}{B}B^{m-i} + B^m\comm{A}{B}&=\sum_{i=0}^{m} B^{i-1}\comm{A}{B}B^{m-i}.
+\end{aligned}
+\end{equation}
+The last expression is just \eqref{eq:comm_power} with $n=m+1$. This
+concludes the proof by induction. \qed
+
+In our case though, we will only be interested in cases where
+$\comm{A}{B}=\lambda$, where $\lambda$ is some regular number. Then
+\eqref{eq:comm_power} becomes 
+\begin{equation} \label{eq:comm_power_c}
+\comm{A}{B^n} = \sum_{i=0}^{n-1} \lambda B^{n-1} = n\lambda B^{n-1}.
+\end{equation}
+
+\subsubsection{Power series in $p_x$} \label{sec:p_power}
+Here we're going to prove the formula
+\begin{equation} \label{eq:p_power}
+\comm{x_l}{G(\mathbf{p})}=\ii\hbar\pdv{G}{p_l},
+\end{equation}
+where $G$ is a power series in ints arguments. 
+
+For simplicity lets
+assume that $\mathbf{p}$ is (only) 3~dimentional and that $x_l=x$, the proof is
+completly analog for any ofther finite dimension pf $\mathbf{p}$ and
+choice of $x_l$. 
+The power series can thus be expressed as
+\begin{equation}
+G(\mathbf{p}) 
+= \sum_{i=0}^\infty\sum_{j=0}^\infty\sum_{k=0}^\infty
+c_{ijk}p_x^ip_y^jp_z^k = \sum_{i=0}^\infty p_x^i \sum_{j,k}c_{ijk}p_y^jp_z^k.
+\end{equation}
+There is no problems with having to wory about any ordering within
+each $p_x^ip_y^jp_z^k$ term, since $\comm{p_l}{p_m}=0$ so that all the
+$p$'s commute. Also $x$ commutes with $p_y$ and $p_z$. This means that
+the second sum can be viewed as a set of operators
+\begin{equation}
+C_i=\sum_{j,k}c_{ijk}p_y^jp_z^k
+\end{equation}
+which \emph{all commute with both} $x$ and $p_x$. The commutator now becomes
+\begin{equation}
+\comm{x}{G(\mathbf{p})} = \comm{x}{\sum_i C_ip_x^i}=\sum_i C_i \comm{x}{p_x^i}.
+\end{equation}
+The last step is now to expand the commutator in the RHS using
+\eqref{eq:comm_power_c} and $\comm{x}{p_x}=\ii\hbar$:
+\begin{equation}
+\comm{x}{G(\mathbf{p})} = \sum_{i=1}^\infty C_i (\ii\hbar) ip_x^{i-1}
+= \ii\hbar \pdv{p_x}\sum_{i=0}^\infty C_i p_x^{i}
+= \ii\hbar \pdv{G(\mathbf{p})}{p_x}.
+\end{equation}
+\qed
+
+
+\subsubsection{Power series in $x$}
+Here we're tasked to show that
+\begin{equation} \label{eq:x_power}
+\comm{p_i}{F(\mathbf{x})}=-\ii\hbar\pdv{F}{x_i}.
+\end{equation}
+For any power series $F$ in terms of it's arguments.
+
+This proof is completly similar to the one for a power series in
+$\mathbf{p}$. Just interchange $x$ and $p_x$ in the proof; the only
+change that will happen is that $\comm{p_x}{x}=-\ii\hbar$, giving rise
+to the minus sign in \eqref{eq:x_power}.
+\qed
+
+\subsection{An example}
+Here we're going to evaluate both the classical and quantum mechanical
+version of $\comm{x^2}{p_x^2}$:
+\begin{equation}
+\begin{aligned}
+\comm{x^2}{p_x^2} &= \comm{x^2}{p_x}p_x + p_x\comm{x^2}{p_x} 
+= \ii\hbar \big( 2xp_x+p_x2x \big) = 2\ii\hbar\acomm{x}{p_x}\\
+\comm{x^2}{p_x^2}_\text{classical} 
+&= \pdv{(x^2)}{x}\pdv{(p_x^2)}{p_x} - \pdv{(x^2)}{p_x}\pdv{(p_x^2)}{x}
+= 4xp_x.
+\end{aligned}
+\end{equation}
+The results are similar, but due to the fact that $x$ and $p_x$
+doesn't commute in the quantum mechanica case, it's not possible to
+collect the two terms in the anticommutator to one, as is the case in
+classical mechanics.
+
+
+
+\section{Some useful relations and a little more}
+
+\subsection{Two formulas for  the connection between position
+  and momentum representations}
+
+The notation used here will be: $\braket{x'}{\alpha}=:\phi_\alpha(x')$ and
+$\braket{p'}{\alpha}=:\tilde\phi_\alpha(p')$, i.e.  wave functions
+with tildes are in the momentum representation.  
+
+\subsubsection{}\label{sec:5ai}
+We're tasked to evaluate the position operator's effects on a wave
+function in the momentum representation:
+\begin{equation}\label{eq:5_pxa}
+\bra{p'}x\ket{\alpha} = \ii\hbar \pdv{p'} \braket{p'}{\alpha} 
+= \ii\hbar \pdv{p'} \tilde\phi_\alpha(p').
+\end{equation}
+
+To begin with we remind ourselves about an equation from
+Sakurai~\&~Napolitano, \textit{Modern Quantum Mechanics},
+2$^\text{nd}$ ed., eqn. (1.7.32)
+\begin{equation}\label{eq:5_xp}
+\braket{x'}{p'} = \frac{1}{\sqrt{2\pi\hbar}} \exp(\frac{\ii p'x'}{\hbar}),
+\end{equation}
+which gives us the transfer function from the position to the momentum
+representation of a wave function.
+
+To evluate the LHS of \eqref{eq:5_pxa}, we begin by instering the
+identity operator in front of the $p'$ bra:
+\begin{equation}
+\bra{p'}x\ket{\alpha} = \int\dd{x'}\mel{p'}{x}{x'}\braket{x'}{\alpha}
+= \int\dd{x'} x'\braket{p'}{x'}\phi_\alpha(x').
+\end{equation}
+And by \eqref{eq:5_xp}, we get
+\begin{equation}
+\bra{p'}x\ket{\alpha} = \frac{1}{\sqrt{2\pi\hbar}} 
+  \int\dd{x'} x'\exp(\frac{-\ii p'x'}{\hbar}) \phi_\alpha(x').
+\end{equation}
+The minus sign in the exponential is due to the fact that we're having
+$\braket{p'}{x'}$ instead of $\braket{x'}{p'}$, as was the case in
+\eqref{eq:5_xp}. 
+
+We now note that we would get a result, similar to the integrand, if
+we take
+\begin{equation}
+\pdv{p'}\qty[\exp(\frac{-\ii p'x'}{\hbar}) \phi_\alpha(x')]
+=\frac{x'}{\ii\hbar}\exp(\frac{-\ii p'x'}{\hbar}) \phi_\alpha(x').
+\end{equation}
+We can therefore\footnotemark{} write
+\begin{equation}
+\begin{aligned}
+\bra{p'}x\ket{\alpha} &= \ii\hbar \pdv{p'}\qty[
+ \frac{1}{\sqrt{2\pi\hbar}} 
+  \int\dd{x'} \exp(\frac{-\ii p'x'}{\hbar}) \phi_\alpha(x')]\\
+&= \ii\hbar \pdv{p'}\qty[
+   \int\dd{x'}\braket{p'}{x'}\braket{x'}{\alpha}] 
+= \ii\hbar\pdv{p'}\braket{p'}{\alpha}
+= \ii\hbar\pdv{p'}\tilde\phi_\alpha(p').
+\end{aligned}
+\end{equation}
+\qed
+\footnotetext{There are some issues regarding wherther it's allowed to
+switch the order of integration and differentiation. But since this is
+physics all functions are assume to be ``well behaved'' enough for
+this to be allowed. }
+
+It should also be noted though, that this relation could have been
+derived much easier with the help of Fourier analysis. The basis
+change from position to momentum, and vice versa, is just a Fourier
+transformation of the wave function. Therefore mutiplying by $x'$ in
+the $x'$ basis, corresponds to differentiation in the $p'$ basis up to
+some constant factor, according to the laws of Fourier Analysis. 
+
+\subsubsection{}
+Here, we're looking at a way to evaluate the inner product
+$\mel{\beta}{x}{\alpha}$, and prove that it can be expressed as
+\begin{equation}
+\bra{\beta}x\ket{\alpha} 
+= \int \rd{p'} \tilde\phi^*_\beta(p')\ii\hbar \pdv{p'} \tilde\phi_\alpha(p').
+\end{equation}
+Again with the same notation as before.
+
+This equation follows pretty straight forward from the result
+before. Just insert the identity in front of $\bra{\beta}$:
+\begin{equation}
+\bra{\beta}x\ket{\alpha} 
+= \int\dd{p'} \braket{\beta}{p'}\mel{p'}{x}{\alpha}
+\stackrel{\eqref{eq:5_pxa}}{=} \int\dd{p'} 
+\tilde\phi_\beta^*(p') \, \ii\hbar \pdv{p}\tilde\phi_\alpha(p').
+\end{equation}
+\qed
+
+
+\subsection{A physical interpretation of an exponential of $x$ (alt. 1)}
+What is the physical interpretation of 
+\begin{equation}
+\exp(\frac{\ii x\Xi'}{\hbar}),
+\end{equation}
+for some momentum value $\Xi'$ an the position operator $x$? 
+For simplicity call this operator $\hat\Xi$. 
+
+
+By analogy to the fact that the momentum operator is a generator of
+translation via \eqref{eq:3_exp_p}, it's not too far of to assume that
+this quantity would correspond to some translation of momentum. 
+There are probably many different ways to show this but here's two.
+
+\subsubsection{Show that $\hat\Xi\ket{p'}$ is an eigenstate of the
+  momentum operator $p$}
+Let's follow the procedure of problem~\ref{sec:3c} and see where we're
+taken. 
+Begin by applying $p\hat\Xi$ to a momentum eigenket:
+\begin{equation}
+p\hat\Xi\ket{p'}=p\exp(\frac{\ii x\Xi'}{\hbar})\ket{p'} 
+= \qty(\comm{p}{\exp(\frac{\ii x\Xi'}{\hbar})}+\exp(\frac{\ii x\Xi'}{\hbar})p)
+\ket{p'}.
+\end{equation}
+By using \eqref{eq:x_power} and $p\ket{p'}=p'\ket{p'}$, we get
+\begin{equation}
+p\hat\Xi\ket{p'} = 
+\qty( -\ii\hbar \frac{\ii\Xi'}{\hbar} \hat{\Xi} + \hat\Xi p')\ket{p'} 
+= \qty(\Xi'+p')\ket{p'}.
+\end{equation}
+Therefore $\hat\Xi\ket{p'}$ is an eigenstate of the momentumoperator
+and the state is actually $\ket{p'+\Xi'}$, showing that $\hat\Xi$
+is indeed a translation of momentum --- although with opposite sign of
+what the translator of position had. 
+\qed
+
+
+\subsubsection{Studying how $\hat\Xi$ affects the wave function of an
+  abritrary state}
+This solution makes use of the results from problem~\ref{sec:5ai},
+that is \eqref{eq:5_pxa}, and the generalized version
+\begin{equation}\label{eq:5_pxa_gen}
+\mel**{p'}{x^n}{\alpha} 
+= (\ii\hbar)^n \frac{\pd^n}{\pd p'^n} \hat{\phi}_\alpha(p').
+\end{equation}
+This relations is easily shown in the same way as in
+problem~\ref{sec:5ai}, but with repeated differentiation of the
+integrand. 
+
+Now we have
+\begin{equation}
+\mel**{p'}{\hat\Xi}{\alpha} 
+= \sum_{k=0}^\infty \frac{1}{k!} \qty(\frac{\ii\Xi'}{\hbar})^k\mel**{p'}{x^k}{\alpha},
+\end{equation}
+which with \eqref{eq:5_pxa_gen} becomes
+\begin{equation}
+\mel**{p'}{\hat\Xi}{\alpha} 
+= \sum_{k=0}^\infty \frac{1}{k!} \qty(-\Xi')^k
+       \frac{\pd^k \tilde\phi_\alpha(p')}{\pd p'^k}
+= \tilde\phi_\alpha\qty(p'-\Xi').
+\end{equation}
+The last step was just identifying the Taylor expansion of
+$\tilde\phi_\alpha$ around $p'$. 
+Once againg we see here that indeed, $\hat\Xi$ corresponds to a
+translation of the \emph{wave function} by $+\Xi'$.
+\qed
+
+\end{document}
+
+
+
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer (två enkelfjongar): ''.
+
+
+%% Inkludera PDF-dokument
+\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+
+%% Figurer inkluderade som pdf-filer
+\begin{figure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer roterade 90 grader
+\begin{sidewaysfigure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{sidewaysfigure}
+
+
+%%Om man vill lägga till något i TOC
+\stepcounter{section} %Till exempel en 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
