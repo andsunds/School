@@ -1,0 +1,24 @@
+# Det här en är en avsiktilgt synlig gitignore-fil som är tänkt som en mall till LaTeX-repositories.
+
+#Onödig LaTeX-output
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+Assignment?.pdf
+Comp_project.pdf
+#Från Beamer
+*.nav
+*.snm
+
+*.fig.bak
+
+*-eps-converted-to.pdf
+
+#From the simulation project
+*~
+rename.py
+*.bin
+*DEBUG*

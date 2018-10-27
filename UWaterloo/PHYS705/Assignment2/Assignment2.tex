@@ -1,0 +1,537 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+\usepackage[makeroom
+]{cancel}
+\graphicspath{{figures/}}
+
+\swapcommands{\Delta}{\varDelta}
+\swapcommands{\Omega}{\varOmega}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 2.5cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+%\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
+\newcommand{\sign}{\ensuremath{\text{sign}}}
+
+%\usepackage{tikz}
+
+\begin{document}
+
+%\tikzstyle{every picture}+=[remember picture]
+%\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{Statistical Physics 2 -- PHYS\,705 \\
+Assignment 2}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+\section{The Ornstein-Zernike formula}
+In this problem we are concerned about the Ornstein-Zernike formula 
+$G(\vb*r)=r^{-(d-1)/2}\ee^{-r/\xi}$. We will start from the real space
+representation 
+\begin{equation}\label{eq:1_start}
+G(\vb*r) = \frac{T}{2}\int\!\rd^dq\,\frac{\ee^{\ii\vb*q\vdot\vb*r}}{kt+bq^2},
+\end{equation}
+where $q^2=\vb*q\vdot\vb*q$, $t=(T-\Tc)/\Tc$, $k$ and $b$ are some
+constants, and $r\gg\xi:=\sqrt{b/kt}$.
+
+\subsection*{1~(a+b)\quad Doing the integrals}\addtocounter{subsection}{2}
+Using 
+\begin{equation}\label{eq:1_1/c}
+\int_0^\infty\rd{u}\,\ee^{-cu}=\frac{1}{c}
+\qcomma a>0,
+\end{equation}
+we can rewrite the target integral as
+\begin{equation}
+g(\vb*r)=\int_{-\infty}^\infty\!\rd^dq\,
+\frac{\ee^{\ii\vb*q\vdot\vb*r}}{kt+bq^2}
+\stackrel{\eqref{eq:1_1/c}}{=}
+\int_{-\infty}^\infty\!\rd^dq\, \ee^{\ii\vb*q\vdot\vb*r}
+\int_0^\infty\!\rd{u}\,\ee^{-u\,(kt+bq^2)}.
+\end{equation}
+Now, since this is physics\footnotemark{}, we can swap the order of
+integration; and while we're at it we might as well change variables
+to $Q=\sqrt{b/kt}\,q=\xi q$ and $U=ktu$. We thereby get
+\begin{equation}
+g(\vb*r)=\int_0^\infty\!\frac{\rd{U}}{kt}\,\ee^{-U}
+\prod_i\int_{-\infty}^\infty\!\frac{\rd{Q}_i}{\xi}\,
+ \exp{-UQ_i^2+\frac{\ii r_i}{\xi}Q_i}.
+\end{equation}
+Each of these $Q_i$ integrals are just regular Gaussian so
+\begin{equation}
+\int_{-\infty}^\infty\!\rd{Q}_i\,
+ \exp{-UQ_i^2+\frac{\ii r_i}{\xi}Q_i}
+=\qty(\frac{\pi}{U})^{1/2}\exp{-\frac{r_i^2}{4\xi^2U}}.
+\end{equation}
+and we and up with
+\begin{equation}\label{eq:1b_end}
+g(\vb*r)=\frac{\pi^{d/2}}{\xi^d kt}\int_0^\infty\!\rd{U}\,
+U^{d/2}\exp{-U-\frac{r^2}{4\xi^2U}}.
+\end{equation}
+
+\footnotetext{I.e. we don't care, but in reality the functions are
+  nice enough, so we can do it.} 
+
+
+\subsection{Asymptotic behavior}
+To get to the asymptotic behavior of $g$, we enlist the help of
+\textit{Mathematica} which helps us to calculate the last remaining
+integral \eqref{eq:1b_end}. And we get
+\begin{equation}
+g(\vb*r)=\qty(\frac{\pi}{2})^{d/2}\frac{1}{\xi^dkt} 
+\qty(\frac{\xi}{r})^{-1-\frac{d}{2}} 
+K_{-1-\frac{d}{2}}\qty(\frac{r}{\xi}),
+\end{equation}
+where $K_\mu$ is the modified Bessel function of the second kind. Next
+we use the asymptotic formula 
+\begin{equation}
+K_\mu(z)\sim \ee^{-z}\sqrt{\frac{\pi}{2z}}
+\end{equation}
+to get
+\begin{equation}
+g(\vb*r)=\qty(\frac{\pi}{2})^{d/2}\frac{1}{\xi^dkt} 
+\qty(\frac{\xi}{r})^{-1-\frac{d}{2}} 
+\ee^{-r/\xi}\qty(\frac{\pi}{2})^{1/2}\qty(\frac{\xi}{r})^{1/2}
+\propto
+%=\qty(\frac{\pi}{2})^{(d+1)/2}\frac{1}{\xi^{(3d+1)/2}kt}\;
+r^{(1-d)/2}\ee^{-r/\xi},
+\end{equation}
+which was what we set out to show. 
+
+
+
+\section{MFT correlation length in the Ising model}
+From class, we derived an expression for the, momentum space,
+correlation function at $T>\Tc$:
+\begin{equation}
+G_{T>\Tc}(\vb*q)=\frac{1}{t+\frac{\kappa}{2T}q^2},
+\end{equation}
+for small $q$, where $t=(T-\Tc)/\Tc$ and $\kappa$ is a given
+constant. From this expression we got the correlation length
+\begin{equation}
+\xi(t>0)=\qty[\frac{\kappa}{2Tt}]^{1/2}
+=\qty[\frac{\kappa}{2(T-\Tc)}]^{1/2}.
+\end{equation}
+We got to this correlation length first after we've done
+the inverse F.T. but if we can get the momentum space correlation
+function, for $t<0$, on the form
+\begin{equation}
+G_{T<\Tc}(\vb*q)\propto\qty[1+\xi^2q^2]^{-1},
+\end{equation}
+we don't have to redo the inverse F.T.
+
+We begin with the MFT equation for the correlation function
+\begin{equation}
+G_{ij}=(1-M^2)\sum_l \qty[\frac{1}{T}J_{il}G_{lj}+\delta_{ij}]
+\quad\Longleftrightarrow\quad
+\sum_l\qty(\frac{\delta_{il}}{1-M^2}-\frac{1}{T}J_{il})G_{lj}
+=\delta_{ij},
+\end{equation}
+where the MFT value for $M^2$ is $M^2=3|t|=-3t$.
+Next step is to F.T. this using the transformation
+\begin{equation}
+A_{ij}=\frac{1}{N}\sum_{\vb*q} A(\vb*q)\ee^{\ii\vb*q\vdot(\vb*r_i-\vb*r_j)}.
+\end{equation}
+And we get
+\begin{equation}\label{eq:2_MFT_FT}
+\frac{1}{N}\sum_{\vb*q} \frac{G(\vb*q)}{1-M^2}
+\ee^{\ii\vb*q\vdot(\vb*r_i-\vb*r_j)}
+-\frac{1}{T}\sum_l\frac{1}{n^2}\sum_{\vb*q', \vb*q''}
+J(\vb*q')\ee^{\ii\vb*q'\vdot(\vb*r_i-\vb*r_l)}
+G(\vb*q'')\ee^{\ii\vb*q''\vdot(\vb*r_l-\vb*r_j)}
+=\frac{1}{N}\sum_{\vb*q}\ee^{\ii\vb*q\vdot(\vb*r_l-\vb*r_j)}.
+\end{equation}
+From here, we use 
+\begin{equation}
+\frac{1}{N}\sum_n\ee^{-\ii \vb*r_n\vdot(\vb*q'-\vb*q'')}=\delta_{\vb*q', \vb*q''}
+\end{equation}
+to collapse the $l$ sum and one of the $\vb*q$ sums in the second term
+of \eqref{eq:2_MFT_FT}:
+\begin{equation}
+\frac{1}{N}\sum_{\vb*q} 
+\qty(\frac{1}{1-M^2} -\frac{1}{T}J(\vb*q))G(\vb*q)
+\ee^{\ii\vb*q\vdot(\vb*r_i-\vb*r_j)}
+=\frac{1}{N}\sum_{\vb*q}\ee^{\ii\vb*q\vdot(\vb*r_l-\vb*r_j)}.
+\end{equation}
+This should be valid for any $\vb*r_i$ and $\vb*r_j$, so we can equate
+the terms:
+\begin{equation}
+G(\vb*q)=\frac{1}{\frac{1}{1-M^2} -\frac{1}{T}J(\vb*q)}.
+\end{equation}
+
+Now we need the long-wavelength limit for $J$, which we derived in
+class to be
+\begin{equation}
+J(\vb*q)=J-\frac{\kappa}{2}q^2,
+\end{equation}
+where 
+\begin{equation}
+\kappa:=\frac{1}{Nd}\sum_{ij}J_{ij}\abs{\vb*r_i-\vb*r_j}^2
+\end{equation}
+is just a constant. 
+
+We now have all we need
+\begin{equation}
+\begin{aligned}
+G(\vb*q)=&\qty[\frac{1}{1-M^2}-\frac{J}{T}+\frac{\kappa}{2T}q^2]^{-1}
+&\stackrel{\text{MFT}}{=}&
+\qty[\frac{1}{1+3t}-\frac{\Tc}{T}+\frac{\kappa}{2T}q^2]^{-1}\\
+\stackrel{|t|\ll1}{\approx}&
+\qty[(1-3t)-\frac{\Tc}{T}+\frac{\kappa}{2T}q^2]^{-1}
+&=\hspace{5pt}&
+\qty[-3t+\frac{T-\Tc}{T}+\frac{\kappa}{2T}q^2]^{-1}\\
+\stackrel{T\approx\Tc}{\approx}&
+\qty[-3t+t+\frac{\kappa}{2T}q^2]^{-1}
+&\propto\hspace{5pt}&
+\qty[1+\frac{\kappa}{T|t|}q^2]^{-1}.
+\end{aligned}
+\end{equation}
+We therefore have
+\begin{equation}
+\xi(t<0)=\qty(\frac{\kappa}{T|t|})^{1/2}
+\propto |t|^{-\nu}\qcomma \nu=\frac{1}{2}
+\end{equation}
+and the amplitude ratio is
+\begin{equation}
+\frac{k_+}{k_-}=\sqrt{2}.
+\end{equation}
+
+
+
+
+
+\section{Heisenberg ferromagnet}
+In this problem we have a Heisenberg ferromagnet with Hamiltonian
+\begin{equation}
+H=-\frac{1}{2}\sum_{ij}J_{ij}\vb*S_i\vdot\vb*S_j
+=-\frac{1}{2}\sum_{ij}J_{ij}S_i^xS_j^x
+-\frac{1}{2}\sum_{ij}J_{ij}S_i^yS_j^y
+-\frac{1}{2}\sum_{ij}J_{ij}S_i^zS_j^z
+\end{equation}
+and partition function
+\begin{equation}\label{eq:3_Z1}
+Z=\Tr{\ee^{-H/T}}=\int_{\vb*S_i^2=1}\!\prod_i\rd{\vb*S_i}\;\ee^{-H/T},
+\end{equation}
+where $\vb*S_i$ are spin unit vectors ($\vb*S_i\vdot\vb*S_i=1$).
+
+\subsection{Functional integral representation}
+To find a functional integral representation of the partition
+function, we will need the Hubbard-Stratonovich transformation (HST)
+\begin{equation}
+\exp[\frac{1}{2}\sum_{ij}A_{ij}^{-1}\gamma_i\gamma_j]
+=C\int\rd\varphi_1\cdots\rd\varphi_N 
+\,\exp[-\frac{1}{2}\sum_{ij}\varphi_iA_{ij}\varphi_j+\sum_i\varphi_i\gamma_i],
+\end{equation}
+where $C$ is some unimportant numerical constant, that will be dropped
+in future calculations here. 
+
+In our case, we will use the HST to rewrite
+\begin{equation}
+\begin{aligned}
+\ee^{-H/T}=&\exp[\frac{1}{2T}\sum_{ij}J_{ij}S_i^xS_j^x]
+\exp[\frac{1}{2T}\sum_{ij}J_{ij}S_i^yS_j^y]
+\exp[\frac{1}{2T}\sum_{ij}J_{ij}S_i^zS_j^z]\\
+=&\int\rd\varphi_1^x\cdots\rd\varphi_N^x
+\,\exp[-\frac{1}{2T}\sum_{ij}\varphi_i^xJ_{ij}^{-1}\varphi_j^x
++\frac{1}{T}\sum_i\varphi_i^xS_i^x]\\
+&\times\int\rd\varphi_1^y\cdots\rd\varphi_N^y
+\,\exp[-\frac{1}{2T}\sum_{ij}\varphi_i^yJ_{ij}^{-1}\varphi_j^y
++\frac{1}{T}\sum_i\varphi_i^yS_i^y]\\
+&\times\int\rd\varphi_1^z\cdots\rd\varphi_N^z
+\,\exp[-\frac{1}{2T}\sum_{ij}\varphi_i^zJ_{ij}^{-1}\varphi_j^z
++\frac{1}{T}\sum_i\varphi_i^zS_i^z].
+\end{aligned}
+\end{equation}
+Then we can write everything as one exponential under one integration:
+\begin{equation}
+\ee^{-H/T}=\int\rd\vb*\varphi_1\cdots\rd\vb*\varphi_N
+\,\exp[-\frac{1}{2T}\sum_{ij}J_{ij}^{-1}\vb*\varphi_i\vdot\vb*\varphi_j
++\frac{1}{T}\sum_i\vb*\varphi_i\vdot\vb*S_i].
+\end{equation}
+
+The next step, to get the partition function \eqref{eq:3_Z1}, is to integrate over all
+possible $\vb*S_i$'s. To do this we take a closer look at \emph{one}
+of those integrals: 
+\begin{equation}
+\int_{\vb*S_i^2=1}\rd\vb*S_i\ee^{\vb*\varphi_i\vdot\vb*S_i/T}
+=\int_0^{2\pi}\rd\phi_i\int_0^{\pi}\rd\theta_i\,\sin(\theta_i)
+\ee^{|\vb*\varphi_i|\,|\vb*S_i|\,\cos(\theta_i)/T}
+=4\pi\frac{\sinh(\varphi_i)/T}{\varphi_i/T},
+\end{equation}
+where $\varphi_i:=|\vb*\varphi_i|$.
+Here we have used the trick to align the $z$~axis of the integration
+with $\vb*\varphi_i$, therefore making
+$\vb*\varphi_i\vdot\vb*S_i=\varphi_i\cos\theta_i$ since $|\vb*S_i|=1$.
+We therefore get the full partition function
+\begin{equation}
+\begin{aligned}
+Z=&\int\rd\vb*\varphi_1\cdots\rd\vb*\varphi_N
+\exp[-\frac{1}{2T}\sum_{ij}\vb*\varphi_iJ_{ij}^{-1}\vb*\varphi_j]
+\int_{\vb*S_i^2=1}\prod_i\rd\vb*S_i\ee^{\vb*\varphi_i\vdot\vb*S_i/T}\\
+=&(4\pi)^N\int\rd\vb*\varphi_1\cdots\rd\vb*\varphi_N
+\exp[-\frac{1}{2T}\sum_{ij}\vb*\varphi_iJ_{ij}^{-1}\vb*\varphi_j
++\sum_i\ln(\frac{\sinh(\varphi_i/T)}{\varphi_i/T})].
+\end{aligned}
+\end{equation}
+We can trow away the prefactor, of $(4\pi)^N$, just as we did with the
+prefactors from the HST. The action then becomes
+\begin{equation}
+S[\vb*\varphi]=\frac{1}{2T}\sum_{ij}J_{ij}^{-1}\vb*\varphi_i\vdot\vb*\varphi_j
+-\sum_i\ln(\frac{\sinh(\varphi_i/T)}{\varphi_i/T}).
+\end{equation}
+
+
+\subsection{Continuum limit}
+To expand $S[\vb*\varphi]$ in $\vb*\varphi$, all we need to do is to
+expand the last term
+\begin{equation}
+\ln(\frac{\sinh(x)}{x})=\frac{x^2}{6}-\frac{x^4}{180}+\order{x^6}.
+\end{equation}
+We therefore get
+\begin{equation}
+\begin{aligned}
+S[\vb*\varphi]=&\frac{1}{2T}\sum_{ij}J^{-1}_{ij}\vb*\varphi_i\vdot\vb*\varphi_j
+-\frac{1}{6T^2}\sum_i\vb*\varphi_i\vdot\vb*\varphi_i
++\frac{1}{180T^4}\sum_i\big(\vb*\varphi_i\vdot\vb*\varphi_i\big)^2\\
+=&\underbrace{\frac{1}{6T^2}\sum_{ij}\qty(3TJ^{-1}_{ij}-\delta_{ij})
+\vb*\varphi_i\vdot\vb*\varphi_j}_{=:S_2[\vb*\varphi]}
++\underbrace{\frac{1}{180T^4}\sum_i
+\big(\vb*\varphi_i\vdot\vb*\varphi_i\big)^2}_{=:S_4[\vb*\varphi]}
+\end{aligned}
+\end{equation}
+
+\subsubsection{The quadratic term}
+We need to diagonalize the quadratic term, which we will do by Fourier
+transform:
+\begin{equation}
+\begin{aligned}
+S_2[\vb*\varphi]=&\frac{1}{6T^2}\sum_{ij}\frac{1}{N^3}
+\sum_{\vb*q, \vb*q', \vb*q''}\vb*\varphi(\vb*q)\vdot\vb*\varphi(\vb*q')
+\qty[\frac{3T}{J(\vb*q'')}-1]
+\ee^{\ii\vb*q\vdot\vb*r_i}\ee^{\ii\vb*q'\vdot\vb*r_j}
+\ee^{\ii\vb*q''\vdot(\vb*r_i-\vb*r_j)}\\
+=&\frac{1}{6NT^2}\sum_{\vb*q, \vb*q', \vb*q''}
+\vb*\varphi(\vb*q)\vdot\vb*\varphi(\vb*q')
+\qty[\frac{3T}{J(\vb*q'')}-1]
+\frac{1}{N^2}\sum_{ij}\ee^{\ii\vb*r_i\vdot(\vb*q+\vb*q')}
+\ee^{\ii\vb*r_j\vdot(\vb*q'-\vb*q'')}.
+\end{aligned}
+\end{equation}
+Now, using 
+\begin{equation}
+\frac{1}{N}\sum_i\ee^{\ii\vb*r_i\vdot(\vb*Q-\vb*Q')}=\delta_{\vb*Q, \vb*Q'},
+\end{equation}
+we get
+\begin{equation}
+S_2[\vb*\varphi]=\frac{1}{6NT^2}\sum_{\vb*q}
+\vb*\varphi(\vb*q)\vdot\vb*\varphi(-\vb*q)
+\qty[\frac{3T}{J(\vb*q)}-1].
+\end{equation}
+
+From here, we are going to use the fact that we are on our way to
+derive a GLW theory for this system. So we are close to $\Tc$,
+meaning that we really only need to worry about the long-wavelength
+limit for the coupling:
+\begin{equation}
+J(\vb*q)\sim J-\frac{\kappa}{2}q^2
+\end{equation}
+for small $q$. This means that
+\begin{equation}
+\frac{3T}{J(\vb*q)}-1\approx
+\frac{3T}{J}\qty(1+\frac{\kappa}{2J}q^2)-1
+=\frac{3T-J}{J}+\frac{3T\kappa}{2J^2}q^2.
+\end{equation}
+Already from here we can anticipate that $\Tc=J/3$, but let's not be
+too hasty; let's just settle for calling $\tilde{t}:=(3T-J)/J$. 
+
+We can now write
+\begin{equation}
+S_2[\vb*\varphi]=\frac{1}{6NT^2}\frac{3\kappa T}{2J^2}\sum_{\vb*q}
+\vb*\varphi(\vb*q)\vdot\vb*\varphi(-\vb*q)
+\qty[\frac{2J^2\tilde{t}}{3\kappa T}+q^2].
+\end{equation}
+If we set $r=2J^2\tilde{t}/(3\kappa T)$ and rescale
+\begin{equation}\label{eq:3_rescale}
+\qty(\frac{a^3\kappa}{TJ^2})^{1/2}\vb*\varphi\to\vb*\varphi.
+\end{equation}
+then we get
+\begin{equation}
+S_2[\vb*\varphi]=\frac{1}{4Na^3}\sum_{\vb*q}
+\vb*\varphi(\vb*q)\vdot\vb*\varphi(-\vb*q)
+\qty[r+q^2].
+\end{equation}
+We now want to change this back to real space.
+
+To do that we first have to go to the continuum limit and use 
+\begin{equation}
+\frac{1}{V}\sum_{\vb*q} \to \int\frac{\rd^3q}{(2\pi)^3},
+\end{equation}
+where $V=Na^d$. We thus have
+\begin{equation}\label{eq:3_S2_qint}
+S_2[\vb*\varphi]=\frac{1}{4}\int\frac{\rd^3q}{(2\pi)^3}\,
+\vb*\varphi(\vb*q)\vdot\vb*\varphi(-\vb*q)
+\qty[r+q^2].
+\end{equation}
+We now apply the (continuum) FT
+\begin{equation}
+\vb*\varphi(\vb*q)=\int\rd^3x\,
+\vb*\varphi(\vb*x)\ee^{-\ii\vb*q\vdot\vb*x}
+\end{equation}
+to this.
+
+The first term is simple enough
+\begin{equation}
+\begin{aligned}
+\int\frac{\rd^3q}{(2\pi)^3}\,
+\vb*\varphi(\vb*q)\vdot\vb*\varphi(-\vb*q)
+=&\int\frac{\rd^3q}{(2\pi)^3}\,
+\int\rd^3x\int\rd^3x'\,
+\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)
+\ee^{-\ii\vb*q\vdot(\vb*x-\vb*x')}\\
+=&\int\rd^3x\,\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x),
+\end{aligned}
+\end{equation}
+since
+\begin{equation}
+\int\frac{\rd^3q}{(2\pi)^3}\ee^{\ii\vb*q\vdot(\vb*x-\vb*x')}
+=\delta((\vb*x-\vb*x')).
+\end{equation}
+
+The other term is a bit trickier. From class we know that, for a
+scalar $\psi$, we have
+\begin{equation}\label{eq:3_grad^2}
+\int\rd^3x \Big[\grad\psi(\vb*x)\Big]^2
+=\int\frac{\rd^3q}{(2\pi)^3}\psi(\vb*q)\psi(-\vb*q)q^2,
+\end{equation}
+which we know through the fact that
+\begin{equation}
+\begin{aligned}
+\int\rd{x}\qty(\pdv{\psi}{x})^2=&
+\int\rd{x}\int\frac{\rd{q}}{2\pi}\psi(q)\dv{x}\ee^{\ii qx}
+\int\frac{\rd{q'}}{2\pi}\psi(q')\dv{x}\ee^{\ii q'x}\\
+=&\int\frac{\rd{q}}{2\pi}\int\rd{q'}\,\psi(q)\psi(q')\,(\ii q)(\ii q')
+\underbrace{\int\frac{\rd{x}}{2\pi}\ee^{\ii x(q+q')}}_{=\delta(q+q')}\\
+=&\int\frac{\rd{q}}{2\pi}\,\psi(q)\psi(-q)\,q^2.
+\end{aligned}
+\end{equation}
+In this case however, all we have to do is to apply
+\eqref{eq:3_grad^2} to each of the three terms in 
+$\vb*\varphi(\vb*q)\vdot\vb*\varphi(-\vb*q)
+=\varphi^x(\vb*q)\varphi^x(-\vb*q)
++\varphi^y(\vb*q)\varphi^y(-\vb*q)+
+\varphi^y(\vb*q)\varphi^y(-\vb*q)$. 
+
+Eventually we end up with a final result for the quadratic term:
+\begin{equation}
+S_2[\vb*\varphi]=\frac{1}{4}\int\rd^3x\,
+\qty{\qty[\qty(\grad\varphi^x(\vb*x))^2
++\qty(\grad\varphi^y(\vb*x))^2
++\qty(\grad\varphi^z(\vb*x))^2]
++r[\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)]}
+\end{equation}
+
+
+\subsubsection{The quartic term}
+For the quartic term, we don't have to go via the detour of FT. We can
+just convert the sum to an integral. Although we do have to remember that we
+rescaled $\vb*\varphi$ for the quartic term, \eqref{eq:3_rescale}. So
+with this in mind we get
+\begin{equation}
+S_4[\vb*\varphi]=
+\frac{1}{180T^4}\sum_i(\vb*\varphi_i\vdot\vb*\varphi_i)^2
+\to \frac{T^2J^4}{180T^4a^6\kappa}
+\sum_i(\vb*\varphi_i\vdot\vb*\varphi_i)^2.
+\end{equation}
+And in the continuum limit we have
+$a^3\sum_i\to\int\rd^3x$, so 
+\begin{equation}
+S_4[\vb*\varphi]=\frac{J^4}{180T^2a^9\kappa}
+\int\rd^3x\,\Big[\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)\Big]^2
+=:\frac{u}{4}
+\int\rd^3x\,\Big[\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)\Big]^2.
+\end{equation}
+
+
+\subsubsection{Final result}
+The final result for the continuum behavior of the action near
+$T=\Tc$ therefore is
+\begin{equation}\label{eq:3b_end}
+S[\vb*\varphi]\approx S_2[\vb*\varphi]+S_4[\vb*\varphi]=
+\int\rd^3x\,\qty{
+\frac{1}{4}\qty[\sum_{\alpha=x,y,z}\qty(\grad\varphi^\alpha(\vb*x))^2]
++\frac{r}{2}[\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)]
++\frac{u}{4}[\vb*\varphi(\vb*x)\vdot\vb*\varphi(\vb*x)]^2},
+\end{equation}
+where we have also rescaled $r\to2r$.
+
+From any general Landau theory we know that $r$ has to be the
+parameter that changes value at $\Tc$. This means that $\tilde{t}$
+really was the reduced temperature and that $\Tc=J/3$.
+
+
+
+\subsection{Mean field critical exponents}
+Next up is MFT, which corresponds to setting
+$\vb*\varphi(\vb*x)\equiv\bar{\vb*\varphi}$, where
+$\bar{\vb*\varphi}$ is the constant value that minimizes $S$. From
+\eqref{eq:3b_end} it is clear that all we have to do is to minimize
+\begin{equation}
+f=\frac{r}{2}\bar\varphi^2+\frac{u}{4}\bar\varphi^4,
+\end{equation}
+where $\bar\varphi=|\bar{\vb*\varphi}|$. And now we're back in regular
+Landau ``$\varphi^4$ theory''. 
+
+The critical exponents are just the regular critical exponents for
+this MFT:
+\begin{itemize}
+\item[$\beta$: ] Minimizing $f(\varphi)=r\varphi^2+\varphi^4$,
+gives $2t\bar\varphi+4\bar\varphi^3=0$ or 
+$\bar\varphi\propto(-r)^{\beta}\propto(-t)^{\beta}$ where $\beta=1/2$.
+\item[$\gamma$: ] Now we minimize $F(\varphi,
+b)=-b\varphi+t\varphi^2+\varphi^4$: $-b+2t\varphi+4\varphi^3$. And if
+we do it for $t>0$, we can disregard the cubic term to get
+$\varphi\propto b/t$, which gives $\chi\propto[t]^{-\gamma}$ where
+$\gamma=1$.
+\item[$\alpha$: ] Here we calculate $C_V=-T\dv[2]{F}{T}$, with
+$\bar\varphi\propto(-t)^{1/2}$. This gives
+$C_V\propto\dv[2]{t}t^2=\text{const.}$ or in other words
+$C_V\propto|t|^{-\alpha}$ where $\alpha=0$.
+\item[$\nu$: ] For the correlation length, we get the same behavior as
+calculated in problem~2 in this assignment, i.e. $\nu=1/2$.
+\end{itemize}
+
+
+\end{document}
+
+
+
+
+%  LocalWords:  MFT MF Ising Ornstein Zernike Stratonovich GLW
+%  LocalWords:  rescale quartic rescaled

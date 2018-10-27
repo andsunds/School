@@ -1,0 +1,540 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+\usepackage[makeroom
+]{cancel}
+\graphicspath{{figures/}}
+
+\swapcommands{\Delta}{\varDelta}
+\swapcommands{\Omega}{\varOmega}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 2.5cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+%\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
+\newcommand{\sign}{\ensuremath{\text{sign}}}
+
+%\usepackage{tikz}
+
+\begin{document}
+
+%\tikzstyle{every picture}+=[remember picture]
+%\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{Statistical Physics 2 -- PHYS\,705 \\
+Assignment 4}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+\section{Gaussian expectation value of fast fields}
+In this problem we want to prove the equality
+\begin{equation}\label{eq:1_want}
+\ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)}
+= G_0(\vb*k_1) (2\pi)^d \delta(\vb*k_1+\vb*k_2),
+\end{equation}
+where $G_0(\vb*k) = (k^2+r)^{-1}$. Our starting point is
+\begin{equation}\label{eq:1_start}
+\ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)}
+:= \frac{1}{Z_{0>}}\! \int\!\mathcal{D}\phi_> 
+\qty[\phi_>(\vb*k_1)\phi_>^*(-\vb*k_2)
+\exp(\!{-}\frac{1}{2V}\sum_{\vb*q}G_0^{-1}(\vb*q)\,
+%\phi_{\!>}\!(\vb*q) \phi_{\!>}^*\!(\vb*q)
+\qty|\phi_{>}\!(\vb*q)|^2
+)],
+\end{equation}
+where $Z_{0>} = \int\mathcal{D}\phi_>\,
+\exp(\sum_{\vb*q}G_0^{-1}\!(\vb*q)\,
+\qty|\phi_{\!>}\!(\vb*q)|^2/2V)$.
+
+
+To do this, we will use a formula from class, based on Wick's
+theorem. For $N$ real variables $x_n$ and a non-singular, symmetric
+matrix $\mathsf{M}$, we write
+\begin{equation}\label{eq:1_ev1}
+\begin{aligned}
+\ev{x_{i}x_{j}} =& 
+\frac{\int\rd^N\!x\,\qty[x_{i}x_{j}
+\exp(-\frac{1}{2}\vb*x^\mathsfrm{T}\mathsf{M}\vb*x)]}
+{\int\rd^N\!x\, \exp(-\frac{1}{2}\vb*x^\mathsfrm{T}\mathsf{M}\vb*x)}\\
+=&\frac{\eval{\pdv[2]{}{J_i}{J_j}
+\qty[\int\rd^N\!x\, 
+\exp(-\frac{1}{2}\vb*x^\mathsfrm{T}\mathsf{M}\vb*x
++\vb*J^\mathsfrm{T}\vb*x)]}_{J=0}}
+{\int\rd^N\!x\, \exp(-\frac{1}{2}\vb*x^\mathsfrm{T}\mathsf{M}\vb*x)},
+\end{aligned}
+\end{equation}
+where $\vb*J\in\R^N$ is just a help variable. Now rewrite, using the
+Hubbard–Stratonovich transformation, the integral in the numerator as
+\begin{equation}
+\begin{aligned}
+I[\mathsf{M}, \vb*J] =& \int\rd^N\!x\, 
+\exp(-\frac{1}{2}\vb*x^\mathsfrm{T}\mathsf{M}\vb*x
++\vb*J^\mathsfrm{T}\vb*x) \\
+=& I[\mathsf{M}, 0]\,\exp(\frac{1}{2}\vb*J^\mathsfrm{T}\mathsf{M}^{-1}\vb*J).
+\end{aligned}
+\end{equation}
+This means that we can rewrite \eqref{eq:1_ev1} as
+\begin{equation}\label{eq:1_ev2}
+\begin{aligned}
+\ev{x_{i}x_{j}} =&
+\frac{\eval{\pdv[2]{}{J_i}{J_j}
+\qty[I[\mathsf{M}, \vb*J]]}_{J=0}}
+{I[\mathsf{M}, 0]}\\
+=&\eval{\pdv[2]{}{J_i}{J_j}
+\qty[\exp(\frac{1}{2}\vb*J^\mathsfrm{T}\mathsf{M}^{-1}\vb*J)]}_{J=0}.
+\end{aligned}
+\end{equation}
+
+This is all good and well, but we have a small problem in that
+$\phi_>$ is a \emph{complex} variable. We are however saved by the
+fact that $\mathsf{M} = \mathsf{G}_0^{-1}/V$ is diagonal, which means
+that we still can write
+\begin{equation}
+\sum_{\vb*q} \frac{G_0^{-1}(\vb*q)}{V}\qty|\phi_{\!>}\!(\vb*q)|^2
+=\sum_{\vb*q} \phi_{>}^*\!(\vb*q)M(\vb*q)\phi_{>}\!(\vb*q) 
+= \vb*\phi_{>}^\dagger\mathsf{M}\vb*\phi_{>}\in\R
+\end{equation}
+and still have $\mathsf{M}\in\R^{N\times N}$. I.e. since $\mathsf{M}$
+is diagonal, we do still end up with a real value despite $\vb*\phi_>$
+being complex. And now to keep the term $\vb*J^\dagger\vb*\phi_>$ real,
+corresponding to $\vb*J^\mathsfrm{T}\vb*x$ in \eqref{eq:1_ev1}, 
+we have to make sure that
+\begin{equation}
+J^*(\vb*k)\phi_>(\vb*k)\in\R, \quad\forall\vb*k;
+\end{equation}
+i.e. $J(\vb*k)$ and $\phi_>(\vb*k)$ have to have the same complex phase:
+\begin{equation}\label{eq:1_J_restr}
+\phi_>(\vb*k) = |\phi_>(\vb*k)|\ee^{\ii\alpha}
+\quad\Longrightarrow\quad
+J(\vb*k) = |J(\vb*k)|\ee^{\ii\alpha}.
+\end{equation}
+Another way of looking at these conditions for $\vb*J$, is that we have
+changed variables to $x(\vb*k)=|\phi_>(\vb*k)|$ to keep $\vb*J$
+real. And then reintroducing the complex phase in the derivatives.
+
+We begin the final steps in this problem by noting a few important
+corollaries of \eqref{eq:1_J_restr}. That is
+\begin{enumerate}[label=(\roman*)]
+\item Since $\phi_>(-\vb*k)=\phi_>^*(\vb*k)$, so must
+$J(-\vb*k)=J^*(\vb*k)$.
+\item $\displaystyle \phi_>(\vb*k_1) \ee^{\vb*J^\dagger\vb*\phi_>}
+=\phi_>(\vb*k_1) \exp(\sum_{\vb*q}J^*(\vb*q)\phi_>(\vb*q))
+=\pdv{J^*(\vb*k_1)}\qty[\ee^{\vb*J^\dagger\vb*\phi_>}]$.
+\item $\displaystyle \phi_>^*(-\vb*k_2) \ee^{\vb*J^\dagger\vb*\phi_>}
+=\phi_>^*(-\vb*k_2) \exp(\sum_{\vb*q}J(-\vb*q)\phi_>(\vb*q))
+=\pdv{J(-\vb*k_2)}\qty[\ee^{\vb*J^\dagger\vb*\phi_>}]$.
+\end{enumerate}
+Now, using \eqref{eq:1_ev2}, with (ii) and (iii), on
+\eqref{eq:1_start} yields 
+\begin{equation}
+\begin{aligned}
+\ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)} 
+=& \eval{\pdv[2]{}{J^*(\vb*k_1)}{J(-\vb*k_2)}
+\qty[\exp(\frac{1}{2}\vb*J^\dagger\mathsf{M}^{-1}\vb*J)]}_{J=0}\\
+=&\eval{\pdv[2]{}{J^*(\vb*k_1)}{J(-\vb*k_2)}
+\qty[\exp(\frac{V}{2}\sum_{\vb*q} J^*(\vb*q)G_0(\vb*q)J(\vb*q))]}_{J=0}.
+\end{aligned}
+\end{equation}
+Here $M(\vb*k)=G_0^{-1}(\vb*k)/V$. 
+
+We now have two cases. The first one being $\vb*k_1\neq-\vb*k_2$, then
+we obviously get
+\begin{equation}
+\begin{aligned}
+\ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)} 
+= \frac{V}{2}\eval{\Big[
+2G_0(\vb*k_1)J(\vb*k_1) + 2J^*(-\vb*k_2)G_0(-\vb*k_2)
+\Big]\exp(\ldots)}_{J=0} = 0.
+\end{aligned}
+\end{equation}
+Each term has a seemingly additional factor 2 here, but that is due to
+fact that for each derivative, we have 2 contributions: one from e.g.
+$J(\vb*k_1)$ and one from $J^*(-\vb*k_2)$.
+But in the second case, when $\vb*k_1=-\vb*k_2=:\vb*k$, we get
+\begin{equation}
+\begin{aligned}
+\ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)} 
+=&\eval{\pdv[2]{}{J^*(\vb*k)}{J(\vb*k)}
+\qty[\exp(\frac{V}{2} \sum_{\vb*q}
+J^*(\vb*q)G_0(\vb*q)J(\vb*q))]}_{J=0}\\
+=&\eval{\pdv{J^*(\vb*k)}\qty[\frac{V}{2} 
+2J^*(\vb*k)G_0(\vb*k)]\exp(\frac{V}{2} \sum_{\vb*q}
+J^*(\vb*q)G_0(\vb*q)J(\vb*q))
+}_{J=0}\\
+=&\eval{\qty[VG_0(\vb*k) + \frac{V}{2} 
+2J(\vb*k)G_0(\vb*k)]\exp(\ldots)
+}_{J=0}\\
+&=VG_0(\vb*k)
+\end{aligned}
+\end{equation}
+
+We can write these two cases together as
+\begin{equation}
+\ev{\phi_>(\vb*k_1)\phi_>(\vb*k_2)} 
+=G_0(\vb*k_1) \,V\delta_{\vb*k_1, -\vb*k_2},
+\end{equation}
+which is just the discrete version of \eqref{eq:1_want}. To get to
+\eqref{eq:1_want}, we just have to use the thermo\-dynamic limit
+$V\delta_{\vb*k_1, -\vb*k_2} \to (2\pi)^d\delta(\vb*k_1+\vb*k_2)$,
+which arises from 
+\begin{equation}
+V\sum_{\vb*k} \to \int\frac{\rd^dk}{(2\pi)^d}.
+\end{equation}
+
+
+
+
+
+
+
+\section{Results from RG recursion relations}
+\newcommand{\TT}{\tilde{T}}
+\newcommand{\hT}{\tilde{h}}
+\newcommand{\fs}{f_{\text{s}}}
+We are given the differential form RG relations
+\begin{equation}\label{eq:2_RG}
+\begin{cases}\displaystyle
+\dv{T}{l} = \frac{(n-2)}{2\pi}T^2 = CT^2
+\\ \displaystyle
+\dv{h}{l} = 2h,
+\end{cases}
+\end{equation}
+with the regular definition of $l$ as $b=\ee^l$. From this we want to
+fins the asymptotic behavior of some different physical quantities as
+$T$ or $h$ goes towards $0$.  
+
+The methods used, will be similar in the two first cases. We will first
+need to find $\TT(l)$ and $\hT(l)$.\footnotemark{} To do that, we
+recognize that \eqref{eq:2_RG} are two ODE's. The first RG relation
+yields:
+\begin{equation}\label{eq:2_TT_ODE}
+\TT^{-2}\dv{\TT}{l} = C
+\quad\Longrightarrow\quad
+\frac{1}{\TT(0)}-\frac{1}{\TT(l)} = Cl
+\end{equation}
+which results in
+\begin{equation}\label{eq:2_TT(l)}
+\TT(l) = \frac{\TT(0)}{1-C\TT(0)l} = \frac{T}{1-CTl}.
+\end{equation}
+Here $\TT(0)$ have been replaced by $T$, since $\TT(0)$ is the value
+of the temperature after \emph{no} RG ``steps'' hence just the
+physical temperature $T$. For $h(l)$, we have a much simpler ODE:
+\begin{equation}\label{eq:2_hT(l)}
+\dv{\hT}{l} = 2\hT
+\quad\Longrightarrow\quad
+\hT(l) = \hT(0)\ee^{2l} = h\ee^{2l}.
+\end{equation}
+Same thing here with $\hT(0)=h$.
+
+\footnotetext{I have renamed the RG functions of $l$, $\TT(l)$ and
+  $\hT(l)$, to clearly separate them from the physical quantities
+  $T=\TT(0)$ and $h=\hT(l)$. }
+
+The method we will be using takes its inspiration from the discrete
+RG method where if we had a variable
+\begin{equation}
+X(T,h) = b^{y_X}X(b^{y_T}T, b^{y_h}h),
+\end{equation}
+we do a certain number, $n$, of RG steps and then set $b^{ny_T}T=K_T$
+as a constant, which then leads us to rewrite $b^n = (K_T/T)^{1/y_T}$ so
+that we can write
+\begin{equation}
+X(T,h) \propto (T)^{-y_X/y_T}\mathcal{X}\qty(h/(T^{y_h/y_T})).
+\end{equation}
+
+What we want to do here is similar, but instead of $b^{ny_T}T=K_T$, we
+set $\TT(l_0) = \TT_0$ constant. So we want to find the inverted
+relation $l_0(\TT_0)$, which is easily done using \eqref{eq:2_TT_ODE}:
+\begin{equation}\label{eq:2_l(TT)}
+l_0(\TT_0) = \frac{1}{C}\qty[\frac{1}{T}-\frac{1}{\TT_0}].
+\end{equation}
+Remember that $\TT_0$ is just some constant that we fixed, and as such
+its influence in the end result should not affect the physics,
+i.e. just a multiplicative constant in the end. 
+
+Back to the example variable $X$. With $b=\ee^l$, we can write
+\begin{equation}
+X(T, h) = \ee^{ly_X} X(\TT(l), \hT(l)).
+\end{equation}
+Now we fix $\TT(l_0)=\TT_0$ and use \eqref{eq:2_l(TT)} to rewire the
+pre-factor and $\hT(l_0) = \ee^{2l_0}$, which results in
+\begin{equation}
+X(T, h) = \exp(\frac{y_X}{C}\qty[\frac{1}{T}-\frac{1}{\TT_0}])
+\mathcal{X}\qty(h\times\exp{\frac{2}{C}\qty[\frac{1}{T}-\frac{1}{\TT_0}]})
+\end{equation}
+and we see indeed that the impact of $\TT_0$ is just in terms of
+multiplicative constants $\ee^{-y_{...}/C\TT_0}$. So, let
+$\mathcal{X}$ be redefined such that these constants becomes baked
+into it. We end up with
+\begin{equation}\label{eq:2_X}
+X(T, h) \sim \exp(\frac{y_X}{CT})
+\mathcal{X}\qty(h\ee^{\frac{2}{CT}}).
+\end{equation}
+
+
+\subsection{Correlation length}
+The scaling form of the correlation length is
+\begin{equation}
+\xi(T, h) = b^1 \xi(\TT(l), \hT(l))= \ee^l \xi(\TT(l), \hT(l)),
+\end{equation}
+which means that, with \eqref{eq:2_X} in mind, we should have
+\begin{equation}
+\xi(T, h)  \sim \exp(\frac{1}{CT})
+\varXi\qty(h\ee^{\frac{2}{CT}}).
+\end{equation}
+
+\subsection{Singular part of the free energy}
+The singular part of the free energy scales like
+\begin{equation}
+\fs(T, h) = \ee^{-dl}\fs(\TT(l), \hT(l)),
+\end{equation}
+and thus
+\begin{equation}
+\fs(T, h) \sim \exp(-\frac{d}{CT})
+\mathcal{F}_\text{s}\qty(h\ee^{\frac{2}{CT}}).
+\end{equation}
+Note that this time the exponent is negative in the exponential
+outside, which means that $\fs$ goes to 0 really fast as $T\to0$. 
+
+\subsection{Susceptibility}
+The susceptibility can be found by differentiating the free energy:
+\begin{equation}
+\chi(T, h=0) = \eval{\pdv[2]{\fs}{h}}_{h\to0}
+=\eval{\exp(-\frac{d}{CT})
+\mathcal{F}_\text{s}''\qty(h\ee^{\frac{2}{CT}})\ee^{2\times\frac{2}{CT}}
+}_{h\to0}
+\propto \exp(\frac{4-d}{CT}).
+\end{equation}
+We can ignore the factor 
+$\eval{\mathcal{F}_\text{s}''\qty(h\ee^{\frac{2}{CT}})}_{h\to0} 
+= \mathcal{F}_\text{s}''(0)$, since that is just a constant. 
+
+
+
+\section{Fixed points from RG recursion relations}
+\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+The LGW functional for an $n$-component field with cubic anisotropy is
+\begin{equation}
+S[\ev*\varphi] = \int\rd^dx \qty[
+\frac{1}{2}(\grad\vb*\varphi)^2
++\frac{r}{2}\vb*\varphi^2 +\frac{u}{4}(\vb*\varphi^2)^2
++v\sum_{i=1}^n\phi_i^4 ].
+\end{equation}
+The RG recursion relations for this system is
+\begin{equation}\label{eq:3_start}
+\begin{cases}\displaystyle
+\dv{u}{l} = \epsilon u - 4C\qty[(n+8)u^2 + 6uv] 
+\\ \displaystyle
+\dv{v}{l} = \epsilon v - 4C\qty[12uv + 9v^2]
+\end{cases}
+\end{equation}
+We want to find the fixed points and RG flow in the $(u, v)$ plane. 
+
+To find the fixed point we want to find
+$\dv*{u^*}{l}=\dv*{v}{l}=0$. There are 4 cases where this can be solved.
+\begin{enumerate}[label=(\roman*)]
+\item $u^*=v^*=0$
+\item $u^*\neq0$, $v^*=0$: here we see that 
+$\epsilon u = 4C(n+8)u^2 \quad\Longrightarrow\quad u^* = \epsilon/[4C(n+8)]$.
+\item $u^*=0$, $v^*\neq0$: this yields 
+$\epsilon v = 36Cv^2 \quad\Longrightarrow\quad v^* = \epsilon/(36C)$.
+\item $u, v\neq0$: this one is a bit trickier, but not very. From the
+second relation in \eqref{eq:3_start}, we get 
+\[ v = \frac{\epsilon-48Cu}{36C}. \]
+Substituting this into the first relation in \eqref{eq:3_start} and
+solving\footnotemark{} for $u$, then substituting that back into the
+expression for $v$, gives
+\[ u^* = \frac{\epsilon}{12Cn}\qcomma v^* = \frac{(n-4)\epsilon}{36Cn} \]
+\end{enumerate}
+
+\footnotetext{This is really just a simple quadratic equation, but to
+  not risk anything, I used \textit{Mathematica}. }
+
+Now when we have the fixed points, we need to figure out the flow
+pattern. To do that we need to calculate the scaling variables and
+their scaling dimensions. To do that we will use the variables
+$\beta_u=\dv*{u}{l}$ and $\beta_v=\dv*{v}{l}$ and the matrix
+\begin{equation}
+M=
+\begin{pmatrix}
+\pdv{\beta_u}{u} & \pdv{\beta_u}{v} \\
+\pdv{\beta_v}{u} & \pdv{\beta_v}{v} 
+\end{pmatrix}
+=
+\begin{pmatrix}
+\epsilon-4C[2(n+8)u +6v] & -24Cu \\
+ -48Cv & \epsilon-4C[12u +18v]
+\end{pmatrix}.
+\end{equation}
+With this all we need to do is to substitute in the various fixed
+points (obviously using \textit{Mathematica's} \texttt{Eigenvalue} and
+\texttt{Eigenvector})
+\begin{enumerate}[label=(\roman*)]
+\item $u^*=v^*=0$: 
+\[%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+M= 
+\begin{pmatrix}
+\epsilon & 0 \\
+0 & \epsilon
+\end{pmatrix}
+\quad\Longrightarrow\quad
+e_1=\begin{pmatrix}
+1\\0
+\end{pmatrix},\;
+e_2=\begin{pmatrix}
+0\\1
+\end{pmatrix}\qcomma
+y_1=y_2=\epsilon.
+\]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $v^*=0$, $u^* = \epsilon/[4C(n+8)]$:
+\[%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+M=
+\begin{pmatrix}
+-\epsilon & -\frac{6\epsilon}{n+8}\\
+0 & \frac{\epsilon(n-4)}{n+8}
+\end{pmatrix}
+\quad\Longrightarrow\quad
+e_1=\begin{pmatrix}
+1\\0
+\end{pmatrix},\;
+e_2=\begin{pmatrix}
+-\frac{3}{2+n}\\1
+\end{pmatrix}\qcomma
+y_1=-\epsilon,\;y_2=-\frac{\epsilon(n-4)}{n+8}.
+\]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $u^*=0$, $v^* = \epsilon/(36C)$:
+\[%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+M=
+\begin{pmatrix}
+\frac{\epsilon}{3}   & 0 \\
+-\frac{4\epsilon}{3} & -\epsilon
+\end{pmatrix}
+\quad\Longrightarrow\quad
+e_1=\begin{pmatrix}
+-1\\1
+\end{pmatrix},\;
+e_2=\begin{pmatrix}
+0\\1
+\end{pmatrix}\qcomma
+y_1=\frac{\epsilon}{3},\;y_2=-\epsilon.
+\]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item $u^* = \epsilon/(12Cn)$, $v^* = (n-4)\epsilon/(36Cn)$:
+\[%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{aligned}
+M=
+\begin{pmatrix}
+-\frac{\epsilon(n+8)}{3n} & -\frac{2\epsilon}{n} \\
+-\frac{4\epsilon(n-4)}{3n} & \frac{\epsilon(n-4)}{n}
+\end{pmatrix}
+\quad\Longrightarrow\quad &
+e_1=\begin{pmatrix}
+-1/2\\1
+\end{pmatrix},\;
+e_2=\begin{pmatrix}
+\frac{3}{n-4}\\1
+\end{pmatrix}\qcomma \\
+&y_1=-\frac{\epsilon(n-4)}{3n},\;y_2=-\epsilon.
+\end{aligned}
+\]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{enumerate}
+
+To draw the RG fixed points and flow diagrams we just take a look at
+items (i)--(iv) above and determine the relevant positions of the fixed
+point, the direction of the scaling variables $e_i$, and the
+corresponding eigenvalues $y_i$. If $y_i>0$, the RG flow is away from
+the fixed point along the axis $e_i$, and if $y_i<0$ then the flow is
+towards the fixed point. The RG flow diagram for $n<0$ is shown in
+\figref{fig:3i}, while the one for $n>0$ is in \figref{fig:3ii}.
+
+
+And lastly to the relevance of $v$ at the different stable fixed
+points. 
+\begin{enumerate}[label=(\roman*)]
+\item This fixed point is unstable in all directions for any $n$.
+\item For $n<4$ this fixed point is attractive in both its scaling
+directions, meaning that a small perturbation in $v$ would also be
+stable; i.e. $v$ is irrelevant. Whereas for $n>4$, we see that this
+fixed point is unstable in its $e_2$ direction, thus rendering $v$
+relevant, since a small perturbation in $v$ would land outside (ii)'s
+basin of attraction; i.e. $v$ is relevant.
+\item This fixed point has its $e_2$ direction along the $v$ axis, and
+the corresponding eigenvalue is negative for any $n$. This means that
+$v$ is irrelevant.
+\item For $n<4$ this fixed point is unstable in its $e_1$ direction,
+meaning that $v$ is relevant. But for $n>4$, (iv) is attractive in
+both its scaling directions, meaning that $v$ is irrelevant. 
+\end{enumerate}
+
+The fact that whether $n$ is smaller or greater than $4$, affects the
+relevance of $v$ for the fixed points (ii) and (iv) is
+interesting. It is also interesting to note that for $n<4$, a small
+perturbation in $v$ from (iv) will flow into (ii), while the opposite
+is true for $n>4$. The last part here is interesting, since (ii) has
+$v^*=0$, meaning that for a system where cubical anisotropy ($v\neq0$)
+is possible, the system will condense to (iv) instead of (ii);
+i.e. condensing to a state with a clear non-zero value of $v$. 
+
+
+
+
+\begin{figure}
+\centering
+\input{figures/3_nl4.pdf_t}
+\caption{RG flow diagram with $n<4$. The fixed points (i)--(iv) are
+  marked and numbered, also their ``scaling directions'', $e_1$ and
+  $e_2$, are marked out, as dotted lines through the relevant fixed
+  point, in the cases where they do not line up with any of the $u$
+  or $v$ axes. }
+\label{fig:3i}
+\end{figure}
+
+\begin{figure}
+\centering
+\input{figures/3_ng4.pdf_t}
+\caption{RG flow diagram with $n>4$. The fixed points (i)--(iv) are
+  marked and numbered, also their ``scaling directions'', $e_1$ and
+  $e_2$, are marked out, as dotted lines through the relevant fixed
+  point, in the cases where they do not line up with any of the $u$ 
+  or $v$ axes. } 
+\label{fig:3ii}
+\end{figure}
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+%  LocalWords:  MFT MF Ising Ornstein Zernike Stratonovich GLW RG
+%  LocalWords:  rescale quartic rescaled anisotropy

@@ -1,0 +1,410 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+\usepackage[makeroom
+]{cancel}
+\graphicspath{{figures/}}
+
+\swapcommands{\Omega}{\varOmega}
+\swapcommands{\Lambda}{\varLambda}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 2.5cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+%\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
+\newcommand{\sign}{\ensuremath{\text{sign}}}
+
+%\usepackage{tikz}
+
+\begin{document}
+
+%\tikzstyle{every picture}+=[remember picture]
+%\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{Statistical Physics 2 -- PHYS\,705 \\
+Assignment 5}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+\section{Wavefunction renormalization}
+Here we want to find the renormalization, $z$, for $\sigma$ and
+$\vb*\pi$ in the non-linear $\sigma$ model. It is defined by 
+$\sigma'(\vb*k') = z^{-1}\sigma_<(\vb*k)$ and
+$\vb*\pi'(\vb*k') = z^{-1}\vb*\pi_<(\vb*k)$. What we want to show is
+that
+\begin{equation}\label{eq:1_want}
+\frac{z}{b^{d}} = 1 -\frac{n-1}{2}I_1,
+\end{equation}
+where
+\begin{equation}
+I_1:= \int_{\Lambda/b}^\Lambda \frac{\rd^dq}{(2\pi)^d}G_0(\vb*q)
+= \int_{\Lambda/b}^\Lambda \frac{\rd^dq}{(2\pi)^d} \frac{T}{q^2}
+= \frac{\mathcal{S}_d T}{(2\pi)^d} \Lambda^{d-2} \Delta{l},
+\end{equation}
+where $\mathcal{S}_d$ is the area of a unit sphere in $d$ dimensions
+and $\ee^{\Delta{l}} = b$.
+
+
+We begin this problem by rewriting
+\begin{equation}\label{eq:1_ev-sigma}
+\ev{\sigma(\vb*x)}_{0>} 
+= \ev{\sqrt{1-\vb*\pi^2(\vb*x)}}_{0>} 
+= \ev{1-\frac{1}{2}\vb*\pi^2(\vb*x) 
++\frac{1}{8}\qty(\vb*\pi^2(\vb*x))^2
++\ldots}_{0>}.
+\end{equation}
+We now split $\vb*\pi = \vb*\pi_< + \vb*\pi_>$ and get
+\begin{equation}
+\vb*\pi^2(\vb*x) = 
+\vb*\pi_<^2(\vb*x) + \vb*\pi_>^2(\vb*x) 
++2\vb*\pi_<(\vb*x)\vdot\vb*\pi_>(\vb*x).
+\end{equation}
+We need to evaluate the expectation value of these terms.
+
+It is easy to realize that 
+\begin{equation}
+\begin{aligned}
+\ev{(\pi_<^a(\vb*x))^n(\pi_>^b(\vb*x))^m}
+=&\frac{1}{Z_{0>}}
+\int\!\mathcal{D}\vb*\pi_>\; (\pi_<^a(\vb*x))^n(\pi_>^b(\vb*x))^m
+\ee^{S[\vb*\pi_>]}\\
+=& \frac{(\pi_<^a(\vb*x))^n}{Z_{0>}}
+\int\!\mathcal{D}\vb*\pi_>\; (\pi_>^b(\vb*x))^m \ee^{S[\vb*\pi_>]}
+=(\pi_<^a(\vb*x))^n\ev{(\pi_>^b(\vb*x))^m},
+\end{aligned}
+\end{equation}
+where $a$ and $b$ are arbitrary indeces for any element in the
+vectors. We see especially, when $b=0$, that that any slow filed on
+its own will just facor out of the expectation value. 
+
+Next we can use Wick's theorem, to get
+\begin{equation}\label{eq:1_Wick's}
+\ev{\pi_>^a(\vb*k_1)\pi_>^b(\vb*k_2)}_{0>}
+= \delta_{a, b} G_0(\vb*k_1) \,(2\pi)^d \delta(\vb*k_1 + \vb*k_2).
+\end{equation}
+We can use that to calculate
+\begin{equation}
+\begin{aligned}
+\ev{(\vb*\pi_>(\vb*x))^2}_{0>} =& \frac{1}{Z_{0>}}
+\int \mathcal{D}\vb*\pi_>\; 
+[\vb*\pi_>(\vb*x)\vdot\vb*\pi_>(\vb*x)] \ee^{-S[\vb*\pi_>]}\\
+=& \frac{1}{Z_{0>}} \int \mathcal{D}\vb*\pi_>
+\qty[\int\frac{\rd^dk_1}{(2\pi)^d}\frac{\rd^dk_2}{(2\pi)^d}
+\vb*\pi_>(\vb*k_1)\vdot\vb*\pi_>(\vb*k_2) \ee^{\ii\vb*x\vdot(\vb*k_1+\vb*k_2)}]
+\ee^{-S[\vb*\pi_>]} \\
+=& \int\frac{\rd^dk_1}{(2\pi)^d}\frac{\rd^dk_2}{(2\pi)^d}
+\ee^{\ii\vb*x\vdot(\vb*k_1+\vb*k_2)}
+\underbrace{\frac{1}{Z_{0>}} \int \mathcal{D}\vb*\pi_>\; 
+\vb*\pi_>(\vb*k_1)\vdot\vb*\pi_>(\vb*k_2) 
+\ee^{-S[\vb*\pi]}}_{=\sum_a\ev{\pi_>^a(\vb*k_1)\pi_>^a(\vb*k_2)}_{0>}}\\[-8pt]
+\stackrel{\eqref{eq:1_Wick's}}{=}& 
+\sum_a \int_{\Lambda/b}^\Lambda\frac{\rd^dk}{(2\pi)^d}G_0(\vb*k)
+= (n-1) I_1.
+\end{aligned}
+\end{equation}
+The factor $(n-1)$ comes from the fact that $\vb*\pi_>$ has $(n-1)$
+components. From Wick's theorem, we also have that
+\begin{equation}
+\ev{\pi_>^a(\vb*x)}_{0>} = 0.
+\end{equation}
+
+We are now ready to go back and tackle \eqref{eq:1_ev-sigma}. We can
+group the terms as
+\begin{equation}\label{eq:1_ev-sigma2}
+\begin{aligned}
+\ev{\sigma(\vb*x)}_{0>} 
+=& \qty[1 - \frac{1}{2}\vb*\pi_<^2(\vb*x) 
++ \frac{1}{8}(\vb*\pi_<^2(\vb*x))^2 +\ldots]\\
+&- \frac{1}{2}\ev{\vb*\pi_>^2(\vb*x)} 
++\ev{\text{``higher order (cross \& regular) terms with }
+\vb*\pi_>^2\text{''}}\\
+\sim&\sqrt{1-\vb*\pi_<^2(\vb*x)} -\frac{(n-1)}{2} I_1.
+\end{aligned}
+\end{equation}
+
+% We also note that the expectation value $\ev{\sigma(\vb*x)}_{0>}$
+% shouldn't be affected by an RG step, so what we have is
+% \begin{equation}
+% \ev{\sigma(\vb*x)}_{0>} = \ev{\sigma'(\vb*x')}_{0>} 
+% = \ev{\zeta^{-1}\sigma_<(\vb*x)}_{0>} 
+% = \zeta^{-1}\sigma_<(\vb*x).
+% \end{equation}
+% Here we used the same principle behind how $\vb*\pi_<$ could be
+% factored out from the expectation value. 
+
+We also have to use another scaling factor, $\zeta$, for
+$\sigma'(\vb*x')$ than for $\sigma'(\vb*k')$. The two are however
+related through a FT. If $\zeta^{-1}\sigma_<(\vb*x) =
+\sigma'(\vb*x')$, then the FT would be
+\begin{equation}
+\zeta^{-1}
+\int\frac{\rd^dk}{(2\pi)^d}\sigma_<(\vb*k)\ee^{\ii\vb*k\vdot\vb*x}
+=\int\frac{\rd^dk'}{(2\pi)^d}
+\sigma'(\vb*k')\ee^{\ii\vb*k'\vdot\vb*x'}
+=\int\frac{b^d\rd^dk}{(2\pi)^d}
+\sigma'(\vb*k')\ee^{\ii b^d\vb*k\vdot\vb*x/b^d}.
+\end{equation}
+This would mean that
+$ z^{-1}\sigma_<(\vb*k) = \sigma'(\vb*k') 
+= \frac{\zeta^{-1}}{b^d}\sigma_<(\vb*k)$, 
+or in other words
+\begin{equation}
+\zeta = \frac{z}{b^d}.
+\end{equation}
+
+The next thing we have to do is to calculate value
+$\sigma_<(\vb*x=\vb*0)$. With the normalization criteria  
+\begin{equation}
+1 = (\vb*\pi'(\vb*x'))^2 +(\sigma'(\vb*x'))^2
+= \zeta^{-2}\qty[ (\vb*\pi_<(\vb*x))^2 +(\sigma_<(\vb*x))^2].
+\end{equation}
+Now, with $\vb*\pi_<(\vb*x=\vb*0)$, we see that
+\begin{equation}
+\sigma_<(\vb*x=\vb*0) = \zeta.
+\end{equation}
+
+% Substituting this into \eqref{eq:1_ev-sigma2}, with
+% $\vb*\pi_<(\vb*x=\vb*0)$, gives 
+\paragraph{End of progress}
+Unfortunately I can not for the life of me figure out a way to connect
+$\ev{\sigma(\vb*x=\vb*0)}_{0>}$ to $\sigma_<(\vb*x=\vb*0)$, which we
+would need to finish off this problem. Judging by the end result,
+\eqref{eq:1_want}, what we want to find would be that
+\begin{equation}
+\ev{\sigma(\vb*x=\vb*0)}_{0>} = \zeta 
+= \sigma_<(\vb*x=\vb*0),
+\end{equation}
+or
+\begin{equation}
+\ev{\sigma(\vb*x=\vb*0)}_{0>} = \zeta
+\overbrace{\ev{\sigma'(\vb*x'=\vb*0)}_{0>}}^{=\sigma_<(\vb*x=\vb*0)},
+\end{equation}
+or maybe even
+\begin{equation}
+\ev{\sigma_>(\vb*x=\vb*0)}_{0>} =0
+\quad\Longrightarrow\quad
+\ev{\sigma(\vb*x=\vb*0)}_{0>} 
+= \ev{\sigma_<(\vb*x=\vb*0) + \sigma_>(\vb*x=\vb*0) }_{0>}
+=\sigma_<(\vb*x=\vb*0).
+\end{equation}
+But none of these approaches seems to yield anything fruitful for me. 
+
+\textcolor{gray}{
+I have to go away for a week now, so this is as far as it gets for my
+part. Sorry about this, but thank you for the course!
+}
+
+\section{The Kosterlitz recursion relations}
+\newcommand{\TKT}{T_{\text{KT}}}
+
+We are given the Kosterlitz recursion relations in $d=2+\epsilon$
+dimensions:
+\begin{align}
+\label{eq:2_dT/dl}
+\beta_T := \dv{T}{l} =& \epsilon T +4\pi^3y^2\\
+\label{eq:2_dy/dl}
+\beta_y := \dv{y}{l} =& \qty(2 -\frac{\pi}{T})y.
+\end{align}
+
+
+\subsection{The finite-temperature fixed point}
+The fixed point, at $T>0$, is given by setting
+\begin{equation}
+\epsilon T +4\pi^3y^2 = 0
+\quad\Longrightarrow\quad
+y = \pm\sqrt{\frac{\epsilon T}{4\pi^3}} \neq0,
+\end{equation}
+which gives
+\begin{equation}
+T^* = \TKT = \frac{\pi}{2}
+\end{equation}
+and 
+\begin{equation}
+y^* = \pm\frac{\sqrt{\epsilon}}{2^{5/2},\pi}.
+\end{equation}
+
+
+\subsection{Scaling dimensions}
+To get the scaling dimensions we need the eigenvalues of 
+\begin{equation}
+M = \eval{
+\begin{pmatrix}
+\pdv{\beta_T}{T} & \pdv{\beta_T}{y}\\
+\pdv{\beta_y}{T} & \pdv{\beta_y}{y}
+\end{pmatrix}
+}_{T^*, y^*}
+=
+\begin{pmatrix}
+-\epsilon & 8\pi^3 y^*\\
+\frac{\pi y^*}{\TKT^2} & 2-\frac{\pi}{\TKT}
+\end{pmatrix}
+=
+\begin{pmatrix}
+-\epsilon & \pm2^{3/2}\pi^2\sqrt{\epsilon}\\
+\pm \frac{\sqrt{2\epsilon}}{\pi^2} & 0
+\end{pmatrix}.
+\end{equation}
+To get the eigenvalues we use the characteristic equation
+\begin{equation}
+0=
+\begin{vmatrix}
+(-\epsilon -\lambda) & \pm2^{3/2}\pi^2\sqrt{\epsilon}\\
+\pm \frac{\sqrt{2\epsilon}}{\pi^2} & 0-\lambda
+\end{vmatrix}
+= \lambda^2 + \epsilon\lambda - 4\epsilon,
+\end{equation}
+which has the solutions
+\begin{equation}
+\lambda_\pm = \frac{1}{2}\qty[ -\epsilon
+\pm\sqrt{\epsilon^2 + 16\epsilon}]
+= \frac{1}{2}\qty[ -\epsilon
+\pm4\sqrt{\epsilon}\sqrt{1+\frac{\epsilon}{16}}].
+\end{equation}
+To lowest order in $\epsilon$, we therefore have
+\begin{equation}
+\lambda_+ =  2\sqrt{\epsilon}\qcomma
+\lambda_- = -2\sqrt{\epsilon}.
+\end{equation}
+None of the eigenvectors align with the $T$ or $y$ axes.
+
+
+
+\subsection{Estimate of $\nu$ and $\alpha$}
+We begin by doing a change of variables to
+\begin{equation}
+x = 1-\frac{T^*}{T} = 1-\frac{\pi}{2T}\qcomma
+\gamma = 1-\frac{y^*}{y} = 1-\frac{\sqrt{\epsilon}}{\sqrt{8}\pi\,y},
+\end{equation}
+which when inverted becomes
+\begin{equation}
+T=\frac{\pi}{2}\qty[1-x]^{-1} = \frac{\pi}{2}\qty[1+x] +\order{x^2}
+\qcomma
+y = \ldots = \frac{\sqrt{\epsilon}}{\sqrt{8}\pi}\qty[1+\gamma] 
++\order{\gamma^2}
+\end{equation}
+assuming that we are close to the fixed point, $x,\gamma\ll1$.
+Substitute these into the RG equations and we get
+\begin{equation}\label{eq:dx/dl}
+\dv{x}{l} = \qty(\dv{T}{x})^{-1}\dv{T}{l} 
+= -\epsilon(1+x) + \epsilon(1+\gamma)^2
+= 2\epsilon\gamma -\epsilon x +\order{x^2, \gamma^2}
+\end{equation}
+and
+\begin{equation}\label{eq:dgamma/dl}
+\dv{\gamma}{l} = \qty(\dv{y}{\gamma})^{-1}\dv{y}{l}
+=2x(1+\gamma) = 2x + \order{x\gamma}.
+\end{equation}
+
+Now, if we differentiate \eqref{eq:dgamma/dl}, we get
+\begin{equation}
+\dv[2]{\gamma}{l} = 2\dv{x}{l} = 4\epsilon\gamma 
+- \overbrace{2\epsilon x}^{\dv*{\gamma}{l}}
+\end{equation}
+or in other words
+\begin{equation}
+\gamma'' +\epsilon\gamma' -4\epsilon\gamma = 0.
+\end{equation}
+This is a linear homogeneous second order ODE with constant
+coefficients; its solutions must be
+$ %\begin{equation}
+\gamma(l) = A\ee^{r_-l} + B\ee^{r_+l},
+$ %\end{equation}
+where $r_\pm$ satisfies
+\begin{equation}
+r^2 +2\epsilon r -4\epsilon = 0
+\quad\Longrightarrow\quad
+r_\pm = -\frac{\epsilon}{2} 
+\pm\sqrt{\frac{\epsilon^2}{4} + 4\epsilon}
+=\pm2\sqrt{\epsilon} + \order{\epsilon},
+\end{equation}
+i.e.
+\begin{equation}
+\gamma(l) = A\ee^{-2\sqrt{\epsilon}l} + B\ee^{+2\sqrt{\epsilon}l}.
+\end{equation}
+
+Now we can solve \eqref{eq:dx/dl} for $x$:
+\begin{equation}
+x' +\epsilon x = 2\epsilon\gamma 
+= 2A\ee^{-2\sqrt{\epsilon}l} + 2B\ee^{+2\sqrt{\epsilon}l}.
+\end{equation}
+Once again linear ODE with constant coefficients, the solution is going
+to be of the form
+\begin{equation}
+x(l) = \tilde{A}\ee^{-2\sqrt{\epsilon}l} 
++ \tilde{B}\ee^{+2\sqrt{\epsilon}l} 
++ C\ee^{-\epsilon l}.
+\end{equation}
+We are only going to keep the lowest orders of $\epsilon$, so we
+discard the last term. Next we want to find an expression for $l(x)$,
+but we are also only eventually interested in the singular part of
+$\xi$; that is going to come from the negative exponent, so we also
+disregard the second term. In the end we get
+\begin{equation}
+l(x) \sim -\frac{1}{2\sqrt{\epsilon}} \ln(x).
+\end{equation}
+
+
+Now for the singular part of the correlation length. We know that
+\begin{equation}
+\xi(t) = b\hat\xi(t) = \ee^l\hat\xi(t)
+\sim \exp(-\frac{1}{2\sqrt{\epsilon}} \ln(x))\hat\xi(t),
+\end{equation}
+where $\hat\xi(t)$ is a scaling function. 
+We also have that $x=1-\pi/(2T) = (T-\Tc)/T \sim t$, so
+\begin{equation}
+\xi(t) 
+\sim t^{-1/\nu}\hat\xi(t)
+\end{equation}
+where $\nu= 2\sqrt{\epsilon} = 2$ in 3D. 
+Once we have $\nu$, we can easily get 
+\begin{equation}
+\alpha = 2-d\nu = 2 - (2+\epsilon)2\sqrt{\epsilon}
+= 2 -4\sqrt{\epsilon} +\order{\epsilon^{3/2}} 
+= -2+\order{\epsilon^{3/2}}.
+\end{equation}
+
+Comparing this to the calculations we did in class for the $d=2$
+XY~model, we see that the over all idea is quite similar. Find $l(x)$
+and then express $\xi$ in terms of $l(x)$. Although, the means of
+getting $l(x)$ differed a bit; in the 2D case we had to use a trick to
+get the hyperbolic relation between $x$ and $y$, while here in 3D we
+just turned the crank with the system of ODE's that thankfully were
+quite easy to solve. 
+
+Interestingly we did not get the same essential singularity in $\xi$
+for $d=3$ as we did for $d=2$. 
+
+
+\end{document}
+
+
+
+
+%  LocalWords:  MFT MF Ising Ornstein Zernike Stratonovich GLW RG
+%  LocalWords:  rescale quartic rescaled anisotropy
