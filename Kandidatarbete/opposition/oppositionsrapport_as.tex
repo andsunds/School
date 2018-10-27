@@ -1,0 +1,129 @@
+\documentclass[11pt,a4paper, english, swedish
+]{article}
+\pdfoutput=1
+
+\usepackage{custom_as}
+
+\graphicspath{ {figurer/} }
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+            top    = 3cm,
+            bottom = 3cm,
+            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+%\renewcommand{\thesection}{...}
+
+
+
+
+\begin{document}
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+\title{Oppositionsrapport för
+\\\Large ''Ytplasmoniska egenskaper hos nanopartikelsystem'' }
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+
+
+%Struktur
+\noindent
+Rapporten (Ytplasmoniska egenskaper hos nanopartikelsystem) är uppbyggd enligt en IMRAD-struktur, med ett extra teoriavsnitt. Den här strukturen är väl lämpad för kortare rapporter, men för längre arbeten blir den lätt svårläst. Fördelen med den här rapportens tydliga uppdelning är dock att man lätt kan hitta en specifik del eller detalj i den. 
+Tyvärr gör dock IMRAD-strukturen att man måste läsa teori-, metod- och framför allt resultatavsnittet utan att riktigt kunna få ett sammanhang mellan de olika delarna och detaljerna förrän i diskussionen -- det blir många trådar som hänger löst innan de knyts samman i diskussionen. Man måste då förlita sig på vad man kommer ihåg från inledningen. 
+
+%Problemdefinition
+En intresseväckande inledning är extra viktig för en längre text av det här slaget. Därför är det synd att bara två meningar har ägnats åt att förklara rapportens syfte och mål. Det hade varit väldigt intressant om författarna hade gjort några kopplingar mellan rapportens syfte och bakgrunden som presenteras. Till exempel presentera, i inledningen, studiens resultat och slutsatser samt förklara hur de kopplar till de tillämpningar som framhålls.
+
+%Metod
+Efter inledningen kommer ett teori- och ett metodavsnitt. Där får man en klar bakgrund och motivering av metodvalen. Studien har i huvudsak baserats på simuleringar och experimentella mätningar. De experimentella metoderna som används är välmotiverade av sammanhanget, och simuleringarna verkar ha en sund utgångspunkt från andra forskargruppers arbeten.
+Dock hade de gärna kunnat diskuteras lite utförligare i diskussionen, men jag återkommer till detta senare. 
+
+Som jag sa så finns det ett teoriavsnitt utöver IMRAD-modellen. Det är befogat att ha med för att säkerställa att läsaren har en viss teoretisk grundnivå när han/hon läser vidare. Men vad som lyser med sin frånvaro är matematiska ekvationer och uttryck. Det finns totalt två ekvationer utdragna på egen rad. För en tänkt läsare med bakgrund i teknisk fysik är ekvationer ett bra hjälpmedel att förmedla information. Det hade helt enkelt varit enklare att läsa rapporten om den kunde ge en lite tydligare matematisk grund.
+
+%Resultat och resultathantering
+I ett större arbete som detta produceras lätt väldigt mycket resultat. Då ställs författarna inför något av det svåraste momenten i rapportskrivning: vad som ska utelämnas. I den här rapporten finns 26 figurer varav 16 ligger bland resultaten. Dessutom är många av figurerna väldigt lika för ett otränat öga, vilket gör att en mindre insatt läsa lätt tappar bort sig bland alla resultat och figurer. Jag förstår att många av dem används i diskussionen och därför ansetts nödvändiga för analysen, men jag tycker ändå att det borde gå att skära ner på mängden information som presenteras i resultatavsnittet. 
+En sista kommentar på presentationen av resultaten är att de s.k. EELS-spektrumen hade kunnat förklarats tydligare -- t.ex. vad det betyder att en topp har flyttas upp eller ner i energi. 
+
+%Analys
+Resultaten analyseras dock väl i diskussionsavsnittet. Detta har gjorts utförligt och välgrundat, men jag har några synpunkter. Ett exempel är simuleringarna. En viktig del av resultaten kommer från simuleringar; dessa jämförs med experiment med en övergripande slutsats att simuleringarna fungerade väl. Vad jag saknade här är en diskussion om hur väl simuleringarna fungerar när de görs med parametervärden bortom vad som undersökts experimentellt. 
+Det kan hända att författarna har andra referenser som visar att simuleringarna även gäller här, men det borde i så fall ha presenterats tydligare i rapporten. 
+\\[2cm]
+
+\noindent
+%Formalia
+Avslutningsvis vill jag komma med några synpunkter på rapportens formalia och språk. Detta är bland de minst och mest viktiga detaljerna i en text som denna. Dels påverkar de inte rapportens innehåll, dels kan de göra att läsaren tappar förtroende till innehållet. För att inte dra ut på dessa små detaljer för mycket kommer jag bara att lista dem nedan.
+
+\begin{itemize}
+\item Referensmarkörer (siffra i hakparentes) sätts ut både före och efter meningsslut. Det blir då lite oklart vad som är refererat till vad.
+\item Den data som visas i graferna visas som splines utan att markera ut vilka de faktiska mätpunkterna är. Det är mycket svårt för läsaren att få en uppfattning om det kvalitativa beteendet som jämförs mellan experiment och simuleringar kommer från data eller splineinterpolationen.
+\item Inga osäkerhetsgränser har satts i resultaten. Som ovan blir det svårt att veta hur god överensstämmelsen faktiskt är.
+\item I diskussionen blir språket lite lättsammare. Det är i sig inget problem, men när det börjar komma in talspråkliga uttryck (som ''än''\,=\,''ännu'' och ''våran'') sjunker förtroendet för texten.
+\end{itemize}
+
+
+
+
+%Avgränsningar
+%Istället för en klar förklaring av arbetets syfte och mål finns det däremot en 
+
+%Teori
+
+
+
+
+\end{document}
+
+
+
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer (två enkelfjongar): ''.
+
+
+%% Inkludera PDF-dokument
+\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+
+%% Figurer inkluderade som pdf-filer
+\begin{figure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer roterade 90 grader
+\begin{sidewaysfigure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{sidewaysfigure}
+
+
+%%Om man vill lägga till något i TOC
+\stepcounter{section} %Till exempel en 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
