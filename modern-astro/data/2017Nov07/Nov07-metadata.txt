@@ -1,0 +1,15 @@
+Date and time of observation 	Observer 	Galactic longitude [ d : ' : " ] 	Galactic latitude [ d : ' : " ] 	Bandwidth [MHz] 	Center frequency [MHz] 	Target integration time [s] 	Telescope
+
+2017-11-07 10:27 	        andsunds 	 49:53:19.0 	                         0:11:35.4 	                        2.5 	                1420.400 	        50 	                        Brage 	
+2017-11-07 10:25 	        andsunds 	 59:54:25.9 	                         0:06:25.7 	                        2.5 	                1420.400 	        50 	                        Brage 	
+2017-11-07 10:24                andsunds 	 69:52:53.9 	                         0:06:53.2 	                        2.5 	                1420.400 	        50 	                        Brage 	
+2017-11-07 10:21 	        andsunds 	 79:49:44.7 	                         0:04:35.5 	                        2.5                     1420.400 	        50 	                        Brage 	
+2017-11-07 10:19 	        andsunds 	 89:52:50.7 	                         0:03:30.6 	                        2.5 	                1420.400 	        50 	                        Brage 	
+2017-11-07 10:17 	        andsunds 	 99:55:10.4 	                         0:05:57.5 	                        2.5 	                1420.400 	        50 	                        Brage 	
+2017-11-07 10:16 	        andsunds 	109:49:35.5 	                        -0:01:28.4 	                        2.5 	                1420.400 	        50 	                        Brage 	
+2017-11-07 10:14 	        andsunds 	119:51:17.3 	                        -0:05:11.7                              2.5 	                1420.400 	        50 	                        Brage 	
+2017-11-07 10:13 	        andsunds 	129:52:42.5 	                        -0:12:53.5 	                        2.5 	                1420.400 	        50 	                        Brage 	
+2017-11-07 10:11 	        andsunds 	149:49:04.7 	                        -0:08:01.2 	                        2.5 	                1420.400 	        50 	                        Brage 	
+2017-11-07 10:09 	        andsunds 	169:55:08.6 	                        -0:10:16.8 	                        2.5 	                1420.400 	        50 	                        Brage 	
+2017-11-07 10:07 	        andsunds 	159:54:19.6 	                        -0:14:11.4 	                        2.5 	                1420.400 	        50 	                        Brage 	
+2017-11-07 10:04 	        andsunds 	139:52:15.2 	                        -0:06:05.0 	                        2.5 	                1420.400 	        50 	                        Brage 	

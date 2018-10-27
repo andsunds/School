@@ -1,0 +1,23 @@
+# Det här en är en avsiktilgt synlig gitignore-fil som är tänkt som en mall till LaTeX-repositories.
+
+#Allmänt onödiga filer
+*~
+
+#Onödig LaTeX-output
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+salsa.pdf
+
+*-eps-converted-to.pdf
+
+#Från Beamer
+*.nav
+*.snm
+
+
+#X-fig
+*.fig.bak
