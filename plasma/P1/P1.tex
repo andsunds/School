@@ -1,0 +1,221 @@
+\documentclass[11pt,a4paper, 
+english, swedish %% Make sure to put the main language last!
+]{article}
+\pdfoutput=1
+
+%% Andréas's custom package 
+%% (Will work for most purposes, but is mainly focused on physics.)
+\usepackage{../custom_as}
+
+%% Figures can now be put in a folder: 
+\graphicspath{ {figurer/} %{some_folder_name/}
+}
+
+%% If you want to change the margins for just the captions
+\usepackage[margin=10 pt]{caption}
+
+%% To add todo-notes in the pdf
+\usepackage[%disable  %%this will hide all notes
+]{todonotes} 
+
+%% Change the margin in the documents
+\usepackage[
+%            top    = 3cm,              %% top margin
+%            bottom = 3cm,              %% bottom margin
+%            left   = 3cm, right  = 3cm %% left and right margins
+]{geometry}
+
+
+\newcommand{\lD}{\ensuremath{\lambda_{\text{D}}}}
+
+
+%% If you want to chage the formating of the section headers
+\renewcommand{\thesubsection}{\arabic{section}.\Alph{subsection})}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%% vvv Internal title page vvv %%%%%%%%%%%%%%%%%%%%%
+\title{Assignment 1 \\
+{\Large Plasma Physics -- RRY085}}
+\author{Andréas Sundström}
+\date{2017-09-08}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%% ^^^ Internal title page ^^^ %%%%%%%%%%%%%%%%%%%%%
+%% If you want a list of all todos
+%\todolist
+
+
+
+\section{Debye shielding}
+To find the potential from a point charge in a plasma, we have to
+solve the Poisson equation inside the plasma:
+\begin{equation}\label{eq1:start}
+-\laplacian \varphi = 
+\frac{1}{\varepsilon_0}\qty(q_\ii n_\ii+ q_\ee n_\ee )
++ \frac{Q}{\varepsilon_0} \delta(r),
+\end{equation}
+where the point charge $Q$ has been set in the origin. The problem is
+assumed to be isotropic, so the Laplacian can be written as
+\begin{equation}
+\laplacian\varphi = \frac{1}{r}\dv[2]{u}{r},
+\end{equation}
+where $u(r)=r\varphi(r)$.
+The next step is to assume that the particles are Boltzmann
+distributed ($k_\text{B}=1$):
+\begin{equation}
+n=n_0\exp(-\frac{q\varphi}{T})
+= n_0\qty[1-\frac{q\varphi}{T} 
++\order{\qty(\frac{q\varphi}{T})^2}].
+\end{equation}
+The charge of the electron is $q_\ee=-e$, and we also assume that the
+charge of the ions is $q_\ii=+e$. 
+We can now write \eqref{eq1:start}, for $r>0$ ($\delta(r)=0$), as
+\begin{equation}
+\dv[2]{u}{r} =
+-\frac{n_0e^2r}{\varepsilon_0}\qty[\qty(\frac{1}{T_\ii}+\frac{1}{T_\ee})\varphi
++\order{\qty(\frac{q\varphi}{T_\ii})^2} 
++\order{\qty(\frac{q\varphi}{T_\ee})^2}].
+\end{equation}
+Dropping higher the order terms and factoring in the $r$ into the
+bracket yields
+\begin{equation}\label{eq1:ODE}
+\dv[2]{u}{r} =-\frac{n_0e^2}{\varepsilon_0}
+\qty(\frac{1}{T_\ii}+\frac{1}{T_\ee})u
+=-\lD^{-2}u.
+\end{equation}
+where we have defined
+\begin{equation}\label{eq1:Debye}
+\lD := \qty[\frac{n_0e^2}{\varepsilon_0}
+\qty(\frac{1}{T_\ii}+\frac{1}{T_\ee})]^{-1/2}
+=\sqrt{\frac{\varepsilon_0 k_\text{B}T_\ii T_\ee}
+{n_0e^2(T_\ii + T_\ee)}}.
+\end{equation}
+(The Boltzmann constant has also been inserted in the last step.)
+Now \eqref{eq1:ODE} has the general solution
+%\begin{equation}
+$u(r) = A\ee^{-r/\lD} + B\ee^{+r/\lD}$
+%\end{equation}
+or 
+\begin{equation}
+\varphi(r) = \frac{A}{r}\ee^{-r/\lD} + \frac{B}{r}\ee^{+r/\lD},
+\end{equation}
+but we also have the boundary conditions
+\begin{equation}
+\begin{cases}
+\varphi(r)\to0\qc &\text{ as } r\to\infty\\
+\varphi(r)\sim \varphi_{\text{free}}(r) 
+= \frac{Q}{4\pi\varepsilon_0r} \qc&\text{ as } r\to0.
+\end{cases}
+\end{equation}
+The first one forces $B=0$ while the second yields 
+$A=Q/(4\pi\varepsilon_0)$, which means that we have 
+\begin{equation}
+\varphi(r)= \frac{Q}{4\pi\varepsilon_0r}\ee^{-r/\lD},
+\end{equation}
+with $\lD$ as defined in \eqref{eq1:Debye}.
+
+\section{Debye sphere}
+In this problem we are concerned about collective behavior and how it
+can be used to show that the Debye sphere has to contain many
+particles ($n_\ee\lD^3\gg1$). 
+The collective behavior, i.e. that long-range effects dominate,
+results in the fact that most particle collisions results in small
+scattering angles.
+
+We begin by taking a look at the length scale $L$ on which a large
+scattering angle, typically $90^\circ$, is to be expected. We assume
+that the scattered particles have ``thermal'' kinetic energy:
+\begin{equation}
+\frac{p_\text{th}^2}{m} \sim T,
+\end{equation}
+where $T$ is the temperature and $p_\text{th}$ is the momentum of
+those particles. Next, for large scattering angles, the change
+in momentum is roughly the same as the initial momentum of the
+particle:
+\begin{equation}
+\delta p \sim p_\text{th}.
+\end{equation}
+Furthermore,  we also assume that the interaction is mediated via a
+regular Coulomb force acting on the said length scale:
+\begin{equation}
+F\sim\frac{e^2}{4\pi\varepsilon_0L^2}.
+\end{equation}
+And finally, we say that the interaction time is roughly 
+$\tau \sim L/v_\text{th} = Lm/p_\text{th}$. 
+
+We can now write down the two expressions for the change in momentum
+\begin{equation}
+p_\text{th} \sim \delta p \sim 
+\frac{e^2}{4\pi\varepsilon_0L^2}\,\frac{Lm}{p_\text{th}}
+\quad\Longleftrightarrow\quad
+L\sim \frac{e^2}{4\pi\varepsilon_0}\,\frac{m}{p_\text{th}^2}
+\sim \frac{e^2T}{4\pi\varepsilon_0}.
+\end{equation}
+In terms of Debye lengths,
+\begin{equation}
+\lD = \sqrt{\frac{\varepsilon_0 T}{n_\ee e^2}},
+\end{equation}
+we can express this large scattering angle length scale as
+\begin{equation}
+L\sim\frac{1}{n_\ee\lD^2}.
+\end{equation}
+
+For collective behavior, we must then require that most interactions
+only result in \emph{small} angle scattering. This means that the mean
+distance between e.g. electrons $\bar{d}$ has to be much \emph{larger}
+that $L$. In terms of electron density, we can write
+\begin{equation}
+n_\ee^{-1/3}\sim \bar{d} \gg L
+\end{equation}
+or
+\begin{equation}
+n_\ee\sim \bar{d}^{-3}\ll L^{-3}
+\sim\qty(n_\ee\lD^2)^3
+\quad\Longleftrightarrow\quad
+n_\ee\lD^3\gg1,
+\end{equation}
+which is just what we wanted to show. 
+
+\section{Polarized atoms}
+In this problem we want to study collisions between an electron and a
+neutral atom. The collisions are made possible through polarization of
+the neutral atom.
+
+Consider an electron on position $r_0\vu{x}$, then the electric field,
+at the origin, due to this electron, will be
+\begin{equation}
+\vb*E_\ee = \frac{e}{4\pi\varepsilon_0 r_0^2}\vu{x}.
+\end{equation}
+On the other hand, the dipole field at the electron due to the
+polarized atom is
+\begin{equation}
+\vb*E_\text{d}=\frac{1}{4\pi\varepsilon_0}\,
+\frac{3(\vb*p\vdot\vu{x})\vu{x}-\vb*p}{r_0^3},
+\end{equation}
+where $\vb*p$ is the polarization of the atom.
+Assuming that the polarization of the atom is given by
+\begin{equation}
+\vb*p = \alpha\vb*E_\ee
+=\frac{\alpha e}{4\pi\varepsilon_0 r_0^2}\vu{x}
+\end{equation}
+the force on the electron will then be
+\begin{equation}
+\vb*F=-e\vb*E_\text{d}=-\frac{e \vu{x}}{4\pi\varepsilon_0}\,
+\frac{2\alpha e/(4\pi\varepsilon_0r_0^2)}{r_0^3}
+=-\frac{2\alpha e^2 \vu{x}}{(4\pi\varepsilon_0)^2r_0^5}.
+\end{equation}
+This is much weaker interaction ($r_0^{-5}$) on long range, compared
+to the regular Coulomb interaction ($r_0^{-2}$).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  LocalWords:  Debye

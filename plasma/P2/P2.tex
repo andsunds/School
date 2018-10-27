@@ -1,0 +1,585 @@
+\documentclass[11pt,a4paper, 
+swedish, english %% Make sure to put the main language last!
+]{article}
+\pdfoutput=1
+
+%% Andréas's custom package 
+%% (Will work for most purposes, but is mainly focused on physics.)
+\usepackage{../custom_as}
+
+%% Figures can now be put in a folder: 
+\graphicspath{ {figures/} %{some_folder_name/}
+}
+
+%% If you want to change the margins for just the captions
+\usepackage[]{caption}
+
+%% To add todo-notes in the pdf
+\usepackage[%disable  %%this will hide all notes
+]{todonotes} 
+
+%% Change the margin in the documents
+\usepackage[
+%            top    = 3cm,              %% top margin
+%            bottom = 3cm,              %% bottom margin
+%            left   = 3cm, right  = 3cm %% left and right margins
+]{geometry}
+
+
+\newcommand{\lD}{\ensuremath{\lambda_{\text{D}}}}
+\newcommand{\wc}{\ensuremath{\omega_{\text{c}}}}
+\newcommand{\rL}{\ensuremath{r_{\text{L}}}}
+\newcommand{\vL}{\ensuremath{v_{\text{L}}}}
+
+
+%% If you want to chage the formating of the section headers
+\renewcommand{\thesubsection}{\arabic{section}.\Alph{subsection})}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%% vvv Internal title page vvv %%%%%%%%%%%%%%%%%%%%%
+\title{Assignment 2 \\
+{\Large Plasma Physics -- RRY085}}
+\author{Andréas Sundström}
+\date{2017-09-17}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%% ^^^ Internal title page ^^^ %%%%%%%%%%%%%%%%%%%%%
+%% If you want a list of all todos
+%\todolist
+
+
+
+\section{Cyclotron motion}
+Here we want to calculate the cyclotron frquencies and Larmor radii
+for electrons and protons in two different systems. 
+
+The cyclotron frequency is simply given by
+\begin{equation} \label{eq1:wc}
+\wc = \frac{|q|B}{m}.
+\end{equation}
+Then the Larmor radius is simply $\rL=v_\perp/\wc$, where $v_\perp$ is
+the velocity component perpendicular to the magnetic field. We do
+however need some expression for $v_\perp$. For that we use the
+equipartition theorem from thermodynamics stating that, in thermal
+equilibrium, the thermal energy is equally distributed over all
+degrees of freedom. For single particle gases this means that 
+(with $k_\text{B}=1$)
+\begin{equation}
+\frac{m}{2} v_i^2 = \frac{1}{3} T
+\quad\Longleftrightarrow\quad
+v_i^2 = \frac{2 T}{3m}.
+\end{equation}
+Now since the perpendicular component of the velocity ``lives'' in two
+spacial dimensions, we must have
+\begin{equation}
+v_\perp^2 = \frac{4 T}{3m}.
+\end{equation}
+For the Larmor radius, this means
+\begin{equation}
+\rL = \frac{m}{|q|B}\sqrt{\frac{4 T}{3m}}
+=\sqrt{\frac{4m T}{3q^2B^2}}.
+\end{equation}
+
+Some numerical values are given in \tabref{tab1}.
+
+\begin{table}
+\begin{center}
+\caption{Numerical values of $\wc$ and $\rL$ for electrons and
+  protons, in Earth's ionosphere ($T_\ee=T_\text{p}=\unit[0.1]{eV}$,
+  and $B=\unit[0.3]{G}=\unit[30]{\micro T}$) and in the solar corona
+  wind ($T_\ee=T_\text{p}=\unit[10]{eV}$, and
+  $B=\unit[10^{-5}]{G}=\unit[1]{nT}$). [Problem 1]
+}\label{tab1}
+\begin{tabular}{|l|c|c|c|c|}\cline{2-5}
+\multicolumn{1}{c|}{}
+&\multicolumn{2}{|c|}{electron} 
+&\multicolumn{2}{|c|}{proton} \\ \hline
+ionosphere 
+&$\wc=\unit[5.3\times10^{6}]{rad/s}$ & $\rL=\unit[29]{mm}$
+&$\wc=\unit[2.9\times10^{3}]{rad/s}$ & $\rL=\unit[1.2]{m}$
+\\ \hline
+solar corona 
+&$\wc=\unit[8.8\times10^{2}]{rad/s}$ & $\rL=\unit[1.7]{km}$
+&$\wc=\unit[4.8\times10^{-1}]{rad/s}$ & $\rL=\unit[74]{km}$
+\\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\section{Uniforn electric and magnetic field}
+Here, we have a charged particle initially at rest with the
+electromagnetic field
+\begin{equation}
+\vb*E = E\vu{y}\qc
+\vb*B = B\vu{z}
+\end{equation}
+acting on the particle.
+
+The equation of motion is
+\begin{equation}
+m\dv{\vb*v}{t} = q\qty(\vb*E + \vb*v\cross\vb*B),
+%\qc \vb*v(t=0) = \vb*0.
+\end{equation}
+or in component form
+\begin{equation}\label{eq2:ODEs}
+\begin{cases}
+\dot{v}_x = \hat\omega v_y\\
+\dot{v}_y = -\hat\omega v_x + a_E\\
+\dot{v}_z = 0,
+\end{cases}
+\end{equation}
+where $\hat\omega = qB/m$ is the ``signed'' cyclotron frequency 
+(as opposed to $\wc=|q|B/m$), and $a_E=qE/m$ is an
+acceleration due to the electric field. The initial condition is 
+$v_x(0)=v_y(0)=v_z(0)=0$.
+
+The $z$ component obviously only has the solution $v_z(t)\equiv0$. But
+for the other two, let's begin by differentiating the first equation
+one more time:
+\begin{equation}
+\ddot{v}_x = \hat\omega \dot{v}_y
+=-\hat\omega^2 {v}_x + \hat\omega a_E
+\quad\Longleftrightarrow\quad
+\ddot{v}_x + \hat\omega^2 {v}_x = \hat\omega a_E.
+\end{equation}
+The RHS of the last equation is just a constant, so the general
+solution to this ODE is
+\begin{equation}
+v_x(t) = A\cos(\hat\omega t) + B\sin(\hat\omega t) 
++ \frac{a_E}{\hat\omega},
+\end{equation}
+with the initial condition $v_x(0)=0$ requiring
+\begin{equation}\label{eq2:vx}
+v_x(t) = \frac{a_E}{\hat\omega}[1-\cos(\hat\omega t)]
+ + B\sin(\hat\omega t).
+\end{equation}
+Note that since we went from a first order to a second order ODE we
+would need a second initial condition to fully specify $v_x$ at this
+point, but instead we will use the inteconnection between $v_x$ and
+$v_y$ together with the initial condition on $v_y$ to solve this
+problem. The second equation of \eqref{eq2:ODEs} thus becomes
+\begin{equation}
+\dot{v}_y = -\hat\omega v_x + a_E
+=a_E\cos(\hat\omega t)
+ - \hat\omega B\sin(\hat\omega t),
+\end{equation}
+which has the solution 
+\begin{equation}\label{eq2:vy}
+v_y(t) = \frac{a_E}{\hat\omega}\sin(\hat\omega t)
++B\cos(\hat\omega t) -B.
+\end{equation}
+The constant of integration must be $-B$ for $v_y(0)=0$ to be
+satisfied. To finally deal with $B$, we substitute \eqref{eq2:vy} back
+into the first equation of \eqref{eq2:ODEs} and compare it to direct
+differentiation of \eqref{eq2:vx}:
+\begin{equation}
+\overbrace{a_E\sin(\hat\omega t) + \hat\omega B\cos(\hat\omega t)}
+^{\dv*{t}:\;\eqref{eq2:vx}}
+\stackrel{\eqref{eq2:ODEs}}{=}
+\hat\omega v_y
+\stackrel{\eqref{eq2:vy}}{=}
+a_E\sin(\hat\omega t)
++\hat\omega B [\cos(\hat\omega t)-1].
+\end{equation}
+Here we see that the already determined coefficient for the sine term
+match and the coefficient for the cosine term do as well, but on the
+RHS there is a constant term which is not on the LHS. We are therefore
+forced to set $B=0$. 
+
+The particle velocity is now finally determined to be
+\begin{equation}
+\begin{cases}
+v_x(t) = \frac{E}{B}[1-\cos(\wc t)]\\
+v_y(t) = \xi\frac{E}{B}\sin(\wc t)\\
+v_z(t) \equiv 0,
+\end{cases}
+\end{equation}
+where $a_E/\hat\omega = (qe/m)/(qB/m)=E/B$, $\wc=\abs{\hat\omega}$ and
+$\xi$ carries the sign of the charge (which is not necessary in the
+cosine). Or in terms of position, using $r_x(0)=r_y(0)=r_z(0)=0$, we
+can write
+\begin{equation}
+\begin{cases}
+r_x(t) = \frac{E}{B}t-\frac{E}{B\wc}\sin(\wc t)\\
+r_y(t) = \xi\frac{E}{B\wc}[1-\cos(\wc t)]\\
+r_z(t) \equiv 0.
+\end{cases}
+\end{equation}
+
+This is seen to be Larmor gyration, with $\rL=E/(B\wc)=Em/(|q|B^2)$,
+and a drift of the guiding center. The drift velosity is also seen to
+be the expected\footnotemark{} ``E cross B'' drift:
+\begin{equation}
+\vb*v_\text{drift} = \frac{\vb*E\cross\vb*B}{B^2}
+=\frac{E}{B} (\vu{y}\cross\vu{z})
+=\frac{E}{B} \vu{x}.
+\end{equation}
+\footnotetext{This whole problem could easily have been solved on a
+  few lines using this formula and the initial conditions, but I was
+  unsure what you were really asking for so I did it the long way
+  around. } 
+
+
+\section{Magnetic ``beach''}
+\newcommand{\Lp}{\ensuremath{L_{\text{p}}}}
+If we have a magnetic ``beach''
+\begin{equation}
+\vb*B = B\qty[1+\frac{x-x_0}{L_0}\Theta(x-x_0)]\vu{x},
+\end{equation}
+then a particle with a non-normal incidence onto this beach will be
+stopped and reflected back. To find the penetration depth, \Lp, we
+will use the fact that the magnetic Lorentz force is perpendicular to
+the velocity and thus cannot exert any work on the particle, and the
+fact that the magnetic moment $\mu=m v_\perp^2/(2B)$ is conserved.
+
+At the penetration depth, the velocity component parallell to the
+magnetic field is~0. With concervation of energy, this means that
+\begin{equation}
+\frac{mv_{0}^2}{2}% + \frac{mv_{0\perp}^2}{2} 
+=\frac{mv_{1\perp}^2}{2}
+\quad\Longleftrightarrow\quad
+v_{1\perp}^2=v_{0}^2,
+\end{equation}
+%where $v_{0||}$ and $v_{0\perp}$ is the parallel and perpendicular velocity components 
+where $v_0$ is the particle speed 
+upon entry onto the beach, and $v_{1\perp}$ is the
+perpendicular (and only) velocity component at the turning point. 
+Now, the conservation of magnetic moment also implies that
+\begin{equation}
+\frac{mv_{0\perp}^2}{2B_0}=\frac{mv_{1\perp}^2}{2B_1}
+\quad\Longleftrightarrow\quad
+\frac{v_{1\perp}^2}{v_{0\perp}^2}=\frac{B_1}{B_0}.
+\end{equation}
+Togther we have
+\begin{equation}
+\frac{B_1}{B_0}=\frac{v_{0}^2}{v_{0\perp}^2}=\sin^{-2}\alpha.
+\end{equation}
+Lastly we write
+\begin{equation}
+B_1 = B_0\qty[1+\frac{\Lp}{L_0}],
+\end{equation}
+which yiels
+\begin{equation}
+\Lp = L_0\qty[\sin^{-2}(\alpha)-1].
+\end{equation}
+As expected if $v_{0\perp}=0$ there is no turning point
+($\Lp\to\infty$). 
+
+
+\section{Adiabatic energy change}
+We want to calculate the energy change assuming that we have a system
+of a large number, $N$, of non-interacting electrons, with
+isotropically distributed velocities but all with speed $v_0$, moving
+in a uniform magnetic field which adiabatically increases from $B_0$
+to $\alpha B_0$ ($\alpha>1$).  
+
+To find the total energy of a system, we can use the distribution
+function:
+\begin{equation}
+U = \oldint_{\vb*x}\!\rd^3x \oldint_{\vb*v}\!\rd^3v \,
+\epsilon(\vb*x, \vb*v)f(\vb*x, \vb*v).
+\end{equation}
+Since there is no electric potential and the electron-electron
+interactions $\epsilon(\vb*x, \vb*v) = m v^2/2$. Initially all
+velociteis are isotropically distributed and have magnitude $v_0$,
+which means that 
+$f_0(\vb*x, \vb*v) = n_0(\vb*x)\delta(v-v_0)/(4\pi v_0^2)$.
+which means that the inital energy of
+the system is
+\begin{equation}
+U_0 = \oldint_{\vb*x}\!\rd^3x \oldint_{\vb*v}\!\rd^3v \,
+\frac{mv^2}{2}f_0(\vb*x, \vb*v)
+=\frac{mv_0^2}{2}\oldint_{\vb*x}\!\rd^3x\,n_0(\vb*x)
+=N\frac{mv_0^2}{2}
+\end{equation}
+
+
+To find the final energy, after the increas in magnetic field, we once
+again use the fact that the magnetic moment  $\mu=mv_\perp^2/(2B)$ is
+conserved, while the velocity component parallel to the field is
+unchanged. This means that the new energy of a particle is 
+\begin{equation}
+\epsilon = \frac{mv_{1||}^2}{2}+\frac{mv_{1\perp}^2}{2}
+=\frac{mv_{0||}^2}{2}+\alpha\frac{mv_{0\perp}^2}{2}.
+\end{equation}
+Note that this is expressed only in the original velocity components,
+which means that we can use $f_0$ when calculating the energy. 
+The integration over all of phase space is made significantly easier
+if we align the $z$-axis of the velocity integral with the magnetic
+field, which means that $v_{0||}=v_0\cos\theta$ and
+$v_{0\perp}=v_0\sin\theta$ if written in polar coordinates. 
+The final energy is therefore given by
+\begin{equation}
+\begin{aligned}
+U_1 =& \frac{m}{2}\oldint_{\vb*x}\!\rd^3x \oldint_{\vb*v}\!\rd^3v \,
+\qty[\cos^2\theta + \alpha\sin^2\theta] v^2 f_0(\vb*x, \vb*v)\\
+=&N\frac{m}{2}
+\int_0^{2\pi}\rd\phi\int_0^\pi\rd\theta\,\sin\theta
+\int_0^\infty \rd{v}\, v^2\,
+\qty[\alpha - (\alpha-1)\cos^2\theta] v^2\frac{\delta(v-v_0)}{4\pi v_0^2}\\
+=&N\frac{mv_0^2}{2}\,\frac{1}{2}
+\int_0^\pi\rd\theta\,\sin\theta
+\qty[\alpha - (\alpha-1)\cos^2\theta]\\
+=&N\frac{mv_0^2}{2}\,\frac{1+2\alpha}{3}
+=\frac{1+2\alpha}{3}U_0.
+\end{aligned}
+\end{equation}
+(The last integral can easily be calculated with a substitution of
+variables $s=\cos\theta$, $\rd{s}=-\sin\theta\,\rd\theta$.) As a
+sanity check, we see that if $\alpha\to1$ then $U_1\to U_0$ as
+expected. 
+
+
+
+\section{Cyclotron radiation}
+The total radiated power due to an acceleration $a$ of a
+non-relativistic charged particle is given by the Laramor formula 
+\begin{equation}
+P = \frac{e^2\, a^2}{6\pi \varepsilon_0 c^3},
+\end{equation}
+where $e$ is the charge of the paricle.
+
+If the particle motion is Laramor gyration, then $a=\vL^2/\rL$ where
+$\rL=m\vL/(eB)$. This means that the acceleration can be written as
+$a=\vL eB/m$
+radiated power is
+\begin{equation}\label{eq5:PL}
+P=\frac{e^4B^2\, \vL^2}{6\pi \varepsilon_0 c^3m^2}
+=\frac{e^4B^2}{3\pi \varepsilon_0 c^3m^3}
+\frac{m\vL^2}{2}
+=\frac{1}{\tau}W,
+\end{equation}
+where $W$ is the kinetic energy of the particle, and
+\begin{equation}\label{eq5:decay-time}
+\tau = \frac{3\pi \varepsilon_0 c^3m^3}{e^4B^2}
+\end{equation}
+is some constant with the dimensions of time.
+
+If there is no other sourse of energy the radiated $P=-\dv*{W}{t}$ has
+to be the rate of change of the kinetic energy. Therefore
+\eqref{eq5:PL} yields
+\begin{equation}\label{eq5:ODE}
+\dv{W}{t}+\frac{1}{\tau}W=0
+\end{equation}
+wich means that
+\begin{equation}
+W(t)=W(0)\ee^{-t/\tau}.
+\end{equation}
+We now see the physical interpretation of the constant $\tau$ from
+\eqref{eq5:decay-time}; it is the decay time of the kinetic energy.
+
+The decay time depends on the field strength. We can therefore express
+the magnetic field, given a set decay time, according to
+\begin{equation}
+B=\sqrt{\frac{3\pi \varepsilon_0 c^3m^3}{e^4\tau}}.
+\end{equation}
+For instance if $\tau=\unit[1]{s}$, then $B=\unit[1.6]{T}$. This is
+easily in the same order of magnitude as in tokamaks. However for  
+\eqref{eq5:ODE} to be valid, there cannot be any other interactions
+between paricles. E.g. almost all of the radiated energy radiated from
+particles \emph{within the bulk} of the plasma will probably be
+reabsorbed by another particle in the plasma. And then energy is also
+added externally to the plasma to heat it up.
+
+
+\section{Dipole pendulum}
+The electric field from a dipole $\vb*p$, in the origin, is given by
+\begin{equation}
+\vb*E(\vb*r) = 
+\frac{3\vu*r(\vb*p\vdot\vu*r)-\vb*p}{4\pi\varepsilon_0r^3},
+\end{equation}
+where $\vb*r=r\vu*r$, and $\vu*r\vdot\vu*r=1$. Separeted into
+componentes the field, produced by a dipole $\vb*p=p\vu{z}$, is given
+by [eqn. 4.12, J. D. Jackson, \textit{Classical Electrodynamics}, 3rd
+ed., 1999]
+\begin{equation}
+\begin{cases}
+E_r = \dfrac{2p\,\cos\theta}{4\pi\varepsilon_0 r^3}\\
+E_\theta = \dfrac{p\,\sin\theta}{4\pi\varepsilon_0 r^3}\\
+E_\phi=0.
+\end{cases}
+\end{equation}
+
+\subsection*{Similarities with the physical penulum}
+Given that that a charged particle, starting out at rest with
+$\theta=\pi/2$, will follow a semicircular\footnotemark{} trajectory
+($r=a$ constant) we can find a differential equation for the
+angle~$\theta$. The velocity along the tradjectory is $a\dot\theta$,
+so the equation of mothion will be
+\begin{equation}\label{eq6:EOM1}
+ma\ddot\theta = qE_\theta = \frac{qp}{4\pi\varepsilon_0 a^3}\sin\theta
+\quad\Longleftrightarrow\quad
+\ddot\theta - \xi\Omega^2\,\sin\theta=0,
+\end{equation}
+where
+\begin{equation}\label{eq6:Omega}
+\Omega= \sqrt{\frac{|q|p}{4\pi\varepsilon_0 a^4m}}
+\end{equation}
+is some constant with dimension of invers time,
+and $\xi=q/|q|=\pm1$ is the sign of the charge, and the initial
+conditions are $\theta(0)=\pi/2$ and $\dot\theta(0)=0$.
+\footnotetext{Which I assume we don't have to prove, otherwise 
+[R. S. Jones, \textit{Circular motion of charged particle in an
+  elextric dipole filed}, Am. J. Phys., \textbf{63}, November] has a
+very short and simple argument, and he seems to be the first one to
+prove this result.} 
+
+Note that this is \emph{exactly} the same equation of motion as for
+the simple physical pendulum ($\ddot\theta + \omega^2\sin\theta=0$),
+but here the initial condition is $\theta(0)=\pi/2$ and not 0 -- we
+can no longer make the assumtion $\sin\theta\approx\theta$). Also,
+\eqref{eq6:EOM1} has a differnt sign 
+depending on $\xi$, but all that really does is to determine wheter
+the pendulum swings upward or downward. 
+
+\subsection*{Using the centripital force to find the period of oscillation}
+We could also use the radial part of the elctric field and the
+centripetal force to get another differntial equation:
+\begin{equation}\label{eq6:EOM2}
+-ma(\dot\theta)^2 = qE_r
+=\frac{2qp\,\cos\theta}{4\pi\varepsilon_0 r^3}
+\quad\Longleftrightarrow\quad
+(\dot\theta)^2 + 2\xi\Omega^2\,\cos\theta=0,
+\end{equation}
+with $\xi$ and $\Omega$ as before. (The minus sign on the LHS is due
+tho the fact that the centripetal force points in the $-\vu*r$
+direction, while the radial elctric force is $+qE_r\vu*r$.)
+
+Now the period of oscillation can be calculated. We can assume,
+without loss of generality, that $q<0$ ($\xi=-1$); then the particle
+will swing upward and the angle $\theta\in[-\pi/2, \pi/2]$. Due to
+symmetry, the oscillation period, $T$, can be expressed as 4 times the
+time it takes for $\theta$ to swing from $-\pi/2$ to 0:
+\begin{equation}
+\begin{aligned}
+T=&4\int_{\theta=-\pi/2}^{\theta=0}\rd t
+=4\int_{\theta=-\pi/2}^{\theta=0}\dv{t}{\theta}\id\theta
+=4\int_0^{\pi/2}\frac{\rd\theta}{\dot\theta}
+\end{aligned}
+\end{equation}
+Now with \eqref{eq6:EOM2}, we can write this as
+\begin{equation}
+\begin{aligned}
+T=&4\int_{-\pi/2}^0\frac{\rd\theta}{\sqrt{2\Omega^2\cos\theta}}\\
+\qty{\alpha=\theta+\frac{\pi}{2}}
+=&\frac{2\sqrt{2}}{\Omega}\int_0^{\pi/2}\frac{\rd\alpha}{\sqrt{\sin\alpha}}
+=\frac{2\sqrt{2}}{\Omega}\frac{[\Gamma(\nicefrac14)]^2}{2\sqrt{2\pi}}
+=\frac{[\Gamma(\nicefrac14)]^2}{\sqrt{\pi}\Omega},
+\end{aligned}
+\end{equation}
+with $\Omega$ as in \eqref{eq6:Omega}.
+The last integral is due to [formula 3.621.7, I. S. Gradshteyn \&
+I. M. Ryzhik, \textit{Table of Integrals, Series, and Products}, 8th
+ed., 2015].
+
+
+
+\section{Conservation of magnetic moment}
+Assuming that we have a slowly time and space varying magnetic field
+$\vb*B(\vb*r, t)$, we want to prove that
+\begin{equation}
+\mu:=I\pi\rL^2=\frac{|q|\wc}{2\pi}\,\pi\rL^2=
+\frac{mv_\perp^2}{2B}=\frac{W_\perp}{B}.
+\end{equation}
+is constant. The fact that the
+variations are slow can be expressed as
+\begin{equation}
+\rL\abs{\frac{1}{B}\pdv{B}{s}}=\epsilon_s\ll1
+\qc
+\frac{1}{\wc}\abs{\frac{1}{B}\pdv{B}{t}}=\epsilon_t\ll1,
+\end{equation}
+where $\pdv*{s}$ denotes differentiation in any direction.
+
+We first note that $\vb*F\vdot\vb*v_\perp$ is the power exerted by the
+force $\vb*F$ in the direction of $\vb*v_\perp$. We also note that
+\emph{spacial} variations in $\vb*B$ will not result in any (direct)
+force in the perpendicular direction. Therefore
+\begin{equation}\label{eq7:Wp1}
+\dv{W_\perp}{t} = q\vb*E\vdot\vb*v_\perp,
+\end{equation}
+where the electric field is due to Faraday's law
+\begin{equation}\label{eq7:Faraday}
+\pdv{B}{t} = -\curl\vb*E.
+\end{equation}
+The temporal variations were very slow compared to the Laramor period,
+which means that we can replace $\vb*E\vdot\vb*v_\perp$ with an
+averaged over one period of oscillation:
+\begin{equation}\label{eq7:evp}
+\vb*E\vdot\vb*v_\perp
+=\ev{\vb*E\vdot\vb*v_\perp}+\order{\epsilon_t}
+=\frac{\wc}{2\pi}\int_0^{\tau_\text{L}}\vb*E\vdot\vb*v_\perp\id{t}
++\order{\epsilon_t},
+\end{equation}
+where $\tau_\text{L}=2\pi/\wc$.
+Now, since $\vb*v_\perp\id{t}=\rd\vb*r_\perp$, we can write the last
+integral in \eqref{eq7:evp} as
+\begin{equation}
+\int_0^{\tau_\text{L}}\vb*E\vdot\vb*v_\perp\id{t}
+=\oint_{\pd S}\vb*E\vdot\rd\vb*r_\perp +\order{\epsilon_t}+\order{\epsilon_s}
+\end{equation}
+where $\pd S$ is the (unperturbed) Laramor orbit; this ofcourse
+introduces some errors 
+$\order{\epsilon_t}+\order{\epsilon_s}=\order{\epsilon_t, \epsilon_s}$
+due to variations of $\vb*B$ in both space and time. Now Stoke's
+theorem comes in handy:
+\begin{equation}
+\oint_{\pd S}\vb*E\vdot\rd\vb*r_\perp 
+=\int_{S}(\curl\vb*E)\vdot\rd\vb*a 
+=-\int_{S}\pdv{\vb*B}{t}\vdot\rd\vb*a 
+=-\pdv{t}\int_{S}\vb*B\vdot\rd\vb*a 
+\end{equation}
+Now assuming that the spacial variations of $\vb*B$ are small, the
+last integral just becomes
+\begin{equation}
+-\pdv{t}\int_{S}\vb*B\vdot\rd\vb*a 
+=-\pdv{t}\qty[\pi\rL^2 \vb*B\vdot\vu{n}_S]+\order{\epsilon_s}
+=-\pi\rL^2 \vu{n}_S\vdot\pdv{\vb*B}{t}+\order{\epsilon_s}
+\end{equation}
+where $\vu{n}_S$ is the surface normal to the surface of the disc
+whose perimiter is the Laramore orbit. 
+
+We can now collect the fruit of our work and return to
+\eqref{eq7:Wp1}. We note when going back trough all the steps that no
+more than first order corrections were introduced on the way, meaning
+that in the end
+\begin{equation}
+\dv{W_\perp}{t} = -\frac{q\wc}{2\pi}\pi\rL^2 \,
+\vu{n}_S\vdot\pdv{\vb*B}{t}
++\order{\epsilon_s, \epsilon_t}.
+\end{equation}
+We note that $\vu{n}_S$ has to be either parallel or anti-paralell to
+the magnetic field, and which one depends on the sign of the
+charge. Luckily we have a (signed) facor $q$ in the extression, so by
+thinking the Laramor orbit through, we see that we can write
+\begin{equation}
+\dv{W_\perp}{t} = +\frac{|q|\wc}{2\pi}\pi\rL^2 \,\pdv{B}{t}
++\order{\epsilon_s, \epsilon_t}
+=\mu\pdv{B}{t} +\order{\epsilon_s, \epsilon_t}.
+\end{equation}
+
+To pound in the last nain in this coffin, we also note that we can
+write
+\begin{equation}
+\dv{W_\perp}{t} = \dv{(\mu B)}{t}
+=B\dv{\mu}{t}+\mu\dv{B}{t}.
+\end{equation}
+Equating these last two we see that
+\begin{equation}
+B\dv{\mu}{t}+\mu\dv{B}{t}=\mu\pdv{B}{t} 
++\order{\epsilon_s, \epsilon_t}
+\quad\Longleftrightarrow\quad
+\dv{\mu}{t}=\order{\epsilon_s, \epsilon_t},
+\end{equation}
+which is what we wanted to prove.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  LocalWords:  Debye Laramor
