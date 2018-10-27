@@ -1,0 +1,591 @@
+\documentclass[10pt,letter, swedish, english,%twocolumn
+]{article}
+\pdfoutput=1
+
+\usepackage[oldint]{../../custom_as}
+
+\graphicspath{ {figures/} }
+
+%\swapcommands{\Phi}{\varPhi}
+
+%\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+%\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+            top    = 1.5cm,
+            bottom = 2cm,
+            left   = 1.2cm, right  = 1.2cm
+]{geometry}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\oh}{\ensuremath\mathpzc{o}}
+
+\newcommand{\as}{\qcomma\text{as }}
+
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+%\fancyhf{}
+\lhead{Swing report}
+\rhead{\today\quad\texttt{v.1.7}}
+%\rfoot{Page \thepage}
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+% \title{\vspace{-2.5cm}Energy argument}
+% \author{Andréas Sundström}
+% \date{\today,\;\; \texttt{v\,1.4}}
+
+%\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+
+\section{How to pump a swing}
+A pendulum is one of the simplest physical systems -- we can all
+understand, in broad terms, the behavior of a pendulum set in
+motion. However, a more intriguing scenario is when a child starts off
+on a swing with virtually zero amplitude, and after just a few minutes
+is swinging high and fast; and that without anyone pushing.
+Consequently the main objective of this section is to explore how it
+is possible to pump a swing \emph{without} any external forcing. 
+
+One of the simplest models, put forth by Tea \& Falk (1968), %~\cite{Tea_Falk_1968}, 
+is the \emph{parametrically forced
+  pendulum}, where the length of the pendulum varies to increase the
+amplitude of the swing. The physical interpretation of this model is
+that the child moves his center of mass (CM) up and down along the radial
+direction of the swing. Also the child and the swing are viewed as a
+point mass on a mass-less connection to the swing suspension. 
+
+In this section we will study the equation of motion for such a system,
+then we study the energy of the swing in more detail to arrive at a
+physical understanding of how the swing can gain energy through this
+parametric forcing. 
+After that, we will use energy considerations and also the
+\emph{method of multiple scales} to study the motion of the swing.
+
+\subsection{The equation of motion}
+One of the most interesting variables will be the angle, $\phi$,
+the swing makes against the vertical as in \figref{fig:pendulum}. 
+A simple and elegant way to find $\phi(t)$ is to use the Lagrangian
+formalism. We therefore need to find the Lagrangian $\mathcal{L}=T-V$,
+where $T$ is the kinetic energy and $V$ is the potential energy of the
+swing. 
+
+To find the kinetic energy, we will need to know the velocity of the
+center of mass (CM). 
+%Since we are looking for the angle, polar coordinates are preferred. 
+In polar coordinates the velocity is given by
+$\vb{v}=\dot{l}\vu{r}+l\dot{\phi}\vu{\phi}$. Thus the kinetic energy is
+$T=m[\dot{l}^2(t)+l^2(t)\dot{\phi}^2(t)]/2$.
+%\begin{equation}
+%T=\frac{m}{2}\vb{v}^2=\frac{m}{2}\qty(\dot{l}^2(t)+l^2(t)\dot{\phi}^2(t)).
+%\end{equation}
+Next the potential energy can be written as
+$V=mg[l_0-l(t)\cos\phi(t)]$,
+%\begin{equation}
+%V=mg\,\Big[l_0-l(t)\cos\phi(t)\Big],
+%\end{equation}
+where the zero point of the potential is set at the bottom of a
+free-running swing -- i.e. a swing where $l(t)\equiv l_0$. 
+By now using the Euler-Lagrange equation on $\mathcal{L}=T-V$, with
+ respect to $\phi$ and $\dot\phi$, we get
+\begin{equation}
+0=\dv{t}\qty[\pdv{\mathcal{L}}{\dot{\phi}}]-\pdv{\mathcal{L}}{\phi}
+=ml^2\ddot\phi +2ml\dot{l}\dot\phi +mgl\sin\phi.
+\end{equation}
+This can be cleaned up by dividing through by $m$ and $l$. 
+
+\begin{figure}\centering
+\resizebox{.15\textwidth}{!}{\input{figures/pendulum.pdf_t}}
+\caption{A sketch of the pendulum and its movement (along the dotted
+  curve) under influence of parametric forcing. The length of the
+  pendulum is assumed to be of the form
+  $l(t)=l_0[1+\epsilon\,\delta(t)]$, where $|\epsilon|\ll1$ and
+  $\delta(t)=\mathcal{O}_\text{M}(1)$  -- i.e. $l$ only deviates by a
+  small amount from its mean.  
+}
+\label{fig:pendulum}
+\end{figure}
+
+
+
+To further simplify the equation of motion (EOM), we
+non-dimensionalize by introducing
+\begin{equation}\label{eq:non-dim}
+l\to {l}/{l_0}=:r\qcomma\text{and}\quad
+t\to\omega t.
+%\tau=\omega t.
+\end{equation}
+Here $l_0$ is the average length of the pendulum, and $\omega$ is a
+frequency that will be used in the forcing later -- i.e. $r(t)$ is a
+periodic function with period $2\pi/\omega$. 
+With the non-dimensionalized parameters we get the EOM:
+\begin{equation}\label{eq:eom}
+r\ddot\phi+2\dot{r}\dot\phi + \eta^2\sin\phi=0,
+\end{equation}
+where %$(')=(\dv*{\tau})$, and
+$\eta^2=\omega_0^2/\omega=(g/l_0)^2/\omega^2$ is the square of the
+ratio of the free-running frequency $\omega_0$ to the forcing
+frequency $\omega$. 
+
+
+
+\subsection{The energy of the swing}
+Non-dimenzionalizing $T$ and $V$ using \eqref{eq:non-dim}, % $r$ and $\tau$, 
+and also dividing by $m$ because the mass has no significance here, we
+get the non-dimensionalized energy  
+\begin{equation}\label{eq:E}
+E=\frac{1}{2}\qty[\dot{r}^2 + {r}^2\dot{\phi}^2] 
+-\eta^2\Big[1-r\cos\phi\Big] 
+\end{equation}
+meaning that the time-derivative of the energy is
+\begin{equation}
+\begin{aligned}
+\dv{E}{t}
+=&\dot{r}\ddot{r}+r\dot\phi\qty(r\ddot\phi + \dot{r}\dot\phi + \eta^2\sin\phi) 
+-\eta^2\dot{r}\cos\phi.
+\end{aligned}
+\end{equation}
+No we note that the expression in parenthesis is just the LHS of
+\eqref{eq:eom} with a term $r'\phi'$ missing. Therefore we can write
+\begin{equation}\label{eq:dE/dt1}
+\dv{E}{t}
+=\dot{r}\ddot{r}+r\dot\phi\qty(0-\dot{r}\dot\phi)-\eta^2\dot{r}\cos\phi
+=\dot{r}\ddot{r} - \dot{r}\qty(r\dot{\phi}^2 + \eta^2\cos\phi).
+\end{equation}
+
+% To get the pumped energy we integrate this over one
+% period\footnotemark{}. But
+% \begin{equation}
+% \int_0^T\!\rd\tau r' r''=\qty[\frac{1}{2}{r'}^2]_0^T\approx0,
+% \end{equation}
+% meaning that we are left with:
+% \begin{equation}\label{eq:int_dE1}
+% \Delta{E}=-\int_0^T\!\rd\tau\;
+% r'\qty(r{\phi'}^2 + \eta^2\cos\phi).
+% \end{equation}
+
+% \footnotetext{This is a little iffy, since we're not dealing with
+%   perfectly periodic behavior, but hopefully it's manageable. }
+
+
+
+\subsubsection{Physical interpretation of the swing energy}
+\label{sec:phys_interp}
+This has a really neat physical interpretation. When the child is
+raising himself on the swing he has to do work against two forces:
+the centrifugal and the gravitational force. Then, since there's no
+dissipation of energy, all the work done by the child must go into the
+motion of the swing. 
+The first term in the parenthesis in \eqref{eq:dE/dt1} corresponds
+to the centrifugal force, and the second term to the gravitational
+force.
+Lastly the term $\dot{r}\ddot{r}$ corresponds to the work needed to
+accelerate the CM along the radius of the swing; the contribution to
+the energy from this term will however vanish over one
+cycle.\footnotemark{}   
+\footnotetext{ 
+Some amount of work is needed to accelerate the mass, but then the
+same amount of energy is given back when the mass decelerates. 
+Resulting in no net contribution to the swing energy over one cycle. }
+
+By only looking at the reasoning above, without the need of the
+analysis resulting in \eqref{eq:dE/dt1}, one can derive that in
+order to pump the swing, the child must move inwards ($r'<0$) when the
+swing is \emph{low}, and outwards ($r'>0$) when the swing is 
+\emph{high}. The general shape of this movement is shown in
+\figref{fig:pendulum}. 
+
+This is the reason why it's possible for the swing to gain energy by
+only changing the length of the pendulum, and not having any external
+forces. The child actually has to do work against the two forces when
+moving the CM up, and then letting  the two forces do less work
+when moving the CM down.
+
+Furthermore, by actually studying the quantitative result,
+\eqref{eq:dE/dt1}, we can conclude that the most effective pumping
+is if $r$ abruptly decreases, the child stands \emph{up}, when
+the swing is at its lowest ($\phi=0$), and then abruptly increases,
+the child sits \emph{down}, when the swing is at its highest ($\phi$
+is at its maximum). This was also the case studied by Tea \&
+Falk (1968). %~\cite{Tea_Falk_1968}. 
+This strategy will result in an $r(t)$ that has a frequency 
+double that of the free-running swing -- i.e. $\omega=2\omega_0$ and
+$\eta=1/4$. That this is the most effective pumping frequency was also
+found by Burns (1970). %\cite{Burns_1970}
+
+
+
+
+\subsection{Studying some solutions}
+As a simple model, we will use a time dependent forcing --
+i.e. $r=r(t)$. This has the disadvantage of being susceptible to
+falling out of sync with the swing. We will later show the importance
+of sync here. But in contrast to, for instance, phase dependent forcing,
+time dependent forcing is much easier to analyze. 
+
+In this section we will first study the energy of the swing, and from
+that deduce a first order approximation to how the swing behaves. Then
+we will use the \emph{method of multiple scales} to rederive the first
+order approximation and also improve upon it. Lastly we will compare
+the approximate solutions to numerical ones. 
+
+
+
+\subsubsection{Using energy considerations}
+\newcommand{\DE}{\Delta{E}}
+To get a feel for how the swing might behave we can begin by
+calculating the energy gained over one swing cycle:
+\begin{equation}\label{eq:DE1}
+\DE=\int_0^T\!\dv{E}{t}\id{t}
+=-\int_0^T\! \dot{r}\qty(r\dot{\phi}^2 + \eta^2\cos\phi)\id{t}.
+\end{equation}
+Here we used \eqref{eq:dE/dt1} and the fact that the integral of
+$\dot{r}\ddot{r}$ over one cycle is~$0$. 
+
+Next we need to decide how to implement the forcing. From
+section~\ref{sec:phys_interp} we learned that the most effective
+forcing would occur when the forcing had double the frequency of the
+free-running swing ($\eta=1/2$). As a first approximation we can use a purely time
+dependent $r$, so a reasonable length would be
+$ %\begin{equation}
+r(t)=1+\epsilon\cos(t+t_0)
+$ %\end{equation}
+where $t_0$ is some constant phase shift, and $\epsilon\ll1$. 
+
+Now, $\DE$ will be proportional to $\epsilon$, and thus $\DE\ll1$ as
+well. This tells us that, to a first approximation, we can use the
+unperturbed $\phi$ when calculating $\DE$. The unperturbed swing is
+obtained by setting $\epsilon=0$ in the EOM, \eqref{eq:eom}, which
+yields
+\begin{equation}
+\ddot\phi_0+\eta^2\,\sin\phi_0=0.
+\end{equation}
+We can choose the initial conditions to be $\phi_0(0)=a_0$ and
+$\dot\phi_0(0)=0$. Next we restrict ourselves to $a_0\ll1$ so that we
+can linearize the sine, which results in the reduced solution
+%\begin{equation}
+$\phi_0(t)=a_0\cos(\eta t)=a_0\cos(t/2)$.
+%\end{equation}
+
+From here we substitute these results into \eqref{eq:DE1} and
+integrate over one free-running cycle. Since the time scale is set by
+the forcing frequency, the integration is from~$0$ to~$4\pi$. However,
+we can not integrate the last term, with a cosine within a cosine; so
+we utilize the restriction $a_0\ll1$ to expand
+$\cos(a_0\cos(t/2))\approx1-[a_0\cos(t/2)]^2/2$. 
+We now end up with 
+\begin{equation}
+\DE=+\epsilon\int_0^{4\pi}\!\!\sin(t+t_0)
+\qty[\qty(-\frac{a_0}{2}\sin(t/2))^2
++\frac{1}{4}\qty(1-\frac{1}{2}\qty[a_0\cos(t/2)]^2)
+]\id{t}+\order{\epsilon^2}.
+\end{equation}
+%To simplify this we can rewrite the square of the sine and the cosine,
+%using the cosine double angle formula. Then use the fact that we are
+%integrating over two \emph{whole} periods of the sine in front,
+%meaning that any constants inside the brackets will
+%disappear. Eventually we get
+This integral evaluates to
+\begin{equation}\label{eq:DE_t0}
+\DE%\approx
+%-\frac{3\epsilon a_0}{16}\int_0^{4\pi}\!\!\sin(t+t_0)\cos(t)\id{t}
+=-\frac{3\pi\epsilon a_0}{8}\sin(t_0),
+\end{equation}
+up to $\order{\epsilon}$.
+
+
+By now it is clear that the most optimal forcing occurs with
+$t_0=-\pi/2$, so that
+\begin{equation}\label{eq:r}
+r(t)=1+\epsilon\cos(t+t_0)=1+\epsilon\sin(t).
+\end{equation}
+This is also in good agreement with the reasoning in
+section~\ref{sec:phys_interp}. We also see the importance of
+synchronization between the swing and the forcing; the phase
+difference will affect how effective the pumping is, but also whether
+energy is pumped \emph{into} or \emph{out of} the swing.
+
+We can now study how the energy behaves over time. Using the
+definition in \eqref{eq:E} we get $E_0=E(0)=a_0^2/8$; this can be
+found by, for example, setting $t=\pi$ in \eqref{eq:E}. We can now write
+\begin{equation}\label{eq:E(4pi)}
+E(t=4\pi)=E(0)+\DE=(1+3\pi\epsilon)E_0.
+\end{equation}
+But $\DE$ only depends on the energy at the start of the cycle;
+therefore after another $4\pi$ has elapsed, $E$ will have increased by
+another factor $(1+3\pi\epsilon)$. 
+It is therefore reasonable to assume an exponential growth of the
+energy: 
+%it is
+%reasonable, when also regarding \eqref{eq:E(4pi)}, to assume an
+%exponential increase of $E$ in time. Using \eqref{eq:E(4pi)}, the
+%exponential behavior would then be
+\begin{equation}\label{eq:E(t)}
+E(t)=E_0\exp[\ln(1+3\pi\epsilon)\frac{t}{4\pi}]
+\approx E_0\,\ee^{\frac{3}{4}\epsilon t}.
+\end{equation}
+The angle of the swing, with the amplitude going as
+$\sqrt{E}$, would therefore be 
+\begin{equation}\label{eq:phi_from_E}
+\phi(t)\approx a_0\ee^{\frac{3}{8}\epsilon t}\cos(t/2).
+\end{equation}
+At least for $t\le\order{\epsilon}$ -- after that non-linearities in the
+original EOM would set in and disrupt the synchronization between $r(t)$ and
+$\phi(t)$. 
+
+
+
+\subsubsection{Using the method of multiple scales}
+
+In this section we will use the method of multiple scales to
+rederive and improve the result from the previous section. In order to
+use this method, we introduce a new timescale $\tau=\epsilon{t}$ and
+the total derivative becomes
+\begin{equation}
+\dv{t}=\pdv{t}+\epsilon\pdv{\tau}.
+\end{equation}
+With this the EOM becomes
+\begin{equation}\label{eq:eom_mms}
+\phi_{tt}+2\epsilon\phi_{t\tau}+\epsilon^2\phi_{\tau\tau}
++\frac{r_t}{r}(\phi_t+\epsilon\phi_\tau)+\frac{\eta^2}{r}\sin(\phi)=0,
+\end{equation}
+with the initial conditions 
+\begin{equation}\label{eq:inti_mms}
+\phi(0, 0)=a_0\ll1\qcomma
+\phi_t(0, 0)+\epsilon\phi_\tau(0, 0)=0.
+\end{equation} 
+Note that only $r_t$ was used, since $r$ still only has $t$
+dependence. 
+
+Expanding \eqref{eq:eom_mms} up to $\order{\epsilon^2}$, using
+\eqref{eq:r} and approximating $\sin(\phi)\approx\phi$, we get
+\begin{equation}
+%\begin{aligned}
+\phi_{tt}+2\epsilon\phi_{t\tau}+\epsilon^2\phi_{\tau\tau}+\eta^2\phi
+=%&\hspace{18pt}
+\epsilon\qty[-2\cos(t)(\phi_t+\epsilon\phi_\tau)+\eta^2\sin(t)\phi]
+%\\&
++\epsilon^2\qty[2\sin(t)\phi_t-2\eta^2\sin^2(t)\phi].
+%\end{aligned}
+\end{equation}
+Then we expand 
+$\phi(t,\tau,\epsilon)=\phi_0(t,\tau)+
+\epsilon\phi_1(t,\tau)+\epsilon^2\phi_2(t,\tau)+\ldots$ and use
+$\eta=1/2$. This results in a series of DEs for each power of
+$\epsilon$. 
+
+The $\order{1}$ problem is just $\phi_{0,tt}+\phi_0/4=0$, which has the
+solution
+%\begin{equation}
+$\phi_0(t,\tau)=A_0(\tau)\cos(t/2)+B_0(\tau)\sin(t/2)$.
+%\end{equation}
+With the initial conditions $A_0(0)=a_0$ and $B_0(0)=0$.
+
+Next the $\order{\epsilon}$ problem: 
+\begin{equation}
+\begin{aligned}
+\phi_{1, tt}+\frac{1}{4}\phi_1=&\Big[A_{0,\tau}\sin(t/2)-B_{0, \tau}\cos(t/2)\Big]\\
+&+\cos(t)\Big[A_0\sin(t/2)-B_0\cos(t/2)\Big]
++\frac{\sin(t)}{4}\Big[A_0\cos(t/2)+B_0\sin(t/2)\Big],
+\end{aligned}
+\end{equation}
+which after reducing the multiplication of the trigonometric functions
+becomes
+\begin{equation}
+\begin{aligned}
+\phi_{1, tt}+\frac{1}{4}\phi_1=&\phantom{+}A_{0,\tau}\sin(t/2)
+-\frac{A_0}{8}\Big[3\sin(t/2)-5\sin(3t/2)\Big]\\
+&{-}B_{0, \tau}\cos(t/2)
+-\frac{B_0}{8}\Big[3\cos(t/2)+5\cos(3t/2)\Big].
+\end{aligned}
+\end{equation}
+We see here that to remove the secular terms, we must have
+\begin{equation}
+\begin{cases}
+A_{0,\,\tau}-\frac{3}{8}A_0=0\qcomma&A_0(0)=a_0,\\
+B_{0,\,\tau}+\frac{3}{8}B_0=0\qcomma&B_0(0)=0,
+\end{cases}
+\end{equation}
+which have the solutions $A_0(\tau)=a_0\ee^{\frac{3}{8}\tau}$ and
+$B_0\equiv0$. And the solution to the $\order{\epsilon}$ problem
+becomes
+\begin{equation}
+\phi_1(t, \tau)=A_1(\tau)\cos(t/2)+B_1(\tau)\sin(t/2)
+-\frac{5}{16}A_0(\tau)\sin(3t/2).
+\end{equation}
+Using \eqref{eq:inti_mms}, the initial conditions are $A_1(0)=0$ and
+$B_1(0)-15A_0(0)/32 + A_{0,\,\tau}(0)=0$, which results in $B_1(0)=3a_0/32$.
+
+Continuing on in an analogous way, the $\order{\epsilon^2}$ problem
+will yield secular terms. The removal of these will result in a set of
+DEs for $A_1$ and $B_1$. 
+%The details of these, quite laborious, calculations are best suited
+%for some kind of symbolic mathematical program -- e.g. Mathematica. 
+After some algebraic work, the DEs for $A_1$ and $B_1$ turn out to be
+\begin{equation}
+\begin{cases}
+128A_{1,\,\tau}-48A_1=0\qcomma&A_1(0)=0\\
+128B_{1,\,\tau}+48B_1=-107a_0\ee^{\frac{3}{8}\tau}\qcomma&B_1(0)=\frac{3a_0}{32},
+\end{cases}
+\end{equation}
+which have the solutions $A_1(\tau)\equiv0$ and
+$B_1(\tau)=a_0(116\ee^{-\frac{3}{8}\tau}-107\ee^{\frac{3}{8}\tau})/96$.
+% \begin{equation}
+% B_1(\tau)=\frac{a_0}{96}
+% \qty(116\ee^{-\frac{3}{8}\tau}-107\ee^{\frac{3}{8}\tau}).
+% \end{equation}
+
+
+\paragraph{Results}
+We now have a full solution up to $\order{\epsilon}$.
+% \begin{equation}
+% \phi(t)=a_0\ee^{\frac{3}{8}\tau}\cos(\frac{t}{2})
+% +\frac{a_0\epsilon}{96}\qty[
+% \qty(116\ee^{-\frac{3}{8}\tau}-107\ee^{\frac{3}{8}\tau})
+% \sin(\frac{t}{2})
+% -30\ee^{\frac{3}{8}\tau}\sin(\frac{3t}{2})]
+% +\mathcal{O}_\text{F}\qty(\epsilon^2).
+% \end{equation}
+% \begin{equation}
+% \begin{aligned}
+% \phi(t, \tau)=&a_0\ee^{\frac{3}{8}\tau}\cos(t/2)\\
+% &+\frac{a_0\epsilon}{96}\qty[
+% \qty(116\ee^{-\frac{3}{8}\tau}-107\ee^{\frac{3}{8}\tau})
+% \sin(t/2)
+% -30\ee^{\frac{3}{8}\tau}\sin(3t/2)]
+% +\mathcal{O}_\text{F}\qty(\epsilon^2).
+% \end{aligned}
+% \end{equation}
+Going back to using only $t$, we get
+\begin{equation}
+\phi(t)=a_0\ee^{\frac{3}{8}\epsilon{t}}\cos(\frac{t}{2})
++\frac{\epsilon a_0}{96}\ee^{\frac{3}{8}\epsilon{t}}\qty[
+\qty(116\ee^{-\frac{3}{4}\epsilon{t}}-107)
+\sin(\frac{t}{2})
+-30\sin(\frac{3t}{2})]
+{+}\mathcal{O}_\text{F}\qty(\epsilon^2)
+% %\\=&
+% a_0\ee^{\frac{3}{8}\epsilon{t}}\qty{
+% \cos(\frac{t}{2})
+% +\frac{\epsilon}{96}\qty[
+% \qty(116\ee^{-\frac{3}{4}\epsilon{t}}-107)
+% \sin(\frac{t}{2})
+% -30\sin(\frac{3t}{2})]}
+% +\mathcal{O}_\text{F}\qty(\epsilon^2)
+% \end{aligned}
+\end{equation}
+We can now see that the first term is precisely what we had in
+\eqref{eq:phi_from_E}. 
+
+
+
+\subsubsection{Comparison to numerical simulations}
+The equation of motion can of course also be solved numerically. The
+numerical solutions are presented in \figref{fig:sim}; there we show
+both the solution to the original EOM, \eqref{eq:eom}, and the
+linearized version -- where $\sin(\phi)$ has been replaced by just
+$\phi$. Then \figref{fig:sim_E} shows the energy of the solutions in
+\figref{fig:sim}, as calculated using \eqref{eq:E}.
+
+It is clear that the original EOM produces a solution which fits the
+calculations, based on the linearized EOM, up to some amplitude. After
+that amplitude the non-linear pendulum frequency-shift, due to an
+amplitude dependent frequency, sets in and disrupts the
+synchronization between the swing and the forcing. The synchronization is vital
+to pump the swing with more energy, as can be seen in
+\eqref{eq:DE_t0}. 
+
+Furthermore when the phase of the swing and the
+forcing is far enough apart the forcing will actually pump energy
+\emph{out} of the swing, which can bee seen in \figref{fig:sim_E} at
+$t\approx500$. If one continues on the numerical solution, one will
+find that the amplitude of the swing will oscillate with a slow
+frequency. This is because when the amplitude decreased, the
+phase-shift will eventually drift back, and then the forcing
+will again start pump energy into the swing. 
+
+Meanwhile the linearized EOM yields a numerical solution that is
+strikingly similar to what was predicted. This was to be expected
+however, since the perturbation parameter $\epsilon=0.01$ in the
+simulations is indeed $\ll1$.
+
+
+
+\begin{figure}\centering
+%\resizebox{.2\textwidth}{!}{
+\input{figures/swing_sim.tex}%}
+\caption{Simulated swing angle, showing simulated results for both the
+  original and the linearized ($\sin(\phi)\approx\phi_\text{lin}$)
+  EOM. In these simulations $\epsilon=0.01$ and $a_0=0.1$. We see how the
+  exponential growth becomes invalid for the original EOM after
+  $t\approx400$, while the solution from the linearized EOM keeps on
+  growing exponentially. 
+}
+\label{fig:sim}
+\end{figure}
+
+\begin{figure}\centering
+%\resizebox{.2\textwidth}{!}{
+\input{figures/swing_sim_energy.tex}%}
+\caption{Energy, calculated using \eqref{eq:E}, of numerical solutions
+  to both the original EOM ($\phi$) and the linearized
+  ($\sin(\phi)\approx\phi_\text{lin}$), together with the calculated energy
+  \eqref{eq:E(t)}. Note here that the energy from the linearized EOM
+  and the approximated energy, \eqref{eq:E(t)}, is nearly
+  indistinguishable in this figure.
+}
+\label{fig:sim_E}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{9}
+
+\bibitem{Tea_Falk_1968}
+Tea, P.L. Jr. and Falk, H. (1968). Pumping on a Swing. Am. J. Phys. 
+\textit{36, 1165-6}
+
+\bibitem{Strub_MSc_2009}
+Strub, D.C. (2009). How do children swing?  M.Eng. thesis, University
+of Bristol, Dept. of Eng. Math.%ematics
+
+\bibitem{Burns_1970}
+Burns, J.A. (1970). More on Pumping a Swing. Am. J. Phys. \textit{38, 920-2}
+\end{thebibliography}
+
+
+\end{document}
+
+
+
+
+%  LocalWords:  parametrically EOM dimensionalize dimensionalized
+%  LocalWords:  dimenzionalizing Floquet linearities rederive DEs
+%  LocalWords:  Falk

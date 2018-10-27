@@ -1,0 +1,498 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\oh}{\ensuremath\mathpzc{o}}
+
+\newcommand{\as}{\qcomma\text{as }}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+% \begin{titlepage}
+\title{Asymptotic Analasys and Pertubation Theory -- AMATH\,732 \\
+Assignment 3}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+%Om man vill ha en lista med vilka todo:s som finns.
+%\todolist
+
+\section{An ODE}
+We have the differential equation
+\begin{equation}\label{eq:1_ODE}
+x^4y''-y=0
+\quad\Longleftrightarrow\quad
+y''-\frac{1}{x^4}y = 0.
+\end{equation}
+
+\subsection{Classifysing the suspect points 
+  and trying the method of Frobenius} 
+
+\subsubsection{Classifying the points $x=0, \infty$}
+To classify the point $x=0$, we first see that $\nicefrac{1}{x^4}$
+isn't analytic there and so also for $x^2\cdot\nicefrac{1}{x^4}$. Thus the
+point $x=0$ is an \emph{irregular singular point}.
+
+To classify the point $x=\infty$, we nee to change variables to
+\begin{equation}\label{eq:t_x}
+t=\frac{1}{x}\qcomma \tilde{y}(t)=y(x),
+\end{equation}
+and classify the new DE at $t=0$.
+The second derivative (w.r.t. $x$) becomes
+\begin{equation}
+\dv[2]{y}{x}=\dv{t}{x}
+\dv{t}\qty[\dv{t}{x}\dv{\tilde{y}}{t}]=t^4\tilde{y}''+2t^3\tilde{y}',
+\end{equation}
+where $\tilde{y}'=\nicefrac{\rd\tilde{y}}{\rd{t}}$. With this we can
+write (\ref{eq:1_ODE}\,a) as
+\begin{equation}\label{eq:1_new_ODE}
+0=\frac{1}{t^4}\qty(t^4\tilde{y}''+2t^3\tilde{y}') - \tilde{y} '
+= \tilde{y}'' +\frac{2}{t}\tilde{y}' - \tilde{y}.
+\end{equation}
+From here we see that $t=0$ is not an ordinary point since we have the
+$\nicefrac{2}{t}$ coefficient, but it is however a \emph{regular singular
+point} since $t\cdot\nicefrac{2}{t}=2$ isn't singular at $t=0$
+\qed
+
+\subsubsection{Trying the method of Frobenius}
+The method of Frobenius is a method for finding series solutions around
+regular singular points, which utilizes the fact that there is 
+at least one solution of the form $(x-x_0)^{\alpha}A(x)$ in a
+neighbourhood of the regular singular point $x_0$ and where $A(x)$ is
+analytic near $x_0$. When searching for a solution with Frobenius'
+method we assume that
+\begin{equation}
+y(x)=\sum_{k=0}^\infty a_k (x-x_0)^{\alpha+k}.
+\end{equation}
+The second derivative of $y$ then becomes
+\begin{equation}
+y(x)=\sum_{k=0}^\infty a_k (\alpha+k)(\alpha+k-1) (x-x_0)^{\alpha+k-2}.
+\end{equation}
+
+In our case we going to look at $x_0=0$. Thus the DE becomes
+\begin{equation}
+0=x^4y''-y=
+\sum_{k=0}^\infty a_k (\alpha+k)(\alpha+k-1) x^{\alpha+k+2}
+-\sum_{k=0}^\infty a_k x^{\alpha+k}.
+\end{equation}
+Collecting like powers of $x$ yields
+\begin{equation}
+\begin{cases}
+a_0=0\\
+a_1=0\\
+a_0(\alpha)(\alpha-1)-a_2=0\\
+\vdots\\
+a_n(\alpha+n)(\alpha+n-1)-a_{n+2}=0
+\end{cases}
+\end{equation}
+which reduces to $a_n=0$ for all $n$. In other words, we could not
+find any solution around $x=0$.
+
+This was not too unexpected since the point $x=0$ is an irregular
+singular point and Frobenius' method is a method for finding solutions
+around regular singular points. 
+
+Another way of seeing this is that the factor $x^4$ in front of $y''$
+makes it imposible to get any non-trivial solutions for $a_0$ and
+$a_1$. From there everything colapses to only zeros.
+
+
+\subsection{The method of Carlini-Liouville-Green}
+In the method of Carlini-Liouville-Green we let
+\begin{equation}
+y=\ee^{S(x)},
+\end{equation}
+and then we find the leading asymptotic behaviour of $S(x)$ as
+$x\to x_0$. 
+
+To use this method we calculate the second derivative
+\begin{equation}
+y''=\dv[2]{x}\qty[\ee^{s(x)}]
+=\qty[\Big(S'(x)\Big)^2 + S''(x)]\ee^{S(x)}.
+\end{equation}
+This makes it possible to rewrite (\ref{eq:1_ODE}\,b) as
+\begin{equation}\label{eq:1_DE_S}
+\qty[S'' + (S')^2 -\frac{1}{x^4}]\ee^{S(x)}=0
+\quad\Longrightarrow\quad
+S'' + (S')^2 -\frac{1}{x^4}=0. 
+\end{equation}
+
+\subsubsection{First term}
+The next setp is to assume that $S''\ll(S')^2$ as $x\to0$, which gives
+us the asymptotic behaviour as $x\to0$:
+\begin{equation}\label{eq:1_S0'}
+\Big(S'(x)\Big)^2\sim \frac{1}{x^4}
+\quad\Longrightarrow\quad
+S'(x)= \frac{-\xi}{x^2} + C'(x)\qcomma\text{where }
+|C'(x)|\ll\frac{1}{x^2} \;\text{ as }\; x\to0,
+\end{equation}
+and $\xi=\pm1$\footnotemark{} is the parameter which keeps track of
+the two linearly independent solutions. This gives the first term in
+the asymptotic expansion of $S(x)$ as $x\to0$: 
+\begin{equation}\label{eq:1_S0}
+%S(x)\sim \frac{\xi}{x}
+%\quad\Longrightarrow\quad
+S(x)=\frac{\xi}{x} + C(x).
+\end{equation}
+We can also see that (assuming $C''(x)=\oh(x^{-3})$)
+\begin{equation}
+\abs{S''(x)}\sim\frac{2}{x^3}\ll\Big(S'(x)\Big)^2\sim\frac{1}{x^4}
+\end{equation}
+as $x\to0$.
+
+\footnotetext{The reason for the minus sign in the expression is
+  purely esthetical, as the sign will change upon integration.}
+
+\subsubsection{Second term}
+To find the secod term in the expansion just substitute
+(\ref{eq:1_S0}) into (\ref{eq:1_DE_S}\,b):
+\begin{equation}
+\frac{2\xi}{x^3}+C''
++(C')^2-2\frac{\xi}{x^2}C' + \qty(\frac{-\xi}{x^2})^2
+-\frac{1}{x^4}=0.
+\end{equation}
+To simplify this we note that $\xi^2\equiv1$, which removes the two
+terms of $x^{-4}$. We're left with
+\begin{equation}
+C''+(C')^2-\frac{2\xi}{x^2}C' + \frac{2\xi}{x^3} = 0.
+\end{equation}
+From here we use the fact, from \eqref{eq:1_S0'}, that
+$|C'(x)|\ll\nicefrac{1}{x^2}$ as $x\to0$ which implies that
+\begin{equation}
+\Big(C'(x)\Big)^2\ll\abs{\frac{2\xi}{x^2}C'}.
+\end{equation}
+We also assume that
+\begin{equation}\label{eq:1_C''}
+\abs{C''(x)}\ll\abs{\frac{1}{x^3}}\as x\to0.
+\end{equation}
+The dominant balance, as $x\to0$, for the equation then becomes
+\begin{equation}
+\frac{2\xi}{x^2}C'(x) \sim \frac{2\xi}{x^3}
+\quad\Longrightarrow\quad
+C'(x)\sim\frac{1}{x}.
+\end{equation}
+This gives 
+\begin{equation}
+C(x)=\ln|x|+D(x),
+\end{equation}
+where $|D'(x)|\ll|\nicefrac{1}{x}|$ as $x\to0$. We can also confirm the
+asumption in \eqref{eq:1_C''} by seeing that
+\begin{equation}
+C''(x)\sim -\frac{1}{x^2}\as x\to0,
+\end{equation}
+under the (standard) assumption that $D''(x)=\oh(x^{-2})$.
+
+\subsubsection{Third term}
+Once again we substitute the new solution into the DE for $C$. With
+some simplification we get
+\begin{equation}
+D''+(D')^2+\frac{2}{x}D' - \frac{2\xi}{x^2}D'=0.
+\end{equation}
+But now the mashinery grinds to a halt. We know that 
+\begin{equation}
+\Big(D'(x)\Big)^2\ll\abs{\frac{D'(x)}{x}}
+\end{equation}
+and by assumption $|D''(x)|$ is negigable compared to the rest of the
+terms. Therefore we get the dominant balance
+\begin{equation}
+\frac{2\xi}{x^2}D'(x) \,"{\sim}"\, 0\as x\to0,
+\end{equation}
+which yields
+\begin{equation}
+D(x)=d,
+\end{equation}
+constant. And we also clearly see that the assumptions made here are
+consistent.
+
+\subsubsection*{Final result}
+The final result for the asymptotic expansion of $S$ is then
+\begin{equation}
+S(x)\sim \frac{\xi}{x}+\ln|x|+d = \pm\frac{1}{x}+\ln|x|+d\as x\to0.
+\end{equation}
+These are the only non-vanishing terms of $S(x)$ as $x\to0$. Or for
+$y$:
+\begin{equation}
+y_\pm(x)\sim c\abs{x}\ee^{\nicefrac{\pm1}{x}},
+\end{equation}
+where $c$ is a constant. \qed
+
+
+\subsection{Finding the actual solutions}
+\newcommand{\eexix}{\ensuremath{\ee^{\nicefrac{\xi}{x}}}}
+\newcommand{\sgn}[1]{\ensuremath{\mathrm{sgn}\qty(#1)}}
+To try and find the rest of the solutions we atempt to write
+\begin{equation}
+y_\xi(x)=w(x)\abs{x}\eexix =w(x)\abs{x}\ee^{\nicefrac{\pm1}{x}}. 
+\end{equation}
+The constant $c$ has been left out since a linear ODE will only define
+any solution up to a candtant factor.
+
+\subsubsection{Finding the DE for $w$}
+Nex we need to differentiate this to then be able to substitute into
+the DE
+\begin{equation}
+\begin{aligned}
+y'(x)&=w'(x)\abs{x}\eexix
++w(x)\qty[\sgn{x}-\frac{\xi\abs{x}}{x^2}]\eexix\\
+&= w'(x)\abs{x}\eexix
++w(x)\qty(1-\frac{\xi}{x})\sgn{x}\eexix,
+\end{aligned}
+\end{equation}
+where $\sgn{x}=\pm1$ is the sign of $x$ (not to be confused with
+$\xi=\pm1$ which is independent).
+
+Next up is the second derivative
+\begin{equation}
+\begin{aligned}
+y''(x)=&w''(x)\abs{x}\eexix
++2w'(x)\qty(1-\frac{\xi}{x})\sgn{x}\eexix
+\\
+&+w(x)\qty[
+\frac{\xi}{x^2}\sgn{x}+\qty(1-\frac{\xi}{x})2\delta(x)
++\qty(1-\frac{\xi}{x})\sgn{x}\frac{-\xi}{x^2}
+]\eexix\\
+=&\sgn{x}\eexix\Bigg\{w''(x)x
++2w'(x)\qty(1-\frac{\xi}{x})
++w(x)\qty[
+\qty(1-\frac{\xi}{x})2\delta(x)\sgn{x}
+-\frac{1}{x^3}
+]\Bigg\}
+\end{aligned}
+\end{equation}
+where $\delta(x)$ is the Dirac delta distribution. We have also used
+the identity $|x|=\sgn{x}x$. To further simplify this we will only
+look at $x\neq0$, which makes $\delta(x)=0$. Thus 
+\begin{equation}
+y''(x)=\sgn{x}\eexix\qty[
+w''(x)x +2w'(x)\qty(1-\frac{\xi}{x})
+-\frac{1}{x^3}w(x) ].
+\end{equation}
+
+With this (\ref{eq:1_ODE}\,a) becomes (for $x\neq0)$
+\begin{equation}
+\begin{aligned}
+0=x^4y''-y=&\sgn{x}\eexix\qty[
+w''(x)x^5 +2w'(x)x^3\qty(x-\xi) -xw(x)] - w(x)\sgn{x}x\eexix\\ 
+=&\sgn{x}\eexix x^3\qty[
+w''(x)x^2 +2w'(x)\qty(x-\xi)],
+\end{aligned}
+\end{equation}
+which is equvalent to
+\begin{equation}
+w''(x) +2w'(x)\frac{x-\xi}{x^2}=0.
+\end{equation}
+This has to be solved in terms of an asymptotic expansion of $w(x)$
+as $x\to0$.
+
+\subsubsection{Finding the asymptotic expansion}
+In the same token as before, we assume that $w''(x)=\oh(x^{-1}w'(x))$
+as $x\to0$. This gives the dominant banalce 
+\begin{equation}
+-\frac{2\xi}{x^2}w'(x)\,"{\sim}"\,0,
+\end{equation}
+which yields
+\begin{equation}
+w(x)=c\qcomma \text{constant.}
+\end{equation}
+Or in other words the expansion we found before is exact(!):
+\begin{equation}\label{eq:1_exact}
+y_\pm(x) \mathbf{=} c\abs{x}\ee^{\nicefrac{\pm1}{x}}.
+\end{equation}
+\qed
+
+\paragraph{Note:}
+This result could have been obtained much easier by just substituing
+in \eqref{eq:1_exact} into the DE an see that everything works out
+to~0. But to keep with the theme of the problem, I decided to go the
+long way around. 
+
+
+\section{The Airy equation}
+\newcommand{\xtoi}{\ensuremath{x\to\infty}}
+\newcommand{\ttoz}{\ensuremath{t\to0^+}}
+\renewcommand{\thesubsubsection}{(\roman{subsubsection})}
+
+The Airy equation
+\begin{equation}\label{eq:Airy}
+y''-xy=0
+\end{equation}
+is a second order linear differential equation, and thus has two
+linearly independent solutions. We here want to find their leading
+asymptotic behaviour as \xtoi. 
+
+\subsection*{Rewrite and classify}
+To begin with we change coordinates as in \eqref{eq:t_x}, which yilds 
+\begin{equation}\label{eq:Airy_t}
+\tilde{y}''+\frac{2}{t}\tilde{y}'-\frac{1}{t^5}\tilde{y} = 0,
+\end{equation}
+analogous to how \eqref{eq:1_new_ODE} was obtained. Here we can
+clearly see that the Airy equation has an irregular singular point at
+$x=\infty$, or at $t=0$ for \eqref{eq:Airy_t}.
+
+\subsection*{Use the method of Carlini-Liouville-Green}
+Because the singularity at $t=0$ is irregular, we now set
+\begin{equation}
+\tilde{t}(t)=\ee^{S(t)}
+\end{equation}
+and try to find the leading behaviour of $S(t)$ as \ttoz. With this
+\eqref{eq:Airy_t} becomes
+\begin{equation}\label{eq:Airy_S}
+S''+(S')^2+\frac{2}{t}S'-\frac{1}{t^5}=0,
+\end{equation}
+analogous to the proceeding in \eqref{eq:1_DE_S}. 
+
+\subsubsection{First term}
+Next we assume
+\begin{equation}
+S''(t)=\oh\qty([S'(t)]^2)\as\ttoz
+\end{equation}
+which gives
+\begin{equation}
+\Big(S'(t)\Big)^2+\frac{2}{t}S'(t)\sim\frac{1}{t^5}
+\quad\Longrightarrow\quad
+S'(t)\sim\frac{-1}{t}\mp\sqrt{\frac{1}{t^2}+\frac{1}{t^5}}
+\sim\frac{-\xi}{t^{5/2}},
+\end{equation}
+where $\xi=\pm1$, like previously, keeps track of the two linearly
+independent solutions. So
+\begin{equation}\label{eq:2_S'}
+S'(t)=\frac{-\xi}{t^{5/2}}+C'(t)\qcomma
+\abs{C'(t)} \ll t^{-5/2} \;\text{ as }\; \ttoz,
+\end{equation}
+and
+\begin{equation}\label{eq:2_S}
+S(t)=\frac{2\xi}{3t^{3/2}}+C(t).
+\end{equation}
+
+
+
+\subsubsection{Second term}
+Now we substitute \eqref{eq:2_S} into \eqref{eq:Airy_S} to get
+\begin{equation}
+\frac{5\xi}{2t^{7/2}}+C'' 
++\frac{\xi^2}{t^5} - \frac{2\xi}{t^{5/2}}C' + (C')^2
++\frac{2}{t}\qty(\frac{-\xi}{t^{5/2}}+C') - \frac{1}{t^5}=0,
+\end{equation}
+which, with $\xi^2\equiv1$, becomes
+\begin{equation}\label{eq:Airy_C}
+C'' + (C')^2 + \frac{2}{t}C' - \frac{2\xi}{t^{5/2}}C'
++\frac{\xi}{2t^{7/2}}=0
+\end{equation}
+As before, for \ttoz, we kwow from \eqref{eq:2_S'} that $C'(t)=\oh(t^{-5/2})$ and
+we also asume that $C''(t)=\oh(t^{-7/2})$. The dominant balance as \ttoz
+therefore becomes
+\begin{equation}\label{eq:2_C'}
+\frac{2\xi}{t^{5/2}}C'(t) \sim \frac{\xi}{2t^{7/2}}
+\quad\Longrightarrow\quad
+C'(t)=\frac{1}{4t}+D'(t)\qcomma |D'(t)|\ll t^{-1}.
+\end{equation}
+To obtain this we have also used the fact that
+\begin{equation}
+\abs{\frac{2}{t}C'(t)} \ll \abs{\frac{2\xi}{t^{5/2}}C'(t)}\as\ttoz.
+\end{equation}
+From \eqref{eq:2_C'} we get
+\begin{equation}\label{eq:2_C}
+C(t)=\frac{1}{4}\ln(t) + D(t).
+\end{equation}
+
+\subsubsection{Third term}
+Once again we substitue the new term, \eqref{eq:2_C}, into the DE,
+\eqref{eq:Airy_C}, and simplify to get
+\begin{equation}\label{eq:Airy_D}
+D''+(D')^2+\frac{5}{2t}D'-\frac{2\xi}{t^{5/2}}D'+\frac{5}{16t^2}=0.
+\end{equation}
+With the regular asumptions and previous knowlegde:
+\begin{equation}
+D''(t)=\oh\qty(t^-2)\qcomma
+\Big(D'(t)\Big)^2=\oh\qty(t^{-5/2}D'(t))\qcomma
+t^{-1}D'(t)=\oh\qty(t^{-5/2}D'(t)),
+\end{equation}
+all as \ttoz, we get the dominat balance
+\begin{equation}
+\frac{2\xi}{t^{5/2}}D'(t) \sim \frac{5}{16t^2}
+\quad\Longrightarrow\quad
+D'(t) = \frac{5\xi}{32}t^{1/2} + E'(t)\qcomma 
+E'(t)=\oh\qty(t^{1/2}) \text{ as } \ttoz.
+\end{equation}
+Now we've come to a turning point. Since $D'(t)\to0$ as \ttoz
+and\footnotemark{} 
+\begin{equation}
+D(t)=\frac{5\xi}{48}t^{3/2}+d+E(t)\to d\as\ttoz,
+\end{equation}
+where $d$ is some constant,
+we have reached the point where new terms after this will vanish in
+the limit  \ttoz.
+\footnotetext{We're also assuming that $E(t)=\oh(t^{3/2})$ as \ttoz.}
+
+\subsubsection{Check for consistency}
+\begin{enumerate}[label=(\roman*)]
+\item 
+The first assumption was that $S''(t)$, which is $\order{t^{-7/2}}$
+should be negligable compared to $(S'(t))^2=\order{t^{-5}}$, which is
+clearly consistent with our findings.
+\item 
+Next we assumed that $C''(t)$, which is $\order{t^{-2}}$, should be
+of order $\oh(t^{-7/2})$. This also turned out to be consistent. For
+completeness, let's also mention that $C''(t)=\order{t^{-2}}$ is
+negligable compared to $t^{-5/2}C'(t)=\order{t^{-7/2}}$.
+\item 
+Here the assumption was that $D''(t)=\oh(t^-2)$, which also isn't any
+problems. 
+\end{enumerate}
+All big and little oh's are as \ttoz.
+
+\subsection*{Final result}
+To wrap everything up we now have the leading behaviours of the two
+linearly independent solutions
+\begin{equation}
+\tilde{y}_\xi(t)=\ee^{S(t)}
+\sim\exp[\frac{2\xi}{3t^{3/2}}+\frac{1}{4}\ln(t)+d]
+=c t^{1/4} \ee^{\frac{2\xi}{3t^{3/2}}},
+\end{equation}
+or in terms of $x$
+\begin{equation}
+y_\xi(x)\sim c x^{-1/4} \ee^{\frac{2\xi}{3}x^{3/2}},
+\end{equation}
+where $c$ is just some new constant. With $\xi=\pm1$ we can write the
+leading oder terms of the two linearly independent solutions to the
+Airy equation \eqref{eq:Airy} as
+\begin{equation}
+\begin{cases}
+y_+(x)= c x^{-1/4} \ee^{+\frac{2}{3}x^{3/2}}\\
+y_-(x)= c x^{-1/4} \ee^{-\frac{2}{3}x^{3/2}}.
+\end{cases}
+\end{equation}
+\qed
+
+
+\end{document}
+
+
+
