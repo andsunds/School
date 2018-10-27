@@ -1,0 +1,487 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+\pdfoutput=1
+\documentclass[swedish]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[scaled]{helvet} %helvetica i sliden blir bra
+\usepackage[T1]{fontenc}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{comment}
+\usepackage[swedish]{babel}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{units}
+%\usepackage{siunitx} %SI-enheter
+\usepackage{comment}
+\usepackage{epstopdf}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage{wallpaper} %För bakgrundsbilder
+\usepackage{multimedia}
+\usepackage{media9}
+
+\usepackage{physics}
+
+
+\usepackage{multimedia} %För att kunna visa film
+%Kräver okular som pdfvisare i unix
+
+
+\graphicspath{ 
+{src_figures/Avancez/}  %specialbilder som bara behövs för bakgrunden
+{figures/} %bilder som används i själva presentationen
+}
+
+\newcommand\impl{\stackrel{\mathclap{\normalfont\mbox{?}}}{\Longleftrightarrow}}
+
+
+
+\definecolor{CTHblue}{RGB}{00,00,102}   % Dessa är faktiskt officella Chalmersfärger som är beslutat att
+\definecolor{CTHgrey}{RGB}{204,204,204} % de skall användas till presentationer. Andra är inte tillåtna...
+\definecolor{CTHgreen}{RGB}{113,178,60} % citation needed []
+\definecolor{CTHblack}{RGB}{00,00,00}
+
+
+\mode<presentation> {
+
+% The Beamer class comes with a number of default slide themes
+% which change the colors and layouts of slides. Below this is a list
+% of all the themes, uncomment each in turn to see what they look like.
+
+%\usetheme{default}
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{Dresden}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+% As well as themes, the Beamer class has a number of color themes
+% for any slide theme. Uncomment each of these in turn to see how it
+% changes the colors of your current slide theme.
+
+%\usecolortheme{albatross}
+%\usecolortheme{beaver}
+%\usecolortheme{beetle}
+%\usecolortheme{crane}
+%\usecolortheme{dolphin}
+%\usecolortheme{dove}
+%\usecolortheme{fly}
+%\usecolortheme{lily}
+%\usecolortheme{orchid}
+%\usecolortheme{rose}
+%\usecolortheme{seagull}
+%\usecolortheme{seahorse}
+%\usecolortheme{whale}
+%\usecolortheme{wolverine}
+
+% \setbeamercolor*{palette primary}{fg=CTHgrey,bg=CTHblue}
+% \setbeamercolor*{palette secondary}{fg=CTHblack,bg=CTHgrey}
+% \setbeamercolor*{palette tertiary}{fg=CTHgrey,bg=CTHblack}
+
+%\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
+%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+
+\usepackage{custom_as}
+
+\newcommand{\RBox}[1]{%
+  \tikz\node[draw,rounded corners,align=center,] {#1};%
+}  
+
+% \usebackgroundtemplate{\vbox to \paperheight{\vspace*{2pt}\includegraphics[width=\paperwidth]{cth_fp.pdf}}}
+
+
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+
+\usetheme[titleflower=true]{chalmers} % titleflower = true or false
+\title[Brownsk rörelse i celler]{Brownsk rörelse i celler\\ hos partiklar och strängar} % Första klammern är en "short title"
+\subtitle{} % optional
+\author{Andréas Sundström \and Emelie Ekenstedt \and Robin Karlsson \and Oliver Sundell 
+\\[.4cm] {\small Handledare:\\ Måns Henningson \\ Daniel Midtvedt} } % [short author (optional)]{many authors}
+\institute[Chalmers]{Chalmers tekniska högskola, \\Institutionen för fysik}
+%\titlepageextra{IPT 2015, Warsaw} % Optional extra info, appears before date on title page
+\footer{\insertshorttitle} % optional, manually sets footer (default is short author)
+%\footer{Something completely different} % but it can of course be anything.
+
+\titlepagelogofile{Avancez_black}
+\date{\vspace{-0.25cm}}
+
+
+\begin{document}
+
+\begin{frame}[plain]
+
+\linethickness{0.075mm}
+
+  \titlepage
+\end{frame}
+% }
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%Här börjar presentationen%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{Innehåll}
+
+\begin{itemize}[label={$\bullet$}]
+    \item Cellbiologi:
+    \begin{itemize}[label={--}]
+        \item Vad som finns i cellen
+    \end{itemize}
+    \item Partikelrörelse:
+    \begin{itemize}[label={--}]
+        \item Partiklarna rör sig för långsamt. 
+        \item Tillgängliga förklaringsmodeller är inte heller perfekta. 
+        \item Klar skillnad mellan aktiva och passiva celler.
+    \end{itemize}
+    \item Filamentrörelse:
+    \begin{itemize}[label={--}]
+        \item En modell som används för polymerer
+        \item Två olika sätt att ta fram svängningsmoder
+    \end{itemize}
+\end{itemize}
+
+%\tableofcontents
+
+\end{frame}
+
+
+
+
+\section{Cellbiologi}%detta kommer med i innehållsförteckningen 
+\begin{frame}
+\frametitle{Cellbiologi}
+ \begin{columns}[c]
+\column{.4\textwidth} % Left column and width
+
+
+Cytoplasman
+\vspace{8mm}
+
+Aktinfilament
+\vspace{8mm}
+
+Diffusion, passiv transport
+
+\column{.6\textwidth} % Right column and width
+
+\begin{figure} %Filament kring kärnan
+\includegraphics[width=1\textwidth]{figures/FluorescentCells.png}
+\end{figure}
+%https://commons.wikimedia.org/wiki/File:FluorescentCells.jpg
+
+\end{columns}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%
+\section{Partikelrörelse}
+
+\begin{frame}
+\frametitle{Film av partiklar i jästceller}
+
+\centering
+\movie[width=\textwidth, height=0.5551\textwidth, poster
+]{}{filmer/partiklar_ed.avi}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Partikelmodeller och MSD}
+\begin{columns}[c]
+\column{.5\textwidth} % Left column and width
+
+Partikelmodeller:
+\begin{itemize}[label={$\bullet$}]
+    \item Brownsk rörelse
+    \item CTRW -- continuous time random walk
+    \item fBm -- fractional Brownian motion
+\end{itemize}
+\vspace{2mm}
+
+Mean squared displacement (MSD):
+\vspace{-2mm}
+\[
+\ev{\Big( x(t+\Delta{t})-x(t) \Big)^{\!\!2}}
+\]
+\[
+\ev{\Big( x(t)-x(0) \Big)^{\!\!2} }
+\]
+
+
+
+\column{.5\textwidth} % Right column and width
+
+\begin{figure} %MSD för dvala
+\resizebox{1\textwidth}{!}{
+\input{figures/MSD_beamer_ed.tex}}
+\end{figure}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\frametitle{Frekvensanalys -- PSD}
+\begin{columns}
+\column{.4\textwidth}
+
+
+
+PSD för stegen 
+\vspace{1cm}
+
+Avvikelse från fBm
+
+
+\column{.6\textwidth}
+\begin{figure} %MSD dvala och logfas
+\resizebox{1\textwidth}{!}{
+\input{figures/PSD_beamer_ed.tex}}
+\end{figure}
+
+\end{columns}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Skillnad mellan celler i dvala och aktiva celler}
+\begin{columns}
+\column{.4\textwidth}
+
+
+Snabbare diffusion i aktiva celler
+\vspace{1cm}
+
+Cytoplasman blir mer fast i dvala?
+
+
+
+
+\column{.6\textwidth}
+\begin{figure} %MSD dvala och logfas
+\resizebox{1\textwidth}{!}{
+\input{figures/MSD_beamer_skillnad.tex}}
+\end{figure}
+
+\end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%
+\section{Filamentrörelse}
+
+\begin{frame}
+\frametitle{Film av strängarna}
+
+\centering
+\movie[width=.9\textwidth, height=0.6492\textwidth, poster
+]{}{filmer/filament4.avi}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{WLC -- Worm-like chain}
+ \begin{columns}[c]
+\column{.3\textwidth} % Left column and width
+%\hspace{-5mm}
+
+ Modell för filament
+\\[8mm]
+ Tangentkorrelation
+\\[8mm]
+ Mikrokanal
+
+\column{.7\textwidth} % Right column and width
+
+\begin{figure}
+\input{figures/tangentkorr_pres2.tex}
+\end{figure}
+
+\end{columns}
+    
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Modifikation för mikrokanal}
+ \begin{columns}[c]
+\column{.3\textwidth} % Left column and width
+
+Styrande differentialekvation
+\vspace{8mm}
+
+Cosinusmoder
+\vspace{8mm}
+
+Samband $\tau(k)$
+
+
+\column{.7\textwidth} % Right column and width
+
+\begin{figure}
+\resizebox{!}{!}{\input{figures/cosktauconf_pres2.tex}}
+% \caption{}
+\end{figure}
+
+%\begin{figure}
+%\resizebox{!}{3cm}{\input{figures/cosktauconf_pres.tex}}
+% \caption{}
+%\end{figure}
+
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Kovariansmatrisen -- Egenmoder}
+
+
+\begin{columns}[c]
+\column{.4\textwidth} % Left column and width
+
+
+Korrelation -- Amplitud
+\vspace{8mm}
+
+Kovariansmatris
+\vspace{8mm}
+
+Egenvektorer
+\vspace{8mm}
+
+$\cos (ks)$ $\impl$ Egenvektor
+\column{.7\textwidth} % Right column and width
+
+\begin{figure}
+\input{figures/moder_pres2.tex}
+ %\caption{}
+\end{figure}
+
+\end{columns}
+    
+\end{frame}
+
+\section{Sammanfattning}
+\begin{frame}
+\frametitle{Sammanfattning}
+
+\begin{itemize}[label={$\bullet$}]
+    
+ \item{Partiklarna rör sig för långsamt för brownsk rörelse.}
+\\[8mm]
+ \item{Diffusion sker långsammare i celler i dvala.}
+\\[8mm]
+ \item{Strängrörelsen kan representeras av oberoende egenmoder.}
+%\\[8mm]
+%\item{Egenmoderna liknar de teoretiska cosinusmoderna}
+
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Till sist...}
+    \begin{center}
+    \huge Tack! 
+    \end{center}
+\end{frame}
+
+\section{Extramaterial}
+\begin{frame}
+\frametitle{Isotropi}
+\begin{figure}
+\resizebox{1\textwidth}{!}{ \input{figures/isotropi_asymmetri.tex} }
+ %\caption{}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Avståndsmätning}
+
+\begin{figure}
+\resizebox{1\textwidth}{!}{ \input{figures/transv_avst.pdf_t} }
+ %\caption{}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Relaxationstid}
+
+\begin{figure}
+\resizebox{.8\textwidth}{!}{ \input{figures/korrfil3_pres.tex} }
+ %\caption{}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Kovariansmatris}
+Alla element är korrelationer. 
+
+\[
+C = 
+\begin{bmatrix}
+\ev{A_1 A_1} & \ev{A_1 A_2} & \cdots \\
+\ev{A_2 A_1} & \ev{A_2 A_2} & \cdots \\
+\vdots & \ddots & \vdots
+\end{bmatrix}
+\]
+
+\end{frame}
+
+
+\end{document}
+
+
+
+
