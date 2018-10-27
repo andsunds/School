@@ -1,0 +1,5 @@
+#Inga jobbiga ~-filer
+*~
+# Jag vill inte ha med de stora simuleringsfilerna
+Dataanalys/Partiklar/simuleringar/*.mat
+Dataanalys/Partiklar/simuleringar/obsolete
