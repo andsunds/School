@@ -1,0 +1,195 @@
+\documentclass[11pt,a4paper, german, english, swedish
+]{article}
+\pdfoutput=1
+
+\usepackage{custom_as}
+
+\graphicspath{ {figurer/} }
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 2.8cm, right  = 2.8cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+%\renewcommand{\thesection}{...}
+
+
+\newcommand{\BM}{\ifmmode\upbeta^{-}\else$\upbeta^{-}$\fi}
+\newcommand{\BP}{\ifmmode\upbeta^{+}\else$\upbeta^{\!+}$\fi}
+\newcommand{\G}{\ifmmode\upgamma\else$\upgamma$\fi}
+\newcommand{\Thalv}{\ifmmode{T_{\nicefrac{1}{2}}}\else$T_{\nicefrac{1}{2}}$\fi}
+
+\begin{document}
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{ Isotopproduktion för PET: \\[1mm] \Large Räkneuppgift nr.\,10, subatomär fysik}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+
+\section{Inledning}
+Innan Röntgens upptäckt 1895\cite{Roentgen1895} av den strålning som nu är uppkallade efter honom, röntgenstrålar, har det enda sättet att undersöka människokroppens inre varit att skära upp den. Men även röntgenstrålning har sina baksidor. Exempelvis kan man bara se täta och hårda strukturer så som ben med dem. Det har därför med åren utvecklats fler tekniker för att skåda in i kroppen. 
+
+En av dessa tekniker är \emph{positronemissionstomografi} (PET)\cite{Sweet&Brownell1955,Phelps_etal1975}. Den bygger på att en radioisotop som sönderfaller med \BP-sönderfall kan lokaliseras i kroppen genom att detektera koincidenta \G-strålar från elektron-positronanhileringen. För att detta ska kunna användas medicinskt krävs även att radioisotopen i fråga kan ansamlas i exempelvis tumörer som man vill undersöka.
+
+I nuläget är PET en etablerad metod runt om i värdens sjukhus. Eftersom man vill ha tillräckligt hög strålningsintensitet vid skanningstillfället, men samtidigt inte vill att radioaktiviteten ska vara för länge efteråt, används oftast isotoper med relativt korta halveringstider. Detta betyder att sjukhusen behöver ha egna cyklotroner för isotopproduktion.
+
+\subsubsection*{Specifikationer}
+I den här rapporten beskrivs hur man kan gå tillväga, ur ett kärnfysiklaiskt perspektiv, för att välja ut och förbereda en sådan radioisotop. Det finns två huvudsakliga delar här: dels att välja ut en lämplig isotop, dels hur produktionen ska dimensioneras.
+
+Den cyklotron som används kan ge protoner med maximal energi på $E_\text{max}=\unit[10]{MeV}$ och ström på $i=\unit[10]{\micro{A}}$. Utgående från denna cyklotron, behövs en isotop med halveringstid på ungefär $\Thalv=\unit[17]{timmar}$. Självklart måste även isotopen \BP-sönderfalla för att kunna vara akutell för PET.
+
+Produktionen ska sedan kunna vara stor nog för att kunna injecera fem patienter med ett antal av dessa kärnor motsvarande en strålningsintensitet på $A_\text{dos}=\unit[2.1]{MBq}$. Detta ska dessutom kunna göras efter att isotoperna har extraherats ur strålmålet som tar $t_0=\unit[54]{timmar}$ från avslutad betrålning. Samtidigt ska inte protonenergin vara så hög att det bildas några exciterade kärnor med excitationsenergi högre än \unit[200]{keV}. 
+
+
+
+\section{Isotopval}
+I National Nuclear Data Centers ''Nuclear Wallet Cards''\cite{NNDC_wallet} kan man specificera vilken typ av sönderfall och hur lång halveringstid man söker. Gör man en sökning efter \BP-sönderfallande isotoper med en halveringstid på $\unit[17\pm 1]{timmar}$ får man 12 möjliga kandidater. Av dessa har en av dem ($^{242}_{95}\!\mathrm{Am}$) bara en smal sönderfallskanal via \BP-sönderfall (17,30\,\%). Så det är effektivt 11 möjliga isotoper att välja på.
+
+Nästa steg i processen är att identifiera vilka isotoper som enkelt går att producera. Detta betyder att de ska gå att producera genom protonbetråning på ett strålmål av naturligt förekommande isotoper\footnotemark{}. Av de 11~kandidaterna går det nu att sålla ut tre (3) med det här extrakravet. 
+\footnotetext{Jag använder här den lista som är given på PingPong~\cite{PingPong}.}
+
+De tre möjliga kandidaterna är: $^{55}_{27}\mathrm{Co}$, $^{76}_{35}\mathrm{Br}$ och $^{193}_{79}\!\mathrm{Au}$. Dessa kan nu slås upp i en nulkeidkarta~\cite{NNDC_chart}. Där kan man börja med att se att $^{193}_{79}\!\mathrm{Au}$ sönderfaller till $^{193}_{78}\mathrm{Pt}$, som också är radioaktiv med en halveringstid på 50~år. Detta är inte så bra. Man behöver visserligen en radioaktiv isotop för att kunna använda PET, men man vill ju heller inte att den ska lämna kvar rester som fortsätter att vara radioaktiva under en längre tid. Det visar sig att även $^{55}_{27}\mathrm{Co}$ har samma problem.
+
+\subsubsection*{Den utvalda isotopen}
+Då återstår bara $^{76}_{35}\mathrm{Br}$. Som tur är, så sönderfaller $^{76}_{35}\mathrm{Br}$ till $^{76}_{34}\mathrm{Se}$, som är stabil. Vidare är faktiskt $^{76}_{35}\mathrm{Br}$ en redan använd radioisotop för PET~\cite{Lapi_PET,Valette_etal1993,Lovqvist_etal1997,Ribeiro_etal1999}. Detta talar också för att det redan finns utvecklade metoder för att medicinskt ge patienten isotopen så att det går att upptäcka eventuella tumörer. 
+
+Valet i det föll alltså på:
+\[
+^{76}_{35}\mathrm{Br}\qcomma 
+\text{med } \Thalv=\unit[16,2]{timmar} \Longleftrightarrow \lambda = \unit[1,19\times10^{-5}]{s^{-1}}.
+\]
+Enligt \cite{PingPong} har $^{76}_{35}\mathrm{Br}$ en tröskelenergi på $E_\text{min}=\unit[5,8]{MeV}$, det är alltså görbart att producera isotopen med den givna cyklotronen.
+
+
+
+
+\section{Produktion}
+När isotopen väl är val måste produktionen av den dimensioneras.
+
+\subsection{Mängd som behöver produceras}
+
+Eftersom preparaten behöver förberedas i $t_0=\unit[54]{timmar}$ efter att produktionen avslutas, måste man ta hänsyn till att radioisotopen sönderfaller under tiden. Dett sker enligt den välkända exponenitellt avtagande kurvan
+\begin{equation}
+N_\text{s}(t) = N_0\,\ee^{-\lambda t}, %= N_0\cdot 2^{-t/\Thalv}
+\end{equation}
+där $N_\text{s}$ är antalet kärnor som finns vid tiden $t$, $N_0$ antalet kärnor som kommer från produktionen och $\lambda$ är radioisotopens sönderfallskonstant. I det här fallet är $t_0\approx3\Thalv$, vilket innebär att bara ungefär en åttondel av de producerade kärnorna har överlevt när patienten får dem. 
+
+PET-skanner kräver att patienterna får en dos på $A_\text{dos}=\unit[2.1]{MBq}$ -- dosen ska ges till fem patienter samtidigt. Eftersom aktiviteten följer
+\begin{equation}
+A(t) = -\dv{N_\text{s}}{t} 
+= \lambda N_0\,\ee^{-\lambda t}
+\end{equation}
+bestämmer detta hur många kärnor som måste produceras. 
+
+Man måste helt enkelt komma upp i $\lambda N_0\,\ee^{-\lambda t_0} = 5A_\text{dos}$. Detta ger en ekvation för för hur många kärnor som måste \emph{produceras i cyklotronen}:
+\begin{equation}\label{eq:N_0}
+N_0 = \frac{5}{\lambda}\,A_\text{dos}\ee^{\lambda t_0} 
+= \frac{5}{\ln{2}}\,\Thalv\,A_\text{dos}\cdot 2^{t_0/\Thalv}
+= \unit[8,90\times 10^{12}]{kärnor}.
+\end{equation}
+
+
+\subsection{Cyklotronen}
+När antalet radioaktiva kärnor som behöver produceras väl är bestämt måste själva produktionen dimensioneras. Antalet radioaktiva kärnor som finns efter tiden $t$ från starten av produktionen är
+\begin{equation}
+N_\text{p}(t) = \frac{R}{\lambda} \left( 1-\ee^{-\lambda t} \right),
+% = \frac{R}{\lambda} \left( 1-2^{-t/\Thalv} \right)
+\end{equation}
+där $R$ är produktionstakten definierad enligt
+\begin{equation}
+R=\sigma n I,
+\end{equation}
+där $\sigma$ är reaktionens tvärsnitt, $I$ är strålens intensitet (i protoner per sekund) och $n$ är strålmålstätheten (i strålmålskärnor per ytenhet). I det här fallet är intensiteten given i ampere. För att konvertera till protoner per sekund används $I=i/e$. 
+
+Det sammanlagda uttrycket blir alltså
+\begin{equation}\label{eq:N_p}
+N_\text{p}(t) = \frac{\sigma n i}{\lambda e} \left( 1-\ee^{-\lambda t} \right).
+\end{equation}
+Nu behöver man bara ta fram värden på tvärsnittet, $\sigma$, och bestämma sig för hur lång tid man ska köra cyklotronen mot hur stort strålmål man ska välja. 
+
+\subsubsection{Problem med oönskade reaktioner}
+Som kan ses i \figref{fig:x-sect} så beror tvärsnittet starkt på protonenergin. Så för produktion av $^{76}_{35}\mathrm{Br}$ syns att det optimala vore att köra cyklotronen på dess högsta energi. Men man får här inte heller glömma att en det finns en övre gräns för hur höga \G-energier som tillåts. 
+
+I det här fallet ''väljs protonenergin så att inga exciterade tillstånd populeras som ger upphov till gamma-fotoner med energi överstigande 200\,keV.'' Detta blir dock omöjligt då nästan all produktion av någon radioisotop från stabila kärnor har ett ganska stort negativt $Q$-värde -- i fallet med $^{76}_{35}\mathrm{Se}\,(\text{p,\,n})\,^{76}_{35}\mathrm{Br}$ så är $Q\approx\unit[-5,8]{MeV}$. Samtidigt har de absolut flesta strålmålskärnorna egna exciterade energinivåer som kan populeras via inelastisk spridning; alltså att det finns nivåer som ligger över den tillåtna \G-gränsen men under protonenergin som krävs för att övervinna $Q$-värdet. Tillsammans blir det omöjligt att producera några nya kärnor utan att man får \G-fotoner som överstiger den satta gränsen.
+
+I det här fallet kan man i \figref{fig:x-sect} se att reaktionen med störst tvärsnitt, upp till ca 6,5\,MeV, är $^{76}_{35}\mathrm{Se}\,(\text{p,\,p})\,^{76}_{35}\mathrm{Se}^*$. Vidare ligger den lägsta exciterade nivån i $^{76}_{34}\mathrm{Se}$ på omkring 560\,keV~\cite{NNDC_levels}. Detta garanterar mer eller mindre att oavsett hur man gör så går det inte att producera $^{76}_{34}\mathrm{Br}$ utan att få \G-fotoner med åtminstone 560\,keV.
+\footnote{
+Jag har pratat med Thomas om detta. För att inte göra saker för komplicerae, så sa han att man skulle bortse från det här problemet och istället fokusera på att inte populera några nivåer i \emph{dotterkärnan} som ger upphov till för högenergietiska \G-fotoner. Detta gör uppgiften lösbar, men mindre realistisk.}
+
+\figref{fig:x-sect} visar även att det finns fler möjliga dotterkärnor som kan produceras. Man ser dock att de två andra dotterkärnorna, $^{73}_{33}\mathrm{As}$ och $^{77}_{35}\mathrm{Br}$, har ett mindre tvärsnitt, vilket gör att de inte produceras lika snabbt. 
+
+Vidare torde separationen av $^{76}_{35}\mathrm{Br}$ från strålmålet göras kemiskt. Detta gör att man inte behöver oroa sig för $^{73}_{33}\mathrm{As}$. Men dock kommer $^{77}_{35}\mathrm{Br}$ fortfarande att vara kvar eftersom masstalet inte påverkar de kemiska egenskaperna nämnvärt. Men $^{77}_{35}\mathrm{Br}$ \BP-sönderfaller också, fast med längre halveringstid, så det borde inte vara några större problem om det kommer med lite extra $^{77}_{35}\mathrm{Br}$. (Jag väljer alltså att helt bortse från annan produktion än den önskade isotopen.)
+
+\begin{figure}\centering
+\input{figurer/Se_76_x-sect.tex}
+\caption{Tvärsnitt~\cite{PingPong} för isotopproduktion med protonstråle med $^{76}_{34}\mathrm{Se}$ som strålmål. Det finns fyra möjliga raktionsprodukter utmarkerade, varav $^{76}_{35}\mathrm{Br}$ är den eftersökta isotopen. }
+\label{fig:x-sect}
+\end{figure}
+
+
+\subsubsection{Produktion av den önskade isotopen}
+Bortser man från problemet med excitation av moderkärnor via inelastisk spridning behöver man nu betrakta $^{76}_{34}\mathrm{Br}$. Speciellt finner man att den kan sända ut \G-fotoner med energier upp till 166\,keV och att nästa steg upp i \G-energi ligger på 212\,keV~\cite{NNDC_levels}. Detta betyder att cyklotronenergin kan läggas ca 200\,keV över tröskelenergin för $^{76}_{35}\mathrm{Se}\,(\text{p,\,n})\,^{76}_{35}\mathrm{Br}$.
+
+Välj alltså en cyklotronenergi på 6\,MeV (noggrannare än så känns onödig eftersom vi ändå inte har någon noggrannare tvärsnittsdata). Detta ger ett tvärsnitt på $\sigma = \unit[33]{mb}$. Utifrån detta behöver nu strålmålstjockleken och produktionstiden bestämmas. 
+
+Att öka tiden i cyklotronen kommer att spela mindre och mindre roll ju längre den blir. Det är därför onödigt att köra produktionen för länge. Tittar man på det större perspektivet om hur den här processen skulle tillämpas, så är det rimligt att välja produktionstiden så att den inte blir en flaskhals. Eftersom det tar $t_0=\unit[54]{timmar}$ att extrahera isotopen skulle man kunna utnyttja den titden maximalt genom att köra cyklotronen lika länge. (Ur ett större perspektiv betyder detta att man kan köra cyklotronen med ett nytt strålmål medan man bearbetar det förra. På så sätt fås ingen ''nertid'' i något led i processen.)
+
+Nu behöver bara strålmålstjockleken bestämmas. Detta görs enklas genom att utnyttja \eqref{eq:N_p} och sätta att $N_\text{p}(t_0) = N_0$. Man får då en ekvation för
+\begin{equation}
+\begin{aligned}
+n &= \frac{N_0\lambda e}{\sigma i (1-\ee^{-\lambda t_0})} 
+%= \frac{5}{\lambda} A_\text{dos} \ee^{\lambda t_0} \frac{\lambda e}{\sigma i (1-\ee^{-\lambda t_0})}
+%\\
+= \frac{5 A_\text{dos} e}{\sigma i} \frac{\ee^{2\lambda t_0}}{\ee^{\lambda t_0}-1}
+=\unit[5,7\times 10^{19}]{kärnor/cm^2}.
+\end{aligned}
+\end{equation}
+Här har \eqref{eq:N_0} utnyttjas för att ersätta $N_0$ ovan. För att omvandla detta till en mer lätthanterlig enhet såsom $\unit{g/cm^2}$ utnyttjas att $^{76}_{34}\mathrm{Se}$ har molmassan $M\approx\unit[76]{g/mol}$ och att Avogadros tal är $N_\text{A}\approx\unit[6,0\times 10^{23}]{mol^{-1}}$. Detta ger tillsammans att strålmålets täthet behöver vara
+\begin{equation}
+\rho = \frac{n M}{N_\text{A}} = \unit[7,2]{mg/cm^2}.
+\end{equation}
+
+Detta gäller dock bara om strålmålet som används är isotoprenat, alltså bara innehåller $^{76}_{34}\mathrm{Se}$. (Är det inte isotoprenat behöver man dessutom titta på vilka andra reaktikoner som kan ske i produktionen, utöver de i \figref{fig:x-sect}.) Naturligt förekommande selen innehåller dock bara ca 9,4\,\% $^{76}_{34}\mathrm{Se}$ \cite{wiki_selenium}. Detta gör att strålmålet behöver ha en täthet på
+\begin{equation}
+\rho_\text{Nat.} = \frac{\unit[7,2]{mg/cm^2}}{0,094} = \unit[77]{mg/cm^2}
+\end{equation}
+om det består av natuligt selen.
+
+
+\section{Sammanfattning}
+Tillvägagångssättet för att dimensionera produktion av radioisotoper för en PET-skanner kan sammanfattas i ett par meningar. 
+
+Först måste en lämplig isotop väljas. Här kommer först kravet på att det ska vara en isotop som \BP-sönderfaller för att PET överhuvudtaget ska fungera. Sedan ska även isotopen uppfylla kravet på halveringstid som ställs av sjukhuset/beställaren. Till sista måste det även gå att producera isotopen. Det visade sig att det fanns tre möjliga kandidater som uppfyller alla kraven ovan. Därifrån valdes $^{76}_{34}\mathrm{Br}$ ut för att den dels sönderfaller till en stabil kärna, dels redan används i PET~\cite{Lapi_PET,Valette_etal1993,Lovqvist_etal1997,Ribeiro_etal1999}. För att producera $^{76}_{34}\mathrm{Br}$ används $^{76}_{34}\mathrm{Se}$ som strålmål.
+
+Därefter måste själva produktionen dimensioneras. Där måste man ta hänsyn till att det tar en viss tid att extrahera de relevanta isotoperna, så att man måste producera mer än vad som behövs vid själva PET-tillfället. Sedan behöver körningen i cyklotronen dimensioneras. Det som där behöver väljas är protonenergi och strålmålstjocklek. Proton energin väljs till 6\,MeV för att inte producera några \G-fotoner med mer än 200\,keV från dotterkärnan. Detta ger ett reaktionstvärsnitt på 33\,mb. Med detta i hand väljs produktionstiden till 54\,timmar, vilket slutligen ger att strålmålet behöver vara $\unit[7,2]{mg/cm^2}$ rent $^{76}_{34}\mathrm{Se}$ för att förse sjukhuset med tillräckligt stor stråldos. 
+
+Notera dock att detta är en undre skattning och förutsätter bland annat att extraktionen av den önskade dotterkärnan kan göras till 100\,\%. I verkligheten föreslås ett något tjockare prov för att säkerställa att tillräckligt många kärnor av den önskade isotopen kan extraheras. 
+
+
+
+
+
+\newpage
+\bibliographystyle{ieeetr}
+\bibliography{referenser}%kräver en fil som heter 'referenser.bib'          
+
+\end{document}
+
+
+

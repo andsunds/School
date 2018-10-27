@@ -1,0 +1,1726 @@
+./Ag_107:
+aprod.tot    gprod.tot	     nprod.tot	rp044100.tot  rp047107.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp046104.tot  rp048107.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp047107.L00  rp048108.tot
+elastic.tot  nonelastic.tot  range	rp047107.L01  total.tot
+
+./Ag_109:
+aprod.tot    gprod.tot	     nprod.tot	rp044102.tot  rp047109.tot  total.tot
+binary.tot   hprod.tot	     output	rp046106.tot  rp048108.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp047109.L00  rp048109.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp047109.L01  rp048110.tot
+
+./Al_27:
+aprod.tot    gprod.tot	     nprod.tot	rp012024.tot  rp014028.tot
+binary.tot   hprod.tot	     output	rp012026.tot  total.tot
+dprod.tot    input	     pprod.tot	rp013027.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp014027.tot  tprod.tot
+
+./Ar_36:
+aprod.tot    gprod.tot	     nprod.tot	rp016032.tot  total.tot
+binary.tot   hprod.tot	     output	rp017033.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp018036.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp019037.tot
+
+./Ar_38:
+aprod.tot    gprod.tot	     nprod.tot	rp017035.tot  total.tot
+binary.tot   hprod.tot	     output	rp018038.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp019038.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp019039.tot
+
+./Ar_40:
+aprod.tot    gprod.tot	     nprod.tot	rp017037.tot  rp019040.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp018038.tot  rp019041.tot
+dprod.tot    input	     pprod.tot	rp018039.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp018040.tot  totalxs.tot
+
+./As_75:
+aprod.tot    gprod.tot	     nprod.tot	rp032072.tot  rp034076.tot
+binary.tot   hprod.tot	     output	rp033075.tot  total.tot
+dprod.tot    input	     pprod.tot	rp034074.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp034075.tot  tprod.tot
+
+./Au_197:
+aprod.tot    nonelastic.tot  rp076190.tot  rp078194.tot  rp080197.tot
+binary.tot   nprod.tot	     rp077193.L00  rp079197.L00  rp080198.tot
+dprod.tot    output	     rp077193.L02  rp079197.L04  total.tot
+elastic.tot  pprod.tot	     rp077193.tot  rp079197.tot  totalxs.tot
+gprod.tot    range	     rp078193.L00  rp080196.tot  tprod.tot
+hprod.tot    rp076190.L00    rp078193.L05  rp080197.L00
+input	     rp076190.L32    rp078193.tot  rp080197.L04
+
+./B_10:
+aprod.tot    gprod.tot	     nprod.tot	rp004007.tot  rp006010.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp004008.tot  rp006011.tot
+dprod.tot    input	     pprod.tot	rp005009.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp005010.tot  totalxs.tot
+
+./B_11:
+aprod.tot    gprod.tot	     nprod.tot	rp004008.tot  total.tot
+binary.tot   hprod.tot	     output	rp005011.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp006011.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp006012.tot
+
+./Ba_130:
+aprod.tot    gprod.tot	     nprod.tot	rp053123.tot  rp057131.tot
+binary.tot   hprod.tot	     output	rp055127.tot  total.tot
+dprod.tot    input	     pprod.tot	rp056130.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp057130.tot  tprod.tot
+
+./Ba_132:
+aprod.tot    gprod.tot	     nprod.tot	rp053125.tot  rp057132.L04  totalxs.tot
+binary.tot   hprod.tot	     output	rp055129.tot  rp057132.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp056132.tot  rp057133.tot
+elastic.tot  nonelastic.tot  range	rp057132.L00  total.tot
+
+./Ba_134:
+aprod.tot    gprod.tot	     nprod.tot	rp053127.tot  rp057135.tot
+binary.tot   hprod.tot	     output	rp055131.tot  total.tot
+dprod.tot    input	     pprod.tot	rp056134.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp057134.tot  tprod.tot
+
+./Ba_135:
+aprod.tot    gprod.tot	     nprod.tot	rp053128.tot  rp056135.L02  total.tot
+binary.tot   hprod.tot	     output	rp055132.tot  rp056135.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp056134.tot  rp057135.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp056135.L00  rp057136.tot
+
+./Ba_136:
+aprod.tot    gprod.tot	     nprod.tot	rp053129.tot  rp057137.tot
+binary.tot   hprod.tot	     output	rp055133.tot  total.tot
+dprod.tot    input	     pprod.tot	rp056136.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp057136.tot  tprod.tot
+
+./Ba_137:
+aprod.tot    input	     rp053130.L00  rp056136.tot  total.tot
+binary.tot   nonelastic.tot  rp053130.L01  rp056137.L00  totalxs.tot
+dprod.tot    nprod.tot	     rp053130.tot  rp056137.L02  tprod.tot
+elastic.tot  output	     rp055134.L00  rp056137.tot
+gprod.tot    pprod.tot	     rp055134.L03  rp057137.tot
+hprod.tot    range	     rp055134.tot  rp057138.tot
+
+./Ba_138:
+aprod.tot    gprod.tot	     nprod.tot	rp053131.tot  rp056138.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp055135.L00  rp057138.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp055135.L10  rp057139.tot
+elastic.tot  nonelastic.tot  range	rp055135.tot  total.tot
+
+./Be_9:
+aprod.tot    gprod.tot	     nprod.tot	rp003006.tot  rp005010.tot
+binary.tot   hprod.tot	     output	rp004008.tot  total.tot
+dprod.tot    input	     pprod.tot	rp004009.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp005009.tot  tprod.tot
+
+./Br_79:
+aprod.tot    gprod.tot	     nprod.tot	rp034076.tot  rp036079.L00  total.tot
+binary.tot   hprod.tot	     output	rp035079.L00  rp036079.L01  totalxs.tot
+dprod.tot    input	     pprod.tot	rp035079.L01  rp036079.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp035079.tot  rp036080.tot
+
+./Br_81:
+aprod.tot    gprod.tot	     nprod.tot	rp034078.tot  rp036081.L02  totalxs.tot
+binary.tot   hprod.tot	     output	rp035081.tot  rp036081.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp036080.tot  rp036082.tot
+elastic.tot  nonelastic.tot  range	rp036081.L00  total.tot
+
+./C_12:
+aprod.tot   elastic.tot  input		 output     rp005009.tot  total.tot
+binary.tot  gprod.tot	 nonelastic.tot  pprod.tot  rp006012.tot  totalxs.tot
+dprod.tot   hprod.tot	 nprod.tot	 range	    rp007013.tot  tprod.tot
+
+./C_13:
+aprod.tot    gprod.tot	     nprod.tot	rp005010.tot  rp007014.tot
+binary.tot   hprod.tot	     output	rp006012.tot  total.tot
+dprod.tot    input	     pprod.tot	rp006013.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp007013.tot  tprod.tot
+
+./Ca_40:
+aprod.tot    gprod.tot	     nprod.tot	rp019037.tot  total.tot
+binary.tot   hprod.tot	     output	rp019039.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp020040.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp021041.tot
+
+./Ca_42:
+aprod.tot    gprod.tot	     nprod.tot	rp018038.tot  rp021042.L02  totalxs.tot
+binary.tot   hprod.tot	     output	rp019039.tot  rp021042.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp020042.tot  rp021043.tot
+elastic.tot  nonelastic.tot  range	rp021042.L00  total.tot
+
+./Ca_43:
+aprod.tot    gprod.tot	     nprod.tot	rp019040.tot  rp021044.L00  totalxs.tot
+binary.tot   hprod.tot	     output	rp020042.tot  rp021044.L04  tprod.tot
+dprod.tot    input	     pprod.tot	rp020043.tot  rp021044.tot
+elastic.tot  nonelastic.tot  range	rp021043.tot  total.tot
+
+./Ca_44:
+aprod.tot    gprod.tot	     nprod.tot	rp019041.tot  rp021044.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp020044.tot  rp021045.tot
+dprod.tot    input	     pprod.tot	rp021044.L00  total.tot
+elastic.tot  nonelastic.tot  range	rp021044.L04  totalxs.tot
+
+./Ca_46:
+aprod.tot    gprod.tot	     nprod.tot	rp019043.tot  rp021046.L02  totalxs.tot
+binary.tot   hprod.tot	     output	rp020045.tot  rp021046.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp020046.tot  rp021047.tot
+elastic.tot  nonelastic.tot  range	rp021046.L00  total.tot
+
+./Cd_106:
+aprod.tot    input	     rp045099.L00  rp048106.tot  rp049107.tot
+binary.tot   nonelastic.tot  rp045099.L01  rp049106.L00  total.tot
+dprod.tot    nprod.tot	     rp045099.tot  rp049106.L01  totalxs.tot
+elastic.tot  output	     rp047103.L00  rp049106.tot  tprod.tot
+gprod.tot    pprod.tot	     rp047103.L02  rp049107.L00
+hprod.tot    range	     rp047103.tot  rp049107.L01
+
+./Cd_108:
+aprod.tot    input	     rp045101.L00  rp048108.tot  rp049109.tot
+binary.tot   nonelastic.tot  rp045101.L01  rp049108.L00  total.tot
+dprod.tot    nprod.tot	     rp045101.tot  rp049108.L01  totalxs.tot
+elastic.tot  output	     rp047105.L00  rp049108.tot  tprod.tot
+gprod.tot    pprod.tot	     rp047105.L01  rp049109.L00
+hprod.tot    range	     rp047105.tot  rp049109.L01
+
+./Cd_110:
+aprod.tot    input	     rp045103.L00  rp048110.tot  rp049111.tot
+binary.tot   nonelastic.tot  rp045103.L01  rp049110.L00  total.tot
+dprod.tot    nprod.tot	     rp045103.tot  rp049110.L01  totalxs.tot
+elastic.tot  output	     rp047107.L00  rp049110.tot  tprod.tot
+gprod.tot    pprod.tot	     rp047107.L01  rp049111.L00
+hprod.tot    range	     rp047107.tot  rp049111.L01
+
+./Cd_111:
+aprod.tot    nonelastic.tot  rp045104.tot  rp048111.tot  total.tot
+binary.tot   nprod.tot	     rp047108.L00  rp049111.L00  totalxs.tot
+dprod.tot    output	     rp047108.L02  rp049111.L01  tprod.tot
+elastic.tot  pprod.tot	     rp047108.tot  rp049111.tot
+gprod.tot    range	     rp048110.tot  rp049112.L00
+hprod.tot    rp045104.L00    rp048111.L00  rp049112.L01
+input	     rp045104.L03    rp048111.L03  rp049112.tot
+
+./Cd_112:
+aprod.tot    hprod.tot	     pprod.tot	   rp048112.tot  rp049113.L01
+binary.tot   input	     range	   rp049112.L00  rp049113.tot
+dprod.tot    nonelastic.tot  rp047109.L00  rp049112.L01  total.tot
+elastic.tot  nprod.tot	     rp047109.L01  rp049112.tot  totalxs.tot
+gprod.tot    output	     rp047109.tot  rp049113.L00  tprod.tot
+
+./Cd_114:
+aprod.tot    input	     rp047111.L00  rp049113.tot  rp049115.tot
+binary.tot   nonelastic.tot  rp047111.L01  rp049114.L00  total.tot
+dprod.tot    nprod.tot	     rp047111.tot  rp049114.L01  totalxs.tot
+elastic.tot  output	     rp048114.tot  rp049114.tot  tprod.tot
+gprod.tot    pprod.tot	     rp049113.L00  rp049115.L00
+hprod.tot    range	     rp049113.L01  rp049115.L01
+
+./Ce_136:
+aprod.tot    gprod.tot	     nprod.tot	rp055129.tot  rp059137.tot
+binary.tot   hprod.tot	     output	rp057133.tot  total.tot
+dprod.tot    input	     pprod.tot	rp058136.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp059136.tot  tprod.tot
+
+./Ce_138:
+aprod.tot    gprod.tot	     nprod.tot	rp055131.tot  rp059138.L05  totalxs.tot
+binary.tot   hprod.tot	     output	rp057135.tot  rp059138.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp058138.tot  rp059139.tot
+elastic.tot  nonelastic.tot  range	rp059138.L00  total.tot
+
+./Ce_140:
+aprod.tot    gprod.tot	     nprod.tot	rp055133.tot  rp059141.tot
+binary.tot   hprod.tot	     output	rp057137.tot  total.tot
+dprod.tot    input	     pprod.tot	rp058140.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp059140.tot  tprod.tot
+
+./Ce_142:
+aprod.tot    input	     rp055135.L00  rp059141.tot  totalxs.tot
+binary.tot   nonelastic.tot  rp055135.L10  rp059142.L00  tprod.tot
+dprod.tot    nprod.tot	     rp055135.tot  rp059142.L01
+elastic.tot  output	     rp056138.tot  rp059142.tot
+gprod.tot    pprod.tot	     rp057139.tot  rp059143.tot
+hprod.tot    range	     rp058142.tot  total.tot
+
+./Cl_35:
+aprod.tot    gprod.tot	     nprod.tot	rp016032.tot  rp018036.tot
+binary.tot   hprod.tot	     output	rp016034.tot  total.tot
+dprod.tot    input	     pprod.tot	rp017035.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp018035.tot  tprod.tot
+
+./Cl_37:
+aprod.tot    gprod.tot	     nprod.tot	rp016034.tot  rp018038.tot
+binary.tot   hprod.tot	     output	rp017036.tot  total.tot
+dprod.tot    input	     pprod.tot	rp017037.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp018037.tot  tprod.tot
+
+./Co_59:
+aprod.tot    gprod.tot	     nprod.tot	rp026056.tot  total.tot
+binary.tot   hprod.tot	     output	rp027059.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp028059.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp028060.tot
+
+./Cr_50:
+aprod.tot    gprod.tot	     nprod.tot	rp023047.tot  rp025050.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp024050.tot  rp025051.tot
+dprod.tot    input	     pprod.tot	rp025050.L00  total.tot
+elastic.tot  nonelastic.tot  range	rp025050.L01  totalxs.tot
+
+./Cr_52:
+aprod.tot    gprod.tot	     nprod.tot	rp023049.tot  rp025052.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp024052.tot  rp025053.tot
+dprod.tot    input	     pprod.tot	rp025052.L00  total.tot
+elastic.tot  nonelastic.tot  range	rp025052.L01  totalxs.tot
+
+./Cr_53:
+aprod.tot    gprod.tot	     nprod.tot	rp023050.tot  rp025054.tot
+binary.tot   hprod.tot	     output	rp024052.tot  total.tot
+dprod.tot    input	     pprod.tot	rp024053.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp025053.tot  tprod.tot
+
+./Cr_54:
+aprod.tot    gprod.tot	     nprod.tot	rp023051.tot  rp025055.tot
+binary.tot   hprod.tot	     output	rp024053.tot  total.tot
+dprod.tot    input	     pprod.tot	rp024054.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp025054.tot  tprod.tot
+
+./Cs_133:
+aprod.tot    gprod.tot	     nprod.tot	rp052126.tot  rp056133.L00  total.tot
+binary.tot   hprod.tot	     output	rp054130.tot  rp056133.L02  totalxs.tot
+dprod.tot    input	     pprod.tot	rp055133.tot  rp056133.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp056132.tot  rp056134.tot
+
+./Cu_63:
+aprod.tot    gprod.tot	     nprod.tot	rp028060.tot  rp030064.tot
+binary.tot   hprod.tot	     output	rp028062.tot  total.tot
+dprod.tot    input	     pprod.tot	rp029063.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp030063.tot  tprod.tot
+
+./Cu_65:
+aprod.tot    gprod.tot	     nprod.tot	rp028062.tot  total.tot
+binary.tot   hprod.tot	     output	rp029065.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp030065.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp030066.tot
+
+./Dy_156:
+aprod.tot    hprod.tot	     pprod.tot	   rp066156.tot  rp067157.tot
+binary.tot   input	     range	   rp067156.L00  total.tot
+dprod.tot    nonelastic.tot  rp063149.tot  rp067156.L01  totalxs.tot
+elastic.tot  nprod.tot	     rp064152.tot  rp067156.L08  tprod.tot
+gprod.tot    output	     rp065153.tot  rp067156.tot
+
+./Dy_158:
+aprod.tot    input	     rp063151.tot  rp067158.L07  totalxs.tot
+binary.tot   nonelastic.tot  rp064154.tot  rp067158.tot  tprod.tot
+dprod.tot    nprod.tot	     rp065155.tot  rp067159.L00
+elastic.tot  output	     rp066158.tot  rp067159.L03
+gprod.tot    pprod.tot	     rp067158.L00  rp067159.tot
+hprod.tot    range	     rp067158.L01  total.tot
+
+./Dy_160:
+aprod.tot    input	     rp063153.tot  rp067160.L09  totalxs.tot
+binary.tot   nonelastic.tot  rp064156.tot  rp067160.tot  tprod.tot
+dprod.tot    nprod.tot	     rp065157.tot  rp067161.L00
+elastic.tot  output	     rp066160.tot  rp067161.L02
+gprod.tot    pprod.tot	     rp067160.L00  rp067161.tot
+hprod.tot    range	     rp067160.L01  total.tot
+
+./Dy_161:
+aprod.tot    nonelastic.tot  rp063154.tot  rp066161.tot  total.tot
+binary.tot   nprod.tot	     rp064157.tot  rp067161.L00  totalxs.tot
+dprod.tot    output	     rp065157.tot  rp067161.L02  tprod.tot
+elastic.tot  pprod.tot	     rp065158.L00  rp067161.tot
+gprod.tot    range	     rp065158.L03  rp067162.L00
+hprod.tot    rp063154.L00    rp065158.tot  rp067162.L03
+input	     rp063154.L13    rp066160.tot  rp067162.tot
+
+./Dy_162:
+aprod.tot    input	     rp063155.tot  rp067161.tot  rp067163.tot
+binary.tot   nonelastic.tot  rp064158.tot  rp067162.L00  total.tot
+dprod.tot    nprod.tot	     rp065159.tot  rp067162.L03  totalxs.tot
+elastic.tot  output	     rp066162.tot  rp067162.tot  tprod.tot
+gprod.tot    pprod.tot	     rp067161.L00  rp067163.L00
+hprod.tot    range	     rp067161.L02  rp067163.L03
+
+./Dy_163:
+aprod.tot    input	     rp063156.tot  rp067163.L00  total.tot
+binary.tot   nonelastic.tot  rp065160.tot  rp067163.L03  totalxs.tot
+dprod.tot    nprod.tot	     rp066163.tot  rp067163.tot  tprod.tot
+elastic.tot  output	     rp067162.L00  rp067164.L00
+gprod.tot    pprod.tot	     rp067162.L03  rp067164.L03
+hprod.tot    range	     rp067162.tot  rp067164.tot
+
+./Dy_164:
+aprod.tot    hprod.tot	     pprod.tot	   rp067163.L00  rp067164.tot
+binary.tot   input	     range	   rp067163.L03  rp067165.tot
+dprod.tot    nonelastic.tot  rp063157.tot  rp067163.tot  total.tot
+elastic.tot  nprod.tot	     rp065161.tot  rp067164.L00  totalxs.tot
+gprod.tot    output	     rp066164.tot  rp067164.L03  tprod.tot
+
+./Er_162:
+aprod.tot    hprod.tot	     pprod.tot	   rp067159.L03  rp069162.tot
+binary.tot   input	     range	   rp067159.tot  rp069163.tot
+dprod.tot    nonelastic.tot  rp065155.tot  rp068162.tot  total.tot
+elastic.tot  nprod.tot	     rp066158.tot  rp069162.L00  totalxs.tot
+gprod.tot    output	     rp067159.L00  rp069162.L04  tprod.tot
+
+./Er_164:
+aprod.tot    hprod.tot	     pprod.tot	   rp067161.L02  rp069164.tot
+binary.tot   input	     range	   rp067161.tot  rp069165.tot
+dprod.tot    nonelastic.tot  rp065157.tot  rp068164.tot  total.tot
+elastic.tot  nprod.tot	     rp066160.tot  rp069164.L00  totalxs.tot
+gprod.tot    output	     rp067161.L00  rp069164.L05  tprod.tot
+
+./Er_166:
+aprod.tot    gprod.tot	     nprod.tot	rp065159.tot  rp067163.tot  total.tot
+binary.tot   hprod.tot	     output	rp066162.tot  rp068166.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp067163.L00  rp069166.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp067163.L03  rp069167.tot
+
+./Er_167:
+aprod.tot    input	     rp065159.tot  rp067164.L00  rp068167.tot
+binary.tot   nonelastic.tot  rp065160.tot  rp067164.L03  rp069167.tot
+dprod.tot    nprod.tot	     rp066163.tot  rp067164.tot  rp069168.tot
+elastic.tot  output	     rp067163.L00  rp068166.tot  total.tot
+gprod.tot    pprod.tot	     rp067163.L03  rp068167.L00  totalxs.tot
+hprod.tot    range	     rp067163.tot  rp068167.L03  tprod.tot
+
+./Er_168:
+aprod.tot    gprod.tot	     nprod.tot	rp065161.tot  rp069167.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp066164.tot  rp069168.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp067165.tot  rp069169.tot
+elastic.tot  nonelastic.tot  range	rp068168.tot  total.tot
+
+./Er_170:
+aprod.tot    gprod.tot	     nprod.tot	rp065163.tot  rp069169.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp066166.tot  rp069170.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp067167.tot  rp069171.tot
+elastic.tot  nonelastic.tot  range	rp068170.tot  total.tot
+
+./Eu_151:
+aprod.tot    hprod.tot	     pprod.tot	   rp062147.tot  rp064152.tot
+binary.tot   input	     range	   rp062148.tot  total.tot
+dprod.tot    nonelastic.tot  rp060143.tot  rp063151.tot  totalxs.tot
+elastic.tot  nprod.tot	     rp060144.tot  rp064150.tot  tprod.tot
+gprod.tot    output	     rp061147.tot  rp064151.tot
+
+./Eu_153:
+aprod.tot    hprod.tot	     pprod.tot	   rp062149.tot  rp064154.tot
+binary.tot   input	     range	   rp062150.tot  total.tot
+dprod.tot    nonelastic.tot  rp060145.tot  rp063153.tot  totalxs.tot
+elastic.tot  nprod.tot	     rp060146.tot  rp064152.tot  tprod.tot
+gprod.tot    output	     rp061149.tot  rp064153.tot
+
+./F_19:
+aprod.tot    hprod.tot	     pprod.tot	   rp008016.tot  rp010019.tot
+binary.tot   input	     range	   rp008017.tot  rp010020.tot
+dprod.tot    nonelastic.tot  rp006012.tot  rp008018.tot  total.tot
+elastic.tot  nprod.tot	     rp007015.tot  rp009018.tot  totalxs.tot
+gprod.tot    output	     rp008015.tot  rp009019.tot  tprod.tot
+
+./Fe_54:
+aprod.tot    gprod.tot	     nprod.tot	rp025051.tot  rp027054.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp026054.tot  rp027055.tot
+dprod.tot    input	     pprod.tot	rp027054.L00  total.tot
+elastic.tot  nonelastic.tot  range	rp027054.L01  totalxs.tot
+
+./Fe_56:
+aprod.tot    gprod.tot	     nprod.tot	rp025053.tot  total.tot
+binary.tot   hprod.tot	     output	rp026056.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp027056.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp027057.tot
+
+./Fe_57:
+aprod.tot    gprod.tot	     nprod.tot	rp025054.tot  rp027058.L00  totalxs.tot
+binary.tot   hprod.tot	     output	rp026056.tot  rp027058.L01  tprod.tot
+dprod.tot    input	     pprod.tot	rp026057.tot  rp027058.tot
+elastic.tot  nonelastic.tot  range	rp027057.tot  total.tot
+
+./Fe_58:
+aprod.tot    gprod.tot	     nprod.tot	rp025055.tot  rp027058.L01  totalxs.tot
+binary.tot   hprod.tot	     output	rp026057.tot  rp027058.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp026058.tot  rp027059.tot
+elastic.tot  nonelastic.tot  range	rp027058.L00  total.tot
+
+./Ga_69:
+aprod.tot    gprod.tot	     nprod.tot	rp030066.tot  rp032070.tot
+binary.tot   hprod.tot	     output	rp030068.tot  total.tot
+dprod.tot    input	     pprod.tot	rp031069.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp032069.tot  tprod.tot
+
+./Ga_71:
+aprod.tot    gprod.tot	     nprod.tot	rp030067.tot  rp032071.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp030068.tot  rp032072.tot
+dprod.tot    input	     pprod.tot	rp031071.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp032070.tot  totalxs.tot
+
+./Gd_154:
+aprod.tot    hprod.tot	     pprod.tot	   rp064154.tot  rp065155.tot
+binary.tot   input	     range	   rp065154.L00  total.tot
+dprod.tot    nonelastic.tot  rp061147.tot  rp065154.L01  totalxs.tot
+elastic.tot  nprod.tot	     rp062150.tot  rp065154.L02  tprod.tot
+gprod.tot    output	     rp063151.tot  rp065154.tot
+
+./Gd_155:
+aprod.tot    nonelastic.tot  rp061148.L03  rp063152.tot  rp065156.tot
+binary.tot   nprod.tot	     rp061148.tot  rp064154.tot  total.tot
+dprod.tot    output	     rp062151.tot  rp064155.tot  totalxs.tot
+elastic.tot  pprod.tot	     rp063151.tot  rp065155.tot  tprod.tot
+gprod.tot    range	     rp063152.L00  rp065156.L00
+hprod.tot    rp061147.tot    rp063152.L01  rp065156.L03
+input	     rp061148.L00    rp063152.L16  rp065156.L06
+
+./Gd_156:
+aprod.tot    gprod.tot	     nprod.tot	rp061149.tot  rp065156.L03  total.tot
+binary.tot   hprod.tot	     output	rp063153.tot  rp065156.L06  totalxs.tot
+dprod.tot    input	     pprod.tot	rp064156.tot  rp065156.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp065156.L00  rp065157.tot
+
+./Gd_157:
+aprod.tot    input	     rp061150.tot  rp065156.L00  rp065158.L03
+binary.tot   nonelastic.tot  rp063154.L00  rp065156.L03  rp065158.tot
+dprod.tot    nprod.tot	     rp063154.L13  rp065156.L06  total.tot
+elastic.tot  output	     rp063154.tot  rp065156.tot  totalxs.tot
+gprod.tot    pprod.tot	     rp064156.tot  rp065157.tot  tprod.tot
+hprod.tot    range	     rp064157.tot  rp065158.L00
+
+./Gd_158:
+aprod.tot    gprod.tot	     nprod.tot	rp061151.tot  rp065158.L00  total.tot
+binary.tot   hprod.tot	     output	rp063155.tot  rp065158.L03  totalxs.tot
+dprod.tot    input	     pprod.tot	rp064158.tot  rp065158.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp065157.tot  rp065159.tot
+
+./Gd_160:
+aprod.tot    gprod.tot	     nprod.tot	rp061153.tot  rp065160.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp063157.tot  rp065161.tot
+dprod.tot    input	     pprod.tot	rp064160.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp065159.tot  totalxs.tot
+
+./Ge_70:
+aprod.tot    gprod.tot	     nprod.tot	rp031067.tot  total.tot
+binary.tot   hprod.tot	     output	rp032070.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp033070.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp033071.tot
+
+./Ge_72:
+aprod.tot    gprod.tot	     nprod.tot	rp031069.tot  total.tot
+binary.tot   hprod.tot	     output	rp032072.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp033072.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp033073.tot
+
+./Ge_73:
+aprod.tot    gprod.tot	     nprod.tot	rp031069.tot  rp033073.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp031070.tot  rp033074.tot
+dprod.tot    input	     pprod.tot	rp032072.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp032073.tot  totalxs.tot
+
+./Ge_74:
+aprod.tot    gprod.tot	     nprod.tot	rp031071.tot  total.tot
+binary.tot   hprod.tot	     output	rp032074.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp033074.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp033075.tot
+
+./H_1:
+input  output  range
+
+./H_2:
+input  output  range
+
+./He_3:
+input  output  range
+
+./He_4:
+input  output  range
+
+./helium_3:
+input  output  range
+
+./Hf_176:
+aprod.tot    gprod.tot	     nprod.tot	rp069169.tot  rp073176.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp070172.tot  rp073177.tot
+dprod.tot    input	     pprod.tot	rp071173.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp072176.tot  totalxs.tot
+
+./Hf_177:
+aprod.tot    input	     rp069169.tot  rp071174.tot  rp073178.L01
+binary.tot   nonelastic.tot  rp069170.tot  rp072177.L00  rp073178.tot
+dprod.tot    nprod.tot	     rp070173.tot  rp072177.L30  total.tot
+elastic.tot  output	     rp071173.tot  rp072177.tot  totalxs.tot
+gprod.tot    pprod.tot	     rp071174.L00  rp073177.tot  tprod.tot
+hprod.tot    range	     rp071174.L03  rp073178.L00
+
+./Hf_178:
+aprod.tot    input	     rp069171.tot  rp072178.tot  total.tot
+binary.tot   nonelastic.tot  rp070174.tot  rp073177.tot  totalxs.tot
+dprod.tot    nprod.tot	     rp071175.tot  rp073178.L00  tprod.tot
+elastic.tot  output	     rp072178.L00  rp073178.L01
+gprod.tot    pprod.tot	     rp072178.L05  rp073178.tot
+hprod.tot    range	     rp072178.L30  rp073179.tot
+
+./Hf_179:
+aprod.tot    nonelastic.tot  rp070175.tot  rp072179.L30  rp073180.L02
+binary.tot   nprod.tot	     rp071175.tot  rp072179.tot  rp073180.tot
+dprod.tot    output	     rp071176.L00  rp073178.L00  total.tot
+elastic.tot  pprod.tot	     rp071176.L01  rp073178.L01  totalxs.tot
+gprod.tot    range	     rp071176.tot  rp073178.tot  tprod.tot
+hprod.tot    rp069171.tot    rp072179.L00  rp073179.tot
+input	     rp069172.tot    rp072179.L05  rp073180.L00
+
+./Hf_180:
+aprod.tot    nonelastic.tot  rp070176.L05  rp071177.tot  rp073180.tot
+binary.tot   nprod.tot	     rp070176.tot  rp072180.L00  rp073181.tot
+dprod.tot    output	     rp071176.L00  rp072180.L07  total.tot
+elastic.tot  pprod.tot	     rp071176.L01  rp072180.tot  totalxs.tot
+gprod.tot    range	     rp071176.tot  rp073179.tot  tprod.tot
+hprod.tot    rp069173.tot    rp071177.L00  rp073180.L00
+input	     rp070176.L00    rp071177.L29  rp073180.L02
+
+./Hg_196:
+aprod.tot    hprod.tot	     pprod.tot	   rp079193.L04  rp081196.tot
+binary.tot   input	     range	   rp079193.tot  rp081197.tot
+dprod.tot    nonelastic.tot  rp077189.tot  rp080196.tot  total.tot
+elastic.tot  nprod.tot	     rp078192.tot  rp081196.L00  totalxs.tot
+gprod.tot    output	     rp079193.L00  rp081196.L06  tprod.tot
+
+./Hg_198:
+aprod.tot    input	     rp077191.L00  rp079195.L04  rp081199.tot
+binary.tot   nonelastic.tot  rp077191.L03  rp079195.tot  total.tot
+dprod.tot    nprod.tot	     rp077191.L10  rp080198.tot  totalxs.tot
+elastic.tot  output	     rp077191.tot  rp081198.L00  tprod.tot
+gprod.tot    pprod.tot	     rp078194.tot  rp081198.L07
+hprod.tot    range	     rp079195.L00  rp081198.tot
+
+./Hg_199:
+aprod.tot    nonelastic.tot  rp077192.L15  rp079196.L10  total.tot
+binary.tot   nprod.tot	     rp077192.tot  rp079196.tot  totalxs.tot
+dprod.tot    output	     rp078195.L00  rp080199.L00  tprod.tot
+elastic.tot  pprod.tot	     rp078195.L07  rp080199.L07
+gprod.tot    range	     rp078195.tot  rp080199.tot
+hprod.tot    rp077192.L00    rp079196.L00  rp081199.tot
+input	     rp077192.L03    rp079196.L03  rp081200.tot
+
+./Hg_200:
+aprod.tot    gprod.tot	     nprod.tot	rp078196.tot  rp080200.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp079197.L00  rp081200.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp079197.L04  rp081201.tot
+elastic.tot  nonelastic.tot  range	rp079197.tot  total.tot
+
+./Hg_201:
+aprod.tot    nonelastic.tot  rp077194.tot  rp079198.L00  total.tot
+binary.tot   nprod.tot	     rp078197.L00  rp079198.L10  totalxs.tot
+dprod.tot    output	     rp078197.L09  rp079198.tot  tprod.tot
+elastic.tot  pprod.tot	     rp078197.tot  rp080201.tot
+gprod.tot    range	     rp079197.L00  rp081200.tot
+hprod.tot    rp077194.L00    rp079197.L04  rp081201.tot
+input	     rp077194.L34    rp079197.tot  rp081202.tot
+
+./Hg_202:
+aprod.tot    gprod.tot	     nprod.tot	rp078198.tot  rp081202.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp079199.tot  rp081203.tot
+dprod.tot    input	     pprod.tot	rp080202.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp081201.tot  totalxs.tot
+
+./Hg_204:
+aprod.tot    gprod.tot	     nprod.tot	rp079201.tot  rp081205.tot
+binary.tot   hprod.tot	     output	rp080204.tot  total.tot
+dprod.tot    input	     pprod.tot	rp081203.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp081204.tot  tprod.tot
+
+./Ho_165:
+aprod.tot    gprod.tot	     nprod.tot	rp064158.tot  rp068164.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp065161.tot  rp068165.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp066162.tot  rp068166.tot
+elastic.tot  nonelastic.tot  range	rp067165.tot  total.tot
+
+./I_127:
+aprod.tot    gprod.tot	     nprod.tot	rp050120.tot  rp054127.L00  total.tot
+binary.tot   hprod.tot	     output	rp052124.tot  rp054127.L02  totalxs.tot
+dprod.tot    input	     pprod.tot	rp053127.tot  rp054127.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp054126.tot  rp054128.tot
+
+./In_113:
+aprod.tot    hprod.tot	     pprod.tot	   rp049113.L01  rp050113.tot
+binary.tot   input	     range	   rp049113.tot  rp050114.tot
+dprod.tot    nonelastic.tot  rp046106.tot  rp050112.tot  total.tot
+elastic.tot  nprod.tot	     rp048110.tot  rp050113.L00  totalxs.tot
+gprod.tot    output	     rp049113.L00  rp050113.L01  tprod.tot
+
+./Ir_191:
+aprod.tot    input	     rp074184.tot  rp077191.L30  totalxs.tot
+binary.tot   nonelastic.tot  rp075187.tot  rp077191.tot  tprod.tot
+dprod.tot    nprod.tot	     rp076187.tot  rp078190.tot
+elastic.tot  output	     rp076188.tot  rp078191.tot
+gprod.tot    pprod.tot	     rp077191.L00  rp078192.tot
+hprod.tot    range	     rp077191.L03  total.tot
+
+./Ir_193:
+aprod.tot    nonelastic.tot  rp076189.L00  rp077193.L02  total.tot
+binary.tot   nprod.tot	     rp076189.L01  rp077193.tot  totalxs.tot
+dprod.tot    output	     rp076189.tot  rp078192.tot  tprod.tot
+elastic.tot  pprod.tot	     rp076190.L00  rp078193.L00
+gprod.tot    range	     rp076190.L32  rp078193.L05
+hprod.tot    rp074186.tot    rp076190.tot  rp078193.tot
+input	     rp075189.tot    rp077193.L00  rp078194.tot
+
+./K_39:
+aprod.tot    gprod.tot	     nprod.tot	rp018036.tot  rp020040.tot
+binary.tot   hprod.tot	     output	rp018038.tot  total.tot
+dprod.tot    input	     pprod.tot	rp019039.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp020039.tot  tprod.tot
+
+./K_41:
+aprod.tot    hprod.tot	     pprod.tot	   rp018040.tot  rp020042.tot
+binary.tot   input	     range	   rp019040.tot  total.tot
+dprod.tot    nonelastic.tot  rp016034.tot  rp019041.tot  totalxs.tot
+elastic.tot  nprod.tot	     rp017037.tot  rp020040.tot  tprod.tot
+gprod.tot    output	     rp018038.tot  rp020041.tot
+
+./Kr_78:
+aprod.tot    gprod.tot	     nprod.tot	rp035075.tot  rp037078.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp036078.tot  rp037079.tot
+dprod.tot    input	     pprod.tot	rp037078.L00  total.tot
+elastic.tot  nonelastic.tot  range	rp037078.L03  totalxs.tot
+
+./Kr_80:
+aprod.tot    gprod.tot	     nprod.tot	rp035077.L00  rp037080.tot  total.tot
+binary.tot   hprod.tot	     output	rp035077.L01  rp037081.L00  totalxs.tot
+dprod.tot    input	     pprod.tot	rp035077.tot  rp037081.L01  tprod.tot
+elastic.tot  nonelastic.tot  range	rp036080.tot  rp037081.tot
+
+./Kr_82:
+aprod.tot    gprod.tot	     nprod.tot	rp035079.L00  rp037082.L00  total.tot
+binary.tot   hprod.tot	     output	rp035079.L01  rp037082.L01  totalxs.tot
+dprod.tot    input	     pprod.tot	rp035079.tot  rp037082.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp036082.tot  rp037083.tot
+
+./Kr_83:
+aprod.tot    input	     rp035080.L00  rp036083.tot  totalxs.tot
+binary.tot   nonelastic.tot  rp035080.L02  rp037083.tot  tprod.tot
+dprod.tot    nprod.tot	     rp035080.tot  rp037084.L00
+elastic.tot  output	     rp036082.tot  rp037084.L02
+gprod.tot    pprod.tot	     rp036083.L00  rp037084.tot
+hprod.tot    range	     rp036083.L02  total.tot
+
+./Kr_84:
+aprod.tot    gprod.tot	     nprod.tot	rp035081.tot  rp037084.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp036084.tot  rp037085.tot
+dprod.tot    input	     pprod.tot	rp037084.L00  total.tot
+elastic.tot  nonelastic.tot  range	rp037084.L02  totalxs.tot
+
+./Kr_86:
+aprod.tot    gprod.tot	     nprod.tot	rp035083.tot  rp037086.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp036086.tot  rp037087.tot
+dprod.tot    input	     pprod.tot	rp037086.L00  total.tot
+elastic.tot  nonelastic.tot  range	rp037086.L02  totalxs.tot
+
+./La_139:
+aprod.tot    gprod.tot	     nprod.tot	rp054132.tot  rp058139.L00  total.tot
+binary.tot   hprod.tot	     output	rp056136.tot  rp058139.L02  totalxs.tot
+dprod.tot    input	     pprod.tot	rp057139.tot  rp058139.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp058138.tot  rp058140.tot
+
+./Li_6:
+aprod.tot   elastic.tot  input		 output     rp003006.tot  totalxs.tot
+binary.tot  gprod.tot	 nonelastic.tot  pprod.tot  rp004007.tot  tprod.tot
+dprod.tot   hprod.tot	 nprod.tot	 range	    total.tot
+
+./Li_7:
+aprod.tot    gprod.tot	     nprod.tot	rp003006.tot  total.tot
+binary.tot   hprod.tot	     output	rp003007.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp004007.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp004008.tot
+
+./Lu_175:
+aprod.tot    input	     rp068167.L00  rp070172.tot  totalxs.tot
+binary.tot   nonelastic.tot  rp068167.L03  rp071175.tot  tprod.tot
+dprod.tot    nprod.tot	     rp068167.tot  rp072174.tot
+elastic.tot  output	     rp068168.tot  rp072175.tot
+gprod.tot    pprod.tot	     rp069171.tot  rp072176.tot
+hprod.tot    range	     rp070171.tot  total.tot
+
+./Mg_24:
+aprod.tot   elastic.tot  input		 output     rp011021.tot  total.tot
+binary.tot  gprod.tot	 nonelastic.tot  pprod.tot  rp012024.tot  totalxs.tot
+dprod.tot   hprod.tot	 nprod.tot	 range	    rp013025.tot  tprod.tot
+
+./Mg_25:
+aprod.tot    gprod.tot	     nprod.tot	rp011022.tot  rp013026.L00  totalxs.tot
+binary.tot   hprod.tot	     output	rp012024.tot  rp013026.L01  tprod.tot
+dprod.tot    input	     pprod.tot	rp012025.tot  rp013026.tot
+elastic.tot  nonelastic.tot  range	rp013025.tot  total.tot
+
+./Mg_26:
+aprod.tot    gprod.tot	     nprod.tot	rp011023.tot  rp013026.L01  totalxs.tot
+binary.tot   hprod.tot	     output	rp012025.tot  rp013026.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp012026.tot  rp013027.tot
+elastic.tot  nonelastic.tot  range	rp013026.L00  total.tot
+
+./Mn_55:
+aprod.tot    gprod.tot	     nprod.tot	rp024052.tot  total.tot
+binary.tot   hprod.tot	     output	rp025055.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp026055.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp026056.tot
+
+./Mo_92:
+aprod.tot    gprod.tot	     nprod.tot	rp041089.L00  rp043092.tot  total.tot
+binary.tot   hprod.tot	     output	rp041089.L01  rp043093.L00  totalxs.tot
+dprod.tot    input	     pprod.tot	rp041089.tot  rp043093.L01  tprod.tot
+elastic.tot  nonelastic.tot  range	rp042092.tot  rp043093.tot
+
+./Mo_94:
+aprod.tot    hprod.tot	     pprod.tot	   rp042094.tot  rp043095.L01
+binary.tot   input	     range	   rp043094.L00  rp043095.tot
+dprod.tot    nonelastic.tot  rp041091.L00  rp043094.L01  total.tot
+elastic.tot  nprod.tot	     rp041091.L01  rp043094.tot  totalxs.tot
+gprod.tot    output	     rp041091.tot  rp043095.L00  tprod.tot
+
+./Mo_95:
+aprod.tot    input	     rp041092.L00  rp043095.L01  totalxs.tot
+binary.tot   nonelastic.tot  rp041092.L01  rp043095.tot  tprod.tot
+dprod.tot    nprod.tot	     rp041092.tot  rp043096.L00
+elastic.tot  output	     rp042094.tot  rp043096.L01
+gprod.tot    pprod.tot	     rp042095.tot  rp043096.tot
+hprod.tot    range	     rp043095.L00  total.tot
+
+./Mo_96:
+aprod.tot    input	     rp039089.L00  rp042096.tot  rp043097.tot
+binary.tot   nonelastic.tot  rp039089.L01  rp043096.L00  total.tot
+dprod.tot    nprod.tot	     rp039089.tot  rp043096.L01  totalxs.tot
+elastic.tot  output	     rp041093.L00  rp043096.tot  tprod.tot
+gprod.tot    pprod.tot	     rp041093.L01  rp043097.L00
+hprod.tot    range	     rp041093.tot  rp043097.L01
+
+./Mo_97:
+aprod.tot    input	     rp039090.L00  rp041094.L00  rp043097.L01
+binary.tot   nonelastic.tot  rp039090.L02  rp041094.L01  rp043097.tot
+dprod.tot    nprod.tot	     rp039090.tot  rp041094.tot  rp043098.tot
+elastic.tot  output	     rp041093.L00  rp042096.tot  total.tot
+gprod.tot    pprod.tot	     rp041093.L01  rp042097.tot  totalxs.tot
+hprod.tot    range	     rp041093.tot  rp043097.L00  tprod.tot
+
+./Mo_98:
+aprod.tot    input	     rp039091.L00  rp042098.tot  rp043099.L02
+binary.tot   nonelastic.tot  rp039091.L01  rp043097.L00  rp043099.tot
+dprod.tot    nprod.tot	     rp039091.tot  rp043097.L01  total.tot
+elastic.tot  output	     rp041095.L00  rp043097.tot  totalxs.tot
+gprod.tot    pprod.tot	     rp041095.L01  rp043098.tot  tprod.tot
+hprod.tot    range	     rp041095.tot  rp043099.L00
+
+./N_14:
+aprod.tot    gprod.tot	     nprod.tot	rp006011.tot  rp008014.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp006012.tot  rp008015.tot
+dprod.tot    input	     pprod.tot	rp007013.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp007014.tot  totalxs.tot
+
+./N_15:
+aprod.tot    gprod.tot	     nprod.tot	rp006012.tot  rp008016.tot
+binary.tot   hprod.tot	     output	rp007014.tot  total.tot
+dprod.tot    input	     pprod.tot	rp007015.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp008015.tot  tprod.tot
+
+./Na_23:
+aprod.tot    gprod.tot	     nprod.tot	rp008016.tot  rp012024.tot
+binary.tot   hprod.tot	     output	rp010020.tot  total.tot
+dprod.tot    input	     pprod.tot	rp011023.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp012023.tot  tprod.tot
+
+./Nb_93:
+aprod.tot    hprod.tot	     pprod.tot	   rp041093.tot  rp042094.tot
+binary.tot   input	     range	   rp042092.tot  total.tot
+dprod.tot    nonelastic.tot  rp040090.tot  rp042093.L00  totalxs.tot
+elastic.tot  nprod.tot	     rp041093.L00  rp042093.L16  tprod.tot
+gprod.tot    output	     rp041093.L01  rp042093.tot
+
+./Nd_142:
+aprod.tot    gprod.tot	     nprod.tot	rp057135.tot  rp061143.tot
+binary.tot   hprod.tot	     output	rp059139.tot  total.tot
+dprod.tot    input	     pprod.tot	rp060142.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp061142.tot  tprod.tot
+
+./Nd_143:
+aprod.tot    hprod.tot	     pprod.tot	   rp058139.tot  rp061144.tot
+binary.tot   input	     range	   rp059140.tot  total.tot
+dprod.tot    nonelastic.tot  rp057136.tot  rp060142.tot  totalxs.tot
+elastic.tot  nprod.tot	     rp058139.L00  rp060143.tot  tprod.tot
+gprod.tot    output	     rp058139.L02  rp061143.tot
+
+./Nd_145:
+aprod.tot    input	     rp057137.tot  rp059142.tot  total.tot
+binary.tot   nonelastic.tot  rp057138.tot  rp060144.tot  totalxs.tot
+dprod.tot    nprod.tot	     rp058141.tot  rp060145.tot  tprod.tot
+elastic.tot  output	     rp059141.tot  rp061144.tot
+gprod.tot    pprod.tot	     rp059142.L00  rp061145.tot
+hprod.tot    range	     rp059142.L01  rp061146.tot
+
+./Nd_146:
+aprod.tot    hprod.tot	     pprod.tot	   rp059142.L01  rp061146.tot
+binary.tot   input	     range	   rp059142.tot  rp061147.tot
+dprod.tot    nonelastic.tot  rp057139.tot  rp059143.tot  total.tot
+elastic.tot  nprod.tot	     rp058142.tot  rp060146.tot  totalxs.tot
+gprod.tot    output	     rp059142.L00  rp061145.tot  tprod.tot
+
+./Nd_148:
+aprod.tot    input	     rp057141.tot  rp060148.tot  total.tot
+binary.tot   nonelastic.tot  rp058144.tot  rp061147.tot  totalxs.tot
+dprod.tot    nprod.tot	     rp059144.L00  rp061148.L00  tprod.tot
+elastic.tot  output	     rp059144.L01  rp061148.L03
+gprod.tot    pprod.tot	     rp059144.tot  rp061148.tot
+hprod.tot    range	     rp059145.tot  rp061149.tot
+
+./Ne_20:
+aprod.tot   elastic.tot  input		 output     rp009017.tot  total.tot
+binary.tot  gprod.tot	 nonelastic.tot  pprod.tot  rp010020.tot  totalxs.tot
+dprod.tot   hprod.tot	 nprod.tot	 range	    rp011021.tot  tprod.tot
+
+./Ne_21:
+aprod.tot    gprod.tot	     nprod.tot	rp007014.tot  rp010021.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp008017.tot  rp011021.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp009018.tot  rp011022.tot
+elastic.tot  nonelastic.tot  range	rp010020.tot  total.tot
+
+./Ne_22:
+aprod.tot    gprod.tot	     nprod.tot	rp007015.tot  rp010022.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp009019.tot  rp011022.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp010020.tot  rp011023.tot
+elastic.tot  nonelastic.tot  range	rp010021.tot  total.tot
+
+./Ni_58:
+aprod.tot    gprod.tot	     nprod.tot	rp027055.tot  total.tot
+binary.tot   hprod.tot	     output	rp028058.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp029058.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp029059.tot
+
+./Ni_60:
+aprod.tot    gprod.tot	     nprod.tot	rp027057.tot  total.tot
+binary.tot   hprod.tot	     output	rp028060.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp029060.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp029061.tot
+
+./Ni_61:
+aprod.tot    gprod.tot	     nprod.tot	rp027058.L00  rp028061.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp027058.L01  rp029061.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp027058.tot  rp029062.tot
+elastic.tot  nonelastic.tot  range	rp028060.tot  total.tot
+
+./Ni_62:
+aprod.tot    gprod.tot	     nprod.tot	rp027059.tot  total.tot
+binary.tot   hprod.tot	     output	rp028062.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp029062.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp029063.tot
+
+./Ni_64:
+aprod.tot    gprod.tot	     nprod.tot	rp027061.tot  rp029065.tot
+binary.tot   hprod.tot	     output	rp028063.tot  total.tot
+dprod.tot    input	     pprod.tot	rp028064.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp029064.tot  tprod.tot
+
+./O_16:
+aprod.tot   elastic.tot  input		 output     rp007013.tot  total.tot
+binary.tot  gprod.tot	 nonelastic.tot  pprod.tot  rp008016.tot  totalxs.tot
+dprod.tot   hprod.tot	 nprod.tot	 range	    rp009017.tot  tprod.tot
+
+./O_17:
+aprod.tot    gprod.tot	     nprod.tot	rp006013.tot  rp009017.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp007014.tot  rp009018.tot
+dprod.tot    input	     pprod.tot	rp008016.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp008017.tot  totalxs.tot
+
+./O_18:
+aprod.tot    gprod.tot	     nprod.tot	rp006014.tot  rp008017.tot  total.tot
+binary.tot   hprod.tot	     output	rp007014.tot  rp008018.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp007015.tot  rp009018.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp008016.tot  rp009019.tot
+
+./Os_184:
+aprod.tot    gprod.tot	     nprod.tot	rp073177.tot  rp077184.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp074180.tot  rp077185.tot
+dprod.tot    input	     pprod.tot	rp075181.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp076184.tot  totalxs.tot
+
+./Os_187:
+aprod.tot    input	     rp073179.tot  rp074183.tot  rp076187.tot
+binary.tot   nonelastic.tot  rp073180.L00  rp075183.tot  rp077187.tot
+dprod.tot    nprod.tot	     rp073180.L02  rp075184.L00  rp077188.tot
+elastic.tot  output	     rp073180.tot  rp075184.L05  total.tot
+gprod.tot    pprod.tot	     rp074183.L00  rp075184.tot  totalxs.tot
+hprod.tot    range	     rp074183.L07  rp076186.tot  tprod.tot
+
+./Os_188:
+aprod.tot    gprod.tot	     nprod.tot	rp073181.tot  rp077188.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp074184.tot  rp077189.tot
+dprod.tot    input	     pprod.tot	rp075185.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp076188.tot  totalxs.tot
+
+./Os_189:
+aprod.tot    nonelastic.tot  rp073182.L29  rp075186.L04  rp077190.L00
+binary.tot   nprod.tot	     rp073182.tot  rp075186.tot  rp077190.L02
+dprod.tot    output	     rp074185.L00  rp076189.L00  rp077190.L37
+elastic.tot  pprod.tot	     rp074185.L06  rp076189.L01  rp077190.tot
+gprod.tot    range	     rp074185.tot  rp076189.tot  total.tot
+hprod.tot    rp073181.tot    rp075185.tot  rp077188.tot  totalxs.tot
+input	     rp073182.L00    rp075186.L00  rp077189.tot  tprod.tot
+
+./Os_190:
+aprod.tot    nonelastic.tot  rp075186.L00  rp077189.tot  rp077191.L10
+binary.tot   nprod.tot	     rp075186.L04  rp077190.L00  rp077191.tot
+dprod.tot    output	     rp075186.tot  rp077190.L02  total.tot
+elastic.tot  pprod.tot	     rp075187.tot  rp077190.L37  totalxs.tot
+gprod.tot    range	     rp076190.L00  rp077190.tot  tprod.tot
+hprod.tot    rp073183.tot    rp076190.L32  rp077191.L00
+input	     rp074186.tot    rp076190.tot  rp077191.L03
+
+./Os_192:
+aprod.tot    nonelastic.tot  rp075189.tot  rp077191.tot  rp077193.tot
+binary.tot   nprod.tot	     rp076192.L00  rp077192.L00  total.tot
+dprod.tot    output	     rp076192.L30  rp077192.L03  totalxs.tot
+elastic.tot  pprod.tot	     rp076192.tot  rp077192.L15  tprod.tot
+gprod.tot    range	     rp077191.L00  rp077192.tot
+hprod.tot    rp073185.tot    rp077191.L03  rp077193.L00
+input	     rp074188.tot    rp077191.L10  rp077193.L02
+
+./P_31:
+aprod.tot    gprod.tot	     nprod.tot	rp014028.tot  rp016032.tot
+binary.tot   hprod.tot	     output	rp014030.tot  total.tot
+dprod.tot    input	     pprod.tot	rp015031.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp016031.tot  tprod.tot
+
+./Pb_204:
+aprod.tot    hprod.tot	     pprod.tot	   rp080200.tot  rp083204.tot
+binary.tot   input	     range	   rp081201.tot  rp083205.tot
+dprod.tot    nonelastic.tot  rp079197.L00  rp082204.L00  total.tot
+elastic.tot  nprod.tot	     rp079197.L04  rp082204.L21  totalxs.tot
+gprod.tot    output	     rp079197.tot  rp082204.tot  tprod.tot
+
+./Pb_206:
+aprod.tot    gprod.tot	     nprod.tot	rp079199.tot  rp083206.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp080202.tot  rp083207.tot
+dprod.tot    input	     pprod.tot	rp081203.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp082206.tot  totalxs.tot
+
+./Pb_207:
+aprod.tot    hprod.tot	     pprod.tot	   rp080203.tot  rp083208.tot
+binary.tot   input	     range	   rp081203.tot  total.tot
+dprod.tot    nonelastic.tot  rp079200.L00  rp081204.tot  totalxs.tot
+elastic.tot  nprod.tot	     rp079200.L11  rp082207.tot  tprod.tot
+gprod.tot    output	     rp079200.tot  rp083207.tot
+
+./Pb_208:
+aprod.tot    gprod.tot	     nprod.tot	rp079201.tot  rp083208.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp080204.tot  rp083209.tot
+dprod.tot    input	     pprod.tot	rp081205.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp082208.tot  totalxs.tot
+
+./Pd_102:
+aprod.tot    input	     rp043095.L00  rp046102.tot  rp047103.tot
+binary.tot   nonelastic.tot  rp043095.L01  rp047102.L00  total.tot
+dprod.tot    nprod.tot	     rp043095.tot  rp047102.L01  totalxs.tot
+elastic.tot  output	     rp045099.L00  rp047102.tot  tprod.tot
+gprod.tot    pprod.tot	     rp045099.L01  rp047103.L00
+hprod.tot    range	     rp045099.tot  rp047103.L02
+
+./Pd_104:
+aprod.tot    input	     rp043097.L00  rp046104.tot  rp047105.tot
+binary.tot   nonelastic.tot  rp043097.L01  rp047104.L00  total.tot
+dprod.tot    nprod.tot	     rp043097.tot  rp047104.L01  totalxs.tot
+elastic.tot  output	     rp045101.L00  rp047104.tot  tprod.tot
+gprod.tot    pprod.tot	     rp045101.L01  rp047105.L00
+hprod.tot    range	     rp045101.tot  rp047105.L01
+
+./Pd_105:
+aprod.tot    input	     rp043098.tot  rp047105.L00  total.tot
+binary.tot   nonelastic.tot  rp045102.L00  rp047105.L01  totalxs.tot
+dprod.tot    nprod.tot	     rp045102.L05  rp047105.tot  tprod.tot
+elastic.tot  output	     rp045102.tot  rp047106.L00
+gprod.tot    pprod.tot	     rp046104.tot  rp047106.L01
+hprod.tot    range	     rp046105.tot  rp047106.tot
+
+./Pd_106:
+aprod.tot    hprod.tot	     pprod.tot	   rp046106.tot  rp047107.L01
+binary.tot   input	     range	   rp047106.L00  rp047107.tot
+dprod.tot    nonelastic.tot  rp045103.L00  rp047106.L01  total.tot
+elastic.tot  nprod.tot	     rp045103.L01  rp047106.tot  totalxs.tot
+gprod.tot    output	     rp045103.tot  rp047107.L00  tprod.tot
+
+./Pd_108:
+aprod.tot    hprod.tot	     pprod.tot	   rp046108.tot  rp047109.L01
+binary.tot   input	     range	   rp047108.L00  rp047109.tot
+dprod.tot    nonelastic.tot  rp045105.L00  rp047108.L02  total.tot
+elastic.tot  nprod.tot	     rp045105.L01  rp047108.tot  totalxs.tot
+gprod.tot    output	     rp045105.tot  rp047109.L00  tprod.tot
+
+./Pd_110:
+aprod.tot    input	     rp045107.tot  rp047110.L02  totalxs.tot
+binary.tot   nonelastic.tot  rp046110.tot  rp047110.tot  tprod.tot
+dprod.tot    nprod.tot	     rp047109.L00  rp047111.L00
+elastic.tot  output	     rp047109.L01  rp047111.L01
+gprod.tot    pprod.tot	     rp047109.tot  rp047111.tot
+hprod.tot    range	     rp047110.L00  total.tot
+
+./Pr_141:
+aprod.tot    gprod.tot	     nprod.tot	rp056134.tot  rp060141.L02  totalxs.tot
+binary.tot   hprod.tot	     output	rp058138.tot  rp060141.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp059141.tot  rp060142.tot
+elastic.tot  nonelastic.tot  range	rp060141.L00  total.tot
+
+./Pt_192:
+aprod.tot    gprod.tot	     nprod.tot	rp075185.tot  rp079192.tot  total.tot
+binary.tot   hprod.tot	     output	rp076188.tot  rp079193.L00  totalxs.tot
+dprod.tot    input	     pprod.tot	rp077189.tot  rp079193.L04  tprod.tot
+elastic.tot  nonelastic.tot  range	rp078192.tot  rp079193.tot
+
+./Pt_194:
+aprod.tot    input	     rp075187.tot  rp077191.L10  rp079195.tot
+binary.tot   nonelastic.tot  rp076190.L00  rp077191.tot  total.tot
+dprod.tot    nprod.tot	     rp076190.L32  rp078194.tot  totalxs.tot
+elastic.tot  output	     rp076190.tot  rp079194.tot  tprod.tot
+gprod.tot    pprod.tot	     rp077191.L00  rp079195.L00
+hprod.tot    range	     rp077191.L03  rp079195.L04
+
+./Pt_195:
+aprod.tot	nprod.tot     rp076191.L01  rp077192.L15  rp079195.tot
+binary.tot	output	      rp076191.tot  rp077192.tot  rp079196.L00
+dprod.tot	pprod.tot     rp077191.L00  rp078195.L00  rp079196.L03
+elastic.tot	range	      rp077191.L03  rp078195.L07  rp079196.L10
+gprod.tot	rp075188.L00  rp077191.L10  rp078195.tot  rp079196.tot
+hprod.tot	rp075188.L07  rp077191.tot  rp079194.tot  total.tot
+input		rp075188.tot  rp077192.L00  rp079195.L00  totalxs.tot
+nonelastic.tot	rp076191.L00  rp077192.L03  rp079195.L04  tprod.tot
+
+./Pt_196:
+aprod.tot    nonelastic.tot  rp076192.tot  rp079195.tot  rp079197.tot
+binary.tot   nprod.tot	     rp077193.L00  rp079196.L00  total.tot
+dprod.tot    output	     rp077193.L02  rp079196.L03  totalxs.tot
+elastic.tot  pprod.tot	     rp077193.tot  rp079196.L10  tprod.tot
+gprod.tot    range	     rp078196.tot  rp079196.tot
+hprod.tot    rp076192.L00    rp079195.L00  rp079197.L00
+input	     rp076192.L10    rp079195.L04  rp079197.L04
+
+./Pt_198:
+aprod.tot    input	     rp076194.tot  rp079197.L04  total.tot
+binary.tot   nonelastic.tot  rp077195.L00  rp079197.tot  totalxs.tot
+dprod.tot    nprod.tot	     rp077195.L02  rp079198.L00  tprod.tot
+elastic.tot  output	     rp077195.tot  rp079198.L10
+gprod.tot    pprod.tot	     rp078198.tot  rp079198.tot
+hprod.tot    range	     rp079197.L00  rp079199.tot
+
+./Rb_85:
+aprod.tot    gprod.tot	     nprod.tot	rp036082.tot  rp038085.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp037085.tot  rp038086.tot
+dprod.tot    input	     pprod.tot	rp038085.L00  total.tot
+elastic.tot  nonelastic.tot  range	rp038085.L02  totalxs.tot
+
+./Re_185:
+aprod.tot    input	     rp072178.L00  rp074182.tot  totalxs.tot
+binary.tot   nonelastic.tot  rp072178.L05  rp075185.tot  tprod.tot
+dprod.tot    nprod.tot	     rp072178.L10  rp076184.tot
+elastic.tot  output	     rp072178.tot  rp076185.tot
+gprod.tot    pprod.tot	     rp073181.tot  rp076186.tot
+hprod.tot    range	     rp074181.tot  total.tot
+
+./Rh_103:
+aprod.tot    gprod.tot	     nprod.tot	rp042096.tot  rp045103.tot  total.tot
+binary.tot   hprod.tot	     output	rp044100.tot  rp046102.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp045103.L00  rp046103.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp045103.L01  rp046104.tot
+
+./Ru_100:
+aprod.tot    input	     rp041093.L00  rp044100.tot  rp045101.tot
+binary.tot   nonelastic.tot  rp041093.L01  rp045100.L00  total.tot
+dprod.tot    nprod.tot	     rp041093.tot  rp045100.L04  totalxs.tot
+elastic.tot  output	     rp043097.L00  rp045100.tot  tprod.tot
+gprod.tot    pprod.tot	     rp043097.L01  rp045101.L00
+hprod.tot    range	     rp043097.tot  rp045101.L01
+
+./Ru_101:
+aprod.tot    input	     rp041094.L00  rp043098.tot  rp045102.L00
+binary.tot   nonelastic.tot  rp041094.L01  rp044100.tot  rp045102.L05
+dprod.tot    nprod.tot	     rp041094.tot  rp044101.tot  rp045102.tot
+elastic.tot  output	     rp043097.L00  rp045101.L00  total.tot
+gprod.tot    pprod.tot	     rp043097.L01  rp045101.L01  totalxs.tot
+hprod.tot    range	     rp043097.tot  rp045101.tot  tprod.tot
+
+./Ru_102:
+aprod.tot    input	     rp041095.L00  rp044102.tot  rp045103.tot
+binary.tot   nonelastic.tot  rp041095.L01  rp045102.L00  total.tot
+dprod.tot    nprod.tot	     rp041095.tot  rp045102.L05  totalxs.tot
+elastic.tot  output	     rp043099.L00  rp045102.tot  tprod.tot
+gprod.tot    pprod.tot	     rp043099.L02  rp045103.L00
+hprod.tot    range	     rp043099.tot  rp045103.L01
+
+./Ru_104:
+aprod.tot    input	     rp043101.tot  rp045104.L03  totalxs.tot
+binary.tot   nonelastic.tot  rp044104.tot  rp045104.tot  tprod.tot
+dprod.tot    nprod.tot	     rp045103.L00  rp045105.L00
+elastic.tot  output	     rp045103.L01  rp045105.L01
+gprod.tot    pprod.tot	     rp045103.tot  rp045105.tot
+hprod.tot    range	     rp045104.L00  total.tot
+
+./Ru_96:
+aprod.tot    hprod.tot	     pprod.tot	   rp044096.tot  rp045097.L01
+binary.tot   input	     range	   rp045096.L00  rp045097.tot
+dprod.tot    nonelastic.tot  rp043093.L00  rp045096.L01  total.tot
+elastic.tot  nprod.tot	     rp043093.L01  rp045096.tot  totalxs.tot
+gprod.tot    output	     rp043093.tot  rp045097.L00  tprod.tot
+
+./Ru_98:
+aprod.tot    input	     rp041091.L00  rp044098.tot  rp045099.tot
+binary.tot   nonelastic.tot  rp041091.L01  rp045098.L00  total.tot
+dprod.tot    nprod.tot	     rp041091.tot  rp045098.L03  totalxs.tot
+elastic.tot  output	     rp043095.L00  rp045098.tot  tprod.tot
+gprod.tot    pprod.tot	     rp043095.L01  rp045099.L00
+hprod.tot    range	     rp043095.tot  rp045099.L01
+
+./Ru_99:
+aprod.tot    input	     rp041092.L00  rp044098.tot  rp045100.L04
+binary.tot   nonelastic.tot  rp041092.L01  rp044099.tot  rp045100.tot
+dprod.tot    nprod.tot	     rp041092.tot  rp045099.L00  total.tot
+elastic.tot  output	     rp043096.L00  rp045099.L01  totalxs.tot
+gprod.tot    pprod.tot	     rp043096.L01  rp045099.tot  tprod.tot
+hprod.tot    range	     rp043096.tot  rp045100.L00
+
+./S_32:
+aprod.tot    gprod.tot	     nprod.tot	rp014028.tot  total.tot
+binary.tot   hprod.tot	     output	rp015029.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp016032.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp017033.tot
+
+./S_33:
+aprod.tot    gprod.tot	     nprod.tot	rp015030.tot  rp017034.L00  totalxs.tot
+binary.tot   hprod.tot	     output	rp016032.tot  rp017034.L01  tprod.tot
+dprod.tot    input	     pprod.tot	rp016033.tot  rp017034.tot
+elastic.tot  nonelastic.tot  range	rp017033.tot  total.tot
+
+./S_34:
+aprod.tot    gprod.tot	     nprod.tot	rp015031.tot  rp017034.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp016034.tot  rp017035.tot
+dprod.tot    input	     pprod.tot	rp017034.L00  total.tot
+elastic.tot  nonelastic.tot  range	rp017034.L01  totalxs.tot
+
+./S_36:
+aprod.tot    gprod.tot	     nprod.tot	rp015033.tot  rp017036.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp016034.tot  rp017037.tot
+dprod.tot    input	     pprod.tot	rp016035.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp016036.tot  totalxs.tot
+
+./Sb_121:
+aprod.tot    input	     rp048114.tot  rp052120.tot  totalxs.tot
+binary.tot   nonelastic.tot  rp050117.L00  rp052121.L00  tprod.tot
+dprod.tot    nprod.tot	     rp050117.L02  rp052121.L02
+elastic.tot  output	     rp050117.tot  rp052121.tot
+gprod.tot    pprod.tot	     rp050118.tot  rp052122.tot
+hprod.tot    range	     rp051121.tot  total.tot
+
+./Sb_123:
+aprod.tot    gprod.tot	     nprod.tot	rp048116.tot  rp052123.L00  total.tot
+binary.tot   hprod.tot	     output	rp050120.tot  rp052123.L02  totalxs.tot
+dprod.tot    input	     pprod.tot	rp051123.tot  rp052123.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp052122.tot  rp052124.tot
+
+./Sc_45:
+aprod.tot    gprod.tot	     nprod.tot	rp020042.tot  rp022046.tot
+binary.tot   hprod.tot	     output	rp020044.tot  total.tot
+dprod.tot    input	     pprod.tot	rp021045.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp022045.tot  tprod.tot
+
+./Se_74:
+aprod.tot    gprod.tot	     nprod.tot	rp033071.tot  rp035074.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp034074.tot  rp035075.tot
+dprod.tot    input	     pprod.tot	rp035074.L00  total.tot
+elastic.tot  nonelastic.tot  range	rp035074.L02  totalxs.tot
+
+./Se_76:
+aprod.tot    gprod.tot	     nprod.tot	rp033073.tot  rp035076.tot  total.tot
+binary.tot   hprod.tot	     output	rp034076.tot  rp035077.L00  totalxs.tot
+dprod.tot    input	     pprod.tot	rp035076.L00  rp035077.L01  tprod.tot
+elastic.tot  nonelastic.tot  range	rp035076.L02  rp035077.tot
+
+./Se_77:
+aprod.tot    hprod.tot	     pprod.tot	   rp034077.L01  rp035078.tot
+binary.tot   input	     range	   rp034077.tot  total.tot
+dprod.tot    nonelastic.tot  rp033074.tot  rp035077.L00  totalxs.tot
+elastic.tot  nprod.tot	     rp034076.tot  rp035077.L01  tprod.tot
+gprod.tot    output	     rp034077.L00  rp035077.tot
+
+./Se_78:
+aprod.tot    gprod.tot	     nprod.tot	rp033075.tot  rp035079.L01  tprod.tot
+binary.tot   hprod.tot	     output	rp034078.tot  rp035079.tot
+dprod.tot    input	     pprod.tot	rp035078.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp035079.L00  totalxs.tot
+
+./Se_80:
+aprod.tot    gprod.tot	     nprod.tot	rp033077.tot  rp035080.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp034080.tot  rp035081.tot
+dprod.tot    input	     pprod.tot	rp035080.L00  total.tot
+elastic.tot  nonelastic.tot  range	rp035080.L02  totalxs.tot
+
+./Si_28:
+aprod.tot   elastic.tot  input		 output     rp013025.tot  total.tot
+binary.tot  gprod.tot	 nonelastic.tot  pprod.tot  rp014028.tot  totalxs.tot
+dprod.tot   hprod.tot	 nprod.tot	 range	    rp015029.tot  tprod.tot
+
+./Si_29:
+aprod.tot    gprod.tot	     nprod.tot	rp013026.L00  rp014029.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp013026.L01  rp015029.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp013026.tot  rp015030.tot
+elastic.tot  nonelastic.tot  range	rp014028.tot  total.tot
+
+./Si_30:
+aprod.tot    gprod.tot	     nprod.tot	rp013027.tot  rp015031.tot
+binary.tot   hprod.tot	     output	rp014029.tot  total.tot
+dprod.tot    input	     pprod.tot	rp014030.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp015030.tot  tprod.tot
+
+./Sm_144:
+aprod.tot    gprod.tot	     nprod.tot	rp059137.tot  rp063145.tot
+binary.tot   hprod.tot	     output	rp061141.tot  total.tot
+dprod.tot    input	     pprod.tot	rp062144.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp063144.tot  tprod.tot
+
+./Sm_149:
+aprod.tot    input	     rp059141.tot  rp061146.tot  rp063150.L01
+binary.tot   nonelastic.tot  rp059142.L00  rp062148.tot  rp063150.tot
+dprod.tot    nprod.tot	     rp059142.L01  rp062149.tot  total.tot
+elastic.tot  output	     rp059142.tot  rp063148.tot  totalxs.tot
+gprod.tot    pprod.tot	     rp060145.tot  rp063149.tot  tprod.tot
+hprod.tot    range	     rp061145.tot  rp063150.L00
+
+./Sm_150:
+aprod.tot    input	     rp059142.L00  rp061147.tot  rp063151.tot
+binary.tot   nonelastic.tot  rp059142.L01  rp062150.tot  total.tot
+dprod.tot    nprod.tot	     rp059142.tot  rp063149.tot  totalxs.tot
+elastic.tot  output	     rp059143.tot  rp063150.L00  tprod.tot
+gprod.tot    pprod.tot	     rp060146.tot  rp063150.L01
+hprod.tot    range	     rp061146.tot  rp063150.tot
+
+./Sm_152:
+aprod.tot    hprod.tot	     pprod.tot	   rp062152.tot  rp063152.tot
+binary.tot   input	     range	   rp063151.tot  rp063153.tot
+dprod.tot    nonelastic.tot  rp059145.tot  rp063152.L00  total.tot
+elastic.tot  nprod.tot	     rp060148.tot  rp063152.L01  totalxs.tot
+gprod.tot    output	     rp061149.tot  rp063152.L16  tprod.tot
+
+./Sm_154:
+aprod.tot    gprod.tot	     nprod.tot	rp059147.tot  rp063154.L00  total.tot
+binary.tot   hprod.tot	     output	rp061151.tot  rp063154.L13  totalxs.tot
+dprod.tot    input	     pprod.tot	rp062154.tot  rp063154.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp063153.tot  rp063155.tot
+
+./Sn_112:
+aprod.tot    hprod.tot	     pprod.tot	   rp049109.L00  rp051113.tot
+binary.tot   input	     range	   rp049109.L01  total.tot
+dprod.tot    nonelastic.tot  rp047105.L00  rp049109.tot  totalxs.tot
+elastic.tot  nprod.tot	     rp047105.L01  rp050112.tot  tprod.tot
+gprod.tot    output	     rp047105.tot  rp051112.tot
+
+./Sn_114:
+aprod.tot    hprod.tot	     pprod.tot	   rp049111.L00  rp051115.tot
+binary.tot   input	     range	   rp049111.L01  total.tot
+dprod.tot    nonelastic.tot  rp047107.L00  rp049111.tot  totalxs.tot
+elastic.tot  nprod.tot	     rp047107.L01  rp050114.tot  tprod.tot
+gprod.tot    output	     rp047107.tot  rp051114.tot
+
+./Sn_115:
+aprod.tot    input	     rp047108.L00  rp050114.tot  total.tot
+binary.tot   nonelastic.tot  rp047108.L02  rp050115.tot  totalxs.tot
+dprod.tot    nprod.tot	     rp047108.tot  rp051115.tot  tprod.tot
+elastic.tot  output	     rp049112.L00  rp051116.L00
+gprod.tot    pprod.tot	     rp049112.L01  rp051116.L03
+hprod.tot    range	     rp049112.tot  rp051116.tot
+
+./Sn_116:
+aprod.tot    gprod.tot	     nprod.tot	rp049113.L00  rp051116.L00  total.tot
+binary.tot   hprod.tot	     output	rp049113.L01  rp051116.L03  totalxs.tot
+dprod.tot    input	     pprod.tot	rp049113.tot  rp051116.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp050116.tot  rp051117.tot
+
+./Sn_117:
+aprod.tot    input	     rp049114.L00  rp050117.tot  totalxs.tot
+binary.tot   nonelastic.tot  rp049114.L01  rp051117.tot  tprod.tot
+dprod.tot    nprod.tot	     rp049114.tot  rp051118.L00
+elastic.tot  output	     rp050116.tot  rp051118.L07
+gprod.tot    pprod.tot	     rp050117.L00  rp051118.tot
+hprod.tot    range	     rp050117.L02  total.tot
+
+./Sn_118:
+aprod.tot    gprod.tot	     nprod.tot	rp049115.L00  rp051118.L00  total.tot
+binary.tot   hprod.tot	     output	rp049115.L01  rp051118.L07  totalxs.tot
+dprod.tot    input	     pprod.tot	rp049115.tot  rp051118.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp050118.tot  rp051119.tot
+
+./Sn_119:
+aprod.tot    input	     rp049116.L00  rp050119.L02  total.tot
+binary.tot   nonelastic.tot  rp049116.L01  rp050119.tot  totalxs.tot
+dprod.tot    nprod.tot	     rp049116.L04  rp051119.tot  tprod.tot
+elastic.tot  output	     rp049116.tot  rp051120.L00
+gprod.tot    pprod.tot	     rp050118.tot  rp051120.L06
+hprod.tot    range	     rp050119.L00  rp051120.tot
+
+./Sn_120:
+aprod.tot    gprod.tot	     nprod.tot	rp049117.L00  rp051120.L00  total.tot
+binary.tot   hprod.tot	     output	rp049117.L01  rp051120.L06  totalxs.tot
+dprod.tot    input	     pprod.tot	rp049117.tot  rp051120.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp050120.tot  rp051121.tot
+
+./Sn_122:
+aprod.tot    hprod.tot	     pprod.tot	   rp050122.tot  rp051123.tot
+binary.tot   input	     range	   rp051121.tot  total.tot
+dprod.tot    nonelastic.tot  rp049119.L00  rp051122.L00  totalxs.tot
+elastic.tot  nprod.tot	     rp049119.L01  rp051122.L05  tprod.tot
+gprod.tot    output	     rp049119.tot  rp051122.tot
+
+./Sn_124:
+aprod.tot    hprod.tot	     pprod.tot	   rp050124.tot  rp051124.tot
+binary.tot   input	     range	   rp051123.tot  rp051125.tot
+dprod.tot    nonelastic.tot  rp049121.L00  rp051124.L00  total.tot
+elastic.tot  nprod.tot	     rp049121.L01  rp051124.L01  totalxs.tot
+gprod.tot    output	     rp049121.tot  rp051124.L02  tprod.tot
+
+./Sr_84:
+aprod.tot    hprod.tot	     pprod.tot	   rp038084.tot  rp039085.L01
+binary.tot   input	     range	   rp039084.L00  rp039085.tot
+dprod.tot    nonelastic.tot  rp037081.L00  rp039084.L02  total.tot
+elastic.tot  nprod.tot	     rp037081.L01  rp039084.tot  totalxs.tot
+gprod.tot    output	     rp037081.tot  rp039085.L00  tprod.tot
+
+./Sr_86:
+aprod.tot    gprod.tot	     nprod.tot	rp037083.tot  rp039086.tot  total.tot
+binary.tot   hprod.tot	     output	rp038086.tot  rp039087.L00  totalxs.tot
+dprod.tot    input	     pprod.tot	rp039086.L00  rp039087.L01  tprod.tot
+elastic.tot  nonelastic.tot  range	rp039086.L02  rp039087.tot
+
+./Sr_87:
+aprod.tot    input	     rp037084.L00  rp038087.tot  totalxs.tot
+binary.tot   nonelastic.tot  rp037084.L02  rp039087.L00  tprod.tot
+dprod.tot    nprod.tot	     rp037084.tot  rp039087.L01
+elastic.tot  output	     rp038086.tot  rp039087.tot
+gprod.tot    pprod.tot	     rp038087.L00  rp039088.tot
+hprod.tot    range	     rp038087.L01  total.tot
+
+./Sr_88:
+aprod.tot    gprod.tot	     nprod.tot	rp037085.tot  rp039089.L01  tprod.tot
+binary.tot   hprod.tot	     output	rp038088.tot  rp039089.tot
+dprod.tot    input	     pprod.tot	rp039088.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp039089.L00  totalxs.tot
+
+./Ta_181:
+aprod.tot    input	     rp070174.tot  rp072177.tot  rp074180.tot
+binary.tot   nonelastic.tot  rp071177.L00  rp072178.L00  rp074181.tot
+dprod.tot    nprod.tot	     rp071177.L29  rp072178.L05  rp074182.tot
+elastic.tot  output	     rp071177.tot  rp072178.L10  total.tot
+gprod.tot    pprod.tot	     rp072177.L00  rp072178.tot  totalxs.tot
+hprod.tot    range	     rp072177.L10  rp073181.tot  tprod.tot
+
+./Tb_159:
+aprod.tot    gprod.tot	     nprod.tot	rp062152.tot  rp066159.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp064156.tot  rp066160.tot
+dprod.tot    input	     pprod.tot	rp065159.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp066158.tot  totalxs.tot
+
+./Te_120:
+aprod.tot    hprod.tot	     pprod.tot	   rp051117.tot  rp053121.tot
+binary.tot   input	     range	   rp052120.tot  total.tot
+dprod.tot    nonelastic.tot  rp049113.L00  rp053120.L00  totalxs.tot
+elastic.tot  nprod.tot	     rp049113.L01  rp053120.L13  tprod.tot
+gprod.tot    output	     rp049113.tot  rp053120.tot
+
+./Te_122:
+aprod.tot    gprod.tot	     nprod.tot	rp049115.L00  rp052122.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp049115.L01  rp053122.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp049115.tot  rp053123.tot
+elastic.tot  nonelastic.tot  range	rp051119.tot  total.tot
+
+./Te_124:
+aprod.tot    gprod.tot	     nprod.tot	rp049117.L00  rp052124.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp049117.L01  rp053124.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp049117.tot  rp053125.tot
+elastic.tot  nonelastic.tot  range	rp051121.tot  total.tot
+
+./Te_125:
+aprod.tot    input	     rp049118.L00  rp051122.tot  rp053126.tot
+binary.tot   nonelastic.tot  rp049118.L01  rp052124.tot  total.tot
+dprod.tot    nprod.tot	     rp049118.L03  rp052125.L00  totalxs.tot
+elastic.tot  output	     rp049118.tot  rp052125.L02  tprod.tot
+gprod.tot    pprod.tot	     rp051122.L00  rp052125.tot
+hprod.tot    range	     rp051122.L05  rp053125.tot
+
+./Te_126:
+aprod.tot    gprod.tot	     nprod.tot	rp049119.L00  rp052126.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp049119.L01  rp053126.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp049119.tot  rp053127.tot
+elastic.tot  nonelastic.tot  range	rp051123.tot  total.tot
+
+./Ti_46:
+aprod.tot    gprod.tot	     nprod.tot	rp021043.tot  total.tot
+binary.tot   hprod.tot	     output	rp022046.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp023046.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp023047.tot
+
+./Ti_47:
+aprod.tot    gprod.tot	     nprod.tot	rp021044.L00  rp022047.tot  totalxs.tot
+binary.tot   hprod.tot	     output	rp021044.L04  rp023047.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp021044.tot  rp023048.tot
+elastic.tot  nonelastic.tot  range	rp022046.tot  total.tot
+
+./Ti_48:
+aprod.tot    gprod.tot	     nprod.tot	rp021045.tot  rp023048.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp022048.L00  rp023049.tot
+dprod.tot    input	     pprod.tot	rp022048.L14  total.tot
+elastic.tot  nonelastic.tot  range	rp022048.tot  totalxs.tot
+
+./Ti_49:
+aprod.tot    hprod.tot	     pprod.tot	   rp022048.L00  rp023050.tot
+binary.tot   input	     range	   rp022048.L14  total.tot
+dprod.tot    nonelastic.tot  rp021046.L00  rp022048.tot  totalxs.tot
+elastic.tot  nprod.tot	     rp021046.L02  rp022049.tot  tprod.tot
+gprod.tot    output	     rp021046.tot  rp023049.tot
+
+./Ti_50:
+aprod.tot    gprod.tot	     nprod.tot	rp021047.tot  total.tot
+binary.tot   hprod.tot	     output	rp022050.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp023050.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp023051.tot
+
+./Tl_203:
+aprod.tot    nonelastic.tot  rp080199.L00  rp082202.tot  total.tot
+binary.tot   nprod.tot	     rp080199.L07  rp082203.L00  totalxs.tot
+dprod.tot    output	     rp080199.tot  rp082203.L06  tprod.tot
+elastic.tot  pprod.tot	     rp080200.tot  rp082203.tot
+gprod.tot    range	     rp081203.tot  rp082204.L00
+hprod.tot    rp078196.tot    rp082202.L00  rp082204.L21
+input	     rp079199.tot    rp082202.L14  rp082204.tot
+
+./Tl_205:
+aprod.tot    hprod.tot	     pprod.tot	   rp080202.tot  rp082205.tot
+binary.tot   input	     range	   rp081205.tot  rp082206.tot
+dprod.tot    nonelastic.tot  rp078198.tot  rp082204.L00  total.tot
+elastic.tot  nprod.tot	     rp079201.tot  rp082204.L21  totalxs.tot
+gprod.tot    output	     rp080201.tot  rp082204.tot  tprod.tot
+
+./Tm_169:
+aprod.tot    hprod.tot	     pprod.tot	   rp068166.tot  rp070169.tot
+binary.tot   input	     range	   rp069169.tot  rp070170.tot
+dprod.tot    nonelastic.tot  rp066162.tot  rp070168.tot  total.tot
+elastic.tot  nprod.tot	     rp067165.tot  rp070169.L00  totalxs.tot
+gprod.tot    output	     rp068165.tot  rp070169.L01  tprod.tot
+
+./V_51:
+aprod.tot    gprod.tot	     nprod.tot	rp022048.L00  rp024051.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp022048.L14  rp024052.tot
+dprod.tot    input	     pprod.tot	rp022048.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp023051.tot  totalxs.tot
+
+./W_180:
+aprod.tot    gprod.tot	     nprod.tot	rp071173.tot  rp075180.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp072176.tot  rp075181.tot
+dprod.tot    input	     pprod.tot	rp073177.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp074180.tot  totalxs.tot
+
+./W_182:
+aprod.tot    input	     rp071175.tot  rp074182.tot  totalxs.tot
+binary.tot   nonelastic.tot  rp072178.L00  rp075182.L00  tprod.tot
+dprod.tot    nprod.tot	     rp072178.L05  rp075182.L02
+elastic.tot  output	     rp072178.L10  rp075182.tot
+gprod.tot    pprod.tot	     rp072178.tot  rp075183.tot
+hprod.tot    range	     rp073179.tot  total.tot
+
+./W_183:
+aprod.tot	nprod.tot     rp072179.L00  rp074183.L00  rp075184.L05
+binary.tot	output	      rp072179.L05  rp074183.L07  rp075184.tot
+dprod.tot	pprod.tot     rp072179.L10  rp074183.tot  total.tot
+elastic.tot	range	      rp072179.tot  rp075182.L00  totalxs.tot
+gprod.tot	rp071175.tot  rp073179.tot  rp075182.L02  tprod.tot
+hprod.tot	rp071176.L00  rp073180.L00  rp075182.tot
+input		rp071176.L01  rp073180.L02  rp075183.tot
+nonelastic.tot	rp071176.tot  rp073180.tot  rp075184.L00
+
+./W_184:
+aprod.tot    nonelastic.tot  rp071177.tot  rp073181.tot  total.tot
+binary.tot   nprod.tot	     rp072180.L00  rp074184.tot  totalxs.tot
+dprod.tot    output	     rp072180.L07  rp075183.tot  tprod.tot
+elastic.tot  pprod.tot	     rp072180.tot  rp075184.L00
+gprod.tot    range	     rp073180.L00  rp075184.L05
+hprod.tot    rp071177.L00    rp073180.L02  rp075184.tot
+input	     rp071177.L29    rp073180.tot  rp075185.tot
+
+./W_186:
+aprod.tot    input	     rp071179.tot  rp073182.tot  rp075186.tot
+binary.tot   nonelastic.tot  rp072182.L00  rp073183.tot  rp075187.tot
+dprod.tot    nprod.tot	     rp072182.L09  rp074186.tot  total.tot
+elastic.tot  output	     rp072182.tot  rp075185.tot  totalxs.tot
+gprod.tot    pprod.tot	     rp073182.L00  rp075186.L00  tprod.tot
+hprod.tot    range	     rp073182.L29  rp075186.L04
+
+./Xe_124:
+aprod.tot    gprod.tot	     nprod.tot	rp051117.tot  rp055124.L25  totalxs.tot
+binary.tot   hprod.tot	     output	rp053121.tot  rp055124.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp054124.tot  rp055125.tot
+elastic.tot  nonelastic.tot  range	rp055124.L00  total.tot
+
+./Xe_126:
+aprod.tot    gprod.tot	     nprod.tot	rp051119.tot  rp055127.tot
+binary.tot   hprod.tot	     output	rp053123.tot  total.tot
+dprod.tot    input	     pprod.tot	rp054126.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp055126.tot  tprod.tot
+
+./Xe_128:
+aprod.tot    gprod.tot	     nprod.tot	rp051121.tot  rp055129.tot
+binary.tot   hprod.tot	     output	rp053125.tot  total.tot
+dprod.tot    input	     pprod.tot	rp054128.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp055128.tot  tprod.tot
+
+./Xe_129:
+aprod.tot    input	     rp051122.L00  rp054129.L02  total.tot
+binary.tot   nonelastic.tot  rp051122.L05  rp054129.tot  totalxs.tot
+dprod.tot    nprod.tot	     rp051122.tot  rp055129.tot  tprod.tot
+elastic.tot  output	     rp053126.tot  rp055130.L00
+gprod.tot    pprod.tot	     rp054128.tot  rp055130.L04
+hprod.tot    range	     rp054129.L00  rp055130.tot
+
+./Xe_130:
+aprod.tot    gprod.tot	     nprod.tot	rp051123.tot  rp055130.L04  totalxs.tot
+binary.tot   hprod.tot	     output	rp053127.tot  rp055130.tot  tprod.tot
+dprod.tot    input	     pprod.tot	rp054130.tot  rp055131.tot
+elastic.tot  nonelastic.tot  range	rp055130.L00  total.tot
+
+./Xe_131:
+aprod.tot    input	     rp051124.L00  rp054131.L00  totalxs.tot
+binary.tot   nonelastic.tot  rp051124.L01  rp054131.L02  tprod.tot
+dprod.tot    nprod.tot	     rp051124.L02  rp054131.tot
+elastic.tot  output	     rp051124.tot  rp055131.tot
+gprod.tot    pprod.tot	     rp053128.tot  rp055132.tot
+hprod.tot    range	     rp054130.tot  total.tot
+
+./Xe_132:
+aprod.tot    gprod.tot	     nprod.tot	rp051125.tot  rp055133.tot
+binary.tot   hprod.tot	     output	rp053129.tot  total.tot
+dprod.tot    input	     pprod.tot	rp054132.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp055132.tot  tprod.tot
+
+./Xe_134:
+aprod.tot    hprod.tot	     pprod.tot	   rp055133.tot  rp055135.L10
+binary.tot   input	     range	   rp055134.L00  rp055135.tot
+dprod.tot    nonelastic.tot  rp051127.tot  rp055134.L03  total.tot
+elastic.tot  nprod.tot	     rp053131.tot  rp055134.tot  totalxs.tot
+gprod.tot    output	     rp054134.tot  rp055135.L00  tprod.tot
+
+./Xe_136:
+aprod.tot    input	     rp051129.L00  rp054136.tot  rp055136.tot
+binary.tot   nonelastic.tot  rp051129.L11  rp055135.L00  rp055137.tot
+dprod.tot    nprod.tot	     rp051129.tot  rp055135.L10  total.tot
+elastic.tot  output	     rp053133.L00  rp055135.tot  totalxs.tot
+gprod.tot    pprod.tot	     rp053133.L16  rp055136.L00  tprod.tot
+hprod.tot    range	     rp053133.tot  rp055136.L01
+
+./Y_89:
+aprod.tot    gprod.tot	     nprod.tot	rp038086.tot  rp040089.L00  total.tot
+binary.tot   hprod.tot	     output	rp039089.L00  rp040089.L01  totalxs.tot
+dprod.tot    input	     pprod.tot	rp039089.L01  rp040089.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp039089.tot  rp040090.tot
+
+./Yb_168:
+aprod.tot    input	     rp067161.L00  rp071168.L00  total.tot
+binary.tot   nonelastic.tot  rp067161.L02  rp071168.L01  totalxs.tot
+dprod.tot    nprod.tot	     rp067161.tot  rp071168.tot  tprod.tot
+elastic.tot  output	     rp068164.tot  rp071169.L00
+gprod.tot    pprod.tot	     rp069165.tot  rp071169.L01
+hprod.tot    range	     rp070168.tot  rp071169.tot
+
+./Yb_170:
+aprod.tot    hprod.tot	     pprod.tot	   rp068166.tot  rp071171.L01
+binary.tot   input	     range	   rp069167.tot  rp071171.tot
+dprod.tot    nonelastic.tot  rp067163.L00  rp070170.tot  total.tot
+elastic.tot  nprod.tot	     rp067163.L03  rp071170.tot  totalxs.tot
+gprod.tot    output	     rp067163.tot  rp071171.L00  tprod.tot
+
+./Yb_171:
+aprod.tot    nonelastic.tot  rp067163.tot  rp069167.tot  rp071172.L00
+binary.tot   nprod.tot	     rp067164.L00  rp069168.tot  rp071172.L01
+dprod.tot    output	     rp067164.L03  rp070170.tot  rp071172.tot
+elastic.tot  pprod.tot	     rp067164.tot  rp070171.tot  total.tot
+gprod.tot    range	     rp068167.L00  rp071171.L00  totalxs.tot
+hprod.tot    rp067163.L00    rp068167.L03  rp071171.L01  tprod.tot
+input	     rp067163.L03    rp068167.tot  rp071171.tot
+
+./Yb_172:
+aprod.tot    gprod.tot	     nprod.tot	rp067165.tot  rp071172.L00  total.tot
+binary.tot   hprod.tot	     output	rp068168.tot  rp071172.L01  totalxs.tot
+dprod.tot    input	     pprod.tot	rp069169.tot  rp071172.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp070172.tot  rp071173.tot
+
+./Yb_173:
+aprod.tot    input	     rp067165.tot  rp069170.tot  rp071174.L00
+binary.tot   nonelastic.tot  rp067166.L00  rp070173.tot  rp071174.L03
+dprod.tot    nprod.tot	     rp067166.L01  rp071172.L00  rp071174.tot
+elastic.tot  output	     rp067166.tot  rp071172.L01  total.tot
+gprod.tot    pprod.tot	     rp068169.tot  rp071172.tot  totalxs.tot
+hprod.tot    range	     rp069169.tot  rp071173.tot  tprod.tot
+
+./Yb_174:
+aprod.tot    hprod.tot	     pprod.tot	   rp070174.tot  rp071175.tot
+binary.tot   input	     range	   rp071173.tot  total.tot
+dprod.tot    nonelastic.tot  rp067167.tot  rp071174.L00  totalxs.tot
+elastic.tot  nprod.tot	     rp068170.tot  rp071174.L03  tprod.tot
+gprod.tot    output	     rp069171.tot  rp071174.tot
+
+./Yb_176:
+aprod.tot    input	     rp067169.tot  rp070176.tot  rp071177.L29
+binary.tot   nonelastic.tot  rp068172.tot  rp071175.tot  rp071177.tot
+dprod.tot    nprod.tot	     rp069172.tot  rp071176.L00  total.tot
+elastic.tot  output	     rp069173.tot  rp071176.L01  totalxs.tot
+gprod.tot    pprod.tot	     rp070176.L00  rp071176.tot  tprod.tot
+hprod.tot    range	     rp070176.L05  rp071177.L00
+
+./Zn_64:
+aprod.tot    gprod.tot	     nprod.tot	rp028060.tot  rp031065.tot
+binary.tot   hprod.tot	     output	rp029061.tot  total.tot
+dprod.tot    input	     pprod.tot	rp030064.tot  totalxs.tot
+elastic.tot  nonelastic.tot  range	rp031064.tot  tprod.tot
+
+./Zn_66:
+aprod.tot    gprod.tot	     nprod.tot	rp029063.tot  total.tot
+binary.tot   hprod.tot	     output	rp030066.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp031066.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp031067.tot
+
+./Zn_67:
+aprod.tot    gprod.tot	     nprod.tot	rp029063.tot  rp031067.tot  tprod.tot
+binary.tot   hprod.tot	     output	rp029064.tot  rp031068.tot
+dprod.tot    input	     pprod.tot	rp030066.tot  total.tot
+elastic.tot  nonelastic.tot  range	rp030067.tot  totalxs.tot
+
+./Zn_68:
+aprod.tot    gprod.tot	     nprod.tot	rp029065.tot  total.tot
+binary.tot   hprod.tot	     output	rp030068.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp031068.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp031069.tot
+
+./Zn_70:
+aprod.tot    gprod.tot	     nprod.tot	rp029067.tot  rp030070.tot  total.tot
+binary.tot   hprod.tot	     output	rp030069.L00  rp031069.tot  totalxs.tot
+dprod.tot    input	     pprod.tot	rp030069.L01  rp031070.tot  tprod.tot
+elastic.tot  nonelastic.tot  range	rp030069.tot  rp031071.tot
+
+./Zr_90:
+aprod.tot    hprod.tot	     pprod.tot	   rp040090.tot  rp041091.L01
+binary.tot   input	     range	   rp041090.L00  rp041091.tot
+dprod.tot    nonelastic.tot  rp039087.L00  rp041090.L02  total.tot
+elastic.tot  nprod.tot	     rp039087.L01  rp041090.tot  totalxs.tot
+gprod.tot    output	     rp039087.tot  rp041091.L00  tprod.tot
+
+./Zr_91:
+aprod.tot    hprod.tot	     pprod.tot	   rp041091.L00  rp041092.tot
+binary.tot   input	     range	   rp041091.L01  total.tot
+dprod.tot    nonelastic.tot  rp039088.tot  rp041091.tot  totalxs.tot
+elastic.tot  nprod.tot	     rp040090.tot  rp041092.L00  tprod.tot
+gprod.tot    output	     rp040091.tot  rp041092.L01
+
+./Zr_92:
+aprod.tot    hprod.tot	     pprod.tot	   rp040092.tot  rp041093.L01
+binary.tot   input	     range	   rp041092.L00  rp041093.tot
+dprod.tot    nonelastic.tot  rp039089.L00  rp041092.L01  total.tot
+elastic.tot  nprod.tot	     rp039089.L01  rp041092.tot  totalxs.tot
+gprod.tot    output	     rp039089.tot  rp041093.L00  tprod.tot
+
+./Zr_94:
+aprod.tot    input	     rp039091.L00  rp041093.L01  rp041095.L01
+binary.tot   nonelastic.tot  rp039091.L01  rp041093.tot  rp041095.tot
+dprod.tot    nprod.tot	     rp039091.tot  rp041094.L00  total.tot
+elastic.tot  output	     rp040093.tot  rp041094.L01  totalxs.tot
+gprod.tot    pprod.tot	     rp040094.tot  rp041094.tot  tprod.tot
+hprod.tot    range	     rp041093.L00  rp041095.L00
