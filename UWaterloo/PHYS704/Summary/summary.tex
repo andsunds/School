@@ -1,0 +1,1120 @@
+\documentclass[11pt,letter, swedish, english, twocolumn
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+\usepackage[makeroom
+]{cancel}
+\graphicspath{{figures/}}
+
+\swapcommands{\Delta}{\varDelta}
+\swapcommands{\Omega}{\varOmega}
+\swapcommands{\Phi}{\varPhi}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+            top    = 2cm,
+            bottom = 2cm,
+            left   = 1.5cm, right  = 1.5cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+
+\newcommand{\ZZ}{\ensuremath{\mathcal{Z}}}
+\newcommand{\gs}{\ensuremath{{g_{\text{s}}}}}
+\newcommand{\Ne}{\ensuremath{{N_{\text{e}}}}}
+\newcommand{\Tc}{\ensuremath{{T_{\text{c}}}}}
+\newcommand{\lc}{\ensuremath{{\lambda_{\text{c}}}}}
+\newcommand{\vc}{\ensuremath{{v_{\text{c}}}}}
+\newcommand{\eF}{\ensuremath{{\epsilon_{\text{F}}}}}
+\newcommand{\cs}{\ensuremath{{c_{\text{s}}}}}
+\newcommand{\wD}{\ensuremath{{\omega_{\text{D}}}}}
+\newcommand{\ns}{\ensuremath{{n_{\text{s}}}}}
+\newcommand{\Hc}{\ensuremath{{H_{\text{c}}}}}
+\newcommand{\Hcc}{\ensuremath{{H_{\text{c}_2}}}}
+\newcommand{\rD}{\ensuremath{{\mathrm{D}}}}
+
+%\usepackage{tikz}
+
+\begin{document}
+
+%\tikzstyle{every picture}+=[remember picture]
+%\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{\vspace{-1.5cm}Statistical Physics -- PHYS\,704 \\
+Course summary}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+\tableofcontents
+\newpage
+
+
+\section{Some Thermodynamic relations}
+
+\begin{itemize}
+\item Energy: $E$, $\rd E = T\rd S - P\rd V + \mu\rd N$.
+Min. in equilibrium when $S$ and $V$ are const.
+\item Helmholtz free energy: $F=E-TS$, $\rd F = -S\rd T - P\rd V + \mu\rd N$.
+Min. in equil. when $T$ and $V$ are const.
+\item Enthalph: $W=E+PV$, $\rd W = T\rd S + V\rd P + \mu\rd N$.
+Min. in equil. when $S$ (adiabatic) and $P$ are const.
+\item Gibbs free energy: $\Phi=E+PV-TS$, $\rd\Phi = -S\rd T + V\rd P + \mu\rd N$.
+Min. in equil. when $T$ and $P$ are const.
+\item Grand potential: $\Omega=-PV$, $\rd\Omega = -S\rd T + P\rd V + N\rd\mu$.
+\end{itemize}
+
+Derivative relations
+\begin{equation}
+\begin{aligned}
+&+\qty(\pdv{T}{V})_S=-\qty(\pdv{P}{S})_T=+\pdv[2]{E}{S}{V}\\
+&+\qty(\pdv{T}{P})_S=+\qty(\pdv{V}{S})_P=+\pdv[2]{W}{S}{P}\\
+&+\qty(\pdv{S}{V})_T=+\qty(\pdv{P}{T})_V=-\pdv[2]{F}{T}{V}\\
+&-\qty(\pdv{S}{P})_T=+\qty(\pdv{V}{T})_P=+\pdv[2]{\Phi}{T}{P}\\
+\end{aligned}
+\end{equation}
+
+
+Temperature
+\begin{equation}
+\frac{1}{T}=\qty(\pdv{S}{E})_{V,N}
+\end{equation}
+
+Heat-capacity
+\begin{equation}
+\begin{aligned}
+C_V&=\qty(\dv{E}{T})_V=T\qty(\pdv{S}{T})_V=-T\qty(\pdv[2]{F}{T})_V\\
+C_P&=\qty(\dv{W}{T})_P=\qty(\pdv{E}{T})_P+P\qty(\pdv{V}{T})_P\\
+\end{aligned}
+\end{equation}
+
+Compressibility
+\begin{equation}
+\kappa_X=-\frac{1}{V}\qty(\pdv{V}{P})_X
+\end{equation}
+
+
+\subsection{Some def. in stat. mech.}
+Definition of entropy
+\begin{equation}
+S:=-\sum_{n,(N)} \rho_{n,(N)}\ln(\rho_{n,(N)}),
+\end{equation}
+where $\rho$ is the density function or distribution fuction.
+
+Canonical distribution ($N$ constant)
+\begin{equation}
+\rho_n = \frac{1}{Z}\ee^{-E_n/T}\qcomma
+Z=\sum_n\ee^{-E_n/T}.
+\end{equation}
+\begin{equation}
+F=-T\ln Z
+\end{equation}
+
+Grand canonical distribution 
+\begin{equation}
+\rho_{n, N} = \frac{1}{\ZZ}\ee^{-(E_n-\mu N)/T}\qcomma
+\ZZ=\sum_n\ee^{-(E_n-\mu N)/T}.
+\end{equation}
+\begin{equation}
+\Omega=-T\ln \ZZ
+\end{equation}
+
+% The energy 
+% \begin{equation}
+% E=T^2\qty(\pdv{\ln(\ZZ)}{T})_{N, V}
+% \end{equation}
+
+
+\section{Theory of ideal gases}
+Ideal gas means that there is no interaction between particles,
+$\epsilon=\hbar^2k^2/(2m)$. 
+In 3 dim.
+\begin{equation}
+\frac{1}{V}\sum_k\to\int\frac{\rd^3k}{(2\pi)^3}
+=\int\!\rd\epsilon\,g(\epsilon),
+\end{equation}
+\begin{equation}
+\frac{\rd^3k}{(2\pi)^3}=\rd\epsilon\,g(\epsilon)\qcomma
+g(\epsilon)=\frac{m^{3/2}}{\sqrt{2}\pi\hbar^3}\sqrt{\epsilon}.
+\end{equation}
+See assignment 3 for other dim.
+
+
+\subsection{Ideal Fermi gases}
+\begin{equation}
+n^{(\text{F.D.})}=\frac{1}{\ee^{(\epsilon-\mu)/T}+1}
+\end{equation}
+
+\begin{equation}
+-\Omega=PV=\frac{2}{3}E=\frac{V\gs T}{\lambda^3}f_{5/2}(z)
+\end{equation}
+\begin{equation}
+N=-\qty(\pdv{\Omega}{\mu})_{T,V}=\frac{V\gs}{\lambda^3}f_{3/2}(z)
+\end{equation}
+\begin{equation}
+\frac{PV}{NT}=\frac{f_{5/2}(z)}{f_{3/2}(z)}
+\end{equation}
+Thermal wavelength $\lambda=h/\sqrt{2\pi mT}=:\Lambda/\sqrt{T}$, $\Lambda$ is a constant.
+
+\paragraph{Fermi functions}
+\begin{equation}
+f_\nu(z)=\frac{1}{\Gamma(\nu)}\int_0^\infty \!\rd{x}
+\frac{x^{\nu-1}}{z^{-1}\ee^x + 1}
+\end{equation}
+Fugacity $z=\ee^{\mu/T}$.
+\begin{equation}
+z\pdv{f_\nu(z)}{z} = \pdv{f_\nu(z)}{(\ln z)}=f_{\nu-1}(z)
+\end{equation}
+
+\paragraph{Fermi energy}
+As $T\to0$, the ccamical potential will go to
+\begin{equation}
+\mu(T\to0)=:\eF=\frac{\hbar^2}{2m}\qty(\frac{6}{\gs}\pi^2n)^{2/3},
+\end{equation}
+where $\gs$ is the spin deganareacy, and $n=N/V$. 
+
+In a regular metal, $\eF\sim\unit[10^4]{K}$. For $T\ll\eF$
+\begin{equation}
+n^{(\text{F.D.})}(\epsilon)\approx
+\begin{cases}
+1\qcomma&\epsilon<\eF\\
+0\qcomma&\epsilon>\eF
+\end{cases}
+\end{equation}
+and $\int_0^\infty\!\rd\epsilon\,n^{(\text{F.D.})}(\epsilon)\ldots
+\to\int_0^\eF\!\rd\epsilon\ldots$
+
+The internal energy
+\begin{equation}
+E(T\ll\eF)=\frac{3}{5}N\eF
+\end{equation}
+
+
+\subsection{Ideal Bose gases}
+\begin{equation}
+n^{(\text{B.E.})}=\frac{1}{\ee^{(\epsilon-\mu)/T}-1}
+\end{equation}
+
+\begin{equation}
+-\Omega=PV=\frac{2}{3}E=\frac{V\gs T}{\lambda^3}g_{5/2}(z)
+\end{equation}
+\begin{equation}
+\Ne=-\qty(\pdv{\Omega}{\mu})_{T,V}=\frac{V\gs}{\lambda^3}g_{3/2}(z)
+\end{equation}
+\begin{equation}
+\frac{PV}{NT}=\frac{g_{5/2}(z)}{g_{3/2}(z)}
+\end{equation}
+Thermal wavelength $\lambda=h/\sqrt{2\pi mT}=:\Lambda/\sqrt{T}$, $\Lambda$ is a constant.
+
+\paragraph{Bose functions}
+\begin{equation}
+g_\nu(z)=\frac{1}{\Gamma(\nu)}\int_0^\infty \!\rd{x}
+\frac{x^{\nu-1}}{z^{-1}\ee^x - 1}
+\end{equation}
+For bosons $\mu\le0$, meaning that $z=\ee^{\mu/T}\le1$. 
+\begin{equation}
+z\pdv{g_\nu(z)}{z} = \pdv{g_\nu(z)}{(\ln z)}=g_{\nu-1}(z)
+\end{equation}
+
+At $z=1$, $g_\nu(z=1)=\zeta(\nu)$.
+
+\paragraph{Critical temperature}
+Critical teperature for ideal Bose gas (3 dim.)
+\begin{equation}
+\Tc=\frac{2\pi\hbar^2}{m}\qty(\frac{N}{V\gs\,\zeta(\nicefrac{3}{2})})^{3/2}
+\end{equation}
+Number of condensed particles
+\begin{equation}
+N_0=N\qty[1-\qty(\frac{T}{\Tc})^{3/2}]\qcomma
+T\le\Tc.
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+&\lambda=\frac{h}{\sqrt{2\pi mT}}\qcomma 
+\lc=\Big[v\zeta(\nicefrac{3}{2})\Big]^{1/3}\\
+&v=\frac{1}{n}=\frac{V}{N},\hspace{18pt}
+\vc=\frac{\lambda^3}{\zeta(\nicefrac{3}{2})}
+\end{aligned}
+\end{equation}
+
+
+\subsubsection{Photons}
+Photons are bosons with $\mu=0$.
+\begin{equation}
+n^{\text{(photons)}}=\frac{1}{\ee^{\hbar\omega/T}-1}.
+\end{equation}
+Number of photons in the interval $\omega$ to $\omega+\rd\omega$:
+\begin{equation}
+\rd N_\omega=\frac{V}{\pi^2c^3}\frac{\omega^2\id\omega}{\ee^{\hbar\omega/T}-1}.
+\end{equation}
+
+Energy in the same interval:
+\begin{equation}
+\rd E_\omega=\hbar\omega\id{N_\omega}=Vu_\omega\id\omega,
+\end{equation}
+where $u_\omega$ is the radiation energy density.
+Total radiation energy
+\begin{equation}
+E=\int_0^\infty\!\rd E_\omega = \frac{4\sigma}{c}VT^4,
+\end{equation}
+where $\sigma=\pi^2/(60\hbar^3c^2)$
+
+
+\subsubsection{Phonons}
+Chain of $N$ particles connected with springs, mean distance
+$a$. Hamiltonian 
+\begin{equation}
+H=\sum_{s=0}^{N-1}\qty[\frac{p_s^2}{2m}+\frac{\kappa}{2}\qty(q_{s+1}-q_s)^2]
+\end{equation}
+Also periodoc boundary conditions: $q_{s+N}=q_s$ and $p_{s+N}=p_s$.
+
+Fourier transform (momentum space)
+\begin{equation}
+H=\sum_{k=0}^{N-1}\qty[\frac{1}{2m}p_{-k}p_{k}+\frac{m\omega_k^2}{2}q_{-k}q_{k}].
+\end{equation}
+This is a Hamiltoninan for $N$ harmonic oscillators:
+\begin{equation}
+H=\sum_{k=0}^{N-1}\hbar\omega_k\qty(\hat{n}_k+\frac{1}{2}).
+\end{equation}
+
+The frequency
+\begin{equation}
+\begin{aligned}
+\omega_k=&\sqrt{\frac{2\kappa}{m}(1-\cos(ka))}\\
+\stackrel{ka\ll1}{\approx}&|ka|\sqrt{\frac{\kappa}{m}}.
+\end{aligned}
+\end{equation}
+Speed of sound
+\begin{equation}
+\cs=\sqrt{\frac{\kappa a^2}{m}}.
+\end{equation}
+
+For $|ka|\ll1$, 
+\begin{equation}
+C_V=\frac{2\pi^2}{5\hbar^3\cs^3} VT^3.
+\end{equation}
+
+
+
+
+
+
+\section{Second quantaization}
+Main idea: use a Bogoliubov transformation to transform the
+Hamiltonian to to a hamiltonian of an ideal gas of quasi-particles. 
+
+\paragraph{Harmonic oscillator interpretation in momentum space}
+Occupation number representation:
+\begin{equation}
+\ket{\psi}=\ket{n_{k_1}, n_{k_2},\ldots, n_{k_i},\ldots}
+\end{equation}
+\begin{equation}
+\hat{n}_{k_i}\ket{n_{k_1}, \ldots, n_{k_i},\ldots}=
+{n}_{k_i}\ket{n_{k_1}, \ldots, n_{k_i},\ldots}
+\end{equation}
+For bosons:
+\begin{equation}
+\comm{a_k}{ a^\dagger_{k'}}=\delta_{k, k'},
+\end{equation}
+whereas for fermions
+\begin{equation}
+\acomm{c_k}{ c^\dagger_{k'}}=\delta_{k, k'}.
+\end{equation}
+
+The Hamiltonian for interacting bosons
+\begin{equation}
+H=\overbrace{\sum_k \epsilon_k a_k^\dagger a_k}^{\text{non-interating}}
++\frac{1}{2V}\sum_{k, k', q} U(q) a_{k+q}^\dagger a_{k'-q}^\dagger 
+a_{k'}a_{k}
+\end{equation}
+and for fermions
+\begin{equation}
+H=\overbrace{\sum_{k, \sigma} \epsilon_k c_{k,\sigma}^\dagger c_{k,\sigma}}^{\text{non-interating}}
++\frac{1}{2V}\sum_{k, k', q, \sigma, \sigma'} 
+U(q) c_{k+q,\sigma}^\dagger c_{k'-q,\sigma}^\dagger c_{k',\sigma'}c_{k,\sigma}.
+\end{equation}
+The inteaction, $U(q)$, is given by
+\begin{equation}
+U(\vb{r}-\vb{r'})=\frac{1}{V}\sum_q U(\vb{q})\ee^{\ii\vb{q}\vdot(\vb{r}-\vb{r}')},
+\end{equation}
+or
+\begin{equation}
+U(\vb{q})=\int\rd^3rU(\vb{r})\ee^{-\ii\vb{q}\vdot\vb{r}}.
+\end{equation}
+
+We can also talk about annihilation and creation operators in real
+space: $\psi^\dagger(\vb{r})$ creates a particle at position $\vb{r}$.
+\begin{equation}
+\int\!\rd^3r\, \psi^\dagger(\vb{r})\psi(\vb{r})=\sum_ka_k^\dagger a_k=\hat{N}
+\end{equation}
+These operators faoolw the same commuttation relations as the momentum
+space equivalence. 
+
+
+\subsection{Superfluidity in $\mathbf{^4}$He}
+At low enough temperatures most atoms will be in the ground state. 
+Our goual is to bring the Hamiltonian to a form:
+\begin{equation}
+H=\sum_k E_k \xi_k^\dagger\xi_k+\text{const.}
+\end{equation}
+
+Mean-field theory:
+\begin{equation}
+a_0a_0^\dagger \approx a_0^\dagger a_0 = \abs{a_0}= N_0
+\end{equation}
+meaning that
+\begin{equation}
+a_0=\sqrt{N_0} \ee^{\ii\theta}.
+\end{equation}
+
+\paragraph{Bogoliubov transformation}
+\begin{equation}
+\begin{cases}
+\xi_k=u_k a_k+v_ka_{-k}^\dagger\\
+\xi_k^\dagger=u_k a_k^\dagger+v_ka_{-k}\\
+\end{cases}
+\Leftrightarrow
+\begin{cases}
+a_k=u_k\xi_k-v_k\xi_{-k}^\dagger\\
+a_k^\dagger=u_k\xi_k^\dagger-v_k\xi_{-k}\\
+\end{cases}
+\end{equation}
+We still want the commutation relation
+$\comm{\xi_k}{\xi_k^\dagger}=1$, which gives
+\begin{equation}
+u_k=\cosh\theta_k\qcomma
+v_k\sinh\theta_k.
+\end{equation}
+And
+
+\begin{equation}
+\cosh2\theta_k=\frac{A_k}{\sqrt{A_k^2-B_k^2}}\qcomma
+\sinh2\theta_k=\frac{B_k}{\sqrt{A_k^2-B_k^2}}\qcomma
+\end{equation}
+where
+\begin{equation}
+A_k=\epsilon_k+nU(k)\qcomma
+B_k=nU(k).
+\end{equation}
+
+\paragraph{Energy of the quasi-particles}
+\begin{equation}
+\begin{aligned}
+E_k=&A_k\cosh2\theta_k-B_k\sinh2\theta_K\\
+=&\sqrt{A_k^2-B_k^2}=\sqrt{\epsilon_k[\epsilon_k+2nU(k)]}
+\end{aligned}
+\end{equation}
+Long wavelength limit ($k\approx0$)
+\begin{equation}
+E_k\approx\hbar|k|\sqrt{\frac{nU(0)}{m}}
+\end{equation}
+same form as phonons, and $\cs=\sqrt{nU(0)/m}$. The super fluid
+behaves more like a solid than a liquid. 
+
+As long as some disturbance is slower than $\cs$, there can not be any
+dissipation of energy into the super fluid. 
+
+\paragraph{Spontaneously broken symmetry}
+We can choose $\theta$ in the mean-field therory description of $a_0$
+freely. And the particles curren will be
+\begin{equation}
+\vb{j}=\frac{\hbar n}{m} \grad\theta
+\end{equation}
+But if the geomery has holes, we must have a periodically varying
+$\theta$, meaning that the vorticity
+\begin{equation}
+\oint\rd\vb{r}\vdot\grad\theta(\vb{r})=\ell2\pi
+\end{equation}
+is quantized.
+
+
+\subsection{BCS theory of superconductivity}
+Assume localized interaction
+$U(\vb{r}-\vb{r}')=(U/2)\delta(\vb{r}-\vb{r}')$, meaning that
+$U(q)\equiv U/2$, const.
+The Hmiltonian becomes
+\begin{equation}
+H=\sum_{k, \sigma} \epsilon_k c_{k,\sigma}^\dagger c_{k,\sigma}
++\frac{U}{V}\sum_{k, k', q} 
+c_{k+q,\uparrow}^\dagger c_{k'-q,\downarrow}^\dagger 
+c_{k',\downarrow}c_{k,\uparrow}.
+\end{equation}
+
+\paragraph{Bogoliubov transformation}
+Ideal gas of quasi-particles (fermions) with annihilation and creation
+operators $\gamma_k$ and $\gamma_k^\dagger$:
+\begin{equation}
+\acomm{\gamma_{k,\sigma}}{\gamma_{k',\sigma}^\dagger}=\delta_{k,k'}.
+\end{equation}
+\begin{equation}
+\begin{cases}
+\gamma_{k,\uparrow}^\dagger=u_kc_{k,\uparrow}^\dagger-v_kc_{-k,\downarrow}\\
+\gamma_{k,\downarrow}^\dagger=u_kc_{k,\downarrow}^\dagger+v_kc_{-k,\uparrow}\\
+\end{cases}
+\hspace{-11pt}\Leftrightarrow
+\begin{cases}
+c_{k,\uparrow}^\dagger=u_k\gamma_{k,\uparrow}^\dagger+v_k\gamma_{-k,\downarrow}\\
+c_{k,\downarrow}^\dagger=u_k\gamma_{k,\downarrow}^\dagger-v_k\gamma_{-k,\uparrow}\\
+\end{cases}
+\end{equation}
+\begin{equation}
+u_k=\cos\theta_k\qcomma
+v_k=\sin\theta_k.
+\end{equation}
+And
+\begin{equation}
+\cos2\theta_k=\frac{\xi_k}{\sqrt{\xi_k^2+\Delta^2}}\qcomma
+\sin2\theta_k=\frac{\Delta}{\sqrt{\xi_k^2+\Delta^2}}.
+\end{equation}
+
+
+The new Hamiltonian
+\begin{equation}
+H=\sum_{k, \sigma} E_k\gamma_{k \sigma}^\dagger\gamma_{k \sigma}
++\overbrace{\frac{V\Delta^2}{U}+\sum_k\qty(\xi_k-E_k)}^{\text{const.}}.
+\end{equation}
+
+
+
+\subsubsection{BCS mean-field theory}
+\begin{equation}
+\begin{aligned}
+\Delta &= \frac{U}{2V}\sum_k \frac{\Delta}{\sqrt{\xi_k^2+\Delta^2}}
+\qty[1-2n^{(\text{F.D.})}(E_k)]\\
+&= \frac{U}{2V}\sum_k \frac{\Delta}{\sqrt{\xi_k^2+\Delta^2}}
+\tanh(\frac{E_k}{2T}).
+\end{aligned}
+\end{equation}
+Here $E_k=\sqrt{\xi_k^2+\Delta^2}$, and $\xi_k=(\epsilon_k-\eF)$ varies
+from $-\eF$ to $\infty$.
+
+Sums transfroms according to
+\begin{equation}
+\frac{1}{V}\sum_k \to g(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi,
+\end{equation}
+where $\wD$ is the Debye frequency, and $\hbar\wD\ll\eF$ (typ. values
+$\hbar\wD\sim\unit[10^2]{K}$, while $\eF\sim\unit[10^4]{K}$). Only the
+states around $\epsilon=\eF$ ($\xi=0$) affects superconductivity. 
+
+\paragraph{Some limit cases for the BCS eqn.}
+\mbox{}
+
+$T\to0$:\\
+Here, $\tanh(\frac{E_k}{2T})\to1$, and
+\begin{equation}
+\begin{aligned}
+1=&\frac{U}{2}g(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi
+\frac{1}{\sqrt{\xi^2+\Delta^2}}\\
+=&Ug(\eF)\ln(\frac{\hbar\wD+\sqrt{\hbar^2\wD^2+\Delta^2}}{\Delta}).
+\end{aligned}
+\end{equation}
+Since $\Delta\ll\hbar\wD$, then $1\approx
+Ug(\eF)\ln(\frac{2\hbar\wD}{\Delta})$ and
+\begin{equation}
+\Delta(T=0)=2\hbar\wD \exp[-\frac{1}{Ug(\eF)}]\ll\hbar\wD
+\end{equation}
+This is the maximum value of $\Delta$.
+
+$\Delta\to0$\\
+This will give us $\Tc$.
+\begin{equation}
+1=\frac{U}{2}g(\eF)\int_{-\hbar\wD}^{\hbar\wD}\!\rd\xi
+\frac{\tanh(\frac{\xi}{2\Tc})}{\xi}.
+\end{equation}
+Numerical integration gives
+\begin{equation}
+\Tc\approx 1.14\hbar\wD \exp[-\frac{1}{Ug(\eF)}]\ll\hbar\wD
+\end{equation}
+or
+\begin{equation}
+\frac{2\Delta(T=0)}{\Tc}\approx 3.51
+\end{equation}
+this value has been confirmed through measurements.
+
+\paragraph{Ground state of a superconductor} (no quasi-particles)
+\begin{equation}
+\gamma_{k,\sigma}\ket{\psi_0}=0
+\end{equation}
+\begin{equation}
+\ket{\psi_0}=\prod_k \qty[
+\cos(\theta_k)+\sin(\theta_k)c_{k,\uparrow}^\dagger
+c_{k,\downarrow}^\dagger
+]\ket{0},
+\end{equation}
+where $\ket{0}$ is the vacuum state (no real particles).
+\begin{equation}
+E=\ev{H}{\psi_0}=-Vg(\eF)\qty[(\hbar\wD)^2+\frac{\Delta^2}{2}]
+\end{equation}
+or
+\begin{equation}
+\frac{E-E_\text{normal}}{V}=-\frac{1}{2}g(\eF)\Delta^2.
+\end{equation}
+This is the condensation energy.
+
+In a superconductor the density of sates is
+\begin{equation}
+g_\text{sc}(E)=g(\eF)\frac{E}{\sqrt{E^2-\Delta^2}}.
+\end{equation}
+It takes $2\Delta$ to excite a quasi-paricle.
+
+\subsection{Ginsburg-Landau theory of supercond.}
+The Helmholtz free energy
+\begin{equation}
+\begin{aligned}
+F=&-T\ln(Z)\\
+=&\sum_k\qty(\xi_k{-}E_k) + \frac{V}{U}\Delta^2 
+- 2T\sum_k \ln(1{+}\ee^{-\frac{E_k}{T}}).
+\end{aligned}
+\end{equation}
+This expanded in terms of $\Delta^2$, near $T=\Tc$, is
+\begin{equation}
+F\approx F_0+a\,\Delta^2
++\frac{1}{2}b\,\Delta^4,
+\end{equation}
+where
+\begin{equation}
+a=Vg(\eF)\,t\qcomma 
+b=0.107\,\frac{Vg(\eF)}{\Tc^2}
+\end{equation}
+and
+\begin{equation}
+t=\frac{T-\Tc}{\Tc}.
+\end{equation}
+Minimizing $F$ with resprect to $\Delta$ gives
+\begin{equation}
+\Delta=
+\begin{cases}
+\sqrt{-\frac{a}{b}}\approx3.1\,\Tc\sqrt{\frac{\Tc-T}{\Tc}}\qcomma &T<\Tc\\
+0,&T\ge\Tc.
+\end{cases}
+\end{equation}
+The critical exponent in $\Delta\propto t^\beta$, is $\beta=1/2$.
+
+\paragraph{Non-uniform gap ($\Delta$)}
+The Hamiltonian 
+\begin{equation}
+\begin{aligned}
+H=&\int\!\rd^3r\,\sum_\sigma \psi_\sigma^\dagger(\vb{r})
+\qty(-\frac{\hbar^2}{2m}\laplacian)\psi_\sigma(\vb{r})\\
+&-U\int\!\rd^3r\;
+\psi_\uparrow^\dagger(\vb{r})\psi_\downarrow^\dagger(\vb{r})
+\psi_\downarrow(\vb{r})\psi_\uparrow(\vb{r})
+\end{aligned}
+\end{equation}
+is invariant under a transformation of the complex phase
+$\psi_\sigma(\vb{r})\to\psi_\sigma(\vb{r})\ee^{\ii\chi(\vb{r})}$, for
+some arbitrary phase function $\chi(\vb{r})$.
+
+When applying a magnetic field
+\begin{equation}
+\vb{p}\to \vb{p}-\frac{q}{c}\vb{A}
+\end{equation}
+and the Hamiltonian changes accordingly. 
+The free energy will get a form
+\begin{equation}
+\begin{aligned}
+F=\int\!\rd^3r\Bigg[&
+a\abs{\Delta(\vb{r})}^2+\frac{1}{2}b\abs{\Delta(\vb{r})}^4\\
+&+\kappa\abs{\qty(-\ii\hbar\grad+\frac{2e}{c}\vb{A})\Delta(\vb{r})}^2
+\Bigg]
+\end{aligned}
+\end{equation}
+Rescale
+\begin{equation}
+\varphi:=\frac{\sqrt{2m\kappa}}{\hbar}\Delta(\vb{r})
+\end{equation}
+\begin{equation}
+\frac{\hbar^2}{2m\kappa}a\to a \qcomma 
+\frac{\hbar^2}{2m\kappa}b \to b
+\end{equation}
+which gives
+\begin{equation}
+\begin{aligned}
+F=\int\!\rd^3r\Bigg[&
+\frac{1}{2m}\abs{\qty(-\ii\hbar\grad+\frac{2e}{c}\vb{A})\varphi(\vb{r})}^2\\
+&+a\abs{\varphi(\vb{r})}^2+b\abs{\varphi(\vb{r})}^4+\frac{\vb{B}^2}{8\pi}
+\Bigg]
+\end{aligned}
+\end{equation}
+
+We minimize $F$ with respect to $\varphi$ and $\varphi^*$, and we
+get\\ 
+the \textbf{first Ginsburg-Landau equation}
+\begin{equation}
+a\varphi+b\abs{\varphi}^2\varphi
++\frac{1}{2m}\qty(-\ii\hbar\grad+\frac{2e}{m}\vb{A})^2\varphi=0
+\end{equation}
+and the \textbf{second G-L eqn.}
+\begin{equation}
+\vb{j}=\frac{\ii\hbar e}{m}
+\qty(\varphi^*\grad\varphi-\varphi\grad\varphi^*)
+-\frac{4e^2}{mc}\abs{\varphi}\vb{A}.
+\end{equation}
+
+Define $\ns:=\abs{\varphi}^2=-a/b$ (in absense of EM-fields), which is
+almost the pair density. Then
+\begin{equation}
+\varphi(\vb{r})=\sqrt{\ns(\vb{r})}\, \ee^{\ii\theta(\vb{r})}
+\end{equation}
+for some phase $\theta(\vb{r})$. If $\ns$ is uniform (but $\theta$ is
+not), then
+\begin{equation}
+\vb{j}=-\frac{2\hbar e\ns}{m}\qty(\grad\theta+\frac{2e}{\hbar c}\vb{A}).
+\end{equation}
+As for superfluids, the vorticity 
+\begin{equation}
+\oint\rd\vb{r}\vdot\grad\theta(\vb{r})=\ell2\pi
+\end{equation}
+is quantized. But now $\vb{j}$ is electrical current, so the magnetic
+flux trough a hole in the superconductor
+\begin{equation}
+\Phi=\int\!\rd\vb{S}\vdot\vb{B}=\oint\rd\vb{r}\vdot\vb{A}
+=\ell\,\frac{hc}{2e}=:\ell\varPhi_0
+\end{equation}
+is also quantized in terms of $\varPhi_0=hc/(2e)$.
+
+\subsubsection{The Meissner effect}
+This effect forces magnetic fields out of a superconductor.
+Say a superconductor begins at $x=0$ and $\vb{B}=B\vu{z}$ outside the
+super sonductor, then
+\begin{equation}
+\vb{B}(x)=\vb{B}(0)\ee^{-x/\lambda}\qcomma \text{for}\;x>0,
+\end{equation}
+where
+\begin{equation}
+\lambda=\sqrt{\frac{mc^2}{16\pi e^2\ns}}
+\end{equation}
+is the penetration depth ($\lambda\sim\unit[100]{Å}$).
+
+The Meissner effect is what separates a true super conductor from a
+``regular'' conductor with arbitrarily low resistivity. 
+
+
+There is a critical (magnetic) field strength
+\begin{equation}
+\Hc = \sqrt{\frac{4\pi a^2}{b}},
+\end{equation}
+above which the super conductor brakes down. 
+
+\subsubsection{Type I or II}
+With no magnetic field ($\vb{A}=0$) the first G-L eqn. in 1 dim. reads 
+\begin{equation}
+-\frac{\hbar^2}{2m}\dv{\varphi}{x}+a\varphi+b\abs{\varphi}^2\varphi=0
+\end{equation}
+and has the solution
+\begin{equation}
+\varphi(x)=\frac{1}{2}\sqrt{-\frac{a}{b}}
+\qty[\tanh(\frac{x}{\sqrt{2}\xi})+1]
+\end{equation}
+where
+\begin{equation}
+\xi=\sqrt{-\frac{\hbar^2}{2ma}}
+\end{equation}
+is the coherence length.
+
+It turns out that the ratio
+\begin{equation}
+\kappa=\frac{\lambda}{\xi}=\frac{mc}{2\hbar e}\sqrt{\frac{b}{2\pi}}
+\end{equation}
+affects the type of
+super conductor.
+\begin{equation}
+\begin{cases}
+\kappa<\frac{1}{\sqrt{2}} \quad\Longrightarrow\quad \text{Type I},\\
+\kappa>\frac{1}{\sqrt{2}} \quad\Longrightarrow\quad \text{Type II}.
+\end{cases}
+\end{equation}
+The  Meissner effect applies to type I. For type II, it turns out that
+it's possible to trap small vorticies, which contains a magnetic
+field, inside the superconductor. 
+
+There is a second critical field strength
+\begin{equation}
+\Hcc =-\frac{amc}{\hbar e} = \sqrt{2}\kappa \Hc.
+\end{equation}
+If this is larger than $\Hc$, we can have vortecies
+
+\section{Landau theory phase transitions}
+Characterized by an order parameter which varies continously.
+\subsection{Ising model}
+A model for ferromagnetism. It consists of a lattice of ``bits'' which
+can have the value $-1$ or $+1$.
+
+Hamiltonian
+\begin{equation}
+H=-J\sum_{\ev{i,j}}\sigma_i\,\sigma_j,
+\end{equation}
+where $\sigma_n=\pm1$, and the sum is over all nearest neighbours. 
+
+Define the magnitazation
+\begin{equation}
+M=\ev{\sigma_i}=\ev{\sigma_j}.
+\end{equation}
+Mean-field approach
+\begin{equation}
+\sigma_i\sigma_j\approx M^2+M\,\qty(\sigma_i+\sigma_j)
+\end{equation}
+\begin{equation}
+H\approx -JzM\sum_i\sigma_i+\frac{JM^2Nz}{2},
+\end{equation}
+where $z$ is the connectivity (number of nearest neighbours).
+
+The free energy
+\begin{equation}
+\pdv{F}{M}=JzN\qty[M-\tanh(\frac{JzM}{T})].
+\end{equation}
+Minimizing $F$ means that
+\begin{equation}
+M=\tanh(\frac{JzM}{T}).
+\end{equation}
+This has non-zero solutions only if $Jz/T<1$. The critical temperature
+is
+\begin{equation}
+\Tc=Jz.
+\end{equation}
+
+Taylor expansion
+\begin{equation}
+f=\frac{F}{N}\approx \frac{\Tc}{2}\qty(1-\frac{\Tc}{T})^2
++\frac{\Tc}{12}M^4.
+\end{equation}
+At $T\le\Tc$
+\begin{equation}
+M=\pm\sqrt{3\qty(1-\frac{T}{\Tc})}\propto t^{1/2}.
+\end{equation}
+Critical exponent $\beta=1/2$.
+
+\subsection{Heissenberg model}
+\begin{equation}
+H=-J\sum_{\ev{i,j}}\vb{S}_i\vdot\vb{S}_j,
+\end{equation}
+\begin{equation}
+\vb{M}=\ev{\vb{S}_i}
+\end{equation}
+
+\begin{equation}
+F=a(T)\vb{M}\vdot\vb{M}+\frac{1}{2}b(\vb{M}\vdot\vb{M})^2
+\end{equation}
+Minimized ($T<\Tc$) when
+\begin{equation}
+\abs{\vb{M}}=M_0=\sqrt{-\frac{a}{b}}.
+\end{equation}
+This gives the (Landau) free energy if condensation
+\begin{equation}
+\varDelta{f}=-\frac{a_1^2t^2}{2b},
+\end{equation}
+where $a(T)=a_1t$. And the entropy of condensation is
+\begin{equation}
+\varDelta{s}=\eval{-\qty(\pdv{f}{T})}_{M=M_0}=\frac{a_1^2}{b\Tc^2}(T-\Tc).
+\end{equation}
+And the heat capacity of condensation
+\begin{equation}
+\varDelta{c_V}=T\pdv{S}{T}=\frac{a_1T}{b\Tc^2}
+\end{equation}
+
+\subsubsection{External magnetic field}
+If we apply an external magnetic field, we get
+\begin{equation}
+f=a(T)\vb{M}\vdot\vb{M}+\frac{1}{2}b(\vb{M}\vdot\vb{M})^2-\vb{B}\vdot\vb{M}.
+\end{equation}
+The symmetry is now broken; use
+$M:=\vb{M}\vdot\vb{B}/\abs{\vb{B}}$. The derivative
+\begin{equation}
+\pdv{f}{M}=2aM+2bM^3-B=0.
+\end{equation}
+Differentiate w.r.t. $B$:
+\begin{equation}
+2a\pdv{M}{B}+6bM^2\pdv{M}{B}=1.
+\end{equation}
+The sucepebility
+\begin{equation}
+\chi=\eval{\pdv{M}{B}}_{B=0}=\frac{1}{2a+6bM^2}
+\end{equation}
+At $T>\Tc$, $M=\chi B$ for weak fields.
+
+In absens of $B$
+\begin{equation}
+\chi=\frac{\Tc}{2a_1(T-T_c)}\times
+\begin{cases}
+1, &T>\Tc\\
+-\frac{1}{2}\qcomma &T<\Tc,
+\end{cases}
+\end{equation}
+which is divergen at $\Tc$ from both directions. 
+Critical exponent
+\begin{equation}
+\chi\propto \abs{t}^{\gamma}\qcomma \gamma=1.
+\end{equation}
+
+\paragraph{Scaling relations (mean-field)}
+\begin{equation}
+M(t,B)=\abs{t}^{1/2}\,\varphi\qty(\frac{B}{\abs{t}^{1/2}})
+\end{equation}
+\begin{equation}
+f=\abs{t}^2\,F\qty(\frac{B}{\abs{t}^{3/2}})
+\end{equation}
+for some function $F$.
+
+With mean-field, we only get these exponents.
+
+
+\subsubsection{Improvements to mean-field theory}
+We can generalize the scaling relations to
+\begin{equation}
+f=\abs{t}^{2-\alpha}\,F\qty(\frac{B}{\abs{t}^{\Delta}})
+\end{equation}
+All other critical exponents can be derived from any two,
+e.g. $\alpha$ and $\Delta$. 
+\begin{equation}
+M=-\pdv{f}{B}\propto \abs{t}^{2-\alpha-\Delta}\qcomma
+\beta=2-\alpha-\Delta
+\end{equation}
+\begin{equation}
+\chi=\eval{\pdv{M}{B}}_{B=0}\propto \abs{t}^{2-\alpha-2\Delta}
+\qcomma \gamma=2\Delta+\alpha-2
+\end{equation}
+
+
+\paragraph{Calculating the critical exponents}
+We need to introduce some non-uniformity, $\vb{M}=\vb{M}(\vb{r})$. The
+full free energy becomes 
+\begin{equation}
+\begin{aligned}
+F[\vb{M}]=\int\!\rd^3r\bigg[&a(\vb{M}\vdot\vb{M})+
+\frac{b}{2}(\vb{M}\vdot\vb{M})^{2}\\
+&+\frac{1}{2}\rho (\grad\vb{M}\vdot\grad\vb{M})\bigg]
+\end{aligned}
+\end{equation}
+where
+\begin{equation}
+\grad\vb{M}\vdot\grad\vb{M} = \sum_{\alpha\in\{x,y,z\}} 
+\grad{M_\alpha}\vdot\grad{M_\alpha}.
+\end{equation}
+This last term penalizes non-uniformity.
+
+Regard $F$ as an effective Hamiltonian
+\begin{equation}
+\ZZ=\tr(\ee^{-H/T})\to\int\!\rD\vb{M}\,
+\exp(-\frac{F[\vb{M}]}{T}).
+\end{equation}
+This is a functional integral, over all functions $\vb{M}(\vb{r})$. 
+
+Switch to momentum space
+\begin{equation}
+\vb{M}(\vb{k})=\vb{M}^*(-\vb{k})
+\end{equation}
+\begin{equation}
+\begin{aligned}
+F[\vb{M}]=&\sum_{\vb{k}}\qty(a+\frac{\rho k^2}{2})\abs{\vb{M}(\vb{k})}\\
+&+\frac{b}{2V}\sum_{\vb{k}_{1, 2, 3, 4}}
+M_\alpha(\vb{k}_1)M_\alpha(\vb{k}_2) M_\beta(\vb{k}_3)M_\beta(\vb{k}_4)
+\end{aligned}
+\end{equation}
+Sum over both $\alpha,\,\beta\in\{x, y, z\}$.
+
+The partition function
+\begin{equation}
+\ZZ \int \prod_{\vb{k}, \alpha} \rd{M_\alpha}(\vb{k}) \exp(-\frac{F[\vb{M}]}{T}).
+\end{equation}
+This is just a countably infinit-dimensional integral.
+Mean-filed theory is equivalent to evaluating this integral using the
+saddle point method (Laplace's method).
+
+\paragraph{Correlation function}
+\begin{equation}
+\begin{aligned}
+G(\vb{r}{-}\vb{r}')=&\ev{\Big.\vb{M}(\vb{r})\vdot\vb{M}(\vb{r}')}\\
+=&\frac{1}{V}\sum_{\vb{k}_1,\vb{k}_2}
+\ev{\Big.\vb{M}(\vb{k}_1)\vdot\vb{M}(\vb{k}_2)}
+\ee^{\ii\vb{k}_1\vdot\vb{r}}\ee^{\ii\vb{k}_2\vdot\vb{r}'}
+\end{aligned}
+\end{equation}
+\begin{equation}
+\ev{\Big.\vb{M}(\vb{k}_1)\vdot\vb{M}(\vb{k}_2)}=\int\ldots=
+\ev{\abs{\vb{M}(\vb{k})}^2}
+\end{equation}
+
+For $T>\Tc$
+\begin{equation}
+\ev{\abs{\vb{M}(\vb{k})}^2}=\frac{3T}{\rho}\frac{1}{k^2+\xi^{-2}}
+\end{equation}
+where
+\begin{equation}
+\xi=\sqrt{\frac{\rho}{2a}}\propto \abs{t}^{-\nu}
+\qcomma \nu=\nicefrac{1}{2}
+\end{equation}
+is the correlation length. It diverges at $T\to\Tc$.
+Back to the real correlation function
+\begin{equation}
+\begin{aligned}
+G(\vb{r}{-}\vb{r}')=\frac{3T}{4\pi\rho}\,
+\frac{\exp(\frac{\abs{\vb{r}-\vb{r}'}}{\xi})}{\abs{\vb{r}-\vb{r}'}}
+\qcomma T>\Tc.
+\end{aligned}
+\end{equation}
+
+For $T<\Tc$, we have some magetization
+\begin{equation}
+\ev{\vb{M}}=\vb{M}_0\stackrel{\text{choose}}{=}M_z\vu{z}
+\end{equation}
+and
+\begin{equation}
+G(\vb{r}{-}\vb{r}')=
+\ev{\Big.\delta\vb{M}(\vb{r})\vdot\delta\vb{M}(\vb{r}')}
+\end{equation}
+is with respect to the deviations in $\vb{M}$ from $\vb{M}_0$.
+
+\begin{equation}
+G(\vb{r}{-}\vb{r}')=\frac{1}{V}\sum_{\vb{k}}
+\ev{\abs{\delta{M}_z}^2 + \abs{\delta\vb{M}_\perp}^2}
+\ee^{\ii \vb{k}\vdot(\vb{r}-\vb{r}')}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+\ev{\abs{\delta{M}_\perp}^2}=&\frac{2T}{\rho}\frac{1}{k^2+\xi_\text{transverse}^{-2}}\\
+\ev{\abs{\delta{M}_z}^2}=&\frac{T}{\rho}\frac{1}{k^2+\xi_\text{along}^{-2}}\Bigg.
+\end{aligned}
+\end{equation}
+\begin{equation}
+\xi_\text{transverse}=\infty\qcomma
+\xi_\text{along}=\sqrt{-\frac{\rho}{4a}}
+\end{equation}
+For $T<\Tc$.
+
+
+%\vspace{2cm}
+\clearpage
+\appendix
+\section{Special functions and integrals}
+\subsection{Gamma function}
+\begin{equation}
+\Gamma(\nu)=\int_0^\infty x^{\nu-1}\ee^{-x}\id{x}
+\end{equation}
+\begin{equation}
+\Gamma(n)=(n-1)!\qcomma n\in\Z^+
+\end{equation}
+
+\begin{center}
+\begin{tabular}{|l||c|c|c|c|c|}\hline
+$x$ & $\nicefrac{1}{2}$ & $\nicefrac{3}{2}$ & $\nicefrac{5}{2}$
+& $\nicefrac{7}{2}$ & $\nicefrac{9}{2}$\\ \hline
+$\Gamma(x)$ & $\sqrt{\pi}$ & $\sqrt{\pi}/2$ & $3\sqrt{\pi}/4$
+& $15\sqrt{\pi}/8$ & $105\sqrt{\pi}/16$
+\\ \hline
+\end{tabular}
+\end{center}
+
+
+\subsection{Zeta function}
+The Riemann zeta function
+\begin{equation}
+\zeta(\nu)=\sum_{n=1}^\infty \frac{1}{n^\nu}
+=\int_0^\infty \frac{x^{\nu-1}}{\ee^x -1}\id{x}
+\end{equation}
+
+\begin{center}
+\begin{tabular}{|l||c|c|c|}\hline
+$x$ & $2$ & $4$ & $6$
+\\ \hline $\zeta(x)$ & 
+$\pi^2/6$ & $\pi^4/90$ & $\pi^6/945$ 
+\\ \hline\hline
+$x$ & $3/2$ & $5/2$ & $7/2$
+\\ \hline $\zeta(x)$ & 
+$2.61238$ & $1.34149$ & $1.12673$ 
+\\ \hline\hline
+$x$ & $3$ & $5$ & $7$
+\\ \hline$\zeta(x)$ & 
+$1.20206$ & $1.03693$ & $1.00835$ 
+\\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Some integrals}
+\begin{equation}
+\int_{-\infty}^\infty\!\rd{x}\,\ee^{-\alpha x^2}
+=\sqrt{\frac{\pi}{\alpha}}
+\qcomma \Re[\alpha]\ge0
+\end{equation}
+
+For large $K$:
+\begin{equation}
+\int_{-\infty}^\infty\!\rd{x}\,
+f(x)\ee^{-\varphi(x)K}
+\approx
+f(c)\ee^{-\varphi(c)K}\sqrt{\frac{2\pi}{\varphi''(c)}}
+\end{equation}
+where $c$ is a min. ponit of $\varphi$.
+
+\begin{equation}
+\int_0^\infty\!\rd{x}\,
+\frac{x^3}{\ee^x-1}=\frac{\pi^4}{15}
+\end{equation}
+
+
+\section{The harmonic oscillator}
+\begin{equation}
+H=\sum_{k}\qty[\frac{1}{2m}p_{-k}p_{k}+\frac{m\omega_k^2}{2}q_{-k}q_{k}].
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+a_k^\dagger =& \frac{1}{\sqrt{2\hbar}}
+\qty[\sqrt{m\omega_k}q_{-k} - \frac{\ii}{\sqrt{m\omega_k}}p_{+k}]\\
+a_k =& \frac{1}{\sqrt{2\hbar}}
+\qty[\sqrt{m\omega_k}q_{+k} - \frac{\ii}{\sqrt{m\omega_k}}p_{-k}]\\
+\end{aligned}
+\end{equation}
+\begin{equation}
+\comm{a_k}{a_{k'}^\dagger}=\delta_{k,k'}
+\end{equation}
+\begin{equation}
+\hat{n}_k=a_k^\dagger a_k
+\end{equation}
+\begin{equation}
+\hat{n}_k\ket{n_k}=n_k\ket{n_k}
+\end{equation}
+
+\begin{equation}
+H=\sum_k \hbar\omega_k\qty(\hat{n}_k+\frac{1}{2})
+\end{equation}
+
+
+\section{General mean-field therory}
+We assume that two quantities, $X$ and $Y$, varies very little from
+their mean values. We can write
+\begin{equation}
+\begin{aligned}
+X=&X-\ev{X}+\ev{X}\\
+Y=&Y-\ev{Y}+\ev{Y}
+\end{aligned}
+\end{equation}
+and
+\begin{equation}
+\begin{aligned}
+XY=&\Big[(X-\ev{X})+\ev{X}\Big]
+\Big[(Y-\ev{Y})+\ev{Y}\Big]
+\\\approx&
+X\ev{Y}+\ev{X}Y-\ev{X}\ev{Y}.
+\end{aligned}
+\end{equation}
+Here, we neglected the term $(X{-}\ev{X})(Y{-}\ev{Y})\approx0$. 
+
+
+\end{document}
+
+
+%  LocalWords:  Pathria  idealities bosonic Bogoliubov Beale BCS
+%  LocalWords:  Laplace's

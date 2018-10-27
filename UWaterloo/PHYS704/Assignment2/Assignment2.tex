@@ -1,0 +1,1121 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+\graphicspath{{figures/}}
+\swapcommands{\Omega}{\varOmega}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+% \newcommand{\cbox}[2][cyan]
+% {\mathchoice
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\displaystyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\textstyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptstyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptscriptstyle#2$}}
+% }
+% \newcommand{\grande}{\cbox{\phantom{\frac{1}{xx}}}}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+% \begin{titlepage}
+\title{Statistical Physics -- PHYS\,704 \\
+Assignment 2}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+%Om man vill ha en lista med vilka todo:s som finns.
+%\todolist
+
+\section{Compressibility and heat capacity of ideal Fermi gases}
+\subsection{Isothermal and adiabatic compressibility}
+In this problem we want to show that
+\begin{equation}\label{eq:1_kappa}
+\kappa_T = k_T:=\frac{1}{nT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
+\quad\text{ and }\quad
+\kappa_S = k_S:=\frac{3}{5nT}\frac{f_{3/2}(z)}{f_{5/2}(z)}.
+\end{equation}
+
+
+\subsubsection{Isothermal compressibility}
+We begin by manipulating the supposed expression for the isothermal
+compressibility
+\begin{equation}\label{eq:1_want_this_T}
+k_T=\frac{1}{nT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
+= \frac{V}{NT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
+= \frac{1}{P}\frac{f_{1/2}(z)f_{5/2}(z)}{[f_{3/2}(z)]^2},
+\end{equation}
+where we have used the thermodynamic relation for Fermi gases
+\begin{equation}\label{eq:1_PVNT}
+\frac{PV}{NT}=\frac{f_{5/2}(z)}{f_{3/2}(z)}.
+\end{equation}
+
+To find the compressibility we just use the definition
+\begin{equation}
+\kappa_T:=-\frac{1}{V}\qty(\pdv{V}{P})_T
+= -\frac{1}{V} \qty(\pdv{P} \frac{NT}{P}\frac{f_{5/2}(z)}{f_{3/2}(z)})_T,
+\end{equation}
+where we once again used \eqref{eq:1_PVNT} to express $V$ in the
+derivative. Now, since $T$ is constant we get
+\begin{equation}\label{eq:1_k_T_2}
+\kappa_T
+= -\frac{NT}{V} \qty[
+\frac{-1}{P^2}\frac{f_{5/2}(z)}{f_{3/2}(z)}
++\frac{1}{P}\qty(\pdv{P}
+\frac{f_{5/2}(z)}{f_{3/2}(z)}
+)_T].
+\end{equation}
+
+Now we have to evaluate the derivative of the special functions. To
+begin with we note that
+\begin{equation}
+\qty(\pdv{f_\nu(z)}{\mu})_T=\qty(\pdv{z}{\mu})_T\pdv{f_\nu(z)}{z}
+= \frac{1}{T}z\pdv{f_\nu(z)}{z}=\frac{1}{T}f_{\nu-1}(z).
+\end{equation}
+This follows from the fact that $z=\ee^{\mu/T}$ and the relation
+\begin{equation}
+z\pdv{f_\nu(z)}{z} = f_{\nu-1}(z).
+\end{equation}
+Next we have to evaluate
+\begin{equation}
+\qty(\pdv{\mu}{P})_T.
+\end{equation}
+To do this we remind ourselves that
+\begin{equation}
+PV=-\Omega=\frac{g_sVT}{\lambda^3}f_{5/2}(z)
+\end{equation}
+for Fermi gases. It's also a good idea to remind ourselves that
+$\lambda$ only depends on $T$ and other constants, so in this case
+$\lambda$ can be regarded as a constant. We now have
+\begin{equation}
+\qty(\pdv{P}{\mu})_T 
+=\qty(\pdv{\mu} \frac{g_sT}{\lambda^3}f_{5/2}(z))_T 
+=\frac{g_sT}{\lambda^3} \,\frac{1}{T}f_{3/2}(z) 
+=\frac{g_s}{\lambda^3} f_{3/2}(z).
+\end{equation}
+The last piece needed is the fact that
+\begin{equation}
+n=\frac{N}{V}=-\frac{1}{V}\qty(\pdv{\Omega}{\mu})_T
+=\frac{g_s}{\lambda^3} f_{3/2}(z)=\qty(\pdv{P}{\mu})_T.
+\end{equation}
+
+Finally we can continue from \eqref{eq:1_k_T_2} to get
+\begin{equation}
+\begin{aligned}
+\kappa_T &= \frac{NT}{VP} \qty[
+\frac{1}{P}\frac{f_{5/2}(z)}{f_{3/2}(z)}
+-\qty(\pdv{\mu}{P})_T\qty(\pdv{\mu}\frac{f_{5/2}(z)}{f_{3/2}(z)})_T
+]\\
+&= \frac{nT}{P} \qty[
+\frac{1}{P}\frac{f_{5/2}(z)}{f_{3/2}(z)}
+-\frac{1}{n}\qty(\frac{1}{T}\frac{f_{3/2}(z)}{f_{3/2}(z)}
+-\frac{1}{T}\frac{f_{5/2}(z)f_{1/2}(z)}{[f_{3/2}(z)]^2}
+)]\\
+&= \frac{nT}{P} \qty[
+\frac{1}{P}\frac{f_{5/2}(z)}{f_{3/2}(z)}
+-\frac{1}{nT}
++\frac{1}{nT}\frac{f_{5/2}(z)f_{1/2}(z)}{[f_{3/2}(z)]^2}
+].
+\end{aligned}
+\end{equation}
+From here we once again use \eqref{eq:1_PVNT} to get
+\begin{equation}
+\frac{1}{P}=\frac{1}{nT}\frac{f_{3/2}(z)}{f_{5/2}(z)}.
+\end{equation}
+This gives
+\begin{equation}
+\kappa_T = \frac{nT}{P} \qty[
+\frac{1}{nT}
+-\frac{1}{nT}
++\frac{1}{nT}\frac{f_{5/2}(z)f_{1/2}(z)}{[f_{3/2}(z)]^2}
+]
+=\frac{1}{P}\frac{f_{5/2}(z)f_{1/2}(z)}{[f_{3/2}(z)]^2},
+\end{equation}
+which is exactly what we had in \eqref{eq:1_want_this_T}.
+\qed
+
+
+\subsubsection{Adiabatic compressibility}
+As before, we begin with rewriting the RHS of the supposed expression
+for the adiabatic compressibility
+\begin{equation}\label{eq:1_want_this_S}
+k_S=\frac{3}{5nT}\frac{f_{3/2}(z)}{f_{5/2}(z)}
+=\frac{3}{5P}\frac{f_{5/2}(z)}{f_{3/2}(z)}\frac{f_{3/2}(z)}{f_{5/2}(z)}
+=\frac{3}{5P},
+\end{equation}
+where we once again used \eqref{eq:1_PVNT} to rewrite $nT$. Next we
+need to remind ourselves about some more important relations:
+\begin{equation}\label{eq:dE}
+\rd{E}=T\rd{S}-P\rd{V}+\mu\rd{N}
+\end{equation}
+and
+\begin{equation}\label{eq:1_Omega}
+PV=-\Omega=\frac{2}{3}E.
+\end{equation}
+Of these relations only the last equality (relating $\Omega$ to $E$)
+is specific for Fermi gases, the rest are general thermodynamic
+identities. 
+
+From now we can focus more on the compressibility
+\begin{equation}
+\kappa_S=-\frac{1}{V}\qty(\pdv{V}{P})_S
+=-\frac{1}{V\qty(\pdv{P}{V})_S}
+\end{equation}
+From the last expression we note that \eqref{eq:1_Omega} allows us to
+write
+\begin{equation}
+\qty(\pdv{P}{V})_S=\frac{2}{3}\qty(\pdv{(\nicefrac{E}{V})}{V})_S
+=\frac{2}{3V}\qty(\pdv{E}{V})_S-\frac{2E}{3}\frac{1}{V^2}.
+\end{equation}
+Now by invoking \eqref{eq:dE} we see that
+\begin{equation}
+\qty(\pdv{E}{V})_S=-P,
+\end{equation}
+we have also assumed $N$ to be constant which is reasonable. And by
+using \eqref{eq:1_Omega} once more to rewrite $E=2PV/3$ we get
+\begin{equation}
+\qty(\pdv{P}{V})_S=-\frac{2P}{3V}-\frac{PV}{V^2}=-\frac{5P}{3V}.
+\end{equation}
+This means that we now have
+\begin{equation}
+\kappa_S=-\frac{1}{V\qty(\pdv{P}{V})_S}=\frac{3}{5P},
+\end{equation}
+which is exactly what we were looking for in
+\eqref{eq:1_want_this_S}.\footnotemark{}
+\qed
+
+\footnotetext{This was a very neat way to derive $\kappa_S$. One could
+  wonder if this approach is applicable to $\kappa_T$ as well. But
+  unfortunately the analogous approach yields an expression which
+  contains $(\pdv*{\mu}{V})_T$, which is not readily evaluated.} 
+
+
+\subsubsection{Low temperature limit}
+% Here we're going to show that 
+% \begin{equation}\label{eq:1_lowT_T}
+% \kappa_T = \frac{1}{nT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
+% \approx \frac{3}{2n\epsilon_F}
+% \qty[1-\frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]
+% \end{equation}
+% and
+% \begin{equation}\label{eq:1_lowT_S}
+% \kappa_T = \frac{3}{5nT}\frac{f_{3/2}(z)}{f_{5/2}(z)}
+% \approx \frac{3}{2n\epsilon_F}
+% \qty[1-\frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]
+% \end{equation}
+% in the low temperature limit. 
+
+Here we're going to find the low temperature limit expressions for
+$\kappa_T$ and $\kappa_S$.
+To be in the limit of low temperature means that
+\begin{equation}
+T\ll\epsilon_F\approx\mu 
+\quad\Longrightarrow\quad
+z=\ee^{\mu/T}\approx \ee^{\epsilon_F/T}\gg1.
+\end{equation}
+We therefore need to expand $f_\nu(z)$ using the Sommerfeld
+expansion\footnotemark{} 
+\begin{equation}\label{eq:1_Sommerfeld}
+\begin{aligned}
+f_\nu(z)=&\frac{\ln^\nu(z)}{\Gamma(\nu+1)}\qty[
+1+\nu(\nu{-}1)\frac{\pi^2}{6}\frac{1}{\ln^2(z)}
++\nu(\nu{-}1)(\nu{-}2)(\nu{-}3)\frac{7\pi^4}{360}\frac{1}{\ln^4(z)}
++\ldots]\\
+=&\frac{\qty(\nicefrac{\mu}{T})^\nu}{\Gamma(\nu+1)}\qty[
+1+\nu(\nu{-}1)\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2
++\nu(\nu{-}1)(\nu{-}2)(\nu{-}3)\frac{7\pi^4}{360}\qty(\frac{T}{\mu})^4
++\ldots]
+\end{aligned}
+\end{equation}
+This expansion can be found in for instance Pathria\,\&\,Beale,
+\textit{Statistical Mechanics}, ed. 3.
+
+\footnotetext{I'm including the $\ln^{-4}(z)$ term since it will be
+  used in the next problem. Here however, we're only interested in the
+  expansion up to $\ln^{-2}(z)$.}
+
+Now we have to start working:
+\begin{equation}\label{eq:1_1/2}
+f_{1/2}(z)\approx\frac{1}{\Gamma(\nicefrac{3}{2})}\qty(\frac{\mu}{T})^{1/2}
+\qty[
+1-\frac{1}{4}\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2]
+=\frac{2}{\sqrt{\pi}}\qty(\frac{\mu}{T})^{1/2}
+\qty[
+1-\frac{\pi^2}{24}\qty(\frac{T}{\mu})^2],
+\end{equation}
+\begin{equation}\label{eq:1_3/2}
+f_{3/2}(z)\approx\frac{1}{\Gamma(\nicefrac{5}{2})}\qty(\frac{\mu}{T})^{3/2}
+\qty[
+1+\frac{3}{4}\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2]
+=\frac{4}{3\sqrt{\pi}}\qty(\frac{\mu}{T})^{3/2}
+\qty[1+\frac{\pi^2}{8}\qty(\frac{T}{\mu})^2],
+\end{equation}
+and 
+\begin{equation}\label{eq:1_5/2}
+f_{5/2}(z)\approx\frac{1}{\Gamma(\nicefrac{7}{2})}\qty(\frac{\mu}{T})^{5/2}
+\qty[
+1+\frac{15}{4}\frac{\pi^2}{6}\qty(\frac{T}{\mu})^2]
+=\frac{8}{15\sqrt{\pi}}\qty(\frac{\mu}{T})^{5/2}
+\qty[1+\frac{5\pi^2}{8}\qty(\frac{T}{\mu})^2].
+\end{equation}
+After this we also need to recognize that $\mu$ is dependent of
+$T$, and $\mu$ is also only coming in as $T/\mu$. It's therefor a
+good idea to use \eqref{eq:2_mu} to expand
+\begin{equation}\label{eq:1_T/mu}
+\frac{T}{\mu}\approx T \frac{1}{\epsilon_F}\qty[ 1
+-\frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]^{-1}
+\approx\tau\qty[1
++\frac{\pi^2}{12}\tau^2]
+\end{equation}
+where $\tau=T/\epsilon_F$. We only needed to expand to
+$\order{\tau^2}$ since we're only going that far in the rest of the
+expansions. 
+
+Then we Taylor expand the quotients in \eqref{eq:1_kappa},
+%{eq:1_lowT_T} and \eqref{eq:1_lowT_S}, 
+which is possible since $T\ll\mu$. 
+For isothermal compressibility this looks like
+\begin{equation}
+\begin{aligned}
+\kappa_T\approx& \frac{1}{nT} 
+\frac{2}{\sqrt{\pi}}\qty(\frac{\mu}{T})^{1/2}
+\qty(\frac{4}{3\sqrt{\pi}}\qty(\frac{\mu}{T})^{3/2})^{-1}
+\qty[
+1-\frac{\pi^2}{24}\qty(\frac{T}{\mu})^2]
+\qty[
+1+\frac{\pi^2}{8}\qty(\frac{T}{\mu})^2]^{-1}\\
+\approx&
+ \frac{3}{2nT}\frac{T}{\mu}
+\qty[
+1-\frac{\pi^2}{24}\qty(\frac{T}{\mu})^2]
+\qty[
+1-\frac{\pi^2}{8}\qty(\frac{T}{\mu})^2]\\
+\end{aligned}
+\end{equation}
+From here we use \eqref{eq:1_T/mu}. But note that only the leading
+factor $T/\mu$ needs to be expanded, since we're only interested in
+expanding to $\order{\tau^2}$ in each bracket. Thus
+\begin{equation}
+\begin{aligned}
+\kappa_T\approx& \frac{3}{2nT}
+\tau\qty[1 +\frac{\pi^2}{12}\tau^2]
+\qty[1 -\frac{\pi^2}{24}\tau^2]
+\qty[1 -\frac{\pi^2}{8}\tau^2]\\
+\approx& \frac{3}{2nT}
+\frac{T}{\epsilon_F}\qty[1 +
+\qty(\frac{\pi^2}{12}-\frac{\pi^2}{24}-\frac{\pi^2}{8})
+\tau^2] 
+&=\frac{3}{2n\epsilon_F}
+\qty[1 - \frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2]
+\end{aligned}
+\end{equation}
+
+The adiabatic compressibility is calculated in an analogous way:
+\begin{equation}
+\begin{aligned}
+\kappa_S\approx& \frac{3}{5nT} 
+\frac{4}{3\sqrt{\pi}}\qty(\frac{\mu}{T})^{3/2}
+\qty(\frac{8}{15\sqrt{\pi}}\qty(\frac{\mu}{T})^{5/2})^{-1}
+\qty[
+1+\frac{\pi^2}{8}\qty(\frac{T}{\mu})^2]
+\qty[
+1+\frac{5\pi^2}{8}\qty(\frac{T}{\mu})^2]^{-1}\\
+\approx&
+ \frac{3}{5nT}\frac{5}{2}\tau\qty[1 +\frac{\pi^2}{12}\tau^2]
+\qty[1+\frac{\pi^2}{8}\tau^2]
+\qty[1-\frac{5\pi^2}{8}\tau^2]\\
+\approx&\frac{3}{2n\epsilon_F}
+\qty[1 - \frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2].
+\end{aligned}
+\end{equation}
+And that's the two expressions for the compressibilities in the low
+temperature limit.
+\qed
+
+\subsection{Relationship between isobaric and isochoric heat capacity}
+
+\subsubsection{General thermodynamic relationship between $C_P$ and $C_V$}
+In general we have
+\begin{equation}
+C_V=T\qty(\pdv{S}{T})_V\qcomma\text{and}\quad
+C_P=T\qty(\pdv{S}{T})_P.
+\end{equation}
+
+To evaluate these in a bit more detail we begin by studying
+$\rd{S}$. By the State postulate any property of the system can be
+described by two independent variables (assuming no particle exchange
+with the environment). We can therefore write
+\begin{equation}
+\rd{S}=\qty(\pdv{S}{T})_V\rd{T} + \qty(\pdv{S}{V})_T\rd{V}.
+\end{equation}
+But we are also free to rewrite $\rd{V}$ in terms of $\rd{T}$ and
+$\rd{P}$:
+\begin{equation}
+\rd{V}=\qty(\pdv{V}{T})_P\rd{T} + \qty(\pdv{V}{P})_T\rd{P}.
+\end{equation}
+With this $\rd{S}$ becomes
+\begin{equation}
+\begin{aligned}
+\rd{S} =& \qty(\pdv{S}{T})_V\rd{T} + \qty(\pdv{S}{V})_T
+\qty[\qty(\pdv{V}{T})_P\rd{T} + \qty(\pdv{V}{P})_T\rd{P}]\\
+=&\qty[\qty(\pdv{S}{T})_V+\qty(\pdv{S}{V})_T\qty(\pdv{V}{T})_P]\rd{T}
++ \qty(\pdv{V}{P})_T\rd{P}.
+\end{aligned}
+\end{equation}
+Now we can write 
+\begin{equation}
+C_P=T\qty(\pdv{S}{T})_P
+=T\qty[\qty(\pdv{S}{T})_V+\qty(\pdv{S}{V})_T\qty(\pdv{V}{T})_P]
+=C_V+T\qty(\pdv{S}{V})_T\qty(\pdv{V}{T})_P.
+\end{equation}
+
+To continue from here we need to use some Maxwell relations. There are
+two of interest to us in the moment:
+\begin{equation}
+\qty(\pdv{S}{V})_T=-\pdv[2]{F}{T}{V}=\qty(\pdv{P}{T})_V
+\end{equation}
+and
+\begin{equation}
+-\qty(\pdv{S}{P})_T=\pdv[2]{\varPhi}{T}{P}=\qty(\pdv{V}{T})_P,
+\end{equation}
+where $F$ and $\varPhi$ are the Helmholtz and Gibbs free energy
+respectively. 
+
+With these Maxwell relations we can write
+\begin{equation}
+C_P-C_V=T\qty(\pdv{P}{T})_V\qty(\pdv{V}{T})_P
+=TV\kappa_T\qty(\pdv{P}{T})_V^2.
+\end{equation}
+The last equality comes from
+\begin{equation}
+V\kappa_T\qty(\pdv{P}{T})_V=-\qty(\pdv{V}{P})_T\qty(\pdv{S}{V})_T
+=-\qty(\pdv{S}{P})_T=\qty(\pdv{V}{T})_P.
+\end{equation}
+
+\subsubsection{In the specific cast of Fermi gases}
+Here we want to study 
+\begin{equation}\label{eq:1bi_1}
+\frac{C_P-C_V}{C_V} 
+= \frac{TV\kappa_T\qty(\pdv{P}{T})_V^2}{\qty(\pdv{E}{T})_V}
+= \frac{TV\kappa_T\qty(\pdv{P}{E})_V^2\qty(\pdv{E}{T})_V^2}{\qty(\pdv{E}{T})_V}
+= TV\kappa_TC_V\qty(\pdv{P}{E})_V^2.
+\end{equation}
+Here we used the fact that $C_V=(\pdv*{E}{T})_V$. To continue we
+note that \eqref{eq:1_Omega} implies that
+\begin{equation}
+\qty(\pdv{E}{P})_V=\frac{3}{2}V.
+\end{equation}
+No we can write \eqref{eq:1bi_1} as
+\begin{equation}
+\frac{C_P-C_V}{C_V} 
+= TV\kappa_TC_V\frac{4}{9V^2}
+=\frac{4C_VT}{9V}\frac{1}{nT}\frac{f_{1/2}(z)}{f_{3/2}(z)}
+=\frac{4C_V}{9N}\frac{f_{1/2}(z)}{f_{3/2}(z)}.
+\end{equation}
+Here we used (\ref{eq:1_kappa}\,a) to rewrite $\kappa_T$.
+
+To get a first order approximation of the value of this in the low
+temperature limit we will use \eqref{eq:1_1/2}, \eqref{eq:1_3/2} and
+\eqref{eq:CV_Fermi}. To a first order approximation 
+\begin{equation}
+\frac{C_P-C_V}{C_V} =\frac{4C_V}{9N}\frac{f_{1/2}(z)}{f_{3/2}(z)} 
+\approx \frac{4}{9} \frac{\pi^2}{2}\frac{T}{\epsilon_F}
+\frac{2}{\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{1/2}
+\qty(\frac{4}{3\sqrt{\pi}}\qty(\frac{\epsilon_F}{T})^{3/2})^{-1}
+=\frac{\pi^2}{3}\qty(\frac{T}{\epsilon_F})^2.
+\end{equation}
+\qed
+
+
+
+
+
+\section{Chemical potential and particle energy of an ideal
+  Fermi gas at low temperatures}
+\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+\subsection{Chemical potential}
+To calculate an approximation to $\mu$ at low temperatures
+$\ln(z)=\mu/T\gg1$, we use the Sommerfeld expansion in
+\eqref{eq:1_Sommerfeld}. 
+Then to get an equation for $\ln(z)$ we can use
+\begin{equation}
+n=\frac{g_s}{\lambda^3}f_{3/2}(z)
+\approx\frac{g_s}{\lambda^3}
+\frac{4}{3\sqrt{\pi}}\ln^{3/2}(z)
+\qty[1+\frac{\pi^2}{8}\ln^{-2}(z) 
++\frac{7\pi^4}{640}\ln^{-4}(z) ]
+\end{equation}
+or in other words
+\begin{equation}
+\zeta\approx\qty(\frac{3\sqrt{\pi}\lambda^3}{4g_s})^{2/3}
+\qty[1+\frac{\pi^2}{8}\zeta^{-2}
++\frac{7\pi^4}{640}\zeta^{-4} ]^{-2/3},
+\end{equation}
+where $\zeta=\ln(z)=\mu/T$.
+We're going to deal with these two factors separately.
+First off is the easy bit. The first factor is
+\begin{equation}
+\qty(\frac{3\sqrt{\pi}\lambda^3}{4g_s})^{2/3}
+=\lambda^2\qty(\frac{3\sqrt{\pi}}{4g_s})^{2/3}
+=\frac{1}{T}\frac{\hbar^2}{2m}4\pi\qty(\frac{3\sqrt{\pi}}{4g_s})^{2/3}
+=\frac{1}{T}\frac{\hbar^2}{2m}\qty(\frac{6\pi^2}{g_s})^{2/3}
+=\frac{\epsilon_F}{T}=\frac{1}{\tau}.
+\end{equation}
+Then there's the other factor which has to be Taylor expanded to the
+second order in $\ln^{-2}(z)\ll1$. To do this we enlist some help in
+form of \emph{Mathematica}\footnotemark{}, which yields
+\begin{equation}
+\qty[1 + \frac{\pi^2}{8}\zeta^{-2}
+ + \frac{7\pi^4}{640}\zeta^{-4}]^{-2/3} 
+=\qty[1 - \frac{\pi^2}{12}\zeta^{-2}
+ + \frac{\pi^4}{720}\zeta^{-4} + \order{\zeta^{-6}}].
+\end{equation}
+We now have every thing we need to start approximating $\zeta$.
+Unfortunately what we have is something in the line of a fifth degree
+polynomial in $\zeta$ to solve: 
+\begin{equation}\label{eq:2_fixed-point}
+\zeta\approx \tau^{-1}\qty[1 - \frac{\pi^2}{12}\zeta^{-2}
+ + \frac{\pi^4}{720}\zeta^{-4}].
+\end{equation}
+This can not and should not be solved
+analytically. Instead we're going to use a method similar to
+fixed-point iteration, but for analytic expressions.
+\footnotetext{Lord and Savior in our times of need and despair!}
+
+The first iteration is just the zeroth power approximation:
+\begin{equation}
+\zeta_0=\tau^{-1}.
+\end{equation}
+Next iteration is using the fixed-point function
+\eqref{eq:2_fixed-point} on $\zeta_0$ to get
+\begin{equation}
+\zeta_1=\tau^{-1}\qty[1 - \frac{\pi^2}{12}\zeta_0^{-2}
+ + \frac{\pi^4}{720}\zeta_0^{-4} ]
+=\tau^{-1}\qty[1 - \frac{\pi^2}{12}\tau^{2}
+ + \frac{\pi^4}{720}\tau^{4} ].
+\end{equation}
+One more iteration:
+\begin{equation}
+\begin{aligned}
+\zeta_2=&\tau^{-1}\qty[1 - \frac{\pi^2}{12}\zeta_1^{-2}
+ + \frac{\pi^4}{720}\zeta_1^{-4} ]\\
+=& \tau^{-1}\qty[1 
+ - \frac{\pi^2}{12}\tau^{2}
+\qty(1 - \frac{\pi^2}{12}\tau^{2}
+ + \frac{\pi^4}{720}\tau^{4})^{-2}
+ + \frac{\pi^4}{720}\tau^{4} 
+\qty(1 - \frac{\pi^2}{12}\tau^{2}
+ + \frac{\pi^4}{720}\tau^{4})^{-4}
+].
+\end{aligned}
+\end{equation}
+We once again turn our faith to \emph{Mathematica} and get
+\begin{equation}
+\zeta_2=\tau^{-1}\qty[1 - \frac{\pi^2}{12}\tau^{2}
+ - \frac{\pi^4}{80}\tau^{4} + \order{\tau^6}].
+\end{equation}
+From here it's no use in continuing. Since our fixed-point function
+only had terms up to $\order{\zeta^{-4}}$, we can not get any higher
+orders than $\tau^4$.
+
+We can therefore conclude that
+\begin{equation}\label{eq:2_mu}
+\mu=T\ln(z)\approx T\zeta_2= \epsilon_F \qty[1
+-\frac{\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2
+-\frac{\pi^4}{80}\qty(\frac{T}{\epsilon_F})^4].
+\end{equation}
+\qed
+
+\subsection{Mean particle energy}
+To calculate an approximation to the mean particle energy $E/N$, we
+once again have to use the Sommerfeld expansion
+\eqref{eq:1_Sommerfeld}. Then we use the relation
+\begin{equation}
+\frac{E}{N}=-\frac{3\Omega}{2N}=\frac{3T}{2}\frac{f_{5/2}(z)}{f_{3/2}(z)}.
+\end{equation}
+Fortunately we've already calculated $\ln(z)=\zeta\approx\zeta_2$, so all
+that left do here is to expand the Fermi functions and then
+Taylor expand the quotient.
+
+Let's begin:
+\begin{equation}
+%\begin{aligned}
+\frac{f_{5/2}(z)}{f_{3/2}(z)}\approx
+\overbrace{\frac{8\zeta_2^{5/2}}{15\sqrt{\pi}}
+\qty(\frac{4\zeta_2^{3/2}}{3\sqrt{\pi}})^{-1}}^{\nicefrac{2\zeta_2}{5}}
+\qty[1+\frac{5\pi^2}{8}\zeta_2^{-2}
+-\frac{7\pi^4}{384}\zeta_2^{-4} ]
+\times \qty[1+\frac{\pi^2}{8}\zeta_2^{-2} 
++\frac{7\pi^4}{640}\zeta_2^{-4} ]^{-1}
+%\end{aligned}
+\end{equation}
+There's no need to even pretend to want deal with this by hand.
+Just go directly to \emph{Mathematica}, which yields
+\begin{equation}
+\frac{f_{5/2}(z)}{f_{3/2}(z)}\approx \frac{2}{5\tau}
+\qty[1+\frac{5\pi^2}{12}\tau^2-\frac{\pi^4}{16}\tau^4].
+\end{equation}
+For reference the command in use were \texttt{Series}.
+
+Now we have
+\begin{equation}
+\frac{E}{N}\approx\frac{3T}{2}\frac{2}{5\tau}
+\qty[1+\frac{5\pi^2}{12}\tau^2-\frac{\pi^4}{16}\tau^4]
+=\frac{3\epsilon_F}{5}\qty[1
++\frac{5\pi^2}{12}\qty(\frac{T}{\epsilon_F})^2
+-\frac{\pi^4}{16}\qty(\frac{T}{\epsilon_F})^4].
+\end{equation}
+This can be used to get an expression for the heat capacity of the
+system
+\begin{equation}\label{eq:CV_Fermi}
+\frac{C_V}{N}=\frac{1}{N}\qty(\pdv{E}{T})_V
+=\;\frac{\pi^2}{2}\frac{T}{\epsilon_F}
+ - \frac{3\pi^2}{20}\qty(\frac{T}{\epsilon_F})^3.
+\end{equation}
+\qed
+
+
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\section{Speed of sound in an ideal Bose gas}
+The speed of sound is given by
+\begin{equation}
+v_s:=\sqrt{\qty(\pdv{P}{\rho})_S}
+\end{equation}
+where $\rho=mn=mN/V$ is the mass density of the gas (assuming a gas of
+identical particles). Here we will also assume that the temperature is
+above the critical temperature for Bose-Einstein condensation, but not
+necessarily in the high temperature limit.
+
+To calculate the speed of sound we begin by noting that 
+\begin{equation}\label{eq:3_PVNT}
+\frac{PV}{NT}=\frac{P}{nT}=\frac{g_{5/2}(z)}{g_{3/2}(z)},
+\end{equation}
+hold analogous to Fermi gases. Meaning that
+\begin{equation}\label{eq:3_dn/dP}
+\qty(\pdv{\rho}{P})_S=m\qty(\pdv{n}{P})_S
+=m\qty(\pdv{P} \frac{P}{T}\frac{g_{3/2}(z)}{g_{5/2}(z)})_S.
+\end{equation}
+
+
+
+Then we need some way of expressing the entropy, to know what is
+constant when differentiating. Here we can use the relation
+\begin{equation}\label{eq:3_S}
+S=\frac{E-\Omega-\mu N}{T}=\frac{E-\Omega}{T}-\ln(z)N.
+\end{equation}
+From here we also need to use
+\begin{equation}\label{eq:3_PV}
+PV=-\Omega=\frac{2}{3}E,
+\end{equation}
+which also holds for Bose gases. This yields
+\vspace{-4mm}\begin{equation}
+S=N\qty[\frac{5}{2}\frac{PV}{NT}-\ln(z)]=
+N\overbrace{\qty[\frac{5}{2}\frac{g_{5/2}(z)}{g_{3/2}(z)}-\ln(z)]}^{=:\varXi(z)},
+\end{equation}
+which is very interesting, since this means that if $S$ is constant
+then $z$ must also be constant\footnotemark{}. This can be seen by
+differentiating (the constant) $S$ with respect to some variable $x$: 
+\begin{equation}
+0=\qty(\pdv{S}{x})_S=N\bigg(\overbrace{\pdv{\varXi}{z}}^{\neq0}\bigg)_S
+\qty(\pdv{z}{x})_S.
+\end{equation}
+The only remaining option is that $z$ must also be constant when $S$
+is constant.
+\footnotetext{As always we assume $N$ to be constant.}
+
+With this new result we can evaluate \eqref{eq:3_dn/dP} further:
+\begin{equation}\label{eq:3_drho/dP}
+\qty(\pdv{\rho}{P})_S=\qty(\pdv{\rho}{P})_z
+=m\frac{g_{3/2}(z)}{g_{5/2}(z)}
+\qty[\frac{1}{T}-\frac{P}{T^2}\qty(\pdv{T}{P})_z].
+\end{equation}
+To continue from here we use \eqref{eq:3_PV} to write $P=-\Omega/V$,
+which makes
+\begin{equation}\label{eq:3_dP/dT}
+\qty(\pdv{P}{T})_z=-\qty(\pdv{(\Omega/V)}{T})_z.
+\end{equation}
+Then we use the fact that
+\begin{equation}\label{eq:3_Omega}
+\Omega=-\frac{VT}{\lambda^3}g_{5/2}(z)
+=-V\frac{T^{5/2}}{\varLambda^3}g_{5/2}(z),
+\end{equation}
+where $\Lambda=T^{1/2}\lambda$ is a gas specific constant (only
+depends on fundamental constants and the mass of the gas particles).
+Now \eqref{eq:3_dP/dT} becomes
+\begin{equation}
+\qty(\pdv{P}{T})_z
+=+\qty(\pdv{T}\frac{T^{5/2}}{\varLambda^3}g_{5/2}(z))_z
+=\frac{5}{2}\frac{T^{3/2}}{\varLambda^3}g_{5/2}(z)
+=\frac{5P}{2T}.
+\end{equation}
+The last step is due to \eqref{eq:3_Omega} and \eqref{eq:3_PV}
+
+Now all there is to do is to use this result in \eqref{eq:3_drho/dP}
+giving
+\begin{equation}
+\qty(\pdv{\rho}{P})_S
+=\frac{m}{T}\frac{g_{3/2}(z)}{g_{5/2}(z)}
+\qty[1-\frac{P}{T}\frac{2T}{5P}]
+=\frac{3m}{5T}\frac{g_{3/2}(z)}{g_{5/2}(z)}.
+\end{equation}
+The speed of sound is now
+\begin{equation}\label{eq:3_vs_1}
+v_s^2=\qty(\pdv{P}{\rho})_S
+=\frac{5T}{3m}\frac{g_{5/2}(z)}{g_{3/2}(z)}.
+\end{equation}
+\qed
+
+\subsubsection*{Speed of sound expressed in terms of the mean square
+  speed of the gas particles}
+We can continue manipulating \eqref{eq:3_vs_1} by using
+\eqref{eq:3_PVNT} and \eqref{eq:3_PV}. More precisely
+\begin{equation}
+T\frac{g_{5/2}(z)}{g_{3/2}(z)}\stackrel{\eqref{eq:3_PVNT}}{=}
+\frac{PV}{N}\stackrel{\eqref{eq:3_PV}}{=}
+\frac{2E}{3N}.
+\end{equation}
+But $E/N$ is just the mean energy per particle which can be expressed
+as
+\begin{equation}
+\frac{E}{N}=\ev{\epsilon}=\ev{\frac{mu^2}{2}}
+=\frac{m}{2}\ev*{u^2}.
+\end{equation}
+In other words
+\begin{equation}
+v_s^2=\qty(\pdv{P}{\rho})_S
+=\frac{5T}{3m}\frac{g_{5/2}(z)}{g_{3/2}(z)}
+=\frac{5}{3m}\frac{2}{3}\frac{m}{2}\ev*{u^2}
+=\frac{5}{9}\ev*{u^2}.
+\end{equation}
+\qed
+
+\section{Regarding ideal Bose gases }
+\newcommand{\V}{\ensuremath{\mathcal{V}}}
+\newcommand{\Sd}{\ensuremath{\mathcal{S}_d}}
+\newcommand{\D}[1]{\ensuremath{\frac{d}{#1}}}
+\newcommand{\nD}[1]{\ensuremath{\nicefrac{d}{#1}}}
+\newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
+
+Here we are concerned about bosons in $d$ dimensions. They are
+confined to a box of (hyper) volume $\V=L^d$ their energy momentum
+relation is $\epsilon_{\vb{k}}=\hbar^2\vb{k}^2/(2m)$.
+
+\subsection{Grand potential and particle density}
+The grand potential is given by
+\begin{equation}
+\Omega=T\ln(Z)=g_sT\sum_{\vb{k}}
+\ln(1-\ee^{-\frac{\epsilon_{\vb{k}}-\mu}{T}})
+\to g_sT
+\iint\frac{\rd^dq\rd^dk}{(2\pi)^d}\ln(1-\ee^{-\frac{\epsilon_{\vb{k}}-\mu}{T}}).
+\end{equation}
+The $q$ integral just gives us the volume $\V$ of the box. The $k$
+integral must however be modified. Since $\epsilon_{\vb{k}}$ only
+depends on $k=|\vb{k}|$, we can go to a spherical coordinate
+system. By doing so we get
+\vspace{-4mm}\begin{equation}
+\int\rd^dk\,f(k)
+=\overbrace{\text{``Area of unit sphere in $d$ dimensions''}}^{=:\Sd}
+\times\int_0^\infty k^{d-1}\rd{k}f(k).
+\end{equation}
+The factor of the area of the unit sphere in $d$ dimensions comes from
+the integration over the corresponding ``spherical'' angles. This area
+does have a closed expression
+\begin{equation}\label{eq:4_Sd}
+\Sd=\frac{2\pi^{\frac{d}{2}}}{\Gamma(\nicefrac{d}{2})}.
+\end{equation}
+
+Then we need to convert to an integral over $\epsilon$ instead. Since 
+\begin{equation}
+\epsilon=\frac{\hbar^2k^2}{2m} 
+\quad\Longrightarrow\quad
+k=\sqrt{\frac{2m}{\hbar^2}} \,\epsilon^{1/2},
+\end{equation}
+which means that
+\begin{equation}\label{eq:5_k->eps}
+k^{d-1}\rd{k}=\qty(\frac{2m}{\hbar^2})^{\frac{d-1}{2}}\epsilon^{\frac{d-1}{2}}
+\times\frac{1}{2}\sqrt{\frac{2m}{\hbar^2}}
+\,\epsilon^{-1/2}\rd\epsilon
+=\frac{1}{2}\qty(\frac{2m}{\hbar^2})^{\D{2}}
+\epsilon^{\D{2}-1}\rd\epsilon
+\end{equation}
+Now we can continue to calculate the grand potential
+\begin{equation}
+\begin{aligned}
+\Omega =& \frac{g_sT\V\Sd}{(2\pi)^d}
+\times\frac{1}{2}\qty(\frac{2m}{\hbar^2})^{\D{2}}
+\int_0^\infty\!\rd\epsilon\, 
+\epsilon^{\D{2}-1} \ln(1-z\ee^{-\frac{\epsilon}{T}})\\
+=&\frac{g_sT\V\Sd}{2(2\pi)^d}
+\qty(\frac{2m}{\hbar^2})^{\D{2}} \qty{
+\qty[\frac{\epsilon^{\D{2}}}{d/2}
+\ln(1-z\ee^{-\frac{\epsilon}{T}})]_{\epsilon=0}^\infty
+-\frac{2}{d}\int_0^\infty\!\rd\epsilon\, 
+\epsilon^{\D{2}}\frac{\frac{z}{T}\ee^{-\frac{\epsilon}{T}}}
+{1-z\ee^{-\frac{\epsilon}{T}}}.
+}\\
+\end{aligned}
+\end{equation}
+Here the integrated part goes to $0$ in the limits, so all we're left
+with is the second integral. To handle that integral we set
+$x=\epsilon/T$ which gives
+\begin{equation}\label{eq:4_Omega_0}
+\begin{aligned}
+\Omega =&\qty(-\frac{2}{d})\frac{g_sT\V\Sd}{2(2\pi)^d}
+\qty(\frac{2m}{\hbar^2})^{\D{2}} \qty{
+\frac{T^{\D{2}+1}}{T}\int_0^\infty
+\frac{\rd{x}\, x^{\D{2}}}{z^{-1}\ee^{x}-1}
+}\\
+=&\qty(-\frac{2}{d})\frac{g_sT^{\D{2}+1}\V\Sd}{2(2\pi)^d}
+\qty(\frac{2m}{\hbar^2})^{\D{2}} \Gamma\qty(\nD{2}+1)g_{\D{2}+1}(z).
+\end{aligned}
+\end{equation}
+The last step was just using the definition of $g_\nu(z)$. We can also
+make use of the thermal wavelength $\lambda=h/\sqrt{2\pi mT}$ to
+rewrite \eqref{eq:4_Omega_0} as 
+\begin{equation}\label{eq:4_Omega}
+\begin{aligned}
+\Omega &=-\frac{g_sT\V\Sd}{d\,\lambda^d \pi^\D{2}}
+\Gamma\qty(\nD{2}+1)g_{\D{2}+1}(z)\\
+&\hspace{-4pt}\stackrel{\eqref{eq:4_Sd}}{=}
+\frac{2g_sTL^d}{d\,\lambda^d}
+\frac{\Gamma(\nD{2}+1)}{\Gamma(\nD{2})}g_{\D{2}+1}(z)\\
+&=\frac{g_sTL^d}{\,\lambda^d}g_{\D{2}+1}(z)
+\end{aligned}
+\end{equation}
+Here I've also substituted $L^d=\V$.
+
+To calculate the number of (excited) particles we use the relation
+\begin{equation}
+N_\ee=-\qty(\pdv{\Omega}{\mu})_{T,\V}
+=\frac{g_sT\V}{\lambda^d}
+\qty(\pdv{\mu}g_{\D{2}+1}(z))_{T,\V}.
+\end{equation}
+This last differentiation is fairly simple to perform:
+\begin{equation}
+\pdv{g_{\nu}(z)}{\mu}=
+\pdv{g_{\nu}(z)}{z}\pdv{z}{\mu}=
+\pdv{g_{\nu}(z)}{z}\frac{1}{T}z
+=\frac{1}{T}g_{\nu-1}(z).
+\end{equation}
+In other words
+\begin{equation}\label{eq:4_ne}
+n_\ee=\frac{N_\ee}{\V}
+=\frac{g_s}{\lambda^d}g_{\D{2}}(z).
+\end{equation}
+This does not take the particles in the ground state into account
+since $\Omega$ doesn't take them into account. For temperatures lower
+than the critical temperature we would also need to take the condensed
+particles, $N_0$, in to account if we want to study the full number of
+particles: $N=N_\ee+N_0$. For temperatures above the critical
+temperatures we can however neglect the particles in the ground
+state, so $n_\ee=n=N/\V$ for $T>\Tc$.
+\qed
+
+\subsection{Energy of the system}
+The energy of the system is given by
+\begin{equation}
+E=\sum_{\vb{k}} g_s \epsilon_{\vb{k}}\ev*{n_{\vb{k}}^\text{B.E.}}
+\to \V\int\frac{\rd^dk}{(2\pi)^d}
+\epsilon\ev*{n_{\vb{k}}^\text{B.E.}}
+=\V\int_0^\infty\rd\epsilon\, g(\epsilon)
+\epsilon\ev*{n_{\vb{k}}^\text{B.E.}},
+\end{equation}
+where $g(\epsilon)$ is the density of states\footnotemark{}. The density
+of states can easily be derived with the help of \eqref{eq:5_k->eps}:
+\begin{equation}
+g(\epsilon)\id\epsilon=\frac{\rd^dk}{(2\pi)^d}
+=\frac{\Sd k^{d-1}\id{k}}{(2\pi)^d}
+=\frac{\Sd}{2(2\pi)^d}\qty(\frac{2m}{\hbar^2})^{\D{2}}
+\epsilon^{\D{2}-1}\id\epsilon.
+\end{equation}
+With this we now have
+\begin{equation}
+\begin{aligned}
+E=&\V\frac{\Sd}{2(2\pi)^d}\qty(\frac{2m}{\hbar^2})^{\D{2}}
+\int_0^\infty\rd\epsilon\, \epsilon^{\D{2}-1}
+\epsilon\,\frac{1}{\ee^{\frac{\epsilon-\mu}{T}}-1}\\
+=&\frac{\V\Sd}{2(2\pi)^d}\qty(\frac{2m}{\hbar^2})^{\D{2}}
+\int_0^\infty
+\frac{\rd\epsilon\,\epsilon^{\D{2}-1}}{\ee^{\frac{\epsilon-\mu}{T}}-1}
+\end{aligned}
+\end{equation}
+which after a substitution $x=\epsilon/T$ will be the exact same
+expression as in the first line of \eqref{eq:4_Omega_0}, apart from a
+factor $-2/d$. 
+\footnotetext{For the energy, we do not need to worry about the
+  particles in the ground state since they have 0 energy
+  anyway. \label{ftn:E}} 
+
+We can therefore conclude that
+\begin{equation}\label{eq:4_E_Omega_PV}
+E=-\frac{d}{2}\Omega=\frac{d}{2}P\V,
+\end{equation}
+where we used the general thermodynamic identity $\Omega=-P\V$.
+
+\qed
+
+
+\subsection{Critical temperature}
+
+For bosons $\mu<0$ or else the partition function doesn't
+converge. This fact together with the expression in \eqref{eq:4_ne}
+for the (excited) particle density gives a temperature, below which
+the number of particles in the ground state can not be neglected. This
+is the critical temperature. 
+
+To find the critical temperature we study the limit $\mu\to0^-$ which
+means that $z\to1$. This gives us an equation for $T_c$:
+\begin{equation}
+\frac{N}{\V}= \Tc^{\D{2}}
+\frac{g_s}{\Lambda^d} g_{\D{2}}(1),
+\end{equation}
+where $\Lambda=T^{1/2}\lambda=h/\sqrt{2\pi m}$. Now we just use the
+definition of $g_\nu(z)$ to get
+\begin{equation}
+\frac{N}{\V}= \Tc^{\D{2}}
+\frac{g_s}{\Lambda^d} 
+\frac{1}{\Gamma(\nD{2})}
+\int_0^\infty\frac{\rd{x}\, x^{\D{2}-1}}{\ee^{x}-1}.
+\end{equation}
+From here on, it's just a matter of recognizing the integral expression
+of the Rieman $\zeta$ function:
+\begin{equation}\label{eq:4_zeta}
+\zeta(\nu)=\frac{1}{\Gamma(\nu)}\int_0^\infty
+\frac{\rd{x}\,x^{\nu-1}}{\ee^{x}-1}
+=g_\nu(1).
+\end{equation}
+The critical temperature is therefore given by
+\begin{equation}
+\Tc=\qty[\frac{N}{\V}
+\frac{\Lambda^d}{g_s\zeta(\nD{2})}
+]^{\frac{2}{d}}
+=\frac{h^2}{2\pi m L^2} \qty[
+\frac{N}{g_s}\,\frac{1}
+{\zeta(\nD{2})}
+]^{\frac{2}{d}},
+\end{equation}
+where we used $\Lambda=h/\sqrt{2\pi m}$, $\V=L^d$ 
+to get to the last expression. \qed
+
+It's interesting that we have the $\zeta$ function in the expression
+for $\Tc$. Because, as we all know, the $\zeta(\nu)$ diverges for
+$s=1$. That means that Bose-Einstein condensation would be impossible
+in $d=2$ dimensions, or rather the condensation temperature would be
+$0$ so B.E. condensation would be unachievable.
+
+We have the same phenomenon for $d=1$, with no B.E. condensation. This
+is however not so obvious from the Rieman $\zeta$ function. But
+looking at the integral representation in \eqref{eq:4_zeta}, we see
+that the integral dose not converge for $d=1$ either. 
+
+From here on, we will therefore only regard $d\ge3$.
+
+Other than that there's not that much more to say about the $d$
+dependence of $\Tc$. By plotting this expression in for example
+Mathematica, I can't see anything else to comment on. 
+
+
+\subsection{Heat capacity for $T<\Tc$}
+\newcommand{\Kd}{\ensuremath{\mathcal{K}_d}}
+As said before, the energy of the system is given by
+\eqref{eq:4_Omega} and \eqref{eq:4_E_Omega_PV} to be
+\begin{equation}\label{eq:4d_E}
+E=\frac{d}{2}\frac{g_sT\V}{\lambda^d}g_{\D{2}+1}(z)
+=T^{\D{2}+1}\frac{d g_s\V}{2\Lambda^d}g_{\D{2}+1}(z)
+\end{equation}
+regardless of whether $T$ is above or below $\Tc$ (see
+footnote~\ref{ftn:E}). Therefore the heat capacity for $T<\Tc$ is given by
+\begin{equation}\label{eq:4b_Cv}
+C_\V=\qty(\pdv{E(z=0)}{T})_\V
+=T^{\D{2}}\frac{d}{2}\qty(\D{2}+1)\frac{g_s\V}{\Lambda^d}\zeta(\nD{2}+1)
+\qcomma T<\Tc.
+\end{equation}
+\qed
+
+
+\subsection{Overall behavior of $C_\V$}
+\begin{figure}\centering
+\resizebox{.5\textwidth}{!}{\input{figures/Cv.pdf_t}}
+\caption{A sketch of the heat capacity of a Bose gas in $d$
+  dimensions. There is a cusp at $T=\Tc$ where $C_\V$ reaches it's
+  maximum value. }
+\label{fig:Cv}
+\end{figure}
+
+To get the rest of the behavior of the heat capacity we need to
+differentiate $E$ again, but now $z$ is no longer constantly 1. This
+complicates the matter some what. And since we're only interested in
+the overall behavior, not an exact expression, we can settle for just
+studying the expansion for small  $z$.
+
+The energy is 
+\begin{equation}\label{eq:4e_E}
+E=\frac{d}{2}\frac{g_sT\V}{\lambda^d}g_{\D{2}+1}(z)
+=\frac{d}{2}TN\frac{g_{\D{2}+1}(z)}{g_{\D{2}}(z)}.
+\end{equation}
+For small values of $z$, corresponding to high
+$T$, we have
+\begin{equation}
+g_\nu(z)=z+\frac{z^2}{2^\nu}+\frac{z^3}{3^\nu}+\ldots
+\end{equation}
+which gives the energy
+\begin{equation}
+E\approx \frac{d}{2}NT
+\qty(1+\frac{z}{2^{\D{2}+1}})\qty(1+\frac{z}{2^{\D{2}}})^{-1}
+\approx\frac{d}{2}NT \qty(1-\frac{z}{2^{\D{2}+1}}).
+\end{equation}
+The heat capacity now becomes
+\begin{equation}
+C_\V=\qty(\pdv{E}{T})_\V\approx
+\frac{d}{2}N \qty(1-\frac{z}{2^{\D{2}+1}})
++\frac{d}{2}NT \frac{1}{2^{\D{2}+1}}\qty(\pdv{z}{T})_\V.
+\end{equation}
+
+Now, one would think that the last derivative is easy since
+$z=\ee^{\mu/T}$ but since we're above the critical temperature, $\mu$
+is obviously dependent on $T$. And the derivative must be
+\begin{equation}
+\qty(\pdv{z}{T})_\V
+=\qty(\pdv{z}{T})_{\V,\mu}\qty(\pdv{T}{T})_\V
++\qty(\pdv{z}{\mu})_{\V,T}\qty(\pdv{\mu}{T})_{\V}
+=-\frac{\mu z}{T^2} + \frac{z}{T}\qty(\pdv{\mu}{T})_{\V}.
+\end{equation}
+What we can do however is to assume that we're at a high enough
+temperature so that the second term here becomes negligible compared
+to the first:
+\begin{equation}
+\abs{\qty(\pdv{\mu}{T})_{\V}}\ll\abs{\frac{\mu}{T}}.
+\end{equation}
+In other words $\mu$ is assumed to have reached a constant value at
+high enough $T$.
+
+Back to the heat capacity. With these assumptions we now have
+\begin{equation}
+\begin{aligned}
+C_\V\approx&
+\frac{d}{2}N\qty[ \qty(1-\frac{z}{2^{\D{2}+1}})
++\frac{1}{2^{\D{2}+1}}\qty(-\frac{\mu}{T}z)]\\
+=& \frac{d}{2}N\qty{1+\frac{z}{2^{\D{2}+1}}\qty[-1-\ln(z)]}.
+\end{aligned}
+\end{equation}
+We should also remember that $z\ll1$ meaning that $[-\ln(z)]\gg1$,
+i.e. the $1$ become negligible compared to $\ln(z)$ and we get
+\begin{equation}
+C_\V\approx
+\frac{d}{2}N\qty{1-\frac{z\ln(z)}{2^{\D{2}+1}}}.
+\end{equation}
+This has the limiting value
+\begin{equation}\label{eq:4_Cv_infty}
+C_\V(T\to\infty)=\frac{d}{2}N,
+\end{equation}
+and it's reached from \emph{above}, since $z\ln(z)<0$.
+
+
+For $T<\Tc$ we have \eqref{eq:4b_Cv}, which tells us that 
+$C_\V\propto T^\D{2}$. We also get a maximum value at $T=\Tc$ of
+\begin{equation}
+\begin{aligned}\label{eq:4_Cv_max}
+C_\V(T=\Tc)=&
+T_c^{\D{2}}\frac{d}{2}\qty(\D{2}+1)\frac{g_s\V}{\Lambda^d}\zeta(\nD{2}+1)\\
+=&\qty[\frac{N}{\V}\frac{\Lambda^d}{g_s\zeta(\nD{2})}]
+\frac{d}{2}\qty(\D{2}+1)\frac{g_s\V}{\Lambda^d}\zeta(\nD{2}+1)\\
+=&N\frac{d}{2}\qty(\D{2}+1)
+\frac{\zeta(\nD{2}+1)}{\zeta(\nD{2})}>C_\V(T\to\infty).
+\\
+\end{aligned}
+\end{equation}
+
+Lastly there are some issues regarding continuity of $C_\V$, but
+unfortunately I don't have much more time, so I leave that bit
+out. It's not very complicated though. Just differentiate
+\eqref{eq:4e_E} and note that the end result can be written as a
+difference between ratios of $g_\nu(z)$'s, and then take the limit
+$z\to1$. 
+
+Anyway the sketch of the heat capacity is in \figref{fig:Cv}.
+
+\subsection{Maximum of $C_\V(T)/C_\V(t\to\infty)$}
+The maximum value of $C_\V$ is given by \eqref{eq:4_Cv_max} and the
+high temperature limit value is given by
+\eqref{eq:4_Cv_infty}. Whereby the maximum ratio is
+\begin{equation}
+\max\qty{\frac{C_\V(T)}{C_\V(t\to\infty)}}=
+\qty(\D{2}+1)\frac{\zeta(\nD{2}+1)}{\zeta(\nD{2})}.
+\end{equation}
+In the specific case of $d=3$ we get 
+\begin{equation}
+\eval{\max\qty{\frac{C_\V(T)}{C_\V(t\to\infty)}}}_{d=3}=
+\frac{5}{2}\frac{\zeta(\nicefrac{5}{2})}{\zeta(\nicefrac{3}{2})}
+\approx 1.28.
+\end{equation}
+\qed
+
+
+\end{document}
+
+
+
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer (två enkelfjongar): ''.
+
+
+%% Inkludera PDF-dokument
+\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+
+%% Figurer inkluderade som pdf-filer
+\begin{figure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer roterade 90 grader
+\begin{sidewaysfigure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{sidewaysfigure}
+
+
+%%Om man vill lägga till något i TOC
+\stepcounter{section} %Till exempel en 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
+
+%  LocalWords:  compressibility compressibilities isothermal

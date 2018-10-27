@@ -1,0 +1,1193 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+\usepackage[%makeroom
+]{cancel}
+\graphicspath{{figures/}}
+\swapcommands{\Omega}{\varOmega}
+%\swapcommands{\Lambda}{\varLambda}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+
+%\usepackage{tikz}
+
+\begin{document}
+
+%\tikzstyle{every picture}+=[remember picture]
+%\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{Statistical Physics -- PHYS\,704 \\
+Assignment 3}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+\newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
+
+\section{Cusp in $C_V$ for a Bose gas}
+\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+Here we are going to find the discontinuity in the derivative of $C_V$
+for a Bose gas. To do that we will need the energy:
+\begin{equation}\label{eq:1_E}
+\begin{cases}
+E=\frac{3}{2}NT\frac{g_{5/2}(z)}{g_{3/2}(z)}, \quad& T>\Tc\\
+E=\frac{3}{2}T^{5/2}\frac{V}{\Lambda^3}\zeta(\nicefrac{5}{2}), &T<\Tc,
+\end{cases}
+\end{equation}
+where $\Lambda=\sqrt{T}\lambda=h/\sqrt{2\pi m}$ is a constant and
+\begin{equation}
+\Tc=\frac{h^2}{2\pi m}\qty[\frac{N}{V\zeta(\nicefrac{3}{2})}]^{2/3}
+=\Lambda^2\qty[\frac{N}{V\zeta(\nicefrac{3}{2})}]^{2/3}.
+\end{equation}
+Then we're also going to need this relationship:
+\begin{equation}\label{eq:1_dz}
+\frac{1}{z}\qty(\pdv{z}{T})_V
+=-\frac{3}{2T}\frac{g_{3/2}(z)}{g_{1/2}(z)}
+\end{equation}
+which can be found in Pathria\,\&\,Beale, \textit{Statistical
+  Mechanics}, 3 ed., equation (7.1.36).
+
+\subsection{Below critical temperature}
+For $T<\Tc$ we have $E\propto T^{5/2}$, making
+\begin{equation}
+C_V=\frac{15}{4}T^{3/2}\frac{V}{\Lambda^3}\zeta(\nicefrac{5}{2}).
+\end{equation}
+Thus
+\begin{equation}
+\qty(\pdv{C_V}{T})_V
+=\frac{45}{8}T^{1/2}\frac{V}{\Lambda^3}\zeta(\nicefrac{5}{2}),
+\end{equation}
+and
+\begin{equation}
+\eval{\qty(\pdv{C_V}{T})_{\!V}}_{T\to\Tc^-}
+=\frac{45}{8}\Tc^{1/2}\frac{V}{\Lambda^3}\zeta(\nicefrac{5}{2})
+%=\frac{45}{8}\frac{V}{\Lambda^2}
+%\qty[\frac{N}{V\zeta(\nicefrac{3}{2})}]^{1/3}\zeta(\nicefrac{5}{2}).
+=\frac{45}{8}\frac{V\zeta(\nicefrac{5}{2})}{\Tc\lambda_\text{c}^3},
+\end{equation}
+where
+$\lambda_\text{c}=\lambda(T=\Tc)=[V\zeta(\nicefrac{3}{2})/N]^{1/3}$. In
+other words
+\begin{equation}\label{eq:1_Tc-}
+\eval{\qty(\pdv{C_V}{T})_{\!V}}_{T\to\Tc^-}
+=\frac{45N}{8\Tc}\frac{\zeta(\nicefrac{5}{2})}{\zeta(\nicefrac{3}{2})},
+\end{equation}
+
+
+\subsection{Above critical temperature}
+Now we have to use the first equation of \eqref{eq:1_E}, giving
+\begin{equation}
+\begin{aligned}
+C_V=&\frac{3}{2}N\qty{\frac{g_{5/2}(z)}{g_{3/2}(z)}
++T\qty(\pdv{T}\frac{g_{5/2}(z)}{g_{3/2}(z)})_V}\\
+=&\frac{3}{2}N\qty{\frac{g_{5/2}(z)}{g_{3/2}(z)}
++T\qty(\frac{1}{g_{3/2}(z)}\qty(\pdv{g_{5/2}(z)}{z}\pdv{z}{T})_V
+-\frac{g_{5/2}(z)}{[g_{3/2}(z)]^2}\qty(\pdv{g_{3/2}(z)}{z}\pdv{z}{T})_V )
+}.
+\end{aligned}
+\end{equation}
+Using \eqref{eq:1_dz} and the iteration formula
+\begin{equation}
+z\pdv{g_\nu(z)}{z}=g_{\nu-1}(z),
+\end{equation}
+we arrive at
+\begin{equation}
+\begin{aligned}
+C_V=&\frac{3}{2}N\qty{\frac{g_{5/2}(z)}{g_{3/2}(z)}
+-\frac{3}{2}\qty(\cancel{\frac{g_{3/2}(z)}{g_{3/2}(z)}}\frac{g_{3/2}(z)}{g_{1/2}(z)}
+-\frac{g_{5/2}(z)}{[g_{3/2}(z)]^2} \bcancel{g_{1/2}(z)} 
+\frac{g_{3/2}(z)}{\bcancel{g_{1/2}(z)}}
+)}\\
+=&\frac{3}{2}N\qty{\frac{5}{2}\frac{g_{5/2}(z)}{g_{3/2}(z)}
+-\frac{3}{2}\frac{g_{3/2}(z)}{g_{1/2}(z)}
+}.
+\end{aligned}
+\end{equation}
+Which upon differentiation and using the same rules when
+differentiating the Bose functions as before becomes
+\begin{equation}
+\begin{aligned}
+\qty(\pdv{C_V}{T})_{\!V}
+=&\frac{3}{2}N\qty(-\frac{3}{2T})\left\{
+\frac{5}{2}\qty(\cancel{\frac{g_{3/2}(z)}{g_{3/2}(z)}}\frac{g_{3/2}(z)}{g_{1/2}(z)}
+-\frac{g_{5/2}(z)}{[g_{3/2}(z)]^2} \bcancel{g_{1/2}(z)} 
+\frac{g_{3/2}(z)}{\bcancel{g_{1/2}(z)}}
+)\right.\\
+&\hspace{65pt}\left.
+-\frac{3}{2}\qty(\cancel{\frac{g_{1/2}(z)}{g_{1/2}(z)}}\frac{g_{3/2}(z)}{g_{1/2}(z)}
+-\frac{g_{3/2}(z)}{[g_{1/2}(z)]^2} g_{-1/2}(z)
+\frac{g_{3/2}(z)}{g_{1/2}(z)}
+)\right\}\\
+=&\frac{9N}{8T}\qty{
+5\frac{g_{5/2}(z)}{g_{3/2}(z)}
+-2\frac{g_{3/2}(z)}{g_{1/2}(z)}
+-3\frac{[g_{3/2}(z)]^2 g_{-1/2}(z)}{[g_{1/2}(z)]^3}
+}
+\end{aligned}
+\end{equation}
+
+Next we need to use the formula\footnote{This is valid for all
+  non-integer values of $\nu$. See appendix D of Pathria\,\&\,Beale,
+  \textit{Statistical Mechanics}, 3 ed.} 
+\begin{equation}
+g_\nu\qty(\ee^{-\alpha})\sim
+\Gamma(1-\nu)\,\alpha^{\nu-1}+\zeta(\nu)\qcomma \text{ as } \alpha\to0.
+\end{equation}
+We see here that for $\nu>1$ the dominant term is the constant
+$\zeta(\nu)$, while for $\nu<1$ the dominant term is the singular
+$\Gamma(1-\nu)\,\alpha^{\nu-1}$.
+
+We also remind ourselves that $\alpha=-\mu/T\to0^+$ as $T\to\Tc^+$. We
+therefore get
+\begin{equation}\label{eq:1_Tc+}
+\begin{aligned}
+\eval{\qty(\pdv{C_V}{T})_{\!V}}_{T\to\Tc^+}
+=&\frac{9N}{8\Tc}\Bigg\{
+5\frac{\zeta(\nicefrac{5}{2})}{\zeta(\nicefrac{3}{2})}
+%first term
+-2\cancelto{0}{\frac{\zeta(\nicefrac{3}{2})}
+{\Gamma(\nicefrac{1}{2})\alpha^{{-}1/2}}}
+%second term
+-3\frac{[\zeta(\nicefrac{3}{2})]^2\Gamma(\nicefrac{3}{2})}
+{[\Gamma(\nicefrac{1}{2})]^3}
+\overbrace{\frac{\alpha^{-3/2}}{[\alpha^{-1/2}]^3}}^{=1}
+\Bigg\}\\
+=&\frac{9N}{8\Tc}\Bigg\{
+5\frac{\zeta(\nicefrac{5}{2})}{\zeta(\nicefrac{3}{2})}
+-3\frac{[\zeta(\nicefrac{3}{2})]^2}{2\pi}
+\Bigg\}
+\end{aligned}
+\end{equation}
+The value of the last term was calculated in \textit{Mathematica}.
+
+\subsection{The discontinuity of the derivative}
+Now we just use \eqref{eq:1_Tc-} and \eqref{eq:1_Tc+} to get
+\begin{equation}
+\begin{aligned}
+\eval{\qty(\pdv{C_V}{T})_{\!V}}_{T\to\Tc^-}
+-\eval{\qty(\pdv{C_V}{T})_{\!V}}_{T\to\Tc^+}
+=&\frac{45N}{8\Tc}\frac{\zeta(\nicefrac{5}{2})}{\zeta(\nicefrac{3}{2})}
+-\frac{9N}{8\Tc}\Bigg\{
+5\frac{\zeta(\nicefrac{5}{2})}{\zeta(\nicefrac{3}{2})}
+-3\frac{[\zeta(\nicefrac{3}{2})]^2}{2\pi}
+\Bigg\}\\
+=&\frac{27N}{8\Tc}\frac{[\zeta(\nicefrac{3}{2})]^2}{2\pi}.
+\end{aligned}
+\end{equation}
+\qed
+
+\section{Bose condensation in one dimension}
+\newcommand{\Ne}{\ensuremath{N_{\text{e}}}}
+To show that Bose condensation is impossible for weakly interacting
+bosons in one dimension, we can begin as we did for the ideal Bose
+gas, by studying the number of (excited) particles
+\begin{equation}
+\Ne=\sum_k{'}\ev{a^\dagger_ka_k}.
+\end{equation}
+
+Using the Bogoliubov transformation from class we have
+\begin{equation}
+\begin{aligned}
+a^\dagger_ka_k=\cosh^2(\theta_k) \xi^\dagger_k\xi_k 
++\sinh^2(\theta_k)\qty[1+\xi^\dagger_{-k}\xi_{-k} ]
+-\frac{1}{2}\sinh(2\theta_k) 
+\qty[\xi^\dagger_{k}\xi^\dagger_{-k}+\xi_{k}\xi_{-k}].
+\end{aligned}
+\end{equation}
+We then use
+\begin{equation}
+\cosh^2(x)=\frac{1+\cosh(2x)}{2}\qcomma
+\sinh^2(x)=\frac{-1+\cosh(2x)}{2}
+\end{equation}
+to get
+\begin{equation}
+\begin{aligned}
+a^\dagger_ka_k=&\frac{1+\cosh(2\theta_k)}{2}\xi^\dagger_k\xi_k 
++\frac{-1+\cosh(2\theta_k)}{2}\qty[1+\xi^\dagger_{-k}\xi_{-k} ]\\
+&-\frac{1}{2}\sinh(2\theta_k) 
+\qty[\xi^\dagger_{k}\xi^\dagger_{-k}+\xi_{k}\xi_{-k}].
+\end{aligned}
+\end{equation}
+Next up we note that since we're taking expectation values we get
+\begin{equation}
+\ev{\xi^\dagger_k\xi_k }=\ev{\xi^\dagger_{-k}\xi_{-k}},
+\end{equation}
+and
+\begin{equation}
+\ev{\xi^\dagger_{k}\xi^\dagger_{-k}}=\ev{\xi_{k}\xi_{-k}}=0.
+\end{equation}
+The last result is due to the fact that 
+\begin{equation}
+\ip{m}{n}=0\qcomma m\neq n
+\end{equation}
+for eigenstates to the number-operator and that $\xi^\dagger$ and $\xi$
+changes that state. 
+We now end up getting
+\begin{equation}\label{eq:2_N_sum}
+\begin{aligned}
+\Ne=&\sum_k{'}\ev{a^\dagger_ka_k}\\
+=&\frac{1}{2}
+\sum_k{'}\bigg\{\Big[1+\cosh(2\theta_k) -1+\cosh(2\theta_k)\Big]
+\ev{\xi^\dagger_k\xi_k }-1+\cosh(2\theta_k)\bigg\}\\
+=&\frac{1}{2}\sum_k{'}\qty{
+2\cosh(2\theta_k)\qty(\ev{\xi^\dagger_k\xi_k }+\frac{1}{2})-1
+}.
+\end{aligned}
+\end{equation}
+
+To continue from here we will use another result from class
+\begin{equation}
+\cosh(2\theta_k)=\frac{\epsilon_k+nu(k)}
+{\sqrt{\epsilon_k\qty[\epsilon_k+2nu(k)]}}.
+\end{equation}
+Then we also know that the quasi-particles are to be treated as an
+ideal Bose gas whereby
+\begin{equation}
+\ev{\xi^\dagger_k\xi_k
+}=\ev{n_k^{\text{B.E}}}=\frac{1}{\ee^{\frac{E_k-\mu N}{T}}-1}.
+\end{equation}
+Now we plug this into \eqref{eq:2_N_sum} and let the sum become an
+integral:
+\begin{equation}
+\begin{aligned}
+\Ne\to&
+\frac{1}{2}\int \frac{\dd{k}}{2\pi}\qty{
+2\frac{\epsilon_k+nu(k)}{\sqrt{\epsilon_k\qty[\epsilon_k+2nu(k)]}}
+\qty(\frac{1}{\ee^{\frac{E_k-\mu N}{T}}-1}+\frac{1}{2})-1
+}\\
+=&C\int_0^\infty\frac{\rd\epsilon}{\sqrt{\epsilon}}\qty{
+2\frac{\epsilon+nu(k)}{\sqrt{\epsilon^2+\epsilon2nu(k)}}
+\qty(\frac{1}{\ee^{\frac{E_k-\mu N}{T}}-1}+\frac{1}{2})-1
+},
+\end{aligned}
+\end{equation}
+where $C$ is just some unimportant constant. The integral has this
+form since we are in just 1~dimension, thus having no more factors of
+$k$ when going to ``spherical'' coordinates.
+
+We can now see that for large $\epsilon$ the integrand becomes approximately
+\begin{equation}
+\frac{1}{\sqrt{\epsilon}}\qty{
+2\frac{\epsilon}{\sqrt{\epsilon^2}}
+\qty(0+\frac{1}{2})-1}
+\propto\frac{1}{\sqrt{\epsilon}}
+\end{equation}
+which diverges upon integration to $\infty$, for any $T>0$. This suggests that
+\emph{if} there is a critical temperature, then it should be
+$\Tc=0$. Even if $\Tc>0$, we would still expect $\Ne$ to be either~0
+or at least finite when $T\to0$.
+
+To further analyze this integral we set
+\begin{equation}
+x=\frac{\epsilon}{T}
+\quad\Longrightarrow\quad
+\frac{\rd\epsilon}{\sqrt{\epsilon}}
+=\sqrt{T}\frac{\rd x}{\sqrt{x}}.
+\end{equation}
+And we get
+\begin{equation}\label{eq:2_Ne_int}
+\Ne=C\int_0^\infty\rd{x}\,\sqrt{\frac{T}{x}}
+\qty{
+2\frac{x+\frac{nu(k)}{T}}{\sqrt{x^2+x\frac{2nu(k)}{T}}}
+\qty(\frac{1}{\ee^{\frac{E(x)-\mu N}{T}}-1}+\frac{1}{2})-1
+}.
+\end{equation}
+Now let $T\to0$, then the first part of the integrand must become
+\begin{equation}\label{eq:2_lim1}
+\sqrt{\frac{T}{x}}
+\frac{x+\frac{nu(k)}{T}}{\sqrt{x^2+x\frac{2nu(k)}{T}}}
+\to \sqrt{\frac{T}{x}}
+\frac{\frac{nu(k)}{T}}{\sqrt{x\frac{2nu(k)}{T}}}
+=\frac{\sqrt{nu(k)}}{\sqrt{2}\,x}.
+\end{equation}
+For the Bose-Einstein distribution we have
+% \begin{equation}
+% \frac{E_k-\mu N}{T}=\frac{\epsilon}{T}\sqrt{1+2\frac{nu(k)}{\epsilon}}
+% -\frac{\mu N}{T}
+% =x\sqrt{1+2\frac{nu(k)}{xT}} \to \infty \qcomma \text{ as } T\to0^+,
+% \end{equation}
+% meaning that
+\begin{equation}
+\frac{1}{\ee^{\frac{E(x)-\mu N}{T}}-1}\to
+\begin{cases}
+0\qcomma\text{or}\\
+-1
+\end{cases}
+\end{equation}
+depending on the sign of $E(x)-\mu N$. Either way this will make
+\begin{equation}
+\qty(\frac{1}{\ee^{\frac{E(x)-\mu N}{T}}-1}+\frac{1}{2})\to A,
+\end{equation}
+where $A=\pm1/2$ is some non-zero parameter. 
+
+We now have
+\begin{equation}\label{eq:2_Ne_div}
+\Ne(T\to0)=C\int_0^\infty\rd{x}\,
+\Bigg\{
+2\frac{\sqrt{nu(k)}}{\sqrt{2}\,x}A
+-\cancelto{0}{\sqrt{\frac{T}{x}}} \phantom{00}\Bigg\}
+=\pm\infty
+\end{equation}
+This is divergent because $1/x$ is divergent both when the integration
+limits are~0 or $\infty$, and 
+\begin{equation}
+u(k)=\int\rd{r}\, u(r)\ee^{-\ii kr}
+\to\int\rd{r}\, u(r) = u_0 
+\qcomma \text{as }\; k\to0 \;\Leftrightarrow\; x\to0.
+\end{equation}
+So since $u_0$ is finite, \eqref{eq:2_Ne_div} must at least diverge in
+the limit $x\to 0$\footnotemark{}. This contradicts the notion that
+there exists a $\Tc\ge0$ for a weakly interacting bosonic gas in one
+dimension. 
+
+\footnotetext{We didn't need to be as drastic as to go all the way to
+  $T\to0$ to see this divergence. Because in the limit $x\to0$, we
+  would still get the result \eqref{eq:2_lim1} for a finite
+  $T$. But \eqref{eq:2_lim1} is more mathematically stringent the way
+  presented here, because of the $x^{-1}$ present. }
+
+\subsection*{No interactions}
+If we were to turn off the interactions, $nu(k)\to0$. Furthermore at
+and below the critical temperature $\mu=0$, meaning that $z=1$. Thus 
+\eqref{eq:2_Ne_int} becomes
+\begin{equation}
+\begin{aligned}
+\Ne(T=\Tc)\to& C\int_0^\infty\rd{x}\,\sqrt{\frac{\Tc}{x}}
+\qty{2\cancel{\frac{x}{\sqrt{x^2}}}
+\qty(\frac{1}{z^{-1}\ee^{\frac{\epsilon}{T}}-1}+\frac{1}{2})-1}\\
+=&2C\sqrt{\Tc} \int_0^\infty\rd{x}
+\frac{x^{-1/2}}{\ee^{x}-1}.
+\end{aligned}
+\end{equation}
+This integral is divergent. However, this time it's possible to save
+the day by setting $\Tc=0$. This is the only way to not get an
+infinite $\Ne$.
+
+\section{Some discontinuities}
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\newcommand{\ideal}[1]{#1^\text{{(ideal)}}}
+\newcommand{\vc}{v_{\text{c}}}
+\newcommand{\lc}{\lambda_{\text{c}}}
+
+To first order in $a$ we have the canonical (\emph{not} the grand
+canonical) partition function 
+\begin{equation}
+\ln(Z)=\ln(\ideal{Z})-\frac{1}{T}\frac{2\pi a\hbar^2}{m}\frac{N^2}{V}
+\qty(2-\frac{n_0^2}{N^2}).
+\end{equation}
+For brevity we can let $A=2\pi a\hbar^2/m$, as a constant. For
+temperature above the critical, we have $n_0\lll N$, so we get
+\begin{equation}
+\ln(Z)=\ln(\ideal{Z})-2A\frac{N^2}{TV}\qcomma
+\text{for}\;T>\Tc.
+\end{equation}
+For below the critical temperature we have instead $n_0/N=1-v/\vc$
+\begin{equation}
+\ln(Z)=\ln(\ideal{Z})
+-A\frac{N^2}{TV}\qty(1+2\frac{v}{\vc}-\frac{v^2}{\vc^2})\qcomma
+\text{for}\;T<\Tc.
+\end{equation}
+Where
+\begin{equation}\label{eq:3_v_vc}
+v=\frac{V}{N}\qcomma\text{and}\quad
+\vc=\frac{\lambda^3}{\zeta(\nicefrac{3}{2})}
+=T^{-3/2}\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})},
+\end{equation}
+where $\Lambda=h/\sqrt(2\pi m)$.
+
+From the partition function we can get the Helmholtz free energy
+\begin{equation}
+F=-T\ln(Z)=
+\begin{cases}
+\ideal{F}+2A\frac{N^2}{V}\qcomma &\text{for}\;T>\Tc,\\
+\ideal{F}
++AN\qty(\frac{1}{v}+\frac{2}{\vc}-\frac{v}{\vc^2})
+\qcomma&\text{for}\;T<\Tc.
+\end{cases}
+\end{equation}
+
+
+\subsection{Heat capacity and bulk modulus}
+
+\subsubsection{Heat capacity}
+To get the discontinuity in the heat capacity we use
+\begin{equation}
+C_V=T\qty(\pdv{S}{T})_v
+\end{equation}
+and 
+\begin{equation}
+S=-\qty(\pdv{F}{T})_v
+\end{equation}
+
+Let's begin with the case $T<\Tc$:
+\begin{equation}
+\begin{aligned}
+S=&\ideal{S}-AN\qty[\pdv{T}\qty(\frac{1}{v}+\frac{2}{\vc}-\frac{v}{\vc^2})_v]\\
+=&\ideal{S}-AN\qty[2\frac{3}{2}T^{1/2}-v3T^2\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}]
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3},
+\end{aligned}
+\end{equation}
+where we used \eqref{eq:3_v_vc} to differentiate $\vc$.
+
+Next is
+\begin{equation}
+\begin{aligned}
+C_V=&T\qty(\pdv{S}{T})_v=\ideal{C_V}-TAN
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[\pdv{T}\qty(3T^{1/2}-v3T^2\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3})_v]\\
+=&\ideal{C_V}-TAN
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[\frac{3}{2}T^{-1/2}-v6T\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}].\\
+% =&\ideal{C_V}-AN
+% \frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+% \qty[\frac{3}{2}T^{1/2}-v6T^2\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}]\\
+\end{aligned}
+\end{equation}
+To get the value as $T\to\Tc$, we use
+\begin{equation}
+\Tc=\Lambda^2\qty[\frac{1}{v\zeta(\nicefrac{3}{2})}]^{2/3}
+\end{equation}
+and get
+\begin{equation}\label{eq:3a_Cv_Tc-}
+\begin{aligned}
+C_V=&\ideal{C_V}(\Tc)-AN
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[\frac{3}{2}\Tc^{1/2}-v6\Tc^2\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}]\\
+=&\ideal{C_V}(\Tc)-AN
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[\frac{3}{2}\Lambda\qty(\frac{1}{v\zeta(\nicefrac{3}{2})})^{1/3}
+-v6\Lambda^4\qty(\frac{1}{v\zeta(\nicefrac{3}{2})})^{4/3}
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}]\\
+=&\ideal{C_V}(\Tc)-AN
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[\frac{3}{2}-6]
+\Lambda\qty(\frac{1}{v\zeta(\nicefrac{3}{2})})^{1/3}.\\
+\end{aligned}
+\end{equation}
+Now we use $\lc=[v\zeta(\nicefrac{3}{2})]^{1/3}$ to get
+\begin{equation}
+\begin{aligned}
+C_V(T\to\Tc-)=&\ideal{C_V}(\Tc)+\frac{9}{2}AN
+\frac{\zeta(\nicefrac{3}{2})}{\Lambda^2}\frac{1}{\lc}.\\
+\end{aligned}
+\end{equation}
+
+For $T>\Tc$ all we have is
+\begin{equation}
+S=\ideal{S}-\qty(\pdv{T} 2A\frac{N^2}{V})_v
+=\ideal{S},
+\end{equation}
+wherefore 
+\begin{equation}
+C_V=\ideal{C_V}
+\end{equation}
+for $T>\Tc$.
+
+Next we already know that in the ideal case $C_V$ is continuous at
+$\Tc$, which means that
+\begin{equation}
+\begin{aligned}
+C_V(T\to\Tc-)-C_V(T\to\Tc+)
+=&\frac{9}{2}AN\frac{\zeta(\nicefrac{3}{2})}{\Lambda^2}\frac{1}{\lc}\\
+=&N\frac{9}{2\lc}\frac{2\pi a \hbar^2}{m}
+\frac{\zeta(\nicefrac{3}{2})}{h^2/(2\pi m)}
+=N\frac{9a}{2\lc}\zeta(\nicefrac{3}{2}).
+\end{aligned}
+\end{equation}
+\qed
+
+\subsubsection{Bulk modulus}
+For the bulk modulus
+\begin{equation}
+K=-V\pdv{P}{V}=-v\pdv{P}{v},
+\end{equation}
+we will use
+\begin{equation}
+P=-\qty(\pdv{F}{V})_T
+=-\frac{1}{N}\qty(\pdv{F}{v})_T.
+\end{equation}
+
+So for $T<\Tc$ we get
+\begin{equation}\label{eq:3_P<Tc}
+P(T<\Tc)=\ideal{P}-A\pdv{v}\qty(\frac{1}{v}+\frac{2}{\vc}-\frac{v}{\vc^2})_T
+=\ideal{P}+A\qty(\frac{1}{v^2}+\frac{1}{\vc^2}),
+\end{equation}
+which gives
+\begin{equation}
+\begin{aligned}
+K=&\ideal{K}-vA\pdv{v}\qty(\frac{1}{v^2}+\frac{1}{\vc^2})\\
+=&\ideal{K}-vA\qty(\frac{-2}{v^3})\\
+=&\ideal{K}+\frac{2\pi a\hbar^2}{m}\frac{2}{v^2}
+\to \ideal{K}+\frac{4\pi a\hbar^2}{m\vc^2}
+\qcomma\text{as}\; T\to\Tc^-.
+\end{aligned}
+\end{equation}
+
+But in the case of $T>\Tc$ we get
+\begin{equation}\label{eq:3_P>Tc}
+P(T>\Tc)=\ideal{P}-\pdv{v}\qty(A\frac{2}{v})_T
+=\ideal{P}+A\frac{2}{v^2}.
+\end{equation}
+From here it's clear that we are going to get double the effect from
+non-idealities for $T>\Tc$. This is because we have a factor~2 on the non-ideal
+term this time, and the non-ideal term has the same $v$-dependence as
+for $T<\Tc$.
+
+We therefore have
+\begin{equation}
+\begin{aligned}
+K(T\to\Tc-)-K(T\to\Tc+)
+=&\cancel{\ideal{K}(\Tc)}+\frac{4\pi a\hbar^2}{m\vc^2}
+-\qty(\cancel{\ideal{K}(\Tc)}+2\frac{4\pi a\hbar^2}{m\vc^2})\\
+=&-\frac{4\pi a\hbar^2}{m\vc^2}.
+\end{aligned}
+\end{equation}
+\qed
+
+\subsection{More discontinuities}
+Here we're going to examine the discontinuities in the quantities
+\begin{equation}
+\qty(\pdv[2]{P}{T})_v \qcomma\text{and}\quad
+\qty(\pdv[2]{\mu}{T})_v.
+\end{equation}
+
+\subsubsection{}
+Since we already have the expressions for $P$ in \eqref{eq:3_P<Tc} and
+\eqref{eq:3_P>Tc}, we can just start differentiating.
+
+For $T<\Tc$, we remember that
+$\vc=T^{-3/2}\,\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})}$, and we use
+\eqref{eq:3_P<Tc} to get
+\begin{equation}
+\begin{aligned}
+\qty(\pdv{P}{T})_v=&\qty(\pdv{\ideal{P}}{T})_v
++A\pdv{T}\qty(\frac{1}{v^2}+\frac{1}{\vc^2})_v\\
+=&\qty(\pdv{\ideal{P}}{T})_v
++A\pdv{T}\qty[\frac{1}{v^2}+T^3\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2]_v\\
+=&\qty(\pdv{\ideal{P}}{T})_v
++3AT^2\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2.
+\end{aligned}
+\end{equation}
+We then end up getting
+\begin{equation}
+\qty(\pdv[2]{P}{T})_v=\qty(\pdv[2]{\ideal{P}}{T})_v
++6AT\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2
+\qcomma T<\Tc.
+\end{equation}
+
+For $T>\Tc$ we can see from \eqref{eq:3_P>Tc} that there is no
+$\vc$-dependence in the non-ideal term. Therefore we get
+\begin{equation}
+\qty(\pdv[2]{P}{T})_v=\qty(\pdv[2]{\ideal{P}}{T})_v
+\qcomma T>\Tc.
+\end{equation}
+
+The discontinuity is thus given by
+\begin{equation}\label{eq:3_discont._P}
+\eval{\qty(\pdv[2]{P}{T})_v}_{\Tc^-}
+-\eval{\qty(\pdv[2]{P}{T})_v}_{\Tc^+}
+=6A\Tc\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2.
+\end{equation}
+%\todo{¿Need to show cont. in ideal case?}
+Since in the ideal case this quantity is continuous\footnotemark{}.
+
+\footnotetext{This can be seen through the fact that in the ideal case
+there is no contribution to $P$ from condensed particles. So pressure
+change when $T$ passes $\Tc$ is smooth, since the number of condensed
+particles also changes smoothly. Therefore this quantity is continuous
+in the ideal case. }
+
+\subsubsection{}
+To differentiate $\mu$ we need to find it first:
+\begin{equation}
+\mu=\frac{F}{N}+Pv.
+\end{equation}
+
+In the case of $T<\Tc$ we have
+\begin{equation}
+\begin{aligned}
+\mu(T<\Tc)=&\frac{\ideal{F}}{N}
++A\qty(\frac{1}{v}+\frac{2}{\vc}-\frac{v}{\vc^2})
++\ideal{P}v+A\qty(\frac{1}{v}+\frac{v}{\vc^2})\\
+=&\ideal{\mu}
++2A\qty(\frac{1}{v}+\frac{1}{\vc}).
+\end{aligned}
+\end{equation}
+Again, we use
+$\vc=T^{-3/2}\,\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})}$
+to get
+\begin{equation}
+\begin{aligned}
+\qty(\pdv{\mu}{T})_v=&\qty(\pdv{\ideal{\mu}}{T})_v
++2A\pdv{T}\qty(\frac{1}{v}+
+T^{3/2}\,\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3})_v\\
+=&\qty(\pdv{\ideal{\mu}}{T})_v
++2A\frac{3}{2}
+T^{1/2}\,\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3},
+\end{aligned}
+\end{equation}
+and
+\begin{equation}
+\qty(\pdv[2]{\mu}{T})_v
+=\qty(\pdv[2]{\ideal{\mu}}{T})_v
++A\frac{3}{2}
+T^{-1/2}\,\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qcomma T<\Tc.
+\end{equation}
+
+For $T>\Tc$ we instead get
+\begin{equation}
+\mu(T>\Tc)=\frac{\ideal{F}}{N}+2A\frac{1}{v}
++\ideal{P}v+A\frac{2}{v}
+=\ideal{\mu}+A\frac{4}{v}.
+\end{equation}
+And again, there's no $T$-dependence in the non-ideal term, whereby 
+\begin{equation}
+\qty(\pdv[2]{\mu}{T})_v
+=\qty(\pdv[2]{\ideal{\mu}}{T})_v
+\qcomma T>\Tc.
+\end{equation}
+
+The discontinuity is now given by
+\begin{equation}\label{eq:3_discont._mu}
+\eval{\qty(\pdv[2]{\mu}{T})_v}_{\Tc^-}
+-\eval{\qty(\pdv[2]{\mu}{T})_v}_{\Tc^+}
+=A\frac{3}{2}
+\Tc^{-1/2}\,\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\end{equation}
+Since, with the same argument as before, this quantity is continuous.
+%\todo{¿Need to show cont. in ideal case?}
+
+\subsubsection{Comparison to the discontinuity in the heat capacity}
+We have the thermodynamic identity
+\begin{equation}\label{eq:3b_Cv_identity}
+C_V=VT\qty(\pdv[2]{P}{T})_v-NT\qty(\pdv[2]{\mu}{T})_v.
+\end{equation}
+With \eqref{eq:3_discont._P} and \eqref{eq:3_discont._mu}, the
+discontinuity on the RHS is
+\begin{equation}
+\begin{aligned}
+V\Tc\qty[6A\Tc\qty(\frac{\Lambda^3}{\zeta(\nicefrac{3}{2})})^2]
+-N\Tc\qty[A\frac{3}{2}
+\Tc^{-1/2}\,\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}]
+=&A\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[V6\Tc^2\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+-N\frac{3}{2}\Tc^{1/2}]\\
+=&AN\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+\qty[v6\Tc^2\frac{\zeta(\nicefrac{3}{2})}{\Lambda^3}
+-\frac{3}{2}\Tc^{1/2}].
+\end{aligned}
+\end{equation}
+This is exactly the same as the non-ideal term in
+(\ref{eq:3a_Cv_Tc-},\,a), and as we remember: only the non-ideal term
+contributed to the discontinuity. Therefore the identity
+\eqref{eq:3b_Cv_identity} holds, even in the discontinuity.
+\qed
+
+
+
+\section{Field operators and the Schrödinger equation}
+\newcommand{\scomm}[2]{\left\langle#1,\;#2\right\rangle}
+\newcommand{\Scomm}[2]{\langle#1,\;#2\rangle}
+\newcommand{\commute}[1]{\overbrace{#1}^{\text{commute}}}
+For a system of interacting particles we have
+\begin{equation}\label{eq:4_want_this}
+\begin{aligned}
+H=&-\frac{\hbar^2}{2m}\int\rd^3r\,
+\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})\\
+&+\frac{1}{2}\iint\rd^3\!r\,\rd^3\!r'\,
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r}),
+\end{aligned}
+\end{equation}
+where the field operators satisfy the commutation relations
+\begin{equation}\label{eq:4_comm}
+\begin{aligned}
+\scomm{\psi(\vb{r})}{\psi^\dagger(\vb{r}')}
+%:=\psi(\vb{r})\psi^\dagger(\vb{r}')-\Theta\psi^\dagger(\vb{r}')\psi^\dagger(\vb{r})
+&=\delta(\vb{r}-\vb{r}')\\
+\scomm{\psi(\vb{r})}{\psi(\vb{r}')\Big.}=
+\scomm{(\psi^\dagger(\vb{r})}{\psi^\dagger(\vb{r}')}&=0
+\end{aligned}
+\end{equation}
+where $\scomm{A}{B}=AB-\Theta BA$ corresponds to a (regular)
+commutator for bosons and an anti-commutator for fermions; that is
+\begin{equation}
+\Theta=
+\begin{cases}
++1\qcomma&\text{for bosons,}\\
+-1\qcomma&\text{for fermions.}
+\end{cases}
+\end{equation}
+The second
+relation means that we can commute creation and annihilation operator
+with each other like so:
+\begin{equation}
+\psi(\vb{r})\psi(\vb{r}')=\Theta\psi(\vb{r}')\psi(\vb{r}),
+\end{equation}
+and analogous for $\psi^\dagger$. In other words we pick up a factor
+of $\Theta$ when commuting annihilation (creation) operators with
+each other.
+
+
+\subsection{Commutation with the Hamiltonian}
+Here we want to show that 
+\begin{equation}
+\comm{\psi(\vb{r}_j)}{H}
+=\qty(-\frac{\hbar^2}{2m}\laplacian_j
++\int\rd^3\!r\,
+\psi^\dagger(\vb{r})
+u(\vb{r}-\vb{r}_j)\psi(\vb{r})
+)\psi(\vb{r}_j),
+\end{equation}
+for bosons as well as fermions.
+This we will do in steps.
+
+\subsubsection{The first term}
+We begin with the first integral of $H$. First of all we have
+\begin{equation}
+\comm{\psi(\vb{r}_j)}{\int\rd^3r\,
+\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})}=
+\int\rd^3r\,
+\comm{\psi(\vb{r}_j)}
+{\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})}
+\end{equation}
+since $\vb{r}_j$ can be regarded as a constant with respect to the
+integration. Then we continue and commute $\psi(\vb{r})$ and
+$\psi(\vb{r}_j)$ in the second term of the expanded commutator:
+\begin{equation}
+\begin{aligned}
+\comm{\psi(\vb{r}_j)}
+{\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})}
+=&\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+-\psi^\dagger(\vb{r})\laplacian
+\commute{\psi(\vb{r})\psi(\vb{r}_j)}\\
+=&\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+ -\Theta\psi^\dagger(\vb{r})\laplacian\psi(\vb{r}_j)\psi(\vb{r})
+% =&\begin{cases}
+% \psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+% -\psi^\dagger(\vb{r})\laplacian\psi(\vb{r}_j)\psi(\vb{r})
+% \qcomma&\text{bosons}\\
+% \psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+% +\psi^\dagger(\vb{r})\laplacian\psi(\vb{r}_j)\psi(\vb{r}),
+% &\text{fermions}.
+% \end{cases}
+\end{aligned}
+\end{equation}
+Now in both cases $\laplacian$ and $\psi(\vb{r}_j)$ commutes since the
+Laplacian operates on $\vb{r}$, and \emph{not} on $\vb{r}_j$. We thus have
+\begin{equation}
+\begin{aligned}
+\comm{\psi(\vb{r}_j)}
+{\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})}
+=&\psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+-\Theta\psi^\dagger(\vb{r})\psi(\vb{r}_j)\laplacian\psi(\vb{r})\\
+% =&\begin{cases}
+% \psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+% -\psi^\dagger(\vb{r})\psi(\vb{r}_j)\laplacian\psi(\vb{r})
+% \qcomma&\text{bosons}\\
+% \psi(\vb{r}_j)\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})
+% +\psi^\dagger(\vb{r})\psi(\vb{r}_j)\laplacian\psi(\vb{r}),
+% &\text{fermions}.
+% \end{cases}\\
+=&\scomm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})}
+\laplacian\psi(\vb{r})%\\=&
+\quad=\quad
+\delta(\vb{r}-\vb{r}_j)\laplacian\psi(\vb{r}).
+\end{aligned}
+\end{equation}
+We now have
+\begin{equation}\label{eq:4_comm_i}
+\comm{\psi(\vb{r}_j)}{\int\rd^3r\,
+\psi^\dagger(\vb{r})\laplacian\psi(\vb{r})}=
+\int\rd^3r\,\delta(\vb{r}-\vb{r}_j)\laplacian\psi(\vb{r})
+=\laplacian_j\psi(\vb{r}_j),
+\end{equation}
+which agrees with the first term in \eqref{eq:4_want_this}.
+
+\subsubsection{The second term}
+Next we tackle
+\begin{equation}
+\begin{aligned}
+&\comm{\psi(\vb{r}_j)}{\iint\rd^3\!r\,\rd^3\!r'\,
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}=\\
+=\iint\rd^3\!r\,\rd^3\!r'&
+\comm{\psi(\vb{r}_j)}{
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}.
+\end{aligned}
+\end{equation}
+Just as before, we want to commute $\psi(\vb{r}_j)$ back to the
+creation operators, in the second term. The only difference now is
+that we have to commute $\psi(\vb{r}_j)$ past both $\psi(\vb{r})$ and
+$\psi(\vb{r}')$. So for \emph{both} bosons and fermions there will be no
+change of sign in the end. We get
+\begin{equation}
+\begin{aligned}
+-\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')
+\commute{\psi(\vb{r})\psi(\vb{r}_j)}
+=&-\Theta\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')
+\commute{\psi(\vb{r}')\psi(\vb{r}_j)}
+\psi(\vb{r})\\
+=&-\cancelto{1}{\Theta^2}\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}_j)\psi(\vb{r}')\psi(\vb{r}).
+\end{aligned}
+\end{equation}
+And once again $\psi(\vb{r}_j)$ and $u(\vb{r}-\vb{r}')$ commute since
+$\vb{r}_j$ is independent of both $\vb{r}$ and $\vb{r}'$. So we are
+left with 
+\begin{equation}
+\comm{\psi(\vb{r}_j)}{
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}
+=\comm{\psi(\vb{r}_j)}
+{\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')}
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r}).
+\end{equation}
+
+We concentrate our effort on the commutator that's still left:
+\begin{equation}
+\begin{aligned}
+\comm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')}
+=&\hspace{-20pt}\overbrace{
+\comm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})}
+}^{\acomm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})}-2\psi^\dagger(\vb{r})\psi(\vb{r}_j)}
+\hspace{-20pt}\psi^\dagger(\vb{r}')
++\psi^\dagger(\vb{r})
+\hspace{-20pt}\overbrace{
+\comm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r}')}
+}^{2\psi(\vb{r}_j)\psi^\dagger(\vb{r}')-\acomm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r}')}}
+\\%\hspace{-22pt}.
+=&
+\begin{cases}
+\comm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})}\psi^\dagger(\vb{r}')
++\psi^\dagger(\vb{r})\comm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r}')}
+,&\text{bosons}\\
+\acomm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r})}\psi^\dagger(\vb{r}')
+-\psi^\dagger(\vb{r})\acomm{\psi(\vb{r}_j)}{\psi^\dagger(\vb{r}')}
+,\;&\text{fermions}
+\end{cases}\\
+=&
+\begin{cases}
+\delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
++\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
+,&\text{bosons}\\
+\delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
+-\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
+,\;&\text{fermions}
+\end{cases}\\
+=&
+\delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
++\Theta\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r}).
+\end{aligned}
+\end{equation}
+In the case of bosons we already had what we needed after using the
+commutator identity in the first step. For fermions however we needed
+to convert the commutators to anti-commutators; this turned out to
+result in almost the same expression in the end as for bosons.
+
+%From here on it will be simpler to deal with the two cases separately.
+
+%\paragraph{Bosons:} 
+\begin{equation}
+\begin{aligned}
+&\iint\rd^3\!r\,\rd^3\!r'\,
+\comm{\psi(\vb{r}_j)}{
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
+=&\iint\rd^3\!r\,\rd^3\!r'\,
+\qty(
+\delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
++\Theta\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
+)
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})\\
+=&\int\rd^3\!r'\,
+\psi^\dagger(\vb{r}')u(\vb{r}_j-\vb{r}')\psi(\vb{r}')\psi(\vb{r}_j)
++\Theta\int\rd^3\!r\,
+\psi^\dagger(\vb{r})u(\vb{r}-\vb{r}_j)
+\commute{\psi(\vb{r}_j)\psi(\vb{r})}\\
+=&\int\rd^3\!r'\,
+\psi^\dagger(\vb{r}')u(\vb{r}_j-\vb{r}')\psi(\vb{r}')\psi(\vb{r}_j)
++\cancelto{1}{\Theta^2}\int\rd^3\!r\,
+\psi^\dagger(\vb{r})u(\vb{r}-\vb{r}_j)
+\psi(\vb{r})\psi(\vb{r}_j)\\
+% =&2\int\rd^3\!r'\,
+% \psi^\dagger(\vb{r}')u(\vb{r}_j-\vb{r}')\psi(\vb{r}')\psi(\vb{r}_j)
+\end{aligned}
+\end{equation}
+%Now we don't need to worry about commutations any longer.
+The interaction $u$ between particles must clearly be
+independent of the direction of the interaction,
+i.e. $u(\vb{r}_j-\vb{r}')=u(\vb{r}'-\vb{r}_j)$. This results in the
+two integrals being equal, only the name of the integration variable
+differs. 
+
+Therefore
+\begin{equation}\label{eq:4_comm_ii}
+\begin{aligned}
+&\iint\rd^3\!r\,\rd^3\!r'\,
+\comm{\psi(\vb{r}_j)}{
+\psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
+=&2\int\rd^3\!r\,
+\psi^\dagger(\vb{r})u(\vb{r}_j-\vb{r})\psi(\vb{r})\psi(\vb{r}_j)
+\end{aligned}
+\end{equation}
+for bosons as well as fermions.
+
+% \paragraph{Fermions:}
+% \begin{equation}
+% \begin{aligned}
+% &\iint\rd^3\!r\,\rd^3\!r'\,
+% \comm{\psi(\vb{r}_j)}{
+% \psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+% u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
+% =&\iint\rd^3\!r\,\rd^3\!r'\,
+% \qty(
+% \delta(\vb{r}-\vb{r}_j) \psi^\dagger(\vb{r}')
+% -\delta(\vb{r}'-\vb{r}_j)\psi^\dagger(\vb{r})
+% )
+% u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})\\
+% =&\int\rd^3\!r'\,
+% \psi^\dagger(\vb{r}')u(\vb{r}_j-\vb{r}')\psi(\vb{r}')\psi(\vb{r}_j)
+% -\iint\rd^3\!r\,
+% \psi^\dagger(\vb{r})u(\vb{r}-\vb{r}_j)
+% \commute{\psi(\vb{r}_j)\psi(\vb{r})}.
+% \end{aligned}
+% \end{equation}
+% Now, however, the commutation results in a change of sign. This change
+% of sign fortunately cancels the minus before the integral, and as
+% before we get
+% \begin{equation}\label{eq:4_comm_ii_ferm}
+% \begin{aligned}
+% &\iint\rd^3\!r\,\rd^3\!r'\,
+% \comm{\psi(\vb{r}_j)}{
+% \psi^\dagger(\vb{r})\psi^\dagger(\vb{r}')
+% u(\vb{r}-\vb{r}')\psi(\vb{r}')\psi(\vb{r})}\\
+% =&2\int\rd^3\!r\,
+% \psi^\dagger(\vb{r})u(\vb{r}_j-\vb{r})\psi(\vb{r})\psi(\vb{r}_j)
+% \end{aligned}
+% \end{equation}
+% for fermions as well.
+
+\subsubsection{Final result}
+To get the full commutator we use \eqref{eq:4_comm_i},
+\eqref{eq:4_comm_ii} %and \eqref{eq:4_comm_ii_ferm} 
+to get the desired
+result:
+\begin{equation}\label{eq:4a_comm}
+\comm{\psi(\vb{r}_j)}{H}
+=\qty(-\frac{\hbar^2}{2m}\laplacian_j
++\int\rd^3\!r\,
+\psi^\dagger(\vb{r})
+u(\vb{r}-\vb{r}_j)\psi(\vb{r})
+)\psi(\vb{r}_j),
+\end{equation}
+which is valid for both bosons and fermions.
+\qed
+
+
+
+\subsection{Equivalence with the Schrödinger equation}
+Here we want to show that the equation
+\begin{equation}\label{eq:4b_start}
+\frac{1}{\sqrt{N!}}
+\mel{0}{\psi(\vb{r}_1)\psi(\vb{r}_2)\cdots\psi(\vb{r}_N)H}{\Psi_{NE}}
+=\frac{E}{\sqrt{N!}}
+\mel{0}{\psi(\vb{r}_1)\psi(\vb{r}_2)\cdots\psi(\vb{r}_N)}{\Psi_{NE}}
+\end{equation}
+is equivalent to the Schrödinger equation:
+\begin{equation}\label{eq:4b_SE}
+\qty[\sum_{i=1}^N\qty(-\frac{\hbar^2}{2m}\laplacian_i 
++ \sum_{j<i}u_{ij})]\Psi_{NE}(\vb{r}_1,\,\vb{r}_2,\cdots\vb{r}_N)
+=E\Psi_{NE}(\vb{r}_1,\,\vb{r}_2,\cdots\vb{r}_N).
+\end{equation}
+We basically want to show that the two LHS's are equal. To do this we
+want to commute $H$ (and all other possible debris) in \eqref{eq:4b_start}
+all the way to the left.  
+
+For brevity let's begin by introducing some abbreviations:
+\begin{equation}
+\psi_n:=\psi(\vb{r}_n)
+\end{equation}
+and
+\begin{equation}
+\comm{\psi_n}{H}\stackrel{\eqref{eq:4a_comm}}{=}
+\Bigg(\overbrace{-\frac{\hbar^2}{2m}\laplacian_n}^{T_n}
++\underbrace{\int\rd^3\!r\,
+\psi^\dagger(\vb{r})
+u(\vb{r}-\vb{r}_n)\psi(\vb{r})}_{U_n}
+\Bigg)\psi_n=:(T_n+U_n)\psi_n
+=:\Xi_n\psi_n
+\end{equation}
+Please note that $T_m$ and $\psi_n$ commute for $m\neq n$, while $U_m$
+and $\psi_n$ does not commute for any $m$ and $n$, so neither does
+$\Xi_m$ and $\psi_n$
+
+
+\subsubsection{Commuting $H$ to the left}
+Let's begin by studying
+\begin{equation}
+\begin{aligned}
+\psi(\vb{r}_1)\cdots\psi(\vb{r}_N)H=&
+\,\psi_1\cdots\psi_{N-1}
+\Big(
+H\psi_N+\overbrace{\comm{\psi_N}{H}}^{\Xi_N\psi_N}
+\Big)\\
+=&\psi_1\cdots\psi_{N-2}
+\Big(
+H\psi_{N-1}\psi_N+\Xi_{N-1}\psi_{N-1}\psi_N + \psi_{N-1}\Xi_N\psi_N
+\Big)
+\end{aligned}
+\end{equation}
+If we were to follow trough with commuting $H$ to the left we would
+end up getting
+\begin{equation}\label{eq:4b_H_to_left}
+\psi_1\psi_2\cdots\psi_{N}H=
+H\psi_1\psi_2\cdots\psi_{N}
++\sum_{i=1}^N\psi_1\cdots\psi_{i-1}\Xi_i\psi_i\cdots\psi_N.
+\end{equation}
+(For the case $i=1$ the term in the sum is just
+$\Xi_1\psi_1\cdots\psi_N$, nothing in front of $\Xi_1$.)
+
+\subsubsection{Commuting $U_i$ to the left}
+We investigate the sum. Let's take a closer look at $\psi_{i-1}\Xi_i$,
+or more specifically $\psi_{i-1}U_i$. To do this we will use
+\eqref{eq:4_comm} in the form
+\begin{equation}
+\scomm{\psi(\vb{r})}{\psi^\dagger(\vb{r}')}
+=\psi(\vb{r})\psi^\dagger(\vb{r}')-\Theta\psi^\dagger(\vb{r}')\psi^\dagger(\vb{r})
+=\delta(\vb{r}-\vb{r}').
+\end{equation}
+We are also not restricted by the fact that we have $i-1$ and $i$. It
+we can just as well analyze
+\begin{equation}
+\begin{aligned}
+\psi_{j}U_i=&\int\rd^3\!r\,
+\psi(\vb{r}_{j})\psi^\dagger(\vb{r})
+u(\vb{r}-\vb{r}_i)\psi(\vb{r})\\
+=&\int\rd^3\!r\,
+\Big[\delta(\vb{r}-\vb{r}_{j}) 
++ \Theta\psi^\dagger(\vb{r})\psi(\vb{r}_{j})\Big]
+u(\vb{r}-\vb{r}_i)\psi(\vb{r})\\
+=&
+u(\vb{r}_{j}-\vb{r}_{i})\psi(\vb{r}_{j}) 
++ \int\rd^3\!r\,
+\Theta\psi^\dagger(\vb{r})\psi(\vb{r}_{j})
+u(\vb{r}-\vb{r}_i)\psi(\vb{r}).
+\end{aligned}
+\end{equation}
+For the second integral we already know that $u(\vb{r}-\vb{r}_i)$ and
+$\psi(\vb{r}_{j})$ commute, and then we pick up another factor
+$\Theta$ when commuting $\psi(\vb{r}_{j})$ past $\psi(\vb{r})$. We
+thus end up with
+\begin{equation}\label{eq:4b_U_comm}
+\begin{aligned}
+\psi_{j}U_i=&
+u(\vb{r}_{j}-\vb{r}_{i})\psi(\vb{r}_{j}) 
++ \cancelto{1}{\Theta^2}\int\rd^3\!r\,
+\psi^\dagger(\vb{r})u(\vb{r}-\vb{r}_i)\psi(\vb{r})
+\psi(\vb{r}_{j})\\
+=&\Big(u_{j,\,i}+U_i \Big)\psi_{j}.
+\end{aligned}
+\end{equation}
+Note that $u_{j,\,i}$ is just a number, so it commutes with any operator. 
+
+Now we are ready to study one full term in the sum from
+\eqref{eq:4b_H_to_left}. With the rule in \eqref{eq:4b_U_comm} applied
+subsequently to commute $U_i$ all the way to the right we get
+\begin{equation}
+\begin{aligned}
+\psi_1\cdots\psi_{i-1}\Xi_i\psi_i\cdots\psi_N
+=&\psi_1\cdots\psi_{i-1}(T_i+U_i)\psi_i\cdots\psi_N\\
+=&T_i\psi_1\cdots\psi_{N}
++U_i\psi_1\cdots\psi_{N}
++\sum_{j=1}^{i-1}u_{j,\,i}\;\psi_1\cdots\psi_{N}\\
+=&\Bigg(T_i+U_i+\sum_{j<i}u_{j,\,i}\Bigg)\psi_1\cdots\psi_{N}.
+\end{aligned}
+\end{equation}
+And \eqref{eq:4b_H_to_left} becomes
+\begin{equation}\label{eq:4b_all_to_left}
+\psi_1\psi_2\cdots\psi_{N}H=
+\qty[H
++\sum_{i=1}^N\Bigg(T_i+U_i+\sum_{j<i}u_{j,\,i}\Bigg)
+]\psi_1\psi_2\cdots\psi_{N}
+\end{equation}
+
+\subsubsection{Applying the results}
+Now all we have to do is to apply \eqref{eq:4b_all_to_left} to
+\eqref{eq:4b_start}, using $T_i=-\hbar^2\laplacian_i/(2m)$, we get
+\begin{equation}\label{eq:4b_almost}
+\mel**{0}{\psi_1\cdots\psi_{N}H}{\Psi_{NE}}=
+\frac{1}{\sqrt{N!}}\mel**{0}{
+\qty[H+\sum_{i=1}^N\qty(-\frac{\hbar^2}{2m}\laplacian_i
++U_i+\sum_{j<i}u_{j,\,i})
+]\psi_1\cdots\psi_{N}}{\Psi_{NE}}.
+\end{equation}
+The first part here is easy to handle:
+\begin{equation}
+\overbrace{\bra{0} H}^{0}\;
+\psi_1\psi_2\cdots\psi_{N}\ket{\Psi_{NE}}
+=0.
+\end{equation}
+Then we can see that all that separates \eqref{eq:4b_almost} from
+\eqref{eq:4b_SE} is the sum over $U_i$. But again
+\begin{equation}
+\bra{0} U_i=\int\rd^3r\,
+\overbrace{\bra{0}\psi^\dagger(\vb{r})}^{=(\psi(\vb{r})\ket{0})^\dagger=0}
+u(\vb{r}-\vb{r}_i)\psi(\vb{r})   = 0
+\end{equation}
+corresponds to the interaction in the vacuum state. 
+And we are left with
+\begin{equation}%\label{eq:}
+\begin{aligned}
+&\frac{1}{\sqrt{N!}}\mel**{0}{\psi_1\cdots\psi_{N}H}{\Psi_{NE}}\\
+=&\frac{1}{\sqrt{N!}}\mel**{0}{
+\sum_{i=1}^N\qty(-\frac{\hbar^2}{2m}\laplacian_i
++\sum_{j<i}u_{j,\,i})
+\psi(\vb{r}_1)\cdots\psi(\vb{r}_{N})}{\Psi_{NE}}.\\
+\stackrel{\eqref{eq:4b_start}}{=}&
+\frac{E}{\sqrt{N!}}
+\mel{0}{\psi(\vb{r}_1)\psi(\vb{r}_2)\cdots\psi(\vb{r}_N)}{\Psi_{NE}},
+\end{aligned}
+\end{equation}
+which corresponds to the Schrödinger equation in
+\eqref{eq:4b_SE}.
+\qed
+
+
+\end{document}
+
+
+%  LocalWords:  Pathria  idealities bosonic Bogoliubov Beale

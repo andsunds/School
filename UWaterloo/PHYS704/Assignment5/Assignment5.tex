@@ -1,0 +1,221 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+\usepackage[makeroom
+]{cancel}
+\graphicspath{{figures/}}
+
+\swapcommands{\Delta}{\varDelta}
+\swapcommands{\Omega}{\varOmega}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 2.5cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\Tc}{\ensuremath{T_{\text{c}}}}
+\newcommand{\eF}{\ensuremath{\epsilon_{\text{F}}}}
+\newcommand{\wD}{\ensuremath{\omega_{\text{D}}}}
+
+%\usepackage{tikz}
+
+\begin{document}
+
+%\tikzstyle{every picture}+=[remember picture]
+%\tikzstyle{na} = [shape=rectangle,inner sep=0pt,text depth=0pt]
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{Statistical Physics -- PHYS\,704 \\
+Assignment 5}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+\section{A phase transition}
+
+We have the Landau free energy
+\begin{equation}\label{eq:f}
+f(t,\,m)=%-hm+
+tm^2+sm^4+um^6,
+\end{equation}
+where $u>0$ is a fixed constant.
+We can also write $f$ on a (semi) factorized form
+\begin{equation}\label{eq:f_fact}
+f(t,\,m)=um^2
+\qty(m^2+\frac{s-\sqrt{s^2-4tu}}{2u})
+\qty(m^2+\frac{s+\sqrt{s^2-4tu}}{2u}).
+\end{equation}
+%Also this function is obviously even in $m$, so we only need to study
+%for instance, positive $m$.
+
+
+All of this problem concerns finding the minimum of $f$ with respect
+to $m_0$. So we might as well find the derivative
+\begin{equation}
+f'_m:=\pdv{f}{m}=2tm+4sm^3+6um^5=2m\qty(t+2sm^2+3um^4)
+\end{equation}
+which is zero at $m=0$, or at 
+\begin{equation}\label{eq:m1}
+m_1^2=\frac{-s\pm\sqrt{s^2-3ut}}{3u}.
+\end{equation}
+We can also semi-factorize the derivative
+\begin{equation}\label{eq:f'_fact}
+f'_m=6um\qty[m^2-m_{1,-}^2]\qty[m^2-m_{1,+}^2],
+\end{equation}
+where $m_{1,+}^2$ is \eqref{eq:m1} with the ``+'' in the ``$\pm$'', and
+similar for $m_{1, -}^2$. Note that $m_{1,+}^2>m_{1,-}^2$.
+
+\subsection{$t>0$, $s>-\sqrt{3ut}$}
+We begin by studying the even narrower case:
+$|s|<\sqrt{3ut}$. Obviously \eqref{eq:m1} lacks a real solution now,
+since $(s^2-3ut)<0$.
+
+Next we tackle the rest of this case, which is: $s>\sqrt{3ut}$. This
+time we see that the RHS of \eqref{eq:m1} is real, but negative. That
+is $m^2$ has to be negative. 
+
+So there's no real solutions here, except for $m=0$. This is a
+\emph{minimum}, since $m=0$ is the only zero point of the derivative, and
+$f\to+\infty$ as $m\to\pm\infty$ (because $u>0$).
+
+\subsection{$t>0$, $-\sqrt{4ut}<s<-\sqrt{3ut}$}
+Now that $s<-\sqrt{3ut}$, \eqref{eq:m1} has real solutions. We get
+two values for $m^2$, the smaller of those values correspond to a
+local \emph{maximum}. We therefore conclude that we get two new
+minimums at
+\begin{equation}\label{eq:1b_m1+}
+m_{1,+}=\pm\qty(\frac{-s+\sqrt{s^2-3ut}}{3u})^{1/2}.
+\end{equation}
+To show that this is an actual minimum, we look at
+\eqref{eq:f'_fact}, under the condition that
+$m>0$\footnotemark{}. There we see that $f'_m$ is negative when 
+$m_{1,-}^2<m^2<m_{1,+}^2$, i.e. between the two new zero points of
+$f'_m$, and $f'_m$ becomes positive for $m^2>m_{1,+}^2$.
+\footnotetext{Since $f$ clearly is even, we only need to study, for
+  instance, $m>0$. The behavior on the other side follows (but
+  mirrored).} 
+
+To show that $f(m_{1,+})>f(m_0=0)=0$, for $-\sqrt{4ut}<s\le-\sqrt{3ut}$,
+we look at \eqref{eq:f_fact} and see that for $s^2<4ut$, the only real
+zero point is at $m=0$. Thus we know that $f(m)>f(m_0=0)=0$ for any
+$m\neq0$ in this interval of $s$, including $m_{1,+}$.
+  
+\subsection{$t>0$, $s=-\sqrt{4ut}$}
+In this case, all the reasoning from the previous problem still
+applies. But we can write \eqref{eq:1b_m1+} as
+\begin{equation}
+m_{1,+}=\pm\qty(\frac{+\sqrt{4ut}+\sqrt{4ut-3ut}}{3u})^{1/2}
+=\pm\qty(\frac{3\sqrt{ut}}{3u})^{1/2}
+=\pm\qty(\frac{t}{u})^{1/4}.
+\end{equation}
+Furthermore, we can rewrite \eqref{eq:f_fact} as
+\begin{equation}
+f(t,\,m)=um^2
+\qty(m^2+\frac{-\sqrt{4tu}}{2u})
+\qty(m^2+\frac{-\sqrt{4tu}}{2u})
+=um^2\qty(m^2+\sqrt{\frac{t}{u}})^2.
+\end{equation}
+And we see that $f$ is indeed~0 at $m_{1,+}$ for $s=-\sqrt{4ut}$. So
+the two minima are equal: $f(m_{1,+})=f(0)=0$. 
+
+
+\subsection{$t>0$, $s<-\sqrt{4ut}$}
+Once again, the reasoning from 1b is still valid. And the minimum is
+still given by \eqref{eq:1b_m1+}. 
+
+Now, when $s<-\sqrt{4ut}$, we do however get negative values
+for $f$. By studying \eqref{eq:f_fact} we see that the expressions in
+the parentheses are real, so we have got more (distinct) zeros for
+$f$. More distinct zeros (that are not minima themselves) means that
+$f$ has to be \emph{negative} at some intervals. Now since $f$ can be
+negative and $f(m=0)=0$, means that $m=0$ is \emph{not} a global
+minimum. Therefore $m_{1,+}$ is the global minimum\footnotemark{},
+where $f(m_{1,+})<0=f(m=0)$.  
+\footnotetext{Because $f(m)\to+\infty$ as $m\to\pm\infty$. }
+
+
+\subsection{$t=0$, $s<0$}
+At $t=0$, \eqref{eq:m1} becomes
+\begin{equation}\label{eq:m1_t=0}
+m_1^2=\frac{-s\pm\abs{s}}{3u}.
+\end{equation}
+For $s<0$ the ``$+$'' value becomes $m_{1,+}^2=2\abs{s}/(3u)$, and
+the ``$-$'' value becomes $m_{1,-}^2=0$. And the factorization of the
+derivative becomes
+\begin{equation}%\label{eq:f'_fact_t=0}
+f'_m=6um^3\qty[m^2-\frac{2\abs{s}}{3u}].
+\end{equation}
+
+We now see that $m=0$ corresponds to a local \emph{maximum}, because
+the sign of $f'_m$ changes from positive to negative when $m$ passes~0
+from below. Therefore $m_{1,+}=\pm\sqrt{2\abs{s}/(3u)}$ are the only
+two minima of $f$. 
+
+\subsection{$t<0$, any $s$}
+As always, the factorization \eqref{eq:f_fact} still holds. What's new
+is that, with $t<0$, $m_{1,+}$ and $m_{1,-}$ will have different
+signs. This fact is independent of the value $s$. 
+
+Define $(m_1^{(+)})^2$ as the positive of $m_{1,+}^2$ or $m_{1,-}^2$, and
+$(m_1^{(-)})^2$ as the negative of the two. We can still write down
+\eqref{eq:f_fact}:
+\begin{equation}\label{eq:f'_fact}
+f'_m=6um\qty[m^2-\qty(m_{1}^{(+)})^2]\qty[m^2-\qty(m_{1}^{(-)})^2].
+\end{equation}
+We see once again, that the sign of $f'_m$ changes from positive to
+negative when $m$ passes~0 from below. Therefore $m=0$ is a local
+maximum, and $(m_{1}^{(+)})^2$ corresponds to the two minima of
+$f$.\footnote{The factor containing $m_{1,-}^2$, doesn't give any real
+zeros for the derivative since the factor has $m^2$, which can't be
+negative, as its other term.}
+
+
+For $s>0$ and $t$ near 0, the minima can be approximated by
+\begin{equation}
+\qty(m_{1}^{(+)})^2=\frac{-s+\sqrt{s^2-3ut}}{3u}
+=\frac{s}{3u}\qty[-1+\qty(1-\frac{3ut}{2s}+\order{t^2})]
+\approx \frac{-t}{2},%\to0\;\text{as}\;t\to0.
+\end{equation}
+which goes to $0$ as $t\to\0^-$.
+
+\subsection{$t=0$, $s>0$}
+We can still use \eqref{eq:m1_t=0}. But for $s>0$ the ``$+$'' value to
+becomes $m_{1,+}^2=0$, and the ``$-$'' value becomes
+$m_{1,-}^2=-2\abs{s}/(3u)<0$. This last equation lacks real solutions
+for $m_{1,-}$. 
+The factorization of the derivative instead becomes
+\begin{equation}%\label{eq:f'_fact_t=0}
+f'_m=6um^3\qty[m^2+\frac{2\abs{s}}{3u}].
+\end{equation}
+We now see that $m=0$ is again the only minimum of $f$, and is indeed the
+only real solution to $f'_m=0$.
+
+
+
+\end{document}
+
+
+%  LocalWords:  Pathria  idealities bosonic Bogoliubov Beale BCS
+%  LocalWords:  Laplace's

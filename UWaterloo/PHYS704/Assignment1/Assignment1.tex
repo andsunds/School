@@ -1,0 +1,417 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+
+
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage[
+%            top    = 3cm,
+%            bottom = 3cm,
+%            left   = 3cm, right  = 3cm
+]{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+% \newcommand{\cbox}[2][cyan]
+% {\mathchoice
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\displaystyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\textstyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptstyle#2$}}
+% 	{\setlength{\fboxsep}{0pt}\colorbox{#1}{$\scriptscriptstyle#2$}}
+% }
+% \newcommand{\grande}{\cbox{\phantom{\frac{1}{xx}}}}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+% \begin{titlepage}
+\title{Statistical Physics -- PHYS\,704 \\
+Assignment 1}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+%Om man vill ha en lista med vilka todo:s som finns.
+%\todolist
+
+\section{Same temperature in equlibrium}
+We have a closed system with two subsystems, $A$ and $B$, at
+equlibrium with each other. Now we want to prove that the temperatures
+of the two subsystems are equal, with the fact that entropy and energy
+are extensive properties. 
+
+Since the two subsystems are at equlibrium we know that the entropy of
+the total system is maximized, therefore $S_A+S_B=S$ is constant. And
+by energy conservation $E_A+E_B=E$ is also constant. 
+
+We are now ready to write down the temperature of the subsystems:
+\begin{equation}
+\frac{1}{T_A}=\qty(\pdv{S_A}{E_A})_{N,V} 
+=\bigg(\pdv{S_A}{E_B}\overbrace{\pdv{E_B}{E_A}}^{=-1}\bigg)_{N,V} 
+=-\bigg(\pdv{S_B}{E_B}\overbrace{\pdv{S_A}{S_B}}^{=-1}\bigg)_{N,V} 
+=+\qty(\pdv{S_B}{E_B})_{N,V} = \frac{1}{T_B}.
+\end{equation}
+\qed
+
+\section{A PDE for the entropy}
+We are given to show that the entropy of a system can be described as
+\begin{equation}
+S \stackrel{?}{=} N\qty(\pdv{S}{N})_{V,E} 
++ V\qty(\pdv{S}{V})_{N,E}
++ E\qty(\pdv{S}{E})_{V,N},
+\end{equation}
+using the fact that $S$, $N$, $V$ and $E$ are all additive or
+extensive properties of a system. This means that if we scale the
+system by any amount $\alpha>0$, these properties will scale with the
+same amount:
+\begin{align}
+&N\longmapsto\alpha N\qcomma V\longmapsto \alpha V 
+\qcomma E\longmapsto \alpha E\qcomma S\longmapsto \alpha S\\
+\label{eq:scale_S}
+\Longrightarrow\quad& S(\alpha N, \alpha V, \alpha E) = \alpha S(N, V, E).
+\end{align}
+
+
+
+Since this is true for any $\alpha$ we can choose $\alpha=1+\epsilon$,
+where $|\epsilon|\ll1$\footnotemark{}. The LHS of \eqref{eq:scale_S}
+can now be expanded in it's Taylor series
+\begin{equation}
+\begin{aligned}
+S\Big((1+\epsilon) N, (1+\epsilon) V, (1+\epsilon) E\Big) =& 
+S(N, V, E)\\
+&+ \epsilon N\qty(\pdv{S}{N})_{\!V,E}\!
++ \epsilon V\qty(\pdv{S}{V})_{\!N,E}\!
++ \epsilon E\qty(\pdv{S}{E})_{\!V,N}\!
++ \order{\epsilon^2},
+\end{aligned}
+\end{equation}
+meanwhile the RHS is just $(1+\epsilon)S(N, V, E)$.
+\footnotetext{More precicely, choose $\epsilon$ sufficiently small so
+  that we're within the radius of conversion of the Taylor series of
+  $S$. }
+All of this is true for all $\epsilon$, especially in the limit
+$\epsilon\to0$, where the $\order{\epsilon^2}$ terms can be
+disregarded. We thus get the equation
+\begin{equation}
+\begin{aligned}
+S(N, V, E) + \epsilon S(N, V, E) =&
+S(N, V, E)\\
+&+\epsilon
+\left(N\qty(\pdv{S}{N})_{\!V,E}\!
++ V\qty(\pdv{S}{V})_{\!N,E}\!
++ E\qty(\pdv{S}{E})_{\!V,N}\right).
+\end{aligned}
+\end{equation}
+Here we can cancel out the $S$ terms and then the $\epsilon$'s, which
+ends up giving us
+\begin{equation}
+S(N, V, E) =
+N\qty(\pdv{S}{N})_{\!V,E}\!
++ V\qty(\pdv{S}{V})_{\!N,E}\!
++ E\qty(\pdv{S}{E})_{\!V,N}.
+\end{equation}
+\qed
+
+
+\section{Partition function of a relativistic gas}
+Given a relativistic gas, with energy-mumentum relation
+$\epsilon=c\abs{p}$, where $c$ is the speed of light in vacuum, we
+want to find the partition function of this gas. 
+
+The partition function is given by
+\begin{equation}
+\begin{aligned}
+Z&=\sum_i\ee^{\nicefrac{-\epsilon_i}{T}}
+=\sum_i\exp\bigg(\!-\frac{c}{T}
+\hspace{-5pt}\sum_{\stackrel{\text{\tiny all}}{\text{\tiny particles}}}\hspace{-5pt}
+|\vb{p}_i|\bigg)\\
+&\to \int\frac{\dd[3N]{q}\dd[3N]{p}}{N!h^{3N}}
+\exp(-\frac{c}{T}\sum_{i=1}^N \abs{\vb{p}_i}).%\\
+%&=\frac{1}{N!h^{3N}} \int\dd[3N]{q} 
+%\int\dd[3N]{p} \prod_{i=1}^N \exp(-\frac{c}{T}\abs{\vb{p}_i}).
+\end{aligned}
+\end{equation}
+Here we easily see that the integrand is independent of $q$, making
+the $q$ integral evaluate to $V^N$. Then we can also note that the
+integrand is just a product where each factor, belonging to a separate
+partice, is independent of each others. This allows us to split up the
+$p$ integral into $N$ identical integrals.
+\begin{equation}
+\begin{aligned}
+Z&=\frac{V^N}{N!h^{3N}}
+\qty(\int\!\dd[3]{p} \ee^{\nicefrac{c|\vb{p}|}{T}})^N\\
+&=\frac{V^N}{N!h^{3N}}
+\qty(\int_0^{2\pi}\!\dd{\phi}\int_0^\pi\!\dd{\theta}\sin\theta
+\int_0^\infty p^2\dd{p}\ee^{\nicefrac{cp}{T}})^{\!\!N}.
+\end{aligned}
+\end{equation}
+The $\phi$ and $\theta$ integral yiels the usual $4\pi$ and the $p$
+integral can easily be solved by substituting $\xi=\nicefrac{cp}{T}$,
+giving
+\begin{equation}
+Z=\frac{V^N}{N!h^{3N}}
+\Bigg(4\pi \qty(\frac{T}{c})^3
+\underbrace{\int_0^\infty \xi^2\ee^{-\xi}\id\xi}_{=2!}\Bigg)^{\!N}
+=\frac{1}{N!} \qty[8\pi V \qty(\frac{T}{hc})^3]^N.
+\end{equation}
+\qed
+
+\subsection*{Some relations derived from the partitionfunction}
+We're also told to show that
+\begin{equation}
+PV=NT=\frac{1}{3}E \quad\text{in general;}
+\quad\text{and } PV^{\frac{4}{3}}=\text{const.}
+\quad\text{for an adiabatic process.}
+\end{equation}
+
+We begin by calculating the energy in the sytem via the formula
+\begin{equation}\label{eq:3_E}
+\begin{aligned}
+E&=-\qty(\pdv{\ln(Z)}{\beta})_{N,V}=T^2\qty(\pdv{\ln(Z)}{T})_{N,V}\\
+&=T^2\qty(\pdv{T})_{N,V}\qty[-\ln(N!)+N\ln(8\pi V (hc)^{-3})+3N\ln(T)].
+&=3NT
+\end{aligned}
+\end{equation}
+The preassure can be given by differentiating the Helmholtz free energy
+$F=-T\ln(Z)$ with respect to $V$.
+thus giving us
+\begin{equation}\label{eq:3_PV}
+\begin{aligned}
+PV&=-V\qty(\pdv{F}{V})_{T}\\
+&=V\qty(\pdv{V})_{T}
+\qty[T\qty(-\ln(N)+N\ln(8\pi\qty(\frac{T}{hc})^3) + N\ln(V))]\\
+&=NT.
+\end{aligned}
+\end{equation}
+This concludes the proof of the first equations.
+
+For the adiabatic process we know that entropy is constant. Once again,
+we make use of th Helmholtz free energy, but this time we need to use
+the relationship $F=E-TS$ as well. The constant entropy is then
+\begin{equation}
+\begin{aligned}
+S&=\frac{E-F}{T}=\begin{Bmatrix*}[l]
+E=3NT\\F=-T\ln(Z)
+\end{Bmatrix*}\\
+&=\underbrace{3N-\ln(N!) +N\ln(8\pi(hc)^{-3})+N}_\text{All constants}
+\ln(VT^3).
+\end{aligned}
+\end{equation}
+In other words, $VT^3=\text{const.}$, and with \eqref{eq:3_PV} we get
+$V^4P^3=\text{const.}$, which is equivalent to what we set out to
+prove. 
+\qed
+
+
+\section{A quantum rotor}
+For a quantum rotor we have the Hamiltonian
+\begin{equation}
+H = -\frac{\hbar^2}{2I} \dv[2]{\theta},
+\end{equation}
+where $\theta\in[0,2\pi)$ is an angular variable. The fact that
+$\theta$ is an angular variable gives us a periodig boundry condition
+on all wavefunctions:
+\begin{equation}
+\psi(\theta+m2\pi)=\psi(\theta)\qcomma \forall m\in\Z.
+\end{equation}
+
+
+\subsection{The eigenstates and eigenvalues to the Hamiltonian}
+To find the eigenstate, we just use the equation
+$H\phi_n(\theta)=E_n\phi_n(\theta)$. With the peiodic boundry
+condition, it's easy to se that
+\begin{equation}
+\phi_n(\theta)= A\ee^{\ii n\theta}+B\ee^{-\ii n\theta}
+\end{equation}
+with the eigenvalue
+\begin{equation}
+E_n=\frac{\hbar^2n^2}{2I}
+\end{equation}
+is a solution to the eigenvalue problem. By applying orthonormality
+for all eigenstates, we see that one possible choise
+of basis/set of eigenfunctions is
+\begin{equation}
+\phi_n(\theta)=\frac{1}{\sqrt{2\pi}}\ee^{\ii n\theta}\qcomma n\in\Z.
+\end{equation}
+
+
+\subsection{The density matrix}
+To find the density matrix, $\rho$, we use the following expression
+\begin{equation}
+\rho = \sum_k p_k \op{\phi_k},
+\end{equation}
+where $\ket{\phi_k}$ is some basis which diagonalizes $\rho$, and
+$p_k$ is the probability to find the state in the state of
+$\ket{\phi_k}$. Thankfully the system considered here is in
+equlibrium, which gives us $\comm{H}{\rho}=0$. This is why
+$\ket{\phi_n}$, which was eigenstates to $H$, is used here as well. 
+
+But we're asked to find the density matrix in the
+$\theta$ representation, which is
+\begin{equation}
+\rho(\theta, \theta') = \mel{\theta'}{\rho}{\theta}
+= \sum_k p_k \ip{\theta'}{\phi_k}\ip{\phi_k}{\theta}
+= \sum_k p_k \phi_k^*(\theta')\phi_k(\theta)
+= \sum_k p_k \frac{\ee^{-\ii k (\theta'-\theta)}}{2\pi}.
+\end{equation}
+Now, we just have to find
+\begin{equation}
+p_k = \frac{\ee^{\nicefrac{-E_k}{T}}}{Z} 
+=\frac{\ee^{-\frac{\hbar^2}{2IT}k^2}}{Z} 
+=\frac{\ee^{-\epsilon k^2}}{Z}, 
+\end{equation}
+where $\epsilon=\nicefrac{\hbar^2}{(2IT)}$, and
+\begin{equation}
+Z=\sum_{k=-\infty}^\infty\ee^{-\epsilon k^2}.
+\end{equation}
+This last sum is clearly convergent, but lacks a closed
+expression. All this leavs us with
+\begin{equation}
+\rho(\theta, \theta')
+= \frac{1}{2\pi Z} 
+\sum_{k=-\infty}^\infty \exp(-\ii k(\theta'-\theta) -\epsilon k^2)
+= \frac{1}{2\pi Z} 
+\sum_{k=-\infty}^\infty \exp(-\ii k\Delta\theta -\epsilon k^2),
+\end{equation}
+for an arbitrary temperature, where $\Delta\theta=\theta'-\theta$. It
+is however posible to get the behaiviour in the limits of high and low
+temperature. 
+
+\subsubsection{High tempereature limit}
+In the high tempererature limit $\epsilon\propto\nicefrac{1}{T}$
+becomes very small, and the difference between each term in the sum
+becomes small as well, justifying a transition to an integral. Note
+here that we'll get an integral expression in both $Z$ and $\rho$.
+
+Let's begin with the partition function
+\begin{equation}
+Z\to \int_0^{2\pi}\frac{\dd{q}}{h^1}\int_{-\infty}^\infty\ee^{-\epsilon k^2} \dd{k} 
+= \frac{2\pi}{h}\sqrt{\frac{\pi}{\epsilon}}.
+\end{equation}
+For the $q$ integral it's over all of the $\theta$ space, that is from
+$0$ to $2\pi$. 
+The $k$ integral is just a standard integral with a well known
+value. 
+
+And now, on to the whole expression for the density matrix
+\begin{equation}\label{eq:4_hi_temp}
+\rho(\Delta\theta) \to \frac{1}{2\pi Z}
+\int_0^{2\pi}\frac{\dd{q}}{h^1}
+\int_{-\infty}^\infty\ee^{\ii k\Delta\theta}\ee^{-\epsilon k^2} \dd{k} 
+= \frac{1}{2\pi}\frac{h}{2\pi}\sqrt{\frac{\epsilon}{\pi}}\cdot
+\frac{2\pi}{h}\sqrt{\frac{\pi}{\epsilon}}\ee^{-\nicefrac{(\Delta\theta)^2}{4\epsilon}}
+= \frac{1}{2\pi}\ee^{-\nicefrac{(\Delta\theta)^2}{4\epsilon}}.
+\end{equation}
+Here the fact that the integral is the Fourier transform of
+$\ee^{-\epsilon k^2}$ was used to evaluate the it. This is also
+a well known transfrom which can be looked up in some work of
+reference, e.g. Råde\,\&\,Westergren, \textit{Mathematics Handbook for
+Science and Engineering}, ed. 5:12, section 13.2.
+
+Pleas do also note, that the $q$ integral is not an integral over
+any of our two angle variables $\theta$ or $\theta'$, even though
+it's over the domain of $\theta$. Therefore $q$ was used as the
+integration variable instead. 
+
+
+
+\subsubsection{Low temperature limit}
+In the low tempereature limit $\epsilon\propto\nicefrac{1}{T}$ becomes
+very large, and causes more or less all terms to vanish in the sums. To
+keep things interesting though, let's keep the terms up to
+$k=\pm1$. This gives us
+\begin{equation}
+Z\approx 1+2\ee^{-\epsilon}
+\end{equation}
+and
+\begin{equation}\label{eq:4_low_temp}
+\begin{aligned}
+\rho(\Delta\theta)&\approx \frac{1}{2\pi}
+\frac{1+\ee^{-\epsilon}\Big(\ee^{-\ii\Delta\theta}+\ee^{+\ii\Delta\theta}\Big)}{1+2\ee^{-\epsilon}}
+\approx\frac{1}{2\pi}
+\qty(1-2\ee^{-\epsilon})\qty(1+2\ee^{-\epsilon}\cos(\Delta\theta))\\
+&\approx \frac{1}{2\pi}\qty(1 + 2\ee^{-\epsilon}\big(\cos(\Delta\theta)-1\big)).
+\end{aligned}
+\end{equation}
+Here all $\order{\ee^{-2\epsilon}}$ have been discarded. If we were to
+discard even the $\order{\ee^{-\epsilon}}$ terms, we would get a
+constant behaviour with respect to $\Delta\theta$.
+
+
+\subsection*{Comment regarding the normalization of $\rho(\Delta\theta)$}
+We should always stop and ask oursevles whether or not the final
+answer is reasonable or feasible. One such question is wheter the total
+probability of the system is still~1, in the given solutions for the
+low and high temperature limits. At a first glance it might look like
+it's not; however with some closer investigation we can see that the
+total probability is indeed~1 for both the limits.
+
+To show this, we begin by remembering that the total probability of the
+system beeing in some state, is given by the \emph{trace} of the
+density matrix. Which in our case would be to integrate over all
+$\theta$'s with $\theta'=\theta$, or $\Delta\theta=0$. From this it's
+clear that the $\rho$'s from both \eqref{eq:4_hi_temp} and
+\eqref{eq:4_low_temp} gives us a trace of~$1$. So there is no
+violation of total nomalization of $\rho$. 
+
+
+\end{document}
+
+
+
+
+
+%% På svenska ska citattecknet vara samma i både början och slut.
+%% Använd två apostrofer (två enkelfjongar): ''.
+
+
+%% Inkludera PDF-dokument
+\includepdf[pages={1-}]{filnamn.pdf} %Filnamnet får INTE innehålla 'mellanslag'!
+
+%% Figurer inkluderade som pdf-filer
+\begin{figure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer inkluderade med xfigs "Combined PDF/LaTeX"
+\begin{figure}\centering
+\resizebox{.8\textwidth}{!}{\input{filnamn.pdf_t}}
+\caption{}
+\label{fig:}
+\end{figure}
+
+%% Figurer roterade 90 grader
+\begin{sidewaysfigure}\centering
+\centerline{ %centrerar även större bilder
+\includegraphics[width=1\textwidth]{filnamn.pdf}
+}
+\caption{}
+\label{fig:}
+\end{sidewaysfigure}
+
+
+%%Om man vill lägga till något i TOC
+\stepcounter{section} %Till exempel en 'section'
+\addcontentsline{toc}{section}{\Alph{section}\hspace{8 pt}Labblogg} 
+
