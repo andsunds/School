@@ -1,0 +1,11 @@
+# Det här en är en avsiktilgt synlig gitignore-fil som är tänkt som en mall till LaTeX-repositories.
+
+#Onödig LaTeX-output
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+reserapport.pdf
+
