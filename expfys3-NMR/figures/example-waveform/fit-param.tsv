@@ -1,0 +1,7 @@
+   1.3551744e+00   3.0443984e-01   8.4317745e-03   4.3966071e-02   1.1222053e+00   1.9239206e-02   0.049572870
+#  A2              p               R1              R2            | A1              R             | bkg
+# Fit parameters for either dual decay mode fits
+#   A(t) = A2*( p*exp(-R1*t) + (1-p)*exp(-R2*t) )
+# or single decay mode
+#   A(t) = A1*exp(-R*t)
+# The variable bkg is just the background noise level.

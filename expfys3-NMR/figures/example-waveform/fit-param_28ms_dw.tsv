@@ -1,0 +1,5 @@
+   1.8555356e+00   3.9773506e-03   4.4253760e-02
+#  A0              R             | bkg
+# Fit parameters for either single decay mode fits
+#   A(t) = A0*exp(-R*t)
+# The variable bkg is just the background noise level.
