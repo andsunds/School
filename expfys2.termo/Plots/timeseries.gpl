@@ -1,0 +1,28 @@
+set decimalsign ','
+
+set terminal epslatex size 16cm,8cm color
+set output "timeseries.eps"
+
+set multiplot
+
+set origin 0,0
+set size 0.6,1
+set xrange [0:10*17]
+set xlabel "Tid [min]" offset 0,0.5
+set ylabel "Temperatur [\\degC]" offset 2,0
+
+set key opaque box
+
+plot for [i=2:6] "timeseries.tsv" using 1:i with lines \
+	 	 		 title sprintf("%d cm", (i-2)*5)
+
+set origin 0.6,0
+set size 0.4,1
+set xrange [0:100*5.5/17]
+set yrange [0:1.1]
+set xlabel "Frekvens $\\left[\\unit[0,01]{min^{-1}}\\right]$" offset 0,0.5
+set ylabel "Relativ amplitud [dimensionsl\"os]" offset 2,0
+
+plot "timeseries.tsv" using ($7*100):8 with lines title " DFT"
+
+unset multiplot
