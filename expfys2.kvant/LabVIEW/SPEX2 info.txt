@@ -1,0 +1,4 @@
+Run Init Spectrometer Communication.vi first.
+Use it to change to serial communication if desired.
+
+MatsR 20111202

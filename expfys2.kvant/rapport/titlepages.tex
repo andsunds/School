@@ -1,0 +1,136 @@
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+%kortkommandon för mailaddresserna
+\newcommand{\andsunds}{andsunds@student.chalmers.se}
+\newcommand{\rigon}{rigon@student.chalmers.se}
+
+
+
+\pagenumbering{roman} %%Romersk sidnumrering i början
+\begin{titlepage}
+\newgeometry{top=3cm, bottom=2cm}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%------------------------------------------------------------------------------------
+
+\textsc{\huge Chalmers tekniska högskola}\\[1.5cm] % Name of university/college
+\textsc{\Large Rapport, Experimentell fysik 2}\\[0.2cm] % Major heading such as course name
+\textsc{\large Termodynamik -- Uppgift 3 }\\[0.5cm] % Minor heading such as course title
+
+%------------------------------------------------------------------------------------
+%	TITLE SECTION
+%------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \LARGE \bfseries 
+Studier av kvicksilveratomens emissionsspektra samt absorptionsspektra av laserfärgämnena Rhodamin B och Kumarin 307
+}\\[0.4cm] % Title of  document
+\HRule \\[1.5cm]
+ 
+%------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Författare:}\\
+Andréas Sundström\footnotemark{} \\
+Rigon Demisai\footnotemark{} 
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Labassistent:} \\
+Martin Wersäll
+\end{flushright}
+\end{minipage}\\[3cm]
+
+\setcounter{footnote}{0}
+\stepcounter{footnote}
+  \footnotetext{\href{mailto:\andsunds}{\texttt{\andsunds}}}
+\stepcounter{footnote}
+  \footnotetext{\href{mailto:\rigon}{\texttt{\rigon}}}
+
+
+
+%------------------------------------------------------------------------------------
+%	DATE SECTION
+%------------------------------------------------------------------------------------
+% Följer ISO-standarden för tidsintervall:
+% https://en.wikipedia.org/wiki/ISO_8601#Time_intervals
+% "Double hyphen" också ok istället för '/'. -- i LaTeX är dock lite på gränsen
+{ \large
+\begin{tabular}{rc}
+    Laboration utförd: & 2015-12-11/15 \\[0.1cm]
+    Rapport inlämnad: & \today
+\end{tabular}\\[1cm]
+}
+
+%------------------------------------------------------------------------------------
+%	LOGO SECTION
+%------------------------------------------------------------------------------------
+
+\includegraphics[height=5cm]{logo.pdf} % Include a department/university logo
+ 
+%------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+\restoregeometry
+
+
+\setcounter{page}{2}%detta är ANDRA (2) sidan
+
+\renewcommand{\abstractname}{Sammandrag}
+\begin{abstract}
+Den här rapporten beskriver en spektroskopisk studie av
+kvicksilveratomens atomära emissionsspektrum samt en studie av
+laserfärgämnena rhodamin~B och kumarin~307 och deras
+absorptionsspektra.
+Ur emisionspektrumet från Hg har vissa av atomens energinivåer kartlagts,
+baserat på kvanmekaniska regler och jämförelse med tidigare data på
+Hg.  Kvicksilvrets emissionsspektra
+är taget i intervallet 350--1100\,nm, där detekterades totalt 23
+emissionstoppar, varefter 13 övergångar kunde identifieras.
+Absorptionsspektrumen för rhodamin~B och kumarin~307 visar breda
+absorptionsband vilket är kännetecknande för flourescerande ämnen som
+består av stora organiska molekyler. 
+Mätningarna har utförts med en Spex~270M spektrometer och
+datainsamlingen har gjorts i LabView.
+\end{abstract}
+
+\renewcommand{\abstractname}{Abstract}
+\begin{abstract}
+This report describes a spectroscopic study of the atomic emision
+spectrum of mercury, and also a study of the laser dyes Rhodamine~D
+and Coumarin~307 and their absorption spectrum.
+Som of the energylevels of Hg have been idetified from the emission
+spectrum, based on quantum mecanichal rules and comparison with erlier
+data on Hg. The emission spectrum of mercury was taken in the interval
+of 350--1100\,nm, there a total of 23 emission lines were detected,
+from which 13 different atomic transitions could be identified. 
+The absorption spectrum of Rhodamin~B and Coumarin~307  show wide
+absorption bands which are characteristic of big organic molecules.
+THe measurements were made with a Spex~270M spectrometer and the data
+collection was done through LabVIEW.
+\end{abstract}
+
+\clearpage
+\renewcommand{\contentsname}{Innehållsförteckning}
+
+\tableofcontents
+
+
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\setcounter{footnote}{0}
