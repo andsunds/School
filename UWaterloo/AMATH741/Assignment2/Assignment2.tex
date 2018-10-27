@@ -1,0 +1,430 @@
+\documentclass[11pt,letter, swedish, english
+]{article}
+\pdfoutput=1
+
+\usepackage{../custom_as}
+
+%\usepackage{listings} 
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{../mcode}
+%\lstloadlanguages{matlab} 
+%\lstset{language=matlab} 
+
+\usepackage[makeroom]{cancel}
+\graphicspath{{figures/}}
+
+
+\swapcommands{\Omega}{\varOmega}
+
+%%Drar in tabell och figurtexter
+\usepackage[margin=10 pt]{caption}
+%%För att lägga in 'att göra'-noteringar i texten
+\usepackage{todonotes} %\todo{...}
+
+%%För att själv bestämma marginalerna. 
+\usepackage{geometry}
+
+%%För att ändra hur rubrikerna ska formateras
+
+
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\renewcommand{\thesubsection}{\arabic{section} (\alph{subsection})}
+\renewcommand{\thesubsubsection}{\arabic{section} (\alph{subsection},\,\roman{subsubsection})}
+
+\newcommand{\Dx}{\ensuremath{\Delta{x}}}
+\newcommand{\Dt}{\ensuremath{\Delta{t}}}
+
+\begin{document}
+
+
+
+
+%%%%%%%%%%%%%%%%% vvv Inbyggd titelsida vvv %%%%%%%%%%%%%%%%%
+
+\title{Numerical solutions to PDE's -- AMATH\,741 \\
+Assignment 2}
+\author{Andréas Sundström}
+\date{\today}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%% ^^^ Inbyggd titelsida ^^^ %%%%%%%%%%%%%%%%%
+
+
+\section{Consistency of a scheme for the heat equation}
+Here we have a scheme
+\begin{equation}
+U_j^{n+1}=\alpha U_j^n+\frac{1-\alpha}{2}\qty(U_{j+1}^n+U_{j-1}^n)
+\end{equation}
+for the heat equation $u_t=\sigma u_{xx}$, and we want to find a
+criteria on $\alpha$ for this scheme to be consistent.
+
+Consistency means that the truncation error
+\begin{equation}
+\tau_j^n=\order{\Dt^m, \Dx^k}
+\end{equation}
+where $m>0$ and $k>1$. 
+If we have a scheme of the form
+\begin{equation}
+V^{n+1}_j=\mathcal{Q}_jV^n,
+\end{equation}
+where $\mathcal{Q}_j$ is some FD scheme, for a PDE of the form
+$u_t+\mathcal{D}_xu=0$, where $\mathcal{D}_x$ is some differential
+operator in $x$, then the truncation error can be defined via
+\begin{equation}
+\Dt\,\tau_j^{n}=u_j^{n+1}-\mathcal{Q}_ju^n.
+\end{equation}
+
+In our case we have
+\begin{equation}
+\mathcal{Q}_jV^n=\alpha V_j^n+\frac{1-\alpha}{2}\qty(V_{j+1}^n+V_{j-1}^n),
+\end{equation}
+so the truncation error is found by Taylor expanding:
+\begin{equation}
+\begin{aligned}
+\Dt\,\tau_j^n=&u_j^{n+1}
+-\qty{\alpha u_j^n+\frac{1-\alpha}{2}\qty(u_{j+1}^n+u_{j-1}^n)}\\
+=& \qty[u_j^n+(u_t)_j^n+\order{\Dt^2}]\\
+&-\Bigg\{\alpha u_j^n+\frac{1-\alpha}{2}
+\Bigg[\qty(u_j^n+(u_x)_j^n\Dx+\frac{\Dx^2}{2}(u_{xx})_j^n)\\
+&\hspace{90pt}+\qty(u_j^n-(u_x)_j^n\Dx+\frac{\Dx^2}{2}(u_{xx})_j^n)
++\order{\Dx^4}\Bigg]\Bigg\}.
+\end{aligned}
+\end{equation}
+We see that by symmetry, all odd power terms in the $x$ expansion must
+vanish; whereby  it is justified to have $\order{\Dx^4}$. 
+
+Now, canceling the terms that can cancel and dividing both sides by
+$\Dt$ gives
+\begin{equation}
+\tau_j^n=(u_t)_j^n-\frac{1-\alpha}{2\Dt}\Dx^2(u_{xx})_j^n
++\order{\Dt, \frac{\Dx^4}{\Dt}}.
+\end{equation}
+We see that for this to be vanishing when $\Dt, \Dx\to0$, we need the
+first two terms to cancel. That will only happen if
+\begin{equation}
+\frac{1-\alpha}{2\Dt}\Dx^2=\sigma
+\quad\Longleftrightarrow\quad
+\alpha=1-2\frac{\sigma\Dt}{\Dx^2}=1-2r.
+\qed
+\end{equation}
+Also note that since $\alpha$ is kept constant, $r$ will also be
+constant; and therefore $\Dt\propto\Dx^2$, meaning that
+$\order{\Dx^4/\Dt}=\order{\Dx^2}$.
+
+\section{Consistency for another scheme to solve the heat equation}
+This time we have another scheme for the heat equation:
+\begin{equation}
+U_{j}^{n+1}=(1-2\alpha_1-2\alpha_2)U_{j}^{n}
++\alpha_1(U_{j+1}^n+U_{j-1}^n)+\alpha_2(U_{j+2}^n+U_{j-2}^n).
+\end{equation}
+
+\subsection{Consistency}
+We have a very similar case to the previous problem. The truncation
+error is
+\begin{equation}
+\begin{aligned}
+\Dt\,\tau_j^n=& \qty[u_j^n+(u_t)_j^n\Dt+\frac{1}{2}(u_{tt})_j^n\Dt^2+\order{\Dt^3}]\\
+&-\Bigg\{(1-2\alpha_1-2\alpha_2)u_j^n
+\\ &\hspace{22pt}+\alpha_1\Bigg[
+\qty(u_j^n+\frac{\Dx^2}{2}(u_{xx})_j^n+\frac{\Dx^4}{24}(u_{4x})_j^n)
+\\ &\hspace{55pt}
++\qty(u_j^n+\frac{\Dx^2}{2}(u_{xx})_j^n+\frac{\Dx^4}{24}(u_{4x})_j^n)
++\order{\Dx^6}\Bigg]
+\\ &\hspace{22pt}
++\alpha_2\Bigg[
+\qty(u_j^n+\frac{4\Dx^2}{2}(u_{xx})_j^n+\frac{16\Dx^4}{24}(u_{4x})_j^n)
+\\ &\hspace{55pt}
++\qty(u_j^n+\frac{4\Dx^2}{2}(u_{xx})_j^n+\frac{16\Dx^4}{24}(u_{4x})_j^n)
++\order{\Dx^6}\Bigg]
+\Bigg\}.
+\end{aligned}
+\end{equation}
+As before, we see that all odd power terms in the $x$ expansion must
+vanish; so $\order{\Dx^6}$ is used. 
+
+We can now cancel most of these terms and simplify:
+\begin{equation}
+\begin{aligned}
+\Dt\,\tau_j^n=& (u_t)_j^n\Dt+\frac{\Dt^2}{2}(u_{tt})_j^n
+-\Bigg\{\alpha_1\qty[
+\qty(\Dx^2(u_{xx})_j^n+\frac{\Dx^4}{12}(u_{4x})_j^n)]
+\\ &\hspace{110pt}
++\alpha_2\qty[
+\qty(4\Dx^2(u_{xx})_j^n+\frac{16\Dx^4}{12}(u_{4x})_j^n)]
+\Bigg\} +\order{\Dt^3, \Dx^6}\\
+=& (u_t)_j^n\Dt -[\alpha_1+4\alpha_2](u_{xx})_j^n\Dx^2\\
+&+\frac{\Dt^2}{2}(u_{tt})_j^n-\frac{1}{12}[\alpha_1+16\alpha_2](u_{4x})_j^n\Dx^4
++\order{\Dt^3, \Dx^6}.
+\end{aligned}
+\end{equation}
+And we once again note that for consistency, we need 
+\begin{equation}\label{eq:2a_end}
+(u_t)_j^n-[\alpha_1+4\alpha_2](u_{xx})_j^n\frac{\Dx^2}{\Dt}=0
+\quad\Longrightarrow\quad
+\alpha_1+4\alpha_2=\frac{\sigma\Dt}{\Dx^2}=r.
+\qed
+\end{equation}
+And also again, since $\alpha_1$ and $\alpha_2$ are constant,
+$\Dt\propto\Dx^2$. 
+
+\subsection{Fourth order accuracy}
+%For this part of the problem we need to expand one more term of the 
+
+Given the condition \eqref{eq:2a_end}, we have the truncation error
+\begin{equation}
+\tau_j^n=\frac{\Dt}{2}(u_{tt})_j^n
+-\frac{1}{12}[\alpha_1+16\alpha_2](u_{4x})_j^n\frac{\Dx^4}{\Dt}
++\order{\Dt^2, \Dx^4}.
+\end{equation}
+Since $\Dt\propto\Dx^2$, we can write $\order{\Dt^2,
+  \Dx^4}=\order{\Dx^4}$, and all we need to do now is to make the
+first terms cancel.
+
+For this we employ a small trick:
+\begin{equation}
+u_t=\sigma u_{xx}
+\quad\Longrightarrow\quad
+u_{tt}=\pdv{t}u_t=\sigma\pdv{t}u_{xx}
+=\sigma\pdv[2]{x}u_t=\sigma^2u_{4x}.
+\end{equation}
+So to get fourth order accuracy, we need
+\begin{equation}
+\frac{\sigma^2\Dt}{2}-\frac{\alpha_1+16\alpha_2}{12}\frac{\Dx^4}{\Dt}=0,
+\end{equation}
+i.e.
+\begin{equation}
+\alpha_1+16\alpha_2=\frac{6\sigma^2\Dt^2}{\Dx^4}=6r^2.
+\end{equation}
+
+
+Both of these conditions together is a $2\times2$ system of linear
+equations 
+\begin{equation}
+\begin{bmatrix}1&4\\1&16\end{bmatrix}
+\begin{bmatrix}\alpha_1\\\alpha_2\end{bmatrix}
+=r\begin{bmatrix}1\\6r\end{bmatrix}
+\quad\Longrightarrow\quad
+\begin{bmatrix}\alpha_1\\\alpha_2\end{bmatrix}
+=\frac{r}{12}\begin{bmatrix*}[c]
+16-24r\\6r-1
+\end{bmatrix*}.
+\qed
+\end{equation}
+
+
+\section{A scheme for the wave equation}
+This time we're dealing with a scheme
+\begin{equation}\label{eq:3_start}
+\mathcal{P}_j^nU=\frac{U_j^{n+1}-2U_j^{n}+U_j^{n-1}}{\Dt^2}
+-\frac{U_{j+1}^{n}-2U_j^{n}+U_{j-1}^{n}}{\Dx^2}=0
+\end{equation}
+for the wave equation $u_{tt}-u_{xx}=0$.
+
+\subsection{Truncation error}
+This time, since the scheme is written on a difference-quotient form,
+the truncation error is just
+\begin{equation}
+\tau_j^n=\mathcal{P}_j^nu
+=\frac{u_j^{n+1}-2u_j^{n}+u_j^{n-1}}{\Dt^2}
+-\frac{u_{j+1}^{n}-2u_j^{n}+u_{j-1}^{n}}{\Dx^2}.
+\end{equation}
+Both of these terms have a very similar form and subsequently, their
+Taylor expansions will also be similar. Let's therefore look at one of
+them:
+\begin{equation}
+\begin{aligned}
+u_{j+1}^{n}-2u_j^{n}+u_{j-1}^{n}=&
+\qty[u_j^n+\frac{1}{2}(u_{xx})_j^n\Dx^2]-2u_j^n
++\qty[u_j^n+\frac{1}{2}(u_{xx})_j^n\Dx^2]+\order{\Dx^4}\\
+=&(u_{xx})_j^n\Dx^2+\order{\Dx^4}.
+\end{aligned}
+\end{equation}
+And as in the two previous problems, the odd power terms cancel each
+others from the $j+1$ and the $j-1$ expansion. Then dividing through
+by $\Dx^2$, we get $(u_{xx})_j^n+\order{\Dx^2}$.
+By symmetry the other term will be $(u_{tt})_j^n+\order{\Dt^2}$.
+
+We can therefore write the truncation error as
+\begin{equation}
+\tau_j^n=
+\overbrace{(u_{tt})_j^n-(u_{xx})_j^n}^{=0\ \text{by definig PDE}}
++\order{\Dt^2, \Dx^2}=\order{\Dt^2, \Dx^2}.
+\end{equation}
+
+\subsection{von Neumann approach}
+In the von Neumann approach we will use the Fourier transform
+\begin{equation}\label{eq:3_FT}
+U(t_n,x_j)=\sum_{k=0}^{J-1} A_k^n\exp(\ii\frac{2\pi k}{J}j)
+=:\sum_{k=0}^{J-1} A_k^nw_j^k.
+\end{equation}
+We also see that
+\begin{equation}
+w_{j+s}^k=\exp(\ii\frac{2\pi k}{J}s)w_j^k.
+\end{equation}
+
+We begin by rewriting \eqref{eq:3_start} as
+\begin{equation}
+U_j^{n+1}=\qty(1-v^{-2})2U_j^n+v^{-2}\qty[U_{j+1}^n+U_{j-1}^n]
+-U_j^{n-1},
+\end{equation}
+where $v=\Dx/\Dt$. Now we can apply the FT \eqref{eq:3_FT} to this
+expression
+\begin{equation}
+\begin{aligned}
+\sum_kA_k^{n+1}w_j^k=&\sum_k \qty{\qty[
+2(1-v^{-2})+v^{-2}\qty(\ee^{\ii 2\pi k/J}+\ee^{-\ii 2\pi k/J})]A_k^n
+-A_k^{n-1} }w_j^k\\
+=&\sum_k \qty{2v^{-2}\qty[
+v^{2}-1+\cos(\frac{2\pi k}{J})]A_k^n
+-A_k^{n-1} }w_j^k.
+\end{aligned}
+\end{equation}
+Equation this for all $j$, we get
+\begin{equation}\label{eq:3_FTcoef}
+A_k^{n+1}=2\lambda A_k^n-A_k^{n-1},
+\end{equation}
+where $\lambda=v^{-2}[v^{2}-1+\cos(2\pi k/J)]$.
+
+To calculate a possible amplification factor we assume that
+$A_k^n=C_k\,(M_k)^n$, meaning that \eqref{eq:3_FTcoef} becomes
+$%\begin{equation}
+C_k\,(M_k)^n=C_k\,(M_k)^{n-1}\qty[2\lambda M_k-1]
+$%\end{equation}
+or
+\begin{equation}
+M_k^2-2\lambda M_k+1=0
+\quad\Longrightarrow\quad
+M_k^\pm=\lambda\pm\sqrt{\lambda^2-1}.
+\end{equation}
+I  general we will have Fourier coefficients of the form
+\begin{equation}
+A_k^n=C_k^+\,(M_k^+)^n+C_k^-\,(M_k^-)^n.
+\end{equation}
+For this to be stable we want \emph{both} $|M_k^+|\le1$ and
+$|M_k^-|\le1$. 
+
+The conditions for this to occur are non-trivial, but we know that 
+\begin{equation}
+M_k^+M_k^-=\qty(\lambda+\sqrt{\lambda^2-1})
+\qty(\lambda-\sqrt{\lambda^2-1})
+=1.
+\end{equation}
+This means that if $M_k^\pm\in\R$, one of them must have magnitude
+greater than 1. That is $M_k^\pm$ \emph{cannot} be real for this
+scheme to be stable. If, on the other hand, $M_k^\pm$ were complex, we
+see that $M_k^\pm$ are a pair of complex conjugates lying on the
+complex unit circle. This gives us the condition that
+\begin{equation}\label{eq:3_lambdacond}
+v^{-2}\abs{v^{2}-1+\cos(2\pi k/J)}=|\lambda|\le1.
+\end{equation}
+
+To study this condition closer, we begin by using the trigonometric
+identity
+\begin{equation}
+\cos(2\alpha)=1-2\sin^2(\alpha)
+\end{equation}
+to rewrite \eqref{eq:3_lambdacond} as
+\begin{equation}
+\abs{1-2v^{-2}\sin^2(2\pi k/J)}\le1.
+\end{equation}
+It is clear that this will only be satisfied when
+\begin{equation}
+\frac{\Dt^2}{\Dx^2}=v^{-2}\le1
+\quad\Longleftrightarrow\quad
+\Dt\le\Dx,
+\end{equation}
+(assuming both $\Dt$ and $\Dx$ to be positive).
+
+\subsection{The merits of this scheme}
+As far as I can tell this scheme isn't too bad. 
+The scheme is not unconditionally stable, but the requirement is not
+that hard, meaning that we can have $\Dt=\order{\Dx}$; so the
+conditional stability is not any big problem.
+The truncation error is $\order{\Dt^2,\Dx^2}$, which becomes just
+$\order{\Dx^2}$ given that we choose $\Dt=\order{\Dx}$. 
+Also, when the stability condition is met, we have $|M_k^\pm|=1$,
+meaning that there is no numerical dissipation in the scheme. 
+
+What I'm saying here is that this scheme lacks many of the major
+drawbacks of other schemes discussed in class. 
+
+
+
+
+\section{Matrix representation of a scheme for the advection equation}
+\newcommand{\odelta}[1]{{\mathring{\delta}^{J}_{#1}}}
+In this problem we have the implicit scheme
+\begin{equation}
+\frac{U_j^{n+1}-U_j^n}{\Dt}
++a\frac{U_{j+1}^{n+1}-U_{j-1}^{n+1}}{2\Dx}=0.
+\end{equation}
+for the advection equation $u_t+au_x=0$. The PDE is applied
+together with periodic boundary conditions.
+We want to find the matrix representation of this scheme.
+
+We begin by rearranging the scheme to look like
+\begin{equation}\label{eq:4_SLE1}
+\nu U_j^{n+1}+U_{j+1}^{n+1}-U_{j-1}^{n+1}=\nu U_j^n,
+\end{equation}
+where $\nu=\Dx/(a\Dt)$. 
+Since we have \emph{periodic boundary conditions}\footnotemark{},
+\begin{equation}
+U_j=U_{j'}\quad\text{if }j\equiv j'\mod J;
+\end{equation}
+we have especially $U_0=U_J$ and $U_{J+1}=U_1$. 
+\footnotetext{With the ``main'' indices being 
+$j\in\{1, 2, \ldots, J\}$.} 
+
+With this in mind we clearly see that
+\eqref{eq:4_SLE1} is a system of linear equation which can be
+represented, using the Einstein sum convention, as
+\begin{equation}
+\qty(-\odelta{i,j-1}+\nu\odelta{i, j}+\odelta{i, j+1})U^{n+1}_i=\nu U_j^n,
+\end{equation}
+where $\odelta{}$ is the ``periodic Kronecker delta'' of period $J$,
+defined as:
+\begin{equation}
+\mathring\delta^{P}_{k,l}:=
+\begin{cases}
+1\quad&\text{if}\ k\equiv l\mod P,\\
+0&\text{otherwise}.
+\end{cases}
+\end{equation}
+Written out in ``full'' matrix notation we get
+\begin{equation}
+\begin{bmatrix*}[r]
+\nu&+1&0&\cdots&0&0&-1\\
+-1&\nu&+1&0&\cdots&0&0\\
+0&-1&\nu&+1&0&\cdots&0\\
+\vdots&&&\ddots&&&\vdots\\
+0&\cdots&0&-1&\nu&+1&0\\
+0&0&\cdots&0&-1&\nu&+1\\
++1&0&0&\cdots&0&-1&\nu\\
+\end{bmatrix*}
+\begin{bmatrix*}
+%\\|\\ \\U^{n+1}\\ \\|\\
+{}\\|\;\\{}\\U^{n+1}\\{}\\|\;\\{}
+\end{bmatrix*}
+=\nu
+\begin{bmatrix*}
+{}\\|\\{}\\U^{n}\\{}\\|\\{}
+\end{bmatrix*},
+\end{equation}
+where $\nu=\Dx/(a\Dt)$. In words, the matrix is a tri-diagonal matrix 
+with the extra addition of a $\pm1$ in the at the anti-diagonal
+corners. 
+
+
+
+
+
+
+
+
+\end{document}
+
+
+
+
+%  LocalWords:  MFT MF Advection PDE's AMATH IC discretization MATLAB
