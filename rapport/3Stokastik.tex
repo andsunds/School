@@ -1,0 +1,375 @@
+\chapter{Stokastiska processer och differentialekvationer}
+
+%För att beskriva de system som undersöks i den här studien behövs stokastisk analys. 
+Många fysikaliska system kan beskrivas med ordinära eller partiella differential\-ekvationer (ODE:er
+eller PDE:er). Tillräckligt små objekt kommer dock att påverkas betydligt av termiska fluktuationer. Dessa fluktuationer kan betraktas som helt slumpmässiga, varför de då bör beskrivas med \emph{stokastiska processer}. Påverkan på ett system från en stokastisk process leder till att den styrande differentialekvationen behöver modifieras med exempelvis en stokastisk term; det blir då en \emph{stokastisk differentialekvation} (SDE).  Således introducerar följande avsnitt några viktiga begrepp och metoder som används för att studera rörelsen av partiklar i celler samt strängar i vätskor. 
+
+Ett exempel på ett system som består av så ''små objekt'' att termiska
+fluktuationer behöver beaktas är i så kallad \emph{brownsk rörelse}. 
+Detta är ett fenomen där små partiklar vandrar runt slumpmässigt, till synes av sig själva. Fenomenet beskrevs först av Robert Brown som 1827~\cite{Brown1828} upptäckte att partiklar från pollenkorn rörde sig hackigt när de flöt på vatten. Fenomenet förklarades dock först 1905 av Einstein \cite{Einstein1905}. Förklaringen går ut på att partiklarna är små nog för att kollisioner med vattenmolekyler ska överföra tillräckligt med rörelsemängd för att pollenkornens rörelseändringar ska bli synbara i ett mikroskop. 
+
+
+\section{Stokastiska processer}
+En \emph{stokastisk variabel} $X$ är ett objekt som kan anta värden
+$x$ från en viss värdemängd $\Omega$. Vilka värden som antas styrs av
+sannolikhetsfördelningen $p(x)=P(X=x)$. I fallet med diskreta stokastiska
+variabler är sannolikhetsfördelningen helt enkelt sannolikheten att
+$X$ antar värdet $x$. Men i det här arbetet ligger fokus på
+kontinuerliga stokastiska variabler. För dessa gäller att sannolikheten för att $X$ antar ett värde i intervallet $[x, x+\dd{x}]$ ges av
+\begin{equation}
+P\big( X\in[x, x+\dd{x}] \big) =p(x)\dd{x}
+\end{equation}
+för någon infinitesimal intervallbredd $\dd{x}$ och där $p(x)$ är sannolikhetstätheten av $X$ i $x$. 
+I fortsättningen av detta arbete kommer ''stokastisk variabel'' att avse en \emph{kontinuerlig} stokastisk variabel om inget annat anges.
+
+
+Från detta kan en så kallad \emph{stokastisk process} definieras som en samling av objekt som beror på en stokastisk variabel $X$ och en deterministisk variabel, ofta betraktad som en tid\footnotemark{} $t$.
+I denna rapport studeras stokastiska processer $Y(t)$ som är funktioner $Y(t) = f(X,t)$, där $X$ följer sannolikhetsfördelningen $p(x)$. Processen $Y(t)$ beror alltså implicit på den stokastiska variabeln $X$.
+\footnotetext{Att tiden väljs som deterministisk variabel är anledning till att det kallas stokastisk \emph{process}. Tanken är att ett tidsförlopp som beror av den stokastiska variabeln utspelar sig. Mer generellt kan en godtycklig deterministisk variabel användas istället för tid.}  
+
+\subsection{Statistiska verktyg för att undersöka stokastiska processer}
+Stokastiska processer är som sagt slumpartade processer. Därmed kan det vara svårt att avgöra processens natur enbart utifrån ett fåtal observationer. För att kunna undersöka en stokastisk process behövs olika statistiska verktyg som exempelvis väntevärde och korrelation.
+
+\subsubsection{Väntevärde, varians och kovarians}
+För en stokastisk variabel $X$ definieras \emph{väntevärdet} med hjälp av variabelns sannolikhetsfördelning $p(x)$ enligt
+\begin{equation}\label{eq:EV}
+    \ev{X} = \int_{\Omega} x p(x) \id{x}.
+\end{equation}
+Något löst sett kan detta betraktas som det förväntade medelvärdet vid upprepade mätningar av $X$. En av de viktigaste egenskaperna hos väntevärdet är att det är \emph{linjärt}. Alltså att~\cite{Rice_matstat2006}
+\begin{equation}\label{eq:EV_linkomb}
+\ev{a+\sum_{i=1}^N b_i X_i} = a+\sum_{i=1}^N b_i \ev{X_i}
+\end{equation}
+för konstanterna $a$ och $b_i$ samt stokastiska variablerna $X_i$. 
+
+Väntevärdet går även att utvidga till att även omfatta funktioner av
+den stokastiska variabeln. Vilket ges av~\cite{Rice_matstat2006}
+\begin{equation}\label{eq:EV_f}
+    \ev{f(X)} = \int_{\Omega} f(x) p(x) \id{x}.
+\end{equation}
+Speciellt i fallet med stokastiska processer blir väntevärdet 
+\begin{equation}\label{eq:EV_process}
+    \ev{Y(t)} = \int_{\Omega} Y(t)p(x) \id{x},
+\end{equation}
+notera att väntevärdet är beroende av $t$. Läsaren påminns om att $Y(t)$ implicit beror av $X$.
+
+Vidare definieras det $n$:te momentet enligt 
+\begin{equation}
+\Big\langle Y(t_1)Y(t_2)..Y(t_n) \Big\rangle 
+= \int_{\Omega} Y(t_1)Y(t_2)\ldots Y(t_n)p(x)\id{x}.
+\end{equation}
+Om momentfunktionen är oberoende av en translation i tid $t_i\to t_i+\tau$, där $i=1,2,\ldots,n$, för alla val av $n$ och $t_i$ definieras den stokastiska processen som \emph{stationär}. Speciellt är väntevärdet $\ev{Y(t)}$ oberoende av $t$ för en stationär process. 
+
+Om väntevärdet är ett mått som anger vad man förväntas få som medelvärde, så behövs även ett mått på hur spridda värden man kan tänkas få. För det används \emph{variansen}, som går att formulera på några olika sätt~\cite{Rice_matstat2006}
+\begin{equation}\label{eq:VAR}
+\sigma_X^2=\VAR{X} = \ev{\big(X-\ev{X} \big)^2} = \ev{X^2}-\ev{X}^2.
+\end{equation}
+Dock ger variansen, som man kan se, ett kvadratiskt mått på avvikelser från medelvärdet. Därför kan det, exempelvis i sammanhang där man vill jämföra spridningen i en mätserie, vara mer intressant att betrakta \emph{standardavvikelsen} $\sigma_X$ som ges av roten ur variansen.
+
+
+På ett analogt sätt definieras en \emph{kovarians}~\cite{Rice_matstat2006}
+\begin{equation}\label{eq:COV}
+\COV{X}{Z} 
+= \Big\langle \big(\, X-\ev{X}\big) \big(\, Z-\ev{Z}\big) \Big\rangle
+= \ev{XZ}-\ev{X}\ev{Z}.
+\end{equation}
+Kovariansen är ett mått på hur mycket två stokastiska variabler samvarierar. Speciellt syns också att $\COV{X}{X}=\VAR{X}$; alltså att kovariansen övergår i variansen för $Z=X$. Vidare gäller att om variablerna är \emph{statistiskt oberoende} så är kovariansen 0.
+
+För att beräkna variansen av en linjärkombination av stokastiska variabler utnyttjas \eqref{eq:EV_linkomb} tillsammans med definitionerna av varians och kovarians. Då erhålls
+\begin{equation}
+\VAR{a+\sum_{i=1}^N b_i X_i} = \VAR{\sum_{i=1}^N b_i X_i} 
+= \sum_{i=1}^N\sum_{j=1}^N b_i b_j\, \COV{X_i}{X_j}.
+\end{equation}
+Om $X_i$ är oberoende, så att $\COV{X_i}{X_j}=0$ för $i\neq j$, kan det sista ledet skrivas om till
+\begin{equation}\label{eq:VAR_linkomb}
+\VAR{a+\sum_{i=1}^N b_i X_i} = \sum_{i=1}^N b_i^2\, \VAR{X_i}.
+\end{equation}
+
+
+
+
+\subsubsection{Korrelationsfunktioner}
+I fallet med stokastiska processer kan det även vara intressant att veta hur korrelerade två processer $Y_1(t)$ och $Y_2(t)$ är, i till exempel tiden. För det används \emph{korrelationsfunktionen}
+\begin{equation}\label{eq:corr}
+\kappa_{12}(t, t') = \ev{Y_1(t)Y_2(t')}.
+\end{equation}
+Oftast brukar också de undersökta processerna ha väntevärde $0$; då övergår $\kappa_{12}$ till att bli kovariansen mellan $Y_1(t)$ och $Y_2(t')$, vilket underlättar tolkningen att $\kappa_{12}$ svarar mot en sorts korrelation. 
+
+Ett specialfall som ofta används är den så kallade \emph{autokorrelationsfunktionen} 
+\begin{equation}\label{eq:autocorr}
+\kappa_{YY}(t, t') = \ev{Y(t)Y(t')}.
+\end{equation}
+Som helt enkelt är när samma process undersöks i olika tidpunkter. 
+
+Om de stokastiska processerna är stationära, vilket ofta gäller, innehar korrelationsfunktionen translationssymmetri i $t$, alltså att när man väljer sitt origo inte spelar någon roll. Detta gör att $t$ och $t'$ kan ersättas differensen~$\tau=\Delta t= \abs{t-t'}$:
+\begin{equation}
+\kappa_{12}(\tau) = \kappa_{12}(t, t+\tau).
+\end{equation}
+%Detta är en egenskap som kommer utnyttjas flitigt under resten av den här studien.
+
+Här bör också påpekas att en \emph{normerad} korrelationsfunktion ibland används men ändå bara kallas ''korrelationsfunktion''. Det kännetecknande för de normerade korrelationsfunktionerna är att de bara antar värden mellan $-1$ och $1$.
+
+
+\subsubsection{Kovariansmatris}\label{sec:kovmatris}
+För att studera kovariansen mellan flera stokastiska processer $Y_i(t)$, där $i=1,2,\ldots,n$ och $n$ är antalet processer, kan en kovariansmatris definieras. Där svarar varje element mot kovariansen mellan process $i$ och process $j$. I denna studie används en tidsoberoende kovariansmatris definierad enligt 
+\begin{equation}
+\label{eq:kovmatris}
+    \mathsfit{C}_{ij} = \COV{Y_i(t)}{Y_j(t)}_t
+\end{equation}
+där kovariansen är bildad med avseende på tiden. Om kovariansmatrisen är icke-diagonal är de stokastiska processerna korrelerade. Kovariansmatrisen ses enligt denna definition vara symmetrisk samt reell, givet att $Y_i(t)$ är reella stokastiska processer. Således är den även diagonaliserbar, och enligt spektralsatsen är dess egenvärden reella. 
+
+Diagonalisering av kovariansmatrisen åstadkoms genom ett basbyte till en bas bestående av linjärkombinationer av de stokastiska processerna, dessa linjärkombinationer är okorrelerade~\cite{Shlens_PCA2014} och är egenvektorer till $\mathsfit{C}$. Egenvärdena till kovariansmatrisen svarar mot variansen av motsvarande egenvektor.
+
+
+\subsection{Skattningar med diskret data} \label{sec:diskret_data}
+Alla verktygen ovan bygger på olika väntevärden. Så för att kunna tillämpa dessa statistiska metoder behövs ett stort statistiskt underlag, baserat på många observationer. Med detta statistiska underlag kan sedan skattningar av exempelvis väntevärde och varians göras.
+
+Vid statistiska analyser används alltså medelvärdet i en mätserie för att approximera väntevärden. Så skattningen ges av
+\begin{equation}\label{eq:mean}
+\ev{X} \approx \bar{x} = \frac{1}{N} \sum_{i=1}^N x_i,
+\end{equation}
+där $x_i$ är de olika observationerna av $X$ och $N$ dess totala antal. 
+
+När man ska beräkna variansen från ett stickprov kräver båda uttrycken i \eqref{eq:VAR} två väntevärden. Om inte $\ev{X}$ är känt får man alltså in två approximationer när man använder \eqref{eq:mean} för att beräkna väntevärdena i \eqref{eq:VAR}. Detta bidrar bland annat till att en approximation av standardavvikelsen behöver göras enligt
+\begin{equation}\label{eq:standard_error}
+\sigma_X^2 \approx s_X^2
+=  \frac{1}{N-1} \sum_{i=1}^N \left(x_i-\bar{x}\right)^2.
+\end{equation}
+Detta är standardfelet, $s_X$, i kvadrat beräknat med Bessels korrektion, som innebär att man använder $N-1$~\cite{Rice_matstat2006} i nämnaren istället för bara $N$. Approximationen av kovariansen följer helt analogt från \eqref{eq:COV}.
+
+\subsubsection{Noggrannheten av skattningarna}
+För att dessa skattningar ska kunna användas behöver man veta hur bra de är. I bilaga~\ref{sec:noggrannhet} bevisas att både \eqref{eq:mean} och \eqref{eq:standard_error} är obiaserade i väntevärdesmening. Alltså att väntevärdet av skattningarna faktiskt är den storhet som skattas.
+
+Vidare behövs även hur stor standardavvikelse man förväntas få i skattningarna. Denna noggrannhet beräknas i bilaga~\ref{sec:noggrannhet}. I huvudsak kan man säga att felet i en skattning av väntevärdet eller varians\footnotemark{} minskar ungefär som $1/\sqrt{N}$ i båda fallen -- ska man däremot skatta en populations standardavvikelse blir felet roten av detta. 
+Detta betyder att man i princip kan komma godtyckligt nära det verkliga värdet genom att öka antalet mätvärden.
+\footnotetext{I beräkningarna av osäkerheteten i skattningen av variansen användes att $N$ behövde vara stort. För osäkerheten i skattningen av väntevärde behövs dock ingen sådant antagande. }
+
+%\subsection{Normalfördelnigen}
+
+
+\subsection{Spektral effekttäthet (PSD)} \label{sec:PSD}
+
+Inom bland annat signalbehandling kan det vara intressant att veta vilka frekvenskomponenter en signal innehåller. Generellt sett används fouriertransformen för att ta fram en signals spektrum.
+För stokastiska processer kan liknande metoder användas, men tyvärr är i allmänhet stokastiska processer inte fouriertransformerbara. Istället används den så kallade spektrala effekttätheten, även kallad PSD (en. power spectral density), en nära släkting till fouriertransformen.
+
+%\paragraph{Energi- och effektinnehåll i en stokastisk process}
+Energin i en process, $Y(t)$, kan betraktas som integralen
+\begin{equation}\label{eq:energy}
+E_Y(T) = \int_{-T}^{T} \big|Y(t)\big|^2 \id{t},
+\end{equation}
+där $T$ svarar mot den tid som energin mäts över. Anledningen till att stokastiska processer i allmänhet inte är fouriertransformerbar är att denna integral divergerar när $T\to\infty$. Alltså att $Y$ är divergent i $\mathcal{L}^2$-mening. 
+
+För att få kopplingen att \eqref{eq:energy} svarar mot just \emph{energin} i processen kan $Y(t)$ betraktas som en spänning, vilket ger att $\abs{Y(t)}^2$ är proportionellt mot effekten; integreras sedan en effekt över tid så erhålls en energi. I övriga fall väljer man oftast att kalla motsvarande storheter för energi och effekt trots att de kanske inte strikt sett går att betrakta dem som fysikaliska energier eller effekter. 
+
+För att undvika divergens när $T\to\infty$ betraktas istället medeleffekten 
+\begin{equation}\label{eq:power}
+P_Y(T) = \frac{1}{2T} \int_{-T}^{T} \abs{Y(t)}^2\id{t},
+\end{equation}
+som för de flesta stokastiska processer oftast~\cite{Miller_probability2012} beter sig bättre än energin.
+I det här läget är det också viktigt att påpeka att trots att $P_Y$ kallas medeleffekt, så är det bara medeleffekten av ett visst utfall av den stokastiska processen $Y$, och bör \emph{inte} förväxlas med någon form av väntevärde. 
+
+För att till slut koppla samman detta med spektraltätheter används den spektrala effekttätheten eller PSD:n
+\begin{equation}\label{eq:PSD}
+\mathcal{S}(f) =  \lim_{T\to\infty}\dfrac{1}{2T} \ev{\abs{\hat{Y}_T(f)}^2},
+\end{equation} 
+där
+\begin{equation}\label{eq:truncated_F}
+\hat{Y}_T(f) = \int_{-T}^{T} Y(t)\,\ee^{-\ii 2\pi f t} \id{t}
+\end{equation}
+är den trunkerade fouriertransformen av $Y$. Genom att ta med kvoten $\nicefrac{1}{2T}$ i \eqref{eq:PSD} erhålls en spektraltäthet av effekter som kan konvergera även om \eqref{eq:truncated_F} på egen hand divergerar när $T\to\infty$. 
+
+\subsubsection{Wiener-Khinthchine-teoremet}
+För att sen koppla ihop PSD:n med några av processens reella egenskaper används Wiener-Khinthchine-teoremet. Kortfattat så säger det att för stationära processer som är ''tillräckligt snälla'' är \cite{Miller_probability2012}
+\begin{equation}\label{eq:W-K-theorem}
+\mathcal{S}(f) = \mathcal{F}\left[\kappa_{YY}(\tau)\right] 
+= \int_{-\infty}^{\infty} 
+\kappa_{YY}(\tau) \ee^{-\ii 2\pi f\tau} \id\tau,
+\end{equation}
+alltså att PSD:n och autokorrelationsfunktionen är kopplade genom fouriertransform. 
+
+Vad som menas med ''tillräckligt snälla'' processer framgår om man tittar på resonemanget som leder fram till beviset av \eqref{eq:W-K-theorem}. Det börjar med att betrakta högerledet i \eqref{eq:PSD}
+\begin{equation}
+\begin{aligned}
+\ev{\abs{\hat{Y}_T(f)}^2}&=\ev{\hat{Y}_T(f)\,\hat{Y}_T^*(f)}\\
+&=\ev{
+\int_{-T}^T\int_{-T}^T\!\dd{t}\dd{t'} Y(t)\ee^{-\ii 2\pi ft}
+ \;Y(t')\ee^{+\ii 2\pi ft'}
+}\\
+&=\int_{-T}^T\int_{-T}^T\!\dd{t}\dd{t'} 
+\ev{Y(t)Y(t')} \ee^{-\ii 2\pi f(t-t')}.
+\end{aligned}
+\end{equation}
+Efter det här steget utnyttjas definitionen av $\kappa$ i \eqref{eq:autocorr} och att $Y$ är stationär, så att
+\begin{equation}
+\ev{Y(t)Y(t')} = \kappa_{YY}(t, t') = \kappa_{YY}(t-t').
+\end{equation}
+Härifrån noteras att $(t-t')$ även förekommer i exponenten så transformen ser ut att kunna gå ihop. Därefter används lite finurliga variabelsubstitutioner och geometriska resonemang~\cite{Miller_probability2012} för att slutligen landa i \eqref{eq:W-K-theorem}.
+
+En tillräckligt snäll process är alltså en process som tillåter att väntevärdet flyttas in under integraltecknen. Detta är oftast inga problem i de flesta fysikaliska tillämpningar. 
+
+
+\subsection{Vitt brus och Wienerprocessen}\label{sec:white_noise}
+Vitt brus, $\pd_tW(t)$,\footnotemark{} är ett brus med konstant PSD, det har alltså lika mycket av alla frekvenskomponenter. Det går att visa att vitt brus uppfyller \cite{Miller_probability2012}
+\begin{equation}\label{eq:white_noise}
+\begin{aligned}
+\ev{\pd_tW(t)}&=0 \\
+\ev{\pd_tW(t)\pd_{t'}W(t')}&=  \delta(t-t'),
+\end{aligned}
+\end{equation}
+samt är normalfördelat. 
+Det bör nämnas att äkta vitt brus inte är fysikaliskt eftersom det innehåller oändligt mycket energi. I de flesta tillämpningar brukar dock fluktuationer antas vara vitt brus för att det oftast ger enkla teoretiska analyser. Vidare kan även verkligt brus i många fall~\cite{Engelberg_noise2007} betraktas som vitt till en god approximation -- det vill säga har en konstant spektralfördelning i ett begränsat frekvensintervall. 
+\footnotetext{Beteckningen med en tidsderivata $\pd_t$ kan verka märklig, men det kommer från tolkningen av Wienerprocessen som integralen av vitt brus. Det står mer om detta längre ner i det här avsnittet.}
+
+Att \eqref{eq:white_noise} medför konstant PSD inses genom att betrakta
+\begin{equation}
+    \ev{\abs{\widehat{\pd_tW}_\omega(f)}^2} =
+    \int_{-T}^{T}\int_{-T}^{T}\!\dd{t}\dd{t'}
+    \ev{\pd_tW(t)\pd_{t'}W(t')}\ee^{-i2\pi f(t-t')},
+\end{equation}
+som är den trunkerade fouriertransformen \eqref{eq:truncated_F} av $\pd_tW(t)$. Denna integral kan beräknas med hjälp av \eqref{eq:white_noise}
+\begin{equation}
+    \int_{-T}^{T}\int_{-T}^{T}\!\dd{t}\dd{t'} 
+     \delta(t-t')\ee^{-i2\pi f(t-t')} 
+    =  \int_{-T}^{T}\dd{t} =2T.
+\end{equation}
+
+Således ses att \eqref{eq:white_noise} medför 
+\begin{equation} \label{eq:white-noise_PSD}
+    \mathcal{S}(f) = \lim_{T\to\infty}\dfrac{2T}{2T} = 1,
+\end{equation}
+vilket visar att PSD:n är konstant. 
+
+
+%Strikt talat ges en Wienerprocess genom att börja med att betrakta \cite{Miller_probability2012}
+%\begin{equation}
+%\tilde{W}(t) = \sum_{k=1}^{n} \delta X_i,
+%\end{equation}
+%där $X_i$ är oberoende stokastiska ''steg'' med som enbart kan anta värdena $1$ och $-1$ med $P(X=1)=P(X=-1)=\nicefrac{1}{2}$, och där $n=t/\Delta{t}$ är antalet steg som tas. Genom att låta $\Delta{t}$ och $\delta$ samtidigt gå mot 0 erhålls en äkta Wienerprocess. 
+
+En Wienerprocess $W(t)$ är en tidskontinuerlig stokastisk process som kan betraktas som integralen av vitt brus\cite{Miller_probability2012}. Detta är anledningen till att det vita bruset har betecknats som tidsderivatan av en Wienerprocess: $\pd_tW(t)$. Vidare brukar integraltolkningen leda till att Wienerprocessen beskrivs som den matematiska beskrivningen av brownsk rörelse. 
+
+Ur en praktisk synvinkel är det dock lättare att tänka sig Wienerprocessen som summa av ett antal normalfördelade steg. Betrakta summan
+\begin{equation}\label{eq:wiener_approx}
+\tilde{W}_n = \sum_{k=1}^{n} \epsilon X_i,
+\end{equation}
+där varje steg $X_i$ är normalfördelat $N(0,1)$ och $n$ är antalet steg. 
+Wienerprocessen erhålls sedan i gränsen där $n\to\infty$ och $\epsilon\to 0$ samtidigt\cite{Miller_probability2012}. Detta åskådliggör tolkningen av Wienerprocesssen som integralen av vitt brus eftersom summan i viss mån kan tolkas som en Riemannsumma som övergår till en integral i den gränsen.
+
+Från \eqref{eq:wiener_approx} erhålls att 
+\begin{equation}
+\ev{\tilde{W}_n} = \epsilon\sum_{i=i}^n \ev{X_i} = 0
+\end{equation}
+och
+\begin{equation}
+\VAR{\tilde{W}_n} = \epsilon^2 \sum_{i=i}^n \VAR{X_i} = n\epsilon^2.
+\end{equation}
+Genom att betrakta \eqref{eq:wiener_approx} som en approximation för Wienerprocessen, är det troligt att den riktiga Wienerprocessen har liknande egenskaper. Så visar sig också vara fallet~\cite{Miller_probability2012}
+\begin{equation}
+\begin{aligned}
+\ev{W(t)} &= 0\\
+\VAR{ W(t) } = \ev{ (W(t))^2 } &\propto t.
+\end{aligned}
+\end{equation}
+Dess egenskaper utnyttjas i avsnitt~\ref{sec:brown} om brownsk rörelse.
+
+
+
+%Tror det blir onödigt formellt att matematiskt definiera dessa
+
+%\subsection{Integraler med stokastiska integrationsvariabler}
+%\label{sec:Stok_int}
+
+%Integraler med stokastiska intebrationsvaribler skiljer sig från integraler i den reella analysen då de ofta behandlar icke-deriverbara processer. Därav behövs en ny definition av hur en sådan stokastisk integral ska beräknas. Följande avsnitt här till stor del hämtat från \emph{Brownian motion and stochastic calculus} av I. Karatzas och S. E. Shreve \cite{Karatzas_stokint1991}, t ex.
+
+%\cite{Dieker_fBm} har bra enklare info.
+
+
+
+
+
+
+
+
+\section{Stokastiska differentialekvationer}
+En differentialekvation som innehåller termer bestående av stokastiska processer kallas en stokastisk differentialekvation (SDE). Lösningen till en SDE kommer representeras av en stokastisk process eftersom minst en av de ingående termerna är stokastisk. Detta gör att systemets tidsutvecklingen också är stokastisk.
+
+Inom fysiken modelleras ofta system via dess styrande differentialekvation. För att studera system under påverkan av en stokastisk fluktuation, exempelvis brus i en elektrisk krets, kan en stokastisk term som representerar fluktuationen adderas till differentialekvationen. Detta kallas \emph{Langevinformalism} och motsvarande stokastiska differentialekvation kallas systemets \emph{Langevinekvation}. Ett illustrerande exempel av Langevinformalismen är fallet för brownsk rörelse som beskrivs i avsnitt~\ref{sec:brown}.
+
+Ett problem som kan uppstå här är att fluktuationens stokastiska fördelning är okänd. Oftast görs dock antaganden om fluktuationen så som att den består av vitt brus som i avsnitt~\ref{sec:white_noise}. 
+Antaganden om fluktuationens väntevärde och korrelation men med en okänd sannolikhetsfördelning leder till att lösningen av Langevinekvationen endast kan beskrivas med motsvarande storheter för systemet. Alltså studeras under dessa antaganden oftast inte lösningen som sådan, utan istället motsvarande väntevärde samt korrelation för lösningen.  
+
+%\subsubsection{Integrering}
+%\todo[inline]{Hur och varför flytta in $\ev{\cdot}$ under integral.}
+
+
+
+
+
+\subsection{Brownsk rörelse}\label{sec:brown}
+Ett illustrerande exempel på en SDE är brownsk rörelse. Då utgår man från Newtons andra lag för att ställa upp en Langevinekvation för partikelns hastighet. Man antar att varje kollision med de omgivande molekylerna ger ett stokastiskt bidrag till partikelns rörelsemängd, vilket ger en stokastisk kraftterm i Newtons andra lag.
+
+Hastigheten för en partikel som utför ren brownsk rörelse styrs av
+Langevinekvationen~\cite{Mazo_Brownian2002} 
+\begin{equation} \label{eq:Brownian_SDE}
+    M\pd_tv=-\zeta v + F(t),
+\end{equation}
+där $M$ är partikelmassan, $\zeta$ en friktionskonstant och $F(t)$ den stokastiskt fluktuerande kraften. Kraften utgör här det stokastiska bidraget och antas uppfylla egenskaperna för vitt brus enligt \eqref{eq:white_noise}, men med en extra faktor $\sigma$ multiplicerad med korrelationen.
+%Den fysikaliska tolkningen av denna stokastiska kraft är att partikeln får små impulser från omgivande vätskepartiklar vilka kolliderar slumpmässigt med partikeln.  
+
+
+Lösningen till den stokastiska differentialekvationen
+\eqref{eq:Brownian_SDE} ges av  
+\begin{equation}
+v(t)
+=v(0)\ee^{-\zeta t/M}
+ +\frac{1}{M}\int^t_0 F(\tau)e^{-\zeta (t-\tau)/M} \id\tau.
+\end{equation}
+Detta får dock inte den stokastiska termen att försvinna och lösningen kan inte skrivas på en deterministisk form. För att ändå kunna göra några förutsägelser betraktas väntevärdet och korrelationen i tiden. Korrelationen ges av, där $\delta t\geq0$,
+\begin{equation}\label{Brownian_korr}
+\begin{aligned}
+\ev{v(t)v(t+\delta t)} 
+=& v(0)^2\ee^{-\zeta(2t+\delta t)/M}\\
+ &+ \frac{1}{M^2}\ee^{-\zeta (2t+\delta t)/M}
+  \int_0^t\int_0^{t+\delta t}\!\dd\tau\dd\tau'\, 
+     \ee^{\zeta (\tau+\tau')/M}\ev{F(\tau)F(\tau')}.
+\end{aligned}
+\end{equation}
+Utnyttja att $F(t)$ korrelerar enligt \eqref{eq:white_noise} vilket ger 
+\begin{equation} \label{eq:Brown_korr}
+\ev{v(t)v(t+\delta t)} 
+= v(0)^2\ee^{-\zeta (2t+\delta t)/M}
+ +\frac{\sigma^2}{M^2}\ee^{-\zeta (2t+\delta t)/M}
+  \int_0^t\!\dd\tau\ee^{2\zeta \tau /M}.
+\end{equation}
+Korrelationen ovan kan nu enkelt beräknas och genom att låta $\delta t\to 0$ samt $t\to \infty$ fås följande samband
+\begin{equation}
+    \ev{v(t)^2} = \frac{\sigma^2}{2M\zeta}.
+\end{equation}
+
+Med hjälp av detta samband samt ekvipartitionsteoremet som gäller vid termisk jämvikt: $\frac{1}{2}M\ev{v^2}=\frac{1}{2}k_BT$, där $k_B$ är Boltzmanns konstant och $T$ är absoluta temperaturen, kan variansen $\sigma^2$ relateras till fysikaliska storheter enligt
+\begin{equation}
+    \sigma^2 = 2k_BT\zeta.
+\end{equation}
+Detta resultat är ett exempel på fluktuation-dissipationsteoremet som relaterar dissipationen av energi, friktionen, med fluktuationen, brownsk rörelse. 
+
+För $t \gg \nicefrac{M}{\zeta}$, det vill säga i gränsen med hög viskositet och lågt Reynoldstal, så kan tröghetstermen i \eqref{eq:Brownian_SDE} försummas relativt friktionskraften. Ekvationen reducerar då till
+\begin{equation}
+    \zeta \pd_t x=F(t),
+\end{equation}
+där $x$ är partikelns position. Detta ger lösningen
+\begin{equation}
+    x(t)=x(0)+\frac{1}{\zeta} \int^t_0 F(\tau)\id\tau.
+\end{equation}
+Utifrån denna lösning kan medelvärdet av den kvadrerade avvikelsen beräknas, kallat ''mean squared displacement'', MSD, (sv. medelvärdet av det kvadrerade avståndet) vilken blir 
+\begin{equation}\label{eq:MSD_brown}
+    \ev{(x(t)-x(0))^2}=\frac{2k_BTt}{\zeta} \propto t,
+\end{equation}
+där enligt fluktuation-dissipationsteoremet  $\sigma^2=2k_BT\zeta$. MSD:n kommer därmed att öka linjärt med tiden, något som enkelt kan jämföras med uppmätt data.
+
+
+
+
+%Bara en liten kodsnutt som behövs när man kompilerar lokalt
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "00main.tex"
+%%% End: 

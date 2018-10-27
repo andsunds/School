@@ -1,0 +1,184 @@
+\chapter{Fördjupning i fBm och fGn}
+\label{sec:App_fBm}
+
+Varje fractional Brownian motion (fBm) är kopplad till en parameter $H$ kallad Hurstparametern, $0<H<1$, som är med och avgör många av rörelsens egenskaper. Ett sätt att formellt representera fBm är att utgå från en vanlig brownsk rörelse $B(t)$, som matematiskt beskrivs av en Wienerprocess, och vikta tidigare steg i rörelsen med $(t-t')^{H-\nicefrac{1}{2}}$, där $t$ och $t'$ är olika tidpunkter. Detta gör att fBm:n blir ett glidande medelvärde av $\dd{B}(t)$ enligt \cite{Mandelbrot_fBm1968}
+\begin{equation} \label{eq:fBm_repr}
+\begin{aligned}
+    B_H(t,\Omega)=& \frac{1}{\Gamma(H+\nicefrac{1}{2})}
+    \int_{\infty}^0 \left( \abs{t-t'}^{H-\nicefrac{1}{2}}-\abs{-t}^{H-\nicefrac{1}{2}}\right)\,\dd{B}(t',\Omega) \\
+    &+ \int_0^t \abs{t-t'}^{H-\nicefrac{1}{2}} \dd{B}(t',\Omega)
+\end{aligned}
+\end{equation}
+utgående från startposition i 0 där $\Omega$ representerar mängden av alla möjliga värden för den stokastiska funktionen och $\Gamma$ är gammafunktionen. För en beskrivning av hur denna typ av integral med stokastisk integrationsvariabel kan beräknas, hänvisas till någon grundläggande lärobok i stokastisk analys, exempelvis \cite{Oksendal2002}.
+
+En normaliserad fBm, $B_H(t)$, karakteriseras fullständigt av följande fem egenskaper~\cite{Dieker_fBm}
+\begin{subequations}
+\begin{align} 
+    B_H(0)&=0 \\ 
+    B_H(t+1)-B_H(t) &\sim N(0,1)\qcomma \forall t \label{eq:fBm_normstep}\\
+    \ev{B_H(t)}&=0 \label{eq:fBm_mean} \\
+    \ev{B^2_H(t)}&=\abs{t}^{2H} \label{eq:fBm_var}\\
+    \ev{(B_H(t_1)-B_H(t_2))^2}&=\abs{t_1-t_2}^{2H}  \label{eq:fBm_stat_step}
+\end{align}
+\end{subequations}
+där $H$ är den tidigare presenterade Hurstparametern. Relationen i \eqref{eq:fBm_stat_step} kommer från att rörelsen har stationära steg. Stegen, som funktion av tid, mellan positionerna $B_H(t)$ och $B_H(t+T)$
+\begin{equation} \label{eq:fracGauss}
+    \delta(t) = B_H(t+T) - B_H(t)
+\end{equation}
+kallas \emph{fractional Gaussian noise} (fGn). Här är $T$ tiden mellan två samplingar i en mätserie. 
+
+Man kan även visa att fBm är den enda gaussiska process med stationära steg som uppträder självliknande \cite{Dieker_fBm}, det vill säga att $B_H(at)$ och $a^H B_H(t)$ har samma ändligdimensionella fördelning för en godtycklig konstant a.
+
+Om fBm:n inte normeras utan definieras direkt från \eqref{eq:fBm_repr} kan man visa att variansen för \emph{icke-normerade} fBm:n $\hat{B}_H(t)$, motsvarande egenskap \eqref{eq:fBm_var}, blir \cite{Dieker_fBm}
+\begin{equation} \label{eq:fBm_onorm_var}
+    \ev{\hat{B}^2_H(t)} = V_H \abs{t}^{2H},
+\end{equation}
+där $V_H = \Gamma(1-2H)\frac{\cos(\pi H)}{\pi H}$ \cite{Flandrin_fBmspektrum1989}.
+
+
+\section{Korrelationer}
+Kovariansen för fBm fås genom att utnyttja egenskaper för kovariansen \eqref{eq:COV} enligt
+\begin{equation}
+\begin{aligned}
+    \COV{B_H(t)}{B_H(t+\Delta{t})}&=\ev{B_H(t)B_H(t+\Delta{t})}-\ev{B_H(t)}\ev{B_H(t+\Delta{t})}
+    \\
+    &=\ev{B_H(t)B_H(t+\Delta{t})},
+\end{aligned}
+\end{equation}
+där $\ev{B_H(t)}=\ev{B_H(t+\Delta{t})}=0$ enligt \eqref{eq:fBm_mean}. För att beräkna det resterande väntevärdet av produkten kan man utnyttja sambandet $(B_H(t)-B_H(t+\Delta{t}))^2=B_H(t)^2 -2B_H(t)B_H(t+\Delta{t})+B_H(t+\Delta{t})^2$ för att få
+\begin{equation}
+    \ev{B_H(t)B_H(t+\Delta{t})}
+    =\frac{
+    \ev{B_H(t)^2} + \ev{B_H(t+\Delta{t})^2} - \ev{(B_H(t)-B_H(t+\Delta{t}))^2}
+    }{2}.
+\end{equation}
+Med \eqref{eq:fBm_var} och \eqref{eq:fBm_stat_step} fås till slut kovariansen
+\begin{equation} \label{eq:fBm_cov}
+    \COV{B_H(t)}{B_H(t+\Delta{t})} = \frac{1}{2}\left(\abs{t}^{2H}+\abs{t+\Delta t}^{2H}-\abs{\Delta{t}}^{2H}\right).
+\end{equation}
+Kovariansen för en fBm är alltså tidsberoende och processen är därmed icke-stationär i denna egenskap. 
+
+Detta resultat kan dock användas för att beräkna kovariansen mellan stegen, fGn, definierade i \eqref{eq:fracGauss}. På samma sätt som för kovariansen av fBm har stegen medelvärde 0 enligt  \eqref{eq:fBm_normstep} vilket ger
+\begin{equation}
+    \COV{\delta(t_1)}{\delta(t_2)} = \Big\langle(B_H(t_1+T)-B_H(t_1))(B_H(t_2+T)-B_H(t_2))\Big\rangle.
+\end{equation}
+Här är $T$ tiden mellan två samplingspunkter. Om produkten utvecklas till fyra termer kan kovariansen i \eqref{eq:fBm_cov} användas för att få fram följande kovarians för fGn:
+\begin{equation} \label{eq:fGn_cov}
+    \COV{\delta(t)}{\delta(t+\Delta{t})} 
+    = \frac{1}{2}
+    \left(-2\abs{\Delta{t}}^{2H}+\abs{\Delta{t}+T}^{2H}+\abs{\Delta{t}-T}^{2H}\right) 
+    \equiv \kappa(\Delta{t}),
+\end{equation}
+där $\Delta{t}=\abs{t_1-t_2}$.
+Detta beror enbart av tidsseparationen mellan $t_1$ och $t_2$, vilket förväntas från en stationär fördelning.
+
+
+%\section{PSD för icke-stationära processer}
+%Som man kan se i avsnitt~\ref{sec:PSD} beror PSD:n enbart på frekvensen och kan beräknas för stationära processer. Konceptet med PSD kan dock generaliseras till icke-stationära processer via Wigner-Ville-spektrumet (WVS) för en process $x(t)$ med kovariansfunktion $\gamma_x(t_1,t_2)$ \cite{Flandrin_fBmspektrum1989}. Wigner-Ville-spektrumet definieras som
+%\begin{equation} \label{eq:WVS}
+%V_x(t,\omega)=
+%\int^{\infty}_{-\infty} 
+%\kappa_x\left(t{+}\nicefrac{\tau}{2},\; t{-}\nicefrac{\tau}{2}\right) \ee^{-\ii \omega \tau} \dd\tau.
+%\end{equation}
+%Alltså kan WVS:en vara tidsberoende. 
+
+%Det går att visa att WVS övergår i PSD för stationära processer. Detta möjliggör att PSD kan tas fram även för den icke-stationära fBm.
+
+
+\section{PSD för fGn}
+\label{sec:PSD_fGn}
+
+PSD för fGn kan räknas ut med hjälp av dess kovariansfunktion $\kappa(t_1,t_2)=\kappa(\tau)$ i ekvation \eqref{eq:fGn_cov} via Wiener-Khinthchine-teoremet \eqref{eq:W-K-theorem}
+\begin{equation} \label{eq:fGn_covterm}
+    \mathcal{S}_{\delta}(\omega)
+    =
+    \int^{\infty}_{-\infty} 
+    \kappa_{\delta}(\tau) \ee^{-\ii \omega\tau} \dd\tau 
+    = 
+    \int^{\infty}_{-\infty} \frac{1}{2} 
+    \left(
+    -2\abs{\tau}^{2H} + \abs{\tau-T}^{2H} + \abs{\tau+T}^{2H}
+    \right) 
+    \ee^{-\ii \omega\tau} \dd\tau.
+\end{equation}
+där $\tau=\Delta{t}=\abs{t_1-t_2}$.
+Via linjäritetsegenskaper kan integralens tre delar beräknas var för sig. Den första termen utgör fouriertransformen för $\abs{\tau}^{(2H+1)-1}$, $2H\in (0,1)$, vilken återfinns i \cite{BETA}
+\begin{equation}
+\begin{aligned}
+    \int^{\infty}_{-\infty} -\abs{\tau}^{(2H+1)-1}\ee^{-\ii \omega\tau} \dd\tau 
+    &= -\frac{
+    2\Gamma(2H+1)
+    \cos(\frac{(2H+1)\pi}{2})}{
+    \abs{\omega}^{2H+1}} 
+    \\ 
+    &= -2\Gamma{(2H+1)} \cos\left(H\pi+\frac{\pi}{2}\right) \abs{\omega}^{-(2H+1)} 
+    \\
+    &= 2\Gamma{(2H+1)}\sin(H\pi) \abs{\omega}^{-(2H+1)} \equiv F.
+\end{aligned}
+\end{equation}
+Andra termen kan uttryckas i termer av $F$ med hjälp av variabelbytet $t'=\tau+T$
+\begin{equation}
+\int^{\infty}_{-\infty}\frac{1}{2} \abs{\tau+T}^{2H})\ee^{-\ii \omega\tau} \dd\tau 
+= \frac{1}{2}\int^{\infty}_{-\infty} \abs{t'}^{2H} \ee^{-\ii \omega(t'-T)} \dd\tau 
+= -\frac{1}{2} F \ee^{\ii \omega T}.
+\end{equation}
+Analogt för tredje termen fås $-\frac{1}{2}F\ee^{-\ii \omega T}$. 
+
+Läggs dessa tre termer ihop fås
+\begin{equation}
+\begin{aligned}
+    \mathcal{S}_{\delta}(\omega)
+    &= F\left(1-\frac{1}{2}\left(\ee^{\ii \omega T}+\ee^{-\ii \omega T}\right)\right)
+    = F\Big( 1-\cos(\omega T) \Big) 
+    = 2F\left(\sin(\frac{\omega T}{2})\right)^2 \\
+    &= 
+    4\Gamma{(2H+1)}
+    \sin(H\pi)\left(\sin(\frac{\omega T}{2})\right)^2 \abs{\omega}^{-(2H+1)}. \label{eq:fGn_PSD_halvklar}
+\end{aligned}
+\end{equation}
+Genom att utnyttja följande egenskaper för gammafunktionen
+\begin{align}
+\Gamma(1-z)\Gamma(z)&=\frac{\pi}{\sin(\pi z)} \\
+\Gamma(z+1)&=z\Gamma(z),
+\end{align}
+kan gammafaktorn i \eqref{eq:fGn_PSD_halvklar} skrivas om till
+\begin{equation}
+\Gamma(2H+1) 
+= 2H \Gamma(2H) = 2H\frac{\pi}{\sin(2H\pi)}\frac{1}{\Gamma(1-2H)} 
+= \frac{H\pi}{\cos(H\pi)\sin(H\pi)\Gamma(1-2H)}.
+\end{equation}
+
+För en icke-normerad fBm fås en extra faktor $V_H$, se \eqref{eq:fBm_onorm_var}, i PSD:n för dess steg fGn: $\hat{\delta}$ enligt
+\begin{equation} \label{eq:fGn_PSD}
+\begin{aligned}
+\mathcal{S}_{\hat{\delta}}(\omega) 
+&= V_H 4\Gamma{(2H+1)}\sin(H\pi) \left( \sin(\frac{\omega T}{2}) \right)^2 \abs{\omega}^{-(2H+1)} 
+\\
+&= 4 \left( \sin(\frac{\omega T}{2}) \right) ^2\abs{\omega}^{-(2H+1)}.
+\end{aligned}
+\end{equation}
+För $\nicefrac{\omega T}{2} \ll 1$ kan den kvadrerade sinusfaktorn taylorutvecklas så att
+\begin{equation}
+    \mathcal{S}_{\hat{\delta}}(\omega) \approx \frac{ \left( \omega T \right)^2}{\abs{\omega}^{(2H+1)}}.
+\end{equation}
+Olika beteende för olika värde på Hurstparametern $H$ framträder nu 
+\begin{equation}
+    \lim\limits_{\omega \to 0} \mathcal{S}_{\hat{\delta}}(\omega) = \begin{cases} 
+      0 & H<\nicefrac{1}{2} \\
+      \nicefrac{T^2}{4} & H=\nicefrac{1}{2} \\
+      \infty & H>\nicefrac{1}{2}.
+   \end{cases}
+\end{equation}
+Detta kommer att synas tydligt i en plott av PSD:n mot frekvensen.
+
+Till sist kan nämnas att för en process som förutsäger en kovarians $\propto t^{\alpha}$ ger \eqref{eq:fGn_covterm}-\eqref{eq:fGn_PSD_halvklar} att motsvarande PSD $\propto \omega^{-(\alpha+1)}$.
+
+
+
+
+
+%Bara en liten kodsnutt som behövs när man kompilerar lokalt
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "00main.tex"
+%%% End: 

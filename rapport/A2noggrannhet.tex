@@ -1,0 +1,112 @@
+\chapter{Kompletterande beräkningar kring skattning av väntevärde och varians}
+\label{sec:noggrannhet}
+
+I den här bilagan bevisas att skattningarna i avsnitt~\ref{sec:diskret_data} är väntevärdesriktiga och hur stor varians man får i respektive skattning.
+
+För att göra beräkningar av hur bra skattningarna är betraktas i båda fallen en uppsättning likafördelade oberoende stokastiska variabler $X_i$ med väntevärde $\mu$ och standardavvikelse $\sigma$. Med dessa stokastiska variabler kan man bilda en stokastisk motsvarighet\footnotemark{} till \eqref{eq:mean} och \eqref{eq:standard_error}. Det är sedan dessa stokastiska motsvarigheter som används i beräkningarna nedan. 
+
+\footnotetext{Här används stokastiska variabler som motsvarar skattningarna i avsnitt~\ref{sec:diskret_data}. Detta är för att kunna göra stokastiska beräkningar. Det är värt att betona skattningarna i \eqref{eq:mean} och \eqref{eq:standard_error} är skattningar med hjälp av redan tagna mätvärden $x_i$, som när de har \emph{fått värden} inte längre är stokastiska variabler. }
+
+
+\section{Skattning av väntevärde}
+Medelvärdet i \eqref{eq:mean} blir alltså den nya stokastiska variabeln
+\begin{equation}
+\bar{X} = \frac{1}{N} \sum_{i=1}^N X_i = \sum_{i=1}^N \frac{X_i}{N}.
+\end{equation}
+Här ifrån kan väntevärde och varians av $\bar{X}$ enkelt beräknas. Med väntevärdets linjäritet, \eqref{eq:EV_linkomb}, och regeln för variansen av en linjärkomination, \eqref{eq:VAR_linkomb}, erhålls
+\begin{equation}
+\ev{\bar{X}} = \sum_{i=1}^N \frac{\ev{X_i}}{N} = \mu
+\end{equation}
+och
+\begin{equation}
+\VAR{\bar{X}} = \sum_{i=1}^N \frac{\VAR{X_i}}{N^2} = \frac{\sigma}{N}.
+\end{equation}
+
+Som förväntat förblir väntevärdet av medelvärdet oförändrat, men det anmärkningsvärda här är att variansen i medelvärdet minskar med antalet termer som medelvärderas. Detta betyder att medelvärdets standardavvikelse går som $\sigma/\sqrt{N}$.
+Från detta kan man dra slutsatsen att skattningen av väntevärdet i \eqref{eq:mean} bör närma sig det verkliga värdet med en osäkerhet i storleksordningen $\sigma/\sqrt{N}$. 
+
+Hur många termer man bör använda i \eqref{eq:mean} beror på hur noggran skattning man vill få i slutändan. Alternativt begränsas $N$ av hur mycket experimentell data man har tillgång till; i så fall kan man använda \eqref{eq:standard_error} för att uppskatta hur noggrant ens medelvärde blir. 
+
+
+\section{Skattning av varians}
+Här används den stokastiska motsvarigheten till \eqref{eq:standard_error}
+\begin{equation}\label{eq:S_square}
+S^2 = \frac{1}{N-1} \sum_{i=1}^N \left(X_i-\bar{X} \right)^2.
+%=\sum_{i=1}^N \hat{X}^2 
+\end{equation}
+Nu behöver väntevärde och standardavvikelse beräknas. 
+
+Väntevärdet av $S^2$ fås av att utveckla kvadraterna i \eqref{eq:S_square} och använda väntevärdets linjäritet, \eqref{eq:EV_linkomb}. Då erhålls
+\begin{equation}\label{eq:EV_S_square1}
+\begin{aligned}
+(N-1)\ev{S^2} &=  \sum_{i=1}^N \ev{X_i^2} 
++ \sum_{i=1}^N\ev{\bar{X}^2} 
+- 2\sum_{i=1}^N\ev{X_i\,\bar{X}}\\
+&= 
+\sum_{i=1}^N \Big( \VAR{X_i}+\mu^2 \Big)
++\sum_{i=1}^N\Big( \VAR{\bar{X}}+\mu^2 \Big)
+-\frac{2}{N}\sum_{i=1}^N\ev{X_i\,\sum_{j=1}^N X_j}.
+\end{aligned}
+\end{equation}
+Här utnyttjas sen att $X_i$ är en uppsättning \emph{oberoende} stokastiska variabler, varför $\ev{X_i\,X_j}=\COV{X_i}{X_j}+\mu^2=\VAR{X_i}\delta_{ij}+\mu^2$ där $\delta_{ij}$ är ett Kroneckerdelta. Med detta kan \eqref{eq:EV_S_square1} skrivas om till
+\begin{equation}\label{eq:EV_S_square2}
+\begin{aligned}
+\ev{S^2} &= \frac{
+N\sigma^2 + N\frac{\sigma^2}{N} + 2N\mu^2
+-\frac{2}{N} \left( N\sigma^2 + N^2\mu^2 \right)
+}{N-1} \\
+&= \sigma^2.
+\end{aligned}
+\end{equation}
+Härmed är det bevisat att \eqref{eq:standard_error} är obiaserad i väntevärdesmening -- alltså att Bessels korrektion stämmer.
+
+
+Med väntevärdet beräknat kan nu variansen av $S^2$ fås med hjälp av 
+\begin{equation}\label{eq:VAR_S_square}
+\VAR{S^2} = \ev{\left(S^2\right)^2} - \ev{S^2}^2
+= \frac{1}{(N-1)^2}\ev{\left(\sum_{i=1}^N\left(X_i-\bar{X}\right)^2 \right)^2} - \sigma^4.
+\end{equation}
+Det som behöver redas ut här är summatermen ovan. 
+Det går tyvärr inte att beräkna den exakt utan att veta $X_i$:s fördelning, men för stora $N$ kan man uppskatta den. 
+
+Till att börja med kan kvadraten av summan skrivas om till
+\begin{equation}
+\ev{\left(\sum_{i=1}^N\left(X_i-\bar{X}\right)^2 \right)^2} 
+= \sum_{i=1}^N \sum_{j=1}^N
+\ev{ \left(X_i-\bar{X}\right)^2\left(X_j-\bar{X}\right)^2 }.
+\end{equation}
+Hade de två faktorerna här varit statistiskt oberoende blir väntevärdet av produkten samma som produkten av väntevärdena\cite{Rice_matstat2006}. Så är tyvärr inte fallet eftersom $\bar{X}$ beror av alla $X_i$.
+
+För att kunna jobba vidare används approximationen $\bar{X}\approx \mu$, vilket ju sen tidigare visade sig fungera bra för stora $N$. Detta ger att de två faktorerna blir oberoende för $i\neq j$ eftersom $X_i$ var satta att vara en uppsättning oberoende stokastiska variabler. Nu kan summan skrivas om till
+\begin{equation}\label{eq:sum_of_moments}
+\ev{\left(\sum_{i=1}^N\left(X_i-\bar{X}\right)^2 \right)^2} 
+\approx
+\sum_{i=1}^N \ev{\left(X_i-\mu \right)^4} 
++\sum_{i=1}^N\sum_{j\neq i} 
+\ev{\left(X_i-\mu \right)^2}\ev{\left(X_j-\mu \right)^2}.
+\end{equation}
+Dubbelsumman är inga problem att evaluera; den innehåller bara varianserna multiplicerade. Däremot behövs mer information om hur $X_i$ är fördelade för att kunna säga något om den första summan -- som är över fjärdemomenten.
+
+Här behöver nästa approximation införas. Den bygger också på att $N$ är stort. Eftersom dubbelsumman innehåller i storleksordningen $N^2$ termer medan summan över fjärdemomenten endast är över $N$ termer, så kommer dubbelsumman att dominera för stora $N$. Detta gör att \eqref{eq:sum_of_moments} kan approximeras med
+\begin{equation}\label{eq:EV_squared_sum}
+\ev{\left(\sum_{i=1}^N\left(X_i-\bar{X}\right)^2 \right)^2} 
+\approx
+N^2\sigma^4.
+\end{equation}
+Man kan motivera att sätta $N^2$, istället för $(N^2-N)$, med att säga att fjärdemomenten alltid är positiva så att man får en underskattning av att helt bortse från den summan. Samtidigt så är det rimligt att anta att $\ev{\left(X_i-\mu\right)^4}\approx\sigma^4$, alltså att de är i samma storleksordning som variansen i kvadrat. Tillsammans ger detta $N^2\sigma^4$.
+
+Slutligen erhålls nu en uppskattning av variansen av $S^2$. Så om man kombinerar \eqref{eq:VAR_S_square} med \eqref{eq:EV_squared_sum} fås för stora $N$: 
+\begin{equation}
+\VAR{S^2} 
+\approx \sigma^4\left(\frac{N^2}{(N-1)^2} -1 \right) 
+=\sigma^4\frac{2N-1}{(N-1)^2}
+\approx \frac{2}{N}\sigma^4.
+\end{equation}
+Även här syns att \emph{variansen} av skattningen av variansen minskar som $1/N$, vilket betyder att \emph{standardavvikelsen} av skattningen av variansen går som $1/\sqrt{N}$. 
+
+
+%Bara en liten kodsnutt som behövs när man kompilerar lokalt
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "00main.tex"
+%%% End: 

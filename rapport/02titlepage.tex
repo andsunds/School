@@ -1,0 +1,93 @@
+\clearpage
+\newgeometry{top=3cm, bottom=2cm, left=3cm, right=3cm}
+\thispagestyle{empty}
+
+
+%kortkommandon för mailaddresserna
+\newcommand{\andsunds}{andsunds@student.chalmers.se}
+\newcommand{\emeeke}{emeeke@student.chalmers.se}
+\newcommand{\robka}{robka@student.chalmers.se}
+\newcommand{\soliver}{soliver@student.chalmers.se}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\begin{center}
+%\center % Center everything on the page
+ 
+%------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%------------------------------------------------------------------------------------
+
+\textsc{\huge \skola}\\[1.5cm] % Name of your university/college
+\textsc{\Large Kandidatarbetesrapport 
+TIFX04\hspace{1pt}\raisebox{1pt}{-}\hspace{-1pt}16\hspace{1pt}\raisebox{1pt}{-}\hspace{0.5pt}02 }\\[0.2cm] % Major heading such as course name
+\textsc{\large \institution  }\\[0.5cm] % Minor heading such as course title
+
+%------------------------------------------------------------------------------------
+%	TITLE SECTION
+%------------------------------------------------------------------------------------
+
+\HRule 
+\\[0.4cm]
+\textbf{\huge \titel} \setlength{\parskip}{0.4cm}
+
+\Large \undertitel \setlength{\parskip}{0.4cm}
+\HRule \\[1.5cm]
+
+%------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Författare:}\\
+Andréas Sundström\footnotemark{} \\
+Emelie Ekenstedt\footnotemark{} \\
+Robin Karlsson\footnotemark{} \\
+Oliver Sundell\footnotemark{}
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Handledare:} \\
+Måns Henningson\\
+Daniel Midtvedt\\
+\end{flushright}
+\end{minipage}\\[2cm]
+
+
+%------------------------------------------------------------------------------------
+%	DATE SECTION
+%------------------------------------------------------------------------------------
+
+{\Large 
+2016\hspace{1pt}\raisebox{1pt}{-}05\hspace{1pt}\raisebox{1pt}{-}26%\today
+}\\[1.5cm] 
+
+%------------------------------------------------------------------------------------
+%	LOGO SECTION
+%------------------------------------------------------------------------------------
+
+\includegraphics[height=6cm]{logo.pdf} % Include a department/university logo 
+ 
+%------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+\end{center}
+%\end{titlepage}
+%\normalsize
+\restoregeometry
+
+
+
+
+
+%Bara en liten kodsnutt som behövs när man kompilerar lokalt
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "00main.tex"
+%%% End: 

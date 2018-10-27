@@ -1,0 +1,32 @@
+\chapter{Slutsats}
+
+För att beskriva det observerade beteendet hos partiklar i jästceller räcker det inte med vanlig brownsk rörelse. De undersökta partiklarna undergår nämligen subdiffusion, karakteriserat av en MSD med ett beroende som är långsammare än proportionellt mot tiden. För klassisk brownsk rörelse gäller att MSD:n är proportionell mot tiden. Detta betyder att mer komplexa modeller krävs för att fullständigt beskriva partikelrörelserna. 
+Inte heller enklare utvidgningar av brownsk rörelse, så som Ornstein-Uhlenbeck-procesen, kan beskriva den observerade MSD:n. Därmed måste man ta till mer avancerade modeller. I dagsläget finns det två huvudsakliga alternativ, CTRW och fBm. 
+
+CTRW är en icke-stationär process. Man borde därför kunna se skillnad på CTRW och fBm om man undersöker mått som skiljer sig mellan stationära och icke-stationära processer. Detta har gjorts genom att studera, dels en MSD som bara har en fast utgångspunkt, dels en som beaktar alla möjliga tidsintervall. Från dessa studier kan vi se att MSD-undersökningarna tyder på att partikelrörelserna har stationära steg, vilket leder till slutsatsen att CTRW inte verkar ge en helt riktig bild av dem.
+
+Eftersom de olika MSD-måtten talar emot CTRW, undersöktes istället fBm mer noggrant. Där fann vi att PSD:n för partiklarnas steg inte verkade gå ihop med fBm:s förutsägelser. Detta talar alltså för att fBm inte heller kan ge en helt tillfredsställande bild av partiklarna. Vidare saknar fBm en klar fysikalisk tolkning, vilket också kan antyda om dess brister som modell.
+
+Med det dataunderlag som studerats är det dock inte helt klart om det går att dra några definitiva slutsatser om de två modellerna. Det är däremot klart att brownsk rörelse inte räcker till för att förklara det observerade beteendet. Vilket har varit känt sedan tidigare.
+
+Partiklarna undersöktes också för att fastställa om det fanns tydlig anisotropi i deras rörelse. Mätningar och simuleringar visar att partikelrörelsen är minst lika isotrop som vanlig brownsk rörelse. Detta tyder på att det i jästcellerna, på den undersökta längdskalan, inte finns några tydliga strukturer som skulle kunna påverka partiklarnas rörelse asymmetriskt. %Detta var också väntat eftersom jästceller i stort sett saknar aktiv intracellulär transport. 
+
+Strängarna som undersökts har haft två olika förutsättningar: fria respektive instängda. Den huvudsakliga modellen som studerats för strängarnas dynamik är WLC-modellen. Mikrokanalens påverkan studeras genom att addera dess bidrag till den styrande differentialekvationen från WLC-modellen. %Den största skillnaden mellan de två typerna av strängar visas vara att strängens styvhet, persistence length, är större för de instängda strängarna.
+Den största skillnaden mellan de två typerna av strängar visas vara styvheten; persistence length blev betydligt större för de instängda strängarna. %För båda typer av strängar konstateras att det finns en styvhet längs med hela strängen. 
+På grund av att det statistiska underlaget var litet är det dock svårt att dra generella slutsatser. Speciellt är det svårt att avgöra huruvida WLC-modellen beskriver strängrörelsen väl.  
+
+Vidare studerades sambandet mellan strängarnas rumsliga svängningar och relaxationstider. %För att göra detta användes två tillvägagångssätt: utveckling i en cosinusbas samt som en diagonalisering av en kovariansmatris. Dispersionsrelationen vid utveckling i cosinusbasen visade att relaxationstiderna avtar med ökat vågtal.
+För att verifiera relationen betraktades svängningsrörelsen utvecklad i två olika baser av egenmoder: cosinusmoder samt egenvektorerna till svängningens kovariansmatris.
+%Moderna för cosinusbasen visade överensstämmelse med dispersionrelationen då relaxationstiderna avtar med ökat vågtal.
+
+Moderna från cosinusutveckling kan härledas ur WLC-modellen. Detta ger bland annat ett avtagande samband mellan relaxationstid och vågtal. I den här studien erhölls också ett avtagande samband, men tyvärr är dataunderlaget för litet för att säkert kunna verifiera det framtagna sambandet.  
+
+%De rumsliga svängningarna, egenmoderna, som togs fram från kovariansmatrisen genom diagonalisering av kovariansmatrisen visade sig ha mycket gemensamt med harmoniska svängningar.
+Genom diagonalisering av kovariansmatrisen erhölls statistiskt okorrelerade egenmoder. Dessa visade sig ha mycket gemensamt med harmoniska svängningar, vilket tillät en uppskattning av modernas vågtal. Och som för cosinusmoderna sågs ett avtagande samband. 
+Egenmodernas likhet med harmoniska svängningar är fascinerande och föreslår en eventuell koppling mellan kovariansmatrisen och en styrande differentialekvation för strängrörelsen. Djupare teoretisk analys av kovariansmatrisen vore därför intressant för att bättre förstå aktinfilamentens dynamik i celler.
+
+%Bara en liten kodsnutt som behövs när man kompilerar lokalt
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "00main.tex"
+%%% End: 

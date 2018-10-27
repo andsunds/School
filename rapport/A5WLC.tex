@@ -1,0 +1,94 @@
+\chapter{Härledning av Langevinekvationen för WLC-modell i mikrokanal}
+\label{A5}
+
+I denna bilaga diskuteras övergången från den potentiella energin för WLC-modellen i en mikrokanal 
+\begin{equation}\label{eq:Htot}
+    \frac{H_\text{tot}}{\kbT}=\int_{0}^{L}\!\dd{s}\,\left[\frac{L_\text{p}}{2}\left(\partial_{s}^{2}\mathbf{r}(s)\right)^2 + \frac{\nu}{2L_\text{p}^3} A(s)^2 + \frac{\mu}{L_\text{p}}\left(\pd_{s}\mathbf{r}(s)\right)^{2} \right]
+\end{equation}
+till Langevinekvationen 
+\begin{equation}\label{eq:wlclangevin}
+    \zeta\pd_tA(t,s) = \kbT\left[-L_\text{p}\pd_s^4A(t,s)-\frac{\nu}{L_\text{p}^3}A(t,s)+\frac{2\mu}{L_\text{p}}\pd_s^2A(t,s) \right]+\sigma\pd_tW(t,s).
+\end{equation}
+
+Den potentiella energin $H_\text{tot} = H + H_{\text{p}} + H_{\text{f}}$ studeras term för term. I analogi med klassisk mekanik där kraften ges av $-\nicefrac{\dd{V}}{\dd{x}}$ för en potentiell energi $V$, studeras hur den potentiella energi \eqref{eq:Htot} ändras vid en variation $\delta A$, alltså $-\frac{\delta H_\text{tot}}{\delta A}$. Starta med att studera termen $H_{\text{p}} = H_{\text{p}}(A,s)$ där
+\begin{equation}
+    H_{\text{p}} = \frac{\nu\kbT}{2L_\text{p}^3}\int_0^L\!\dd{s} A(s)^2
+\end{equation}
+genom att betrakta variationen 
+\begin{equation}
+    \delta H_{\text{p}} = \frac{\pd H_{\text{p}}}{\pd A}\delta A.
+\end{equation}
+
+Detta ger 
+\begin{equation}
+    \delta H_{\text{p}} = \frac{\nu\kbT}{2L_\text{p}^3}\int_0^L\!\dd{s} 2A(s)\delta A.
+\end{equation}
+De övriga termerna beror på första- respektive andraderivatan av $A(s)$ vilket kräver lite mer arbete. Starta därför med $H_{\text{f}}=H_{\text{f}}(\pd_sA,s)$ som innehåller förstaderivatan enligt
+\begin{equation}
+    H_{\text{f}} = \frac{\mu\kbT}{L_\text{p}}\int_0^L\!\dd{s}\left[\pd_s \mathbf{r}(s)\right]^2.
+\end{equation}
+Eftersom vi inför en variation $\delta A$ i den transversella riktningen kommer inte den tangentiella riktningen förändras, vilket inses efter en kort räkning, vilket motiverar ersättande av $\mathbf{r}(s)$ med $A(s)$ . Denna term ger därför på analogt vis 
+\begin{equation}
+    \delta H_{\text{f}} = \frac{\pd H_{\text{f}}}{\pd (\pd_s A)}\delta(\pd_sA),
+\end{equation}
+vilket ger 
+\begin{equation}
+    \label{eq:deltaHf}
+    \delta H_{\text{f}} =  \frac{\mu\kbT}{L_\text{p}}\int_0^L\!\dd{s} 2\pd_sA(s)\delta (\pd_s A).
+\end{equation}
+Då $H_{\text{f}}$ beror av derivatan $\pd_sA(s)$ ses att $\delta H_{\text{f}}$ innehåller variationen av derivatan av $A(s)$, alltså av termen $\delta (\pd_sA)$. För att komma vidare utnyttjas produktregeln som ger följande relation 
+\begin{equation}
+    \pd_s\left[\frac{\pd H_{\text{f}}}{\pd \left(\pd_sA\right)}\delta A\right] = \pd_s\left(\frac{\pd H_{\text{f}}}{\pd \left(\pd_sA\right)}\right)\delta A+\frac{\pd H_{\text{f}}}{\pd \left(\pd_sA\right)}\delta(\pd_sA).
+\end{equation}
+Genom insättning av denna i relation i \eqref{eq:deltaHf} fås 
+\begin{equation}
+    \delta H_{\text{f}} = \frac{\mu\kbT}{L_\text{p}}\int_0^L\!\dd{s} \left[\pd_s\left[\frac{\pd H_{\text{f}}}{\pd \left(\pd_sA\right)}\delta A\right]-\pd_s\left(\frac{\pd H_{\text{f}}}{\pd \left(\pd_sA\right)}\right)\delta A \right].
+\end{equation}
+Den första termen i denna ekvation kan nu integreras och genom att kräva att variationen $\delta A$ är noll vid $s=0$ samt $s=L$ försvinner bidraget från denna term. Slutligen fås 
+\begin{equation}
+    \delta H_{\text{f}} = -\frac{\mu\kbT}{L_\text{p}}\int_0^L\!\dd{s} \pd_s\left(\frac{\pd H_{\text{f}}}{\pd \left(\pd_sA\right)}\right)\delta A,
+\end{equation}
+och 
+\begin{equation}
+     \delta H_{\text{f}} = -\frac{\mu\kbT}{L_\text{p}}\int_0^L\!\dd{s} 2\left(\pd_s^2A\right)\delta A.
+\end{equation}
+
+För $H$ behöver produktregeln appliceras två gånger, vilket är en följd av att $H = H(\pd_s^2A,s)$ enligt 
+\begin{equation}
+     H = \frac{ L_\text{p}\kbT}{2}\int_0^L\!\dd{s}\left(\pd_s^2A\right)^2,
+\end{equation}
+vilket efter en analog beräkning ger 
+\begin{equation}
+     \delta H = L_\text{p}\kbT \int_0^L\!\dd{s} \pd_s^4A.
+\end{equation}
+
+Slutligen studeras variationen av den totala potentiella energin $\delta H_\text{tot} = \delta H + \delta H_{\text{p}} + \delta H_{\text{f}}$ 
+\begin{equation}
+     \delta H_\text{tot} = \kbT\int_0^L\!\dd{s} \left[L_\text{p}\pd_s^4A+\frac{\nu}{L_\text{p}^3}A -\frac{2\mu}{L_\text{p}}\pd_s^2A\right]\delta A. 
+\end{equation}
+Kraften på ett längdelement $\dd{s}$ ges då av 
+\begin{equation}\label{eq:F}
+      F = -\frac{\delta H_\text{tot}}{\delta A} = -\kbT\left[L_\text{p}\pd_s^4A+\frac{\nu}{L_\text{p}^3}A-\frac{2\mu}{L_\text{p}}\pd_s^2A \right]\dd{s} .
+\end{equation}
+Givet denna kraft kan Newtons andra lag ställas upp enligt 
+\begin{equation}
+      \rho\dd{s}\pd_t^2A = -\kbT\left[L_\text{p}\pd_s^4A+\frac{\nu}{L_\text{p}^3}A-\frac{2\mu}{L_\text{p}}\pd_s^2A \right]\dd{s},
+\end{equation}
+där $\rho$ är massan per längdenhet. Detta är en deterministisk rörelseekvation och för att kunna beskriva de stokastiska fluktuationerna på en mikroskopisk sträng används Langevinformalismen. För att få motsvarande Langevinekvation adderas två termer till kraften \cite{Bullerjahn2011,Dhar,VanKampen2007}: en friktionskraft $-\zeta\dd{s}\pd_tA$, där $[\zeta] = \unit[]{[kg/sm]}$ är en friktionskoefficient per längdenhet, samt ett vitt brus $\sigma\pd_t W$, där $\sigma$ är en konstant.
+
+Dividera med $\dd{s}$ enligt 
+\begin{equation}
+      \rho\pd_t^2A = -\zeta\pd_tA+ \kbT\left[-L_\text{p}\pd_s^4A-\frac{\nu}{L_\text{p}^3}A+\frac{2\mu}{L_\text{p}}\pd_s^2A \right]+\sigma\pd_tW.
+\end{equation}
+För att slutligen nå ekvation \eqref{eq:wlclangevin} antas att tröghetstermen är försumbar relativt friktionskraften, vilket gäller under antagandet att polymeren är placerad i en vätska med hög viskositet \cite{Dhar} -- alltså att Reynoldstalet är litet. Langevinekvationen för WLC-modellen i en mikrokanal ges därför av
+\begin{equation}
+    \zeta\pd_tA(t,s) = \kbT\left[-L_\text{p}\pd_s^4A(t,s)-\frac{\nu}{L_\text{p}^3}A(t,s)+\frac{2\mu}{L_\text{p}}\pd_s^2A(t,s) \right]+\sigma\pd_tW(t,s).
+\end{equation}
+
+
+
+%Bara en liten kodsnutt som behövs när man kompilerar lokalt
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "00main.tex"
+%%% End
