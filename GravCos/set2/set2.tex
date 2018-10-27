@@ -1,0 +1,650 @@
+\documentclass[11pt,a4paper, 
+swedish, english %% Make sure to put the main language last!
+]{article}
+\pdfoutput=1
+
+%% Andréas's custom package 
+%% (Will work for most purposes, but is mainly focused on physics.)
+\usepackage{../custom_as}
+
+%% Figures can now be put in a folder: 
+\graphicspath{ {figures/} %{some_folder_name/}
+}
+
+%% If you want to change the margins for just the captions
+\usepackage[margin=10 pt]{caption}
+
+%% To add todo-notes in the pdf
+\usepackage[%disable  %%this will hide all notes
+]{todonotes} 
+
+%% Change the margin in the documents
+\usepackage[
+%            top    = 3cm,              %% top margin
+%            bottom = 3cm,              %% bottom margin
+%            left   = 2.5cm, right  = 2.5cm %% left and right margins
+]{geometry}
+
+
+%% If you want to change the formatting of the section headers
+%\renewcommand{\thesection}{...}
+
+\newcommand{\EM}{\text{EM}}
+\newcommand{\E}{\text{E}}
+%\newcommand{\GR}{\text{GR}}
+%\newcommand{\SR}{\text{SR}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}%% v v v v v v v v v v v v v v v v v v v v v v v v v v
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% If you want to use an external file for the title page
+%\input{titlepages.tex}
+
+
+%%%%%%%%%%%%%%%%%%%% vvv Internal title page vvv %%%%%%%%%%%%%%%%%%%%%
+\title{Gravitation and Cosmology -- FFM 071
+\\ {\Large Hand-in set 2} }
+\author{Andréas Sundström}
+\date{2018-03-06}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%% ^^^ Internal title page ^^^ %%%%%%%%%%%%%%%%%%%%%
+%% If you want a list of all todos
+%\todolist
+
+\renewcommand{\thesubsection}{\arabic{section} (\roman{subsection})}
+\setcounter{section}{8}
+
+\section{3D anti-de Sitter}
+
+The $\text{AdS}_3$ metric
+\begin{equation}\label{eq9:metric1}
+\rd{s}^2=-\rd{u}^2-\rd{v}^2+\rd{x}^2+\rd{y}^2
+\end{equation}
+under the constraint
+\begin{equation}\label{eq9:constraint}
+-u^2-v^2+x^2+y^2=-R^2,
+\end{equation}
+can be rewritten using the change of variables
+\begin{equation}\label{eq9:var-change}
+\begin{aligned}
+&u=\sqrt{R^2+r^2}\cos(t/R)
+\qc\qquad &x=r\cos\phi, \\
+&v=\sqrt{R^2+r^2}\sin(t/R)
+\qc\qquad &y=r\sin\phi.
+\end{aligned}
+\end{equation}
+Firstly it is easy to confirm that \eqref{eq9:var-change} satisfy
+\eqref{eq9:constraint} by noting that
+\begin{equation}
+u^2+v^2=R^2+r^2\qand
+x^2+y^2=r^2.
+\end{equation}
+Then to calculate the metric, we need
+\begin{equation}
+\rd{u}=\pdv{u}{r}\rd{r}+\pdv{u}{t}\rd{t}+\pdv{u}{\phi}\rd\phi
+=\frac{r\cos(t/R)\rd{r}}{\sqrt{R^2+r^2}}
+-\frac{\sqrt{R^2+r^2}}{R}\sin(t/R)\rd{t}
+\end{equation}
+and similarly for
+\begin{equation}
+\rd{v}=\frac{r\sin(t/R)\rd{r}}{\sqrt{R^2+r^2}}
++\frac{\sqrt{R^2+r^2}}{R}\cos(t/R)\rd{t},
+\end{equation}
+which leads to
+\begin{equation}
+\rd{u}^2+\rd{v}^2=
+\frac{r^2\rd{r}^2}{R^2+r^2}+\frac{R^2+r^2}{R^2}\rd{t}^2
+\end{equation}
+Then since we already recognize the polar coordinates for $x$ and $y$,
+we can write down
+\begin{equation}
+\rd{x}^2+\rd{y}^2=\rd{r}^2+r^2\rd\phi^2.
+\end{equation}
+We can now write down the metric \eqref{eq9:metric1} in terms of the
+new coordinates
+\begin{equation}
+\begin{aligned}
+\rd{s}^2=&-\frac{R^2+r^2}{R^2}\rd{t}^2
++\qty[1-\frac{r^2}{R^2+r^2}]\rd{r}^2+r^2\rd\phi^2\\
+=&-\frac{R^2+r^2}{R^2}\rd{t}^2
++\frac{R^2}{R^2+r^2}\rd{r}^2+r^2\rd\phi^2
+\end{aligned}
+\end{equation}
+
+The proper distance from $r=0$ to $r=\infty$ can easily be calculated
+as
+\begin{equation}
+S=\int_{r=0}^{r=\infty}\rd{s}=
+\begin{Bmatrix}
+\rd{t}=0\\
+\rd{\phi}=0
+\end{Bmatrix}
+=\int_0^\infty\rd{r}
+\overbrace{\frac{R}{\sqrt{R^2+r^2}}}^{\sim R/r\text{ for }r\gg R}
+ =\infty.
+\end{equation}
+Meanwhile the time it takes for a light signal to traverses the same
+path is
+\begin{equation}
+T=\int_{r=0}^{r=\infty}\rd{t}
+=\int_0^\infty\rd{r}\frac{R^2}{R^2+r}
+=\frac{\pi R}{2},
+\end{equation}
+where $\rd{t}$ have been calculated using
+\begin{equation}
+0=\rd{\tau^2}=\frac{R^2+r^2}{R^2}\rd{t}^2
+-\frac{R^2}{R^2+r^2}\rd{r}^2
+\end{equation}
+for light.
+
+
+
+\section{Maximally symmetric metric?}
+We have a metric given by
+\begin{equation}\label{eq10:ds}
+\rd{s}^2=-\rd{t}^2+\rd{x}^2+\rd{y}^2+\rd{z}^2
+-4\cosh(\frac{x}{2})
+\qty[\cosh(\frac{x}{2})(\rd{t}+\rd{x})-\sinh(\frac{x}{2})\rd{y}]\rd{x},
+\end{equation}
+which in matrix form gives
+\begin{equation}
+g_{\mu\nu}=
+\begin{bmatrix}
+-1 & -(1+\cosh x) &0 &0\\
+-(1+\cosh x) &-(1+2\cosh x) &+\sinh x&0\\
+0&+\sinh x &1&0\\
+0&0&0&1
+\end{bmatrix}.
+\end{equation}
+Here we have used the hyperbolic identities
+\begin{equation}
+2\cosh^2\qty(\frac{x}{2})\equiv 1+\cosh x
+\qand
+2\cosh(\frac{x}{2})\sinh(\frac{x}{2})
+\equiv \sinh x.
+\end{equation}
+
+To see if this is maximally symmetric, we calculate the Riemann
+tensor. To do that we need the affine connection
+\begin{equation}
+\Gamma^\rho_{\mu\nu}=\frac{1}{2}g^{\rho\sigma}
+\qty(\pd_{\mu}g_{\nu\sigma}+\pd_{\nu}g_{\mu\sigma}-\pd_{\sigma}g_{\mu\nu}).
+\end{equation}
+However we inside the parenthesis only the elements with $\mu\nu=xx$
+survive. To prove this we take $\mu\nu=x\alpha$, where $\alpha\neq x$,
+this gives
+\begin{equation}
+\pd_{x}g_{\alpha\sigma}+\cancelto{0}{\pd_{\alpha}}g_{x\sigma}-\pd_{\sigma}g_{x\alpha}
+=\pd_{x}g_{\alpha\sigma}-\pd_{\sigma}g_{x\alpha}.
+\end{equation}
+The only way for either of the two remaining terms to survive is if
+$\sigma=x$, but in that case the two terms are identical and cancel
+each other. Then for $\mu\nu=\alpha\beta$, where $\alpha,\beta\neq x$,
+we get
+\vspace{-1em}
+\begin{equation}
+\cancelto{0}{\pd_{\alpha}}g_{\beta\sigma}
++\cancelto{0}{\pd_{\beta}}g_{\alpha\sigma}
+-\cancel{\pd_{\sigma}g_{\alpha\beta}}=0.
+\end{equation}
+The last term cancel because the only non-constant elements in
+$g_{\mu\nu}$ are on either $\mu=x$ or $\nu=x$, which is not the case
+for $\mu\nu=\alpha\beta$. Hence the only non-vanishing elements of the
+affine connection are $\Gamma^\rho_{xx}$. This then means that the
+Riemann tensor,
+\begin{equation}
+{R^\rho}_{\sigma\mu\nu}=
+\pd_{\mu}\Gamma^\rho_{\sigma\nu}-\pd_{\nu}\Gamma^\rho_{\sigma\mu}
++\Gamma^\rho_{\mu\tau}\Gamma^\tau_{\sigma\nu}
+-\Gamma^\rho_{\nu\tau}\Gamma^\tau_{\sigma\mu},
+\end{equation}
+actually vanishes. To see this more clearly, we note that the
+anti-symmetry in $\mu\nu$ means that $\mu\neq\nu$, but due to the
+restriction to $\Gamma^\rho_{xx}$ we must have one of $\mu$ or $\nu$
+to be $x$. Without loss of generality, we choose $\mu=x$ and
+$\nu=\alpha\neq x$, and we get
+\begin{equation}
+{R^\rho}_{\sigma x\alpha}=
+\pd_{x}\cancelto{0}{\Gamma^\rho_{\sigma\alpha}}
+-\cancelto{0}{\pd_{\alpha}}\Gamma^\rho_{\sigma x}
++\Gamma^\rho_{x\tau}\cancelto{0}{\Gamma^\tau_{\sigma\alpha}}
+-\cancelto{0}{\Gamma^\rho_{\alpha\tau}}\Gamma^\tau_{\sigma x}=0.
+\end{equation}
+This is in other words a flat space-time, and is therefore maximally
+symmetric.
+% Note to self: See Weinberg p. 380:
+% "Thus any flat metric admits $N(N+1)/2$ independent Killing vectors,
+% and is therefore maximally symmetric."
+
+
+We will therefore now try to get \eqref{eq10:ds} into the familiar
+form of the Minkowski metric,
+\begin{equation}\label{eq10:Mink1}
+\rd{s'}^2=-\rd{t'}^2+\rd{x'}^2+\rd{y'}^2+\rd{z'}^2.
+\end{equation}
+To do this we introduce the new variables $t'=t'(t,x)$, $x'=x'(x)$,
+$y'=y'(x,y)$, and $z'=z'(z)=z$. For $z'$ the choice is obvious, and
+for the other three variables it is relatively easy to convince
+yourself that that they should only depend on $x$ and their non-primed
+counterpart. We can now write out the metric \eqref{eq10:Mink1}
+(ignoring $z'$ and $z$ since we already know that transformation) 
+\begin{equation}%\label{eq10:Mink2}
+\begin{aligned}
+\rd{s'}^2=&
+-\qty(\pdv{t'}{t})^2\rd{t}^2-2\pdv{t'}{t}\pdv{t'}{x}\id{t}\id{x}
+-\qty(\pdv{t'}{x})^2\rd{x}^2\\
+&+\qty(\pdv{x'}{x})^2\rd{x}^2\\
+&+\qty(\pdv{y'}{x})^2\rd{x}^2+2\pdv{y'}{x}\pdv{y'}{y}\id{x}\id{y}
++\qty(\pdv{y'}{y})^2\rd{y}^2.
+\end{aligned}
+\end{equation}
+For this to equal the original metric \eqref{eq10:ds}, we must have
+\begin{equation}\label{eq10:cond}
+\begin{cases}
+\qty(\pdv{t'}{t})^2=1\\
+\qty(\pdv{y'}{y})^2=1\\
+\qty(\pdv{x'}{x})^2-\qty(\pdv{t'}{x})^2+\qty(\pdv{y'}{x})^2
+=-(1+2\cosh x)\\
+\pdv{t'}{t}\pdv{t'}{x}=1+\cosh x\\
+\pdv{y'}{x}\pdv{y'}{y}=\sinh x.
+\end{cases}
+\end{equation}
+If we choose the positive solutions to the first two equations, we get
+\begin{equation}
+\begin{cases}
+\qty(\pdv{t'}{t})=+1\\
+\qty(\pdv{y'}{y})=+1\\
+\end{cases}
+\quad\Longrightarrow\quad
+\begin{cases}
+t'(t,x)=t+f(x)\\
+y'(x,y)=y+g(x),
+\end{cases}
+\end{equation}
+which means that the last two equations in \eqref{eq10:cond} become
+\begin{equation}
+\begin{cases}
+\dv{f}{x}=1+\cosh x\\
+\dv{g}{x}=\sinh x
+\end{cases}
+\quad\Longrightarrow\quad
+\begin{cases}
+t'(t,x)=t+x+\sinh x\\
+y'(x,y)=y+\cosh x.
+\end{cases}
+\end{equation}
+It is now straight forward to show that the middle equation in
+\eqref{eq10:cond} becomes
+\begin{equation}
+\qty(\pdv{x'}{x})^2
+\cancel{-(1+2\cosh x)}
+\overbrace{-\cosh^2 x+\sinh^2x}^{=-1}
+=\cancel{-(1+2\cosh x)},
+\end{equation}
+which means that we also here can choose $\pdv*{x'}{x}=+1$. Every
+thing is self-consistent, meaning that the full transformation of
+variables 
+\begin{equation}
+\begin{cases}
+t'=t'(t,x)=t+x+\sinh x\\
+x'=x'(x)=x\\
+y'=y'(x,y)=y+\cosh x\\
+z'=z'(z)=z
+\end{cases}
+\end{equation}
+results in $\rd{s'}^2$ from \eqref{eq10:Mink1} and $\rd{s}^2$ from
+\eqref{eq10:ds} being equal. With this transformation of variables
+the maximal symmetry is obvious.
+
+
+
+\section{The non-flat torus}
+On the non-flat torus embedded in three dimensions 
+\begin{equation}
+\begin{cases}
+x=r_2A(\phi_2)\cos\phi_1\\
+y=r_2A(\phi_2)\sin\phi_1\\
+z=r_2\sin\phi_2
+\end{cases}
+\qq{with}
+A(\phi_2)=r_1+r_2\cos\phi_2,
+\end{equation}
+and the metric, given by 
+\begin{equation}
+\rd{s}^2=\rd{x}^2+\rd{y}^2+\rd{z}^2
+=A^2(\phi_2)\rd\phi_1^2+{r_2}^2\rd\phi_2^2,
+\end{equation}
+is
+\begin{equation}
+g_{\mu\nu}=
+\begin{bmatrix}
+A^2(\phi_2)&0\\
+0&{r_2}^2
+\end{bmatrix}.
+\end{equation}
+Here $\phi_1$ denotes an angle running around the ``hole'' of the
+torus, and $\phi_2$ runs around the ``cylinder'' making up the torus;
+$r_1$ and $r_2$ are the corresponding radii.
+From this it is a simple task to compute the Affine connection
+\begin{equation}
+\Gamma^\rho_{\mu\nu}=\frac{1}{2}g^{\rho\sigma}
+\qty(\pd_{\mu}g_{\nu\sigma}+\pd_{\nu}g_{\mu\sigma}-\pd_{\sigma}g_{\mu\nu}),
+\end{equation}
+whose only non-zero elements are 
+\begin{equation}\label{eq11:affine}
+\begin{aligned}
+\Gamma^1_{12}=\Gamma^1_{21}
+=&\frac{1}{2}g^{11}\pd_2g_{11}
+=-\frac{r_2\sin\phi_2}{A(\phi_2)}\\
+\Gamma^2_{11}=&-\frac{1}{2}g^{22}\pd_2g_{11}
+=\frac{A(\phi_2)\sin\phi_2}{r_2}.
+\end{aligned}
+\end{equation}
+Here we have used $\pd_2A^2(\phi_2)=-2A(\phi_2){r_2}\sin\phi_2$. Then
+the Riemann tensor,
+\begin{equation}
+{R^\rho}_{\sigma\mu\nu}=
+\pd_{\mu}\Gamma^\rho_{\sigma\nu}-\pd_{\nu}\Gamma^\rho_{\sigma\mu}
++\Gamma^\rho_{\mu\tau}\Gamma^\tau_{\sigma\nu}
+-\Gamma^\rho_{\nu\tau}\Gamma^\tau_{\sigma\mu},
+\end{equation}
+is also seen to only have these few non-zero elements
+\begin{equation}
+\begin{aligned}
+{R^1}_{212}=-{R^1}_{221}=&-\pd\Gamma^1_{21}-\Gamma^1_{21}\Gamma^1_{21}
+=\frac{r_2}{A(\phi_2)}\cos\phi_2,\\
+{R^2}_{112}=-{R^1}_{121}=&-\pd\Gamma^2_{11}+\Gamma^2_{11}\Gamma^1_{21}
+=-\frac{A(\phi_2)}{r_2}\cos\phi_2.
+\end{aligned}
+\end{equation}
+This gives the Ricci tensor
+\begin{equation}
+R_{\mu\nu}={R^\rho}_{\mu\rho\nu}={R^1}_{\mu1\nu}+{R^2}_{\mu2\nu}
+=\begin{bmatrix}
+\frac{A(\phi_2)}{r_2}\cos\phi_2&0\\
+0&\frac{r_2}{A(\phi_2)}\cos\phi_2
+\end{bmatrix},
+\end{equation}
+and the Ricci scalar
+\begin{equation}
+R=g^{\mu\nu}R_{\mu\nu}=g^{11}R_{11}+g^{22}R_{22}
+=\frac{2\cos\phi_2}{r_2A(\phi_2)}
+=\frac{2\cos\phi_2}{r_2(r_1+r_2\cos\phi_2)}.
+\end{equation}
+We now also note that $R_{\mu\nu}=g_{\mu\nu}R/2$ as is the case for
+maximally symmetric spaces.
+
+Now to the Killing vectors. We start with the Killing equations
+\begin{equation}
+0=\nabla_\mu\xi_\nu+\nabla_\nu\xi_{\mu}
+=\pd_\mu\xi_\nu+\pd_\nu\xi_{\mu}-2\Gamma^\rho_{\mu\nu}\xi_\rho.
+\end{equation}
+This gives us three equations for $\mu\nu=11$, $12$, and $22$,
+\begin{equation}\label{eq11:Killing0}
+\begin{cases}
+\pd_1\xi_1=\Gamma^\rho_{11}\xi_{\rho}
+=\frac{A(\phi_2)\sin\phi_2}{r_2}\xi_{2}\\
+\pd_1\xi_2+\pd_2\xi_1=2\Gamma^\rho_{12}\xi_{\rho}
+=-2\frac{r_2\sin\phi_2}{A(\phi_2)}\xi_1\\
+\pd_2\xi_2=\Gamma^\rho_{22}\xi_{\rho}=0.
+\end{cases}
+\end{equation}
+Using the last equation we get
+\begin{equation}
+\xi_2=f(\phi_1),
+\end{equation}
+then substituting this into the first equation we get
+\begin{equation}\label{eq11:xi1}
+\xi_1=\frac{A(\phi_2)\sin\phi_2}{r_2}F(\phi_1)+g(\phi_2),
+\end{equation}
+where $\pdv*{F}{\phi_1}=f(\phi_1)$, and lastly the middle equation
+becomes 
+\begin{equation}
+f'(\phi_1)+\qty(\frac{A(\phi_2)}{r_2}\cos\phi_2-\sin^2\phi_2)F(\phi_1)
++g'(\phi_2)=-2
+\qty[\sin^2\phi_2F(\phi_1)+\frac{r_2\sin\phi_2}{A(\phi_2)}g(\phi_2)],
+\end{equation}
+where prime denotes differentiation with respect to the variable of the
+respective functions. This can now be rewritten, using
+$A(\phi_2)=r_1+r_2\cos\phi_2$, to 
+\begin{equation}\label{eq11:Killing1}
+f'(\phi_1)+g'(\phi_2)+\qty(1+\frac{r_1}{r_2}\cos\phi_2)F(\phi_1)
+=-\frac{2r_2\sin\phi_2}{r_1+r_2\cos\phi_2}g(\phi_2).
+\end{equation}
+This equation must hold for any combination of $\phi_1$ and
+$\phi_2$. Specifically if we fix $\phi_1$ at some value, we can
+find a solution for $g(\phi_2)=\tilde{g}(\phi_2)$. However, this
+solution must also be a solution for any other value of $\phi_1$, and
+the only way this can be fulfilled is if we require that
+$F(\phi_1)\equiv F_0$ is constant for all $\phi_1$. This also means
+that $f(\phi_1)\equiv0$ and $f'(\phi_1)\equiv0$. We can now write
+\eqref{eq11:Killing1} as
+\begin{equation}
+g'(\phi_2)+\frac{2r_2\sin\phi_2}{r_1+r_2\cos\phi_2}g(\phi_2)
+=-\qty(1+\frac{r_1}{r_2}\cos\phi_2)F_0,
+\end{equation}
+which can be solved using the particular and homogeneous
+solution. However to make the process a little more expedient we can
+also use \textsl{Mathematica}, which gives the solution
+\begin{equation}
+g(\phi_2)=C\qty(r_1{+}r_2\cos\phi_2)^2
+-F_0\frac{(r_1{+}r_2\cos\phi_2)\sin\phi_2}{r_2}
+=CA^2(\phi_2)-F_0\frac{A(\phi_2)\sin\phi_2}{r_2}.
+\end{equation}
+The final Killing vectors now become
+\begin{equation}
+\xi_1=CA^2(\phi_2)\qc
+\xi_2=0.
+\end{equation}
+Note that the second term in $g$ is canceled in \eqref{eq11:xi1}, and
+the seeming second Killing vector does not exist. I.e. there is only
+one Killing vector, and it corresponds to a translation in $\phi_1$;
+in the embedded geometry that is a rotation around the ``hole'' of 
+the torus, which obviously is the only symmetry of a torus.
+
+
+\section{Wormholes}
+Here we have the metric
+\begin{equation}\label{eq12:ds}
+\rd{s}^2=-\rd{t}^2+\rd{r}^2
++\qty(r^2+a^2)\qty(\rd\theta^2+\sin^2\theta\id\phi^2),
+\end{equation}
+giving 
+\begin{equation}
+g_{\mu\nu}=\text{Diag}
+\begin{bmatrix}
+-1,& 1,& (r^2+a^2),& (r^2+a^2)\sin^2
+\end{bmatrix}.
+\end{equation}
+We now want to find the geodesic equations
+\begin{equation}
+\dv[2]{x^\mu}{\tau}+\Gamma^\mu_{\rho\nu}\dv{x^\rho}{\tau}\dv{x^\nu}{\tau}=0. 
+\end{equation}
+To do that we need the affine connection which, since $g_{\mu\nu}$ is
+diagonal and only depends on $r$ and $\theta$, is relatively straight
+forward to compute. Its only non-zero elements are
+\begin{equation}\label{eq12:Gamma}
+\begin{aligned}
+&\Gamma^r_{\theta\theta}=-r\qc
+\Gamma^r_{\phi\phi}=-r\sin^2\theta\\
+&\Gamma^{\theta}_{r\theta}=\Gamma^{\theta}_{\theta r}
+=\frac{r}{r^2+a^2}\qc
+\Gamma^{\theta}_{\phi\phi}=-\sin\theta\,\cos\theta\\
+&\Gamma^{\phi}_{r\phi}=\Gamma^{\phi}_{\phi r}=\frac{r}{r^2+a^2}\qc
+\Gamma^\phi_{\theta\phi}=\Gamma^\phi_{\phi\theta}=\cot\theta,
+\end{aligned}
+\end{equation}
+which gives the geodesic equations
+\begin{equation}\label{eq12:geodesic}
+\begin{cases}
+\dv[2]{t}{\tau}=0\\
+\dv[2]{r}{\tau}-r\qty(\dv{\theta}{\tau})^2
+-r\sin^2\theta\,\qty(\dv{\phi}{\tau})^2=0\\
+\dv[2]{\theta}{\tau}+\frac{2r}{r^2+a^2}\dv{r}{\tau}\dv{\theta}{\tau}
+-\sin\theta\cos\theta\qty(\dv{\phi}{\tau})^2=0\\
+\dv[2]{\phi}{\tau}+\frac{2r}{r^2+a^2}\dv{r}{\tau}\dv{\phi}{\tau}
++\cot\theta\dv{\phi}{\tau}\dv{\theta}{\tau}=0.
+\end{cases}
+\end{equation}
+The last two equations can be rewritten, by multiplying with
+$(r^2+a^2)$ (and also with $\sin^2\theta$ for the last equation), to
+\begin{equation}
+\begin{cases}
+\dv{\tau}\qty[\qty(r^2+a^2)\dv{\theta}{\tau}]
+=\qty(r^2+a^2)\sin\theta\cos\theta\qty(\dv{\phi}{\tau})^2\\[0.5ex]
+\dv{\tau}\qty[\qty(r^2+a^2)\sin^2\theta\dv{\phi}{\tau}]=0.
+\end{cases}
+\end{equation}
+The last equation represents a conservation law similar to the $z$
+component of the angular momentum
+\begin{equation}\label{eq12:J}
+\qty(r^2+a^2)\sin^2\theta\dv{\phi}{\tau}=J,
+\end{equation}
+where $J$ is a constant of motion. We also have
+\begin{equation}\label{eq12:k}
+\dv{t}{\tau}=k
+\end{equation}
+from the first equation of \eqref{eq12:geodesic}, where $k$ is
+constant. Now for completeness sake, we note that the metric is
+asymptotically Minkowski, which means that for a massive particle
+\begin{equation}
+k=\eval{\dv{t}{\tau}}_{r\to\infty}=
+\eval{\dv{t}{\tau}}_{\text{Minkowski}}=\gamma=\qty(1-v^2)^{-1/2},
+\end{equation}
+where $v$ is the asymptotic velocity of the particle as $r\to\infty$.
+
+Now to see if there are time-like geodesics traversing the wormhole,
+we can restrict our search to the $\theta=\pi/2$ plane since the
+metric is spherically symmetric\footnotemark{}. In this plane, we have
+\footnotetext{See \eqref{eq12:ds-sphere} and the discussion
+  immediately preceding it.} 
+\begin{equation}
+\rd\tau^2=\rd{t}^2-\rd{r}^2-\qty(r^2+a^2)\rd{\phi}^2,
+\end{equation}
+which when dividing through with $\rd\tau^2$ and substituting in
+\eqref{eq12:J} and \eqref{eq12:k} becomes
+\begin{equation}
++1=k^{2}-\qty(\dv{r}{\tau})^2-\frac{J^2}{r^2+a^2}.
+\end{equation}
+The $+1$ on the LHS is for time-like geodesics, as we are looking
+for. We may now further simplify our search by restricting ourselves
+to ``radial'' geodesics, i.e. with no angular momentum $J=0$. This
+yields
+\begin{equation}
+\dv{r}{t}=\dv{\tau}{t}\dv{r}{\tau}=\pm\frac{1}{k}\sqrt{k^2-1}
+=\pm v,
+\end{equation}
+which means that
+\begin{equation}
+r(t)=\pm vt+r_0;
+\end{equation}
+a supringly simple result.
+This geodesic clearly has the capability to traverse the wormhole, in
+the sense that it can go from arbitrarily large negative values of $r$
+to arbitrarily large positive values of $r$. 
+
+
+Using \eqref{eq12:Gamma} we can easily calculate the Riemann tensor
+whose non-zero elements are
+\begin{equation}
+\begin{aligned}
+&{R^r}_{\theta r\theta}=-{R^r}_{\theta\theta r}
+=-\frac{a^2}{r^2+a^2} \qc
+{R^r}_{\phi r\phi}=-{R^r}_{\phi\phi r}
+=-\frac{a^2\sin^2\theta}{R^2+a^2}\\
+&{R^\theta}_{r\theta r}=-{R^\theta}_{rr\theta}
+=-\frac{a^2}{(r^2+a^2)^2}\qc
+{R^\theta}_{\phi\theta\phi}=-{R^\theta}_{\phi\phi\theta}
+=\frac{a^2\sin^2\theta}{r^2+a^2},\\
+&{R^\phi}_{r\phi r}=-{R^\phi}_{rr\phi}
+=-\frac{a^2}{(r^2+a^2)^2}\qc
+{R^\phi}_{\theta\phi\theta}=-{R^\phi}_{\theta\theta\phi}
+=\frac{a^2}{r^2+a^2}.
+\end{aligned}
+\end{equation}
+From this we can compute the Ricci tensor and scalar. It is clear from
+the Riemann tensor above that $R_{\mu\nu}={R^\rho}_{\mu\rho\nu}$ must
+be diagonal and is given by
+\begin{equation}
+R_{\mu\nu}=\text{Diag}
+\begin{bmatrix}
+0,& -\frac{2a^2}{(r^2+a^2)^2},& 0, &0
+\end{bmatrix},
+\end{equation}
+and then the curvature tensor trivially becomes
+\begin{equation}
+R=g^{\mu\nu}R_{\mu\nu}=-\frac{2a^2}{(r^2+a^2)^2}.
+\end{equation}
+We also see that $a\to0$ recovers a flat space, as we would expect
+from the metric.
+
+We now can write down the Einstein tensor as
+\begin{equation}
+G_{\mu\nu}=R_{\mu\nu}-\frac{R}{2}g_{\mu\nu}
+=\frac{a^2}{(r^2+a^2)^2}\,\text{Diag}\!
+\begin{bmatrix}
+-1,& -1,&
+(r^2+a^2),&
+(r^2+a^2)\sin^2\theta
+\end{bmatrix}.
+\end{equation}
+There are however problems with this Einstein tensor. According to
+Einstein's equations 
+\begin{equation}
+G_{\mu\nu}=8\pi G T_{\mu\nu},
+\end{equation}
+and therefore since $G_{00}<0$ also $T_{00}<0$, but $T_{00}$
+represents the energy density which can not be negative. 
+
+To find the isometries of this metric, we begin by noting that this
+metric has a maximally symmetric subspace. Namely a spherically
+symmetric sub-spaces, which is seen by writing \eqref{eq12:ds} on the
+form 
+\begin{equation}\label{eq12:ds-sphere}
+\rd{s}^2=\hat{g}_{ab}\rd{x^a}\rd{x^b}
++f(t,r)\tilde{g}_{ij}\rd{x^i}\rd{x^j},
+\end{equation}
+where $a,b\in\qty{t,x}$, $i,j\in\qty{\theta,\phi}$, and
+$\tilde{g}_{ij}$ is the maximally symmetric metric of the
+2-sphere. This means that we immediately have the isometries of the
+2-sphere, i.e. rotations around any axis. Apart from these isometries,
+we can refine our analysis of \eqref{eq12:ds-sphere} by noting that
+$f$ actually is also independent of $t$, and that $\hat{g}_{ab}$ is
+constant (i.e. independent of $t$ and $r$) and diagonal. This means
+that we can also do a parity transformation of $t$ and $r$, as well as
+translate $t$; these isometries are therefore
+\begin{equation}
+\begin{cases}
+t\to t'=\pm t+t_0\\
+r\to r'=\pm r.
+\end{cases}
+\end{equation}
+We cannot translate or boost in space, since the workhole is located
+at $r=0$ so any of those two transformations will obviously not be
+isometric. We can therfore not go any further unless $a=0$, and that
+would just result in the regular Minkowski metric which is maximally
+symmetric. 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}%% ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+
+%  LocalWords:  contravariant stereographic covariant variational
+%  LocalWords:  azimuthal affine parametrization Ricci Minkowski
+%  LocalWords:  Mathematica isometries
