@@ -1,12 +1,12 @@
-# plot the h(t)
+# plot the powerspectrum
 # Created by Martin Gren 2014-10-25.
 
 # imports
-import matplotlib.pyplot as plt
+import matplotlib.pylab as plt
 import numpy as np
 
 # input file
-filename = 'function.dat'
+filename = 'powerspectrum.dat'
 
 # import data
 data = np.loadtxt(filename)
@@ -18,8 +18,8 @@ plt.figure(figsize=(8,6))
 plt.plot(data[:,0], data[:,1],'-')
 
 # labels
-plt.xlabel('t / [arb. unit]', fontsize=20)
-plt.ylabel('h(t) / [arb. unit]', fontsize=20)
+plt.xlabel('Frequency / [arb. unit]', fontsize=20)
+plt.ylabel('Power spectrum / [arb. unit]', fontsize=20)
 
 # set tick fontsize
 plt.yticks(fontsize=12)
@@ -27,5 +27,5 @@ plt.xticks(fontsize=12)
 
 # display the plot
 
-plt.savefig('h(t).pdf')
-#plt.show()
+plt.savefig('powerspectrum.pdf')
+plt.show()

@@ -6,19 +6,20 @@
 #include <stdlib.h>
 #include "fft_func.h"
 #define PI 3.141592653589
-#define n 270 /*number of timesteps*/
+#define n 250 /*number of timesteps*/
 
 int main ()
 {
 	/* timestep dt */
-	double dt = 0.1;
+	double dt = 0.05;
 
 	/* Declare and set Iteration parameter, data arrays and frequency */
 	int i;
 	double data[n];
 	double freq[n];
 	double powspec_data[n];
-	double f = 1;
+	double f1 = 2;
+	double f2 = 6;
 	double phi = 0;// PI/2;
 	
 
@@ -28,7 +29,7 @@ int main ()
 
 	/* calculate data points */
 	for (i = 0; i < n; i++)	{
-		data[i] = cos(2*PI*f*dt*i);
+		data[i] = cos(2*PI*f1*dt*i) + cos(2*PI*f2*dt*i);
 	}
 
 	/*Save function values in file*/
