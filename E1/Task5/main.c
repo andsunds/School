@@ -115,7 +115,6 @@ int main()
 	}
 	fclose(file);	
 	
-	file = fopen("energy.dat","w");
 	/* make FFT (powerspectrum) */
 	double *data_to_plot = q_3;
 	powerspectrum(data_to_plot, p_spectrum, nbr_of_timesteps+1);

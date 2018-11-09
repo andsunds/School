@@ -30,7 +30,7 @@ ltext  = leg.get_texts()
 plt.setp(ltext, fontsize=12) 
 
 # axis limits
-plt.xlim([0,50])
+#plt.xlim([0,0.5])
 
 # tick fontsize
 plt.xticks(fontsize=12)

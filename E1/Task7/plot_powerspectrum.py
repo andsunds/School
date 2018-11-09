@@ -24,7 +24,7 @@ plt.ylabel('Power spectrum / [arb. unit]', fontsize=20)
 # set tick fontsize
 plt.yticks(fontsize=12)
 plt.xticks(fontsize=12)
-plt.xlim({-0.5, 0.5})
+plt.xlim({-150, 150})
 
 # display the plot
 
