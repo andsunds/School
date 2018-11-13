@@ -1,5 +1,29 @@
 /*
 E1_main.c
+
+NIST:
+* σg+	1	Sym str	1333	 C	 ia		1388.15	gas	FR(2ν2)
+* σg+	1	Sym str	1333	 C	 ia		1285.40	gas	FR(2ν2)
+  πu	2	Bend	667	 A	667.38 S	gas	 ia		
+* σu+	3	Anti str	2349	 A	2349.16 VS	gas	 ia		
+*=our modes
+This corresponds to:
+   39.962 (sym)    70.421 (anti-sym) THz
+
+
+
+MATHEMATICA for calcualting eigen values:
+
+M2 = {{1, -1,  0}, {-1 mRatio , 2 mRatio, -1 mRatio}, {0, -1,  1}};
+Simplify[Eigenvectors[M2] /. mRatio -> (16/12)] // TraditionalForm
+Simplify[Eigenvalues[M2] /. mRatio -> (16/12)] // TraditionalForm
+
+{{-1, 0, 1}, {1, 1, 1}, {1, -(8/3), 1}}
+
+{1,0,11/3}
+
+
+Theoretical base frequencies: 39.058747 (sym)   74.791807 (anti-sym) THz
  
 Created by AL on 2013-10-24.
 Further developed by Martin Gren on 2014-10-20.
@@ -46,16 +70,17 @@ int main()
 	double *freq = malloc((N_time) * sizeof (double));
 	/* Set variables */
 	kappa = 1.6e3*kappa_unit;
-	timestep = 0.002*sqrt(m[0]/kappa);
+	timestep = 0.01*sqrt(m[0]/kappa);
 	timestep_sq = timestep * timestep;
 
-
+	printf("%f\n",timestep);
+	printf("Base frequencies: %f\t%f\n",sqrt(kappa/m[0])/2/PI,sqrt(kappa/m[0]*11/3)/2/PI);
 	
 	/* Initial conditions */
 	/* Set initial displacements and velocites */
-	q[0] = 0.05;
-	q[1] = 0.1;
-	q[2] = -0.15;
+	q[0] = 0.20;
+	q[1] = -0.15;
+	q[2] = -0.05;
 	v[0] = 0;
 
 	for (i = 1; i < nbr_of_particles; i++) {
@@ -121,6 +146,11 @@ int main()
 	
 	
 	/* make FFT (powerspectrum) */
+	/* Frequency given in inverse time units:
+	   [ps^(-1)]=[THz]
+	   
+	   
+	 */
 	double *data_to_plot = q_3;
 	powerspectrum(data_to_plot, p_spectrum, N_time);
 	powerspectrum_shift(p_spectrum, N_time);

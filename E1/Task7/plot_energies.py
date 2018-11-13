@@ -20,8 +20,8 @@ plt.plot(data[:,0], data[:,2],'-',label='Potential energy')
 plt.plot(data[:,0], data[:,3],'-',label='Kinetic energy')
 
 # labels
-plt.xlabel('Time / [dim. unit]', fontsize=20)
-plt.ylabel('Energy / [dim. unit]', fontsize=20)
+plt.xlabel('Time / [ps]', fontsize=20)
+plt.ylabel('Energy / [eV]', fontsize=20)
 
 # legend
 plt.legend()
@@ -30,7 +30,7 @@ ltext  = leg.get_texts()
 plt.setp(ltext, fontsize=12) 
 
 # axis limits
-#plt.xlim([0,50])
+plt.xlim([0,.50])
 plt.ylim([min(data[:,3])-0.05,max(data[:,1])*1.05])
 
 # tick fontsize

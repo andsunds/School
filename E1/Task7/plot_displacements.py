@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # plot the displacements
 # Created by Martin Gren 2014-10-25.
 
@@ -20,8 +22,8 @@ plt.plot(data[:,0], data[:,2],'-',label='Atom 2')
 plt.plot(data[:,0], data[:,3],'-',label='Atom 3')
 
 # labels
-plt.xlabel('Time / [dim. unit]', fontsize=20)
-plt.ylabel('Displacement / [dim. unit]', fontsize=20)
+plt.xlabel('Time / [ps]', fontsize=20)
+plt.ylabel('Displacement / [AA]', fontsize=20)
 
 # legend
 plt.legend()
@@ -30,7 +32,7 @@ ltext  = leg.get_texts()
 plt.setp(ltext, fontsize=12) 
 
 # axis limits
-#plt.xlim([0,0.5])
+plt.xlim([0,0.5])
 
 # tick fontsize
 plt.xticks(fontsize=12)
