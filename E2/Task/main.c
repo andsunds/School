@@ -35,8 +35,8 @@ Further developed by Martin Gren on 2014-10-20.
 #include "func.h"
 #include "fft_func.h"
 #define PI 3.141592653589
-#define N_time 100000000//32768 /* N_time+1 = power of 2, for best speed */
-#define N_between_steps 10000
+#define N_time 10000000//32768 /* N_time+1 = power of 2, for best speed */
+#define N_between_steps 1000
 #define N_part 32 /* The number of particles */
 
 
@@ -51,7 +51,7 @@ int main()
 	double m  = 1;
 	double kappa = 1;
 	double omega0 = sqrt(kappa/m);
-	double alpha = 0.11;//0.01;
+	double alpha = 0.1;//0.01;
 	double E0 = N_part;  
 	
 	/* declare file variable */
