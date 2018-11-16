@@ -2,10 +2,10 @@
 # Constants
 #
 CC = gcc # c-compiler
-CFLAGS = -O3 -W # -O3 gives optimization, -W gives warnings
+CFLAGS = -std=c11 -O3 -W # -O3 gives optimization, -W gives warnings
 LIBS = -lm -lgsl -lgslcblas # libraries
 
-OBJECTS = func.o fft_func.o main.o # object files to produce
+OBJECTS = func.o main.o # object files to produce
 PROGRAM = run # name of executable to be built
 
 #

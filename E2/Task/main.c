@@ -1,41 +1,14 @@
 /*
-E1_main.c
+main.c
 
-NIST:
-* σg+	1	Sym str	1333	 C	 ia		1388.15	gas	FR(2ν2)
-* σg+	1	Sym str	1333	 C	 ia		1285.40	gas	FR(2ν2)
-  πu	2	Bend	667	 A	667.38 S	gas	 ia		
-* σu+	3	Anti str	2349	 A	2349.16 VS	gas	 ia		
-*=our modes
-This corresponds to:
-   39.962 (sym)    70.421 (anti-sym) THz
-
-
-
-MATHEMATICA for calcualting eigen values:
-
-M2 = {{1, -1,  0}, {-1 mRatio , 2 mRatio, -1 mRatio}, {0, -1,  1}};
-Simplify[Eigenvectors[M2] /. mRatio -> (16/12)] // TraditionalForm
-Simplify[Eigenvalues[M2] /. mRatio -> (16/12)] // TraditionalForm
-
-{{-1, 0, 1}, {1, 1, 1}, {1, -(8/3), 1}}
-
-{1,0,11/3}
-
-
-Theoretical base frequencies: 39.058747 (sym)   74.791807 (anti-sym) THz
- 
-Created by AL on 2013-10-24.
-Further developed by Martin Gren on 2014-10-20.
 */
 
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
 #include "func.h"
-#include "fft_func.h"
 #define PI 3.141592653589
-#define N_time 10000000//32768 /* N_time+1 = power of 2, for best speed */
+#define N_time 1e7
 #define N_between_steps 1000
 #define N_part 32 /* The number of particles */
 

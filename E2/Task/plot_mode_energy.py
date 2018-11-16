@@ -69,8 +69,8 @@ plt.gca().set_yscale('log')
 plt.gca().set_xscale('log')
 
 # axis limits
-plt.ylim([0.1,10])
-plt.xlim([1e3,1e7])
+plt.ylim([1e-12,40])
+plt.xlim([1e2,1e6])
 
 # tick fontsize
 plt.xticks(fontsize=12)
