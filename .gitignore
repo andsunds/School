@@ -10,5 +10,7 @@
 a
 a.out
 run
+MD
 
 *.dat
+*.tsv
