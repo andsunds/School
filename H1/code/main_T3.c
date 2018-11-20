@@ -23,6 +23,8 @@
 /* Main program */
 int main()
 {
+  char file_name[100];
+  
   int N_atoms = 4*N_cells*N_cells*N_cells;
   double m_Al = 27*AMU;
   /*
@@ -71,9 +73,7 @@ int main()
   add_noise( N_atoms, 3, pos, noise_amplitude ); // adds random noise to pos
   set_zero( N_atoms, 3, momentum); // set momentum to 0
   get_forces_AL( forces, pos, cell_length, N_atoms); //initial cond forces
-  
 
-  
   for (int i=0; i<N_timesteps_T_eq; i++){
     /* 
        The loop over the timesteps first takes a timestep according to the 
@@ -95,7 +95,7 @@ int main()
     */
     alpha_T = 1 + 2*dt*(T_eq - temperature[i]) / (tau_T * temperature[i]);
     scale_mat(N_atoms, 3, momentum, sqrt(alpha_T));
-    
+    temperature[i]*=alpha_T;
   }
 
   for (int i=N_timesteps_T_eq; i<N_timesteps; i++){
@@ -126,11 +126,13 @@ int main()
 
     cell_length*=alpha_P_cube_root;
     inv_volume*=1/alpha_P;
+
+    temperature[i]*=alpha_T;
+    pressure[i]*=alpha_P;
   }
 
 
   /* Write tempertaure to file */
-  char file_name[100];
   sprintf(file_name,"../data/temp-%d_pres-%d_Task3.tsv",
 	  (int) T_eq_C, (int) P_eq_bar);
   file_pointer = fopen(file_name, "w");
@@ -156,7 +158,7 @@ int main()
   }
   fclose(file_pointer);
 
-  //  size_t fread(void *ptr, size_t size_of_elements, size_t number_of_elements, FILE *a_file);
+  
   sprintf(file_name,"../data/pos_temp-%d_pres-%d.bin",
 	  (int) T_eq_C, (int) P_eq_bar);
   file_pointer = fopen(file_name, "wb");
@@ -168,10 +170,15 @@ int main()
 	  (int) T_eq_C, (int) P_eq_bar);
   file_pointer = fopen(file_name, "wb");
   for (int i=0; i<N_atoms; i++){
-      fwrite(pos[i], sizeof(double), 3, file_pointer);
+      fwrite(momentum[i], sizeof(double), 3, file_pointer);
   }
   fclose(file_pointer);
-     
+
+  /*  
+  printf("T=%0.2f\tP=%0.2e\n",
+	 temperature[N_timesteps-1],pressure[N_timesteps-1]);
+  */
+  
   free(pos); pos = NULL;
   free(momentum); momentum = NULL;
   free(forces); forces = NULL;
