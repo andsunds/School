@@ -33,25 +33,24 @@ int main()
     B = Y*G / (9*G - 3*Y)   [F 1.15, Physics Handbook]
     kappa = 1/B
   */
-  double kappa_Al = 100/(6.6444e+05 * bar); // STRANGE FACTOR 100 OFF !!!
-  double a_eq = 4.03;
-  double cell_length = a_eq*N_cells;
-  double inv_volume = pow(N_cells*cell_length, -3);
+//  double kappa_Al = 100/(6.6444e+05 * bar); // STRANGE FACTOR 100 OFF !!!
+  double cell_length = 0;
+  double inv_volume;
   
 
   double T_eq_C   = 500;
   double P_eq_bar = 1;
-  double T_eq     = T_eq_C + degC_to_K;
-  double P_eq     = P_eq_bar*bar;
+//  double T_eq     = T_eq_C + degC_to_K;
+//  double P_eq     = P_eq_bar*bar;
   double dt       = 5e-3;
   double t_end    = 10;
-  double tau_T = 100*dt;
-  double tau_P = 100*dt;  
+//  double tau_T = 100*dt;
+//  double tau_P = 100*dt; 
   
   int N_timesteps = t_end/dt;
-  //int N_save_timesteps = N_timesteps / 100; //for the displacements
+  int N_save_timesteps = N_timesteps / 100; //for the displacements
   
-  double alpha_T, alpha_P,alpha_P_cube_root;  
+//  double alpha_T, alpha_P,alpha_P_cube_root;  
   double t, E_kin, virial;
     
   double (*pos)[3]      = malloc(sizeof(double[N_atoms][3]));
@@ -59,7 +58,7 @@ int main()
   double (*momentum)[3] = malloc(sizeof(double[N_atoms][3]));
   double (*mom_0)[3]    = malloc(sizeof(double[N_atoms][3]));
   double (*forces)[3]   = malloc(sizeof(double[N_atoms][3]));
-  double *displacements = malloc(sizeof(double[N_atoms]));
+  double (*displacements)[N_atoms] = malloc(sizeof(double[N_save_timesteps][N_atoms]));
   double *temperature   = malloc(sizeof(double[N_timesteps]));
   double *pressure      = malloc(sizeof(double[N_timesteps]));
   //double *msd           = malloc(sizeof(double[N_timesteps]));
@@ -92,6 +91,15 @@ int main()
     }
   }
   fclose(file_pointer);
+  
+  // read cell_length
+  sprintf(file_name,"../data/cell-length_temp-%d_pres-%d.bin",
+	  (int) T_eq_C, (int) P_eq_bar);
+  file_pointer = fopen(file_name, "rb");
+  fread(&cell_length, sizeof(double), 1, file_pointer);
+  fclose(file_pointer);
+  inv_volume = pow(N_cells*cell_length, -3);
+  
   
   get_forces_AL( forces, pos, cell_length, N_atoms); //initial cond forces
   
@@ -128,7 +136,7 @@ int main()
     
     //*/
   }
-
+ 
 
   /* Write tempertaure to file */
   //*

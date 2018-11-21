@@ -11,7 +11,6 @@ v0 = a0.^3;
 energy = energy_data(:,2);
 figure(1);clf;
 plot(v0,energy, 'x-', 'color', 0.7*[0.9 0.9 1]);
-%ImproveFigure(gcf, 'profile', 'paper1'); ImproveFigure(gcf, 'profile', 'paper1')
 ylabel('$E_{\rm pot}$ [eV/unit cell]');
 xlabel('$a_0^3$ [\AA$^3$]');
 
@@ -35,7 +34,7 @@ legend('data', 'quadratic fit', ['$V_{\rm min} \approx \, $' num2str(round(v_min
     'location', 'southeast')
 
 %axis([63 68 ylim(1) 0]);
-%ImproveFigure(gcf, 'profile', 'paper1')
+ImproveFigureCompPhys(gcf); %setFigureSize(gcf); 
 %h1.LineWidth = 2;
 
 
@@ -109,6 +108,7 @@ plot(t,P),hold on
 %plot(t,1+500*exp(-t/0.5))
 %ylim([-100,200])
 
+ImproveFigureCompPhys('linewidth', 2);
 %%
 clc;clf;clear
 

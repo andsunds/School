@@ -3,6 +3,7 @@ function ImproveFigureCompPhys(varargin)
 %  Input: 
 % - none (improve all figures) or handles to figures to improve
 % - optional: 
+%       LineWidth  int
 %       LineStyle  column vector cell, e.g. {'-','--'}',
 %       LineColor  column vector cell, e.g. {'k',[0 1 1], 'MYBLUE'}'
 %                           colors: MYBLUE,MYORANGE,MYGREEN,MYPURPLE, MYYELLOW,
@@ -65,6 +66,8 @@ colors = struct('MYBLUE', co(1,:),...
 for i = 1:nargin
     if ischar(varargin{i})
         switch lower(varargin{i})   %Compare lower case strings
+            case 'linewidth'
+                lineWidth = varargin{i+1};
             case 'linestyle'
                 LineStyle = varargin{i+1};
             case 'linecolor'

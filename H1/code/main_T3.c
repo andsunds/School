@@ -158,7 +158,7 @@ int main()
   }
   fclose(file_pointer);
 
-  
+  /* save equlibrated position and momentum as binary files */
   sprintf(file_name,"../data/pos_temp-%d_pres-%d.bin",
 	  (int) T_eq_C, (int) P_eq_bar);
   file_pointer = fopen(file_name, "wb");
@@ -166,12 +166,19 @@ int main()
       fwrite(pos[i], sizeof(double), 3, file_pointer);
   }
   fclose(file_pointer);
+  
   sprintf(file_name,"../data/mom_temp-%d_pres-%d.bin",
 	  (int) T_eq_C, (int) P_eq_bar);
   file_pointer = fopen(file_name, "wb");
   for (int i=0; i<N_atoms; i++){
       fwrite(momentum[i], sizeof(double), 3, file_pointer);
   }
+  fclose(file_pointer);
+
+  sprintf(file_name,"../data/cell-length_temp-%d_pres-%d.bin",
+	  (int) T_eq_C, (int) P_eq_bar);
+  file_pointer = fopen(file_name, "wb");
+  fwrite(&cell_length, sizeof(double), 1, file_pointer);
   fclose(file_pointer);
 
   /*  
