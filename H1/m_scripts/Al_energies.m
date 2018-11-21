@@ -1,7 +1,9 @@
 tmp = matlab.desktop.editor.getActive;
 cd(fileparts(tmp.Filename));
-addpath('../../../../scripts');
 set(0,'DefaultFigureWindowStyle','docked');
+GRAY = 0.7*[0.9 0.9 1];
+
+%%
 clc
 
 energy_data = load('../data/lattice_energies.tsv');
@@ -10,7 +12,7 @@ v0 = a0.^3;
 
 energy = energy_data(:,2);
 figure(1);clf;
-plot(v0,energy, 'x-', 'color', 0.7*[0.9 0.9 1]);
+plot(v0,energy, 'x-', 'color', GRAY);
 ylabel('$E_{\rm pot}$ [eV/unit cell]');
 xlabel('$a_0^3$ [\AA$^3$]');
 
@@ -71,13 +73,16 @@ ylim(E_avg*(1+0.001*[1,-1]));
 end
 
 
-%%
-clc; clf;clear
+%% test production pressure and temp
+clc; clf;
+%clear
+
 
 
 %data = load(sprintf('../data/temperature_dt-1e-02_Task3.tsv'));
 %data = load('../data/temp-500_pres-1_Task3.tsv');
 data = load('../data/temp-500_pres-1_Prod-test.tsv');
+
 bar = 6.2415e-07;
 
 t = data(:,1);
@@ -98,19 +103,51 @@ P_avg=mean(P(t>t_eq));
 P_std=std(P(t>t_eq));
 fprintf('\tP = %0.2f +- %0.1f %%\n', P_avg, abs(P_std/P_avg)*100);
 
-%figure(i);clf
-plot(t,T),hold on
-%plot(t, cumsum(T)./(1:length(t))','-k')
-%ylim([0,1000])
+yyaxis left
+plot(t,T, 'color', GRAY),hold on
+plot(t, cumsum(T)./(1:length(t))','-k')
+ylabel('$T \, [^\circ \rm C]$')
+
+ylim([200,1000])
+
+
 yyaxis right
 plot(t,P),hold on
-%plot(t,cumsum(P)./(1:length(t))','-k')
-%plot(t,1+500*exp(-t/0.5))
-%ylim([-100,200])
+plot(t,cumsum(P)./(1:length(t))','-k')
 
-ImproveFigureCompPhys('linewidth', 2);
+
+ylabel('$P \,[\rm bar]$')
+ylim([-50,200])
+
+xlabel('$t$\, [ps]')
+
+ImproveFigureCompPhys(gcf, 'linewidth', 3, 'LineColor', {'MYORANGE', GRAY, 'MYBLUE', GRAY}');
+
+%% determine displacements
+
+clc; clf;
+
+FILENAMES = strcat({'../data/temp-'}, num2str([500;900]), '_pres-1_displacements.tsv');
+for iFile = 1:numel(FILENAMES)
+    
+    figure(iFile); clf;
+    data = load(FILENAMES{iFile});
+    t = data(:,1);
+    dx = data(:,2:end);
+    
+    plot(t, dx)
+    
+    leg = legend( strcat({'$n=$'}, num2str((1:size(dx,2))'))');
+    leg.Location='northwest';
+    xlabel('$t$ [ps]')
+    ylabel('$\Delta x \,[\rm \AA]$')
+    if iFile ==1
+    ylim([ 0 1.2]);
+    end
+    ImproveFigureCompPhys(gcf);
+end
 %%
-clc;clf;clear
+clc;clf;
 
 
 FILENAME = '../data/mom_temp-500_pres-1.bin';

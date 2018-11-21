@@ -120,6 +120,7 @@ int main()
     scale_mat(N_atoms, 3, momentum, sqrt(alpha_T));
     
     // Equlibrate pressure by scaling the posistions by a factor of alpha_P^(1/3)
+    
     alpha_P = 1 - kappa_Al* dt*(P_eq - pressure[i])/tau_P;
     alpha_P_cube_root = pow(alpha_P, 1.0/3.0);
     scale_mat(N_atoms, 3, pos, alpha_P_cube_root);
@@ -158,28 +159,15 @@ int main()
   }
   fclose(file_pointer);
 
-  /* save equlibrated position and momentum as binary files */
-  sprintf(file_name,"../data/pos_temp-%d_pres-%d.bin",
+  /* save equlibrated position and momentum as a binary file */  
+  sprintf(file_name,"../data/INIDATA_temp-%d_pres-%d.bin",
 	  (int) T_eq_C, (int) P_eq_bar);
   file_pointer = fopen(file_name, "wb");
-  for (int i=0; i<N_atoms; i++){
-      fwrite(pos[i], sizeof(double), 3, file_pointer);
-  }
-  fclose(file_pointer);
-  
-  sprintf(file_name,"../data/mom_temp-%d_pres-%d.bin",
-	  (int) T_eq_C, (int) P_eq_bar);
-  file_pointer = fopen(file_name, "wb");
-  for (int i=0; i<N_atoms; i++){
-      fwrite(momentum[i], sizeof(double), 3, file_pointer);
-  }
-  fclose(file_pointer);
-
-  sprintf(file_name,"../data/cell-length_temp-%d_pres-%d.bin",
-	  (int) T_eq_C, (int) P_eq_bar);
-  file_pointer = fopen(file_name, "wb");
+  fwrite(pos, sizeof(double), 3*N_atoms, file_pointer);
+  fwrite(momentum, sizeof(double), 3*N_atoms, file_pointer);
   fwrite(&cell_length, sizeof(double), 1, file_pointer);
   fclose(file_pointer);
+
 
   /*  
   printf("T=%0.2f\tP=%0.2e\n",

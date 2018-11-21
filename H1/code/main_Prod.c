@@ -43,12 +43,15 @@ int main()
 //  double T_eq     = T_eq_C + degC_to_K;
 //  double P_eq     = P_eq_bar*bar;
   double dt       = 5e-3;
-  double t_end    = 10;
+  double t_end    = 30;
 //  double tau_T = 100*dt;
 //  double tau_P = 100*dt; 
   
   int N_timesteps = t_end/dt;
-  int N_save_timesteps = N_timesteps / 100; //for the displacements
+  
+  int N_between_steps = 100;
+  int N_save_timesteps = N_timesteps / N_between_steps; //for the displacements
+  int N_save_atoms = 5;
   
 //  double alpha_T, alpha_P,alpha_P_cube_root;  
   double t, E_kin, virial;
@@ -56,9 +59,9 @@ int main()
   double (*pos)[3]      = malloc(sizeof(double[N_atoms][3]));
   double (*pos_0)[3]    = malloc(sizeof(double[N_atoms][3]));
   double (*momentum)[3] = malloc(sizeof(double[N_atoms][3]));
-  double (*mom_0)[3]    = malloc(sizeof(double[N_atoms][3]));
+//  double (*mom_0)[3]    = malloc(sizeof(double[N_atoms][3]));
   double (*forces)[3]   = malloc(sizeof(double[N_atoms][3]));
-  double (*displacements)[N_atoms] = malloc(sizeof(double[N_save_timesteps][N_atoms]));
+  double (*displacements)[N_save_atoms] = malloc(sizeof(double[N_save_timesteps][N_save_atoms]));
   double *temperature   = malloc(sizeof(double[N_timesteps]));
   double *pressure      = malloc(sizeof(double[N_timesteps]));
   //double *msd           = malloc(sizeof(double[N_timesteps]));
@@ -68,13 +71,13 @@ int main()
   FILE *file_pointer;
     
   /* ----------------------------- TASK 3 ----------------------------------*/
-  
+  /*
   // Read in the positions
   sprintf(file_name,"../data/pos_temp-%d_pres-%d.bin",
 	  (int) T_eq_C, (int) P_eq_bar);
   file_pointer = fopen(file_name, "rb");
+  fread(pos, sizeof(double), 3*N_atoms, file_pointer);
   for (int i=0; i<N_atoms; i++){
-    fread(pos[i], sizeof(double), 3, file_pointer);
     for (int j=0; j<3; j++){
       pos_0[i][j]=pos[i][j];
     }
@@ -84,12 +87,7 @@ int main()
   sprintf(file_name,"../data/mom_temp-%d_pres-%d.bin",
 	  (int) T_eq_C, (int) P_eq_bar);
   file_pointer = fopen(file_name, "rb");
-  for (int i=0; i<N_atoms; i++){
-    fread(momentum[i], sizeof(double), 3, file_pointer);
-    for (int j=0; j<3; j++){
-      mom_0[i][j]=momentum[i][j];
-    }
-  }
+  fread(momentum, sizeof(double), 3*N_atoms, file_pointer);
   fclose(file_pointer);
   
   // read cell_length
@@ -99,6 +97,24 @@ int main()
   fread(&cell_length, sizeof(double), 1, file_pointer);
   fclose(file_pointer);
   inv_volume = pow(N_cells*cell_length, -3);
+  */
+  
+  //---------SHORTER------------------
+  sprintf(file_name,"../data/INIDATA_temp-%d_pres-%d.bin",
+	  (int) T_eq_C, (int) P_eq_bar);
+  file_pointer = fopen(file_name, "wb");
+  fread(pos, sizeof(double), 3*N_atoms, file_pointer);
+  fread(momentum, sizeof(double), 3*N_atoms, file_pointer);
+  fread(&cell_length, sizeof(double), 1, file_pointer);
+  fclose(file_pointer);
+  
+  for (int i=0; i<N_atoms; i++){
+    for (int j=0; j<3; j++){
+      pos_0[i][j]=pos[i][j];
+    }
+  }
+  inv_volume = pow(N_cells*cell_length, -3);
+  //
   
   
   get_forces_AL( forces, pos, cell_length, N_atoms); //initial cond forces
@@ -118,6 +134,13 @@ int main()
     /* 3N*kB*T/2 = 1/(2m) * \sum_{i=1}^{N} p_i^2  = p_sq/(2m) */
     temperature[i] =  E_kin * 1/(1.5*N_atoms*kB);
     
+    
+    if (i % N_between_steps == 0){
+	 	int k = i/N_between_steps; // number of saved timesteps so far
+		get_displacements (N_save_atoms,  pos, pos_0, displacements[k]);
+	 }
+    
+	 
 
     /*
     // Re-equlibrate temperature 
@@ -139,7 +162,7 @@ int main()
  
 
   /* Write tempertaure to file */
-  //*
+  
   sprintf(file_name,"../data/temp-%d_pres-%d_Prod-test.tsv",
 	  (int) T_eq_C, (int) P_eq_bar);
   file_pointer = fopen(file_name, "w");
@@ -149,9 +172,24 @@ int main()
 	    t, temperature[i],pressure[i]);
   }
   fclose(file_pointer);
-  //*/
+  
+  /* Write displacements to file */
+  sprintf(file_name,"../data/temp-%d_pres-%d_displacements.tsv",
+	  (int) T_eq_C, (int) P_eq_bar);
+  file_pointer = fopen(file_name, "w");
+  for (int i=0; i<N_save_timesteps; i++){
+    t = i*dt*N_between_steps; // time at step i
+    fprintf(file_pointer, "%.4f", t);
+    for (int j=0; j<N_save_atoms; j++){
+    	fprintf(file_pointer, "\t %.8f", displacements[i][j]);
+	 }
+	 fprintf(file_pointer, "\n");
+  }
+  fclose(file_pointer);
+  
        
   free(pos);           pos = NULL;
+  free(pos_0);         pos_0 = NULL;
   free(momentum);      momentum = NULL;
   free(forces);        forces = NULL;
   free(temperature);   temperature = NULL;
