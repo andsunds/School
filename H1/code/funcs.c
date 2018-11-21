@@ -56,10 +56,22 @@ void get_displacements ( int N_atoms,  double (*positions)[3],
       disp[i] += (positions[i][j] - initial_positions[i][j])
 	        *(positions[i][j] - initial_positions[i][j]);
     }
-    disp[i]=sqrt(disp[i]);
+    disp[i] = sqrt(disp[i]);
   }
 }
-								   
+
+// FIX HERE!!
+double get_sq_displacements ( int N_atoms,  double (*positions)[3],
+			 double (*initial_positions)[3]) {
+   double disp_sq = 0; 		 
+   for (int i = 0; i < N_atoms; i++) {
+     for (int j = 0; j < 3; j++) {
+      disp_sq += (positions[i][j] - initial_positions[i][j])
+	        *(positions[i][j] - initial_positions[i][j]);
+     }
+   }
+   return disp_sq;
+}								   
 
 void set_zero (int M, int N, double mat[M][N]){
   /* Sets the matrix `mat` to zero */

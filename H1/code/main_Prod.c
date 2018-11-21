@@ -38,7 +38,7 @@ int main()
   double inv_volume;
   
 
-  double T_eq_C   = 500;
+  double T_eq_C   = 700;
   double P_eq_bar = 1;
 //  double T_eq     = T_eq_C + degC_to_K;
 //  double P_eq     = P_eq_bar*bar;
@@ -71,38 +71,11 @@ int main()
   FILE *file_pointer;
     
   /* ----------------------------- TASK 3 ----------------------------------*/
-  /*
-  // Read in the positions
-  sprintf(file_name,"../data/pos_temp-%d_pres-%d.bin",
-	  (int) T_eq_C, (int) P_eq_bar);
-  file_pointer = fopen(file_name, "rb");
-  fread(pos, sizeof(double), 3*N_atoms, file_pointer);
-  for (int i=0; i<N_atoms; i++){
-    for (int j=0; j<3; j++){
-      pos_0[i][j]=pos[i][j];
-    }
-  }
-  fclose(file_pointer);
-  // Read in the momentums
-  sprintf(file_name,"../data/mom_temp-%d_pres-%d.bin",
-	  (int) T_eq_C, (int) P_eq_bar);
-  file_pointer = fopen(file_name, "rb");
-  fread(momentum, sizeof(double), 3*N_atoms, file_pointer);
-  fclose(file_pointer);
   
-  // read cell_length
-  sprintf(file_name,"../data/cell-length_temp-%d_pres-%d.bin",
-	  (int) T_eq_C, (int) P_eq_bar);
-  file_pointer = fopen(file_name, "rb");
-  fread(&cell_length, sizeof(double), 1, file_pointer);
-  fclose(file_pointer);
-  inv_volume = pow(N_cells*cell_length, -3);
-  */
-  
-  //---------SHORTER------------------
+  // read positions, momenta and cell_length
   sprintf(file_name,"../data/INIDATA_temp-%d_pres-%d.bin",
 	  (int) T_eq_C, (int) P_eq_bar);
-  file_pointer = fopen(file_name, "wb");
+  file_pointer = fopen(file_name, "rb");
   fread(pos, sizeof(double), 3*N_atoms, file_pointer);
   fread(momentum, sizeof(double), 3*N_atoms, file_pointer);
   fread(&cell_length, sizeof(double), 1, file_pointer);
@@ -114,7 +87,7 @@ int main()
     }
   }
   inv_volume = pow(N_cells*cell_length, -3);
-  //
+  
   
   
   get_forces_AL( forces, pos, cell_length, N_atoms); //initial cond forces
