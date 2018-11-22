@@ -1,6 +1,11 @@
 \input{template_files/packages}
 \usepackage{units}
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+\usepackage{physics}
 
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
 
 \title{H1b: MD simulation -- dynamic properties}
 \author{Andr\'eas Sundstr\"om and Linnea Hesslow}
@@ -32,9 +37,11 @@ We find that figure~\ref{fig1} looks similar to the figure~1 in the homework pro
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Task 2: detmine the timestep}
 
+
 With the random noise, the temperature and the energy are differs between runs, but are in the same order of magnitude. From figure~\ref{fig:task2}, we determine that $dt = \unit[5 \cdot 10^{-3}]{ps} = \unit[5]{fs}$ is a sufficient time step. This is in line with the lecture notes, where it is stated that the a suitable timestep would normally be a few femtoseconds, or somewhat larger for heavy atoms.
   
 We note that the temperature is higher than desired value of~\unit[600-800]{K}. The temperatures and energies up to one standard deviation are quantified in table~\ref{tab:task2}. 
+
 
 
 \begin{figure}[!ht]
@@ -120,6 +127,52 @@ Equation (82) in MD lecture notes:
 To determine M, we used mean of ... for t $>$ ... 
 
 
+\section*{Task 7}
+
+
+
+The average ``power'' content in avariable , $X(t')$, at
+some time, $t$, during some range of time, $T$, can be defined as
+\begin{equation}
+P_X(t,T) = \frac{1}{T}\int_{t-T/2}^{t+T/2}\dd{t'}\,X^2(t').
+\end{equation}
+This quantity can (in physically relevant systems) also be defined for
+the process over all,
+\begin{equation}
+P_X = \lim_{T\to\infty} P_X(T)
+= \lim_{T\to\infty} \frac{1}{T} \ev{\int_{0}^{T}\dd{t'}\,X^2(t')}.
+\end{equation}
+At this stage, we can introduce a 
+We have the Fourier transform
+\begin{equation}
+\hat{f}(\omega) = \int_{-\infty}^{\infty}\dd{t} f(t)\ee^{\ii\omega t},
+\end{equation}
+
+
+Using these two functions, we can define a power spectrum
+\begin{equation}
+\begin{aligned}
+\hat{P}(\omega) =& \ev{\abs{\hat{\vb*v}(\omega)}^2}_{\rm A}
+=\ev{\hat{\vb*v}(\omega)\vdot \bar{\hat{\vb*v}}(\omega)}_{\rm A}\\
+=& \ev{\int_{-\infty}^{\infty}\dd{t}\, \vb*v(t)\ee^{\ii\omega t}
+  \int_{-\infty}^{\infty}\dd{t'}\, \vb*v(t')\ee^{-\ii\omega t'} }_{\rm A},
+\end{aligned}
+\end{equation}
+where $\bar{\hat{\vb*v}}$ denotes the complex conjugate of
+$\bar{\vb*v}$. We can now change varaibles to $t=t'+\tau$ and note
+that the atom averages only falls on the velocities, which gives
+\begin{equation}
+\begin{aligned}
+\hat{P}(\omega) 
+=& \int_{-\infty}^{\infty}\dd\tau\, \ee^{\ii\omega\tau}
+  \int_{-\infty}^{\infty}\dd{t'} \ev{\vb*v(t'+\tau)\vdot\vb*v(t') }_{\rm A},
+\end{aligned}
+\end{equation}
+
+
+
+
+
 
 
 \section*{Concluding discussion}
@@ -177,3 +230,8 @@ break lines that are too long. (Keep them under 80 characters!)
 \subsection{Change size of figures: \texttt{setFigureSize.m}}
 \lstinputlisting[language=matlab,numbers=left]{../m_scripts/setFigureSize.m}
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
