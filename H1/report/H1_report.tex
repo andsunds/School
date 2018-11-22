@@ -99,7 +99,20 @@ a_0 &\approx \unit[4.29]{\AA}, \quad T=\unit[700]{^\circ C} .
 These value are larger than the zero-temperature constants, and it is reasonable that the higher $\unit[700]{^\circ C}$ case corresponds to a larger lattice parameter at constant pressure. 
 
 \section*{Tasks 3-5: particle trajectories}
+
 Starting with the temperature- and pressure equilibrated systems from the previous section, we study the particle trajectories for both systems. Here, we decrease the timestep to   $dt       = \unit[5\cdot 10^{-4}]{ps}$ and the simulation length to $t_{\rm end} = \unit[5]{ps}$ to get better statistics. This was mostly motivated by increasing the resolution in tasks 6-7. 
+
+Equation (82) in MD lecture notes:
+
+
+\begin{align}
+\Delta_{\rm MSD}(t) &= \lim_{T \rightarrow \infty} \frac{1}{T} \int_0^{T} d t' \frac{1}{N_{\rm atoms}} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t+t') - {\bf r}_i(t') \right]^2 \\ &\Rightarrow \nonumber
+\\
+\Delta_{\rm MSD}(t_k) &\approx
+\frac{1}{N_T -k}\frac{1}{N_{\rm atoms}} \sum_{j=0}^{N_T-k-1} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t_{k+j}) - {\bf r}_i(t_j) \right]^2 
+\label{eq:1}
+\end{align}
+
 
 First, we note that the cumulative averages of the instantaneous temperatures and pressures stayed close to their inital values. This is shown in figure~\ref{fig:prod}.
 
@@ -111,38 +124,25 @@ First, we note that the cumulative averages of the instantaneous temperatures an
   \label{fig:prod}
 \end{center}
 \end{figure}
+
+We now consider the particle trajectories. Figure~\ref{fig:MSD} shows the trajectories of five individual particles along with the mean square displacement as determined in equation~\eqref{eq:1}. We can clearly see that the particle trajectories are bounded in the left figure~\ref{fig:MSD}, while for the high-temperature case in the right panel, they increase as square root of time ($\Delta_{\rm MSD} \propto t$). Consequently, the former is in a solid state while the latter is in a liquid state. 
+
+The self-diffusion coefficient as determined by the average slope of the mean square displacement, was calculated to $D_s \approx \unit[0.52]{\AA^2/ps}$.  
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/MSD-500} 
     \includegraphics[width=0.48\textwidth]{../figures/MSD-700} 
-  \caption{The instantaneous values, and the cumulative averages, of the temperature and the pressure in the production runs. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[500]{^\circ C}$}
-  \label{fig:prod}
-\end{center}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-  \includegraphics[width=0.48\textwidth]{../figures/Phi-t} 
-    \includegraphics[width=0.48\textwidth]{../figures/P-freq} 
-  \caption{The instantaneous values, and the cumulative averages, of the temperature and the pressure in the production runs. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[500]{^\circ C}$}
-  \label{fig:prod}
+  \caption{!!!!!!!!!!!!!!!!!!!!!!!! Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[500]{^\circ C}$}
+  \label{fig:MSD}
 \end{center}
 \end{figure}
 
 
-\section*{Task 5}
-Equation (82) in MD lecture notes:
 
 
-\begin{align}
-\Delta_{\rm MSD}(t) &= \lim_{T \rightarrow \infty} \frac{1}{T} \int_0^{T} d t' \frac{1}{N_{\rm atoms}} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t+t') - {\bf r}_i(t') \right]^2 \\ &\Rightarrow \nonumber
-\\
-\Delta_{\rm MSD}(t_k) &\approx
-\frac{1}{N_T -k}\frac{1}{N_{\rm atoms}} \sum_{j=0}^{N_T-k-1} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t_{k+j}) - {\bf r}_i(t_j) \right]^2 
-\end{align}
-
-To determine M, we used mean of ... for t $>$ ... 
+%To determine M, we used mean of ... for t $>$ ... 
 
 
 \section*{Task 7}
@@ -188,11 +188,16 @@ that the atom averages only falls on the velocities, which gives
 \end{equation}
 
 
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{../figures/Phi-t} 
+    \includegraphics[width=0.48\textwidth]{../figures/P-freq} 
+  \caption{!!!!!!!!!!!!!!!!!!!!!!}
+  \label{fig:spectrum}
+\end{center}
+\end{figure}
 
-
-
-
-
+The self-diffusion coefficient as determined by the power spectral density at $f=0$, was found to be  $D_s = \unit[0.49]{\AA^2/ps}$, which is close to the value obtained from the mean square displacement, as expected.  
 
 
 \section*{Concluding discussion}

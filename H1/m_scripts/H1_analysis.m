@@ -205,9 +205,7 @@ for iFile = 1:numel(FILENAMES)
         ylim([0 20]);
         leg = legend('$\Delta_{\rm MSD}$', '$6 t D_s$', 'individual trajectories');
     end
-    
-    
-    
+ 
     leg.Location='northwest';
     ImproveFigureCompPhys(gcf, 'Linewidth', 2);
     ax = gca; [ax.Children(6:end).LineWidth] = deal(5);
