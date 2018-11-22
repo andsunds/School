@@ -12,13 +12,10 @@
 
 \section*{Introduction}
 
-Already in antiquity people studied the effect of particles impinging on other
-particles. Since then the art has developed \ldots\
-(\emph{If you like to do so, you may take the opportunity to put the  methods
-in a wider perspective here.}) Here is a random reference.\cite{lamport94}
+.... TODO... !!!!!!!!!!!!!!!!!!!!!
 
-\section*{Task 1}
-We determined the theoretical lattice parameter ....
+\section*{Task 1: potential energy}
+The theoretical lattice parameter for aluminim can be determined by calculating the minimum potential energy per unit cell in a lattice with zero initial momenta for all particles. 
 
 Figure~\ref{fig1} shows the potential energy as a function of the lattice parameter. We used a quadratic fit to find the minimum energy, and obtained $V_{\rm eq} \approx \unit[65.38]{\AA^3}$. This corresponds to the equilibrium lattice parameter $a_{\rm eq} \approx \unit[4.029]{\AA}$ at \unit[0]{K}, which we took as the initial lattice parameter for the following tasks.  
 
@@ -32,6 +29,83 @@ Figure~\ref{fig1} shows the potential energy as a function of the lattice parame
 
 We find that figure~\ref{fig1} looks similar to the figure~1 in the homework problem file. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Task 2: detmine the timestep}
+
+With the random noise, the temperature and the energy are differs between runs, but are in the same order of magnitude. From figure~\ref{fig:task2}, we determine that $dt = \unit[5 \cdot 10^{-3}]{ps} = \unit[5]{fs}$ is a sufficient time step. This is in line with the lecture notes, where it is stated that the a suitable timestep would normally be a few femtoseconds, or somewhat larger for heavy atoms.
+  
+We note that the temperature is higher than desired value of~\unit[600-800]{K}. The temperatures and energies up to one standard deviation are quantified in table~\ref{tab:task2}. 
+
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{../figures/dt-scan-temperature} 
+    \includegraphics[width=0.48\textwidth]{../figures/dt-scan-energy} 
+  \caption{The temperature and kinetic energy per unit cell as a function of time for four different timesteps.}
+  \label{fig:task2}
+\end{center}
+\end{figure}
+
+
+
+\begin{table}[!ht]
+  \begin{center}
+    \caption{Energies and temperatures with one standard deviation uncertainties for four different values of the time steps.}
+    \begin{tabular}{l c c} 
+    $dt$ [ps] & $T$ [K] & $E_{\rm tot}$ [eV/unit cell]\\ \hline
+$10^{-2}$ & 	$847 \pm 4.2\%$ &	$-12.55 \pm 1.2\cdot 10^{-2} \% $\\
+$5\cdot 10^{-3}$ &	$1157 \pm$ 3.8 \% &$-12.24 \pm 3.6\cdot 10^{-3} \%$ \\
+$2\cdot 10^{-3}$ & $1058  \pm 3.7 \% $ & 	$ -12.35 \pm 6.6\cdot 10^{-4} \% $\\ 
+$1\cdot 10^{-3}$ & $ 841  \pm 3.7 \% $	 &$ -12.58 \pm 3.6\cdot 10^{-4} \%$ \\ 
+      \hline
+    \end{tabular}
+    \label{tab:task2}
+  \end{center}
+\end{table}
+
+\section*{Tasks 3 and 4: Temperature and pressure equilibration}
+We set $\tau_P = \tau_T = 100 dt$, where $dt = 5\cdot 10^{-3}$\,ps, and equilibrated the temperature and pressure by scaling the particle momenta and positions (and box size) respectively. Choosing a slower equilibration time did not affect the results qualitatively. Both temperature and pressure were equilibrated in the same Verlet loop, but for the higher temperature the the system was first melted by increasing the temperature to \unit[900]{$^\circ$C}. To determine the isothermal compressibility $\kappa$, 
+the values of Young's modulus $Y$ and shear modulus $G$ were taken from Physics Handbook, table T 1.1. From F 1.15 in Physics Handbook, the bulk modulus can then calculated as
+\begin{equation}
+B = \frac{YG}{9G - 3Y} \,\quad \kappa_{\rm Al} = \frac{1}{B} \approx \unit[6.6444\cdot 10^5]{bar},
+\end{equation}
+where \unit[1]{bar } = $\unit[6.2415\cdot 10^{-7}]{eV/\AA^3}$ in atomic units. \textbf{However, we set $\kappa = 100 \kappa_{\rm Al}$ since the pressure equilibration happened on a much longer timescale than $\tau_P$ with $\kappa = \kappa_{\rm Al}$. We have not yet figured out why this is. }
+
+The results are shown in figure~\ref{fig:eq}, where we overlay the instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ with a moving average using 250 time steps. The desired temperatures and pressures were approximatelyh obtained in the equilibration process. Although  the average pressure was slightly below zero, this is within the fluctuation error bars and is in line with the figure~2 in the homework problem document. 
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{../figures/TP-eq-500} 
+    \includegraphics[width=0.48\textwidth]{../figures/TP-eq-700} 
+  \caption{The instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ overlayed with with a moving average using 100 time steps, which corresponds to $\Delta t = \tau_P/2$. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[500]{^\circ C}$.}
+  \label{fig:eq}
+\end{center}
+\end{figure}
+
+
+The equilibrium values of the lattice parameter were found to be 
+\begin{align}
+a_0 &\approx \unit[4.10]{\AA}, \quad T=\unit[500]{^\circ C}, \\
+a_0 &\approx \unit[4.29]{\AA}, \quad T=\unit[700]{^\circ C} .
+\end{align} 
+
+These value are larger than the zero-temperature constants, and it is reasonable that the higher $\unit[700]{^\circ C}$ case corresponds to a larger lattice parameter at constant pressure. 
+
+\section*{Tasks 3-5: particle trajectories}
+Starting with the temperature- and pressure equilibrated systems from the previous section, we study the particle trajectories for both systems. Here, we decrease the timestep to   $dt       = \unit[5\cdot 10^{-4}]{ps}$ and the simulation length to $t_{\rm end} = \unit[5]{ps}$ to get better statistics. This was mostly motivated by increasing the resolution in tasks 6-7. 
+
+First, we note that the cumulative averages of the instantaneous temperatures and pressures stayed close to their inital values. This is shown in figure~\ref{fig:prod}.
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{../figures/TP-prod-500} 
+    \includegraphics[width=0.48\textwidth]{../figures/TP-prod-700} 
+  \caption{The instantaneous values, and the cumulative averages, of the temperature and the pressure in the production runs. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[500]{^\circ C}$}
+  \label{fig:prod}
+\end{center}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section*{Task 5}
 Equation (82) in MD lecture notes:
 
@@ -43,96 +117,14 @@ Equation (82) in MD lecture notes:
 \frac{1}{N_T -k}\frac{1}{N_{\rm atoms}} \sum_{j=0}^{N_T-k-1} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t_{k+j}) - {\bf r}_i(t_j) \right]^2 
 \end{align}
 
-To determine M, we used mean of ... for t > ... 
+To determine M, we used mean of ... for t $>$ ... 
 
-\section*{Problem 1}
-As a starting point we first look at scattering from a hard-sphere
-potential. We also consider the Lennard--Jones potential, which is depicted
-in Figure~\ref{fig11}. (\emph{Always refer to Figures in the text.})
 
-\begin{figure}[!ht]
-\begin{center}
-  \includegraphics[width=0.7\textwidth]{template_files/LJ} 
-  \caption{The Lennard--Jones potential.
-  Make sure you label and have units on all axes! Also make sure that labels etc.\
-  are legible and that, if you print in black and white, that you use different line
-  styles when required to differentiate between curves. In \textsc{matlab}
-  you can export any figure to an .eps file from File $\rightarrow$
-  Export\ldots\ in the Figure window.}
-  \label{fig1}
-\end{center}
-\end{figure}
-  
-\section*{Problem 2}
 
-In the following we give an example of how to produce a table.
-Use the code for Table~\ref{tab1} as a template.
-
-\begin{table}[!ht]
-  \begin{center}
-    \caption{A dummy table}
-    \begin{tabular}{l|c|c}\hline\hline
-      \textbf{Col.~1} & \textbf{Col.~2} & \textbf{Col.~3} \\ \hline
-      the & quick & brown \\ 
-      fox & jumps & over \\ 
-      the & lazy  & dog \\ 
-      \hline\hline
-    \end{tabular}
-    \label{tab1}
-  \end{center}
-\end{table}
-
-\section*{Problem 3}
-
-If you find some part of the code particularly interesting you may 
-include it in the text, otherwise it should be included in the appedix.
-If you do want to include code the following commands will print
-the text directly, with no \LaTeX~commands executed:
-
-\begin{lstlisting}[language=matlab]
-% Hello world ten times in MATLAB
-for i = 1 : 10
-  fprintf('Hello world %d!\n',i);
-end
-\end{lstlisting}
-
-\begin{lstlisting}[language=python]
-# Hello world ten times in Python
-for i in range(10):
-  print 'Hello world %d!' % i
-\end{lstlisting}
-
-\section*{Problem 4}
-At some point it may be appropriate to include equations. It is done in the
-following way:
-
-\begin{equation}
-  V(r) = 4\epsilon \left[ \left( \frac{\sigma}{r} \right)^{12} - 
-    \left(\frac{\sigma}{r} \right)^{6} \right]
-\end{equation}
-
-Do number and reference all your equations.
 
 \section*{Concluding discussion}
 
-Use your favourite flavor of \LaTeX{} to compile the file:
-\begin{verbatim}
-xelatex template.tex
-pdflatex template.tex
-latex template.tex
-\end{verbatim}
-should all work.
-If you use \verb+pdflatex+ or \verb+xelatex+, included figures need to be in
-\verb+pdf+, \verb+jpg+, or \verb+png+ format. If you want to include eps
-figures, you can easily convert them to \verb+pdf+ using the command
-\begin{verbatim}
-ps2pdf -dEPSCrop figure.eps figure.pdf
-\end{verbatim}
-
-\begin{thebibliography}{69}
-\bibitem{lamport94} Leslie Lamport, \emph{\LaTeX: A Document Preparation
-System}. Addison Wesley, Massachusetts, 2nd Edition, 1994.
-\end{thebibliography}
+!!!!!!!!!!!!!!!!!!!!!!!!!1
 
 \newpage
 
