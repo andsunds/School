@@ -53,45 +53,92 @@ To determine M, we used mean of ... for t  > ...
 
 \section*{Task 7}
 
+% \subsection*{Sort of proof}
+% Discrete auto-correlation function
+% \begin{equation}
+% \varPhi_j = \frac{1}{N}\sum_{i=0}^{N-1} v_{i+j}v_{i}
+% \end{equation}
 
+% Discrete Fourier transform,
+% \begin{equation}
+% \hat{f}_k = \sum_{i=0}^{N-1} f_i \exp(\ii 2\pi \frac{ik}{N}),
+% \end{equation}
+% We can define a discrete power spectrum as
+% \begin{equation}
+% \begin{aligned}
+% \hat{P}_k =& \frac{1}{N} \abs{\hat{v}_k}^2
+% =\frac{1}{N} \hat{v}_k\bar{\hat{v}}_k\\
+% =&\frac{1}{N} \sum_{i=0}^{N-1} v_i\exp(\ii 2\pi \frac{ik}{N})
+% \sum_{i'=0}^{N-1} v_{i'}\exp(-\ii 2\pi \frac{i'k}{N})
+% \end{aligned}
+% \end{equation}
+% We can now do a relabeling of the index $i=i'+j$, and use periodic
+% indices $v_{i+N}=v_{i}$
+% \begin{equation}
+% \begin{aligned}
+% \hat{P}_k =& \frac{1}{N} \abs{\hat{v}_k}^2
+% =\frac{1}{N} \hat{v}_k\bar{\hat{v}}_k\\
+% =&\frac{1}{N} \sum_{i'=0}^{N-1}\sum_{j=-i'}^{N-1-i'} v_{j+i'}v_{i'}
+% \exp(\ii 2\pi \frac{jk}{N}).
+% \end{aligned}
+% \end{equation}
+% However, since the sum over $j$ reaches all indices in the periodic
+% index domain, we can change the summation to going from $j=0$ to
+% $N-1$, and then also swap the order of summation, which gives
+% \begin{equation}
+% \hat{P}_k =\sum_{j=0}^{N-1} \exp(\ii 2\pi \frac{jk}{N}).
+% \frac{1}{N}\sum_{i'=0}^{N-1} v_{j+i'}v_{i'}.
+% \end{equation}
+% It is now clear that this power spectrum is the discrete Fourier
+% transform of the discrete auto-correlation function,
+% \begin{equation}\label{eq7:Wiener-Khinthchine}
+% \hat{P}_k =\sum_{j=0}^{N-1} \varPhi_j \exp(\ii 2\pi \frac{jk}{N}).
+% \end{equation}
+% In reality, $v_i$ is not periodic, however we might still use the
+% periodic indices for notational convenience.
 
-The average ``power'' content in avariable , $X(t')$, at
-some time, $t$, during some range of time, $T$, can be defined as
+\subsection*{What we did}
+
+We calculated the discrete auto-correlation function similarly to the
+MSD, 
 \begin{equation}
-P_X(t,T) = \frac{1}{T}\int_{t-T/2}^{t+T/2}\dd{t'}\,X^2(t').
+\varPhi_j = \frac{1}{N-j}\sum_{i=0}^{N-j-1} \ev{v_{i+j}v_{i}},
 \end{equation}
-This quantity can (in physically relevant systems) also be defined for
-the process over all,
+where $j=0,1,\ldots,N-1$ and the average is taken over all atoms.
+We then preceded to numerically approximate the integral
 \begin{equation}
-P_X = \lim_{T\to\infty} P_X(T)
-= \lim_{T\to\infty} \frac{1}{T} \ev{\int_{0}^{T}\dd{t'}\,X^2(t')}.
+\hat{\varPhi}(f) = 2\int_0^{\infty}\dd{t}\,
+\varPhi(t) \cos(2\pi ft)
+\approx 2\int_0^{T_{\rm s}}\dd{t}\,\varPhi(t) \cos(2\pi ft)
 \end{equation}
-At this stage, we can introduce a 
-We have the Fourier transform
-\begin{equation}
-\hat{f}(\omega) = \int_{-\infty}^{\infty}\dd{t} f(t)\ee^{\ii\omega t},
-\end{equation}
+using a trapeziodal method in \textsc{Matlab}, with a frequency range
+$f=0$ to $f=1/(2\Delta{t})=f_{\rm Nyqvist}$, and frequency steps
+$\Delta{f}=1/T_{\rm s}$, where $T_{\rm s}$ is a time at about half the
+simulation end time. This is to avoid including noisy data in
+$\varPhi(t)$ at later times, where the statistics are poor.
 
-
-Using these two functions, we can define a power spectrum
+We then calculated the powerspectrum according to
 \begin{equation}
 \begin{aligned}
-\hat{P}(\omega) =& \ev{\abs{\hat{\vb*v}(\omega)}^2}_{\rm A}
-=\ev{\hat{\vb*v}(\omega)\vdot \bar{\hat{\vb*v}}(\omega)}_{\rm A}\\
-=& \ev{\int_{-\infty}^{\infty}\dd{t}\, \vb*v(t)\ee^{\ii\omega t}
-  \int_{-\infty}^{\infty}\dd{t'}\, \vb*v(t')\ee^{-\ii\omega t'} }_{\rm A},
+\hat{P}(\omega) =& \lim_{T\to\infty}\frac{1}{T}
+\ev{\abs{\int_0^{T}\dd{t}\,v(t)\ee^{\ii\omega t}}^2}\\
+\approx& \frac{1}{T}
+\ev{\abs{\int_0^{T}\dd{t}\,v(t)\ee^{\ii\omega t}}^2}\\
+\Longrightarrow\quad
+\hat{P}_k=& \frac{1}{T}
+\ev{\abs{\frac{T}{N} \sum_{i=0}^{N-1} v_i\exp(\ii2\pi\frac{ik}{N})}^2}
+=\frac{T}{N} \ev{\abs{\hat{\vb*v}_k}^2}
 \end{aligned}
 \end{equation}
-where $\bar{\hat{\vb*v}}$ denotes the complex conjugate of
-$\bar{\vb*v}$. We can now change varaibles to $t=t'+\tau$ and note
-that the atom averages only falls on the velocities, which gives
+where the averages is taken over all atoms, and
 \begin{equation}
-\begin{aligned}
-\hat{P}(\omega) 
-=& \int_{-\infty}^{\infty}\dd\tau\, \ee^{\ii\omega\tau}
-  \int_{-\infty}^{\infty}\dd{t'} \ev{\vb*v(t'+\tau)\vdot\vb*v(t') }_{\rm A},
-\end{aligned}
+\hat{\vb*v}_k = \sqrt{N}\sum_{i=0}^{N-1} \vb*v_i \exp(\ii2\pi\frac{ik}{N})
 \end{equation}
+is the discrete Fourier transform of $v_i$.
+
+When we compare $\hat{\varPhi}_k$ and $\hat{P}_k$ in Figure~\ref{...},
+we find that they are very similar, as, indeed, they should be
+acording to the Wiener-Khinthchine theorem.
 
 
 
@@ -204,43 +251,46 @@ break lines that are too long. (Keep them under 80 characters!)
 %\subsection{Calculating pi using python: \texttt{pi.py}}
 %\lstinputlisting[language=python,numbers=left]{template_files/pi.py}
 
-\subsection{Main program task 1: \texttt{main\_T1.c}}
-\lstinputlisting[language=c,numbers=left]{../code/main_T1.c}
 
-\subsection{Main program  Task 2: \texttt{main\_T2.c}}
-\lstinputlisting[language=c,numbers=left]{../code/main_T2.c}
+% \subsection{Main program task 1: \texttt{main\_T1.c}}
+% \lstinputlisting[language=c,numbers=left]{../code/main_T1.c}
 
-\subsection{Temperature and pressure equilibration for tasks 3-7 : \texttt{main\_T3.c}}
-\lstinputlisting[language=c,numbers=left]{../code/main_T3.c}
+% \subsection{Main program  Task 2: \texttt{main\_T2.c}}
+% \lstinputlisting[language=c,numbers=left]{../code/main_T2.c}
 
-\subsection{Production runs for tasks 3-7 : \texttt{main\_Prod.c}}
-\lstinputlisting[language=c,numbers=left]{../code/main_Prod.c}
+% \subsection{Temperature and pressure equilibration for tasks 3-7 : \texttt{main\_T3.c}}
+% \lstinputlisting[language=c,numbers=left]{../code/main_T3.c}
 
-\subsection{Production runs for tasks 3-7 : \texttt{main\_Prod.c}}
-\lstinputlisting[language=c,numbers=left]{../code/main_Prod.c}
+% \subsection{Production runs for tasks 3-7 : \texttt{main\_Prod.c}}
+% \lstinputlisting[language=c,numbers=left]{../code/main_Prod.c}
 
-
-\subsection{Misc functions : \texttt{funcs.c}}
-\lstinputlisting[language=c,numbers=left]{../code/funcs.c}
-
-\section{Auxiliary }
-\subsection{Makefile}
-\lstinputlisting[language=bash,numbers=left]{../code/Makefile}
+% \subsection{Production runs for tasks 3-7 : \texttt{main\_Prod.c}}
+% \lstinputlisting[language=c,numbers=left]{../code/main_Prod.c}
 
 
+% \subsection{Misc functions : \texttt{funcs.c}}
+% \lstinputlisting[language=c,numbers=left]{../code/funcs.c}
 
-\section{Matlab scripts}
-\subsection{Analysis scripts for tasks 3-7: \texttt{Al\_energies.m}}
-\lstinputlisting[language=matlab,numbers=left]{../m_scripts/H1_analysis.m}
+% \section{Auxiliary }
+% \subsection{Makefile}
+% \lstinputlisting[language=bash,numbers=left]{../code/Makefile}
 
-\subsection{Improve figure appearance: \texttt{ImproveFigureCompPhys.m}}
-\lstinputlisting[language=matlab,numbers=left]{../m_scripts/ImproveFigureCompPhys.m}
+% \section{Matlab scripts}
+% \subsection{Analysis scripts for tasks 3-7: \texttt{Al\_energies.m}}
+% \lstinputlisting[language=matlab,numbers=left]{../m_scripts/H1_analysis.m}
 
-\subsection{Change size of figures: \texttt{setFigureSize.m}}
-\lstinputlisting[language=matlab,numbers=left]{../m_scripts/setFigureSize.m}
+% \subsection{Improve figure appearance: \texttt{ImproveFigureCompPhys.m}}
+% \lstinputlisting[language=matlab,numbers=left]{../m_scripts/ImproveFigureCompPhys.m}
+
+% \subsection{Change size of figures: \texttt{setFigureSize.m}}
+% \lstinputlisting[language=matlab,numbers=left]{../m_scripts/setFigureSize.m}
+
+
 \end{document}
 
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
+
+%  LocalWords:  MSD
