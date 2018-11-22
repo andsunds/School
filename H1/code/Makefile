@@ -1,10 +1,11 @@
 
 CC = gcc
-CFLAGS = -O3 -Wall
+CFLAGS = -O3 -Wall -Wno-unused-result
+
 LIBS = -lm -lgsl -lgslcblas
 
-HEADERS = initfcc.h alpotential.h funcs.h
-OBJECTS = initfcc.o alpotential.o funcs.o 
+HEADERS = initfcc.h alpotential.h funcs.h fft_func.h
+OBJECTS = initfcc.o alpotential.o funcs.o fft_func.o
 
 
 %.o: %.c $(HEADERS)

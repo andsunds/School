@@ -6,6 +6,7 @@
 #include <gsl/gsl_rng.h>
 #include <time.h>  // also needed for random stuff
 #include "alpotential.h"
+#include "fft_func.h"
 
 //  prototypes
 
@@ -26,6 +27,9 @@ extern void get_MSD ( int N_atoms,  int N_times, double all_pos[N_times][N_atoms
 
 extern void get_vel_corr ( int N_atoms,  int N_times, double all_mom[N_times][N_atoms][3], 
                  double vel_corr[N_times]);
+                 
+extern void get_powerspectrum ( int N_atoms,  int N_times, double all_vel[N_times][N_atoms][3], 
+                 double pow_spec[N_times]);                 
 
 extern void copy_mat (int M, int N, double mat_from[M][N], double mat_to[M][N]);
 

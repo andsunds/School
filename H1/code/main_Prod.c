@@ -38,7 +38,7 @@ int main()
   double inv_volume;
   
 
-  double T_eq_C   = 700;
+  double T_eq_C   = 500;
   double P_eq_bar = 1;
 //  double T_eq     = T_eq_C + degC_to_K;
 //  double P_eq     = P_eq_bar*bar;
@@ -70,9 +70,13 @@ int main()
   double *pressure      = malloc(sizeof(double[N_timesteps]));
   double *msd           = malloc(sizeof(double[N_save_timesteps])); 
   double *vel_corr      = malloc(sizeof(double[N_save_timesteps])); 
+  double *pow_spec      = malloc(sizeof(double[N_save_timesteps])); 
+  double *freq		      = malloc(sizeof(double[N_save_timesteps])); 
   
   for (int i = 0; i<N_save_timesteps; i++){
     msd[i] = 0;
+    pow_spec[i] = 0;
+    vel_corr[i] = 0;
   }
   FILE *file_pointer;
     
@@ -125,8 +129,15 @@ int main()
   }
   printf("calculating MSD\n");
   get_MSD(N_atoms, N_save_timesteps, pos_all, msd);
+  
   printf("calculating velocity correlation\n");
   get_vel_corr(N_atoms, N_save_timesteps, vel_all, vel_corr);
+
+  printf("calculating power spectrum\n");
+  get_powerspectrum(N_atoms, N_save_timesteps, vel_all, pow_spec);
+  fft_freq(freq, dt, N_save_timesteps);
+
+
 
   printf("writing to file\n");
   /* Write tempertaure to file */
@@ -166,6 +177,16 @@ int main()
      fprintf(file_pointer, "%.4f \t %.8f \t %.8f \n", t, msd[i], vel_corr[i]);
   }
   fclose(file_pointer);
+  
+  sprintf(file_name,"../data/temp-%d_pres-%d_power-spectrum.tsv",
+	  (int) T_eq_C, (int) P_eq_bar);
+  file_pointer = fopen(file_name, "w");
+  // write header 
+  fprintf(file_pointer, "%% f[1/ps] \t P[A/ps]^2 \n"); 
+  for (int i=0; i<N_save_timesteps/2; i++){ // only print from f=0 to f_crit
+     fprintf(file_pointer, "%.4f \t %.8f \n", freq[i], pow_spec[i]);
+  }
+  fclose(file_pointer);
        
   free(pos);           pos = NULL;
   free(pos_0);         pos_0 = NULL;
@@ -176,5 +197,9 @@ int main()
   free(displacements); displacements = NULL;
   free(pos_all); pos_all = NULL;
   free(vel_all); vel_all = NULL;
+  free(msd); msd = NULL;
+  free(vel_corr); vel_corr = NULL;
+  free(pow_spec); pow_spec = NULL;
+  free(freq); freq = NULL;
   return 0;
 }

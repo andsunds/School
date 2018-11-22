@@ -127,11 +127,12 @@ xlabel('$t$\, [ps]')
 ImproveFigureCompPhys(gcf, 'linewidth', 3, 'LineColor', {'MYORANGE', GRAY, 'MYBLUE', GRAY}');
 
 %% determine displacements and MSD
-
+temperatures = num2str([500;700]);
 clc; clf;
 figure(10); clf;
-FILENAMES = strcat({'../data/temp-'}, num2str([500;700]), '_pres-1_displacements.tsv');
-FILENAMES_Dyn = strcat({'../data/temp-'}, num2str([500;700]), '_pres-1_dynamicProperties.tsv');
+FILENAMES = strcat({'../data/temp-'}, temperatures, '_pres-1_displacements.tsv');
+FILENAMES_Dyn = strcat({'../data/temp-'}, temperatures, '_pres-1_dynamicProperties.tsv');
+FILENAMES_Pow = strcat({'../data/temp-'}, temperatures, '_pres-1_power-spectrum.tsv');
 for iFile = 1:numel(FILENAMES)
     
     figure(iFile); clf;
@@ -178,19 +179,25 @@ for iFile = 1:numel(FILENAMES)
     data = load(FILENAMES_Dyn{iFile});
     t = data(:,1);
     vel_corr = data(:,3);
+    
+    data = load(FILENAMES_Pow{iFile});
+    freq = data(:,1);
+    pow_spec = data(:,2);
+    
     figure(10);
     plot(t, vel_corr/vel_corr(1)); hold on;
    
-    
     dt = t(2)-t(1);
-    N_times = round(length(t)/10);
+    N_times = round(length(t)/2); % we have too bad statistics at later times. 
     deltaf = 1/(N_times * dt);
     omegavec = 0:deltaf:(1/(2*dt));
-    PhiHat = 2 * trapz(t(1:N_times), (vel_corr(1:N_times) * ones(size(omegavec))) .* cos(t(1:N_times) * omegavec ), 1); %dimension 1
-
+    %PhiHat = 2 * trapz(t(1:N_times), (vel_corr(1:N_times) * ones(size(omegavec))) .* cos(t(1:N_times) * omegavec ), 1); %dimension 1
+    PhiHat =  1/2 * 1/N_times * 2 * sum( (vel_corr(1:N_times) * ones(size(omegavec))) .* cos(t(1:N_times) * omegavec ), 1); %dimension 1
+    
     figure(11); 
     
-    plot(omegavec, movmean(PhiHat,n_average_points)); hold on;
+    plot(omegavec/(2*pi), PhiHat); hold on;
+    plot(freq, pow_spec, ':'); hold on;
     if iFile ==2 % liquid
         tStart = 1;
         selfDiffusionCoeff_spectral = PhiHat(1)/6; % in Å^2 /ps
@@ -209,9 +216,11 @@ ylabel('$\Phi (t)/\Phi(0)$')
 
 
 figure(11)
-leg = legend(strcat({'$T='}, num2str([500;700]), '\,^\circ $C'));
-xlim([0 100])
-ImproveFigureCompPhys();
+leg = legend('$T= 500 \, ^\circ $C, $ \hat \Phi$' , '$T= 500 \, ^\circ $C, $|\hat v|^2$',...
+    '$T= 700 \, ^\circ $C, $ \hat \Phi$', '$T= 700 \, ^\circ $C, $|\hat v|^2$');
+xlim([0 30])
+ylim([0 Inf])
+ImproveFigureCompPhys('LineColor', {'r', 'MYRED', 'GERIBLUE','MYLIGHTBLUE'}');
 %%
 clc;clf;
 

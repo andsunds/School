@@ -93,6 +93,29 @@ void get_vel_corr ( int N_atoms,  int N_times, double all_vel[N_times][N_atoms][
    } 
 }
 
+void get_powerspectrum ( int N_atoms,  int N_times, double all_vel[N_times][N_atoms][3], 
+                 double pow_spec[N_times]) {
+   /* all_vel = velocity of all particles at all (saved) times */
+   double vel_component[N_times]; // "all_vel[:][i][j]"        
+   double pow_spec_component[N_times];
+   double normalization_factor = 1/( (double)N_atoms * (N_times));
+   for (int kn = 0; kn < N_atoms; kn++) { // particle index
+   	for (int kd = 0; kd < 3; kd++) { // three dimensions
+         for (int it = 0; it < N_times; it++) { // 	
+         	vel_component[it] = all_vel[it][kn][kd];
+	      }
+	      powerspectrum(vel_component, pow_spec_component, N_times);
+	      for (int iw = 0; iw < N_times; iw++) { // for all frequencies 	
+         	pow_spec[iw] += pow_spec_component[iw];
+	      }
+	   }
+   } 
+   for (int iw = 0; iw < N_times; iw++) { // for all frequencies 	
+       pow_spec[iw] *= normalization_factor;
+	}
+}
+  
+  
 
 void copy_mat (int M, int N, double mat_from[M][N], double mat_to[M][N]){
    /* Copies matrix `mat_from` to `mat_to` */
