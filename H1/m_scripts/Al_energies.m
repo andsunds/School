@@ -3,7 +3,7 @@ cd(fileparts(tmp.Filename));
 set(0,'DefaultFigureWindowStyle','docked');
 GRAY = 0.7*[0.9 0.9 1];
 
-%%
+%% task 1
 clc
 
 energy_data = load('../data/lattice_energies.tsv');
@@ -12,35 +12,38 @@ v0 = a0.^3;
 
 energy = energy_data(:,2);
 figure(1);clf;
-plot(v0,energy, 'x-', 'color', GRAY);
-ylabel('$E_{\rm pot}$ [eV/unit cell]');
-xlabel('$a_0^3$ [\AA$^3$]');
+plot(v0,energy, 'xk');
 
-
-start_a = 4;
-end_a = 68.^(1/3);
-indToInclude = (a0 > start_a) & (a0 < end_a);
+start_v = 64;
+end_v = 68;
+indToInclude = (v0 > start_v) & (v0 < end_v);
 p = polyfit(v0(indToInclude),energy(indToInclude),2);
 hold on;
 
-vvec = linspace(start_a^3, end_a^3);
+vvec = linspace(start_v, end_v);
 plot(vvec, p(1)*vvec.^2 + p(2)*vvec + p(3), '-r');
 xlim([64 68]);
 
 v_min = -p(2)/(2*p(1));
+a_min = v_min^(1/3);
+
 ax = gca;
-%ylim = ax.YLim;
-ylim([-13.45 -13.42]);
-h1 = plot( v_min*[1 1], ylim, '--k');
-legend('data', 'quadratic fit', ['$V_{\rm min} \approx \, $' num2str(round(v_min,3))], ...
+ax.YLim = [-13.45 -13.42];
+h1 = plot( v_min*[1 1], ax.YLim, '--k'); % plot vertical line at v_min
+
+
+ax.YTick = (-13.45:0.01:-13.42);
+ylabel('$E_{\rm pot}$ [eV/unit cell]');
+xlabel('$a_0^3$ [\AA$^3$]');
+legend('data', 'quadratic fit', ['$V_{\rm eq} \approx \, $' num2str(round(v_min,2)) '\, \AA$^3$'], ...
     'location', 'southeast')
+ImproveFigureCompPhys(gcf); h1.LineWidth = 2; setFigureSize(gcf);
 
 %axis([63 68 ylim(1) 0]);
-ImproveFigureCompPhys(gcf); %setFigureSize(gcf); 
-%h1.LineWidth = 2;
+saveas(gcf, '../figures/potential_energy.eps', 'epsc')
 
 
-%%
+%% task 2
 %clc;
 clf;clear
 
@@ -80,9 +83,9 @@ clc; clf;
 
 
 %data = load(sprintf('../data/temperature_dt-1e-02_Task3.tsv'));
-%data = load('../data/temp-500_pres-1_Task3.tsv');
+%data = load('../data/temp-700_pres-1_Task3.tsv');
 data = load('../data/temp-500_pres-1_Prod-test.tsv');
-
+%data = load('../data/temp-700_pres-1_Prod-test.tsv');
 bar = 6.2415e-07;
 
 t = data(:,1);
@@ -108,7 +111,7 @@ plot(t,T, 'color', GRAY),hold on
 plot(t, cumsum(T)./(1:length(t))','-k')
 ylabel('$T \, [^\circ \rm C]$')
 
-ylim([200,1000])
+ylim([400,800])
 
 
 yyaxis right
@@ -123,11 +126,12 @@ xlabel('$t$\, [ps]')
 
 ImproveFigureCompPhys(gcf, 'linewidth', 3, 'LineColor', {'MYORANGE', GRAY, 'MYBLUE', GRAY}');
 
-%% determine displacements
+%% determine displacements and MSD
 
 clc; clf;
-
-FILENAMES = strcat({'../data/temp-'}, num2str([500;900]), '_pres-1_displacements.tsv');
+figure(10); clf;
+FILENAMES = strcat({'../data/temp-'}, num2str([500;700]), '_pres-1_displacements.tsv');
+FILENAMES_Dyn = strcat({'../data/temp-'}, num2str([500;700]), '_pres-1_dynamicProperties.tsv');
 for iFile = 1:numel(FILENAMES)
     
     figure(iFile); clf;
@@ -135,22 +139,84 @@ for iFile = 1:numel(FILENAMES)
     t = data(:,1);
     dx = data(:,2:end);
     
-    plot(t, dx)
+    plot(t, dx.^2); hold on;
+    
+
+    data = load(FILENAMES_Dyn{iFile});
+    MSD = data(:,2);
+    vel_corr = data(:,3);
+    plot(t, MSD, 'k')
+    
+    if iFile ==2 % liquid
+        tStart = 1;
+        D = MSD(t>tStart)./(6*t(t>tStart));
+        selfDiffusionCoeff = mean(D); % in Å^2 /ps
+        plot(t, 6*t*selfDiffusionCoeff, ':');
+    end
     
     leg = legend( strcat({'$n=$'}, num2str((1:size(dx,2))'))');
     leg.Location='northwest';
     xlabel('$t$ [ps]')
-    ylabel('$\Delta x \,[\rm \AA]$')
+    ylabel('$\Delta x^2 \,[\rm \AA^2]$')
     if iFile ==1
-    ylim([ 0 1.2]);
+        ylim([ 0 1.0]);
+    else
+        ylim([0 200]);
     end
     ImproveFigureCompPhys(gcf);
+    
+    figure(10)
+    plot(t, vel_corr/vel_corr(1)); hold on;
+    xlim([0 1])
+    
 end
+
+% velocity correlation
+figure(10);clf; figure(11);clf;
+n_average_points = 1;%30;
+for iFile = 1:numel(FILENAMES)
+    data = load(FILENAMES_Dyn{iFile});
+    t = data(:,1);
+    vel_corr = data(:,3);
+    figure(10);
+    plot(t, vel_corr/vel_corr(1)); hold on;
+   
+    
+    dt = t(2)-t(1);
+    N_times = round(length(t)/10);
+    deltaf = 1/(N_times * dt);
+    omegavec = 0:deltaf:(1/(2*dt));
+    PhiHat = 2 * trapz(t(1:N_times), (vel_corr(1:N_times) * ones(size(omegavec))) .* cos(t(1:N_times) * omegavec ), 1); %dimension 1
+
+    figure(11); 
+    
+    plot(omegavec, movmean(PhiHat,n_average_points)); hold on;
+    if iFile ==2 % liquid
+        tStart = 1;
+        selfDiffusionCoeff_spectral = PhiHat(1)/6; % in Å^2 /ps
+    end
+    
+end
+
+disp([selfDiffusionCoeff selfDiffusionCoeff_spectral]);
+
+figure(10)
+xlim([0 1])
+leg = legend(strcat({'$T='}, num2str([500;700]), '\,^\circ $C'));
+leg.Location='northeast';
+xlabel('$t$ [ps]')
+ylabel('$\Phi (t)/\Phi(0)$')
+
+
+figure(11)
+leg = legend(strcat({'$T='}, num2str([500;700]), '\,^\circ $C'));
+xlim([0 100])
+ImproveFigureCompPhys();
 %%
 clc;clf;
 
 
-FILENAME = '../data/mom_temp-500_pres-1.bin';
+FILENAME = '../data/INIDATA_temp-700_pres-1.bin';
 fID=fopen(FILENAME,'rb');
 data1=fread(fID,[3,inf],'real*8').';
 fclose(fID);

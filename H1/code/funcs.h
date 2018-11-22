@@ -20,6 +20,14 @@ extern double get_kin_energy ( int N_atoms,  double (*momentum)[3], double m );
 
 extern void get_displacements ( int N_atoms,  double (*positions)[3],
 				double (*initial_positions)[3], double disp[]);
+				
+extern void get_MSD ( int N_atoms,  int N_times, double all_pos[N_times][N_atoms][3], 
+                 double MSD[N_times]);				
+
+extern void get_vel_corr ( int N_atoms,  int N_times, double all_mom[N_times][N_atoms][3], 
+                 double vel_corr[N_times]);
+
+extern void copy_mat (int M, int N, double mat_from[M][N], double mat_to[M][N]);
 
 extern void set_zero (int M, int N, double mat[M][N]);
 

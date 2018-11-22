@@ -42,14 +42,14 @@ int main()
   double P_eq_bar = 1;
 //  double T_eq     = T_eq_C + degC_to_K;
 //  double P_eq     = P_eq_bar*bar;
-  double dt       = 5e-3;
-  double t_end    = 30;
+  double dt       = 5e-4; // higher res for spectral function
+  double t_end    = 5;
 //  double tau_T = 100*dt;
 //  double tau_P = 100*dt; 
   
   int N_timesteps = t_end/dt;
   
-  int N_between_steps = 100;
+  int N_between_steps = 1;
   int N_save_timesteps = N_timesteps / N_between_steps; //for the displacements
   int N_save_atoms = 5;
   
@@ -59,15 +59,21 @@ int main()
   double (*pos)[3]      = malloc(sizeof(double[N_atoms][3]));
   double (*pos_0)[3]    = malloc(sizeof(double[N_atoms][3]));
   double (*momentum)[3] = malloc(sizeof(double[N_atoms][3]));
-//  double (*mom_0)[3]    = malloc(sizeof(double[N_atoms][3]));
   double (*forces)[3]   = malloc(sizeof(double[N_atoms][3]));
-  double (*displacements)[N_save_atoms] = malloc(sizeof(double[N_save_timesteps][N_save_atoms]));
+  double (*displacements)[N_save_atoms] = 
+  			malloc(sizeof(double[N_save_timesteps][N_save_atoms]));
+  double (*pos_all)[N_atoms][3] = 
+  			malloc(sizeof(double[N_save_timesteps][N_atoms][3]));
+  double (*vel_all)[N_atoms][3] = 
+  			malloc(sizeof(double[N_save_timesteps][N_atoms][3]));
   double *temperature   = malloc(sizeof(double[N_timesteps]));
   double *pressure      = malloc(sizeof(double[N_timesteps]));
-  //double *msd           = malloc(sizeof(double[N_timesteps]));
-
+  double *msd           = malloc(sizeof(double[N_save_timesteps])); 
+  double *vel_corr      = malloc(sizeof(double[N_save_timesteps])); 
   
-    
+  for (int i = 0; i<N_save_timesteps; i++){
+    msd[i] = 0;
+  }
   FILE *file_pointer;
     
   /* ----------------------------- TASK 3 ----------------------------------*/
@@ -87,11 +93,9 @@ int main()
     }
   }
   inv_volume = pow(N_cells*cell_length, -3);
-  
-  
-  
   get_forces_AL( forces, pos, cell_length, N_atoms); //initial cond forces
   
+  printf("Initialized. Starting with Verlet timestepping.\n");
   for (int i=0; i<N_timesteps; i++){
     /* 
        The loop over the timesteps first takes a timestep according to the 
@@ -107,33 +111,24 @@ int main()
     /* 3N*kB*T/2 = 1/(2m) * \sum_{i=1}^{N} p_i^2  = p_sq/(2m) */
     temperature[i] =  E_kin * 1/(1.5*N_atoms*kB);
     
-    
     if (i % N_between_steps == 0){
-	 	int k = i/N_between_steps; // number of saved timesteps so far
-		get_displacements (N_save_atoms,  pos, pos_0, displacements[k]);
+	     int k = i/N_between_steps; // number of saved timesteps so far
+		  get_displacements (N_save_atoms,  pos, pos_0, displacements[k]);
+	     copy_mat(N_atoms, 3, pos, pos_all[k]);
+	     
+	     copy_mat(N_atoms, 3, momentum, vel_all[k]);
+	     scale_mat(N_atoms, 3, vel_all[k], 1/m_Al);
 	 }
-    
-	 
-
-    /*
-    // Re-equlibrate temperature 
-    alpha_T = 1 + 2*dt*(T_eq - temperature[i]) / (tau_T * temperature[i]);
-    scale_mat(N_atoms, 3, momentum, sqrt(alpha_T));
-    
-    // Equlibrate pressure by scaling the posistions by a factor of alpha_P^(1/3)
-    alpha_P = 1 - kappa_Al* dt*(P_eq - pressure[i])/tau_P;
-    alpha_P_cube_root = pow(alpha_P, 1.0/3.0);
-    scale_mat(N_atoms, 3, pos, alpha_P_cube_root);
-
-    cell_length*=alpha_P_cube_root;
-    inv_volume*=1/alpha_P;
-    pressure[i] *= alpha_P;
-    temperature[i] *= alpha_T;
-    
-    //*/
+    if ((i*10) % N_timesteps == 0){
+       printf("done %d0 %% of Verlet timestepping\n", (i*10)/N_timesteps);
+    }
   }
- 
+  printf("calculating MSD\n");
+  get_MSD(N_atoms, N_save_timesteps, pos_all, msd);
+  printf("calculating velocity correlation\n");
+  get_vel_corr(N_atoms, N_save_timesteps, vel_all, vel_corr);
 
+  printf("writing to file\n");
   /* Write tempertaure to file */
   
   sprintf(file_name,"../data/temp-%d_pres-%d_Prod-test.tsv",
@@ -160,6 +155,17 @@ int main()
   }
   fclose(file_pointer);
   
+   /* Write MSD to file */
+  sprintf(file_name,"../data/temp-%d_pres-%d_dynamicProperties.tsv",
+	  (int) T_eq_C, (int) P_eq_bar);
+  file_pointer = fopen(file_name, "w");
+  // write header 
+  fprintf(file_pointer, "%% t[ps] \t MSD[A^2] \t vel_corr [A/ps]^2 \n"); 
+  for (int i=0; i<N_save_timesteps; i++){
+     t = i*dt*N_between_steps; // time at step i
+     fprintf(file_pointer, "%.4f \t %.8f \t %.8f \n", t, msd[i], vel_corr[i]);
+  }
+  fclose(file_pointer);
        
   free(pos);           pos = NULL;
   free(pos_0);         pos_0 = NULL;
@@ -168,5 +174,7 @@ int main()
   free(temperature);   temperature = NULL;
   free(pressure);      pressure = NULL;
   free(displacements); displacements = NULL;
+  free(pos_all); pos_all = NULL;
+  free(vel_all); vel_all = NULL;
   return 0;
 }

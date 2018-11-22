@@ -59,19 +59,49 @@ void get_displacements ( int N_atoms,  double (*positions)[3],
     disp[i] = sqrt(disp[i]);
   }
 }
+								   
 
-// FIX HERE!!
-double get_sq_displacements ( int N_atoms,  double (*positions)[3],
-			 double (*initial_positions)[3]) {
-   double disp_sq = 0; 		 
-   for (int i = 0; i < N_atoms; i++) {
-     for (int j = 0; j < 3; j++) {
-      disp_sq += (positions[i][j] - initial_positions[i][j])
-	        *(positions[i][j] - initial_positions[i][j]);
-     }
+void get_MSD ( int N_atoms,  int N_times, double all_pos[N_times][N_atoms][3], 
+                 double MSD[N_times]) {
+   /* all_pos = positions of all particles at all (saved) times */
+   /* outer time index it starts at outer it = 1, since MSD[0] = 0*/        
+   for (int it = 1; it < N_times; it++) { // 	 
+      for (int jt = 0; jt < N_times-it; jt++) { // summed time index
+         for (int kn = 0; kn < N_atoms; kn++) { // particle index
+            for (int kd = 0; kd < 3; kd++) { // three dimensions
+               MSD[it] += (all_pos[it+jt][kn][kd] - all_pos[jt][kn][kd])
+	                      *(all_pos[it+jt][kn][kd] - all_pos[jt][kn][kd]);
+	         }
+	      }
+      }
+      MSD[it] *= 1/( (double)N_atoms * (N_times-it));
+   } 
+}
+
+void get_vel_corr ( int N_atoms,  int N_times, double all_vel[N_times][N_atoms][3], 
+                 double vel_corr[N_times]) {
+   /* all_vel = velocity of all particles at all (saved) times */        
+   for (int it = 0; it < N_times; it++) { // 	 
+      for (int jt = 0; jt < N_times-it; jt++) { // summed time index
+         for (int kn = 0; kn < N_atoms; kn++) { // particle index
+            for (int kd = 0; kd < 3; kd++) { // three dimensions
+               vel_corr[it] += (all_vel[it+jt][kn][kd] * all_vel[jt][kn][kd]);
+	         }
+	      }
+      }
+      vel_corr[it] *= 1/( (double)N_atoms * (N_times-it));
+   } 
+}
+
+
+void copy_mat (int M, int N, double mat_from[M][N], double mat_to[M][N]){
+   /* Copies matrix `mat_from` to `mat_to` */
+   for (int i = 0; i < M; i++) {
+      for (int j = 0; j < N; j++) {
+      mat_to[i][j] = mat_from[i][j];
+      } 
    }
-   return disp_sq;
-}								   
+}
 
 void set_zero (int M, int N, double mat[M][N]){
   /* Sets the matrix `mat` to zero */

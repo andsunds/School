@@ -1,4 +1,6 @@
 \input{template_files/packages}
+\usepackage{units}
+
 
 \title{H1b: MD simulation -- dynamic properties}
 \author{Andr\'eas Sundstr\"om and Linnea Hesslow}
@@ -15,10 +17,38 @@ particles. Since then the art has developed \ldots\
 (\emph{If you like to do so, you may take the opportunity to put the  methods
 in a wider perspective here.}) Here is a random reference.\cite{lamport94}
 
+\section*{Task 1}
+We determined the theoretical lattice parameter ....
+
+Figure~\ref{fig1} shows the potential energy as a function of the lattice parameter. We used a quadratic fit to find the minimum energy, and obtained $V_{\rm eq} \approx \unit[65.38]{\AA^3}$. This corresponds to the equilibrium lattice parameter $a_{\rm eq} \approx \unit[4.029]{\AA}$ at \unit[0]{K}, which we took as the initial lattice parameter for the following tasks.  
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{../figures/potential_energy} 
+  \caption{The potential energy per unit cell for aluminum as a function of the lattice parameter cubed.}
+  \label{fig1}
+\end{center}
+\end{figure}
+
+We find that figure~\ref{fig1} looks similar to the figure~1 in the homework problem file. 
+
+\section*{Task 5}
+Equation (82) in MD lecture notes:
+
+
+\begin{align}
+\Delta_{\rm MSD}(t) &= \lim_{T \rightarrow \infty} \frac{1}{T} \int_0^{T} d t' \frac{1}{N_{\rm atoms}} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t+t') - {\bf r}_i(t') \right]^2 \\ &\Rightarrow \nonumber
+\\
+\Delta_{\rm MSD}(t_k) &\approx
+\frac{1}{N_T -k}\frac{1}{N_{\rm atoms}} \sum_{j=0}^{N_T-k-1} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t_{k+j}) - {\bf r}_i(t_j) \right]^2 
+\end{align}
+
+To determine M, we used mean of ... for t > ... 
+
 \section*{Problem 1}
 As a starting point we first look at scattering from a hard-sphere
 potential. We also consider the Lennard--Jones potential, which is depicted
-in Figure~\ref{fig1}. (\emph{Always refer to Figures in the text.})
+in Figure~\ref{fig11}. (\emph{Always refer to Figures in the text.})
 
 \begin{figure}[!ht]
 \begin{center}
@@ -114,13 +144,44 @@ Include all source code here in the appendix. Keep the code formatting clean,
 use indentation, and comment your code to make it easy to understand. Also,
 break lines that are too long. (Keep them under 80 characters!)
 
-\subsection{Calculating pi using matlab: \texttt{pi.m}}
-\lstinputlisting[language=matlab,numbers=left]{template_files/pi.m}
+%\subsection{Calculating pi using matlab: \texttt{pi.m}}
+%\lstinputlisting[language=matlab,numbers=left]{template_files/pi.m}
 
-\subsection{Calculating pi using python: \texttt{pi.py}}
-\lstinputlisting[language=python,numbers=left]{template_files/pi.py}
+%\subsection{Calculating pi using python: \texttt{pi.py}}
+%\lstinputlisting[language=python,numbers=left]{template_files/pi.py}
 
-\subsection{Calculating pi using C: \texttt{pi.c}}
-\lstinputlisting[language=c,numbers=left]{template_files/pi.c}
+\subsection{Main program task 1: \texttt{main\_T1.c}}
+\lstinputlisting[language=c,numbers=left]{../code/main_T1.c}
 
+\subsection{Main program  Task 2: \texttt{main\_T2.c}}
+\lstinputlisting[language=c,numbers=left]{../code/main_T2.c}
+
+\subsection{Temperature and pressure equilibration for tasks 3-7 : \texttt{main\_T3.c}}
+\lstinputlisting[language=c,numbers=left]{../code/main_T3.c}
+
+\subsection{Production runs for tasks 3-7 : \texttt{main\_Prod.c}}
+\lstinputlisting[language=c,numbers=left]{../code/main_Prod.c}
+
+\subsection{Production runs for tasks 3-7 : \texttt{main\_Prod.c}}
+\lstinputlisting[language=c,numbers=left]{../code/main_Prod.c}
+
+
+\subsection{Misc functions : \texttt{funcs.c}}
+\lstinputlisting[language=c,numbers=left]{../code/funcs.c}
+
+\section{Auxiliary }
+\subsection{Makefile}
+\lstinputlisting[language=bash,numbers=left]{../code/Makefile}
+
+
+
+\section{Matlab scripts}
+\subsection{Analysis scripts for tasks 3-7: \texttt{Al\_energies.m}}
+\lstinputlisting[language=matlab,numbers=left]{../m_scripts/Al_energies.m}
+
+\subsection{Improve figure appearance: \texttt{ImproveFigureCompPhys.m}}
+\lstinputlisting[language=matlab,numbers=left]{../m_scripts/ImproveFigureCompPhys.m}
+
+\subsection{Change size of figures: \texttt{setFigureSize.m}}
+\lstinputlisting[language=matlab,numbers=left]{../m_scripts/setFigureSize.m}
 \end{document}
