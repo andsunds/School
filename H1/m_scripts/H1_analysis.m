@@ -3,7 +3,7 @@ cd(fileparts(tmp.Filename));
 set(0,'DefaultFigureWindowStyle','docked');
 GRAY = 0.7*[0.9 0.9 1];
 
-%% task 1
+%% task 1 : lattice energies
 clc
 
 energy_data = load('../data/lattice_energies.tsv');
