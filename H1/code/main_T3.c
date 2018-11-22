@@ -39,8 +39,8 @@ int main()
    double inv_volume = pow(N_cells*cell_length, -3);
    double noise_amplitude = 6.5e-2 * a_eq;
 
-   double T_final_C= 700;
-   int nRuns = 2; //2 if melt, 1 otherwise
+   double T_final_C= 500;
+   int nRuns = 1; //2 if melt, 1 otherwise
    double T_melt_C = 900;
    
    double P_final_bar= 1;
@@ -142,6 +142,7 @@ int main()
       }
 	}
 
+	printf("equilibrium a0 = %.4f A\n", cell_length/N_cells);
 
   /* Write tempertaure to file */
   sprintf(file_name,"../data/temp-%d_pres-%d_Task3.tsv",

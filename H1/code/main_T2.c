@@ -55,8 +55,8 @@ int main()
     */
     timestep_Verlet (N_atoms, pos,  momentum, forces, m_Al, dt, a_eq*N_cells);
 
-    E_kin    =get_kin_energy(N_atoms, momentum, m_Al );
-    E_tot[i] =E_kin + get_energy_AL(pos, a_eq*N_cells, N_atoms);
+    E_kin    = get_kin_energy(N_atoms, momentum, m_Al );
+    E_tot[i] = (E_kin + get_energy_AL(pos, a_eq*N_cells, N_atoms))*4/N_atoms;
     
     /* 3N*kB*T/2 = 1/(2m) * \sum_{i=1}^{N} p_i^2  = p_sq/(2m) */
     temperature[i] =  E_kin * 2/(3*N_atoms*kB);
