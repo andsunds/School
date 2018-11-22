@@ -180,35 +180,44 @@ for iFile = 1:numel(FILENAMES)
     t = data(:,1);
     dx = data(:,2:end);
     
-    plot(t, dx.^2); hold on;
+    
 
     data = load(FILENAMES_Dyn{iFile});
     MSD = data(:,2);
     vel_corr = data(:,3);
-    plot(t, MSD, 'k')
+    plot(t, MSD, 'k'); hold on;
     
     if iFile ==2 % liquid
         tStart = 1;
         D = MSD(t>tStart)./(6*t(t>tStart));
         selfDiffusionCoeff = mean(D); % in Å^2 /ps
-        plot(t, 6*t*selfDiffusionCoeff, ':');
+        plot(t, 6*t*selfDiffusionCoeff, ':r');
     end
     
-    leg = legend( [strcat({'$n=$'}, num2str((1:size(dx,2))')); '$\Delta_{\rm MSD}$']);
-    leg.Location='northwest';
+    plot(t, dx.^2, 'color', GRAY); hold on;
+    
     xlabel('$t$ [ps]')
     ylabel('$\Delta x^2 \,[\rm \AA^2]$')
     if iFile ==1
         ylim([ 0 1.0]);
+        leg = legend( '$\Delta_{\rm MSD}$', 'individual trajectories');
     else
         ylim([0 20]);
+        leg = legend('$\Delta_{\rm MSD}$', '$6 t D_s$', 'individual trajectories');
     end
+    
+    
+    
+    leg.Location='northwest';
     ImproveFigureCompPhys(gcf, 'Linewidth', 2);
-    ax = gca; ax.Children(1).LineWidth = 4;
+    ax = gca; [ax.Children(6:end).LineWidth] = deal(5);
+    ax.Children = ax.Children([6:end 1:5]);
+   
+    setFigureSize(gcf, 400, 400);
     
     figure(10)
     plot(t, vel_corr/vel_corr(1), 'color', GRAY); hold on;
-    xlim([0 1])
+    xlim([0 0.8])
     
 end
 
@@ -254,10 +263,24 @@ leg.Location='northeast';
 xlabel('$t$ [ps]')
 ylabel('$\Phi (t)/\Phi(0)$')
 ImproveFigureCompPhys(gcf);
+setFigureSize(gcf, 400, 400);
 
 figure(11)
-leg = legend('$T= 500 \, ^\circ $C, $ \hat \Phi$' , '$T= 500 \, ^\circ $C, $|\hat v|^2$',...
-    '$T= 700 \, ^\circ $C, $ \hat \Phi$', '$T= 700 \, ^\circ $C, $|\hat v|^2$');
+leg = legend('$T= 500 \, ^\circ $C, $ \hat \Phi$' , '$T= 500 \, ^\circ $C, $\hat P$',...
+    '$T= 700 \, ^\circ $C, $ \hat \Phi$', '$T= 700 \, ^\circ $C, $\hat P$');
 xlim([0 30])
 ylim([0 Inf])
+xlabel('$f$ [ps$^{-1}$]')
+ylabel('$\hat P$ [\AA$^2$/ps] ')
+setFigureSize(gcf, 400, 400);
+
 ImproveFigureCompPhys(gcf,'LineColor', {'r', 'MYRED', 'GERIBLUE','MYLIGHTBLUE'}');
+
+
+
+
+saveas(1, '../figures/MSD-500.eps', 'epsc')
+saveas(2, '../figures/MSD-700.eps', 'epsc')
+saveas(10, '../figures/Phi-t.eps', 'epsc')
+saveas(11, '../figures/P-freq.eps', 'epsc')
+
