@@ -1,6 +1,11 @@
 \input{template_files/packages}
 \usepackage{units}
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+\usepackage{physics}
 
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
 
 \title{H1b: MD simulation -- dynamic properties}
 \author{Andr\'eas Sundstr\"om and Linnea Hesslow}
@@ -43,7 +48,56 @@ Equation (82) in MD lecture notes:
 \frac{1}{N_T -k}\frac{1}{N_{\rm atoms}} \sum_{j=0}^{N_T-k-1} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t_{k+j}) - {\bf r}_i(t_j) \right]^2 
 \end{align}
 
-To determine M, we used mean of ... for t > ... 
+To determine M, we used mean of ... for t  > ...
+
+
+\section*{Task 7}
+
+
+
+The average ``power'' content in avariable , $X(t')$, at
+some time, $t$, during some range of time, $T$, can be defined as
+\begin{equation}
+P_X(t,T) = \frac{1}{T}\int_{t-T/2}^{t+T/2}\dd{t'}\,X^2(t').
+\end{equation}
+This quantity can (in physically relevant systems) also be defined for
+the process over all,
+\begin{equation}
+P_X = \lim_{T\to\infty} P_X(T)
+= \lim_{T\to\infty} \frac{1}{T} \ev{\int_{0}^{T}\dd{t'}\,X^2(t')}.
+\end{equation}
+At this stage, we can introduce a 
+We have the Fourier transform
+\begin{equation}
+\hat{f}(\omega) = \int_{-\infty}^{\infty}\dd{t} f(t)\ee^{\ii\omega t},
+\end{equation}
+
+
+Using these two functions, we can define a power spectrum
+\begin{equation}
+\begin{aligned}
+\hat{P}(\omega) =& \ev{\abs{\hat{\vb*v}(\omega)}^2}_{\rm A}
+=\ev{\hat{\vb*v}(\omega)\vdot \bar{\hat{\vb*v}}(\omega)}_{\rm A}\\
+=& \ev{\int_{-\infty}^{\infty}\dd{t}\, \vb*v(t)\ee^{\ii\omega t}
+  \int_{-\infty}^{\infty}\dd{t'}\, \vb*v(t')\ee^{-\ii\omega t'} }_{\rm A},
+\end{aligned}
+\end{equation}
+where $\bar{\hat{\vb*v}}$ denotes the complex conjugate of
+$\bar{\vb*v}$. We can now change varaibles to $t=t'+\tau$ and note
+that the atom averages only falls on the velocities, which gives
+\begin{equation}
+\begin{aligned}
+\hat{P}(\omega) 
+=& \int_{-\infty}^{\infty}\dd\tau\, \ee^{\ii\omega\tau}
+  \int_{-\infty}^{\infty}\dd{t'} \ev{\vb*v(t'+\tau)\vdot\vb*v(t') }_{\rm A},
+\end{aligned}
+\end{equation}
+
+
+
+
+
+
 
 \section*{Problem 1}
 As a starting point we first look at scattering from a hard-sphere
@@ -185,3 +239,8 @@ break lines that are too long. (Keep them under 80 characters!)
 \subsection{Change size of figures: \texttt{setFigureSize.m}}
 \lstinputlisting[language=matlab,numbers=left]{../m_scripts/setFigureSize.m}
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
