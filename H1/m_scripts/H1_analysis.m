@@ -1,13 +1,14 @@
+%% initial
+
 tmp = matlab.desktop.editor.getActive; %% cd to current path
 cd(fileparts(tmp.Filename));
 set(0,'DefaultFigureWindowStyle','docked');
-GRAY = 0.7*[0.9 0.9 1];
 warning('off','MATLAB:handle_graphics:exceptions:SceneNode'); % interpreter warning
-%% task 1: lattice energies
-clc
-
+GRAY = 0.7*[0.9 0.9 1];
 AMU = 1.0364e-4;
 m_Al = 27*AMU;
+%% task 1: lattice energies
+clc
 
 energy_data = load('../data/lattice_energies.tsv');
 a0 = energy_data(:,1);
@@ -30,15 +31,11 @@ xlim([64 68]);
 v_min = -p(2)/(2*p(1));
 a_min = v_min^(1/3);
 omega_res = sqrt(2*p(1)*a_min^4/m_Al);
-f_res = omega_res/(2*pi); 
+f_res = omega_res/(2*pi); % order of magnitude estimation of resonance frequency (?)
 
-
-
-ax = gca;
-ax.YLim = [-13.45 -13.42];
 h1 = plot( v_min*[1 1], ax.YLim, '--k'); % plot vertical line at v_min
 
-
+ax = gca; ax.YLim = [-13.45 -13.42];
 ax.YTick = (-13.45:0.01:-13.42);
 ylabel('$E_{\rm pot}$ [eV/unit cell]');
 xlabel('$a_0^3$ [\AA$^3$]');
@@ -46,23 +43,21 @@ legend('data', 'quadratic fit', ['$V_{\rm eq} \approx \, $' num2str(round(v_min,
     'location', 'southeast')
 ax = gca; ax.Children = ax.Children(3:-1:1);
 ImproveFigureCompPhys(gcf); h1.LineWidth = 2; setFigureSize(gcf, 300, 600);
-
-%axis([63 68 ylim(1) 0]);
 saveas(gcf, '../figures/potential_energy.eps', 'epsc')
-
 %% task 2: find a suitable timestep
-clc;clf;
+clc;
 
-dt=[1e-2,5e-3,2e-3,1e-3];
+dt=[1e-2,5e-3,2e-3,1e-3]; 
+t_eq=0.5;
+
 figure(1);clf;figure(2);clf;
+
 for i=1:4
     T_data = load(sprintf('../data/temperature_dt-%0.0e_Task2.tsv',dt(i)));
     E_data = load(sprintf('../data/total_energy_dt-%0.0e_Task2.tsv',dt(i)));
     t = T_data(:,1);
     T = T_data(:,2);
     E = E_data(:,2);
-    
-    t_eq=0.5;
     
     fprintf('dt = %0.0e\n',dt(i));
     
@@ -77,28 +72,26 @@ for i=1:4
     figure(1)
     plot(t, T); hold on;
     
-    %yyaxis right
     figure(2)
     plot(t, E);hold on;
-    %ylim(E_avg*(1+0.001*[1,-1]));
 end
 for ifig = 1:2
     figure(ifig);
     h = legend(strcat({'$dt = $ '}, num2str(round(dt',4)) , ' ps'));
     xlabel('$t$ [ps]');
+    ax = gca;
     if ifig ==1
         ylabel('$T$ [K]')
+        ax.YLim = [400 1800];
     else
         ylabel('$E_{\rm tot}$ [eV/unit cell]');
-        ax = gca; ax.YTick = (-13:0.1:-10);
-        ax.YLim = [-12.6 -12.2];
-        %h.Location = 'best';
+        ax.YTick = (-13:0.1:-10);
+        ax.YLim = [-12.6 -12.0];
     end
     ImproveFigureCompPhys(gcf,'Linewidth', 2);setFigureSize(gcf, 400, 400);
 end
 saveas(1, '../figures/dt-scan-temperature.eps', 'epsc')
 saveas(2, '../figures/dt-scan-energy.eps', 'epsc')
-
 %% task 3: temperature and pressure equilibration, 
 % and task4: test production pressure and temperature
 
@@ -144,7 +137,6 @@ for iFile = 1:numel(FILENAMES)
     end
     ylabel('$T \, [^\circ \rm C]$')
     
-    
     if iFile <=2 % equlibration run, otherwise production
         ylim(temps(iFile)*(1+ 0.3*[-1,1.2]))
         yyaxis right
@@ -171,8 +163,6 @@ saveas(1, '../figures/TP-eq-500.eps', 'epsc')
 saveas(2, '../figures/TP-eq-700.eps', 'epsc')
 saveas(3, '../figures/TP-prod-500.eps', 'epsc')
 saveas(4, '../figures/TP-prod-700.eps', 'epsc')
-
-
 %% determine displacements and MSD
 temperatures_str = num2str([500;700]);
 clc; clf;
@@ -181,13 +171,10 @@ FILENAMES = strcat({'../data/temp-'}, temperatures_str, '_pres-1_displacements.t
 FILENAMES_Dyn = strcat({'../data/temp-'}, temperatures_str, '_pres-1_dynamicProperties.tsv');
 FILENAMES_Pow = strcat({'../data/temp-'}, temperatures_str, '_pres-1_power-spectrum.tsv');
 for iFile = 1:numel(FILENAMES)
-
     figure(iFile); clf;
     data = load(FILENAMES{iFile});
     t = data(:,1);
     dx = data(:,2:end);
-    
-    
 
     data = load(FILENAMES_Dyn{iFile});
     MSD = data(:,2);
@@ -217,16 +204,10 @@ for iFile = 1:numel(FILENAMES)
     ImproveFigureCompPhys(gcf, 'Linewidth', 2);
     ax = gca; [ax.Children(6:end).LineWidth] = deal(5);
     ax.Children = ax.Children([6:end 1:5]);
-   
     setFigureSize(gcf, 400, 400);
-    
-    figure(10)
-    plot(t, vel_corr/vel_corr(1), 'color', GRAY); hold on;
-    xlim([0 0.8])
-    
 end
 
-% % velocity correlation
+% velocity correlation
 figure(10);clf; figure(11);clf;
 n_average_points = 1;%30;
 for iFile = 1:numel(FILENAMES)
@@ -249,9 +230,8 @@ for iFile = 1:numel(FILENAMES)
     %PhiHat =  1/2 * 1/N_times * 2 * sum( (vel_corr(1:N_times) * ones(size(freqvec))) .* cos(2*pi*t(1:N_times) * freqvec ), 1); %dimension 1
     
     figure(11);
-    
-    plot(freqvec, PhiHat); hold on;
-    plot(freq, pow_spec*t(end), ':'); hold on;
+    plot(freqvec, m_Al/2*PhiHat); hold on;
+    plot(freq, m_Al/2* pow_spec*t(end), ':'); hold on;
     if iFile ==2 % liquid
         tStart = 1;
         selfDiffusionCoeff_spectral = PhiHat(1)/6; % in Å^2 /ps
@@ -262,12 +242,12 @@ end
 disp([selfDiffusionCoeff selfDiffusionCoeff_spectral]);
 
 figure(10)
-xlim([0 1])
+xlim([0 1]);
 leg = legend(strcat({'$T='}, num2str([500;700]), '\,^\circ $C'));
 leg.Location='northeast';
 xlabel('$t$ [ps]')
 ylabel('$\Phi (t)/\Phi(0)$')
-ImproveFigureCompPhys(gcf);
+ImproveFigureCompPhys(gcf,'LineColor', {'MYRED', 'MYLIGHTBLUE'}');
 setFigureSize(gcf, 400, 400);
 
 figure(11)
@@ -275,13 +255,11 @@ leg = legend('$T= 500 \, ^\circ $C, $ \hat \Phi$' , '$T= 500 \, ^\circ $C, $\hat
     '$T= 700 \, ^\circ $C, $ \hat \Phi$', '$T= 700 \, ^\circ $C, $\hat P$');
 xlim([0 30])
 ylim([0 Inf])
-xlabel('$f$ [ps$^{-1}$]')
-ylabel('$\hat P$ [\AA$^2$/ps] ')
+xlabel('$f$ [THz]')
+ylabel('$\frac{1}{2} m \hat P$ [eV/THz]')
 setFigureSize(gcf, 400, 400);
 
 ImproveFigureCompPhys(gcf,'LineColor', {'r', 'MYRED', 'GERIBLUE','MYLIGHTBLUE'}');
-
-
 
 
 saveas(1, '../figures/MSD-500.eps', 'epsc')

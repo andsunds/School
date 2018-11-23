@@ -26,8 +26,7 @@ mean square displacements and the velocity correlation function.
 \section*{Task 1: potential energy}
 The theoretical lattice parameter for aluminim can be determined by calculating the minimum potential energy per unit cell in a lattice with zero initial momenta for all particles. 
 
-Figure~\ref{fig1} shows the potential energy as a function of the lattice parameter. We used a quadratic fit to find the minimum energy, and obtained $V_{\rm eq} \approx \unit[65.38]{\AA^3}$. This corresponds to the equilibrium lattice parameter $a_{\rm eq} \approx \unit[4.029]{\AA}$ at \unit[0]{K}, which we took as the initial lattice parameter for the following tasks.  
-
+Figure~\ref{fig1} shows the potential energy as a function of the lattice parameter. We used a quadratic fit to find the minimum energy\footnote{We performed the quadratic fit in the volume $V$, which to a small error corresponds to a quadratic fit in the lattice parameter $a$, since $E \approx  \alpha(V-V_0)^2 \approx \alpha a_0^4 (a-a_0)^2$ in a close vicinity of the minimum $a\approx a_0$}, and obtained $V_{\rm eq} \approx \unit[65.38]{\AA^3}$. This corresponds to the equilibrium lattice parameter $a_{\rm eq} \approx \unit[4.029]{\AA}$ at \unit[0]{K}, which we took as the initial lattice parameter for the following tasks.  We find that figure~\ref{fig1} looks similar to the figure~1 in the homework problem file, which is encouraging.
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.7\textwidth]{../figures/potential_energy} 
@@ -36,17 +35,13 @@ Figure~\ref{fig1} shows the potential energy as a function of the lattice parame
 \end{center}
 \end{figure}
 
-We find that figure~\ref{fig1} looks similar to the figure~1 in the homework problem file. 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Task 2: detmine the timestep}
+\section*{Task 2: determine the time step}
 
 
-With the random noise, the temperature and the energy are differs between runs, but are in the same order of magnitude. From figure~\ref{fig:task2}, we determine that $dt = \unit[5 \cdot 10^{-3}]{ps} = \unit[5]{fs}$ is a sufficient time step. This is in line with the lecture notes, where it is stated that the a suitable timestep would normally be a few femtoseconds, or somewhat larger for heavy atoms.
+With the random noise, the temperature and the energy differ between runs, but are in the same order of magnitude. From figure~\ref{fig:task2}, we determine that $dt = \unit[5 \cdot 10^{-3}]{ps} = \unit[5]{fs}$ is a sufficient time step. This is in line with the lecture notes, where it is stated that a suitable timestep would normally be a few femtoseconds, or somewhat larger for heavy atoms.
   
-We note that the temperature is higher than desired value of~\unit[600-800]{K}. The temperatures and energies up to one standard deviation are quantified in table~\ref{tab:task2}. 
-
-
+We note that the temperature in several cases is higher than desired value of~\unit[600-800]{K} from the problem sheet. The temperatures and energies up to one standard deviation are quantified in table~\ref{tab:task2}. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -74,7 +69,7 @@ $1\cdot 10^{-3}$ & $ 841  \pm 3.7 \% $	 &$ -12.58 \pm 3.6\cdot 10^{-4} \%$ \\
   \end{center}
 \end{table}
 
-\section*{Tasks 3 and 4: Temperature and pressure equilibration}
+\section*{Tasks 3 and 4: temperature and pressure equilibration}
 We set $\tau_P = \tau_T = 100 dt$, where $dt = 5\cdot 10^{-3}$\,ps, and equilibrated the temperature and pressure by scaling the particle momenta and positions (and box size) respectively. Choosing a slower equilibration time did not affect the results qualitatively. Both temperature and pressure were equilibrated in the same Verlet loop, but for the higher temperature the the system was first melted by increasing the temperature to \unit[900]{$^\circ$C}. To determine the isothermal compressibility $\kappa$, 
 the values of Young's modulus $Y$ and shear modulus $G$ were taken from Physics Handbook, table T 1.1. From F 1.15 in Physics Handbook, the bulk modulus can then calculated as
 \begin{equation}
@@ -88,7 +83,7 @@ The results are shown in figure~\ref{fig:eq}, where we overlay the instantaneous
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/TP-eq-500} 
     \includegraphics[width=0.48\textwidth]{../figures/TP-eq-700} 
-  \caption{The instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ overlayed with with a moving average using 100 time steps, which corresponds to $\Delta t = \tau_P/2$. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[500]{^\circ C}$.}
+  \caption{The instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ overlayed with with a moving average using 100 time steps, which corresponds to $\Delta t = \tau_P/2$. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[700]{^\circ C}$.}
   \label{fig:eq}
 \end{center}
 \end{figure}
@@ -124,7 +119,7 @@ First, we note that the cumulative averages of the instantaneous temperatures an
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/TP-prod-500} 
     \includegraphics[width=0.48\textwidth]{../figures/TP-prod-700} 
-  \caption{The instantaneous values, and the cumulative averages, of the temperature and the pressure in the production runs. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[500]{^\circ C}$}
+  \caption{The instantaneous values, and the cumulative averages, of the temperature and the pressure in the production runs. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[700]{^\circ C}$}
   \label{fig:prod}
 \end{center}
 \end{figure}
@@ -138,7 +133,7 @@ The self-diffusion coefficient as determined by the average slope of the mean sq
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/MSD-500} 
     \includegraphics[width=0.48\textwidth]{../figures/MSD-700} 
-  \caption{!!!!!!!!!!!!!!!!!!!!!!!! Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[500]{^\circ C}$}
+  \caption{Five individual particle trajectories are shown in gray, overlaid with the mean square displacement in thick black line. In the left panel, $T=\unit[500]{^\circ C}$, and the system is in a solid state. In the right panel, $T=\unit[700]{^\circ C}$, the system is in a liquid state, where $\Delta_{\rm MSD} \approx 6 t D_s$ (shown in dotted red).}
   \label{fig:MSD}
 \end{center}
 \end{figure}
@@ -149,57 +144,53 @@ The self-diffusion coefficient as determined by the average slope of the mean sq
 %To determine M, we used mean of ... for t $>$ ... 
 
 
-\section*{Task 7}
+\section*{Tasks 6-7: the velocity correlation}
 
-\subsection*{What we did}
 
-We calculated the discrete auto-correlation function similarly to the
-MSD, 
+The average ``power'' content in avariable , $X(t')$, at
+some time, $t$, during some range of time, $T$, can be defined as
 \begin{equation}
-\varPhi_j = \frac{1}{N-j}\sum_{i=0}^{N-j-1} \ev{v_{i+j}v_{i}},
+P_X(t,T) = \frac{1}{T}\int_{t-T/2}^{t+T/2}\dd{t'}\,X^2(t').
 \end{equation}
-where $j=0,1,\ldots,N-1$ and the average is taken over all atoms.
-We then preceded to numerically approximate the integral
+This quantity can (in physically relevant systems) also be defined for
+the process over all,
 \begin{equation}
-\hat{\varPhi}(f) = 2\int_0^{\infty}\dd{t}\,
-\varPhi(t) \cos(2\pi ft)
-\approx 2\int_0^{T_{\rm s}}\dd{t}\,\varPhi(t) \cos(2\pi ft)
+P_X = \lim_{T\to\infty} P_X(T)
+= \lim_{T\to\infty} \frac{1}{T} \ev{\int_{0}^{T}\dd{t'}\,X^2(t')}.
 \end{equation}
-using a trapeziodal method in \textsc{Matlab}, with a frequency range
-$f=0$ to $f=1/(2\Delta{t})=f_{\rm Nyqvist}$, and frequency steps
-$\Delta{f}=1/T_{\rm s}$, where $T_{\rm s}$ is a time at about half the
-simulation end time. This is to avoid including noisy data in
-$\varPhi(t)$ at later times, where the statistics are poor.
+At this stage, we can introduce a 
+We have the Fourier transform
+\begin{equation}
+\hat{f}(\omega) = \int_{-\infty}^{\infty}\dd{t} f(t)\ee^{\ii\omega t},
+\end{equation}
 
-We then calculated the powerspectrum according to
+
+Using these two functions, we can define a power spectrum
 \begin{equation}
 \begin{aligned}
-\hat{P}(\omega) =& \lim_{T\to\infty}\frac{1}{T}
-\ev{\abs{\int_0^{T}\dd{t}\,v(t)\ee^{\ii\omega t}}^2}\\
-\approx& \frac{1}{T}
-\ev{\abs{\int_0^{T}\dd{t}\,v(t)\ee^{\ii\omega t}}^2}\\
-\Longrightarrow\quad
-\hat{P}_k=& \frac{1}{T}
-\ev{\abs{\frac{T}{N} \sum_{i=0}^{N-1} v_i\exp(\ii2\pi\frac{ik}{N})}^2}
-=\frac{T}{N} \ev{\abs{\hat{\vb*v}_k}^2}
+\hat{P}(\omega) =& \ev{\abs{\hat{\vb*v}(\omega)}^2}_{\rm A}
+=\ev{\hat{\vb*v}(\omega)\vdot \bar{\hat{\vb*v}}(\omega)}_{\rm A}\\
+=& \ev{\int_{-\infty}^{\infty}\dd{t}\, \vb*v(t)\ee^{\ii\omega t}
+  \int_{-\infty}^{\infty}\dd{t'}\, \vb*v(t')\ee^{-\ii\omega t'} }_{\rm A},
 \end{aligned}
 \end{equation}
-where the averages is taken over all atoms, and
+where $\bar{\hat{\vb*v}}$ denotes the complex conjugate of
+$\bar{\vb*v}$. We can now change varaibles to $t=t'+\tau$ and note
+that the atom averages only falls on the velocities, which gives
 \begin{equation}
-\hat{\vb*v}_k = \sqrt{N}\sum_{i=0}^{N-1} \vb*v_i \exp(\ii2\pi\frac{ik}{N})
+\begin{aligned}
+\hat{P}(\omega) 
+=& \int_{-\infty}^{\infty}\dd\tau\, \ee^{\ii\omega\tau}
+  \int_{-\infty}^{\infty}\dd{t'} \ev{\vb*v(t'+\tau)\vdot\vb*v(t') }_{\rm A},
+\end{aligned}
 \end{equation}
-is the discrete Fourier transform of $v_i$.
-
-When we compare $\hat{\varPhi}_k$ and $\hat{P}_k$ in Figure~\ref{fig:spectrum},
-we find that they are very similar, as, indeed, they should be
-acording to the Wiener-Khinthchine theorem.
 
 
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/Phi-t} 
     \includegraphics[width=0.48\textwidth]{../figures/P-freq} 
-  \caption{!!!!!!!!!!!!!!!!!!!!!!}
+  \caption{Left panel: The velocity correlation function, and (right panel) its spectrum, calculated both directly from the velocity correlation (solid line) and from the power spectrum of the particle velocity (dotted line). Blue lines show $T=\unit[500]{^\circ C}$ and red lines $T=\unit[700]{^\circ C}$. The spectrum is multiplied by a factor of $\tfrac{1}{2} m_{\rm Al}$, in which case it can be interpreted as energy per frequency interval. }
   \label{fig:spectrum}
 \end{center}
 \end{figure}
@@ -218,10 +209,6 @@ clearly distinguishable from the liquid state. The mean square displacement reac
 
 \section{Source Code}
 
-Include all source code here in the appendix. Keep the code formatting clean,
-use indentation, and comment your code to make it easy to understand. Also,
-break lines that are too long. (Keep them under 80 characters!)
-
 %\subsection{Calculating pi using matlab: \texttt{pi.m}}
 %\lstinputlisting[language=matlab,numbers=left]{template_files/pi.m}
 
@@ -234,7 +221,7 @@ break lines that are too long. (Keep them under 80 characters!)
 \subsection{Main program  Task 2: \texttt{main\_T2.c}}
 \lstinputlisting[language=c,numbers=left]{../code/main_T2.c}
 
-\subsection{Temperature and pressure equilibration for tasks 3-7 : \texttt{main\_T3.c}}
+\subsection{Temperature and pressure equilibration for tasks 3-7:\\ \texttt{main\_T3.c}}
 \lstinputlisting[language=c,numbers=left]{../code/main_T3.c}
 
 \subsection{Production runs for tasks 3-7 : \texttt{main\_Prod.c}}
