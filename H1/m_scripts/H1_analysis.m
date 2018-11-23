@@ -6,6 +6,9 @@ warning('off','MATLAB:handle_graphics:exceptions:SceneNode'); % interpreter warn
 %% task 1: lattice energies
 clc
 
+AMU = 1.0364e-4;
+m_Al = 27*AMU;
+
 energy_data = load('../data/lattice_energies.tsv');
 a0 = energy_data(:,1);
 v0 = a0.^3;
@@ -26,6 +29,10 @@ xlim([64 68]);
 
 v_min = -p(2)/(2*p(1));
 a_min = v_min^(1/3);
+omega_res = sqrt(2*p(1)*a_min^4/m_Al);
+f_res = omega_res/(2*pi); 
+
+
 
 ax = gca;
 ax.YLim = [-13.45 -13.42];
