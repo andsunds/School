@@ -40,9 +40,6 @@ Figure~\ref{fig1} shows the potential energy as a function of the lattice parame
 
 
 With the random noise, the temperature and the energy differ between runs, but are in the same order of magnitude. From figure~\ref{fig:task2}, we determine that $dt = \unit[5 \cdot 10^{-3}]{ps} = \unit[5]{fs}$ is a sufficient time step. This is in line with the lecture notes, where it is stated that a suitable timestep would normally be a few femtoseconds, or somewhat larger for heavy atoms.
-  
-We note that the temperature in several cases is higher than desired value of~\unit[600-800]{K} from the problem sheet. The temperatures and energies up to one standard deviation are quantified in table~\ref{tab:task2}. 
-
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/dt-scan-temperature} 
@@ -50,10 +47,8 @@ We note that the temperature in several cases is higher than desired value of~\u
   \caption{The temperature and kinetic energy per unit cell as a function of time for four different timesteps.}
   \label{fig:task2}
 \end{center}
-\end{figure}
-
-
-
+\end{figure}  
+We note that the temperature in several cases is higher than desired value of~\unit[600-800]{K} from the problem sheet. The temperatures and energies up to one standard deviation are quantified in table~\ref{tab:task2}. 
 \begin{table}[!ht]
   \begin{center}
     \caption{Energies and temperatures with one standard deviation uncertainties for four different values of the time steps.}
@@ -68,6 +63,7 @@ $1\cdot 10^{-3}$ & $ 841  \pm 3.7 \% $	 &$ -12.58 \pm 3.6\cdot 10^{-4} \%$ \\
     \label{tab:task2}
   \end{center}
 \end{table}
+
 
 \section*{Tasks 3 and 4: temperature and pressure equilibration}
 We set $\tau_P = \tau_T = 100 dt$, where $dt = 5\cdot 10^{-3}$\,ps, and equilibrated the temperature and pressure by scaling the particle momenta and positions (and box size) respectively. Choosing a slower equilibration time did not affect the results qualitatively. Both temperature and pressure were equilibrated in the same Verlet loop, but for the higher temperature the the system was first melted by increasing the temperature to \unit[900]{$^\circ$C}. To determine the isothermal compressibility $\kappa$, 
@@ -101,9 +97,17 @@ These value are larger than the zero-temperature constants, and it is reasonable
 
 Starting with the temperature- and pressure equilibrated systems from the previous section, we study the particle trajectories for both systems. Here, we decrease the timestep to   $dt       = \unit[5\cdot 10^{-4}]{ps}$ and the simulation length to $t_{\rm end} = \unit[5]{ps}$ to get better statistics. This was mostly motivated by increasing the resolution in tasks 6-7. 
 
-Equation (82) in MD lecture notes:
+First, we note that the cumulative averages of the instantaneous temperatures and pressures stayed close to their inital values. This is shown in figure~\ref{fig:prod}.
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{../figures/TP-prod-500} 
+    \includegraphics[width=0.48\textwidth]{../figures/TP-prod-700} 
+  \caption{The instantaneous values, and the cumulative averages, of the temperature and the pressure in the production runs. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[700]{^\circ C}$}
+  \label{fig:prod}
+\end{center}
+\end{figure}
 
-
+From equation (82) in MD lecture notes, the the means square displacement can be calculated as
 \begin{align}
 \Delta_{\rm MSD}(t) &= \lim_{T \rightarrow \infty} \frac{1}{T} \int_0^{T} d t' \frac{1}{N_{\rm atoms}} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t+t') - {\bf r}_i(t') \right]^2 \\ &\Rightarrow \nonumber
 \\
@@ -113,16 +117,7 @@ Equation (82) in MD lecture notes:
 \end{align}
 
 
-First, we note that the cumulative averages of the instantaneous temperatures and pressures stayed close to their inital values. This is shown in figure~\ref{fig:prod}.
 
-\begin{figure}[!ht]
-\begin{center}
-  \includegraphics[width=0.48\textwidth]{../figures/TP-prod-500} 
-    \includegraphics[width=0.48\textwidth]{../figures/TP-prod-700} 
-  \caption{The instantaneous values, and the cumulative averages, of the temperature and the pressure in the production runs. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[700]{^\circ C}$}
-  \label{fig:prod}
-\end{center}
-\end{figure}
 
 We now consider the particle trajectories. Figure~\ref{fig:MSD} shows the trajectories of five individual particles along with the mean square displacement as determined in equation~\eqref{eq:1}. We can clearly see that the particle trajectories are bounded in the left figure~\ref{fig:MSD}, while for the high-temperature case in the right panel, they increase as square root of time ($\Delta_{\rm MSD} \propto t$). Consequently, the former is in a solid state while the latter is in a liquid state. 
 
