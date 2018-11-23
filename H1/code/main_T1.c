@@ -1,6 +1,16 @@
 /*
- main_T1.c Task 1 H1b
- */
+  main_T1.c Task 1 H1b
+  In this task, we scan over a range of lattice parameters, a0, to determine 
+  which results in the lowest potetntial energy stored in the lattice.
+  
+  System of units:
+  Energy   - eV
+  Time     - ps
+  Length   - Angstrom
+  Temp     - K
+  Mass     - eV (ps)^2 A^(-2)
+  Pressure - eV A^(-3)
+*/
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
@@ -26,12 +36,13 @@ int main()
   FILE *file_pointer;    
     
   for (int i=0; i<N_lattice_params; i++){
-    a0 = a0_min + i*da0; 	
-    init_fcc(pos, N_cells, a0);		
-    // energy per unit cell 	
+    a0 = a0_min + i*da0;        // The lattice constant of this iteration	
+    init_fcc(pos, N_cells, a0); // Init, FCC cells with lattice constant `a0`
+    // energy per unit cell
     energy[i] = get_energy_AL(pos, N_cells*a0, N_atoms )*4/N_atoms;    
   }
 
+  // Write to files
   file_pointer = fopen("../data/lattice_energies.tsv", "w");
   for (int i=0; i<N_lattice_params; i++){
     a0 = a0_min + i*da0; 
@@ -39,7 +50,7 @@ int main()
   }
   fclose(file_pointer);    
   
-  free(pos); pos = NULL;
+  free(pos);    pos = NULL;
   free(energy); energy = NULL;
   return 0;
 }

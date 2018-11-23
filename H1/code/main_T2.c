@@ -1,8 +1,17 @@
 /*
- MD_main.c
- 
- Created by Anders Lindman on 2013-10-31.
- */
+  main_T2.c, Task 2, H1b
+  In this task, we add random noise to the particle positions and see how the 
+  system evolves in time. Using the kinetic energy of the particles, we can 
+  derive an instantaneous temperature of the system.
+
+  System of units:
+  Energy   - eV
+  Time     - ps
+  Length   - Angstrom
+  Temp     - K
+  Mass     - eV (ps)^2 A^(-2)
+  Pressure - eV A^(-3)
+*/
 
 #include <stdio.h>
 #include <math.h>
@@ -20,14 +29,13 @@
 /* Main program */
 int main()
 {
-    
   int N_atoms = 4*N_cells*N_cells*N_cells;
   double m_Al = 27*AMU;
     
-  double a_eq = 4.03; 
+  double a_eq = 4.03; // Min potential energy lattice constant
     
   double noise_amplitude = 6.5e-2 * a_eq;
-  double t_max=10;
+  double t_max=10; //
   double dt = 1e-3;
   int N_timesteps = t_max/dt;
   double t, E_kin;
@@ -81,10 +89,10 @@ int main()
   }
   fclose(file_pointer);
      
-  free(pos); pos = NULL;
-  free(momentum); momentum = NULL;
-  free(forces); forces = NULL;
+  free(pos);         pos = NULL;
+  free(momentum);    momentum = NULL;
+  free(forces);      forces = NULL;
   free(temperature); temperature = NULL;
-  free(E_tot); E_tot = NULL;
+  free(E_tot);       E_tot = NULL;
   return 0;
 }

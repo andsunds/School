@@ -1,8 +1,24 @@
 /*
- MD_main.c
+  main_T3.c, Task 3, H1b
+  In this task, we use an equlibration scheme, based on scaling particle momenta
+  and positions, to equlibrate the temperature and pressure in the system. We do
+  this for T=500 degC and T=700 degC and P=1 bar. The difference between the two
+  temperatures are that the higer temperature results in a melted system. (To 
+  ensure that the system is melted properly, we first raise the temperature to
+  900 degC and then lower it back to 700 degC.)
+  
+  After the system has equlibrated, we save the full phase space (all particle
+  positions and momenta) as well as the equlibrated lattice parameter to a binary
+  file which then can be read in for a production run.
  
- Created by Anders Lindman on 2013-10-31.
- */
+  System of units:
+  Energy   - eV
+  Time     - ps
+  Length   - Angstrom
+  Temp     - K
+  Mass     - eV (ps)^2 A^(-2)
+  Pressure - eV A^(-3)
+*/
 
 #include <stdio.h>
 #include <math.h>
@@ -23,27 +39,27 @@
 /* Main program */
 int main()
 {
-   char file_name[100];
+  char file_name[100];
   
-   int N_atoms = 4*N_cells*N_cells*N_cells;
-   double m_Al = 27*AMU;
-   /*
-     Values of Young's and shear modulus, Y and G resp., taken from 
-     Physics Handbook, table T 1.1. Bulk mudulus then calculated as
-     B = Y*G / (9*G - 3*Y)   [F 1.15, Physics Handbook]
-     kappa = 1/B
-   */
-   double kappa_Al = 100/(6.6444e+05 * bar); // STRANGE FACTOR 100 OFF !!!
-   double a_eq = 4.03;
-   double cell_length = a_eq*N_cells;
-   double inv_volume = pow(N_cells*cell_length, -3);
-   double noise_amplitude = 6.5e-2 * a_eq;
+  int N_atoms = 4*N_cells*N_cells*N_cells;
+  double m_Al = 27*AMU;
+  /*
+    Values of Young's and shear modulus, Y and G resp., taken from 
+    Physics Handbook, table T 1.1. Bulk mudulus then calculated as
+    B = Y*G / (9*G - 3*Y)   [F 1.15, Physics Handbook]
+    kappa = 1/B
+  */
+  double kappa_Al = 100/(6.6444e+05 * bar); // STRANGE FACTOR 100 OFF !!!
+  double a_eq = 4.03;
+  double cell_length = a_eq*N_cells;
+  double inv_volume = pow(N_cells*cell_length, -3);
+  double noise_amplitude = 6.5e-2 * a_eq;
 
-   double T_final_C= 500;
-   int nRuns = 1; //2 if melt, 1 otherwise
-   double T_melt_C = 900;
+  double T_final_C= 500;
+  int nRuns = 1; //2 if melt, 1 otherwise
+  double T_melt_C = 900;
    
-   double P_final_bar= 1;
+  double P_final_bar= 1;
    
   double T_eq;
   double P_eq  = P_final_bar*bar;
@@ -76,10 +92,10 @@ int main()
   get_forces_AL( forces, pos, cell_length, N_atoms); //initial cond forces
 
   /*
-  for (int i=0; i<N_timesteps_T_eq; i++){
+    for (int i=0; i<N_timesteps_T_eq; i++){
     //
-       The loop over the timesteps first takes a timestep according to the 
-       Verlet algorithm, then calculates the energies and temeperature.
+    The loop over the timesteps first takes a timestep according to the 
+    Verlet algorithm, then calculates the energies and temeperature.
     //
     timestep_Verlet(N_atoms, pos,  momentum, forces, m_Al, dt, cell_length);
     
@@ -95,17 +111,17 @@ int main()
     alpha_T = 1 + 2*dt*(T_eq - temperature[i]) / (tau_T * temperature[i]);
     scale_mat(N_atoms, 3, momentum, sqrt(alpha_T));
     temperature[i]*=alpha_T;
-  }
+    }
   */
 
 
-	for (int irun=0; irun < nRuns; irun++){// last run: final, irun = 0
-	   if (irun == nRuns - 1){ // final run
-	      T_eq = T_final_C + degC_to_K; 
-	   }else{
-	      T_eq = T_melt_C + degC_to_K;
-	   }
-		for (int i=0; i<N_timesteps; i++){
+  for (int irun=0; irun < nRuns; irun++){// last run: final, irun = 0
+    if (irun == nRuns - 1){ // final run
+      T_eq = T_final_C + degC_to_K; 
+    }else{
+      T_eq = T_melt_C + degC_to_K;
+    }
+    for (int i=0; i<N_timesteps; i++){
       /* 
          The loop over the timesteps first takes a timestep according to the 
          Verlet algorithm, then calculates the energies and temeperature.
@@ -122,8 +138,8 @@ int main()
       pressure[i] = inv_volume * (1.5*E_kin + virial);
 
       /* Equlibrate temperature by scaling momentum by a factor sqrt(alpha_T).
-          N.B. It is equally valid to scale the momentum instead of the velocity,
-          since they only differ by a constant factor m.
+	 N.B. It is equally valid to scale the momentum instead of the velocity,
+	 since they only differ by a constant factor m.
       */
       alpha_T = 1 + 2*dt*(T_eq - temperature[i]) / (tau_T * temperature[i]);
       scale_mat(N_atoms, 3, momentum, sqrt(alpha_T));
@@ -139,10 +155,10 @@ int main()
 
       temperature[i]*=alpha_T;
       pressure[i]*=alpha_P;
-      }
-	}
+    }
+  }
 
-	printf("equilibrium a0 = %.4f A\n", cell_length/N_cells);
+  printf("equilibrium a0 = %.4f A\n", cell_length/N_cells);
 
   /* Write tempertaure to file */
   sprintf(file_name,"../data/temp-%d_pres-%d_Task3.tsv",
@@ -181,8 +197,8 @@ int main()
 
 
   /*  
-  printf("T=%0.2f\tP=%0.2e\n",
-	 temperature[N_timesteps-1],pressure[N_timesteps-1]);
+      printf("T=%0.2f\tP=%0.2e\n",
+      temperature[N_timesteps-1],pressure[N_timesteps-1]);
   */
   
   free(pos); pos = NULL;
