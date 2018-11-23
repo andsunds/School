@@ -19,14 +19,14 @@
 
 The velocity Verlet algorithm is a semi-implicit and efficient method to simulate en ensemble of particles whose trajectories are governed by Newton's equation of motion. Accordingly, 
 it is a suitable algorithm to study molecular dynamics and to determine statistical properties of a system. Here, we use the velocity Verlet algorithm to study a system of aluminum atoms in an fcc lattice. By scaling the positions, momenta and lattice parameter, we can equilibrate the temperature and pressure to prescribed values. We  study the alumninum system at \unit[500]{$^\circ$ C} and \unit[700]{$^\circ$ C}, which correspond to the solid and liquid state respectively, and compute two dynamic quantities:   
-mean square displacements and the velocity correlation function. 
+mean squared displacements and the velocity correlation function. 
 
 
 
 \section*{Task 1: potential energy}
-The theoretical lattice parameter for aluminim can be determined by calculating the minimum potential energy per unit cell in a lattice with zero initial momenta for all particles. 
+The theoretical, minimum energy lattice parameter for aluminum can be determined by calculating the minimum potential energy per unit cell in a lattice with zero initial momenta for all particles. 
 
-Figure~\ref{fig1} shows the potential energy as a function of the lattice parameter. We used a quadratic fit to find the minimum energy\footnote{We performed the quadratic fit in the volume $V$, which to a small error corresponds to a quadratic fit in the lattice parameter $a$, since $E \approx  \alpha(V-V_0)^2 \approx \alpha a_0^4 (a-a_0)^2$ in a close vicinity of the minimum $a\approx a_0$}, and obtained $V_{\rm eq} \approx \unit[65.38]{\AA^3}$. This corresponds to the equilibrium lattice parameter $a_{\rm eq} \approx \unit[4.029]{\AA}$ at \unit[0]{K}, which we took as the initial lattice parameter for the following tasks.  We find that figure~\ref{fig1} looks similar to the figure~1 in the homework problem file, which is encouraging.
+Figure~\ref{fig1} shows the potential energy as a function of the lattice parameter. We used a quadratic fit to find the minimum energy\footnote{We performed the quadratic fit in the volume $V$, which to a small error corresponds to a quadratic fit in the lattice parameter $a$, since $E \approx  \alpha(V-V_0)^2 \approx \alpha a_0^4 (a-a_0)^2$ in a close vicinity of the minimum $a\approx a_0$.}, and obtained $V_{\rm eq} \approx \unit[65.38]{\AA^3}$. This corresponds to the equilibrium lattice parameter $a_{\rm eq} \approx \unit[4.029]{\AA}$ at \unit[0]{K}, which we took as the initial lattice parameter for the following tasks.  We find that figure~\ref{fig1} looks similar to the figure~1 in the homework problem file, which is encouraging.
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.7\textwidth]{../figures/potential_energy} 
@@ -71,31 +71,26 @@ the values of Young's modulus $Y$ and shear modulus $G$ were taken from Physics 
 \begin{equation}
 B = \frac{YG}{9G - 3Y} \,\quad \kappa_{\rm Al} = \frac{1}{B} \approx \unit[6.6444\cdot 10^5]{bar},
 \end{equation}
-where \unit[1]{bar } = $\unit[6.2415\cdot 10^{-7}]{eV/\AA^3}$ in atomic units. \textbf{However, we set $\kappa = 100 \kappa_{\rm Al}$ since the pressure equilibration happened on a much longer timescale than $\tau_P$ with $\kappa = \kappa_{\rm Al}$. We have not yet figured out why this is. }
+where \unit[1]{bar } = $\unit[6.2415\cdot 10^{-7}]{eV/\AA^3}$ in atomic units. However, we set $\kappa = 100 \kappa_{\rm Al}$ since the pressure equilibration happened on a much longer timescale than $\tau_P$ with $\kappa = \kappa_{\rm Al}$. We have not yet figured out why this is. 
 
-The results are shown in figure~\ref{fig:eq}, where we overlay the instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ with a moving average using 250 time steps. The desired temperatures and pressures were approximatelyh obtained in the equilibration process. Although  the average pressure was slightly below zero, this is within the fluctuation error bars and is in line with the figure~2 in the homework problem document. 
-
+The results are shown in figure~\ref{fig:eq}, where we overlay the instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ with a moving average using 250 time steps. The desired temperatures and pressures were approximately obtained in the equilibration process. Although  the average pressure was slightly below zero, this is within the fluctuation error bars and is in line with the figure~2 in the homework problem document. 
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/TP-eq-500} 
     \includegraphics[width=0.48\textwidth]{../figures/TP-eq-700} 
-  \caption{The instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ overlayed with with a moving average using 100 time steps, which corresponds to $\Delta t = \tau_P/2$. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[700]{^\circ C}$.}
+  \caption{The instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ overlaid with with a moving average using 100 time steps, which corresponds to $\Delta t = \tau_P/2$. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[700]{^\circ C}$.}
   \label{fig:eq}
 \end{center}
 \end{figure}
-
-
 The equilibrium values of the lattice parameter were found to be 
 \begin{align}
 a_0 &\approx \unit[4.10]{\AA}, \quad T=\unit[500]{^\circ C}, \\
 a_0 &\approx \unit[4.29]{\AA}, \quad T=\unit[700]{^\circ C} .
 \end{align} 
-
 These value are larger than the zero-temperature constants, and it is reasonable that the higher $\unit[700]{^\circ C}$ case corresponds to a larger lattice parameter at constant pressure. 
 
 \section*{Tasks 3-5: particle trajectories}
-
-Starting with the temperature- and pressure equilibrated systems from the previous section, we study the particle trajectories for both systems. Here, we decrease the timestep to   $dt       = \unit[5\cdot 10^{-4}]{ps}$ and the simulation length to $t_{\rm end} = \unit[5]{ps}$ to get better statistics. This was mostly motivated by increasing the resolution in tasks 6-7. 
+Starting with the temperature- and pressure-equilibrated systems from the previous section, we study the particle trajectories for both systems. Here, we decrease the timestep to   $dt       = \unit[5\cdot 10^{-4}]{ps}$ and the simulation length to $t_{\rm end} = \unit[5]{ps}$ to get better statistics. This was mostly motivated by increasing the resolution in tasks 6-7. 
 
 First, we note that the cumulative averages of the instantaneous temperatures and pressures stayed close to their inital values. This is shown in figure~\ref{fig:prod}.
 \begin{figure}[!ht]
@@ -107,7 +102,7 @@ First, we note that the cumulative averages of the instantaneous temperatures an
 \end{center}
 \end{figure}
 
-From equation (82) in MD lecture notes, the the means square displacement can be calculated as
+From equation (82) in MD lecture notes, the the mean squared displacement can be calculated as
 \begin{align}
 \Delta_{\rm MSD}(t) &= \lim_{T \rightarrow \infty} \frac{1}{T} \int_0^{T} d t' \frac{1}{N_{\rm atoms}} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t+t') - {\bf r}_i(t') \right]^2 \\ &\Rightarrow \nonumber
 \\
@@ -116,88 +111,85 @@ From equation (82) in MD lecture notes, the the means square displacement can be
 \label{eq:1}
 \end{align}
 
+We now consider the particle trajectories. Figure~\ref{fig:MSD} shows the trajectories of five individual particles along with the mean squared displacement as determined in equation~\eqref{eq:1}. We can clearly see that the particle trajectories are bounded in the left figure~\ref{fig:MSD}, while for the high-temperature case in the right panel, they increase as square root of time ($\Delta_{\rm MSD} \propto t$). Consequently, the former is in a solid state while the latter is in a liquid state. 
 
-
-
-We now consider the particle trajectories. Figure~\ref{fig:MSD} shows the trajectories of five individual particles along with the mean square displacement as determined in equation~\eqref{eq:1}. We can clearly see that the particle trajectories are bounded in the left figure~\ref{fig:MSD}, while for the high-temperature case in the right panel, they increase as square root of time ($\Delta_{\rm MSD} \propto t$). Consequently, the former is in a solid state while the latter is in a liquid state. 
-
-The self-diffusion coefficient as determined by the average slope of the mean square displacement, was calculated to $D_s \approx \unit[0.52]{\AA^2/ps}$.  
+The self-diffusion coefficient as determined by the average slope of the mean squared displacement, was calculated to $D_s \approx \unit[0.52]{\AA^2/ps}$.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/MSD-500} 
     \includegraphics[width=0.48\textwidth]{../figures/MSD-700} 
-  \caption{Five individual particle trajectories are shown in gray, overlaid with the mean square displacement in thick black line. In the left panel, $T=\unit[500]{^\circ C}$, and the system is in a solid state. In the right panel, $T=\unit[700]{^\circ C}$, the system is in a liquid state, where $\Delta_{\rm MSD} \approx 6 t D_s$ (shown in dotted red).}
+  \caption{Five individual particle trajectories (gray thin lines), overlaid with the mean squared displacement (thick black line). In the left panel, $T=\unit[500]{^\circ C}$, the system is in a solid state. In the right panel, $T=\unit[700]{^\circ C}$, the system is in a liquid state, where $\Delta_{\rm MSD} \approx 6 t D_s$ (dotted red line).}
   \label{fig:MSD}
 \end{center}
 \end{figure}
 
-
-
-
 %To determine M, we used mean of ... for t $>$ ... 
 
 
-\section*{Tasks 6-7: the velocity correlation}
+\section*{Tasks 6-7: velocity correlation and power spectrum}
 
-
-The average ``power'' content in avariable , $X(t')$, at
-some time, $t$, during some range of time, $T$, can be defined as
+We calculated the discrete auto-correlation function similarly to the
+MSD, 
 \begin{equation}
-P_X(t,T) = \frac{1}{T}\int_{t-T/2}^{t+T/2}\dd{t'}\,X^2(t').
+\varPhi_j = \frac{1}{N-j}\sum_{i=0}^{N-j-1} \ev{v_{i+j}v_{i}},
 \end{equation}
-This quantity can (in physically relevant systems) also be defined for
-the process over all,
-\begin{equation}
-P_X = \lim_{T\to\infty} P_X(T)
-= \lim_{T\to\infty} \frac{1}{T} \ev{\int_{0}^{T}\dd{t'}\,X^2(t')}.
-\end{equation}
-At this stage, we can introduce a 
-We have the Fourier transform
-\begin{equation}
-\hat{f}(\omega) = \int_{-\infty}^{\infty}\dd{t} f(t)\ee^{\ii\omega t},
-\end{equation}
-
-
-Using these two functions, we can define a power spectrum
-\begin{equation}
-\begin{aligned}
-\hat{P}(\omega) =& \ev{\abs{\hat{\vb*v}(\omega)}^2}_{\rm A}
-=\ev{\hat{\vb*v}(\omega)\vdot \bar{\hat{\vb*v}}(\omega)}_{\rm A}\\
-=& \ev{\int_{-\infty}^{\infty}\dd{t}\, \vb*v(t)\ee^{\ii\omega t}
-  \int_{-\infty}^{\infty}\dd{t'}\, \vb*v(t')\ee^{-\ii\omega t'} }_{\rm A},
-\end{aligned}
-\end{equation}
-where $\bar{\hat{\vb*v}}$ denotes the complex conjugate of
-$\bar{\vb*v}$. We can now change varaibles to $t=t'+\tau$ and note
-that the atom averages only falls on the velocities, which gives
-\begin{equation}
-\begin{aligned}
-\hat{P}(\omega) 
-=& \int_{-\infty}^{\infty}\dd\tau\, \ee^{\ii\omega\tau}
-  \int_{-\infty}^{\infty}\dd{t'} \ev{\vb*v(t'+\tau)\vdot\vb*v(t') }_{\rm A},
-\end{aligned}
-\end{equation}
-
+where $j=0,1,\ldots,N-1$ and the average is taken over all atoms. Figure~\ref{fig:spectrum}(left) shows that it is noticeably different between the solid and the liquid states: while the solid state remains non-zero at longer time, presumably because of oscillations around lattice points, the liquid velocity correlation quickly decays to zero after some initial oscillations. 
 
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/Phi-t} 
     \includegraphics[width=0.48\textwidth]{../figures/P-freq} 
-  \caption{Left panel: The velocity correlation function, and (right panel) its spectrum, calculated both directly from the velocity correlation (solid line) and from the power spectrum of the particle velocity (dotted line). Blue lines show $T=\unit[500]{^\circ C}$ and red lines $T=\unit[700]{^\circ C}$. The spectrum is multiplied by a factor of $\tfrac{1}{2} m_{\rm Al}$, in which case it can be interpreted as energy per frequency interval. }
+  \caption{Left panel: The velocity correlation function, and (right panel) its spectrum, calculated both directly from the velocity correlation (solid line) and from the power spectrum of the particle velocity (dotted line). Blue lines show $T=\unit[500]{^\circ C}$ and red lines $T=\unit[700]{^\circ C}$. The spectrum is multiplied by a factor of $\tfrac{1}{2} m_{\rm Al}$, in which case it can be interpreted as energy per frequency interval and atom. }
   \label{fig:spectrum}
 \end{center}
 \end{figure}
 
-The self-diffusion coefficient as determined by the power spectral density at $f=0$, was found to be  $D_s = \unit[0.49]{\AA^2/ps}$, which is close to the value obtained from the mean square displacement, as expected.  
+
+We then preceded to numerically approximate the integral
+\begin{equation}
+\hat{\varPhi}(f) = 2\int_0^{\infty}\dd{t}\,
+\varPhi(t) \cos(2\pi ft)
+\approx 2\int_0^{T_{\rm s}}\dd{t}\,\varPhi(t) \cos(2\pi ft)
+\end{equation}
+using a trapezoidal method in \textsc{Matlab}, with a frequency range
+$f=0$ to $f=1/(2\Delta{t})=f_{\rm Nyqvist}$, and frequency steps
+$\Delta{f}=1/T_{\rm s}$, where $T_{\rm s}$ is a time at about half the
+simulation end time. This is to avoid including noisy data in
+$\varPhi(t)$ at later times, where the statistics are poor.
+
+We then calculated the power spectrum according to
+\begin{equation}
+\begin{aligned}
+\hat{P}(\omega) =& \lim_{T\to\infty}\frac{1}{T}
+\ev{\abs{\int_0^{T}\dd{t}\,v(t)\ee^{\ii\omega t}}^2}\\
+\approx& \frac{1}{T}
+\ev{\abs{\int_0^{T}\dd{t}\,v(t)\ee^{\ii\omega t}}^2}\\
+\Rightarrow\quad
+\hat{P}_k=& \frac{1}{T}
+\ev{\abs{\frac{T}{N} \sum_{i=0}^{N-1} v_i\exp(\ii2\pi\frac{ik}{N})}^2}
+=\frac{T}{N} \ev{\abs{\hat{\vb*v}_k}^2}
+\end{aligned}
+\end{equation}
+where the averages is taken over all atoms, and
+\begin{equation}
+\hat{\vb*v}_k = \sqrt{N}\sum_{i=0}^{N-1} \vb*v_i \exp(\ii2\pi\frac{ik}{N})
+\end{equation}
+is the discrete Fourier transform of $v_i$. Note that the factor of $T$ was not included in the C scripts, and we therefore multiplied by this factor in the \textsc{Matlab} plotting scripts.
+When we compare $\hat{\varPhi}_k$ and $\hat{P}_k$ in figure~\ref{fig:spectrum} (right),
+we find that they are very similar, as, indeed, they should be
+according to the Wiener-Khinthchine theorem.
+
+
+The self-diffusion coefficient as determined by the power spectral density at $f=0$, was found to be  $D_s = \unit[0.49]{\AA^2/ps}$, which is close to the value obtained from the mean squared displacement, as expected.  
 
 
 \section*{Concluding discussion}
-Using the velocity Verlet algorithm, we study a system of alumnim atoms  at \unit[500]{$^\circ$ C} and \unit[700]{$^\circ$ C}, which correspond to the solid and liquid state respectively.
+Using the velocity Verlet algorithm, we study a system of aluminum atoms  at \unit[500]{$^\circ$ C} and \unit[700]{$^\circ$ C}, which correspond to the solid and liquid state respectively.
 
-From both the mean square displacements and the velocity correlation function, the solid state is 
-clearly distinguishable from the liquid state. The mean square displacement reaches a constant value in the solid state, whereas it grows linearly with time in the liquid state, which is characteristic of diffusion in a random walk process. Similarly, the spectrum of the velocity correlation function vanishes at zero frequency which means that the average velocity correlation is zero and hence there is no net movement of the particles; in contrast for the liquid state, the zero-frequency value of the spectrum is finite and proportional to the diffusion coefficient. 
+From both the mean squared displacements and the velocity correlation function, the solid state is 
+clearly distinguishable from the liquid state. The mean squared displacement reaches a constant value in the solid state, whereas it grows linearly with time in the liquid state, which is characteristic of diffusion in a random walk process. Similarly, the spectrum of the velocity correlation function vanishes at zero frequency which means that the average velocity correlation is zero and hence there is no net movement of the particles; in contrast for the liquid state, the zero-frequency value of the spectrum is finite and proportional to the diffusion coefficient. 
 \newpage
 
 \appendix
@@ -235,7 +227,7 @@ clearly distinguishable from the liquid state. The mean square displacement reac
 
 
 
-\section{Matlab scripts}
+\section{MATLAB scripts}
 \subsection{Analysis scripts for tasks 3-7: \texttt{Al\_energies.m}}
 \lstinputlisting[language=matlab,numbers=left]{../m_scripts/H1_analysis.m}
 

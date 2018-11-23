@@ -47,9 +47,6 @@ int main()
   double *E_tot = malloc(sizeof(double[N_timesteps]));
     
   FILE *file_pointer;
-
-    
-  /* ----------------------------- TASK 2 ----------------------------------*/
   
   init_fcc(pos, N_cells, a_eq); // initialize fcc lattice
   add_noise( N_atoms, 3, pos, noise_amplitude ); // adds random noise to pos

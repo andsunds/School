@@ -1,5 +1,5 @@
 /*
-  main_T3.c, Task 3, H1b
+  main_T3.c, Tasks 3 and 4, H1b. Also used as input in Tasks 5-7.
   In this task, we use an equlibration scheme, based on scaling particle momenta
   and positions, to equlibrate the temperature and pressure in the system. We do
   this for T=500 degC and T=700 degC and P=1 bar. The difference between the two
@@ -8,8 +8,8 @@
   900 degC and then lower it back to 700 degC.)
   
   After the system has equlibrated, we save the full phase space (all particle
-  positions and momenta) as well as the equlibrated lattice parameter to a binary
-  file which then can be read in for a production run.
+  positions and momenta) as well as the equlibrated lattice parameter to a 
+  binary file which then can be read in for a production run. 
  
   System of units:
   Energy   - eV
@@ -66,54 +66,25 @@ int main()
   double dt    = 5e-3;
   double tau_T = 100*dt;
   double tau_P = 100*dt;
-  //double t_T_eq= 10*tau_T; //equlibration times
   double t_eq= 15*tau_P; //equlibration times
   int N_timesteps = t_eq/dt;
   
   double alpha_T, alpha_P,alpha_P_cube_root;
   double t, E_kin, virial;
-
-    
+  
   double (*pos)[3] = malloc(sizeof(double[N_atoms][3]));
   double (*momentum)[3] = malloc(sizeof(double[N_atoms][3]));
   double (*forces)[3] = malloc(sizeof(double[N_atoms][3]));
   double *temperature = malloc(sizeof(double[N_timesteps]));
   double *pressure = malloc(sizeof(double[N_timesteps]));
-  
     
   FILE *file_pointer;
-    
-  /* ----------------------------- TASK 3 ----------------------------------*/
   
   
   init_fcc(pos, N_cells, a_eq); // initialize fcc lattice
   add_noise( N_atoms, 3, pos, noise_amplitude ); // adds random noise to pos
   set_zero( N_atoms, 3, momentum); // set momentum to 0
   get_forces_AL( forces, pos, cell_length, N_atoms); //initial cond forces
-
-  /*
-    for (int i=0; i<N_timesteps_T_eq; i++){
-    //
-    The loop over the timesteps first takes a timestep according to the 
-    Verlet algorithm, then calculates the energies and temeperature.
-    //
-    timestep_Verlet(N_atoms, pos,  momentum, forces, m_Al, dt, cell_length);
-    
-    E_kin  = get_kin_energy(N_atoms, momentum, m_Al );
-    virial = get_virial_AL(pos, cell_length, N_atoms);
-    
-    // PV = NkT + virial 
-    pressure[i] = inv_volume * (1.5*E_kin + virial);
-    // 3N*kB*T/2 = 1/(2m) * \sum_{i=1}^{N} p_i^2  = p_sq/(2m) 
-    temperature[i] =  E_kin * 1/(1.5*N_atoms*kB);
-
- 
-    alpha_T = 1 + 2*dt*(T_eq - temperature[i]) / (tau_T * temperature[i]);
-    scale_mat(N_atoms, 3, momentum, sqrt(alpha_T));
-    temperature[i]*=alpha_T;
-    }
-  */
-
 
   for (int irun=0; irun < nRuns; irun++){// last run: final, irun = 0
     if (irun == nRuns - 1){ // final run
@@ -128,7 +99,6 @@ int main()
       */
       timestep_Verlet(N_atoms, pos,  momentum, forces, m_Al, dt, cell_length);
     
-    
       E_kin  = get_kin_energy(N_atoms, momentum, m_Al );
       virial = get_virial_AL(pos, cell_length, N_atoms);
 
@@ -138,14 +108,14 @@ int main()
       pressure[i] = inv_volume * (1.5*E_kin + virial);
 
       /* Equlibrate temperature by scaling momentum by a factor sqrt(alpha_T).
-	 N.B. It is equally valid to scale the momentum instead of the velocity,
-	 since they only differ by a constant factor m.
+	      N.B. It is equally valid to scale the momentum instead of the velocity,
+	      since they only differ by a constant factor m.
       */
       alpha_T = 1 + 2*dt*(T_eq - temperature[i]) / (tau_T * temperature[i]);
       scale_mat(N_atoms, 3, momentum, sqrt(alpha_T));
     
-      // Equlibrate pressure by scaling the posistions by a factor of alpha_P^(1/3)
-    
+      // Equlibrate pressure by scaling the posistions by a factor of 
+      // alpha_P^(1/3)
       alpha_P = 1 - kappa_Al* dt*(P_eq - pressure[i])/tau_P;
       alpha_P_cube_root = pow(alpha_P, 1.0/3.0);
       scale_mat(N_atoms, 3, pos, alpha_P_cube_root);
@@ -194,18 +164,11 @@ int main()
   fwrite(momentum, sizeof(double), 3*N_atoms, file_pointer);
   fwrite(&cell_length, sizeof(double), 1, file_pointer);
   fclose(file_pointer);
-
-
-  /*  
-      printf("T=%0.2f\tP=%0.2e\n",
-      temperature[N_timesteps-1],pressure[N_timesteps-1]);
-  */
   
   free(pos); pos = NULL;
   free(momentum); momentum = NULL;
   free(forces); forces = NULL;
   free(temperature); temperature = NULL;
   free(pressure); pressure = NULL;
-  //free(volume); volume = NULL;
   return 0;
 }

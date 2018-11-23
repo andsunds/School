@@ -1,6 +1,6 @@
 /*
   main_Prod.c, Production runs, H1b
-  In this program, we use the equlibrated micro-states from Task 3 to study 
+  In this program, we use the equlibrated micro-states from Tasks 3-4 to study 
   dynamical properties, such as mean squared displacement (MSD), velocity 
   auto-correlation function, and the power spectral density of the atom 
   movements.
@@ -46,14 +46,14 @@ int main()
   double dt       = 5e-4; // higher res for spectral function
   double t_end    = 5;
   int N_timesteps = t_end/dt;  
-  int N_between_steps = 1;
-  int N_save_timesteps = N_timesteps / N_between_steps; //for the displacements
+  int N_between_steps = 1; // save all steps for max res in spectral function
+  int N_save_timesteps = N_timesteps / N_between_steps; 
   int N_save_atoms = 5;
   
   double t, E_kin, virial;
     
   double (*pos)[3]      = malloc(sizeof(double[N_atoms][3]));
-  double (*pos_0)[3]    = malloc(sizeof(double[N_atoms][3]));
+  double (*pos_0)[3]    = malloc(sizeof(double[N_atoms][3]));//for displacements
   double (*momentum)[3] = malloc(sizeof(double[N_atoms][3]));
   double (*forces)[3]   = malloc(sizeof(double[N_atoms][3]));
   double (*displacements)[N_save_atoms] = 
@@ -76,8 +76,6 @@ int main()
     vel_corr[i] = 0;
   }
   FILE *file_pointer;
-    
-  /* ----------------------------- TASK 3 ----------------------------------*/
   
   // read positions, momenta and cell_length
   sprintf(file_name,"../data/INIDATA_temp-%d_pres-%d.bin",
@@ -130,18 +128,19 @@ int main()
     }
   }
   printf("done 100%% of Verlet timestepping\n");
+  
   //Calculating MSD
   printf("calculating MSD\n");
   get_MSD(N_atoms, N_save_timesteps, pos_all, msd);
+  
   //Calculating the velocity correlation function
   printf("calculating velocity correlation\n");
   get_vel_corr(N_atoms, N_save_timesteps, vel_all, vel_corr);
+  
   //Calculating the velocity power spectrum
   printf("calculating power spectrum\n");
   get_powerspectrum(N_atoms, N_save_timesteps, vel_all, pow_spec);
   fft_freq(freq, dt, N_save_timesteps);
-
-
 
   printf("writing to file\n");
   /* Write tempertaure to file */
@@ -181,6 +180,7 @@ int main()
   }
   fclose(file_pointer);
   
+  /* Write power spectrum to file */
   sprintf(file_name,"../data/temp-%d_pres-%d_power-spectrum.tsv",
 	  (int) T_eq_C, (int) P_eq_bar);
   file_pointer = fopen(file_name, "w");

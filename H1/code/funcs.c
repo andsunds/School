@@ -73,10 +73,10 @@ void get_MSD ( int N_atoms,  int N_times, double all_pos[N_times][N_atoms][3],
   for (int it = 1; it < N_times; it++) { // 	 
     for (int jt = 0; jt < N_times-it; jt++) { // summed time index
       for (int kn = 0; kn < N_atoms; kn++) { // particle index
-	for (int kd = 0; kd < 3; kd++) {    // three dimensions
-	  MSD[it] += (all_pos[it+jt][kn][kd] - all_pos[jt][kn][kd])
-	    *(all_pos[it+jt][kn][kd] - all_pos[jt][kn][kd]);
-	}
+	      for (int kd = 0; kd < 3; kd++) {    // three dimensions
+	        MSD[it] += (all_pos[it+jt][kn][kd] - all_pos[jt][kn][kd])
+	          *(all_pos[it+jt][kn][kd] - all_pos[jt][kn][kd]);
+	      }
       }
     }
     MSD[it] *= 1/( (double)N_atoms * (N_times-it));
@@ -90,9 +90,9 @@ void get_vel_corr ( int N_atoms,  int N_times,
   for (int it = 0; it < N_times; it++) { // 	 
     for (int jt = 0; jt < N_times-it; jt++) { // summed time index
       for (int kn = 0; kn < N_atoms; kn++) { // particle index
-	for (int kd = 0; kd < 3; kd++) { // three dimensions
-	  vel_corr[it] += (all_vel[it+jt][kn][kd] * all_vel[jt][kn][kd]);
-	}
+	      for (int kd = 0; kd < 3; kd++) { // three dimensions
+	        vel_corr[it] += (all_vel[it+jt][kn][kd] * all_vel[jt][kn][kd]);
+	      }
       }
     }
     vel_corr[it] *= 1/( (double)N_atoms * (N_times-it));
@@ -112,13 +112,13 @@ void get_powerspectrum ( int N_atoms, int N_times,
     for (int kd = 0; kd < 3; kd++){ // for 3D
       // Copies the velocity component of one particle, into temporary variable
       for (int it = 0; it < N_times; it++){
-	vel_component[it] = all_vel[it][kn][kd];
+	      vel_component[it] = all_vel[it][kn][kd];
       }
       //Calculates the power spect. of this one velocity component
       powerspectrum(vel_component, pow_spec_component, N_times);
       //Adds the powerspectrum to the "output" variable
       for (int iw = 0; iw < N_times; iw++) { // for all frequencies 	
-	pow_spec[iw] += pow_spec_component[iw];
+	      pow_spec[iw] += pow_spec_component[iw];
       }// end for all frequencies
     }// end for 3D
   }// end for particle index

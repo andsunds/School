@@ -1,7 +1,7 @@
 /*
   main_T1.c Task 1 H1b
   In this task, we scan over a range of lattice parameters, a0, to determine 
-  which results in the lowest potetntial energy stored in the lattice.
+  which one results in the lowest potential energy stored in the lattice.
   
   System of units:
   Energy   - eV

@@ -3,7 +3,7 @@
 tmp = matlab.desktop.editor.getActive; %% cd to current path
 cd(fileparts(tmp.Filename));
 set(0,'DefaultFigureWindowStyle','docked');
-warning('off','MATLAB:handle_graphics:exceptions:SceneNode'); % interpreter warning
+warning('off','MATLAB:handle_graphics:exceptions:SceneNode'); % interpreter
 GRAY = 0.7*[0.9 0.9 1];
 AMU = 1.0364e-4;
 m_Al = 27*AMU;
@@ -31,7 +31,7 @@ xlim([64 68]);
 v_min = -p(2)/(2*p(1));
 a_min = v_min^(1/3);
 omega_res = sqrt(2*p(1)*a_min^4/m_Al);
-f_res = omega_res/(2*pi); % order of magnitude estimation of resonance frequency (?)
+f_res = omega_res/(2*pi); % rough estimation of resonance frequency (?)
 
 h1 = plot( v_min*[1 1], ax.YLim, '--k'); % plot vertical line at v_min
 
@@ -39,7 +39,8 @@ ax = gca; ax.YLim = [-13.45 -13.42];
 ax.YTick = (-13.45:0.01:-13.42);
 ylabel('$E_{\rm pot}$ [eV/unit cell]');
 xlabel('$a_0^3$ [\AA$^3$]');
-legend('data', 'quadratic fit', ['$V_{\rm eq} \approx \, $' num2str(round(v_min,2)) '\, \AA$^3$'], ...
+legend('data', 'quadratic fit', ['$V_{\rm eq} \approx \, $' ...
+    num2str(round(v_min,2)) '\, \AA$^3$'], ...
     'location', 'southeast')
 ax = gca; ax.Children = ax.Children(3:-1:1);
 ImproveFigureCompPhys(gcf); h1.LineWidth = 2; setFigureSize(gcf, 300, 600);
@@ -54,7 +55,7 @@ figure(1);clf;figure(2);clf;
 
 for i=1:4
     T_data = load(sprintf('../data/temperature_dt-%0.0e_Task2.tsv',dt(i)));
-    E_data = load(sprintf('../data/total_energy_dt-%0.0e_Task2.tsv',dt(i)));
+    E_data =load(sprintf('../data/total_energy_dt-%0.0e_Task2.tsv',dt(i)));
     t = T_data(:,1);
     T = T_data(:,2);
     E = E_data(:,2);
@@ -98,7 +99,8 @@ saveas(2, '../figures/dt-scan-energy.eps', 'epsc')
 clc; clf;
 temps = [500 700 500 700];
 temperatures_str = num2str([500;700]);
-FILENAMES = [strcat({'../data/temp-'}, temperatures_str, '_pres-1_Task3.tsv');
+FILENAMES = [strcat({'../data/temp-'}, temperatures_str,...
+    '_pres-1_Task3.tsv');
     strcat({'../data/temp-'}, temperatures_str, '_pres-1_Prod-test.tsv')];
 bar = 6.2415e-07;
 Kelvin_to_degC = -273.15;
@@ -144,7 +146,7 @@ for iFile = 1:numel(FILENAMES)
         plot(t./tau_equilibration, movmean(P,N_average_points),'-k')
         legend('$\mathcal{T}$', 'mov avg','$\mathcal{P}$', 'mov avg');
         xlabel('$t/\tau_{\rm eq}$')
-        xlim([0 5])
+        %xlim([0 5])
     else
         ylim(temps(iFile)+ 100*[-3,3])
         yyaxis right
@@ -155,7 +157,8 @@ for iFile = 1:numel(FILENAMES)
     end
     ylabel('$P \,[\rm bar]$')
     ylim([-100,400])
-    ImproveFigureCompPhys(gcf, 'linewidth', 3, 'LineColor', {'MYORANGE', GRAY, 'MYBLUE', GRAY}');
+    ImproveFigureCompPhys(gcf, 'linewidth', 3, 'LineColor', ...
+        {'MYORANGE', GRAY, 'MYBLUE', GRAY}');
     setFigureSize(gcf, 400, 400); 
 end
 
@@ -167,9 +170,12 @@ saveas(4, '../figures/TP-prod-700.eps', 'epsc')
 temperatures_str = num2str([500;700]);
 clc; clf;
 figure(10); clf;
-FILENAMES = strcat({'../data/temp-'}, temperatures_str, '_pres-1_displacements.tsv');
-FILENAMES_Dyn = strcat({'../data/temp-'}, temperatures_str, '_pres-1_dynamicProperties.tsv');
-FILENAMES_Pow = strcat({'../data/temp-'}, temperatures_str, '_pres-1_power-spectrum.tsv');
+FILENAMES = strcat({'../data/temp-'}, temperatures_str, ...
+    '_pres-1_displacements.tsv');
+FILENAMES_Dyn = strcat({'../data/temp-'}, temperatures_str, ...
+    '_pres-1_dynamicProperties.tsv');
+FILENAMES_Pow = strcat({'../data/temp-'}, temperatures_str, ...
+    '_pres-1_power-spectrum.tsv');
 for iFile = 1:numel(FILENAMES)
     figure(iFile); clf;
     data = load(FILENAMES{iFile});
@@ -197,7 +203,8 @@ for iFile = 1:numel(FILENAMES)
         leg = legend( '$\Delta_{\rm MSD}$', 'individual trajectories');
     else
         ylim([0 20]);
-        leg = legend('$\Delta_{\rm MSD}$', '$6 t D_s$', 'individual trajectories');
+        leg = legend('$\Delta_{\rm MSD}$', '$6 t D_s$', ...
+            'individual trajectories');
     end
  
     leg.Location='northwest';
@@ -223,11 +230,12 @@ for iFile = 1:numel(FILENAMES)
     plot(t, vel_corr/vel_corr(1)); hold on;
     
     dt = t(2)-t(1);
-    N_times = round(length(t)/2); % we have too bad statistics at later times.
+    N_times = round(length(t)/2);% we have bad statistics at later times.
     deltaf = 1/(N_times * dt);
     freqvec = 0:deltaf:(1/(2*dt));
-    PhiHat = 2 * trapz(t(1:N_times), (vel_corr(1:N_times) * ones(size(freqvec))) .*     cos(2*pi*t(1:N_times) * freqvec ), 1); %dimension 1
-    %PhiHat =  1/2 * 1/N_times * 2 * sum( (vel_corr(1:N_times) * ones(size(freqvec))) .* cos(2*pi*t(1:N_times) * freqvec ), 1); %dimension 1
+    PhiHat = 2 * trapz(t(1:N_times), ...
+        (vel_corr(1:N_times) * ones(size(freqvec))) .* ...
+        cos(2*pi*t(1:N_times) * freqvec ), 1); 
     
     figure(11);
     plot(freqvec, m_Al/2*PhiHat); hold on;
@@ -251,19 +259,19 @@ ImproveFigureCompPhys(gcf,'LineColor', {'MYRED', 'MYLIGHTBLUE'}');
 setFigureSize(gcf, 400, 400);
 
 figure(11)
-leg = legend('$T= 500 \, ^\circ $C, $ \hat \Phi$' , '$T= 500 \, ^\circ $C, $\hat P$',...
-    '$T= 700 \, ^\circ $C, $ \hat \Phi$', '$T= 700 \, ^\circ $C, $\hat P$');
+leg = legend('$T= 500 \, ^\circ $C, $ \hat \Phi$' ,...
+    '$T= 500 \, ^\circ $C, $\hat P$',...
+    '$T= 700 \, ^\circ $C, $ \hat \Phi$', ...
+    '$T= 700 \, ^\circ $C, $\hat P$');
 xlim([0 30])
 ylim([0 Inf])
 xlabel('$f$ [THz]')
 ylabel('$\frac{1}{2} m \hat P$ [eV/THz]')
 setFigureSize(gcf, 400, 400);
 
-ImproveFigureCompPhys(gcf,'LineColor', {'r', 'MYRED', 'GERIBLUE','MYLIGHTBLUE'}');
-
-
+ImproveFigureCompPhys(gcf,'LineColor', ...
+    {'r', 'MYRED', 'GERIBLUE','MYLIGHTBLUE'}');
 saveas(1, '../figures/MSD-500.eps', 'epsc')
 saveas(2, '../figures/MSD-700.eps', 'epsc')
 saveas(10, '../figures/Phi-t.eps', 'epsc')
 saveas(11, '../figures/P-freq.eps', 'epsc')
-
