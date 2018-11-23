@@ -133,7 +133,7 @@ The self-diffusion coefficient as determined by the average slope of the mean sq
 We calculated the discrete auto-correlation function similarly to the
 MSD, 
 \begin{equation}
-\varPhi_j = \frac{1}{N-j}\sum_{i=0}^{N-j-1} \ev{v_{i+j}v_{i}},
+\varPhi_j = \frac{1}{N-j}\sum_{i=0}^{N-j-1} \ev{v_{i+j}v_{i}}, \label{eq:Phi}
 \end{equation}
 where $j=0,1,\ldots,N-1$ and the average is taken over all atoms. Figure~\ref{fig:spectrum}(left) shows that it is noticeably different between the solid and the liquid states: while the solid state remains non-zero at longer time, presumably because of oscillations around lattice points, the liquid velocity correlation quickly decays to zero after some initial oscillations. 
 
@@ -171,6 +171,7 @@ We then calculated the power spectrum according to
 \ev{\abs{\frac{T}{N} \sum_{i=0}^{N-1} v_i\exp(\ii2\pi\frac{ik}{N})}^2}
 =\frac{T}{N} \ev{\abs{\hat{\vb*v}_k}^2}
 \end{aligned}
+\label{eq:PHat}
 \end{equation}
 where the averages is taken over all atoms, and
 \begin{equation}
@@ -179,8 +180,8 @@ where the averages is taken over all atoms, and
 is the discrete Fourier transform of $v_i$. Note that the factor of $T$ was not included in the C scripts, and we therefore multiplied by this factor in the \textsc{Matlab} plotting scripts.
 When we compare $\hat{\varPhi}_k$ and $\hat{P}_k$ in figure~\ref{fig:spectrum} (right),
 we find that they are very similar, as, indeed, they should be
-according to the Wiener-Khinthchine theorem.
-
+according to the Wiener-Khinthchine theorem. If we instead take $T_s = T$ (using the full time evolution of $\Phi(t)$, we get a more noisy signal. This is because there is less statistics at high values of $j$ in equation~\eqref{eq:Phi}.
+Therefore, even though the results are similar, the power spectrum method in equation~\eqref{eq:PHat}, should be considered more accurate since it includes more statistics of the data points. 
 
 The self-diffusion coefficient as determined by the power spectral density at $f=0$, was found to be  $D_s = \unit[0.49]{\AA^2/ps}$, which is close to the value obtained from the mean squared displacement, as expected.  
 
