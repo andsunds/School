@@ -1,0 +1,11 @@
+function [ fig ] = setFigureSize( fig )
+%figureSizePaper1 
+fig.Units = 'points';
+W = 600; 
+H = 400;
+
+fig.WindowStyle = 'normal'; % undock 
+for i = 1:2
+fig.Position(3:4) = [W H];
+
+end
