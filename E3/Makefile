@@ -4,14 +4,14 @@ CFLAGS = -O3 -Wall -Wno-unused-result
 
 LIBS = -lm -lgsl -lgslcblas
 
-HEADERS = initfcc.h alpotential.h funcs.h fft_func.h
-OBJECTS = initfcc.o alpotential.o funcs.o fft_func.o
+HEADERS = funcs.h
+OBJECTS = funcs.o
 
 
 %.o: %.c $(HEADERS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-all: Task1 Task2 Task3 main_Prod.c
+all: Task1
 
 Task1: $(OBJECTS) main_T1.c
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)

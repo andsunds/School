@@ -48,7 +48,7 @@ int main()
     
     spentTime = (double)(clock() - startTime)/CLOCKS_PER_SEC*1e3;
     
-    printf("N= %.0e, \t I_N = %.4f +- %.4f, \t I-I_N = %.1e, \t t = %.4f ms\n", (double)Ns[i], 
+    printf("N= %.0e, \t I_N = %.4f +- %.4f, \t I-I_N = %.4f, \t t = %.4f ms\n", (double)Ns[i], 
       mean_value, sigma_s, exact_value-mean_value, spentTime);
   }
   
