@@ -2,7 +2,7 @@
 #define  _FUNCS_H
 
 #define PI 3.141592653589
-
+#define PI_To_minus_ThreeHalfs 0.179587122125167
 //  includes
 #include  <math.h>
 #include <gsl/gsl_rng.h>
@@ -15,6 +15,12 @@
 double get_f1(double x);
 
 double get_f2(double x);
+
+double get_weightfunction(double x, double y, double z);
+
+double get_normalized_integrand(double x, double y, double z);
+
+void initialize_rng(gsl_rng *q);
 
 void set_uniform_random(int N, double vec[N]);
 

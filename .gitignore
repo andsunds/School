@@ -5,7 +5,7 @@
 *.log
 *.out
 *.toc
-
+*~
 *.o
 a
 a.out
@@ -13,6 +13,7 @@ run
 MD
 H1/code/Task?
 H1/code/Prod
+E3/Task?
 
 *.dat
 *.tsv

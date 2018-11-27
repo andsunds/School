@@ -10,7 +10,7 @@
 /* Main program */
 int main()
 {
-  double Ns[] = {1e1,1e2,1e3,1e4};
+  int Ns[] = {1e1,1e2,1e3,1e4};
   int N_Ns = 4;
   double (*function_pointer)(double);
    
@@ -42,8 +42,8 @@ int main()
       mean_value += (*function_pointer)(x[j]);
       sigma_s += (*function_pointer)(x[j]) * (*function_pointer)(x[j]);
     }
-    mean_value *= 1/Ns[i];
-    sigma_s = sigma_s*1/Ns[i] - mean_value * mean_value;
+    mean_value *= 1/(double)Ns[i];
+    sigma_s = sigma_s/(double)Ns[i] - mean_value * mean_value;
     sigma_s = sqrt(sigma_s/(Ns[i]-1));
     
     spentTime = (double)(clock() - startTime)/CLOCKS_PER_SEC*1e3;
@@ -68,11 +68,8 @@ int main()
       mean_value += (*function_pointer)(y);
       sigma_s += (*function_pointer)(y) * (*function_pointer)(y);
     }
-    mean_value *= 1/Ns[i];
-    sigma_s = sigma_s*1/Ns[i] - mean_value * mean_value;
-    if (sigma_s<0){
-        printf("NOOOO! %f \n", sigma_s );
-    }
+    mean_value *= 1/(double)Ns[i];
+    sigma_s = sigma_s/(double)Ns[i] - mean_value * mean_value;
     sigma_s = sqrt(sigma_s/Ns[i]);
     
     spentTime = (double)(clock() - startTime)/CLOCKS_PER_SEC*1e3;

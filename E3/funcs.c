@@ -1,5 +1,28 @@
 #include "funcs.h"
 
+
+
+double get_weightfunction(double x, double y, double z){ // w
+  return PI_To_minus_ThreeHalfs * exp( -x*x - y*y - z*z );
+}
+
+double get_normalized_integrand(double x, double y, double z){ // f/w
+  return  x*x * ( 1 + y*y*(1+z*z) );
+}
+
+void initialize_rng(gsl_rng *q)
+{
+  const  gsl_rng_type *T;    // static  info  about  rngs  
+  gsl_rng_env_setup ();      // setup  the  rngs 
+  T = gsl_rng_default;       // specify  default  rng 
+  q = gsl_rng_alloc(T);      // allocate  default  rng 
+  gsl_rng_set(q,time(NULL)); // Initialize  rng 
+} 
+
+
+
+////// T1-T2
+
 double get_f1(double x){
 	return x*(1-x);
 }
@@ -32,8 +55,8 @@ void set_uniform_random(int N, double vec[N])
   gsl_rng_free(q); // deallocate  rng 
 } 
 
-void set_zero (int M, int N, double mat[M][N]){
-  /* Sets all the elements of matrix `mat` to zero */
+/*void set_zero (int M, int N, double mat[M][N]){
+  // Sets all the elements of matrix `mat` to zero 
   //loops over all indices
   for (int i = 0; i < M; i++) {
     for (int j = 0; j < N; j++) {
@@ -41,4 +64,5 @@ void set_zero (int M, int N, double mat[M][N]){
     } 
   }
 } 
+*/
 
