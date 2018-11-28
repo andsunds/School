@@ -1,0 +1,245 @@
+\input{template_files/packages}
+\usepackage{units}
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+\usepackage{physics}
+
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+
+\title{H1b: MD simulation -- dynamic properties}
+\author{Andr\'eas Sundstr\"om and Linnea Hesslow}
+\date{\today}
+
+\begin{document}
+
+\input{template_files/titlepage}
+
+\section*{Introduction}
+
+The velocity Verlet algorithm is a semi-implicit and efficient method to simulate en ensemble of particles whose trajectories are governed by Newton's equation of motion. Accordingly, 
+it is a suitable algorithm to study molecular dynamics and to determine statistical properties of a system. Here, we use the velocity Verlet algorithm to study a system of aluminum atoms in an fcc lattice. By scaling the positions, momenta and lattice parameter, we can equilibrate the temperature and pressure to prescribed values. We  study the alumninum system at \unit[500]{$^\circ$ C} and \unit[700]{$^\circ$ C}, which correspond to the solid and liquid state respectively, and compute two dynamic quantities:   
+mean squared displacements and the velocity correlation function. 
+
+
+
+\section*{Task 1: potential energy}
+The theoretical, minimum energy lattice parameter for aluminum can be determined by calculating the minimum potential energy per unit cell in a lattice with zero initial momenta for all particles. 
+
+Figure~\ref{fig1} shows the potential energy as a function of the lattice parameter. We used a quadratic fit to find the minimum energy\footnote{We performed the quadratic fit in the volume $V$, which to a small error corresponds to a quadratic fit in the lattice parameter $a$, since $E \approx  \alpha(V-V_0)^2 \approx \alpha a_0^4 (a-a_0)^2$ in a close vicinity of the minimum $a\approx a_0$.}, and obtained $V_{\rm eq} \approx \unit[65.38]{\AA^3}$. This corresponds to the equilibrium lattice parameter $a_{\rm eq} \approx \unit[4.029]{\AA}$ at \unit[0]{K}, which we took as the initial lattice parameter for the following tasks.  We find that figure~\ref{fig1} looks similar to the figure~1 in the homework problem file, which is encouraging.
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{../figures/potential_energy} 
+  \caption{The potential energy per unit cell for aluminum as a function of the lattice parameter cubed.}
+  \label{fig1}
+\end{center}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Task 2: determine the time step}
+
+
+With the random noise, the temperature and the energy differ between runs, but are in the same order of magnitude. From figure~\ref{fig:task2}, we determine that $dt = \unit[5 \cdot 10^{-3}]{ps} = \unit[5]{fs}$ is a sufficient time step. This is in line with the lecture notes, where it is stated that a suitable timestep would normally be a few femtoseconds, or somewhat larger for heavy atoms.
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{../figures/dt-scan-temperature} 
+    \includegraphics[width=0.48\textwidth]{../figures/dt-scan-energy} 
+  \caption{The temperature and kinetic energy per unit cell as a function of time for four different timesteps.}
+  \label{fig:task2}
+\end{center}
+\end{figure}  
+We note that the temperature in several cases is higher than desired value of~\unit[600-800]{K} from the problem sheet. The temperatures and energies up to one standard deviation are quantified in table~\ref{tab:task2}. 
+\begin{table}[!ht]
+  \begin{center}
+    \caption{Energies and temperatures with one standard deviation uncertainties for four different values of the time steps.}
+    \begin{tabular}{l c c} 
+    $dt$ [ps] & $T$ [K] & $E_{\rm tot}$ [eV/unit cell]\\ \hline
+$10^{-2}$ & 	$847 \pm 4.2\%$ &	$-12.55 \pm 1.2\cdot 10^{-2} \% $\\
+$5\cdot 10^{-3}$ &	$1157 \pm$ 3.8 \% &$-12.24 \pm 3.6\cdot 10^{-3} \%$ \\
+$2\cdot 10^{-3}$ & $1058  \pm 3.7 \% $ & 	$ -12.35 \pm 6.6\cdot 10^{-4} \% $\\ 
+$1\cdot 10^{-3}$ & $ 841  \pm 3.7 \% $	 &$ -12.58 \pm 3.6\cdot 10^{-4} \%$ \\ 
+      \hline
+    \end{tabular}
+    \label{tab:task2}
+  \end{center}
+\end{table}
+
+
+\section*{Tasks 3 and 4: temperature and pressure equilibration}
+We set $\tau_P = \tau_T = 100 dt$, where $dt = 5\cdot 10^{-3}$\,ps, and equilibrated the temperature and pressure by scaling the particle momenta and positions (and box size) respectively. Choosing a slower equilibration time did not affect the results qualitatively. Both temperature and pressure were equilibrated in the same Verlet loop, but for the higher temperature the the system was first melted by increasing the temperature to \unit[900]{$^\circ$C}. To determine the isothermal compressibility $\kappa$, 
+the values of Young's modulus $Y$ and shear modulus $G$ were taken from Physics Handbook, table T 1.1. From F 1.15 in Physics Handbook, the bulk modulus can then calculated as
+\begin{equation}
+B = \frac{YG}{9G - 3Y} \,\quad \kappa_{\rm Al} = \frac{1}{B} \approx \unit[6.6444\cdot 10^5]{bar},
+\end{equation}
+where \unit[1]{bar } = $\unit[6.2415\cdot 10^{-7}]{eV/\AA^3}$ in atomic units. However, we set $\kappa = 100 \kappa_{\rm Al}$ since the pressure equilibration happened on a much longer timescale than $\tau_P$ with $\kappa = \kappa_{\rm Al}$. We have not yet figured out why this is. 
+
+The results are shown in figure~\ref{fig:eq}, where we overlay the instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ with a moving average using 250 time steps. The desired temperatures and pressures were approximately obtained in the equilibration process. Although  the average pressure was slightly below zero, this is within the fluctuation error bars and is in line with the figure~2 in the homework problem document. 
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{../figures/TP-eq-500} 
+    \includegraphics[width=0.48\textwidth]{../figures/TP-eq-700} 
+  \caption{The instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ overlaid with with a moving average using 100 time steps, which corresponds to $\Delta t = \tau_P/2$. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[700]{^\circ C}$.}
+  \label{fig:eq}
+\end{center}
+\end{figure}
+The equilibrium values of the lattice parameter were found to be 
+\begin{align}
+a_0 &\approx \unit[4.10]{\AA}, \quad T=\unit[500]{^\circ C}, \\
+a_0 &\approx \unit[4.29]{\AA}, \quad T=\unit[700]{^\circ C} .
+\end{align} 
+These value are larger than the zero-temperature constants, and it is reasonable that the higher $\unit[700]{^\circ C}$ case corresponds to a larger lattice parameter at constant pressure. 
+
+\section*{Tasks 3-5: particle trajectories}
+Starting with the temperature- and pressure-equilibrated systems from the previous section, we study the particle trajectories for both systems. Here, we decrease the timestep to   $dt       = \unit[5\cdot 10^{-4}]{ps}$ and the simulation length to $t_{\rm end} = \unit[5]{ps}$ to get better statistics. This was mostly motivated by increasing the resolution in tasks 6-7. 
+
+First, we note that the cumulative averages of the instantaneous temperatures and pressures stayed close to their inital values. This is shown in figure~\ref{fig:prod}.
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{../figures/TP-prod-500} 
+    \includegraphics[width=0.48\textwidth]{../figures/TP-prod-700} 
+  \caption{The instantaneous values, and the cumulative averages, of the temperature and the pressure in the production runs. Left panel: $T=\unit[500]{^\circ C}$,  right panel: $T=\unit[700]{^\circ C}$}
+  \label{fig:prod}
+\end{center}
+\end{figure}
+
+From equation (82) in MD lecture notes, the the mean squared displacement can be calculated as
+\begin{align}
+\Delta_{\rm MSD}(t) &= \lim_{T \rightarrow \infty} \frac{1}{T} \int_0^{T} d t' \frac{1}{N_{\rm atoms}} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t+t') - {\bf r}_i(t') \right]^2 \\ &\Rightarrow \nonumber
+\\
+\Delta_{\rm MSD}(t_k) &\approx
+\frac{1}{N_T -k}\frac{1}{N_{\rm atoms}} \sum_{j=0}^{N_T-k-1} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t_{k+j}) - {\bf r}_i(t_j) \right]^2 
+\label{eq:1}
+\end{align}
+
+We now consider the particle trajectories. Figure~\ref{fig:MSD} shows the trajectories of five individual particles along with the mean squared displacement as determined in equation~\eqref{eq:1}. We can clearly see that the particle trajectories are bounded in the left figure~\ref{fig:MSD}, while for the high-temperature case in the right panel, they increase as square root of time ($\Delta_{\rm MSD} \propto t$). Consequently, the former is in a solid state while the latter is in a liquid state. 
+
+The self-diffusion coefficient as determined by the average slope of the mean squared displacement, was calculated to $D_s \approx \unit[0.52]{\AA^2/ps}$.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{../figures/MSD-500} 
+    \includegraphics[width=0.48\textwidth]{../figures/MSD-700} 
+  \caption{Five individual particle trajectories (gray thin lines), overlaid with the mean squared displacement (thick black line). In the left panel, $T=\unit[500]{^\circ C}$, the system is in a solid state. In the right panel, $T=\unit[700]{^\circ C}$, the system is in a liquid state, where $\Delta_{\rm MSD} \approx 6 t D_s$ (dotted red line).}
+  \label{fig:MSD}
+\end{center}
+\end{figure}
+
+%To determine M, we used mean of ... for t $>$ ... 
+
+
+\section*{Tasks 6-7: velocity correlation and power spectrum}
+
+We calculated the discrete auto-correlation function similarly to the
+MSD, 
+\begin{equation}
+\varPhi_j = \frac{1}{N-j}\sum_{i=0}^{N-j-1} \ev{v_{i+j}v_{i}}, \label{eq:Phi}
+\end{equation}
+where $j=0,1,\ldots,N-1$ and the average is taken over all atoms. Figure~\ref{fig:spectrum}(left) shows that it is noticeably different between the solid and the liquid states: while the solid state remains non-zero at longer time, presumably because of oscillations around lattice points, the liquid velocity correlation quickly decays to zero after some initial oscillations. 
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.48\textwidth]{../figures/Phi-t} 
+    \includegraphics[width=0.48\textwidth]{../figures/P-freq} 
+  \caption{Left panel: The velocity correlation function, and (right panel) its spectrum, calculated both directly from the velocity correlation (solid line) and from the power spectrum of the particle velocity (dotted line). Blue lines show $T=\unit[500]{^\circ C}$ and red lines $T=\unit[700]{^\circ C}$. The spectrum is multiplied by a factor of $\tfrac{1}{2} m_{\rm Al}$, in which case it can be interpreted as energy per frequency interval and atom. }
+  \label{fig:spectrum}
+\end{center}
+\end{figure}
+
+
+We then preceded to numerically approximate the integral
+\begin{equation}
+\hat{\varPhi}(f) = 2\int_0^{\infty}\dd{t}\,
+\varPhi(t) \cos(2\pi ft)
+\approx 2\int_0^{T_{\rm s}}\dd{t}\,\varPhi(t) \cos(2\pi ft)
+\end{equation}
+using a trapezoidal method in \textsc{Matlab}, with a frequency range
+$f=0$ to $f=1/(2\Delta{t})=f_{\rm Nyqvist}$, and frequency steps
+$\Delta{f}=1/T_{\rm s}$, where $T_{\rm s}$ is a time at about half the
+simulation end time. This is to avoid including noisy data in
+$\varPhi(t)$ at later times, where the statistics are poor.
+
+We then calculated the power spectrum according to
+\begin{equation}
+\begin{aligned}
+\hat{P}(\omega) =& \lim_{T\to\infty}\frac{1}{T}
+\ev{\abs{\int_0^{T}\dd{t}\,v(t)\ee^{\ii\omega t}}^2}\\
+\approx& \frac{1}{T}
+\ev{\abs{\int_0^{T}\dd{t}\,v(t)\ee^{\ii\omega t}}^2}\\
+\Rightarrow\quad
+\hat{P}_k=& \frac{1}{T}
+\ev{\abs{\frac{T}{N} \sum_{i=0}^{N-1} v_i\exp(\ii2\pi\frac{ik}{N})}^2}
+=\frac{T}{N} \ev{\abs{\hat{\vb*v}_k}^2}
+\end{aligned}
+\label{eq:PHat}
+\end{equation}
+where the averages is taken over all atoms, and
+\begin{equation}
+\hat{\vb*v}_k = \sqrt{N}\sum_{i=0}^{N-1} \vb*v_i \exp(\ii2\pi\frac{ik}{N})
+\end{equation}
+is the discrete Fourier transform of $v_i$. Note that the factor of $T$ was not included in the C scripts, and we therefore multiplied by this factor in the \textsc{Matlab} plotting scripts.
+When we compare $\hat{\varPhi}_k$ and $\hat{P}_k$ in figure~\ref{fig:spectrum} (right),
+we find that they are very similar, as, indeed, they should be
+according to the Wiener-Khinthchine theorem. If we instead take $T_s = T$ (using the full time evolution of $\Phi(t)$, we get a more noisy signal. This is because there is less statistics at high values of $j$ in equation~\eqref{eq:Phi}.
+Therefore, even though the results are similar, the power spectrum method in equation~\eqref{eq:PHat}, should be considered more accurate since it includes more statistics of the data points. 
+
+The self-diffusion coefficient as determined by the power spectral density at $f=0$, was found to be  $D_s = \unit[0.49]{\AA^2/ps}$, which is close to the value obtained from the mean squared displacement, as expected.  
+
+
+\section*{Concluding discussion}
+Using the velocity Verlet algorithm, we study a system of aluminum atoms  at \unit[500]{$^\circ$ C} and \unit[700]{$^\circ$ C}, which correspond to the solid and liquid state respectively.
+
+From both the mean squared displacements and the velocity correlation function, the solid state is 
+clearly distinguishable from the liquid state. The mean squared displacement reaches a constant value in the solid state, whereas it grows linearly with time in the liquid state, which is characteristic of diffusion in a random walk process. Similarly, the spectrum of the velocity correlation function vanishes at zero frequency which means that the average velocity correlation is zero and hence there is no net movement of the particles; in contrast for the liquid state, the zero-frequency value of the spectrum is finite and proportional to the diffusion coefficient. 
+\newpage
+
+\appendix
+
+\section{Source Code}
+
+%\subsection{Calculating pi using matlab: \texttt{pi.m}}
+%\lstinputlisting[language=matlab,numbers=left]{template_files/pi.m}
+
+%\subsection{Calculating pi using python: \texttt{pi.py}}
+%\lstinputlisting[language=python,numbers=left]{template_files/pi.py}
+
+\subsection{Main program task 1: \texttt{main\_T1.c}}
+\lstinputlisting[language=c,numbers=left]{../code/main_T1.c}
+
+\subsection{Main program  Task 2: \texttt{main\_T2.c}}
+\lstinputlisting[language=c,numbers=left]{../code/main_T2.c}
+
+\subsection{Temperature and pressure equilibration for tasks 3-7:\\ \texttt{main\_T3.c}}
+\lstinputlisting[language=c,numbers=left]{../code/main_T3.c}
+
+\subsection{Production runs for tasks 3-7 : \texttt{main\_Prod.c}}
+\lstinputlisting[language=c,numbers=left]{../code/main_Prod.c}
+
+\subsection{Production runs for tasks 3-7 : \texttt{main\_Prod.c}}
+\lstinputlisting[language=c,numbers=left]{../code/main_Prod.c}
+
+
+\subsection{Misc functions : \texttt{funcs.c}}
+\lstinputlisting[language=c,numbers=left]{../code/funcs.c}
+
+\section{Auxiliary }
+\subsection{Makefile}
+\lstinputlisting[language=bash,numbers=left]{../code/Makefile}
+
+
+
+\section{MATLAB scripts}
+\subsection{Analysis scripts for tasks 3-7: \texttt{Al\_energies.m}}
+\lstinputlisting[language=matlab,numbers=left]{../m_scripts/H1_analysis.m}
+
+\subsection{Improve figure appearance: \texttt{ImproveFigureCompPhys.m}}
+\lstinputlisting[language=matlab,numbers=left]{../m_scripts/ImproveFigureCompPhys.m}
+
+\subsection{Change size of figures: \texttt{setFigureSize.m}}
+\lstinputlisting[language=matlab,numbers=left]{../m_scripts/setFigureSize.m}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
