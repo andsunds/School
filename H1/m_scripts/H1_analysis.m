@@ -227,20 +227,20 @@ for iFile = 1:numel(FILENAMES)
     xlabel('$t$ [ps]')
     ylabel('$\Delta x^2 \,[\rm \AA^2]$')
     if iFile ==1
-        ylim([ 0 1.0]);
+        ylim([ 0 0.5]);
         leg = legend( '$\Delta_{\rm MSD}$', 'individual trajectories');
     else
-        ylim([0 50]);
+        ylim([0 30]);
         leg = legend('$\Delta_{\rm MSD}$', '$6 t D_s$', ...
             'individual trajectories');
     end
-    %xlim([0 10])
+    xlim([0 6])
  
     leg.Location='northwest';
     ImproveFigureCompPhys(gcf, 'Linewidth', 2);
     ax = gca; [ax.Children(6:end).LineWidth] = deal(5);
     ax.Children = ax.Children([6:end 1:5]);
-    setFigureSize(gcf, 400, 400);
+    setFigureSize(gcf, 300, 600);
 end
 
 % velocity correlation
