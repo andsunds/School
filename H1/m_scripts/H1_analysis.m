@@ -271,12 +271,13 @@ for iFile = 1:numel(FILENAMES)
     plot(freq, pow_spec*t(end), '-.'); hold on;
     if iFile ==2 % liquid
         tStart = 1;
-        selfDiffusionCoeff_spectral = PhiHat(1)/6; % in Å^2 /ps
+        selfDiffusionCoeff_spectral1 = mean(PhiHat(1:3))/6; % in Å^2 /ps
+        selfDiffusionCoeff_spectral2 = mean(pow_spec(1:3)*t(end))/6; % in Å^2 /ps
     end
     
 end
 
-disp([selfDiffusionCoeff selfDiffusionCoeff_spectral]);
+disp([selfDiffusionCoeff selfDiffusionCoeff_spectral1 selfDiffusionCoeff_spectral2]);
 
 figure(10)
 xlim([0 1]);

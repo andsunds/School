@@ -43,7 +43,7 @@ int main()
   double T_eq_C   = 700;
   double P_eq_bar = 1;
 
-  double dt       = 2e-3; // higher res for spectral function
+  double dt       = 1e-3; // higher res for spectral function
   double t_end    = 10;
   int N_timesteps = t_end/dt;  
   int N_between_steps = 1; // save all steps for max res in spectral function

@@ -55,8 +55,8 @@ int main()
   double inv_volume = pow(cell_length, -3);
   double noise_amplitude = 6.5e-2 * a_eq;
 
-  double T_final_C= 700;
-  int nRuns = 2; //2 if melt, 1 otherwise
+  double T_final_C= 500;
+  int nRuns = 1; //2 if melt, 1 otherwise
   double T_melt_C = 1100;
    
   double P_final_bar= 1;
@@ -124,8 +124,8 @@ int main()
       cell_length*=alpha_P_cube_root;
       inv_volume*=1/alpha_P;
 
-      temperature[i]*=alpha_T;
-      pressure[i]*=alpha_P;
+      //temperature[i]*=alpha_T;
+      //pressure[i]*=alpha_P;
       a0[i] = cell_length/N_cells;
     }
   }
