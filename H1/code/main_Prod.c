@@ -40,11 +40,11 @@ int main()
   double cell_length;
   double inv_volume;
   
-  double T_eq_C   = 500;
+  double T_eq_C   = 700;
   double P_eq_bar = 1;
 
-  double dt       = 5e-4; // higher res for spectral function
-  double t_end    = 5;
+  double dt       = 2e-3; // higher res for spectral function
+  double t_end    = 10;
   int N_timesteps = t_end/dt;  
   int N_between_steps = 1; // save all steps for max res in spectral function
   int N_save_timesteps = N_timesteps / N_between_steps; 
@@ -91,7 +91,7 @@ int main()
       pos_0[i][j]=pos[i][j];
     }
   }
-  inv_volume = pow(N_cells*cell_length, -3);
+  inv_volume = pow(cell_length, -3);
   get_forces_AL( forces, pos, cell_length, N_atoms); //initial cond forces
   
   printf("Initialized. Starting with Verlet timestepping.\n");
@@ -105,7 +105,7 @@ int main()
     E_kin  = get_kin_energy(N_atoms, momentum, m_Al );
     virial = get_virial_AL(pos, cell_length, N_atoms);
     /* PV = NkT + virial */
-    pressure[i] = inv_volume * (1.5*E_kin + virial);
+    pressure[i] = inv_volume * (E_kin/1.5 + virial);
     /* 3N*kB*T/2 = 1/(2m) * \sum_{i=1}^{N} p_i^2  = p_sq/(2m) */
     temperature[i] =  E_kin * 1/(1.5*N_atoms*kB);
     

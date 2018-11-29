@@ -49,15 +49,15 @@ int main()
     B = Y*G / (9*G - 3*Y)   [F 1.15, Physics Handbook]
     kappa = 1/B
   */
-  double kappa_Al = 100/(6.6444e+05 * bar); // STRANGE FACTOR 100 OFF !!!
+  double kappa_Al = 1/(6.6444e+05 * bar); 
   double a_eq = 4.03;
   double cell_length = a_eq*N_cells;
-  double inv_volume = pow(N_cells*cell_length, -3);
+  double inv_volume = pow(cell_length, -3);
   double noise_amplitude = 6.5e-2 * a_eq;
 
-  double T_final_C= 500;
-  int nRuns = 1; //2 if melt, 1 otherwise
-  double T_melt_C = 900;
+  double T_final_C= 700;
+  int nRuns = 2; //2 if melt, 1 otherwise
+  double T_melt_C = 1100;
    
   double P_final_bar= 1;
    
@@ -77,6 +77,7 @@ int main()
   double (*forces)[3] = malloc(sizeof(double[N_atoms][3]));
   double *temperature = malloc(sizeof(double[N_timesteps]));
   double *pressure = malloc(sizeof(double[N_timesteps]));
+  double *a0 = malloc(sizeof(double[N_timesteps]));
     
   FILE *file_pointer;
   
@@ -105,7 +106,7 @@ int main()
       /* 3N*kB*T/2 = 1/(2m) * \sum_{i=1}^{N} p_i^2  = p_sq/(2m) */
       temperature[i] =  E_kin * 1/(1.5*N_atoms*kB);
       /* PV = NkT + virial */
-      pressure[i] = inv_volume * (1.5*E_kin + virial);
+      pressure[i] = inv_volume * (E_kin/1.5 + virial);
 
       /* Equlibrate temperature by scaling momentum by a factor sqrt(alpha_T).
 	      N.B. It is equally valid to scale the momentum instead of the velocity,
@@ -125,19 +126,20 @@ int main()
 
       temperature[i]*=alpha_T;
       pressure[i]*=alpha_P;
+      a0[i] = cell_length/N_cells;
     }
   }
 
   printf("equilibrium a0 = %.4f A\n", cell_length/N_cells);
 
-  /* Write tempertaure to file */
+  /* Write tempertaure, pressure and cell size to file */
   sprintf(file_name,"../data/temp-%d_pres-%d_Task3.tsv",
 	  (int) T_final_C, (int) P_final_bar);
   file_pointer = fopen(file_name, "w");
   for (int i=0; i<N_timesteps; i++){
     t = i*dt; // time at step i
-    fprintf(file_pointer, "%.4f \t %.8f \t %.8f \n",
-	    t, temperature[i],pressure[i]);
+    fprintf(file_pointer, "%.4f \t %.8f \t %.8f \t %.8f \n",
+	    t, temperature[i],pressure[i], a0[i]);
   }
   fclose(file_pointer);
 
@@ -170,5 +172,6 @@ int main()
   free(forces); forces = NULL;
   free(temperature); temperature = NULL;
   free(pressure); pressure = NULL;
+  free(a0); a0 = NULL;
   return 0;
 }
