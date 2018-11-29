@@ -36,7 +36,7 @@ int main()
     
   double noise_amplitude = 6.5e-2 * a_eq;
   double t_max=10; //
-  double dt = 1e-3;
+  double dt = 2e-3;
   int N_timesteps = t_max/dt;
   double t, E_kin;
     

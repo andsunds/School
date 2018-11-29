@@ -10,8 +10,8 @@ void add_noise(int M, int N, double mat[M][N], double noise_amplitude )
   gsl_rng_set(q,time(NULL)); // Initialize  rng 
   
   // Loops over all the elemtens in the matrix, to which we want to add noise
-  for (int i=0; i<N; i++){
-    for (int j=0; j<M; j++){
+  for (int i=0; i<M; i++){
+    for (int j=0; j<N; j++){
       // adds uniformly distributed random noise in range +-`noise_amplitude`
       mat[i][j] += noise_amplitude * (2*gsl_rng_uniform(q)-1); 
     }
