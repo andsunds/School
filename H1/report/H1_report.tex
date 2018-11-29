@@ -17,13 +17,13 @@
 
 \section*{Introduction}
 
-The velocity Verlet algorithm is a semi-implicit and efficient method to simulate en ensemble of particles whose trajectories are governed by Newton's equation of motion. Accordingly, it is a suitable algorithm to study molecular dynamics and to determine statistical properties of a system. Here, we use the velocity Verlet algorithm to study a system of aluminum atoms in a face centered cubic (FCC) lattice. By scaling the positions, momenta and lattice parameter, we can equilibrate the temperature and pressure to prescribed values. We  study the alumninum system at \unit[500]{$^\circ$C} and \unit[700]{$^\circ$C}, which correspond to the solid and liquid state respectively, and compute two dynamic quantities:   
+The velocity Verlet algorithm is a semi-implicit and efficient method to simulate an ensemble of particles whose trajectories are governed by Newton's equation of motion. Accordingly, it is a suitable algorithm to study molecular dynamics and to determine statistical properties of a system. Here, we use the velocity Verlet algorithm to study a system of aluminum atoms in a face centered cubic (FCC) lattice. By scaling the positions, momenta and lattice parameter, we can equilibrate the temperature and pressure to prescribed values. We  study the alumninum system at \unit[500]{$^\circ$C} and \unit[700]{$^\circ$C}, which correspond to the solid and liquid state respectively, and compute two dynamic quantities:   
 mean squared displacements and the velocity correlation function.
 
 For this report, we used scripts provided by Anders Lindman for intializing FCC lattices and calcualting lattice energies, lattice forces and virials of an aluminium lattice. All simulations were done in a simulation box containing $4^3=64$ unit FCC cells, and a total of $4\cdot64$ aluminum atoms placed at the corresponding FCC lattice points. The simulation box had periodic boundary conditions.
 
 \subsubsection*{The velocity Verlet algorithm}
-The main idea behind the velocity Verlet algorithm is to split up the time steps of the velocity, so as to make the update process of the state more symmetric. The position, velocity and acceleration, $x_i$, $v_i$ and $a_i$\footnotemark{} respectively, are updated according to
+The main idea behind the velocity Verlet algorithm is to split up the time steps of the velocity, in order to make the update process of the state more symmetric. The position, velocity and acceleration, $x_i$, $v_i$ and $a_i$\footnotemark{} respectively, are updated according to
 \footnotetext{In most situations the acceleration need not be saved for each time step, which might be insinuated by the index on $a_i$. The index is just used for notational convenience. }
 \begin{equation}
 \begin{aligned}
@@ -55,9 +55,9 @@ Figure~\ref{fig1} shows the potential energy as a function of the lattice parame
 \section*{Task 2: determine the time step}
 In this task, we use a lattice with the equilibrium lattice constant $a_{\rm eq} \approx \unit[4.029]{\AA}$, found in the previous task, but then we added a random perturbation, uniformly distributed in the interval $\pm0.065a_{\rm eq}$, to each atom position. This creates a non-equlibrium system, which has a non-trivial time evolution. To determine the time evolution, we used the velocity Verlet algorithm, as described in the introduction.
 
-The first step when doing simulations of this kind, is to determine a suitable timestep. Even though the velocity Verlet algorithm have good energy conservation properties, it still only gives an approximation to the ``true'' continuous solution; an approximation which gets better the smaller $dt$ we choose. However, choosing $dt$ too small will result in unnecessary computational costs for the same total simulation time. We are therefore interested in finding the largest $dt$ we can get away with without loosing energy conservation. From figure~\ref{fig:task2}, we see that $dt = \unit[2 \cdot 10^{-2}]{ps}$ clearly does not conserve energy, while $dt = \unit[1 \cdot 10^{-1}]{ps}$ dose conserve energy. To be on the safe side, we chose $dt = \unit[5 \cdot 10^{-3}]{ps} = \unit[5]{fs}$ as our time step. This is in line with the lecture notes, where it is stated that a suitable time step would normally be a few femtoseconds, or somewhat larger for heavy atoms.
+The first step when doing simulations of this kind is to determine a suitable timestep. Even though the velocity Verlet algorithm have good energy conservation properties, it only gives an approximation to the ``true'' continuous solution; an approximation which gets better the smaller $dt$ we choose. However, choosing $dt$ too small will result in unnecessary computational costs for the same total simulation time. We are therefore interested in finding the largest $dt$ we can get away with without loosing energy conservation. From figure~\ref{fig:task2}, we see that $dt = \unit[2 \cdot 10^{-2}]{ps}$ clearly does not conserve energy, while $dt = \unit[1 \cdot 10^{-1}]{ps}$ dose conserve energy. To be on the safe side, we chose $dt = \unit[5 \cdot 10^{-3}]{ps} = \unit[5]{fs}$ as our time step. This is in line with the lecture notes, where it is stated that a suitable time step would normally be a few femtoseconds, or somewhat larger for heavy atoms.
 
-The total energy of the simulated system at each time step can easily be calculated as a sum of the kinetic energy of each particle, $E_{\rm kin}^{\rm(atom)}=\,m_{\rm Al}v^2/2$, as well as the total lattice energy of the system. Then, to calculate the temperature, we can use the \emph{equipartition theorem} stating that $\ev{E_{\rm kin}^{\rm(atom)}}=3k_{\rm B}T/2$, or equivalently that $T=2\ev{E_{\rm kin}^{\rm(atom)}}/(3k_{\rm B})$. We can therefore define an instantaneous temperature
+The total energy of the simulated system at each time step is determined by sum of the kinetic energy of each particle, $E_{\rm kin}^{\rm(atom)}=\,m_{\rm Al}v^2/2$, and the total lattice energy of the system. Then, to calculate the temperature, we can use the \emph{equipartition theorem} stating that $\ev{E_{\rm kin}^{\rm(atom)}}=3k_{\rm B}T/2$, or equivalently that $T=2\ev{E_{\rm kin}^{\rm(atom)}}/(3k_{\rm B})$. We can therefore define an instantaneous temperature
 \begin{equation}
 \label{eq:T_instantaneous}
 \mathcal{T}(t)=\sum_{\text{all atoms}}2E_{\rm kin}^{\rm(atom)}(t)/(3N_{\rm atoms}k_{\rm B}).
@@ -78,13 +78,14 @@ We note that the temperature in several cases is higher than desired value of~\u
 
 \begin{table}[!ht]
   \begin{center}
-    \caption{NEED UPDATING! Energies and temperatures with one standard deviation uncertainties for four different values of the time steps.}
+    \caption{Energies and temperatures with one standard deviation uncertainties for four different values of the time steps.}
     \begin{tabular}{l c c} 
     $dt$ [ps] & $T$ [K] & $E_{\rm tot}$ [eV/unit cell]\\ \hline
-$10^{-2}$ & 	$847 \pm 4.2\%$ &	$-12.55 \pm 1.2\cdot 10^{-2} \% $\\
-$5\cdot 10^{-3}$ &	$1157 \pm$ 3.8 \% &$-12.24 \pm 3.6\cdot 10^{-3} \%$ \\
-$2\cdot 10^{-3}$ & $1058  \pm 3.7 \% $ & 	$ -12.35 \pm 6.6\cdot 10^{-4} \% $\\ 
-$1\cdot 10^{-3}$ & $ 841  \pm 3.7 \% $	 &$ -12.58 \pm 3.6\cdot 10^{-4} \%$ \\ 
+$2 \cdot 10^{-2}$ & 	unstable &	unstable \\
+$1\cdot 10^{-2}$ & 	$783 \pm 3.5\%$ &	$-12.61 \pm 9.2\cdot 10^{-3} \% $\\
+$5\cdot 10^{-3}$ &	$793 \pm 3.7 \% $ &$-12.62 \pm 2.2\cdot 10^{-3} \%$ \\
+$2\cdot 10^{-3}$ & $769  \pm 3.7 \% $ & 	$ -12.65 \pm 5.2\cdot 10^{-4} \% $\\ 
+%$1\cdot 10^{-3}$ & $ 841  \pm 3.7 \% $	 &$ -12.58 \pm 3.6\cdot 10^{-4} \%$ \\ 
       \hline
     \end{tabular}
     \label{tab:task2}
@@ -93,17 +94,17 @@ $1\cdot 10^{-3}$ & $ 841  \pm 3.7 \% $	 &$ -12.58 \pm 3.6\cdot 10^{-4} \%$ \\
 
 
 \section*{Tasks 3 and 4: temperature and pressure equilibration}
-When we started the system with the random fluctuations, we saw in figure~\ref{fig:task2} that we get some different temperatures each time. If we want to study the system at some given temperature and pressure, we need some way of persuading the system to change to the desired macro state.
-
-Given that the temperature of the system is given by the average kinetic energy of the atoms, we can change the temperature by scaling the velocities of all atoms. A scheme for this temperature scaling is to first calculate the instantaneous temperature, $\mathtt{T}$ according to equation~\eqref{eq:T_instantaneous}, at that time step, and then scale it by a scaling factor
+%When we started the system with the random fluctuations, we saw in figure~\ref{fig:task2} that we get some different temperatures each time. If we want to study the system at some given temperature and pressure, we need some way of persuading the system to change to the desired macro state.
+There is no simple method to initialize a system to a specified temperature and pressure, but prescribed values can be obtained by scaling the velocities and the positions of the particles in the system. 
+Given that the temperature of the system is given by the average kinetic energy of the atoms, we can change the temperature by scaling the velocities of all atoms. A scheme for this temperature scaling is to first calculate the instantaneous temperature $\mathcal{T}$ according to equation~\eqref{eq:T_instantaneous}, at that time step, and then scale it by a scaling factor
 \begin{equation}
-\alpha_T=1-\frac{dt}{\tau_T}\frac{\mathtt{T}-T_{\rm eq}}{\mathcal{T}},
+\alpha_T=1-\frac{dt}{\tau_T}\frac{\mathcal{T}-T_{\rm eq}}{\mathcal{T}},
 \end{equation}
-where $T_{\rm eq}$ is the desired equilibrium temperature, and $\tau_T$ turns out to be a typical time scale on which the system equlibrates. However, it is only the particle velocities which we have control over, so to actually scale the temperature, we have to scale the velocities by $v_i\to\sqrt{\alpha_T}v_i$, since the temperature depends quadratically on the velocities.
+where $T_{\rm eq}$ is the desired equilibrium temperature, and $\tau_T$ turns out to be a typical time scale on which the system equlibrates. However, as we only have direct control of the particle velocities, we equilibrate the temperature by scaling the velocities by $v_i\to\sqrt{\alpha_T}v_i$, since the temperature depends quadratically on the velocities.
 
 A similar scheme for pressure equlibration is to instead scale the particle positions and simulation-box volume, using a scaling factor of
 \begin{equation}
-\alpha_P=1-\kappa\frac{dt}{\tau_P}(\mathtt{P}-P_{\rm eq}),
+\alpha_P=1-\kappa\frac{dt}{\tau_P}(\mathcal{P}-P_{\rm eq}),
 \end{equation}
 where $\mathcal{P}$ is the instantaneous pressure, $P_{\rm eq}$ is the desired equilibrium pressure, $\tau_P$ is the characteristic equlibration time, and $\kappa$ is the isothermal compressibility of the material simulated\footnotemark{}. This time the positions are scaled according to $x_i\to\alpha_P^{1/3}x_i$, and similarly the simulation box volume is scale by scaling its side lengths by $L\to\alpha_P^{1/3}L$.
 \footnotetext{The isothermal compressibility is defined according to $\kappa=-(V\pdv*{P}{V})_T^{-1}$. This compressibility should therefore be used when scaling the volume of the box to change the pressure.}
@@ -117,7 +118,7 @@ B = \frac{YG}{9G - 3Y} \,\quad \kappa_{\rm Al} = \frac{1}{B} \approx
 where \unit[1]{bar } = $\unit[6.2415\cdot 10^{-7}]{eV/\AA^3}$ in atomic units.
 %However, we set $\kappa = \kappa_{\rm Al}$ since the pressure equilibration happened on a much longer timescale than $\tau_P$ with $\kappa = \kappa_{\rm Al}$. We have not yet figured out why this is. 
 
-The results are shown in figure~\ref{fig:eq}, where we overlay the instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ with a moving average using 250 time steps. The desired temperatures and pressures were approximately obtained in the equilibration process. Although  the average pressure was slightly below zero, this is within the fluctuation error bars and is in line with the figure~2 in the homework problem document. 
+The results are shown in figure~\ref{fig:eq}, where we overlay the instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ with a moving average using 100 time steps. The desired temperatures and pressures were approximately obtained in the equilibration process. Although  the average pressure was slightly below zero, this is within the fluctuation error bars and is in line with the figure~2 in the homework problem document. 
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/TP-eq-500} 
@@ -126,17 +127,34 @@ The results are shown in figure~\ref{fig:eq}, where we overlay the instantaneous
   \label{fig:eq}
 \end{center}
 \end{figure}
-The equilibrium values of the lattice parameter were found to be 
+
+Due to the large fluctuations, it is difficult to determine if the system has reached its equilibrium directly from the instantaneous pressure. Instead, we consider the time-evolution of the lattice parameter $a_0$, as shown in figure~\ref{fig:a0}. After $t = 15 \tau_{\rm eq}$, the lattice parameter has reached a constant which means that the equilibrium is reached. The equilibrium values of the lattice parameter were found to be 
 \begin{align}
 a_0 &\approx \unit[4.09]{\AA}, \quad T=\unit[500]{^\circ C}, \\
-a_0 &\approx \unit[4.25]{\AA}, \quad T=\unit[700]{^\circ C} .
+a_0 &\approx \unit[4.26]{\AA}, \quad T=\unit[700]{^\circ C} .
 \end{align} 
 These value are larger than the zero-temperature constants, and it is reasonable that the higher $\unit[700]{^\circ C}$ case corresponds to a larger lattice parameter at constant pressure. 
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{../figures/a0}  
+  \caption{The time evolution of the lattice parameter $a_0$ as the system equilibrates.}
+  \label{fig:a0}
+\end{center}
+\end{figure}
+
+
 
 \section*{Tasks 3-5: particle trajectories}
-Starting with the temperature- and pressure-equilibrated systems from the previous section, we study the particle trajectories for both systems. Here, we decrease the time step to   $dt       = \unit[5\cdot 10^{-4}]{ps}$ and the simulation length to $t_{\rm end} = \unit[5]{ps}$ to get better statistics. This was mostly motivated by increasing the resolution in tasks 6-7. 
+Starting with the temperature- and pressure-equilibrated systems from the previous section, we study the particle trajectories for both systems. Here, we decrease the time step to   $dt       = \unit[1\cdot 10^{-3}]{ps}$ and the simulation length to $t_{\rm end} = \unit[10]{ps}$ to get better statistics. This was mostly motivated by increasing the resolution in tasks 6-7. 
 
-First, we note that the cumulative averages of the instantaneous temperatures and pressures stayed close to their initial values. This is shown in figure~\ref{fig:prod}.
+First, we note that the cumulative averages of the instantaneous temperatures and pressures stayed close to their initial values. This is shown in figure~\ref{fig:prod}. Numerically, we obtained 
+\begin{equation}
+T=\unit[506\pm 28]{^\circ C},\quad  P = \unit[403 \pm 1244]{bar},
+\end{equation} 
+and 
+\begin{equation}
+T=\unit[699\pm 36]{^\circ C},\quad P = \unit[-640 \pm 1860]{bar}.
+\end{equation} 
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/TP-prod-500} 
@@ -155,26 +173,26 @@ From equation (82) in MD lecture notes, the mean squared displacement can be cal
 \label{eq:1}
 \end{align}
 
-We now consider the particle trajectories. Figure~\ref{fig:MSD} shows the trajectories of five individual particles along with the mean squared displacement as determined in equation~\eqref{eq:1}. We can clearly see that the particle trajectories are bounded in the left figure~\ref{fig:MSD}, while for the high-temperature case in the right panel, they increase as square root of time ($\Delta_{\rm MSD} \propto t$). Consequently, the former is in a solid state while the latter is in a liquid state. 
 
-The self-diffusion coefficient as determined by the average slope of the mean squared displacement, was calculated to $D_s \approx \unit[0.52]{\AA^2/ps}$.  
+{\color{red} COMMENT ON THE LARGE FLUCTUATIONS IN P!!!!!!!!!!!!!!!!}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!ht]
 \begin{center}
-  \includegraphics[width=0.48\textwidth]{../figures/MSD-500} 
-    \includegraphics[width=0.48\textwidth]{../figures/MSD-700} 
-  \caption{Five individual particle trajectories (gray thin lines), overlaid with the mean squared displacement (thick black line). In the left panel, $T=\unit[500]{^\circ C}$, the system is in a solid state. In the right panel, $T=\unit[700]{^\circ C}$, the system is in a liquid state, where $\Delta_{\rm MSD} \approx 6 t D_s$ (dotted red line).}
+  \includegraphics[width=0.7\textwidth]{../figures/MSD-500}  \\
+    \includegraphics[width=0.7\textwidth]{../figures/MSD-700} 
+  \caption{Five individual particle trajectories (gray thin lines), overlaid with the mean squared displacement $\Delta_{\rm MSD} \approx \unit[0.16]{\AA^2}$ (thick black line). In the top panel, $T=\unit[500]{^\circ C}$, the system is in a solid state. In the bottom panel, $T=\unit[700]{^\circ C}$, the system is in a liquid state, where $\Delta_{\rm MSD} \approx 6 t D_s$ (dotted red line).}
   \label{fig:MSD}
 \end{center}
 \end{figure}
-
+We now consider the particle trajectories. Figure~\ref{fig:MSD} shows the trajectories of five individual particles along with the mean squared displacement as determined in equation~\eqref{eq:1}. We can clearly see that the particle trajectories are bounded in the left figure~\ref{fig:MSD}, while for the high-temperature case in the right panel, they increase as square root of time ($\Delta_{\rm MSD} \propto t$). Consequently, the former is in a solid state while the latter is in a liquid state.  
+In the solid, the obtained mean squared displacement was $\Delta_{\rm MSD} \approx \unit[0.16]{\AA^2}$.
+We determined the self-diffusion coefficient as average slope of the mean squared displacement for $\unit[1]{ps} \leq t \leq \unit[9]{ps}$, yielding $D_s \approx \unit[0.42]{\AA^2/ps}$. 
 %To determine M, we used mean of ... for t $>$ ... 
 
 
 \section*{Tasks 6-7: velocity correlation and power spectrum}
 
-We calculated the discrete auto-correlation function similarly to the
+We calculate the discrete auto-correlation function similarly to the
 MSD, 
 \begin{equation}
 \varPhi_j = \frac{1}{N-j}\sum_{i=0}^{N-j-1} \ev{v_{i+j}v_{i}}, \label{eq:Phi}
@@ -183,15 +201,17 @@ where $j=0,1,\ldots,N-1$ and the average is taken over all atoms. Figure~\ref{fi
 
 \begin{figure}[!ht]
 \begin{center}
-  \includegraphics[width=0.48\textwidth]{../figures/Phi-t} 
-    \includegraphics[width=0.48\textwidth]{../figures/P-freq} 
-  \caption{Left panel: The velocity correlation function, and (right panel) its spectrum, calculated both directly from the velocity correlation (solid line) and from the power spectrum of the particle velocity (dotted line). Blue lines show $T=\unit[500]{^\circ C}$ and red lines $T=\unit[700]{^\circ C}$. The spectrum is multiplied by a factor of $\tfrac{1}{2} m_{\rm Al}$, in which case it can be interpreted as energy per frequency interval and atom. }
+  \includegraphics[width=0.7\textwidth]{../figures/Phi-t} \\
+    \includegraphics[width=0.7\textwidth]{../figures/P-freq} 
+  \caption{Top panel: The velocity correlation function, and (bottom panel) its spectrum, calculated both directly from the velocity correlation (solid line) and from the power spectrum of the particle velocity (dotted line). Blue lines show $T=\unit[500]{^\circ C}$ and red lines $T=\unit[700]{^\circ C}$.   
+  %The spectrum is multiplied by a factor of $\tfrac{1}{2} m_{\rm Al}$, in which case it can be interpreted as energy per frequency interval and atom. 
+  }
   \label{fig:spectrum}
 \end{center}
 \end{figure}
 
 
-We then preceded to numerically approximate the integral
+We now proceed to numerically approximate the integral
 \begin{equation}
 \hat{\varPhi}(f) = 2\int_0^{\infty}\dd{t}\,
 \varPhi(t) \cos(2\pi ft)
@@ -203,7 +223,7 @@ $\Delta{f}=1/T_{\rm s}$, where $T_{\rm s}$ is a time at about half the
 simulation end time. This is to avoid including noisy data in
 $\varPhi(t)$ at later times, where the statistics are poor.
 
-We then calculated the power spectrum according to
+We may then calculate the power spectrum according to
 \begin{equation}
 \begin{aligned}
 \hat{P}(\omega) =& \lim_{T\to\infty}\frac{1}{T}
@@ -227,8 +247,7 @@ we find that they are very similar, as, indeed, they should be
 according to the Wiener-Khinthchine theorem. If we instead take $T_s = T$ (using the full time evolution of $\Phi(t)$, we get a more noisy signal. This is because there is less statistics at high values of $j$ in equation~\eqref{eq:Phi}.
 Therefore, even though the results are similar, the power spectrum method in equation~\eqref{eq:PHat}, should be considered more accurate since it includes more statistics of the data points. 
 
-The self-diffusion coefficient as determined by the power spectral density at $f=0$, was found to be  $D_s = \unit[0.49]{\AA^2/ps}$, which is close to the value obtained from the mean squared displacement, as expected.  
-
+The self-diffusion coefficient as determined by the power spectral density at $f=0$, was found to be  $D_s = \unit[0.44]{\AA^2/ps}$ and $D_s = \unit[0.42]{\AA^2/ps}$ determined from $\hat \Phi$, and  $\hat P$ respectively. (Since the data was noisy, we took the mean of the three first data points to obtain these values). As expected, these values are close to the values obtained from the mean squared displacement.  
 
 \section*{Concluding discussion}
 Using the velocity Verlet algorithm, we study a system of aluminum atoms  at \unit[500]{$^\circ$ C} and \unit[700]{$^\circ$ C}, which correspond to the solid and liquid state respectively.

@@ -117,17 +117,15 @@ for iFile = 1:numel(FILENAMES)
     T = data(:,2)+Kelvin_to_degC;
     P = data(:,3)/bar/1e4; %GPa
     
-    
     t_eq=t_eqs(iFile);
-
-    %fprintf('dt = %0.0e\n',dt(i));
+    
     T_avg=mean(T(t>t_eq));
     T_std=std(T(t>t_eq));
-    fprintf('\tT = %0.2f +- %0.1f K\n', T_avg, abs(T_std));
+    fprintf('\tT = %0.2f +- %0.1f C\n', T_avg, abs(T_std));
     
     P_avg=mean(P(t>t_eq));
     P_std=std(P(t>t_eq));
-    fprintf('\tP = %0.2f +- %0.1f bar\n', P_avg, abs(P_std));
+    fprintf('\tP = %0.2f +- %0.1f bar\n', P_avg*1e4, abs(P_std*1e4)); % convert to bar
     
     yyaxis left
     %subplot(2,1,1)
@@ -144,24 +142,18 @@ for iFile = 1:numel(FILENAMES)
     if iFile <=2 % equlibration run, otherwise production
         ylim(temps(iFile)*(1+ 0.3*[-3*0.6,0.6]))
         yyaxis right
-        %legend('$\mathcal{T}$', 'mov avg');
-        %subplot(2,1,2)
         plot(t./tau_equilibration,P),hold on;
         plot(t./tau_equilibration, movmean(P,N_average_points),'-k')
         
-        %legend('$\mathcal{P}$', 'mov avg');
         legend('$\mathcal{T}$', 'mov avg','$\mathcal{P}$', 'mov avg', 'location', 'west');
         xlabel('$t/\tau_{\rm eq}$')
         %xlim([0 5])
     else
         ylim(temps(iFile)+ 100*[-3,1])
         yyaxis right
-        %legend('$\mathcal{T}$', 'cum avg');
-        %subplot(2,1,2)
         plot(t,P),hold on;
         plot(t, cumsum(P)./(1:length(t))','-k')
         legend('$\mathcal{T}$', 'cum avg','$\mathcal{P}$', 'cum avg', 'location', 'west');
-        %legend('$\mathcal{P}$', 'cum avg');
         xlabel('$t$\, [ps]')
     end
     ylabel('$P \,[\rm GPa]$')
@@ -179,18 +171,18 @@ for iFile = 1:numel(FILENAMES)
     end
 end
 
-saveas(1, '../figures/TP-eq-500.eps', 'epsc')
-saveas(2, '../figures/TP-eq-700.eps', 'epsc')
-saveas(3, '../figures/TP-prod-500.eps', 'epsc')
-saveas(4, '../figures/TP-prod-700.eps', 'epsc')
-saveas(10, '../figures/a0.eps', 'epsc')
 figure(10);
 xlabel('$t/\tau_{\rm eq}$');
 ylabel('$a_0$');
 legend('$T = 500^\circ$C','$T = 700^\circ$C')
 setFigureSize(gcf, 300, 600);
-ImproveFigureCompPhys(gcf);
+ImproveFigureCompPhys(gcf, 'LineColor', {'MYRED','MYLIGHTBLUE'}', 'LineStyle', {'-','-.'}');
 
+saveas(1, '../figures/TP-eq-500.eps', 'epsc')
+saveas(2, '../figures/TP-eq-700.eps', 'epsc')
+saveas(3, '../figures/TP-prod-500.eps', 'epsc')
+saveas(4, '../figures/TP-prod-700.eps', 'epsc')
+saveas(10, '../figures/a0.eps', 'epsc')
 %% determine displacements and MSD
 temperatures_str = num2str([500;700]);
 clc; clf;
@@ -286,7 +278,7 @@ leg.Location='northeast';
 xlabel('$t$ [ps]')
 ylabel('$\Phi (t)/\Phi(0)$')
 ImproveFigureCompPhys(gcf,'LineColor', {'MYRED', 'MYLIGHTBLUE'}');
-setFigureSize(gcf, 400, 400);
+setFigureSize(gcf, 300, 600);
 
 figure(11)
 leg = legend('$T= 500 \, ^\circ $C, $ \hat \Phi$' ,...
