@@ -104,10 +104,11 @@ FILENAMES = [strcat({'../data/temp-'}, temperatures_str,...
     strcat({'../data/temp-'}, temperatures_str, '_pres-1_Prod-test.tsv')];
 bar = 6.2415e-07;
 Kelvin_to_degC = -273.15;
-t_eqs = [1 1 0.5 0.5]; % approximate equilibration time
+
 N_average_points = 100;
 dt = 5e-3;
 tau_equilibration = 100*dt;
+t_eqs = [10*tau_equilibration 10*tau_equilibration 1 1]; % approximate equilibration time
 
 for iFile = 1:numel(FILENAMES)
     figure(iFile);clf;
@@ -121,11 +122,11 @@ for iFile = 1:numel(FILENAMES)
     
     T_avg=mean(T(t>t_eq));
     T_std=std(T(t>t_eq));
-    fprintf('\tT = %0.2f +- %0.1f C\n', T_avg, abs(T_std));
+    fprintf('\tT = %0.f +- %0.f C \t ', T_avg, abs(T_std));
     
     P_avg=mean(P(t>t_eq));
     P_std=std(P(t>t_eq));
-    fprintf('\tP = %0.2f +- %0.1f bar\n', P_avg*1e4, abs(P_std*1e4)); % convert to bar
+    fprintf('\tP = %0.f +- %0.f bar\n', P_avg*1e4, abs(P_std*1e4)); % convert to bar
     
     yyaxis left
     %subplot(2,1,1)
@@ -183,6 +184,14 @@ saveas(2, '../figures/TP-eq-700.eps', 'epsc')
 saveas(3, '../figures/TP-prod-500.eps', 'epsc')
 saveas(4, '../figures/TP-prod-700.eps', 'epsc')
 saveas(10, '../figures/a0.eps', 'epsc')
+
+%% estimating  fluctuations:
+bar = 6.2415e-07;
+kB = 8.61733e-5;
+deltaT = [29 36];
+a0 = [4.09 4.25];
+pressure_fluctuations_from_T = 4*kB./a0.^3.*deltaT./bar
+pressure_fluctuations_from_T_GPa = pressure_fluctuations_from_T*1e-4
 %% determine displacements and MSD
 temperatures_str = num2str([500;700]);
 clc; clf;
@@ -222,7 +231,7 @@ for iFile = 1:numel(FILENAMES)
         ylim([ 0 0.5]);
         leg = legend( '$\Delta_{\rm MSD}$', 'individual trajectories');
     else
-        ylim([0 30]);
+        ylim([0 20]);
         leg = legend('$\Delta_{\rm MSD}$', '$6 t D_s$', ...
             'individual trajectories');
     end
@@ -251,7 +260,7 @@ for iFile = 1:numel(FILENAMES)
     plot(t, vel_corr/vel_corr(1)); hold on;
     
     dt = t(2)-t(1);
-    N_times = round(length(t)/1.5);% we have bad statistics at later times.
+    N_times = round(length(t)*0.75);% we have bad statistics at later times.
     deltaf = 1/(N_times * dt);
     freqvec = 0:deltaf:(1/(2*dt));
     PhiHat = 2 * trapz(t(1:N_times), ...
@@ -263,8 +272,8 @@ for iFile = 1:numel(FILENAMES)
     plot(freq, pow_spec*t(end), '-.'); hold on;
     if iFile ==2 % liquid
         tStart = 1;
-        selfDiffusionCoeff_spectral1 = mean(PhiHat(1:3))/6; % in Å^2 /ps
-        selfDiffusionCoeff_spectral2 = mean(pow_spec(1:3)*t(end))/6; % in Å^2 /ps
+        selfDiffusionCoeff_spectral1 = (PhiHat(1))/6; % in Å^2 /ps
+        selfDiffusionCoeff_spectral2 = (pow_spec(1)*t(end))/6; % in Å^2 /ps
     end
     
 end
@@ -297,3 +306,4 @@ saveas(1, '../figures/MSD-500.eps', 'epsc')
 saveas(2, '../figures/MSD-700.eps', 'epsc')
 saveas(10, '../figures/Phi-t.eps', 'epsc')
 saveas(11, '../figures/P-freq.eps', 'epsc')
+

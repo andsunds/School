@@ -118,7 +118,32 @@ B = \frac{YG}{9G - 3Y} \,\quad \kappa_{\rm Al} = \frac{1}{B} \approx
 where \unit[1]{bar } = $\unit[6.2415\cdot 10^{-7}]{eV/\AA^3}$ in atomic units.
 %However, we set $\kappa = \kappa_{\rm Al}$ since the pressure equilibration happened on a much longer timescale than $\tau_P$ with $\kappa = \kappa_{\rm Al}$. We have not yet figured out why this is. 
 
-The results are shown in figure~\ref{fig:eq}, where we overlay the instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ with a moving average using 100 time steps. The desired temperatures and pressures were approximately obtained in the equilibration process. Although  the average pressure was slightly below zero, this is within the fluctuation error bars and is in line with the figure~2 in the homework problem document. 
+The results are shown in figure~\ref{fig:eq}, where we overlay the instantaneous values of $\mathcal{T}$ and $\mathcal{P}$ with a moving average using 100 time steps. The desired temperatures and pressures were approximately obtained in the equilibration process. The averages during the last half of the process ($t \geq 10 \tau_{\rm eq}$), were
+\begin{equation}
+T=\unit[500\pm 29]{^\circ C},\quad  P = \unit[43 \pm 1232]{bar},
+\label{eq:Tprod1}
+\end{equation} 
+and 
+\begin{equation}
+T=\unit[701\pm 34]{^\circ C},\quad P = \unit[-349 \pm 1911]{bar}.
+\label{eq:Tprod2}
+\end{equation}
+The fluctuations in the pressure may appear large, but are roughly consistent with the fluctuations in the temperature (as well as figure~2 in the homework problem document). With $P = N k_{\rm B} T + W$, the fluctuations in the pressure can be estimated by
+\begin{equation}
+\Delta P = \sqrt{\Delta P_{\rm T}^2 + \Delta P_{\rm W}^2}, 
+\end{equation} 
+where
+\begin{align}
+\Delta P_{\rm T} &\equiv \frac{N k_{\rm B}}{V} \Delta T = \frac{4 k_{\rm B}}{a_0^3} \Delta T \approx 
+\begin{cases}
+\unit[234]{bar} \approx  \unit[0.02]{GPa}, \quad T=\unit[500]{^\circ C} \\
+\unit[259]{bar} \approx  \unit[0.03]{GPa}, \quad T=\unit[700]{^\circ C}
+\end{cases} \\
+ \Delta P_{\rm W} &\equiv \frac{\Delta W}{V}.
+\end{align}
+The fluctuations $\Delta P$ in equations~\eqref{eq:Tprod1} and~\eqref{eq:Tprod2} are significantly larger than $\Delta P_{\rm T}$, but differ with less than an order of magnitude. We find it plausible that $\Delta P_{\rm W}$ can be significantly larger than $\Delta P_{\rm T}$. 
+
+
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/TP-eq-500} 
@@ -128,10 +153,10 @@ The results are shown in figure~\ref{fig:eq}, where we overlay the instantaneous
 \end{center}
 \end{figure}
 
-Due to the large fluctuations, it is difficult to determine if the system has reached its equilibrium directly from the instantaneous pressure. Instead, we consider the time-evolution of the lattice parameter $a_0$, as shown in figure~\ref{fig:a0}. After $t = 15 \tau_{\rm eq}$, the lattice parameter has reached a constant which means that the equilibrium is reached. The equilibrium values of the lattice parameter were found to be 
+Due to the large fluctuations, it is difficult to determine if the system has reached its equilibrium directly from the instantaneous pressure. Instead, we consider the time-evolution of the lattice parameter $a_0$, as shown in figure~\ref{fig:a0}. After $t = 20 \tau_{\rm eq}$, the lattice parameter has reached a constant which means that the equilibrium is reached. The equilibrium values of the lattice parameter were found to be 
 \begin{align}
 a_0 &\approx \unit[4.09]{\AA}, \quad T=\unit[500]{^\circ C}, \\
-a_0 &\approx \unit[4.26]{\AA}, \quad T=\unit[700]{^\circ C} .
+a_0 &\approx \unit[4.25]{\AA}, \quad T=\unit[700]{^\circ C} .
 \end{align} 
 These value are larger than the zero-temperature constants, and it is reasonable that the higher $\unit[700]{^\circ C}$ case corresponds to a larger lattice parameter at constant pressure. 
 \begin{figure}[!ht]
@@ -149,12 +174,15 @@ Starting with the temperature- and pressure-equilibrated systems from the previo
 
 First, we note that the cumulative averages of the instantaneous temperatures and pressures stayed close to their initial values. This is shown in figure~\ref{fig:prod}. Numerically, we obtained 
 \begin{equation}
-T=\unit[506\pm 28]{^\circ C},\quad  P = \unit[403 \pm 1244]{bar},
+T=\unit[504\pm 29]{^\circ C},\quad  P = \unit[-660 \pm 1215]{bar},
+\label{eq:Tprod11}
 \end{equation} 
 and 
 \begin{equation}
-T=\unit[699\pm 36]{^\circ C},\quad P = \unit[-640 \pm 1860]{bar}.
+T=\unit[706\pm 37]{^\circ C},\quad P = \unit[-1021 \pm 1985]{bar}.
+\label{eq:Tprod22}
 \end{equation} 
+
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.48\textwidth]{../figures/TP-prod-500} 
@@ -174,7 +202,6 @@ From equation (82) in MD lecture notes, the mean squared displacement can be cal
 \end{align}
 
 
-{\color{red} COMMENT ON THE LARGE FLUCTUATIONS IN P!!!!!!!!!!!!!!!!}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -219,8 +246,7 @@ We now proceed to numerically approximate the integral
 \end{equation}
 using a trapezoidal method in \textsc{Matlab}, with a frequency range
 $f=0$ to $f=1/(2\Delta{t})=f_{\rm Nyqvist}$, and frequency steps
-$\Delta{f}=1/T_{\rm s}$, where $T_{\rm s}$ is a time at about half the
-simulation end time. This is to avoid including noisy data in
+$\Delta{f}=1/T_{\rm s}$, where $T_{\rm s} = T*0.75$. This is to avoid including noisy data in
 $\varPhi(t)$ at later times, where the statistics are poor.
 
 We may then calculate the power spectrum according to
@@ -245,9 +271,9 @@ is the discrete Fourier transform of $v_i$. Note that the factor of $T$ was not 
 When we compare $\hat{\varPhi}_k$ and $\hat{P}_k$ in figure~\ref{fig:spectrum} (right),
 we find that they are very similar, as, indeed, they should be
 according to the Wiener-Khinthchine theorem. If we instead take $T_s = T$ (using the full time evolution of $\Phi(t)$, we get a more noisy signal. This is because there is less statistics at high values of $j$ in equation~\eqref{eq:Phi}.
-Therefore, even though the results are similar, the power spectrum method in equation~\eqref{eq:PHat}, should be considered more accurate since it includes more statistics of the data points. 
+Therefore, even though the results are similar, the power spectrum method in equation~\eqref{eq:PHat} should be considered more accurate since it includes more statistics of the data points. 
 
-The self-diffusion coefficient as determined by the power spectral density at $f=0$, was found to be  $D_s = \unit[0.44]{\AA^2/ps}$ and $D_s = \unit[0.42]{\AA^2/ps}$ determined from $\hat \Phi$, and  $\hat P$ respectively. (Since the data was noisy, we took the mean of the three first data points to obtain these values). As expected, these values are close to the values obtained from the mean squared displacement.  
+The self-diffusion coefficient as determined by the power spectral density at $f=0$, was found to be  $D_{s, \hat \Phi} = \unit[0.38]{\AA^2/ps}$ and $D_{s, \hat P} = \unit[0.41]{\AA^2/ps}$ determined from $\hat \Phi$, and  $\hat P$ respectively. As expected, these values are close to the values obtained from the mean squared displacement. We note that $D_{s, \hat P}$ provides a better agreement with the $\Delta_{\rm MSD}$ value, which is consistent with $\hat P(\omega)$ containing more statistics.  
 
 \section*{Concluding discussion}
 Using the velocity Verlet algorithm, we study a system of aluminum atoms  at \unit[500]{$^\circ$ C} and \unit[700]{$^\circ$ C}, which correspond to the solid and liquid state respectively.

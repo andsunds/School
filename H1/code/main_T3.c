@@ -55,8 +55,8 @@ int main()
   double inv_volume = pow(cell_length, -3);
   double noise_amplitude = 6.5e-2 * a_eq;
 
-  double T_final_C= 500;
-  int nRuns = 1; //2 if melt, 1 otherwise
+  double T_final_C= 700;
+  int nRuns = 2; //2 if melt, 1 otherwise
   double T_melt_C = 1100;
    
   double P_final_bar= 1;
@@ -66,7 +66,7 @@ int main()
   double dt    = 5e-3;
   double tau_T = 100*dt;
   double tau_P = 100*dt;
-  double t_eq= 15*tau_P; //equlibration times
+  double t_eq= 20*tau_P; //equlibration times
   int N_timesteps = t_eq/dt;
   
   double alpha_T, alpha_P,alpha_P_cube_root;
