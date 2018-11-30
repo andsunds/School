@@ -212,7 +212,10 @@ Note that the sum over $j$ has a varying number of terms depending on $k$. For h
 \end{center}
 \end{figure}
 We now consider the particle trajectories. Figure~\ref{fig:MSD} shows the trajectories of five individual particles along with the mean squared displacement as determined in equation~\eqref{eq:1}. We can clearly see that the particle trajectories are bounded in the left figure~\ref{fig:MSD}, while for the high-temperature case in the right panel, they increase as square root of time ($\Delta_{\rm MSD} \propto t$). Consequently, the former is in a solid state while the latter is in a liquid state.  
-In the solid, the obtained mean squared displacement was $\Delta_{\rm MSD} \approx \unit[0.16]{\AA^2}$. We determined the self-diffusion coefficient as the average slope of the mean squared displacement for $\unit[1]{ps} \leq t \leq \unit[9]{ps}$, yielding $D_s \approx \unit[0.42]{\AA^2/ps}$. In theory, $\Delta_{\rm MSD}(t)=6D_st$, hence $D_s=\lim_{t\to\infty}\Delta_{\rm MSD}(t)/(6t)$; however, in practice we use the linear fit method for determining $D_s$, since we want to avoid giving too much statistical significance to the values of $\Delta_{\rm MSD}(t)$ at high $t$, where the constituting statistics are poor.
+In the solid, the obtained mean squared displacement was $\Delta_{\rm MSD} \approx \unit[0.16]{\AA^2}$.
+
+We determined the self-diffusion coefficient as the average slope of the mean squared displacement for $\unit[1]{ps} \leq t \leq \unit[9]{ps}$, yielding $D_s \approx \unit[0.42]{\AA^2/ps}$. This is because we want to avoid giving too much statistical significance to the values of $\Delta_{\rm MSD}(t)$ at high $t$, where the statistics are poor. 
+In contrast, the method suggested, $D_s=\lim_{t\to\infty}\Delta_{\rm MSD}(t)/(6t)$, only utilizes the high uncertainty values of $\Delta_{\rm MSD}(t)$ at high $t$.
 
 
 
@@ -242,7 +245,8 @@ We now proceed to numerically approximate the integral
 \varPhi(t) \cos(2\pi ft)
 \approx 2\int_0^{T_{\rm s}}\dd{t}\,\varPhi(t) \cos(2\pi ft)
 \end{equation}
-using a trapezoidal method in \textsc{Matlab}, with a frequency range $f=0$ to $f=1/(2\Delta{t})=f_{\rm Nyqvist}$, and frequency steps $\Delta{f}=1/T_{\rm s}$, where $T_{\rm s} = 0.75T$. This is to avoid including noisy data in $\varPhi(t)$ at long time intervals $t$, where the statistics are poor---c.f. the discussion of the error in \eqref{eq:1}. It is especially important to exlude the values of $\Phi_k$ with high uncertainty in this (essentially) Fourier transorm, since that statistical ``noise'' will, in general, affect all frequencies---even the low frequencies which are of interest to us.
+using a trapezoidal method in \textsc{Matlab}, with a frequency range $f=0$ to $f=1/(2\Delta{t})=f_{\rm Nyqvist}$, and frequency steps $\Delta{f}=1/T_{\rm s}$, where $T_{\rm s} = 0.75T$.
+This is to avoid including noisy data in $\varPhi(t)$ at long time intervals $t$, where the statistics are poor---c.f. the discussion on the error in \eqref{eq:1}. Since that statistical ``noise'' will affect all frequencies, the solid lines in the lower panel of figure~\ref{fig:spectrum} would otherwise be too noisy.
 
 We may then calculate the power spectrum according to
 \begin{equation}

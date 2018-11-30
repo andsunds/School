@@ -1,15 +1,43 @@
 #include "funcs.h"
 
-double get_bond_E(int site_1, int site_2, double E_ZnZn, double E_CuZn, 
-  double E_CuCu){
+double get_bond_E(int site_1, int site_2,
+		  double E_ZnZn, double E_CuZn, double E_CuCu){
+  double tmp=0;
   switch(site_1 + site_2 ) {
     case 0 :
-      return E_ZnZn; 
+      //return E_ZnZn;
+      tmp=E_ZnZn;
+      break;
     case 1 :
-      return E_CuZn;
+      //return E_CuZn;
+      tmp= E_CuZn;
+      break;
     case 2 :
-      return E_CuCu; 
+      //return E_CuCu;
+      tmp=E_CuCu;
+      break;
   }
+  //printf("%0.3f ", tmp);
+  return tmp;
+}
+
+double get_P(int *lattice, int N_Cu){
+  int N_Cu_in_Cu_lattice=0;
+  for(int i=0;i<N_Cu;i++){
+    N_Cu_in_Cu_lattice+=lattice[i];
+  }
+  return (double)N_Cu_in_Cu_lattice/N_Cu *2 -1;
+}
+
+double get_Etot(int *lattice, int N_atoms, int (*nearest)[8],
+		double E_ZnZn, double E_CuZn, double E_CuCu){
+  double Etot=0;
+  for(int i=0; i<N_atoms; i++){
+    for( int j=0; j<8; j++){
+      Etot+= get_bond_E(lattice[i], lattice[nearest[i][j]], E_ZnZn, E_CuZn, E_CuCu);
+    }
+  }
+  return Etot/2;
 }
 
 void init_nearestneighbor(int Nc, int (*nearest)[8]){
