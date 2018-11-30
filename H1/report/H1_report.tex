@@ -197,10 +197,10 @@ From equation (82) in MD lecture notes, the mean squared displacement can be cal
 \Delta_{\rm MSD}(t) &= \lim_{T \rightarrow \infty} \frac{1}{T} \int_0^{T} d t' \frac{1}{N_{\rm atoms}} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t+t') - {\bf r}_i(t') \right]^2 \\ &\Rightarrow \nonumber
 \\
 \Delta_{\rm MSD}(t_k) &\approx
-\frac{1}{N_T -k}\frac{1}{N_{\rm atoms}} \sum_{j=0}^{N_T-k-1} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t_{k+j}) - {\bf r}_i(t_j) \right]^2 
+\frac{1}{N -k}\frac{1}{N_{\rm atoms}} \sum_{j=0}^{N-k-1} \sum_{i=0}^{N_{\rm atoms}-1} \left[{\bf r}_i(t_{k+j}) - {\bf r}_i(t_j) \right]^2 .
 \label{eq:1}
 \end{align}
-
+Note that the sum over $j$ has a varying number of terms depending on $k$. For high $k$ (large $t_k$), the sum contains fewer terms and thus the statistics going into the average becomes less certain. The standard deviation in the mean is proportional to $(N-k-1)^{-1/2}$; hence when $k$ is large, the uncertainty also becomes large. However, note that \eqref{eq:1} utilizes the maximum amount of data, and the higher uncertainty at large $t_k$ cannot be avoided.
 
 
 \begin{figure}[!ht]
@@ -212,19 +212,17 @@ From equation (82) in MD lecture notes, the mean squared displacement can be cal
 \end{center}
 \end{figure}
 We now consider the particle trajectories. Figure~\ref{fig:MSD} shows the trajectories of five individual particles along with the mean squared displacement as determined in equation~\eqref{eq:1}. We can clearly see that the particle trajectories are bounded in the left figure~\ref{fig:MSD}, while for the high-temperature case in the right panel, they increase as square root of time ($\Delta_{\rm MSD} \propto t$). Consequently, the former is in a solid state while the latter is in a liquid state.  
-In the solid, the obtained mean squared displacement was $\Delta_{\rm MSD} \approx \unit[0.16]{\AA^2}$.
-We determined the self-diffusion coefficient as average slope of the mean squared displacement for $\unit[1]{ps} \leq t \leq \unit[9]{ps}$, yielding $D_s \approx \unit[0.42]{\AA^2/ps}$. 
-%To determine M, we used mean of ... for t $>$ ... 
+In the solid, the obtained mean squared displacement was $\Delta_{\rm MSD} \approx \unit[0.16]{\AA^2}$. We determined the self-diffusion coefficient as the average slope of the mean squared displacement for $\unit[1]{ps} \leq t \leq \unit[9]{ps}$, yielding $D_s \approx \unit[0.42]{\AA^2/ps}$. In theory, $\Delta_{\rm MSD}(t)=6D_st$, hence $D_s=\lim_{t\to\infty}\Delta_{\rm MSD}(t)/(6t)$; however, in practice we use the linear fit method for determining $D_s$, since we want to avoid giving too much statistical significance to the values of $\Delta_{\rm MSD}(t)$ at high $t$, where the constituting statistics are poor.
+
 
 
 \section*{Tasks 6-7: velocity correlation and power spectrum}
 
-We calculate the discrete auto-correlation function similarly to the
-MSD, 
+We calculate the discrete auto-correlation function similarly to the MSD, in \eqref{eq:1}, 
 \begin{equation}
-\varPhi_j = \frac{1}{N-j}\sum_{i=0}^{N-j-1} \ev{v_{i+j}v_{i}}, \label{eq:Phi}
+\varPhi_k = \frac{1}{N-k}\sum_{i=0}^{N-k-1} \ev{v_{i+k}v_{i}}, \label{eq:Phi}
 \end{equation}
-where $j=0,1,\ldots,N-1$ and the average is taken over all atoms. Figure~\ref{fig:spectrum}(left) shows that it is noticeably different between the solid and the liquid states: while the solid state remains non-zero at longer time, presumably because of oscillations around lattice points, the liquid velocity correlation quickly decays to zero after some initial oscillations. 
+where $j=0,1,\ldots,N-1$ and the average is taken over all atoms. Figure~\ref{fig:spectrum}(left) shows that it is noticeably different between the solid and the liquid states: while the solid state remains non-zero at longer time, presumably because of oscillations around lattice points, the liquid velocity correlation quickly decays to zero after some initial oscillations. Note that this calculation of $\varPhi_k$ suffers from the same high uncertainty at large $k$ as the MSD calculation.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -244,10 +242,7 @@ We now proceed to numerically approximate the integral
 \varPhi(t) \cos(2\pi ft)
 \approx 2\int_0^{T_{\rm s}}\dd{t}\,\varPhi(t) \cos(2\pi ft)
 \end{equation}
-using a trapezoidal method in \textsc{Matlab}, with a frequency range
-$f=0$ to $f=1/(2\Delta{t})=f_{\rm Nyqvist}$, and frequency steps
-$\Delta{f}=1/T_{\rm s}$, where $T_{\rm s} = T*0.75$. This is to avoid including noisy data in
-$\varPhi(t)$ at later times, where the statistics are poor.
+using a trapezoidal method in \textsc{Matlab}, with a frequency range $f=0$ to $f=1/(2\Delta{t})=f_{\rm Nyqvist}$, and frequency steps $\Delta{f}=1/T_{\rm s}$, where $T_{\rm s} = 0.75T$. This is to avoid including noisy data in $\varPhi(t)$ at long time intervals $t$, where the statistics are poor---c.f. the discussion of the error in \eqref{eq:1}. It is especially important to exlude the values of $\Phi_k$ with high uncertainty in this (essentially) Fourier transorm, since that statistical ``noise'' will, in general, affect all frequencies---even the low frequencies which are of interest to us.
 
 We may then calculate the power spectrum according to
 \begin{equation}
@@ -267,10 +262,7 @@ where the averages is taken over all atoms, and
 \begin{equation}
 \hat{\vb*v}_k = \sqrt{N}\sum_{i=0}^{N-1} \vb*v_i \exp(\ii2\pi\frac{ik}{N})
 \end{equation}
-is the discrete Fourier transform of $v_i$. Note that the factor of $T$ was not included in the C scripts, and we therefore multiplied by this factor in the \textsc{Matlab} plotting scripts.
-When we compare $\hat{\varPhi}_k$ and $\hat{P}_k$ in figure~\ref{fig:spectrum} (right),
-we find that they are very similar, as, indeed, they should be
-according to the Wiener-Khinthchine theorem. If we instead take $T_s = T$ (using the full time evolution of $\Phi(t)$, we get a more noisy signal. This is because there is less statistics at high values of $j$ in equation~\eqref{eq:Phi}.
+is the discrete Fourier transform of $v_i$. Note that the factor of $T$ was not included in the C scripts, and we therefore multiplied by this factor in the \textsc{Matlab} plotting scripts. When we compare $\hat{\varPhi}_k$ and $\hat{P}_k$ in figure~\ref{fig:spectrum} (right), we find that they are very similar, as, indeed, they should be according to the Wiener-Khinthchine theorem. If we instead take $T_s = T$ (using the full time evolution of $\Phi(t)$, we get a more noisy signal. This is because there is less statistics at high values of $j$ in equation~\eqref{eq:Phi}.
 Therefore, even though the results are similar, the power spectrum method in equation~\eqref{eq:PHat} should be considered more accurate since it includes more statistics of the data points. 
 
 The self-diffusion coefficient as determined by the power spectral density at $f=0$, was found to be  $D_{s, \hat \Phi} = \unit[0.38]{\AA^2/ps}$ and $D_{s, \hat P} = \unit[0.41]{\AA^2/ps}$ determined from $\hat \Phi$, and  $\hat P$ respectively. As expected, these values are close to the values obtained from the mean squared displacement. We note that $D_{s, \hat P}$ provides a better agreement with the $\Delta_{\rm MSD}$ value, which is consistent with $\hat P(\omega)$ containing more statistics.  
