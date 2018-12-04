@@ -7,12 +7,11 @@ warning('off','MATLAB:handle_graphics:exceptions:SceneNode'); % interpreter
 GRAY = 0.7*[0.9 0.9 1];
 kB = 8.61733e-5;
 %% task 1: MFT
+doSave = 0;
 clc
 
 Pmin = 0;
 Pmax = 1;
-
-kB= 8.61733e-5;
 
 E_CuCU = -.436;
 E_ZnZn = -.133;
@@ -27,8 +26,6 @@ E_MFT_bar=@(P) E0_bar - 2*P.^2;
 dE_MFTdP =@(P) - 4*P*Delta_E;
 
 F_MFT = @(P,Tbar) E_MFT_bar(P) + Tbar*(-2*log(2) + (1+P).*log(1+P)+(1-P).*log(1-P));
-%dFdP = @(P, Tbar)( -4*P + Tbar * (log(1+P)-log(1-P)) );
-
 P_eq=@(Tbar)  fminbnd(@(P)F_MFT(P, Tbar), Pmin, Pmax, optimset('TolX',1e-9));
 
 Tbar = linspace(0,3,1000)';
@@ -39,61 +36,60 @@ for iT = 1:numel(Tbar)
     Peq(iT) = P_eq(Tbar(iT));
 end
 
+% plot P(T) and make a fit
 figure(1);clf
-plot(T_MFT, Peq);
-
-xlabel('$k_B T/ \Delta E$')
-ylabel('$P_{\rm equilibrium}$')
-
-
-figure(2);clf
+plot(Tbar, Peq);hold on
 
 dT=2-Tbar(Tbar<2);
 Peq_nonzero = Peq(Tbar<2);
 
-plot(dT, Peq_nonzero); hold on
-set(gca,'xscale','log','yscale','log');
-
 I_good = (dT<0.1);
 log_dT = log(dT(I_good));
 log_P  = log(Peq_nonzero(I_good));
-
 A=[ones(size(log_dT)), log_dT]\log_P;
 b     = exp(A(1));
 alpha = A(2);
 fprintf('alpha = %.3f\n', alpha)
 
 P_approx = @(alpha,b,Tbar) b*(2-Tbar).^alpha;
-
-plot(dT,P_approx(alpha,b,2-dT),'k:')
-
-
-
+plot(Tbar(Tbar<2),P_approx(alpha,b,Tbar(Tbar<2)),'k:')
 xlabel('$k_B T/ \Delta E$')
-ylabel('$P_{\rm equilibrium}$')
+ylabel('$P$')
+legend('$P$', 'fit $P \propto (2-\bar T)^\alpha$')
+ylim([0 1.3]);
+if doSave; setFigureSize(gcf, 300, 600); end
+
+% plot E_MFT and the fit
+figure(2);clf
+plot(Tbar,E_MFT(Peq)); hold on
+plot(Tbar,E_MFT(P_approx(alpha,b,Tbar)),'k:')
+xlabel('$k_B T/ \Delta E$')
+ylabel('$U$ [eV/cell]')
+legend('$E_{\rm MFT}$', 'fit $P \propto (2-\bar T)^\alpha$', 'location', 'NorthWest');
+ylim([-2.36 -2.3]);
+if doSave; setFigureSize(gcf, 300, 600); end
 
 figure(3);clf
-plot(T_MFT,E_MFT(Peq)); hold on
-
-plot(T_MFT,E_MFT(P_approx(alpha,b,Tbar)),'k:')
-
-
-figure(4);clf
-%dPdT=diff(Peq)./diff(T);
-%dE_MFTdP(Peq(1:end-1))*
 C=diff(E_MFT(Peq))./diff(T_MFT);
-plot(Tbar(1:end-1), C); hold on
-
+plot(Tbar(1:end-1), C*1e3); hold on
 C_approx=4*b^2*kB*alpha*(2-Tbar).^(2*alpha-1);
-plot(Tbar(Tbar<2),C_approx(Tbar<2),'k:')
-
+plot(Tbar(Tbar<2),1e3*C_approx(Tbar<2),'k:')
+xlabel('$k_B T/ \Delta E$')
+ylabel('$C$ [meV K$^{-1}$/cell]')
+legend('$C_{\rm MFT}$', 'fit $P \propto (2-\bar T)^\alpha$', 'location', 'NorthWest');
+ylim([0 0.3])
+if doSave; setFigureSize(gcf, 300, 600); end
 
 ImproveFigureCompPhys()
-
+if doSave
+    saveas(1, '../figures/P_MFT.eps', 'epsc');
+    saveas(2, '../figures/E_MFT.eps', 'epsc');
+    saveas(3, '../figures/C_MFT.eps', 'epsc');
+end
 %% task 2: ...
 clc;
 
-Ts=[-200:20:600]'; 
+Ts=[-200:20:600]';
 TsToPlot = [300 440 600]';
 t_eq=0;
 
@@ -120,7 +116,7 @@ for i=1:numel(Ts)
     VarF_norm = data(:,3);
     kstar = k(find(log(phi)<-2, 1, 'first'));
     if ~isempty(kstar)
-      ns_Phi(i) = kstar;
+        ns_Phi(i) = kstar;
     end
     N_avg = 20;
     filtereddata = movmean(VarF_norm,N_avg);
@@ -155,7 +151,7 @@ ImproveFigureCompPhys()
 
 data = load('../data/E_production.tsv');
 T_degC = data(:,1);
-N_Cu = 1e3; 
+N_Cu = 1e3;
 N_timeSteps = 1e7;
 
 Emean_approx = data(:,2);
@@ -164,7 +160,7 @@ E_sq_mean_shifted = data(:,4);
 
 E_Var = (E_sq_mean_shifted - Emean_shifted.^2);
 
-Cv = 1./(kB * (T_degC+273.15).^2).*E_Var; 
+Cv = 1./(kB * (T_degC+273.15).^2).*E_Var;
 U = Emean_shifted + Emean_approx;
 U_std = sqrt(E_Var/N_timeSteps);
 P = data(:,5);
@@ -193,7 +189,7 @@ errorbar(Ts, P(ind), 2*P_std(ind).*sqrt(ns_Phi), '.k', 'linewidth', 1.5); hold o
 %errorbar(Ts, P(ind), 2*P_std(ind).*sqrt(ns_block), '.r','linewidth', 1.5);hold on;
 plot(T_degC, P, 'color', GRAY); hold on;
 
-plot(T_MFT_degC, Peq, '--k'); 
+plot(T_MFT_degC, Peq, '--k');
 
 figure(14);clf;
 errorbar(Ts, r(ind), 2*r_std(ind).*sqrt(ns_Phi), '.k','linewidth', 1.5);hold on;

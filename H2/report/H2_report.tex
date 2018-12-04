@@ -1,0 +1,92 @@
+\input{template_files/packages}
+\usepackage{units}
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+\usepackage{physics}
+
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+
+\title{H2a: Binary Alloy}
+\author{Andr\'eas Sundstr\"om and Linnea Hesslow}
+\date{\today}
+
+\begin{document}
+
+\input{template_files/titlepage}
+
+\section*{Introduction}
+
+....
+
+\section*{Task 1: mean field theory}
+Fits: we obtained $\alpha \approx 0.494$
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{../figures/P_MFT} 
+  \caption{.....}
+  \label{fig1}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{../figures/E_MFT} 
+  \caption{......}
+  \label{fig1}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{../figures/C_MFT} 
+  \caption{......}
+  \label{fig1}
+\end{center}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Task 2: Ising model}
+
+
+\section*{Concluding discussion}
+ ...  
+\newpage
+
+\appendix
+
+\section{Source Code}
+
+%\subsection{Calculating pi using matlab: \texttt{pi.m}}
+%\lstinputlisting[language=matlab,numbers=left]{template_files/pi.m}
+
+%\subsection{Calculating pi using python: \texttt{pi.py}}
+%\lstinputlisting[language=python,numbers=left]{template_files/pi.py}
+
+\subsection{Main program task 2: \texttt{main\_T2.c}}
+\lstinputlisting[language=c,numbers=left]{../code/main_T2.c}
+
+
+\subsection{Misc functions : \texttt{funcs.c}}
+\lstinputlisting[language=c,numbers=left]{../code/funcs.c}
+
+\section{Auxiliary }
+\subsection{Makefile}
+\lstinputlisting[language=bash,numbers=left]{../code/Makefile}
+
+\section{MATLAB scripts}
+\subsection{Task 1 and analysis scripts for Task 2}
+\lstinputlisting[language=matlab,numbers=left]{../m_scripts/H2_analysis.m}
+
+\subsection{Improve figure appearance: \texttt{ImproveFigureCompPhys.m}}
+\lstinputlisting[language=matlab,numbers=left]{../m_scripts/ImproveFigureCompPhys.m}
+
+\subsection{Change size of figures: \texttt{setFigureSize.m}}
+\lstinputlisting[language=matlab,numbers=left]{../m_scripts/setFigureSize.m}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
