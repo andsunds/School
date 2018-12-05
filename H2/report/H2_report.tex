@@ -269,6 +269,95 @@ Figure~\ref{fig:T2:equil} shows the equilibration at three different temperature
 \end{center}
 \end{figure}
 
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{../figures/U} 
+  \caption{... }
+  \label{fig:U}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{../figures/C} 
+  \caption{... }
+  \label{fig:C}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{../figures/r} 
+  \caption{... }
+  \label{fig:r}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{../figures/P} 
+  \caption{... }
+  \label{fig:P}
+\end{center}
+\end{figure}
+
+
+\subsection*{Statistical inefficiency}
+As described in the Lecture notes, the statistical inefficiency can be used to obtain error estimates of correlated data. 
+
+Suppose we want to measure a quantity $I$, as an average of $N\gg1$ measurements: 
+\begin{equation}
+I = \langle f \rangle \equiv \frac{1}{N}\sum_{i = 1}^N f_i.
+\end{equation}
+
+The variance is then given by 
+\begin{equation}
+{\rm Var}[I] = \frac{n_s}{N}{\rm Var}[f], \quad {\rm Var}[f] = \langle f^2 \rangle - \langle f \rangle^2,
+\end{equation}
+where $n_s$ is the statistical inefficiency. 
+The statistical inefficiency can be determined either from the decay of the correlation function, 
+\begin{equation}
+\Phi_{k = n_s} = e^{-2} \approx 0.1, \quad \frac{\langle f_i f_{i+k}\rangle - \langle f \rangle^2}{\langle f^2\rangle - \langle f \rangle^2},
+\label{eq:ns_Phi}
+\end{equation}
+or from block averaging
+\begin{equation}
+n_s = \lim_{B \rightarrow \infty} \frac{B {\rm Var}[F]}{{\rm Var}[f]}\,, \quad F_j = \frac{1}{B}\sum_{i = 1}^B f_{i + (j-1)B}\,, \quad j \in [1, N_{\rm blocks} ].
+\label{eq:ns_block}
+\end{equation}
+
+The two methods in equations~\eqref{eq:ns_Phi} and~\eqref{eq:ns_block} should give similar estimates of $n_s$, which they do in the simulations here. The obtained statistical inefficiency is shown in figures~\ref{fig:ns_phi} and~\ref{fig:ns_block}   at three different temperatures, calculated with the correlation function and block average respectively. 
+
+In the case of block average, we used a moving average of 100 points, as the data become noisy when the block size become comparable to the total number of steps. Alternatively, we could have made more blocks of the largest sizes by also using shifted blocks of data, but the results obtained here were considered accurate enough. 
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=\textwidth]{../figures/stat_inefficiency_Phi} 
+  \caption{The logarirhm of the correlation function $\Phi_k(k)$ for three different temperatures. Dotted lines mark the estimated value of $n_s = k (\ln \Phi_k = -2)$.}
+  \label{fig:ns_phi}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=\textwidth]{../figures/stat_inefficiency_block} 
+  \caption{The statistical inefficiency determined with block averages for three different temperatures. Raw data is shown with dots, solid line show a moving average with 100 points, and the dotted lines show the estimated values of the statistical inefficiency.}
+  \label{fig:ns_block}
+\end{center}
+\end{figure}
+
+Note in figures~\ref{fig:ns_phi} and~\ref{fig:ns_block} that the statistical inefficiency is larger close to the phase transition at $T \approx \unit[440]{^\circ C}$ than at the lower and higher temperatures  $T = \unit[300]{^\circ C}$ and $T = \unit[600]{^\circ C}$. We speculate that this is related to the diverging property of the correlation length close to the phase transition. 
+
+This peak in the statistical inefficiency close to the phase transition can be clearly identified also in figure~\ref{fig:ns_both}, where $n_s$ is plotted as a function of temperature using the two methods described above. We note that both methods give similar estimates of $n_s$, but the correlation function give larger fluctuations than the block average method. Moreover, we note that the statistical inefficiency diverges as $T \rightarrow \unit[0]{K}$. This is because very few changes in the lattice will be accepted at low temperatures, which give highly correlated data. At low temperatures, the equilibrium system is almost completely ordered, and we note that the uncertainty of the quantities $U, P$ and $r$ is still small at low temperatures as their variance decrease rapidly with decreasing temperature. 
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{../figures/stat_inefficiency_both} 
+  \caption{The statistical inefficiency $n_s$ as a function of temperature using both the correlation function and block averages to determine $n_s$.}
+  \label{fig:ns_both}
+\end{center}
+\end{figure}
 \section*{Concluding discussion}
  ...  
 \newpage
