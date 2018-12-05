@@ -38,7 +38,7 @@ void update_E_P_r(int iT, double E_dev, double *E_mean, double *E_sq_mean,
 
 
 /************************* initializing functions******************************/
-void* init_temps(int *nT, double dT_small, double dT_large,
+double* init_temps(int *nT, double dT_small, double dT_large,
 		 double T_start, double T_end, double T_start_fine,
 		 double T_end_fine);
 
@@ -48,7 +48,7 @@ void init_ordered_lattice(int N_atoms, int N_Cu, int *lattice);
 
 void init_random_lattice(int N_atoms, int N_Cu, int *lattice, gsl_rng *q);
 
-void* init_random();
+gsl_rng* init_random();
 
 
 /************************* file I/O functions *********************************/

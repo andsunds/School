@@ -131,8 +131,10 @@ void MC_step( double *Etot, double *r, double *P, gsl_rng *q,
 	 otherwise it's accepted with a probability of `exp(-beta * dE)`
       */
       // Updates P
-      if (i1 < N_Cu) *P += (double)(lattice[i1] - old_1 )/N_Cu *2;
-      if (i2 < N_Cu) *P += (double)(lattice[i2] - old_2 )/N_Cu *2;
+      if (i1 < N_Cu) 
+        *P += (double)(lattice[i1] - old_1 )/N_Cu *2;
+      if (i2 < N_Cu) 
+        *P += (double)(lattice[i2] - old_2 )/N_Cu *2;
     }else{
       /* 
 	 If the test failed, we change back to the old lattice configuration 
@@ -167,7 +169,7 @@ void update_E_P_r(int iT, double E_dev, double *E_mean, double *E_sq_mean,
 }
 
 /************************* initializing functions******************************/
-void * init_temps( int *nT, double dT_small, double dT_large,
+double * init_temps( int *nT, double dT_small, double dT_large,
 		   double T_start, double T_end, double T_start_fine,
 		   double T_end_fine){
   /*
@@ -254,7 +256,7 @@ void init_nearestneighbor(int Nc, int (*nearest)[N_neigh]){
   }
 }
 
-void* init_random(){
+gsl_rng* init_random(){
   /*
     Initializes a GSL random nuber generator, and returns the pointer.
   */
@@ -294,7 +296,6 @@ void write_production(double *T_degC, int nT, double *E_mean_approx,
     `P_mean`, `P_sq_mean`, `r_mean`, and `r_sq_mean` for each temperature 
     to file.
   */
-  void* init_random();
   FILE *file_pointer;
   char file_name[256];
   sprintf(file_name,"../data/E_production.tsv");

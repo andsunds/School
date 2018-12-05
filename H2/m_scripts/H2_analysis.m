@@ -88,7 +88,7 @@ if doSave
 end
 %% task 2: ...
 clc;
-
+doSave = 1;
 Ts=[-200:20:600]';
 TsToPlot = [300 440 600]';
 t_eq=0;
@@ -98,10 +98,18 @@ figure(10);clf;
 for i=1:numel(TsToPlot)
     data = load(sprintf('../data/E_equilibration-T%d.tsv',TsToPlot(i)));
     E = data(:,1);
-    P = data(:,2);
-    
-    %plot(E); hold on
-    plot(P); hold on;
+    steps = 1:length(E);
+    %P = data(:,2);
+    plot(steps/1e6, E*1000); hold on
+end
+legstr = strcat({'$T='}, num2str(TsToPlot), '^\circ$ C');
+legend(legstr, 'location', 'NorthWest');
+ylabel('$E$ [meV/$N_{\rm bonds}$]')
+xlabel('$N_{\rm steps}/10^6$')
+if doSave
+    ImproveFigureCompPhys(gcf)
+    setFigureSize(gcf, 300, 600); 
+    saveas(gcf, '../figures/equilibration.eps', 'epsc');
 end
 
 
