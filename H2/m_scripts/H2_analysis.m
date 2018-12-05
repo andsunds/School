@@ -7,7 +7,7 @@ warning('off','MATLAB:handle_graphics:exceptions:SceneNode'); % interpreter
 GRAY = 0.7*[0.9 0.9 1];
 kB = 8.61733e-5;
 %% task 1: MFT
-doSave = 0;
+doSave = 1;
 clc
 
 Pmin = 0;
@@ -65,13 +65,13 @@ plot(Tbar,E_MFT(Peq)); hold on
 plot(Tbar,E_MFT(P_approx(alpha,b,Tbar)),'k:')
 xlabel('$k_B T/ \Delta E$')
 ylabel('$U$ [eV/cell]')
-legend('$E_{\rm MFT}$', 'fit $P \propto (2-\bar T)^\alpha$', 'location', 'NorthWest');
+legend('$U_{\rm MFT}$', 'fit $P \propto (2-\bar T)^\alpha$', 'location', 'NorthWest');
 ylim([-2.36 -2.3]);
 if doSave; setFigureSize(gcf, 300, 600); end
 
 figure(3);clf
-C=diff(E_MFT(Peq))./diff(T_MFT);
-plot(Tbar(1:end-1), C*1e3); hold on
+C_MFT=diff(E_MFT(Peq))./diff(T_MFT);
+plot(Tbar(1:end-1), C_MFT*1e3); hold on
 C_approx=4*b^2*kB*alpha*(2-Tbar).^(2*alpha-1);
 plot(Tbar(Tbar<2),1e3*C_approx(Tbar<2),'k:')
 xlabel('$k_B T/ \Delta E$')
@@ -86,14 +86,16 @@ if doSave
     saveas(2, '../figures/E_MFT.eps', 'epsc');
     saveas(3, '../figures/C_MFT.eps', 'epsc');
 end
-%% task 2: ...
+
+
+%% task 2: equilibration and statistical inefficiency
 clc;
 doSave = 1;
 Ts=[-200:20:600]';
 TsToPlot = [300 440 600]';
 t_eq=0;
 
-figure(10);clf;
+figure(1);clf;
 
 for i=1:numel(TsToPlot)
     data = load(sprintf('../data/E_equilibration-T%d.tsv',TsToPlot(i)));
@@ -106,14 +108,9 @@ legstr = strcat({'$T='}, num2str(TsToPlot), '^\circ$ C');
 legend(legstr, 'location', 'NorthWest');
 ylabel('$E$ [meV/$N_{\rm bonds}$]')
 xlabel('$N_{\rm steps}/10^6$')
-if doSave
-    ImproveFigureCompPhys(gcf)
-    setFigureSize(gcf, 300, 600); 
-    saveas(gcf, '../figures/equilibration.eps', 'epsc');
-end
+ImproveFigureCompPhys(1)
 
-
-figure(1000); clf;
+figure(3); clf;figure(2); clf;
 [ns_Phi,ns_block] = deal(nan(size(Ts)));
 Nskip = 10;
 for i=1:numel(Ts)
@@ -126,50 +123,100 @@ for i=1:numel(Ts)
     if ~isempty(kstar)
         ns_Phi(i) = kstar;
     end
-    N_avg = 20;
+    N_avg = 100;
     filtereddata = movmean(VarF_norm,N_avg);
     ns_block(i) = filtereddata(end);
     
     if any(Ts(i) == TsToPlot)
-        subplot(2,1,1)
-        plot(k, log(phi));hold on;
+        figure(2)
         
-        plot([0 kstar kstar], [-2 -2 -6],':k')
-        ylim([-4 0]);
-        legend('data', 'estimated $n_s$', 'location', 'northeast');
-        xlabel('$k$'); ylabel('ln $\phi_k$');
-        xlim([0 2e5])
+        semilogx(k, log(phi));hold on;
+        plot([0.1 kstar kstar], [-2 -2 -6],':k')
         
-        subplot(2,1,2);
-        plot(block_size, VarF_norm); hold on;
-        
+        figure(3)
+        semilogy(block_size, VarF_norm, '.'); hold on;
         plot(block_size(N_avg:end), filtereddata(N_avg:end));
         plot(block_size, filtereddata(end)*ones(size(block_size)), ':k');
-        legend('data', 'moving average', 'estimated $n_s$', 'location', 'northwest');
-        xlabel('block size $B$'); ylabel('$B$ Var[$F$]/Var[$f$] ');
-        ylim([0 2e5])
+        
     end
 end
-%Ts = Ts(~isnan(ns_Phi));
-%ns_Phi = ns_Phi(~isnan(ns_Phi));
-%ns_block = ns_block(~isnan(ns_Phi));
 
-ImproveFigureCompPhys()
-%%
+figure(4); clf;
+plot(Ts, ns_Phi, 'k',Ts, ns_block, '--r')
+ax = gca; 
+ax.YTickLabel = {'0', '$10^5$', '$2\cdot 10^5$','$3\cdot 10^5$','$4\cdot 10^5$','$5\cdot 10^5$'}';
+ylabel('$n_s$');
+legend('$\Phi$', 'block average');
+xlabel('$T$ [$^\circ$C]');
+ImproveFigureCompPhys(gcf)
+
+legs_Phi = cell(6,1);
+legs_block = cell(9,1);
+for i = 1:numel(TsToPlot)
+    tt = ['$T=' num2str(TsToPlot(i)) '$ K: '];
+    legs_Phi{1 + 2*(i-1)} = [tt 'data'];
+    legs_Phi{2 + 2*(i-1)} = 'estimated $n_s$';
+    legs_block{1 + 3*(i-1)} = [tt 'data'];
+    legs_block{2 + 3*(i-1)} = 'moving average';
+    legs_block{3 + 3*(i-1)} = 'estimated $n_s$';
+end
+
+figure(2);
+
+legend(legs_Phi, 'location', 'northeastoutside');
+xlabel('$k$'); ylabel('ln $\phi_k$');
+ylim([-3.5 0]);
+xlim([2e3 3e5])
+%ax = gca; ax.XTick = [3e3 1e4 3e4 1e5 3e5];
+%ax.XTickLabel = {'$3\cdot 10^3$', '$10^4$','$3\cdot 10^4$','$10^5$','$3\cdot 10^5$'}';
+figure(3);
+ax = gca;
+[ax.Children(:).MarkerSize] = deal(12);
+legend(legs_block, 'location', 'northeastOutSide');
+xlabel('block size $B$'); 
+ylabel('$B$ Var[$F$]/Var[$f$]');
+ylim([2e3 2e5])
+ax = gca; 
+ax.XTickLabel = {'0', '$10^5$', '$2\cdot 10^5$','$3\cdot 10^5$','$4\cdot 10^5$','$5\cdot 10^5$'}';
+
+ImproveFigureCompPhys(2, 'LineColor', {'LINNEAGREEN','LINNEAGREEN','GERIBLUE','GERIBLUE', 'k', 'k'}',...
+    'LineStyle', {':','-.',':','-', ':', '--'}')
+ImproveFigureCompPhys(3, 'LineColor', {'LINNEAGREEN','LINNEAGREEN','LINNEAGREEN',...
+    'GERIBLUE','GERIBLUE','GERIBLUE', 'k', 'k', 'k'}',...
+    'LineStyle', {':','-.','none',':','-','none', ':', '--','none'}');
+if doSave
+    figure(1);
+    setFigureSize(gcf, 300, 600); 
+    saveas(gcf, '../figures/equilibration.eps', 'epsc');
+    figure(2);
+    setFigureSize(gcf, 350, 900); 
+    saveas(gcf, '../figures/stat_inefficiency_Phi.eps', 'epsc');
+    figure(3);
+    setFigureSize(gcf, 350, 900); 
+    saveas(gcf, '../figures/stat_inefficiency_block.eps', 'epsc');
+    figure(4);
+    setFigureSize(gcf, 300, 600); 
+    saveas(gcf, '../figures/stat_inefficiency_both.eps', 'epsc');
+end
+
+
+%% task 2: U, C, P and r
+
+doSave = 1;
 
 data = load('../data/E_production.tsv');
 T_degC = data(:,1);
 N_Cu = 1e3;
 N_timeSteps = 1e7;
 
-Emean_approx = data(:,2);
-Emean_shifted = data(:,3);
-E_sq_mean_shifted = data(:,4);
+Emean_approx = data(:,2)/N_Cu; % divide by N_Cu to get energy and Cv per cell
+Emean_shifted = data(:,3)/N_Cu;
+E_sq_mean_shifted = data(:,4)/N_Cu^2; 
 
 E_Var = (E_sq_mean_shifted - Emean_shifted.^2);
 
-Cv = 1./(kB * (T_degC+273.15).^2).*E_Var;
-U = Emean_shifted + Emean_approx;
+Cv = 1./(kB * (T_degC+273.15).^2).*E_Var*N_Cu;
+U = (Emean_shifted + Emean_approx); 
 U_std = sqrt(E_Var/N_timeSteps);
 P = data(:,5);
 P_std = sqrt((data(:,6)-P.^2)/N_timeSteps); % without ns so far
@@ -181,49 +228,53 @@ for i = 1:numel(Ts)
     ind(i) = find(Ts(i) == T_degC);
 end
 
-figure(11);clf;
-
-errorbar(Ts, U(ind), 2*U_std(ind).*sqrt(ns_Phi), '.k','linewidth', 1.5); hold on;
+figure(1);clf;
 plot(T_degC, U); hold on;
+errorbar(Ts, U(ind), 2*U_std(ind).*sqrt(ns_Phi), '.k','linewidth', 2.5); hold on;
+plot(T_MFT_degC, E_MFT(Peq), '-.'); hold on
+ImproveFigureCompPhys(gcf, 'LineColor', {'GERIBLUE', 'r'}');
+legend('$U$', '$U\pm 2 \sigma$ (with $n_{s, \rm \Phi})$', '$E_{\rm MFT}$', 'Location', 'NorthWest');
+ylabel('$U$ [eV/cell]')
 
-plot(T_degC, cumtrapz(T_degC, Cv) + U(1));
+figure(2); clf;
+plot(T_degC(2:end), 1e3*diff(U)./diff(T_degC)); hold on;
+plot(T_degC, 1e3*Cv); 
+plot(T_MFT_degC(1:end-1), 1e3*C_MFT, '-.');
+ImproveFigureCompPhys(gcf, 'LineColor', {'GERIBLUE', 'k',GRAY}');
+legend('$C, {\rm Var(E)}$', '$C, {\partial U/ \partial T}$', '$C_{\rm MFT}$', 'Location', 'NorthWest');
+ylabel('$C$ [meV/cell]')
 
-figure(12); clf;
-plot(T_degC, Cv/N_Cu); hold on;
-plot(T_MFT_degC(1:end-1), C); hold on
+figure(3);clf;
+plot(T_degC, P, 'r'); hold on;
+errorbar(Ts, P(ind), 2*P_std(ind).*sqrt(ns_Phi), '.k', 'linewidth', 2.5); hold on;
+plot(T_MFT_degC, Peq, '-.k');
+ImproveFigureCompPhys(gcf, 'LineColor', {'GERIBLUE', 'r'}');
+legend('$P$', '$P\pm 2 \sigma$ (with $n_{s, \rm \Phi})$', '$P_{\rm MFT}$', 'Location', 'SouthWest');
+ylabel('$P$ ')
 
-figure(13);clf;
-errorbar(Ts, P(ind), 2*P_std(ind).*sqrt(ns_Phi), '.k', 'linewidth', 1.5); hold on;
-%errorbar(Ts, P(ind), 2*P_std(ind).*sqrt(ns_block), '.r','linewidth', 1.5);hold on;
-plot(T_degC, P, 'color', GRAY); hold on;
 
-plot(T_MFT_degC, Peq, '--k');
-
-figure(14);clf;
+figure(4);clf;
+plot(T_degC, r, 'r');hold on;
 errorbar(Ts, r(ind), 2*r_std(ind).*sqrt(ns_Phi), '.k','linewidth', 1.5);hold on;
-hold on; plot(T_degC, r, T_degC, P.^2, T_MFT_degC, Peq.^2, 'k');
+plot(T_degC, P.^2, '--',T_MFT_degC, Peq.^2, '-.');
+ImproveFigureCompPhys(gcf, 'LineColor', {'GERIBLUE', 'LINNEAGREEN','r'}');
+legend('$r$', '$r\pm 2 \sigma$ (with $n_{s, \rm \Phi})$', '$P^2$','$r_{\rm MFT}$', 'Location', 'SouthWest');
+ylabel('$r$ ')
 
-legend('$r$','$P^2$',  '$r_{\rm MFT}$ ')
-ImproveFigureCompPhys('linewidth', 2)
+ImproveFigureCompPhys((2:4), 'linewidth', 2)
 
-% for ifig = 1:2
-%     figure(ifig);
-%     h = legend(strcat({'$dt = $ '}, num2str(round(dt',4)) , ' ps'));
-%     xlabel('$t$ [ps]');
-%     ax = gca;
-%     if ifig ==1
-%         ylabel('$T$ [K]')
-%         ax.YLim = [400 1800];
-%     else
-%         ylabel('$E_{\rm tot}$ [eV/unit cell]');
-%         ax.YTick = (-13:0.1:-10);
-%         ax.YLim = [-12.6 -12.0];
-%     end
-%     ImproveFigureCompPhys(gcf,'Linewidth', 2);setFigureSize(gcf, 400, 400);
-% end
-% saveas(1, '../figures/dt-scan-temperature.eps', 'epsc')
-% saveas(2, '../figures/dt-scan-energy.eps', 'epsc')
-
-%%
-
+if doSave
+    for ifig = 1:4;
+        figure(ifig)
+        setFigureSize(gcf, 300, 600); 
+        xlabel('$T$ [$^\circ$C]');
+        axis tight
+        xlim([-200 Inf])
+    end
+    ImproveFigureCompPhys(1:4);
+    saveas(1, '../figures/U.eps', 'epsc');
+    saveas(2, '../figures/C.eps', 'epsc');
+    saveas(3, '../figures/P.eps', 'epsc');
+    saveas(4, '../figures/r.eps', 'epsc');
+end
 
