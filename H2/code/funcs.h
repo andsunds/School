@@ -4,7 +4,7 @@
 //  includes
 #include  <math.h>
 #include <gsl/gsl_rng.h>
-#include <time.h>  // also needed for random stuff
+#include <time.h>  // also needed for the random generator
 
 #define N_neigh 8
 
@@ -18,7 +18,7 @@ double get_order_parameter(int *lattice, int N_Cu);
 double get_short_range_order_parameter(int *lattice, int(*nearest)[N_neigh],
 				       int N_Cu);
 
-double get_Etot(int *lattice, int N_atoms, int (*nearest)[N_neigh]);
+double get_Etot(int *lattice, int N_Cu, int (*nearest)[N_neigh]);
 
 void get_phi (double *phi, int N_times, double f_mean, double f_var,
 	      double *data,int N_k, int N_skip);
