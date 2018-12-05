@@ -55,7 +55,7 @@ P_approx = @(alpha,b,Tbar) b*(2-Tbar).^alpha;
 plot(Tbar(Tbar<2),P_approx(alpha,b,Tbar(Tbar<2)),'k:')
 xlabel('$k_B T/ \Delta E$')
 ylabel('$P$')
-legend('$P$', 'fit $P \propto (2-\bar T)^\alpha$')
+legend('$P$', 'fit $P \propto (2-\bar T)^\beta$')
 ylim([0 1.3]);
 if doSave; setFigureSize(gcf, 300, 600); end
 
@@ -65,7 +65,7 @@ plot(Tbar,E_MFT(Peq)); hold on
 plot(Tbar,E_MFT(P_approx(alpha,b,Tbar)),'k:')
 xlabel('$k_B T/ \Delta E$')
 ylabel('$U$ [eV/cell]')
-legend('$U_{\rm MFT}$', 'fit $P \propto (2-\bar T)^\alpha$', 'location', 'NorthWest');
+legend('$U_{\rm MFT}$', 'fit $P \propto (2-\bar T)^\beta$', 'location', 'NorthWest');
 ylim([-2.36 -2.3]);
 if doSave; setFigureSize(gcf, 300, 600); end
 
@@ -76,7 +76,7 @@ C_approx=4*b^2*kB*alpha*(2-Tbar).^(2*alpha-1);
 plot(Tbar(Tbar<2),1e3*C_approx(Tbar<2),'k:')
 xlabel('$k_B T/ \Delta E$')
 ylabel('$C$ [meV K$^{-1}$/cell]')
-legend('$C_{\rm MFT}$', 'fit $P \propto (2-\bar T)^\alpha$', 'location', 'NorthWest');
+legend('$C_{\rm MFT}$', 'fit $P \propto (2-\bar T)^\beta$', 'location', 'NorthWest');
 ylim([0 0.3])
 if doSave; setFigureSize(gcf, 300, 600); end
 
@@ -90,7 +90,7 @@ end
 
 %% task 2: equilibration and statistical inefficiency
 clc;
-doSave = 1;
+doSave = 0;
 Ts=[-200:20:600]';
 TsToPlot = [300 440 600]';
 t_eq=0;
@@ -239,14 +239,16 @@ plot(T_MFT_degC, E_MFT(Peq), '-.'); hold on
 ImproveFigureCompPhys(gcf, 'LineColor', {'GERIBLUE', 'r'}');
 legend('$U$', '$U\pm 2 \sigma$ (with $n_{s, \rm \Phi})$', '$E_{\rm MFT}$', 'Location', 'NorthWest');
 ylabel('$U$ [eV/cell]')
+axis tight
 
 figure(2); clf;
 plot(T_degC(2:end), 1e3*diff(U)./diff(T_degC)); hold on;
 plot(T_degC, 1e3*Cv); 
 plot(T_MFT_degC(1:end-1), 1e3*C_MFT, '-.');
 ImproveFigureCompPhys(gcf, 'LineColor', {'GERIBLUE', 'k',GRAY}');
-legend('$C, {\rm Var(E)}$', '$C, {\partial U/ \partial T}$', '$C_{\rm MFT}$', 'Location', 'NorthWest');
+legend('$C, {\partial U/ \partial T}$','$C, {\rm Var}(E)$', '$C_{\rm MFT}$', 'Location', 'NorthWest');
 ylabel('$C$ [meV/cell]')
+ylim([0 0.6])
 
 figure(3);clf;
 plot(T_degC, P, 'r'); hold on;
@@ -255,7 +257,7 @@ plot(T_MFT_degC, Peq, '-.k');
 ImproveFigureCompPhys(gcf, 'LineColor', {'GERIBLUE', 'r'}');
 legend('$P$', '$P\pm 2 \sigma$ (with $n_{s, \rm \Phi})$', '$P_{\rm MFT}$', 'Location', 'SouthWest');
 ylabel('$P$ ')
-
+axis tight
 
 figure(4);clf;
 plot(T_degC, r, 'r');hold on;
@@ -264,7 +266,7 @@ plot(T_degC, P.^2, '--',T_MFT_degC, Peq.^2, '-.');
 ImproveFigureCompPhys(gcf, 'LineColor', {'GERIBLUE', 'LINNEAGREEN','r'}');
 legend('$r$', '$r\pm 2 \sigma$ (with $n_{s, \rm \Phi})$', '$P^2$','$r_{\rm MFT}$', 'Location', 'SouthWest');
 ylabel('$r$ ')
-
+axis tight
 ImproveFigureCompPhys((2:4), 'linewidth', 2)
 
 if doSave
@@ -272,7 +274,6 @@ if doSave
         figure(ifig)
         setFigureSize(gcf, 300, 600); 
         xlabel('$T$ [$^\circ$C]');
-        axis tight
         xlim([-200 Inf])
     end
     ImproveFigureCompPhys(1:4);
@@ -281,4 +282,47 @@ if doSave
     saveas(3, '../figures/P.eps', 'epsc');
     saveas(4, '../figures/r.eps', 'epsc');
 end
+
+%%
+Tcrit = 430;
+dT=Tcrit-T_degC(T_degC<Tcrit);
+P_nonzero = abs(P(T_degC<Tcrit));
+
+I_good = (dT<30 & P_nonzero>0.4);
+log_dT = log(dT(I_good));
+log_P  = log(P_nonzero(I_good));
+A=[ones(size(log_dT)), log_dT]\log_P;
+b     = exp(A(1));
+alpha = A(2);
+fprintf('P: alpha = %.3f\n', alpha)
+P_approx = @(alpha,b,T) b*(Tcrit-T).^alpha;
+
+%figure(5);clf;
+%loglog(dT,P_nonzero) ; hold on;
+%plot(dT, P_approx(alpha, b, Tcrit-dT), 'g')
+
+figure(3)
+Tvec = linspace(300,Tcrit);
+plot(Tvec, P_approx(alpha, b, Tvec), ':k')
+ImproveFigureCompPhys(gcf)
+
+
+
+Cv_good = abs(Cv(T_degC<Tcrit));
+I_good = (dT<150);
+log_dT = log(dT(I_good));
+log_C  = log(Cv_good(I_good));
+A=[ones(size(log_dT)), log_dT]\log_C;
+b     = exp(A(1));
+alpha = A(2);
+fprintf('Cv: alpha = %.3f\n', alpha)
+C_approx = @(alpha,b,T) b*(Tcrit-T).^alpha;
+
+%figure(6);clf;
+%loglog(dT,Cv_good) ; hold on;
+%plot(dT, C_approx(alpha, b, Tcrit-dT), 'g')
+
+figure(2);
+plot(Tvec, 1e3*C_approx(alpha, b, Tvec), ':r')
+ImproveFigureCompPhys(gcf)
 

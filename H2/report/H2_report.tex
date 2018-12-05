@@ -16,8 +16,7 @@
 \input{template_files/titlepage}
 
 \section*{Introduction}
-
-....
+We study a simple model of a binary alloy of copper and zink, commonly known as brass. Some properties of the system can be determined analytically in the mean field theory, but a numerical simulation of the Ising model gives more accurate results at low dimensionality. Both the mean field theory and the Ising model play an important role in statistical mechanics. We use these two models to compute various statistical properties and compare the results. 
 
 \section*{Task 1: mean field theory}
 Fits: we obtained $\alpha \approx 0.494$
@@ -48,57 +47,109 @@ Fits: we obtained $\alpha \approx 0.494$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Task 2: Ising model}
-\begin{align}
+
+We model the binary alloy with a static bcc lattice consisting of Cu and Zn atoms. The system size was $10 \times 10 \times 10$ cells and had periodic boundary conditions. Each atoms has eight bonds to each nearest neighbors, with energies
+\begin{equation}
+\begin{aligned}
 E_{\rm CuZn} &= \unit[-294]{meV} \\
 E_{\rm CuCu} &= \unit[-436]{meV} \\
-E_{\rm ZnZn} &= \unit[-133]{meV} \\
-\end{align}
+E_{\rm ZnZn} &= \unit[-133]{meV}
+\end{aligned}
+\label{eq:energies}
+\end{equation}
+We use the Metropolis algorithm to estimate statistical properties of the system. In each simulation step, we swap two randomly selected atoms in the lattice, and determine the energy change $\Delta E$. If $\Delta E \leq 0$, or if $(\exp[-\Delta E/(k_{\rm B} T)] > \xi$, where $\xi$ is a random number between $0$ and $1$, the change is accepted; otherwise the lattice remains in the previous state for another timestep. In this way, the Metropolis algorithm allows us to sample the state space according to the probability function $p \propto \exp[- E/(k_{\rm B} T)]$, and thus favor the most probable configurations. 
 
-Figure~\ref{fig:T2:equil} shows the equilibration at three different temperatures. We note that the energy per bond is in the range $E_{\rm CuZn} \leq E \leq (E_{\rm CuCu} + E_{\rm ZnZn})/2 = \unit[284.5]{meV}$, which it should be. 
+\subsection*{Equilibration}
+To equilibrate the system, we started with an ordered system and performed $N_{\rm eq, long} = 10^6$ Monte Carlo steps to equilibrate the system at $T = \unit[-200]{^\circ C}$. At higher temperatures, we started with the final lattice state of the previous temperature, and therefore the number of equilibration steps was reduced to $N_{\rm eq, short} = 5 \cdot 10^5$. For all temperatures, we used $10^7$ Monte Carlo steps in the production run. 
+
+Figure~\ref{fig:T2:equil} shows the equilibration of the energy at three different temperatures: significantly below, close to and significantly above the critical temperature $T = \unit[440]{^\circ C}$. By plotting the energy per bond, i.e.\  $E/(8 N_{\rm Cu})$, we can compare the energies to the binding energies in equation~\eqref{eq:energies}. 
+We note that the energy per bond is in the range $E_{\rm CuZn} \leq E \leq E_{\rm max}$, where
+\begin{equation}
+ E_{\rm max} \equiv \frac{1}{2}(E_{\rm CuCu} + E_{\rm ZnZn}) = \unit[-284.5]{meV}.
+ \label{eq:Emax}
+\end{equation}
 
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.7\textwidth]{../figures/equilibration} 
-  \caption{... }
+  \caption{The energy normalized to the number of bonds in the system during the equilibration process.}
   \label{fig:T2:equil}
 \end{center}
 \end{figure}
 
+\subsection*{Statistical properties}
+Figure~\ref{fig:U} shows the equilibrium energy per cell as a function of temperature, and compared to the mean field theory. We also show the error bars of two standard deviations using the statistical inefficiency  as calculated from the correlation function in section~\ref{sec:ns}. 
+
+
+The metropolis simulation differs significantly from the mean free theory prediction; the critical temperature is significantly higher in the simulation and the mean energy continues to increase with temperature beyond the transition. 
 
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.7\textwidth]{../figures/U} 
-  \caption{... }
+  \caption{The average energy of the system normalized to the number of cells, as a function of temperature. Solid red: simulation, black: error bars at selected temperatures, dash-dotted blue: mean field theory prediction.}
   \label{fig:U}
 \end{center}
 \end{figure}
 
+In mean field theory, the energy per cell never exceeds $8 E_0 = \unit[-2.31]{eV}$, but in the Monte Carlo simulation the system is allowed to develop clusters of Cu and Zn atoms, which gives a higher energy than the completely randomly ordered system. In the high temperature limit of an infinite system, the theoretical maximum energy is $ 8 E_{\rm max} \approx \unit[-2.276]{eV}$ (defined in equation~\eqref{eq:Emax}). With a limited system size with 10 cells in each direction, we estimate that the maximum energy should be approximately 
+\begin{equation}
+8 (0.9\cdot E_{\rm max} + 0.1 E_{\rm CuZn}) \approx \unit[2.284]{eV}
+\end{equation}
+Here we obtain $E \approx \unit[-2.287]{eV}$ at $\unit[600]{^\circ C}$, which is slightly below this limit. 
+
+The heat capacity can be determined either by 
+\begin{equation}
+C = \frac{d U}{d T},
+\label{eq:C1}
+\end{equation}
+or as the variance in the energy:
+\begin{equation}
+C = \frac{1}{k_{\rm B} T^2}\left(\langle E^2 \rangle  - \langle E \rangle^2 \right)
+\label{eq:C2}.
+\end{equation}
+Since the latter method does not depend on the derivatives, it gives less noisy data. This is can be seen from figure~\ref{fig:C} by comparing the gray and the black lines. Again, we note that the mean field theory gives a lower critical temperature than the simulation. 
+
 \begin{figure}[!ht]
 \begin{center}
   \includegraphics[width=0.7\textwidth]{../figures/C} 
-  \caption{... }
+  \caption{The specific heat of the system normalized to the number of cells, as a function of temperature. Solid gray: simulation using the derivative of $U$ directly, black: simulation using the variance of $E$, dash-dotted blue: mean field theory prediction.}
   \label{fig:C}
 \end{center}
 \end{figure}
 
 \begin{figure}[!ht]
 \begin{center}
-  \includegraphics[width=0.7\textwidth]{../figures/r} 
-  \caption{... }
-  \label{fig:r}
-\end{center}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
   \includegraphics[width=0.7\textwidth]{../figures/P} 
-  \caption{... }
+  \caption{The order parameter $P$ as a function of temperature. Solid red: simulation, black: error bars at selected temperatures, dash-dotted blue: mean field theory prediction.}
   \label{fig:P}
 \end{center}
 \end{figure}
 
+The order parameter $P$ is shown in figure~\ref{fig:P}. Close to the phase transition, the data has high uncertainty, which is also reflected in the large error bars. Note that $P <0$ at some temperature above the critical temperature -- the system oscillates between a majority of the Cu atoms in the Cu sublattice, and a majority in the Zn sublattice.  
+
+Finally, the short range order parameter $r$ is determined by the number of nearest-neighbor Cu-Zn bonds $q$ as follows
+\begin{equation}
+r = \frac{1}{4 N}(q-4N) \rightarrow \begin{cases}
+1, \quad {\rm perfect \, order} \\
+0, \quad  {\rm no \, order, \, homogeneous \, system}\\
+-1, \qquad {\rm fully \, separated \, system}
+\end{cases}
+\end{equation}
+In the mean field theory, $r = P^2$. Figure~\ref{fig:r} therefore shows not only the simulation and the MFT prediction, but also the curve $P^2$. Until the transition, $r \approx P^2$ is a good estimation, but at higher temperatures $r$ remains non-zero despite $P \approx 0$. We speculate that this is a sign that there are still more Cu-Zn bonds than the homogeneous system without order. Just like there are clusters of Cu atoms and Zn atoms, there could be clusters of order, which could possibly explain this behavior. 
+
+\begin{figure}[!ht]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{../figures/r} 
+  \caption{The short range order parameter as a function of temperature. Solid red: simulation, black: error bars at selected temperatures, dashed green: estimate $r \approx P^2$, dash-dotted blue: mean field theory prediction. }
+  \label{fig:r}
+\end{center}
+\end{figure}
+
+
+
 
 \subsection*{Statistical inefficiency}
+\label{sec:ns}
 As described in the Lecture notes, the statistical inefficiency can be used to obtain error estimates of correlated data. 
 
 Suppose we want to measure a quantity $I$, as an average of $N\gg1$ measurements: 
@@ -154,7 +205,8 @@ This peak in the statistical inefficiency close to the phase transition can be c
 \end{center}
 \end{figure}
 \section*{Concluding discussion}
- ...  
+We study a binary alloy of brass. We compare semi-analytical results from mean-field theory with a Monte Carlo simulation using the Metropolis algorithm, and determine the energy, heat capacity, the order parameter as well as the short range order parameter. 
+We find that the mean field theory underestimates the critical temperature and also fails to explain the behavior of the system above this phase transition. 
 \newpage
 
 \appendix
