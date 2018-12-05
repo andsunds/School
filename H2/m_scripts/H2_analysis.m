@@ -7,7 +7,7 @@ warning('off','MATLAB:handle_graphics:exceptions:SceneNode'); % interpreter
 GRAY = 0.7*[0.9 0.9 1];
 kB = 8.61733e-5;
 %% task 1: MFT
-doSave = 1;
+doSave = 0;
 clc
 
 Pmin = 0;
@@ -90,7 +90,7 @@ end
 
 %% task 2: equilibration and statistical inefficiency
 clc;
-doSave = 1;
+doSave = 0;
 Ts=[-200:20:600]';
 TsToPlot = [300 440 600]';
 t_eq=0;
@@ -146,7 +146,7 @@ plot(Ts, ns_Phi, 'k',Ts, ns_block, '--r')
 ax = gca; 
 ax.YTickLabel = {'0', '$10^5$', '$2\cdot 10^5$','$3\cdot 10^5$','$4\cdot 10^5$','$5\cdot 10^5$'}';
 ylabel('$n_s$');
-legend('$\Phi$', 'block average');
+legend('correlation function $\Phi$', 'block average');
 xlabel('$T$ [$^\circ$C]');
 ImproveFigureCompPhys(gcf)
 
@@ -202,7 +202,7 @@ end
 
 %% task 2: U, C, P and r
 
-doSave = 1;
+doSave = 0;
 
 data = load('../data/E_production.tsv');
 T_degC = data(:,1);
