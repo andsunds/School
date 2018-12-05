@@ -39,7 +39,7 @@ int main(){
   double dT_small     = 2;
   double dT_large     = 10;
   double T_start      = -200;
-  double T_end        = 600;
+  double T_end        = 1000;
   double T_start_fine = 410;
   double T_end_fine   = 460;
   int nT;

@@ -7,18 +7,19 @@ warning('off','MATLAB:handle_graphics:exceptions:SceneNode'); % interpreter
 GRAY = 0.7*[0.9 0.9 1];
 kB = 8.61733e-5;
 %% task 1: MFT
-doSave = 0;
+doSave = 1;
 clc
 
 Pmin = 0;
 Pmax = 1;
 
 E_CuCU = -.436;
-E_ZnZn = -.133;
+E_ZnZn = -.113;
 E_CuZn = -.294;
 
 E0=2*(E_CuCU+E_ZnZn+2*E_CuZn);
 Delta_E=(E_CuCU+E_ZnZn-2*E_CuZn);
+E_max = (E_CuCU + E_ZnZn)/2;
 
 E0_bar=E0/Delta_E;
 E_MFT=@(P) E0 - 2*P.^2*Delta_E;
@@ -53,7 +54,7 @@ fprintf('alpha = %.3f\n', alpha)
 
 P_approx = @(alpha,b,Tbar) b*(2-Tbar).^alpha;
 plot(Tbar(Tbar<2),P_approx(alpha,b,Tbar(Tbar<2)),'k:')
-xlabel('$k_B T/ \Delta E$')
+xlabel('$\bar T$')
 ylabel('$P$')
 legend('$P$', 'fit $P \propto (2-\bar T)^\beta$')
 ylim([0 1.3]);
@@ -63,9 +64,9 @@ if doSave; setFigureSize(gcf, 300, 600); end
 figure(2);clf
 plot(Tbar,E_MFT(Peq)); hold on
 plot(Tbar,E_MFT(P_approx(alpha,b,Tbar)),'k:')
-xlabel('$k_B T/ \Delta E$')
-ylabel('$U$ [eV/cell]')
-legend('$U_{\rm MFT}$', 'fit $P \propto (2-\bar T)^\beta$', 'location', 'NorthWest');
+xlabel('$\bar T$')
+ylabel('$u$ [eV/cell]')
+legend('$u_{\rm MFT}$', 'fit $P \propto (2-\bar T)^\beta$', 'location', 'NorthWest');
 ylim([-2.36 -2.3]);
 if doSave; setFigureSize(gcf, 300, 600); end
 
@@ -74,7 +75,7 @@ C_MFT=diff(E_MFT(Peq))./diff(T_MFT);
 plot(Tbar(1:end-1), C_MFT*1e3); hold on
 C_approx=4*b^2*kB*alpha*(2-Tbar).^(2*alpha-1);
 plot(Tbar(Tbar<2),1e3*C_approx(Tbar<2),'k:')
-xlabel('$k_B T/ \Delta E$')
+xlabel('$\bar T$')
 ylabel('$C$ [meV K$^{-1}$/cell]')
 legend('$C_{\rm MFT}$', 'fit $P \propto (2-\bar T)^\beta$', 'location', 'NorthWest');
 ylim([0 0.3])
@@ -90,8 +91,8 @@ end
 
 %% task 2: equilibration and statistical inefficiency
 clc;
-doSave = 0;
-Ts=[-200:20:600]';
+doSave = 1;
+Ts=[-200:20:1000]';
 TsToPlot = [300 440 600]';
 t_eq=0;
 
@@ -101,7 +102,6 @@ for i=1:numel(TsToPlot)
     data = load(sprintf('../data/E_equilibration-T%d.tsv',TsToPlot(i)));
     E = data(:,1);
     steps = 1:length(E);
-    %P = data(:,2);
     plot(steps, E*1000); hold on
 end
 legstr = strcat({'$T='}, num2str(TsToPlot), '^\circ$ C');
@@ -157,7 +157,7 @@ ImproveFigureCompPhys(gcf)
 legs_Phi = cell(6,1);
 legs_block = cell(9,1);
 for i = 1:numel(TsToPlot)
-    tt = ['$T=' num2str(TsToPlot(i)) '$ K: '];
+    tt = ['$T=' num2str(TsToPlot(i)) '^\circ$C: '];
     legs_Phi{1 + 2*(i-1)} = [tt 'data'];
     legs_Phi{2 + 2*(i-1)} = 'estimated $n_s$';
     legs_block{1 + 3*(i-1)} = [tt 'data'];
@@ -171,8 +171,6 @@ legend(legs_Phi, 'location', 'northeastoutside');
 xlabel('$k$'); ylabel('ln $\Phi_k$');
 ylim([-3.5 0]);
 xlim([2e3 3e5])
-%ax = gca; ax.XTick = [3e3 1e4 3e4 1e5 3e5];
-%ax.XTickLabel = {'$3\cdot 10^3$', '$10^4$','$3\cdot 10^4$','$10^5$','$3\cdot 10^5$'}';
 figure(3);
 ax = gca;
 [ax.Children(:).MarkerSize] = deal(12);
@@ -203,10 +201,9 @@ if doSave
     saveas(gcf, '../figures/stat_inefficiency_both.eps', 'epsc');
 end
 
-
 %% task 2: U, C, P and r
 
-doSave = 0;
+doSave = 1;
 
 data = load('../data/E_production.tsv');
 T_degC = data(:,1);
@@ -237,8 +234,8 @@ plot(T_degC, U); hold on;
 errorbar(Ts, U(ind), 2*U_std(ind).*sqrt(ns_Phi), '.k','linewidth', 2.5); hold on;
 plot(T_MFT_degC, E_MFT(Peq), '-.'); hold on
 ImproveFigureCompPhys(gcf, 'LineColor', {'GERIBLUE', 'r'}');
-legend('$U$', '$U\pm 2 \sigma$ (with $n_{s, \rm \Phi})$', '$E_{\rm MFT}$', 'Location', 'NorthWest');
-ylabel('$U$ [eV/cell]')
+legend('$u$', '$u\pm 2 \sigma$ (with $n_{s, \rm \Phi})$', '$E_{\rm MFT}$', 'Location', 'NorthWest');
+ylabel('$u$ [eV/cell]')
 axis tight
 
 figure(2); clf;
@@ -246,7 +243,7 @@ plot(T_degC(2:end), 1e3*diff(U)./diff(T_degC)); hold on;
 plot(T_degC, 1e3*Cv); 
 plot(T_MFT_degC(1:end-1), 1e3*C_MFT, '-.');
 ImproveFigureCompPhys(gcf, 'LineColor', {'GERIBLUE', 'k',GRAY}');
-legend('$C, {\partial U/ \partial T}$','$C, {\rm Var}(E)$', '$C_{\rm MFT}$', 'Location', 'NorthWest');
+legend('$C, {\partial u/ \partial T}$','$C, {\rm Var}(E)$', '$C_{\rm MFT}$', 'Location', 'NorthWest');
 ylabel('$C$ [meV/cell]')
 ylim([0 0.6])
 
@@ -283,7 +280,7 @@ if doSave
     saveas(4, '../figures/r.eps', 'epsc');
 end
 
-%%
+%% test with critical exponents
 Tcrit = 430;
 dT=Tcrit-T_degC(T_degC<Tcrit);
 P_nonzero = abs(P(T_degC<Tcrit));
@@ -325,4 +322,8 @@ C_approx = @(alpha,b,T) b*(Tcrit-T).^alpha;
 figure(2);
 plot(Tvec, 1e3*C_approx(alpha, b, Tvec), ':r')
 ImproveFigureCompPhys(gcf)
-
+%%
+clf;
+Ufunc = @(r) 4*(r+1)*E_CuZn + 2*(E_ZnZn+ E_CuCU) * (1-r);
+plot(r, U, 'k',r, Ufunc(r), ':r')
+ImproveFigureCompPhys(gcf)
