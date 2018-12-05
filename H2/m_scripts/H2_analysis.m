@@ -90,7 +90,7 @@ end
 
 %% task 2: equilibration and statistical inefficiency
 clc;
-doSave = 0;
+doSave = 1;
 Ts=[-200:20:600]';
 TsToPlot = [300 440 600]';
 t_eq=0;
@@ -102,17 +102,21 @@ for i=1:numel(TsToPlot)
     E = data(:,1);
     steps = 1:length(E);
     %P = data(:,2);
-    plot(steps/1e6, E*1000); hold on
+    plot(steps, E*1000); hold on
 end
 legstr = strcat({'$T='}, num2str(TsToPlot), '^\circ$ C');
 legend(legstr, 'location', 'NorthWest');
 ylabel('$E$ [meV/$N_{\rm bonds}$]')
-xlabel('$N_{\rm steps}/10^6$')
+xlabel('$N_{\rm steps}$')
+ax = gca; 
+ax.XTickLabel = {'0', '$10^5$', '$2\cdot 10^5$','$3\cdot 10^5$','$4\cdot 10^5$','$5\cdot 10^5$'}';
+
 ImproveFigureCompPhys(1)
 
 figure(3); clf;figure(2); clf;
 [ns_Phi,ns_block] = deal(nan(size(Ts)));
-Nskip = 10;
+Nskip = 10; % did not use all k's when calculating block averages
+N_avg = 100; % moving average
 for i=1:numel(Ts)
     data = load(sprintf('../data/stat_inefficiency-T%d.tsv',Ts(i)));
     k = data(:,1);
@@ -123,7 +127,7 @@ for i=1:numel(Ts)
     if ~isempty(kstar)
         ns_Phi(i) = kstar;
     end
-    N_avg = 100;
+    
     filtereddata = movmean(VarF_norm,N_avg);
     ns_block(i) = filtereddata(end);
     
@@ -164,7 +168,7 @@ end
 figure(2);
 
 legend(legs_Phi, 'location', 'northeastoutside');
-xlabel('$k$'); ylabel('ln $\phi_k$');
+xlabel('$k$'); ylabel('ln $\Phi_k$');
 ylim([-3.5 0]);
 xlim([2e3 3e5])
 %ax = gca; ax.XTick = [3e3 1e4 3e4 1e5 3e5];
