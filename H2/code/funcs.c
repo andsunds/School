@@ -2,27 +2,41 @@
 
 /************************ get functions **************************************/
 double get_bond_E(int site_1, int site_2){
-  double tmp=0;
-  switch(site_1 + site_2 ) {
-  case 0 :
-    //return E_ZnZn;
-    tmp=-0.113;
+  /*
+    The bond can be one of three types: ZnZn, CuZn=ZnCu, or CuCu.
+    With the lattice encoding Cu=1 and Zn=0, we get
+      Zn+Zn = 0,  Zn+Cu = Cu+Zn = 1,  Cu+Cu = 2.
+    Hence the switch over the tree cases: 0, 1, and 2.
+  */
+  double Ebond=0;
+  switch (site_1 + site_2){
+  case 0:
+    Ebond= -0.113;//E_ZnZn;
     break;
-  case 1 :
-    //return E_CuZn;
-    tmp= -0.294;
+  case 1:
+    Ebond= -0.294;//E_CuZn;
     break;
-  case 2 :
-    //return E_CuCu;
-    tmp=-0.436;
+  case 2:
+    Ebond= -0.436;//E_CuCu;
     break;
   }
-  return tmp;
+  return Ebond;
 }
 
 double get_order_parameter(int *lattice, int N_Cu){
+  /*
+    The macro order parameter `P` is given by the number of atoms in 
+    their respective sub-lattice (normalized and shifted to get a 
+    better physical interpretation), e.g. the number of Cu atoms in 
+    the Cu sub-lattice.
+  */
   int N_Cu_in_Cu_lattice=0;
   for(int i=0;i<N_Cu;i++){
+    /*
+      Sum the atoms in the Cu sub-lattice (i=0,1,2,...,N_Cu-1), and 
+      with the encoding Cu=1 and Zn=0, we can simply add the values 
+      of the lattice encoding at each sub-lattice point.
+     */
     N_Cu_in_Cu_lattice+=lattice[i];
   }
   return (double)N_Cu_in_Cu_lattice/N_Cu *2 -1;
@@ -30,64 +44,136 @@ double get_order_parameter(int *lattice, int N_Cu){
 
 double get_short_range_order_parameter(int *lattice, int(*nearest)[N_neigh],
 				       int N_Cu){
+  /*
+    The short range order parameter `r` is given by the number of AB bonds
+    (normalized and shifted to get a better physical interpretation).
+  */
   int N_CuZnBonds=0;
   for(int i=0;i<N_Cu;i++){
     for( int j=0; j<N_neigh; j++){
-      N_CuZnBonds+= (lattice[i] + lattice[nearest[i][j]]) == 1 ;
+      /*
+	With the encoding Cu=1 and Zn=0, we know that in order for a
+	bond to be a CuZn/ZnCu the sum of a lattice point with its 
+	neighbour must be 1 (see `get_bond_E` for more detail).
+       */
+      N_CuZnBonds+= ((lattice[i] + lattice[nearest[i][j]]) == 1);
     }
   }
-  return (double) N_CuZnBonds/(4*N_Cu)-1;
+  return (double) N_CuZnBonds/(4*N_Cu)-1; // this is `r`
 }
 
-double get_Etot(int *lattice, int N_atoms, int (*nearest)[N_neigh]){
+double get_Etot(int *lattice, int N_Cu, int (*nearest)[N_neigh]){
+  /*
+    The total energy of the system is given by looping over every atom 
+    in one of the sub-latticies (Cu) and summing the energies of its 
+    bonds to every neighbour.
+    We only need to sum over every atom in one sub-lattice since there
+    are no bonds within a sub-lattice.
+   */
   double Etot=0;
-  for(int i=0; i<N_atoms; i++){
-    for( int j=0; j<N_neigh; j++){
+  for(int i=0; i<N_Cu; i++){ // loop over atoms
+    for( int j=0; j<N_neigh; j++){ // loop over neighbours
       Etot+= get_bond_E(lattice[i], lattice[nearest[i][j]]);
     }
   }
-  return Etot/2;
+  return Etot;
 }
 
 void get_phi (double *phi, int N_times, double f_mean,
 	      double f_var, double *data, int N_k, int N_skip){
-  for (int k=0; k<N_k; k++) {
+  /*
+    Function for calcuating the austo-correlation in a data set. The
+    rate at which the auto-correlation decay can be used to calcuate
+    the statistical inefficiency in the data set.
+    Formula:
+      phi_k = (<f_{i+k}f_{i}> - <f_{i}>^2) / (<f_{i}^2> - <f_{i}>^2)
+
+    Note that, by definition, phi_0 = 1.
+  */
+  int N_terms_in_avg; // helper variable
+  for (int k=0; k<N_k; k++){
+    /*
+      We loop over `k` in the formula above to get the auto-correlation
+      at the differnt times.
+      `phi[k]` is used to hold intermediary values, and only becomes the
+      auto-correlation at the last step in this loop.
+    */
     phi[k] = 0;
-    for (int i=0; (i+k)*N_skip<N_times; i++) {
+    
+    /*
+      The number of terms in the sum to get <f_{i+k}f_{i}> must be such 
+      that i fulfills the relation:
+         `(i+k)*N_skip < N_times`,
+      which is equivalent to saying that
+         `i < N_times/N_skip - k'.
+    */
+    N_terms_in_avg = N_times/N_skip - k;
+    for (int i=0; i<N_terms_in_avg; i++){
+      /*
+	Add the products of the off-setted data points to get: 
+	sum_{i} f_{i+k}f_{i}
+      */
       phi[k] += data[i*N_skip]*data[(i+k)*N_skip];
     }
-    phi[k] = (phi[k]/(N_times/N_skip - k) - f_mean*f_mean)/f_var;
+    /*
+      First:
+      <f_{i+k}f_{i}> = (1/N_avg) sum_{i}*{N_avg} f_{i+k}f_{i},
+      then we get the auto-correlation by subtracting `f_mean`^2
+      and divifing by the variance.
+    */
+    phi[k] = (phi[k]/N_terms_in_avg - f_mean*f_mean)/f_var;
   }
 }
 
 void get_varF_block_average(double *var_F, int N_times, double f_mean,
 			    double f_var, double *data, int N_k, int N_skip){
-  // block average
-  int block_size;
-  double Fj;
-  int number_of_blocks;
+  /*
+    Function for calcuating the variances of the blockaverages for `N_k` 
+    different block sizes. This varaince can then be used to calcuate the 
+    statistical inefficiency in the data set.
+  */
+  int block_size; 
+  double Fj; // help vaiable, holding each block average
+  int number_of_blocks; // The number of blocks depends on the block size
+  
   for (int k=0; k<N_k; k++) { // block size loop
+    /* 
+       For every block size, we need to loop over every block, 
+       and every element in that block
+    */
     block_size = N_skip * (k+1);
     number_of_blocks = N_times/block_size;
-    var_F[k] = 0;
+
+    var_F[k] = 0; // start 
     for (int j=0; j<number_of_blocks; j++) {// loop over all blocks
-      Fj = 0;
+      /* For every block, we loop over all elements in it to take average. */
+      Fj = 0; // reset to 0
       for (int i=0; i<block_size; i++) {// internal block loop
+	/* Adding all elemts in the block to get the average */
         Fj += data[j*block_size + i];
       }
-      Fj *= 1/(double)block_size; // these are the values we need the variance of F
+      Fj *= 1/(double)block_size; // divide by block size to get average
       var_F[k] += Fj*Fj; // will become the variance soon
     }
+    /*
+      To get the varaince of F we use:
+        Var[F] = <F^2> - <F>^2 = <F^2> - <f>^2,
+      where f is the data set the block averages were taken from.
+     */
     var_F[k] = var_F[k]/number_of_blocks - f_mean*f_mean;
     var_F[k] *= block_size/f_var;
-  }
+  } // end block size loop
 }
 
 /************** Monte Carlo step functions ************************************/
 void MC_step( double *Etot, double *r, double *P, gsl_rng *q,
               int *lattice, int (*nearest)[N_neigh], double beta, int N_Cu){
   /* 
-     takes a Monte Carlo step. Updates the lattice and `Etot`
+     Function that takes a Monte Carlo step and updates the lattice points,
+     `Etot`, `r`, and `P` accordingly.
+     It is important to utilize the _chage_ in energy, `r` and `P` when 
+     updating them as to not have to do a clostly full calcualtion of either
+     every step in the Monte Carlo loop.
   */
   // Picks two random sites in the whole lattice.
   int i1 = (int)(2*N_Cu*gsl_rng_uniform(q));
