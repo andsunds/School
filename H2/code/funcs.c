@@ -65,7 +65,7 @@ double get_short_range_order_parameter(int *lattice, int(*nearest)[N_neigh],
 double get_Etot(int *lattice, int N_Cu, int (*nearest)[N_neigh]){
   /*
     The total energy of the system is given by looping over every atom 
-    in one of the sub-latticies (Cu) and summing the energies of its 
+    in one of the sub-lattices (Cu) and summing the energies of its 
     bonds to every neighbour.
     We only need to sum over every atom in one sub-lattice since there
     are no bonds within a sub-lattice.
