@@ -214,7 +214,7 @@ an asymmetric state: $P<0$ or $P>0$.
 
 We can also find an approximating power law near the critical
 temperature:
-\begin{equation}\label{eq:alpha}
+\begin{equation}\label{eq:beta}
 \hat{P}(T)\propto (\bar{T}_{\rm crit}-\bar{T})^{\beta}=(2-\bar{T})^{\beta},
 \end{equation}
 with a so called \emph{critical exponent}, $\beta$. We used a log-log
@@ -268,9 +268,10 @@ There is also a critical exponent for the heat capacity,
 $\hat{C}\propto(\bar{T}_{\rm crit}-\bar{T})^{-\alpha}$. Using
 \eqref{eq:C_MFT}, we can easily show that
 \begin{equation}
-\hat{C}\propto(\bar{T}_{\rm crit}-\bar{T})^{2\beta-1},
+\hat{C}\propto(\bar{T}_{\rm crit}-\bar{T})^{-\alpha}
+=(\bar{T}_{\rm crit}-\bar{T})^{2\beta-1},
 \end{equation}
-which corresponds to $\alpha=1-2\beta=0.012$. This power law is also
+or in other words $\alpha=1-2\beta=0.012$. This power law is also
 plotted in figure~\ref{fig:T1:C}, but the agreement is much worse than
 in the previous two cases.
 
@@ -403,9 +404,11 @@ Accordingly, $r = 0$ corresponds to the low temperature limit $u = E_0 -2\Delta 
 \end{figure}
 
 Finally a note on the critical exponents. Similarly to the MFT analysis, we performed a power law fit of 
-the near-critical behavior of $P$ and $C$, resulting in 
+the near-critical behavior of
+$P\propto(\bar{T}_{\rm crit}-\bar{T})^{\beta}$ and
+$C\propto(\bar{T}_{\rm crit}-\bar{T})^{-\alpha}$, resulting in  
 \begin{equation}
-\beta \approx 0.1, \quad \alpha \approx -0.2.
+\beta \approx 0.1, \quad \alpha \approx 0.2.
 \end{equation}
 Although these values are highly uncertain, we note that the MFT prediction $\alpha_{\rm MFT} = 1-2\beta_{\rm MFT} $ does not generalize to the Ising model simulation. 
 
