@@ -100,13 +100,13 @@ figure(1);clf;
 
 for i=1:numel(TsToPlot)
     data = load(sprintf('../data/E_equilibration-T%d.tsv',TsToPlot(i)));
-    E = data(:,1);
+    E = data(:,1)*8; % convert from energy per bond to energy per cell
     steps = 1:length(E);
-    plot(steps, E*1000); hold on
+    plot(steps, E); hold on
 end
 legstr = strcat({'$T='}, num2str(TsToPlot), '^\circ$ C');
 legend(legstr, 'location', 'NorthWest');
-ylabel('$E$ [meV/$N_{\rm bonds}$]')
+ylabel('$E$ [eV/cell]')
 xlabel('$N_{\rm steps}$')
 ax = gca; 
 ax.XTickLabel = {'0', '$10^5$', '$2\cdot 10^5$','$3\cdot 10^5$','$4\cdot 10^5$','$5\cdot 10^5$'}';
@@ -129,7 +129,7 @@ for i=1:numel(Ts)
     end
     
     filtereddata = movmean(VarF_norm,N_avg);
-    ns_block(i) = filtereddata(end);
+    ns_block(i) = max(filtereddata);
     
     if any(Ts(i) == TsToPlot)
         figure(2)
@@ -140,7 +140,7 @@ for i=1:numel(Ts)
         figure(3)
         semilogy(block_size, VarF_norm, '.'); hold on;
         plot(block_size(N_avg:end), filtereddata(N_avg:end));
-        plot(block_size, filtereddata(end)*ones(size(block_size)), ':k');
+        plot(block_size, ns_block(i)*ones(size(block_size)), ':k');
         
     end
 end
@@ -271,7 +271,7 @@ if doSave
         figure(ifig)
         setFigureSize(gcf, 300, 600); 
         xlabel('$T$ [$^\circ$C]');
-        xlim([-200 Inf])
+        xlim([-200 1000])
     end
     ImproveFigureCompPhys(1:4);
     saveas(1, '../figures/U.eps', 'epsc');
@@ -291,7 +291,7 @@ log_P  = log(P_nonzero(I_good));
 A=[ones(size(log_dT)), log_dT]\log_P;
 b     = exp(A(1));
 alpha = A(2);
-fprintf('P: alpha = %.3f\n', alpha)
+fprintf('P: beta = %.3f\n', alpha)
 P_approx = @(alpha,b,T) b*(Tcrit-T).^alpha;
 
 %figure(5);clf;
@@ -322,7 +322,7 @@ C_approx = @(alpha,b,T) b*(Tcrit-T).^alpha;
 figure(2);
 plot(Tvec, 1e3*C_approx(alpha, b, Tvec), ':r')
 ImproveFigureCompPhys(gcf)
-%%
+%% test U as a function of r
 clf;
 Ufunc = @(r) 4*(r+1)*E_CuZn + 2*(E_ZnZn+ E_CuCU) * (1-r);
 plot(r, U, 'k',r, Ufunc(r), ':r')
