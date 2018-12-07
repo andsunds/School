@@ -187,7 +187,7 @@ C(T)=\pdv{U}{T}=\pdv{E}{P}\pdv{P}{T}.
   \caption{The mean field theory value of the order parameter, $P$, as
   a function of temperature, $\bar{T}=\kB T/\Delta{E}$. There is a
   clear critical temperature, $\bar{T}_{\rm crit}=2$
-  ($T_{\rm crit}=\unit[441]{K}$), above which $P$ becomes constantly
+  ($T_{\rm crit}=\unit[905]{K}$), above which $P$ becomes constantly
   zero. Close below the critical temperature, there is a power law for
   $P(\bar{T})\propto(\bar{T}_{\rm crit}-\bar{T})^{\alpha}$, with
   $\alpha=0.494$; this is shown as the black dotted line. }
@@ -200,7 +200,7 @@ as shown in figure~\ref{fig:T1:P}. There, we clearly see that there is
 a critical temperature at $\bar{T}_{\rm crit}=2$, which is consistent with the prediction~\eqref{eq:Tcrit}. Numerically,
 \begin{equation}
 T_{\rm crit}=\frac{2\Delta{E}}{\kB}
-=\unit[441]{K}=\unit[168]{^{\circ}C}.
+=\unit[905]{K}=\unit[632]{^{\circ}C}.
 \end{equation}
 Above this temperature the mean field theory predicts that
 $P(T>T_{\rm crit})=0$ is constant, which corresponds to a maximally
@@ -214,7 +214,7 @@ an asymmetric state: $P<0$ or $P>0$.
 
 We can also find an approximating power law near the critical
 temperature:
-\begin{equation}\label{eq:alpha}
+\begin{equation}\label{eq:beta}
 \hat{P}(T)\propto (\bar{T}_{\rm crit}-\bar{T})^{\beta}=(2-\bar{T})^{\beta},
 \end{equation}
 with a so called \emph{critical exponent}, $\beta$. We used a log-log
@@ -268,9 +268,10 @@ There is also a critical exponent for the heat capacity,
 $\hat{C}\propto(\bar{T}_{\rm crit}-\bar{T})^{-\alpha}$. Using
 \eqref{eq:C_MFT}, we can easily show that
 \begin{equation}
-\hat{C}\propto(\bar{T}_{\rm crit}-\bar{T})^{2\beta-1},
+\hat{C}\propto(\bar{T}_{\rm crit}-\bar{T})^{-\alpha}
+=(\bar{T}_{\rm crit}-\bar{T})^{2\beta-1},
 \end{equation}
-which corresponds to $\alpha=1-2\beta=0.012$. This power law is also
+or in other words $\alpha=1-2\beta=0.012$. This power law is also
 plotted in figure~\ref{fig:T1:C}, but the agreement is much worse than
 in the previous two cases.
 
@@ -295,18 +296,35 @@ or if
 \begin{equation}
 \exp[-\Delta E/(k_{\rm B} T)] > \xi,
 \end{equation}
-where $\xi$ is a random number between $0$ and $1$, the change is accepted; otherwise the lattice remains in the previous state for another step. In this way, the Metropolis algorithm allows us to sample the state space according to a probability $p \propto \exp[- E/(k_{\rm B} T)]$, and thus favor the most probable configurations. 
+where $\xi$ is a random number between $0$ and $1$, the change is
+accepted; otherwise the lattice remains in the previous state for
+another step. In this way, the Metropolis algorithm allows us to
+sample the state space according to a probability $p \propto \exp[-
+E/(k_{\rm B} T)]$, and thus favor the most probable
+configurations. However, this also poses a risk that the system gets
+stuck in some configuration due to a high rejection rate of
+changes. This means that the system needs a large number of
+iterations, much larger than the number of particles, to reach an
+equlibrium. Then, when the system is equlibrated, we also need a large
+number of iterations in the production run, where the data is
+collected. 
 
 \subsubsection*{Equilibration}
-To equilibrate the system, we started with an ordered system and performed $N_{\rm eq, long} = 10^6$ Monte Carlo steps to equilibrate the system at $T = \unit[-200]{^\circ C}$. At higher temperatures, we started with the final lattice state of the previous temperature run, and therefore the number of equilibration steps was reduced to $N_{\rm eq, short} = 5 \cdot 10^5$. For all temperatures, we used $10^7$ Monte Carlo steps in the production run. 
+To equilibrate the system, we started with a fully ordered system and performed $N_{\rm eq, long} = 10^6$ Monte Carlo steps to equilibrate the system at $T = \unit[-200]{^\circ C}$. At higher temperatures, we started with the final lattice state of the previous temperature run, and therefore the number of equilibration steps was reduced to $N_{\rm eq, short} = 5 \cdot 10^5$. For all temperatures, we used $10^7$ Monte Carlo steps in the production run. 
 
-Figure~\ref{fig:T2:equil} shows the equilibration of the energy at three different temperatures: significantly below, close to and significantly above the critical temperature $T \approx \unit[430]{^\circ C}$. 
+Figure~\ref{fig:T2:equil} shows the equilibration of the energy at
+three different temperatures: significantly below, close to, and
+significantly above the critical temperature
+$T_{\rm crit} \approx \unit[430]{^\circ C}$. 
 We note that the energy per unit cell is in the range 
 \begin{equation}
-E_0 - 2 \Delta E \approx \unit[-2.35 ]{eV}\leq E\leq  E_0  \approx \unit[-2.27]{eV},
+E_0 - 2 \Delta E \approx \unit[-2.35 ]{eV}\leq E\leq  E_0
+\approx \unit[-2.27]{eV},
 \label{eq:E-range}
 \end{equation}
-which is consistent with the mean field theory prediction~\eqref{eq:E_MFT}; and the energy is equal to or lower than the completely random system where $E = E_0$. 
+which is consistent with the mean field theory
+prediction~\eqref{eq:E_MFT}; and the energy is equal to or lower than
+the completely random system where $E = E_0$.  
 
 \begin{figure}[!ht]
 \begin{center}
@@ -317,7 +335,11 @@ which is consistent with the mean field theory prediction~\eqref{eq:E_MFT}; and 
 \end{figure}
 
 \subsubsection*{Statistical properties}
-Figure~\ref{fig:U} shows the equilibrium energy per unit cell as a function of temperature, and compared to the mean field theory. We also show the error bars of two standard deviations using the statistical inefficiency  as calculated from the correlation function in section~\ref{sec:ns}. 
+Figure~\ref{fig:U} shows the equilibrium energy per unit cell as a
+function of temperature, and compared to the mean field theory. We
+also show the error bars of two standard deviations using the
+statistical inefficiency as calculated from the correlation function
+in section~\ref{sec:ns}.  
 
 
 \begin{figure}[!ht]
@@ -328,8 +350,17 @@ Figure~\ref{fig:U} shows the equilibrium energy per unit cell as a function of t
 \end{center}
 \end{figure}
 
-The metropolis simulation differs significantly from the mean free theory prediction: the critical temperature is significantly lower in the simulation, and the mean energy continues to increase with temperature beyond the transition. 
-In mean field theory, the energy per unit  in the range $u \in [E_0 - 2 \Delta E,  E_0]$ (see equation~\eqref{eq:E-range}. This is fulfilled also in the Monte Carlo simulation, which means that it did not develop clusters of Cu and Zn atoms, in which case the energy per bond would approach the average of the Cu-Cu and Zn-Zn bond energies. In contrast, the simulation does not reach the limit of $u = E_0$ even significantly above $T_{\rm crit}$. 
+The metropolis simulation differs significantly from the mean free
+theory prediction: the critical temperature is significantly lower in
+the simulation, and the mean energy continues to increase with
+temperature beyond the transition.
+In mean field theory, the energy per unit  in the range
+$u \in [E_0 - 2\Delta E,  E_0]$ (see equation~\eqref{eq:E-range}. This
+is fulfilled also in the Monte Carlo simulation, which means that it
+did not develop clusters of Cu and Zn atoms, in which case the energy
+per bond would approach the average of the Cu-Cu and Zn-Zn bond
+energies. In contrast, the simulation does not reach the limit of $u =
+E_0$ even significantly above $T_{\rm crit}$.  
 
 %In the high temperature limit of an infinite system, the theoretical maximum energy is $ 8 E_{\rm max} \approx \unit[-2.276]{eV}$ (defined in equation~\eqref{eq:Emax}). With a limited system size with 10 cells in each direction, we estimate that the maximum energy should be approximately 
 %\begin{equation}
@@ -347,7 +378,7 @@ or as the variance in the energy:
 C = \frac{1}{k_{\rm B} T^2}\left(\langle E^2 \rangle  - \langle E \rangle^2 \right)
 \label{eq:C2}.
 \end{equation}
-Since the latter method does not depend on the derivatives, it gives less noisy data. This is can be seen from figure~\ref{fig:C} by comparing the gray and the black lines. Again, we note that the mean field theory gives a higher critical temperature than the simulation. Moreover, the heat capacity remains non-zero above the critical temperature. Thus, the Ising model does not share  the unphysical artifact of the mean field theory (where there is no cost in energy to change the temperature of the system above the critical temperature). This is because the energy $u < E_0$ even at high temperatures in the simulation. 
+Since the latter method does not depend on numerical derivatives, it gives less noisy data. This can be seen from figure~\ref{fig:C} by comparing the gray and the black lines. Again, we note that the mean field theory gives a higher critical temperature than the simulation. Moreover, the heat capacity remains non-zero above the critical temperature. Thus, the Ising model does not share  the unphysical artifact of the mean field theory (where there is no cost in energy to change the temperature of the system above the critical temperature). This is because the energy $u < E_0$, even at high temperatures in the simulation. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -365,7 +396,14 @@ Since the latter method does not depend on the derivatives, it gives less noisy 
 \end{center}
 \end{figure}
 
-The order parameter $P$ is shown in figure~\ref{fig:P}. Close to the phase transition, the data has high uncertainty, which is also reflected in the large error bars. Note that $P <0$ at some temperatures above the critical temperature -- the system oscillates between a majority of the Cu atoms in the Cu sub-lattice, and a majority in the Zn sub-lattice.  
+The order parameter $P$ is shown in figure~\ref{fig:P}. Close to the
+phase transition, the data has high uncertainty, which is also
+reflected in the large error bars. Note that $P<0$ at some
+temperatures above the critical temperature -- the system oscillates
+between a majority of the Cu atoms in the Cu sub-lattice, and a
+majority in the Zn sub-lattice. Physically, however, there is no real
+difference between a system where $P<0$ and $P>0$, so the large
+fluctuations should not be seen as a major concern.
 
 Finally, the short range order parameter $r$ is determined by the number of nearest-neighbor Cu-Zn bonds as follows
 \begin{equation}
@@ -392,7 +430,7 @@ U &= E_{\rm CuZn}N_{\rm CuZn}
 \\ &=
 N E_0   - 2N r \Delta E .
 \end{align}
-Accordingly, $r = 0$ corresponds to the low temperature limit $u = E_0 -2\Delta E$; the average energy then approaches $u \rightarrow E_0$ at high temperatures (c.f. equation~\eqref{eq:E-range}).   
+Accordingly, $r = 1$ corresponds to the low temperature limit $u = E_0 -2\Delta E$; the average energy then approaches $u \rightarrow E_0$ at high temperatures (c.f. equation~\eqref{eq:E-range}).   
 
 \begin{figure}[!ht]
 \begin{center}
@@ -402,12 +440,16 @@ Accordingly, $r = 0$ corresponds to the low temperature limit $u = E_0 -2\Delta 
 \end{center}
 \end{figure}
 
-Finally a note on the critical exponents. Similarly to the MFT analysis, we performed a power law fit of 
-the near-critical behavior of $P$ and $C$, resulting in 
+Finally a note on the critical exponents. Similarly to the MFT
+analysis, we performed a power law fit of the near-critical behavior
+of $P\propto(\bar{T}_{\rm crit}-\bar{T})^{\beta}$ and
+$C\propto(\bar{T}_{\rm crit}-\bar{T})^{-\alpha}$, resulting in  
 \begin{equation}
-\beta \approx 0.1, \quad \alpha \approx -0.2.
+\beta \approx 0.1, \quad \alpha \approx 0.2.
 \end{equation}
-Although these values are highly uncertain, we note that the MFT prediction $\alpha_{\rm MFT} = 1-2\beta_{\rm MFT} $ does not generalize to the Ising model simulation. 
+Although these values are highly uncertain, we note that the MFT
+prediction $\alpha_{\rm MFT} = 1-2\beta_{\rm MFT}$ does not generalize
+to the Ising model simulation.  
 
 \subsubsection*{Statistical inefficiency}
 \label{sec:ns}
@@ -417,7 +459,6 @@ Suppose we want to measure a quantity $I$, as an average of $N\gg1$ measurements
 \begin{equation}
 I = \langle f \rangle \equiv \frac{1}{N}\sum_{i = 1}^N f_i.
 \end{equation}
-
 The variance is then given by 
 \begin{equation}
 {\rm Var}[I] = \frac{n_s}{N}{\rm Var}[f], \quad {\rm Var}[f] = \langle f^2 \rangle - \langle f \rangle^2,
@@ -434,7 +475,7 @@ n_s = \lim_{B \rightarrow \infty} \frac{B {\rm Var}[F]}{{\rm Var}[f]}\,, \quad F
 \label{eq:ns_block}
 \end{equation}
 
-The two methods in equations~\eqref{eq:ns_Phi} and~\eqref{eq:ns_block} should give similar estimates of $n_s$, which they do in the simulations here. The obtained statistical inefficiency is shown in figures~\ref{fig:ns_phi} and~\ref{fig:ns_block}   at three different temperatures, calculated with the correlation function and block average respectively. 
+The two methods in equations~\eqref{eq:ns_Phi} and~\eqref{eq:ns_block} should give similar estimates of $n_s$, which they do in the simulations here. The obtained statistical inefficiency is shown in figures~\ref{fig:ns_phi} and~\ref{fig:ns_block} at three different temperatures, calculated with the correlation function and block average respectively. 
 
 In the case of block average, we used a moving average of 100 points, as the data become noisy when the block size become comparable to the total number of steps. Alternatively, we could have made more blocks of the largest sizes by also using shifted blocks of data, but the results obtained here were considered accurate enough. 
 
@@ -456,7 +497,7 @@ In the case of block average, we used a moving average of 100 points, as the dat
 
 Note in figures~\ref{fig:ns_phi} and~\ref{fig:ns_block} that the statistical inefficiency is larger close to the phase transition at $T \approx \unit[440]{^\circ C}$ than at the lower and higher temperatures  $T = \unit[300]{^\circ C}$ and $T = \unit[600]{^\circ C}$. We speculate that this is related to the diverging property of the correlation length close to the phase transition. 
 
-This peak in the statistical inefficiency close to the phase transition can be clearly identified also in figure~\ref{fig:ns_both}, where $n_s$ is plotted as a function of temperature using the two methods described above. We note that both methods give consistent estimates of $n_s$, but the correlation function give larger fluctuations than the block average method. Moreover, that the statistical inefficiency diverges as $T \rightarrow \unit[0]{K}$. This is because very few changes in the lattice will be accepted at low temperatures, resulting in highly correlated data. At low temperatures, the equilibrium system is almost completely ordered, and therefore the uncertainty of the quantities $U, P$ and $r$ is still small at low temperatures; note the vanishing $2-\sigma$ error bars in figures~\ref{fig:U}-\ref{fig:r}. 
+This peak in the statistical inefficiency close to the phase transition can be clearly identified also in figure~\ref{fig:ns_both}, where $n_s$ is plotted as a function of temperature using the two methods described above. We note that both methods give consistent estimates of $n_s$, but the correlation function give larger fluctuations than the block average method. Moreover, that the statistical inefficiency diverges as $T \rightarrow \unit[0]{K}$. This is because very few changes in the lattice will be accepted at low temperatures, resulting in highly correlated data. At low temperatures, the equilibrium system is almost completely ordered, and therefore the uncertainty of the quantities $U$, $P$ and $r$ is still small at low temperatures; note the vanishing $2\sigma$ error bars in figures~\ref{fig:U}-\ref{fig:r}. 
 
 \begin{figure}[!ht]
 \begin{center}
@@ -465,13 +506,30 @@ This peak in the statistical inefficiency close to the phase transition can be c
   \label{fig:ns_both}
 \end{center}
 \end{figure}
+
 \section*{Concluding discussion}
-We study a binary alloy of brass. We compare semi-analytical results from mean-field theory with a Monte Carlo simulation using the Metropolis algorithm, and determine the energy, heat capacity, the order parameter as well as the short range order parameter. 
+We study a binary alloy of 50\,\% copper and 50\,\% zinc. We compare
+semi-analytical results from mean-field theory with a Monte Carlo
+simulation using the Metropolis algorithm, and determine the energy,
+heat capacity, the order parameter as well as the short range order
+parameter. 
 
-We find that the mean field theory overestimates the critical temperature. Furthermore, it fails to explain the behavior of the system above this phase transition, as the simulations show a slower convergence to the high-temperature behavior. This results in a non-zero heat capacity at supercritical temperatures, as well as a non-zero short range order parameter $r$. We also determine the critical exponents associated with the order parameter $P$ and the heat capacity from the simulations. Although these are uncertain, it is clear that they differ significantly from the mean field theory prediction. 
+We find that the mean field theory overestimates the critical
+temperature. Furthermore, it fails to explain the behavior of the
+system above this phase transition, as the simulations show a slower
+convergence to the high-temperature behavior. This results in a
+non-zero heat capacity at above-critical temperatures, as well as a
+non-zero short range order parameter $r$. We also determine the
+critical exponents associated with the order parameter $P$ and the
+heat capacity from the simulations. Although these are uncertain, it
+is clear that they differ significantly from the mean field theory
+prediction. 
 
-
-Finally, we consider the statistical inefficiency. The block average method is consistent with the results using the correlation function, and we observe a peak in close to the phase transition, which is possibly connected to the longer correlation length of a system close to the phase transition. 
+Finally, we consider the statistical inefficiency. The block average
+method is consistent with the results using the correlation function,
+and we observe a peak in close to the phase transition, which is
+possibly connected to the longer correlation length of a system close
+to the phase transition.  
 
 \newpage
 
