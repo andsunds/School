@@ -33,12 +33,16 @@ muv = data(:,4);
 sigmav = data(:,5);
 
 figure(1);clf;
-plot(t, x,'linewidth', 1.4); hold on;
-plot(t, mux, '-k', t, mux-sigmax, ':k', t, mux+sigmax, ':k', 'linewidth', 3)
+plot(t, 1e3*x,'linewidth', 1.4); hold on;
+plot(t, 1e3*mux, '-k', t, 1e3*(mux-sigmax), ':k', t, 1e3*(mux+sigmax), ':k', 'linewidth', 3)
+xlabel('t [\mu s]')
+ylabel('x [n m]')
 
 figure(2);clf;
-plot(t, v,'linewidth', 1.4); hold on;
-plot(t, muv, '-k', t, muv-sigmav, ':k', t, muv+sigmav, ':k', 'linewidth', 3)
+plot(t, 1e3*v,'linewidth', 1.4); hold on;
+plot(t, 1e3*muv, '-k', t, 1e3*(muv-sigmav), ':k', t, 1e3*(muv+sigmav), ':k', 'linewidth', 3)
+xlabel('t [\mu s]')
+ylabel('v [\mu m/ms]')
 
 data = load('dist_tau-48.tsv');
 rho_t = data(1,:);
@@ -65,6 +69,10 @@ xlabel('\mu m/ms')
 ylabel('\rho_v [#particles/ (\mu m/ms)]')
 ylim([0 2])
 
+saveas(1, 'tausmall_x.eps', 'epsc');
+saveas(2, 'tausmall_v.eps', 'epsc');
+saveas(3, 'tausmall_rhox.eps', 'epsc');
+saveas(4, 'tausmall_rhov.eps', 'epsc');
 %% tau large
 
 data = load('xv_tau-147.tsv');
@@ -78,12 +86,16 @@ muv = data(:,4);
 sigmav = data(:,5);
 
 figure(1);clf;
-plot(t, x,'linewidth', 1.4); hold on;
-plot(t, mux, '-k', t, mux-sigmax, ':k', t, mux+sigmax, ':k', 'linewidth', 3)
+plot(t, 1e3*x,'linewidth', 1.4); hold on;
+plot(t, 1e3*mux, '-k', t, 1e3*(mux-sigmax), ':k', t, 1e3*(mux+sigmax), ':k', 'linewidth', 3)
+xlabel('t [\mu s]')
+ylabel('x [n m]')
 
 figure(2);clf;
-plot(t, v,'linewidth', 1.4); hold on;
-plot(t, muv, '-k', t, muv-sigmav, ':k', t, muv+sigmav, ':k', 'linewidth', 3)
+plot(t, 1e3*v,'linewidth', 1.4); hold on;
+plot(t, 1e3*muv, '-k', t, 1e3*(muv-sigmav), ':k', t, 1e3*(muv+sigmav), ':k', 'linewidth', 3)
+xlabel('t [\mu s]')
+ylabel('v [\mu m/ms]')
 
 data = load('dist_tau-147.tsv');
 rho_t = data(1,:);
@@ -109,3 +121,7 @@ legend(strcat({'t='}, num2str(rho_t(1:2:end)'),'\mu s'),'location', 'northwest')
 xlabel('\mu m/ms')
 ylabel('\rho_v [#particles/ (\mu m/ms)]')
 ylim([0 2])
+saveas(1, 'taularge_x.eps', 'epsc');
+saveas(2, 'taularge_v.eps', 'epsc');
+saveas(3, 'taularge_rhox.eps', 'epsc');
+saveas(4, 'taularge_rhov.eps', 'epsc');
