@@ -16,7 +16,7 @@ D = 2.79e-6;
 r = D/2;
 m = rho * 4 * pi * r^3/3;
 
-tau_Stokes = m/(6*pi*viscosity * r);
+tau_Stokes = m/(6*pi*viscosity * r)
 
 % 61 vs 48 = consistent. 
 

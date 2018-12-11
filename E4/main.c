@@ -34,7 +34,7 @@ int main()
   double v_th = sqrt(kB*T / m);  
   
 
-  double tau =  48.5; //147.3/  48.5; // Time unit: µs, length unit µm 
+  double tau =  147.3; // 48.5; // Time unit: µs, length unit µm 
   double eta = 1/tau;
   
   double c0 = exp( - eta * dt);

@@ -1,6 +1,6 @@
 
 CC = gcc
-CFLAGS = -O3 -Wall 
+CFLAGS = -std=gnu11 -O3 -Wall 
 
 LIBS = -lm -lgsl -lgslcblas
 
