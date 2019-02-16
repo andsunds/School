@@ -1,0 +1,22 @@
+#Onödig LaTeX-output
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*~
+*.o
+a
+a.out
+run
+MD
+H?/code/Task?
+H?/code/Prod
+E?/Task?
+
+*.dat
+*.tsv
+*.bin
+*.zip
+*.gz
